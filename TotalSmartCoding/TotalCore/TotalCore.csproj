@@ -39,7 +39,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ISqlRoutines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Repositories\IGenericAPIRepository.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\IGenericWithDetailRepository.cs" />
+    <Compile Include="Services\IBaseService.cs" />
+    <Compile Include="Services\IGenericService.cs" />
+    <Compile Include="Services\IGenericWithDetailService.cs" />
+    <Compile Include="Services\IGenericWithViewDetailService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TotalBase\TotalBase.csproj">
+      <Project>{613978fb-2460-436c-a4f4-b98b7ff3dc1d}</Project>
+      <Name>TotalBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalDTO\TotalDTO.csproj">
+      <Project>{2f551a1e-72c8-4cf6-a8a2-5637e138d2af}</Project>
+      <Name>TotalDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalModel\TotalModel.csproj">
+      <Project>{7bcad737-a3d0-4482-b8f5-034844acebe1}</Project>
+      <Name>TotalModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

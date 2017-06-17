@@ -54,6 +54,20 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TotalBase\TotalBase.csproj">
+      <Project>{613978fb-2460-436c-a4f4-b98b7ff3dc1d}</Project>
+      <Name>TotalBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalCore\TotalCore.csproj">
+      <Project>{505f12ab-8af4-4660-bc9a-51eaf173bc0b}</Project>
+      <Name>TotalCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TotalModel\TotalModel.csproj">
+      <Project>{7bcad737-a3d0-4482-b8f5-034844acebe1}</Project>
+      <Name>TotalModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
