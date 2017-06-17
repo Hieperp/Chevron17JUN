@@ -48,12 +48,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseModel.cs" />
+    <Compile Include="Helpers\IHelper.cs" />
+    <Compile Include="IAccessControlAttribute.cs" />
+    <Compile Include="IBaseDetailEntity.cs" />
+    <Compile Include="IBaseEntity.cs" />
+    <Compile Include="IPrimitiveEntity.cs" />
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\DatabaseConcurrencyException.cs" />
+    <Compile Include="Validations\DatabaseValidationErrors.cs" />
+    <Compile Include="Validations\GeneralError.cs" />
+    <Compile Include="Validations\IBaseError.cs" />
+    <Compile Include="Validations\IValidationErrors.cs" />
+    <Compile Include="Validations\PropertyError.cs" />
+    <Compile Include="Validations\ValidationErrors.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
