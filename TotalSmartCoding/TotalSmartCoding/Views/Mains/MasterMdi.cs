@@ -8,7 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using TotalBase.Enums;
+
 using TotalSmartCoding.CommonLibraries;
+
+using TotalSmartCoding.Views.Commons;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -168,7 +172,7 @@ namespace TotalSmartCoding.Views.Mains
             try
             {
                 ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Print(PrintDestination.Print);
+                if (callToolStrip != null) callToolStrip.Print(GlobalEnums.PrintDestination.Print);
             }
             catch (Exception exception)
             {
@@ -181,7 +185,7 @@ namespace TotalSmartCoding.Views.Mains
             try
             {
                 ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Print(PrintDestination.PrintPreview);
+                if (callToolStrip != null) callToolStrip.Print(GlobalEnums.PrintDestination.PrintPreview);
             }
             catch (Exception exception)
             {

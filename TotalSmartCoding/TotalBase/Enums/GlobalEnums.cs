@@ -242,6 +242,14 @@
 
 
 
+        public static string stringFieldRequired = "Input not correct. Please make sure all required fields are filled out correctly";
+
+
+
+
+
+
+
 
         public enum PrintDestination
         {

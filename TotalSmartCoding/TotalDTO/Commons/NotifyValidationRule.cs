@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
+using TotalBase.Enums;
 
 namespace DataTransferObject
 {
@@ -82,7 +83,7 @@ namespace DataTransferObject
             foreach (ValidationRule rule in GetBrokenRules(propertyName))
             {
                 if (propertyName == string.Empty || rule.PropertyName == propertyName)
-                    exceptionTable.AddException(new string[] { Global.Class.Library.GlobalVariables.stringFieldRequired, rule.Description });
+                    exceptionTable.AddException(new string[] { GlobalEnums.stringFieldRequired, rule.Description });
             }
         }
 

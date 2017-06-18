@@ -45,6 +45,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ExceptionMessageBox, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SQL Server\110\SDK\Assemblies\Microsoft.ExceptionMessageBox.dll</HintPath>
+    </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
       <Private>True</Private>
@@ -63,8 +67,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
+    <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Commons\CustomExceptionMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Commons\CustomExceptionMessageBox.designer.cs">
+      <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Mains\MasterMdi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +92,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\Commons\CustomExceptionMessageBox.resx">
+      <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\MasterMdi.resx">
       <DependentUpon>MasterMdi.cs</DependentUpon>
     </EmbeddedResource>
