@@ -31,6 +31,91 @@ namespace TotalSmartCoding.Views.Mains
 
 
 
+        #region Form Events: Merge toolstrip & Set toolbar context
+        private void MasterMdi_MdiChildActivate(object sender, EventArgs e)
+        {       
+            try
+            {
+                ToolStripManager.RevertMerge(this.toolStripMDIMain);
+                IMergeToolStrip mdiChildMergeToolStrip = ActiveMdiChild as IMergeToolStrip;
+                if (mdiChildMergeToolStrip != null)
+                {
+                    ToolStripManager.Merge(mdiChildMergeToolStrip.ChildToolStrip, toolStripMDIMain);
+                }
+
+                ICallToolStrip mdiChildCallToolStrip = ActiveMdiChild as ICallToolStrip;
+                if (mdiChildCallToolStrip != null)
+                {
+                    mdiChildCallToolStrip.PropertyChanged -= new PropertyChangedEventHandler(mdiChildCallToolStrip_PropertyChanged);
+                    mdiChildCallToolStrip.PropertyChanged += new PropertyChangedEventHandler(mdiChildCallToolStrip_PropertyChanged);
+
+                    mdiChildCallToolStrip_PropertyChanged(mdiChildCallToolStrip, new PropertyChangedEventArgs("IsDirty"));
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        void mdiChildCallToolStrip_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            try
+            {
+                ICallToolStrip mdiChildCallToolStrip = sender as ICallToolStrip;
+                if (mdiChildCallToolStrip != null)
+                {
+
+                    bool closable = mdiChildCallToolStrip.Closable;
+                    bool loadable = mdiChildCallToolStrip.Loadable;
+                    bool newable = mdiChildCallToolStrip.Newable;
+                    bool editable = mdiChildCallToolStrip.Editable;
+                    bool isDirty = mdiChildCallToolStrip.IsDirty;
+                    bool deletable = mdiChildCallToolStrip.Deletable;
+                    bool importable = mdiChildCallToolStrip.Importable;
+                    bool exportable = mdiChildCallToolStrip.Exportable;
+                    bool verifiable = mdiChildCallToolStrip.Verifiable;
+                    bool unverifiable = mdiChildCallToolStrip.Unverifiable;
+                    bool printable = mdiChildCallToolStrip.Printable;
+                    bool readonlyMode = mdiChildCallToolStrip.ReadonlyMode;
+                    bool editableMode = mdiChildCallToolStrip.EditableMode;
+                    bool isValid = mdiChildCallToolStrip.IsValid;
+
+
+                    this.toolStripButtonEscape.Enabled = closable;
+                    this.toolStripButtonLoad.Enabled = loadable && readonlyMode;
+
+                    this.toolStripButtonNew.Enabled = newable && readonlyMode;
+                    this.toolStripButtonEdit.Enabled = editable && readonlyMode;
+                    this.toolStripButtonSave.Enabled = isDirty && isValid && editableMode;
+                    this.toolStripButtonDelete.Enabled = deletable && readonlyMode;
+
+                    this.toolStripButtonImport.Visible = importable;
+                    this.toolStripButtonImport.Enabled = importable && newable && readonlyMode;
+                    this.toolStripButtonExport.Visible = exportable;
+                    this.toolStripButtonExport.Enabled = exportable;//&& !isDirty && readonlyMode;
+                    this.toolStripSeparatorImport.Visible = importable || exportable;
+
+                    this.toolStripButtonVerify.Visible = verifiable || unverifiable;
+                    this.toolStripButtonVerify.Enabled = verifiable || unverifiable;
+                    this.toolStripButtonVerify.Text = verifiable ? "Verify" : "Unverify";
+                    this.toolStripSeparatorVerify.Visible = verifiable || unverifiable;
+
+                    this.toolStripButtonPrint.Visible = printable;
+                    this.toolStripButtonPrint.Enabled = printable;
+                    this.toolStripButtonPrintPreview.Visible = printable;
+                    this.toolStripButtonPrintPreview.Enabled = printable;
+                    this.toolStripSeparatorPrint.Visible = printable;
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        #endregion Form Events
+
 
         #region <Call Tool Strip>
         private void toolStripButtonEscape_Click(object sender, EventArgs e)
@@ -194,6 +279,8 @@ namespace TotalSmartCoding.Views.Mains
         }
 
         #endregion <Call Tool Strip>
+
+        
 
         
 

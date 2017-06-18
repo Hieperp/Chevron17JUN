@@ -448,6 +448,7 @@
             this.Text = "Total Smart 2D Coding Solution";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MasterMdi_Load);
+            this.MdiChildActivate += new System.EventHandler(this.MasterMdi_MdiChildActivate);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip.ResumeLayout(false);
