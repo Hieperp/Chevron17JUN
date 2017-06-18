@@ -58,12 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="CommonLibraries\CommonInterfaces.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Mains\MasterMdi.cs">
@@ -80,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\Mains\MasterMdi.resx">
       <DependentUpon>MasterMdi.cs</DependentUpon>
@@ -123,6 +119,405 @@
       <Project>{94d46fd9-2ae6-4070-9995-891bdf06ee42}</Project>
       <Name>TotalService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graphicloads-100-Flat-Home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3floppy-mount.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1368113696_32538.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1368113865_132657.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\20130106011449193_easyicon_cn_32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-document-print.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-document-print-preview.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-document-save-as.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-edit-find.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-messagebox-warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-trash-empty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addressbook-edit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ahmadhania-Spherical-Back.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ahmadhania-Spherical-Down.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Burn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Error.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Error1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Private.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Private1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm-Warning1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alert.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apps-Burn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background21.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Barcode %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar-code %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar-code %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar-code.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Barcode-green-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode-reader.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Benjigarner-Softdimension-Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Benjigarner-Softdimension-Excel1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Benjigarner-Softdimension-Excel2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue2010.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue2010Large.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue-recycle-bin.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bookmark-add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button-Delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImage1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImageIcon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ButtonImageIconRight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Check.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_expand.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_expand_Left.1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_expand1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_Right.1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron_Right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chromatix-Keyboard-Keys-Esc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect %283%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect_creating.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect_no.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Office-Forward.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-5-Hide-right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-5-Navigate-left.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-5-Navigate-right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-6-Import-export.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-6-User-mapping.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Custom-Icon-Design-Pretty-Office-7-Generate-tables.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dario-Arnaez-Genesis-3G-User-Files.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delacro-Id-Recent-Documents.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deleket-Orb-Download.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deleket-Sleek-Xp-Basic-Ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deleket-Soft-Scraps-Document-Preview.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designcontest-Ecommerce-Business-Money.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit-Text.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit-validated.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\esc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Everaldo-Crystal-Clear-App-key-bindings.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Excel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fatcow-Farm-Fresh-Key-escape.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Firstfear-Whistlepuff-Documents.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Floppy-Drive.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder-printer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Get-Info-B.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Graphicrating-Koloria-Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Honeycomb-Barcode-Scanner-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icojam-Onebit-Currency-dollar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iconarchive-Red-Orb-Alphabet-Dollar.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iconshock-Perspective-General-Administrator.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Iconshock-Super-Vista-General-Administrator.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\install_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Internet-Connect.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Key %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Key.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Keys.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kyo-Tux-Phuzion-Folder-Blue-Tools.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-dollar-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-Folder-Add.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-disconnect-icone-6892 %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-edit-find.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-go-next-view.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-go-previous-view.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oxygen-Icons.org-Oxygen-Mimetypes-text-x-log.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Play-Normal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer %281%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer %282%29.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ramotion-Custom-Mac-Os-Preview.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recycle-Bin-full.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Robsonbillponte-IRob-Folder-Utilities-Folder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Saki-NuoveXT-Actions-ok.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign-up.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smallsuccess.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Status-security-high.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Status-wallet-open.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stop-Normal-Red.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-Key.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Edit.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thvg-Wood-Folders-Matte-Utilities.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Toolbar Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-empty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Treetog-Junior-Folder-user.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UpgradeReport_Minus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UpgradeReport_Plus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-login.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
