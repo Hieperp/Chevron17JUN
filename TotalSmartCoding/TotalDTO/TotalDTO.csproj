@@ -54,6 +54,12 @@
   <ItemGroup>
     <Compile Include="BaseDTO.cs" />
     <Compile Include="BaseWithDetailDTO.cs" />
+    <Compile Include="Commons\CustomException.cs" />
+    <Compile Include="Commons\NotifyPropertyChangeObject.cs" />
+    <Compile Include="Commons\NotifyValidationRule.cs" />
+    <Compile Include="Commons\RegexValidationRule.cs" />
+    <Compile Include="Commons\SimpleValidationRule.cs" />
+    <Compile Include="Commons\ValidationRule.cs" />
     <Compile Include="CustomValidation.cs" />
     <Compile Include="Helpers\AmountDetailDTO.cs" />
     <Compile Include="Helpers\AmountDTO.cs" />
