@@ -4,31 +4,112 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using TotalBase.Enums;
-
 using TotalSmartCoding.CommonLibraries;
-
 using TotalSmartCoding.Views.Commons;
 
 namespace TotalSmartCoding.Views.Mains
 {
     public partial class MasterMdi : Form
     {
+        #region Contractor
+
+
+        Binding beginingDateBinding;
+        Binding endingDateBinding;
+
+        Binding buttonNaviBarHeaderVisibleBinding;
+
+
+        [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
+        public static extern int SetWindowTheme(IntPtr hWnd, String pszSubAppName, String pszSubIdList);
+
+
         public MasterMdi()
         {
             InitializeComponent();
-        }
 
-        private void MasterMdi_Load(object sender, EventArgs e)
+
+            try
+            {
+
+                this.beginingDateBinding = this.textBoxLowerFillterDate.TextBox.DataBindings.Add("Text", GlobalEnums.GlobalOptionSetting, "LowerFillterDate", true);
+                this.endingDateBinding = this.textBoxUpperFillterDate.TextBox.DataBindings.Add("Text", GlobalEnums.GlobalOptionSetting, "UpperFillterDate", true);
+
+
+                this.beginingDateBinding.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+                this.endingDateBinding.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+
+
+                this.buttonNaviBarHeaderVisibleBinding = this.buttonNaviBarHeader.DataBindings.Add("Visible", this.naviBarModuleMaster, "Collapsed", true, DataSourceUpdateMode.OnPropertyChanged);
+                this.buttonNaviBarHeaderVisibleBinding.Parse += new ConvertEventHandler(buttonNaviBarHeaderVisibleBinding_Parse);
+                this.buttonNaviBarHeaderVisibleBinding.Format += new ConvertEventHandler(buttonNaviBarHeaderVisibleBinding_Format);
+
+                this.listViewTaskMaster.Dock = DockStyle.Fill;
+                this.listViewTaskMaster.Columns.Add(new ColumnHeader() { Width = this.listViewTaskMaster.Width });
+
+
+
+
+                //InitializeModuleMaster();
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+        
+
+        void buttonNaviBarHeaderVisibleBinding_Parse(object sender, ConvertEventArgs e)
         {
+            e.Value = !(bool)e.Value;
+        }
 
+        void buttonNaviBarHeaderVisibleBinding_Format(object sender, ConvertEventArgs e)
+        {
+            e.Value = !(bool)e.Value;
+        }
+
+        private void buttonNaviBarHeader_Click(object sender, EventArgs e)
+        {
+            this.naviBarModuleMaster.Collapsed = true;
+        }
+
+        private void naviBarModuleMaster_CollapsedChanged(object sender, EventArgs e)
+        {
+            this.listViewTaskMaster.Columns[0].Width = this.listViewTaskMaster.Columns[0].Width + (this.naviBarModuleMaster.Collapsed ? -4 : 4);
         }
 
 
+        private void naviBarModuleMaster_ActiveBandChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.buttonNaviBarHeader.Text = this.naviBarModuleMaster.ActiveBand.Text;
+
+                this.listViewTaskMaster.Parent = null;
+                this.naviBarModuleMaster.ActiveBand.ClientArea.Controls.Add(this.listViewTaskMaster);
+                this.listViewTaskMaster.Visible = true;
+                SetWindowTheme(listViewTaskMaster.Handle, "explorer", null);
+
+                //int moduleID; if (int.TryParse(this.naviBarModuleMaster.ActiveBand.Tag.ToString(), out  moduleID)) InitializeTaskMaster(moduleID);
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+        private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
+        {
+            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+        }
+
+        #endregion Contractor
 
 
         #region Form Events: Merge toolstrip & Set toolbar context

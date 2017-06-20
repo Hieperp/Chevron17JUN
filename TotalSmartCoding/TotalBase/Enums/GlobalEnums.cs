@@ -2,6 +2,13 @@
 {
     public static class GlobalEnums
     {
+
+        public static OptionSetting GlobalOptionSetting = new OptionSetting();
+        public static string stringFieldRequired = "Input not correct. Please make sure all required fields are filled out correctly";
+
+
+
+
         public static bool ERPConnected = false;
 
         public static int CalculatingTypeID = 0;
@@ -241,9 +248,7 @@
 
 
 
-
-        public static string stringFieldRequired = "Input not correct. Please make sure all required fields are filled out correctly";
-
+        
 
 
 

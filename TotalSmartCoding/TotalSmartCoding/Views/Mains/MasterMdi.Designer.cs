@@ -63,9 +63,13 @@
             this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.naviBarModuleMaster = new Guifreaks.Navisuite.NaviBar(this.components);
+            this.listViewTaskMaster = new System.Windows.Forms.ListView();
+            this.buttonNaviBarHeader = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStripMDIMain.SuspendLayout();
+            this.naviBarModuleMaster.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListModuleMasterSmall
@@ -267,6 +271,7 @@
             // toolStripMDIMain
             // 
             this.toolStripMDIMain.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStripMDIMain.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
             this.toolStripMDIMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripMDIMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonEscape,
@@ -434,11 +439,65 @@
             this.helpToolStripButton.Text = "Help";
             this.helpToolStripButton.Visible = false;
             // 
+            // naviBarModuleMaster
+            // 
+            this.naviBarModuleMaster.ActiveBand = null;
+            this.naviBarModuleMaster.Controls.Add(this.listViewTaskMaster);
+            this.naviBarModuleMaster.Controls.Add(this.buttonNaviBarHeader);
+            this.naviBarModuleMaster.Dock = System.Windows.Forms.DockStyle.Left;
+            this.naviBarModuleMaster.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.naviBarModuleMaster.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.naviBarModuleMaster.HeaderHeight = 32;
+            this.naviBarModuleMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
+            this.naviBarModuleMaster.Location = new System.Drawing.Point(0, 110);
+            this.naviBarModuleMaster.Margin = new System.Windows.Forms.Padding(4);
+            this.naviBarModuleMaster.Name = "naviBarModuleMaster";
+            this.naviBarModuleMaster.Size = new System.Drawing.Size(291, 776);
+            this.naviBarModuleMaster.TabIndex = 14;
+            this.naviBarModuleMaster.Text = "naviBar1";
+            this.naviBarModuleMaster.VisibleLargeButtons = 3;
+            this.naviBarModuleMaster.ActiveBandChanged += new System.EventHandler(this.naviBarModuleMaster_ActiveBandChanged);
+            this.naviBarModuleMaster.CollapsedChanged += new System.EventHandler(this.naviBarModuleMaster_CollapsedChanged);
+            // 
+            // listViewTaskMaster
+            // 
+            this.listViewTaskMaster.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Blue2010Large;
+            this.listViewTaskMaster.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewTaskMaster.FullRowSelect = true;
+            this.listViewTaskMaster.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewTaskMaster.LargeImageList = this.imageListTaskMaster;
+            this.listViewTaskMaster.Location = new System.Drawing.Point(0, 42);
+            this.listViewTaskMaster.Margin = new System.Windows.Forms.Padding(4);
+            this.listViewTaskMaster.Name = "listViewTaskMaster";
+            this.listViewTaskMaster.Size = new System.Drawing.Size(287, 720);
+            this.listViewTaskMaster.SmallImageList = this.imageListTaskMaster;
+            this.listViewTaskMaster.TabIndex = 24;
+            this.listViewTaskMaster.UseCompatibleStateImageBehavior = false;
+            this.listViewTaskMaster.View = System.Windows.Forms.View.Details;
+            this.listViewTaskMaster.Visible = false;
+            // 
+            // buttonNaviBarHeader
+            // 
+            this.buttonNaviBarHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNaviBarHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.buttonNaviBarHeader.Image = global::TotalSmartCoding.Properties.Resources.ButtonImageIcon;
+            this.buttonNaviBarHeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonNaviBarHeader.Location = new System.Drawing.Point(0, 2);
+            this.buttonNaviBarHeader.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonNaviBarHeader.Name = "buttonNaviBarHeader";
+            this.buttonNaviBarHeader.Size = new System.Drawing.Size(289, 34);
+            this.buttonNaviBarHeader.TabIndex = 20;
+            this.buttonNaviBarHeader.Text = "Home Navigation Panel";
+            this.buttonNaviBarHeader.UseVisualStyleBackColor = true;
+            this.buttonNaviBarHeader.Click += new System.EventHandler(this.buttonNaviBarHeader_Click);
+            // 
             // MasterMdi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1841, 911);
+            this.Controls.Add(this.naviBarModuleMaster);
             this.Controls.Add(this.toolStripMDIMain);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
@@ -447,7 +506,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Total Smart 2D Coding Solution";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MasterMdi_Load);
             this.MdiChildActivate += new System.EventHandler(this.MasterMdi_MdiChildActivate);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -455,6 +513,7 @@
             this.statusStrip.PerformLayout();
             this.toolStripMDIMain.ResumeLayout(false);
             this.toolStripMDIMain.PerformLayout();
+            this.naviBarModuleMaster.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,6 +554,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
+        private Guifreaks.Navisuite.NaviBar naviBarModuleMaster;
+        private System.Windows.Forms.ListView listViewTaskMaster;
+        private System.Windows.Forms.Button buttonNaviBarHeader;
 
     }
 }

@@ -45,6 +45,8 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Guifreaks.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b9e40ae01dee0076" />
+    <Reference Include="Guifreaks.Navisuite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7f6dc13cbca790ea" />
     <Reference Include="Microsoft.ExceptionMessageBox, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Microsoft SQL Server\110\SDK\Assemblies\Microsoft.ExceptionMessageBox.dll</HintPath>
