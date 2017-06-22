@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TotalSmartCodingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Commodities">
+          <Key>
+            <PropertyRef Name="CommodityID" />
+          </Key>
+          <Property Name="CommodityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfficialCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="OfficialName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="OriginalName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CommodityCategoryID" Type="int" Nullable="false" />
+          <Property Name="CommodityTypeID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="PiecePerPack" Type="int" />
+          <Property Name="QuantityAlert" Type="int" />
+          <Property Name="PurchaseUnit" Type="nvarchar" MaxLength="10" />
+          <Property Name="SalesUnit" Type="nvarchar" MaxLength="10" />
+          <Property Name="Packing" Type="nvarchar" MaxLength="60" />
+          <Property Name="Origin" Type="nvarchar" MaxLength="60" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="LeadTime" Type="float" />
+          <Property Name="Discontinue" Type="bit" />
+          <Property Name="InActive" Type="bit" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OfficialName" Type="nvarchar" MaxLength="150" />
+          <Property Name="CustomerCategoryID" Type="int" Nullable="false" />
+          <Property Name="CustomerTypeID" Type="int" Nullable="false" />
+          <Property Name="TerritoryID" Type="int" Nullable="false" />
+          <Property Name="BillingAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ShippingAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="VATCode" Type="nvarchar" MaxLength="60" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Facsimile" Type="nvarchar" MaxLength="60" />
+          <Property Name="AttentionName" Type="nvarchar" MaxLength="60" />
+          <Property Name="AttentionTitle" Type="nvarchar" MaxLength="60" />
+          <Property Name="LimitAmount" Type="float" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DeliveryAdviceDetails">
+          <Key>
+            <PropertyRef Name="DeliveryAdviceDetailID" />
+          </Key>
+          <Property Name="DeliveryAdviceDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="DeliveryAdviceID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="SalesOrderID" Type="int" />
+          <Property Name="SalesOrderDetailID" Type="int" />
+          <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="CommodityTypeID" Type="int" Nullable="false" />
+          <Property Name="WarehouseID" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityIssue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="InActivePartial" Type="bit" Nullable="false" />
+          <Property Name="InActivePartialDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DeliveryAdvices">
+          <Key>
+            <PropertyRef Name="DeliveryAdviceID" />
+          </Key>
+          <Property Name="DeliveryAdviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="10" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="ShippingAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PreparedPersonID" Type="int" Nullable="false" />
+          <Property Name="OrganizationalUnitID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="ApproverID" Type="int" Nullable="false" />
+          <Property Name="PaymentTermID" Type="int" Nullable="false" />
+          <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalQuantityIssue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="InActivePartial" Type="bit" Nullable="false" />
+          <Property Name="InActiveDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_DeliveryAdviceDetails_Commodities">
+          <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
+          <End Role="DeliveryAdviceDetails" Type="Self.DeliveryAdviceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodities">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="DeliveryAdviceDetails">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdviceDetails_DeliveryAdvices">
+          <End Role="DeliveryAdvices" Type="Self.DeliveryAdvices" Multiplicity="1" />
+          <End Role="DeliveryAdviceDetails" Type="Self.DeliveryAdviceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryAdvices">
+              <PropertyRef Name="DeliveryAdviceID" />
+            </Principal>
+            <Dependent Role="DeliveryAdviceDetails">
+              <PropertyRef Name="DeliveryAdviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdvices_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="DeliveryAdvices" Type="Self.DeliveryAdvices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvices">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TotalSmartCodingModelStoreContainer">
+          <EntitySet Name="Commodities" EntityType="Self.Commodities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryAdviceDetails" EntityType="Self.DeliveryAdviceDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryAdvices" EntityType="Self.DeliveryAdvices" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DeliveryAdviceDetails_Commodities" Association="Self.FK_DeliveryAdviceDetails_Commodities">
+            <End Role="Commodities" EntitySet="Commodities" />
+            <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdviceDetails_DeliveryAdvices" Association="Self.FK_DeliveryAdviceDetails_DeliveryAdvices">
+            <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+            <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Customers" Association="Self.FK_DeliveryAdvices_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TotalSmartCodingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Commodity">
+          <Key>
+            <PropertyRef Name="CommodityID" />
+          </Key>
+          <Property Name="CommodityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficialCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficialName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OriginalName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CommodityCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="PiecePerPack" Type="Int32" />
+          <Property Name="QuantityAlert" Type="Int32" />
+          <Property Name="PurchaseUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SalesUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Packing" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Origin" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="LeadTime" Type="Double" />
+          <Property Name="Discontinue" Type="Boolean" />
+          <Property Name="InActive" Type="Boolean" />
+          <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeliveryAdviceDetails" Relationship="Self.FK_DeliveryAdviceDetails_Commodities" FromRole="Commodities" ToRole="DeliveryAdviceDetails" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficialName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TerritoryID" Type="Int32" Nullable="false" />
+          <Property Name="BillingAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShippingAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VATCode" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Facsimile" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="AttentionName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="AttentionTitle" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="LimitAmount" Type="Double" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DeliveryAdvices" Relationship="Self.FK_DeliveryAdvices_Customers" FromRole="Customers" ToRole="DeliveryAdvices" />
+        </EntityType>
+        <EntityType Name="DeliveryAdviceDetail">
+          <Key>
+            <PropertyRef Name="DeliveryAdviceDetailID" />
+          </Key>
+          <Property Name="DeliveryAdviceDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryAdviceID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="SalesOrderID" Type="Int32" />
+          <Property Name="SalesOrderDetailID" Type="Int32" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityIssue" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Commodity" Relationship="Self.FK_DeliveryAdviceDetails_Commodities" FromRole="DeliveryAdviceDetails" ToRole="Commodities" />
+          <NavigationProperty Name="DeliveryAdvice" Relationship="Self.FK_DeliveryAdviceDetails_DeliveryAdvices" FromRole="DeliveryAdviceDetails" ToRole="DeliveryAdvices" />
+        </EntityType>
+        <EntityType Name="DeliveryAdvice">
+          <Key>
+            <PropertyRef Name="DeliveryAdviceID" />
+          </Key>
+          <Property Name="DeliveryAdviceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="ShippingAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PreparedPersonID" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="ApproverID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTermID" Type="Int32" Nullable="false" />
+          <Property Name="TotalQuantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalQuantityIssue" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
+          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_DeliveryAdvices_Customers" FromRole="DeliveryAdvices" ToRole="Customers" />
+          <NavigationProperty Name="DeliveryAdviceDetails" Relationship="Self.FK_DeliveryAdviceDetails_DeliveryAdvices" FromRole="DeliveryAdvices" ToRole="DeliveryAdviceDetails" />
+        </EntityType>
+        <Association Name="FK_DeliveryAdviceDetails_Commodities">
+          <End Role="Commodities" Type="Self.Commodity" Multiplicity="1" />
+          <End Role="DeliveryAdviceDetails" Type="Self.DeliveryAdviceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodities">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="DeliveryAdviceDetails">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdvices_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="DeliveryAdvices" Type="Self.DeliveryAdvice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvices">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdviceDetails_DeliveryAdvices">
+          <End Role="DeliveryAdvices" Type="Self.DeliveryAdvice" Multiplicity="1" />
+          <End Role="DeliveryAdviceDetails" Type="Self.DeliveryAdviceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryAdvices">
+              <PropertyRef Name="DeliveryAdviceID" />
+            </Principal>
+            <Dependent Role="DeliveryAdviceDetails">
+              <PropertyRef Name="DeliveryAdviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TotalSmartCodingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Commodities" EntityType="Self.Commodity" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DeliveryAdviceDetails" EntityType="Self.DeliveryAdviceDetail" />
+          <EntitySet Name="DeliveryAdvices" EntityType="Self.DeliveryAdvice" />
+          <AssociationSet Name="FK_DeliveryAdviceDetails_Commodities" Association="Self.FK_DeliveryAdviceDetails_Commodities">
+            <End Role="Commodities" EntitySet="Commodities" />
+            <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Customers" Association="Self.FK_DeliveryAdvices_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdviceDetails_DeliveryAdvices" Association="Self.FK_DeliveryAdviceDetails_DeliveryAdvices">
+            <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+            <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TotalSmartCodingModelStoreContainer" CdmEntityContainer="TotalSmartCodingEntities">
+          <EntitySetMapping Name="Commodities">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Commodity">
+              <MappingFragment StoreEntitySet="Commodities">
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OfficialName" ColumnName="OfficialName" />
+                <ScalarProperty Name="OriginalName" ColumnName="OriginalName" />
+                <ScalarProperty Name="CommodityCategoryID" ColumnName="CommodityCategoryID" />
+                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
+                <ScalarProperty Name="QuantityAlert" ColumnName="QuantityAlert" />
+                <ScalarProperty Name="PurchaseUnit" ColumnName="PurchaseUnit" />
+                <ScalarProperty Name="SalesUnit" ColumnName="SalesUnit" />
+                <ScalarProperty Name="Packing" ColumnName="Packing" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="Discontinue" ColumnName="Discontinue" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OfficialName" ColumnName="OfficialName" />
+                <ScalarProperty Name="CustomerCategoryID" ColumnName="CustomerCategoryID" />
+                <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+                <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
+                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+                <ScalarProperty Name="VATCode" ColumnName="VATCode" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Facsimile" ColumnName="Facsimile" />
+                <ScalarProperty Name="AttentionName" ColumnName="AttentionName" />
+                <ScalarProperty Name="AttentionTitle" ColumnName="AttentionTitle" />
+                <ScalarProperty Name="LimitAmount" ColumnName="LimitAmount" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryAdviceDetails">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.DeliveryAdviceDetail">
+              <MappingFragment StoreEntitySet="DeliveryAdviceDetails">
+                <ScalarProperty Name="DeliveryAdviceDetailID" ColumnName="DeliveryAdviceDetailID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="DeliveryAdviceID" ColumnName="DeliveryAdviceID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
+                <ScalarProperty Name="SalesOrderDetailID" ColumnName="SalesOrderDetailID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="QuantityIssue" ColumnName="QuantityIssue" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryAdvices">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.DeliveryAdvice">
+              <MappingFragment StoreEntitySet="DeliveryAdvices">
+                <ScalarProperty Name="DeliveryAdviceID" ColumnName="DeliveryAdviceID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PreparedPersonID" ColumnName="PreparedPersonID" />
+                <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ApproverID" ColumnName="ApproverID" />
+                <ScalarProperty Name="PaymentTermID" ColumnName="PaymentTermID" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="TotalQuantityIssue" ColumnName="TotalQuantityIssue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

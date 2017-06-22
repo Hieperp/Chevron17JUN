@@ -54,6 +54,10 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
       <Private>True</Private>
@@ -75,6 +79,7 @@
     <Compile Include="CommonLibraries\CommonFormAction.cs" />
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
     <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
+    <Compile Include="CommonLibraries\CommonNinject.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CoreController.cs" />
     <Compile Include="Controllers\GenericSimpleController.cs" />
