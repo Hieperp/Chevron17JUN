@@ -520,7 +520,7 @@
             this.MainMenuStrip = this.InvisibleMainMenuStripOfMDI;
             this.Name = "MasterMdi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Total Smart 2D Coding Solution";
+            this.Text = "Total 2D Coding Solution";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MdiChildActivate += new System.EventHandler(this.MasterMdi_MdiChildActivate);
             this.statusStrip.ResumeLayout(false);
