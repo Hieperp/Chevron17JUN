@@ -8,7 +8,7 @@ namespace TotalSmartCoding.CommonLibraries
 
     public interface IMergeToolStrip
     {
-        ToolStrip ChildToolStrip { get; set; }
+        ToolStrip ChildToolStrip { get; }// set; }
     }
 
 

@@ -51,6 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Microsoft SQL Server\110\SDK\Assemblies\Microsoft.ExceptionMessageBox.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
       <Private>True</Private>
@@ -68,15 +71,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\IViewModelSelectListBuilder.cs" />
+    <Compile Include="CommonLibraries\CommonFormAction.cs" />
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
     <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CoreController.cs" />
+    <Compile Include="Controllers\GenericSimpleController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Helpers\IBaseViewModel.cs" />
+    <Compile Include="ViewModels\Helpers\PrintViewModel.cs" />
     <Compile Include="Views\Commons\CustomExceptionMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Commons\CustomExceptionMessageBox.designer.cs">
       <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts.Designer.cs">
+      <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\BasicForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Mains\MasterMdi.cs">
       <SubType>Form</SubType>
@@ -96,6 +115,12 @@
     </Compile>
     <EmbeddedResource Include="Views\Commons\CustomExceptionMessageBox.resx">
       <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts.resx">
+      <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\BasicForm.resx">
+      <DependentUpon>BasicForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\MasterMdi.resx">
       <DependentUpon>MasterMdi.cs</DependentUpon>

@@ -12,6 +12,9 @@ using TotalBase.Enums;
 using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Views.Commons;
 
+using TotalSmartCoding.Views.Inventories;
+
+
 namespace TotalSmartCoding.Views.Mains
 {
     public partial class MasterMdi : Form
@@ -63,7 +66,7 @@ namespace TotalSmartCoding.Views.Mains
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
         }
-        
+
 
         void buttonNaviBarHeaderVisibleBinding_Parse(object sender, ConvertEventArgs e)
         {
@@ -114,7 +117,7 @@ namespace TotalSmartCoding.Views.Mains
 
         #region Form Events: Merge toolstrip & Set toolbar context
         private void MasterMdi_MdiChildActivate(object sender, EventArgs e)
-        {       
+        {
             try
             {
                 ToolStripManager.RevertMerge(this.toolStripMDIMain);
@@ -361,9 +364,29 @@ namespace TotalSmartCoding.Views.Mains
 
         #endregion <Call Tool Strip>
 
-        
 
-        
+
+        private void OpenTestView()
+        {
+
+            //Open new form
+            Form childForm;
+            childForm = new GoodsReceipts();
+
+            if (childForm != null)
+            {
+                childForm.MdiParent = this;
+                childForm.WindowState = FormWindowState.Maximized;
+                childForm.ControlBox = false;
+                childForm.Show();
+            }
+
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            OpenTestView();
+        }
 
 
     }
