@@ -31,6 +31,30 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
+        public int ReceiverID { get; set; }
+        public Nullable<int> PromotionID { get; set; }
+        public int SalespersonID { get; set; }
+        public int CalculatingTypeID { get; set; }
+        public bool VATbyRow { get; set; }
+        public decimal ControlFreeQuantity { get; set; }
+        public decimal FreeQuantity { get; set; }
+        public decimal FreeQuantityIssue { get; set; }
+        public decimal ListedPrice { get; set; }
+        public decimal DiscountPercent { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal TradeDiscountRate { get; set; }
+        public decimal VATPercent { get; set; }
+        public decimal ListedGrossPrice { get; set; }
+        public decimal GrossPrice { get; set; }
+        public decimal ListedAmount { get; set; }
+        public decimal Amount { get; set; }
+        public decimal ListedVATAmount { get; set; }
+        public decimal VATAmount { get; set; }
+        public decimal ListedGrossAmount { get; set; }
+        public decimal GrossAmount { get; set; }
+        public Nullable<bool> IsBonus { get; set; }
+        public Nullable<int> VoidTypeID { get; set; }
+        public bool InActiveIssue { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual DeliveryAdvice DeliveryAdvice { get; set; }

@@ -40,6 +40,16 @@ namespace TotalModel.Models
         public Nullable<bool> Discontinue { get; set; }
         public Nullable<bool> InActive { get; set; }
         public string Remarks { get; set; }
+        public string CodePartA { get; set; }
+        public string CodePartB { get; set; }
+        public string CodePartC { get; set; }
+        public string CodePartD { get; set; }
+        public Nullable<int> PreviousCommodityID { get; set; }
+        public decimal ListedPrice { get; set; }
+        public decimal GrossPrice { get; set; }
+        public string HSCode { get; set; }
+        public bool IsRegularCheckUps { get; set; }
+        public string Specifycation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }

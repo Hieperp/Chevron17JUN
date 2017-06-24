@@ -168,7 +168,19 @@ namespace TotalSmartCoding.Views.Mains
         public void New()
         {
             this.ControlBox = false;
-            MessageBox.Show("New");
+            //MessageBox.Show("New");
+
+            string plainText ="nguyễnđạtphú";
+            // Convert the plain string pwd into bytes
+            //byte[] plainTextBytes = UnicodeEncoding.Unicode.GetBytes(plainText);
+            //System.Security.Cryptography.HashAlgorithm hashAlgo = new System.Security.Cryptography.SHA256Managed();
+            //byte[] hash = hashAlgo.ComputeHash(plainTextBytes);
+
+            byte[] data = UnicodeEncoding.Unicode.GetBytes(plainText);
+            data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+            String hash = UnicodeEncoding.Unicode.GetString(data);
+            MessageBox.Show(hash);
+
             //this.marketingProgramBLL.New();
             //this.SetEditableMode(true);
         }

@@ -1,5 +1,22 @@
 ﻿using Ninject;
+
 using TotalCore.Repositories;
+using TotalModel.Models;
+
+using TotalModel.Models;
+
+using TotalCore.Repositories;
+//using TotalCore.Repositories.Inventories;
+
+//using TotalCore.Services.Inventories;
+
+using TotalDAL.Repositories;
+//using TotalDAL.Repositories.Inventories;
+
+//using TotalService.Inventories;
+
+//using TotalSmartCoding.Areas.Inventories.Builders;
+//using TotalSmartCoding.Areas.Commons.Builders;
 
 namespace TotalSmartCoding.CommonLibraries
 {
@@ -15,13 +32,13 @@ namespace TotalSmartCoding.CommonLibraries
             Kernel = new StandardKernel();
             try
             {
-                //NinjectKernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-                //NinjectKernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+                //Kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
+                //Kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
 
-                //NinjectKernel.Bind<TotalSalesPortalEntities>().ToSelf().InRequestScope();
+                Kernel.Bind<TotalSmartCodingEntities>().ToSelf(); //.InRequestScope()
 
-                //Kernel.Bind<IBaseRepository>().To<BaseRepository>();
+                Kernel.Bind<IBaseRepository>().To<BaseRepository>();
             }
             catch
             {

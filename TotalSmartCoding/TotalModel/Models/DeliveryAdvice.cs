@@ -43,9 +43,39 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
+        public bool HasSalesOrder { get; set; }
+        public Nullable<int> SalesOrderID { get; set; }
+        public string SalesOrderCodes { get; set; }
+        public string SalesOrderReferences { get; set; }
+        public int ReceiverID { get; set; }
+        public int WarehouseID { get; set; }
+        public int PriceCategoryID { get; set; }
+        public Nullable<int> PromotionID { get; set; }
+        public string PromotionVouchers { get; set; }
+        public int SalespersonID { get; set; }
+        public bool VATbyRow { get; set; }
+        public decimal VATPercent { get; set; }
+        public decimal TotalFreeQuantity { get; set; }
+        public decimal TotalFreeQuantityIssue { get; set; }
+        public decimal TotalListedAmount { get; set; }
+        public decimal TotalAmount { get; set; }
+        public decimal TradeDiscountRate { get; set; }
+        public decimal ListedTradeDiscountAmount { get; set; }
+        public decimal TradeDiscountAmount { get; set; }
+        public decimal TotalListedTaxableAmount { get; set; }
+        public decimal TotalTaxableAmount { get; set; }
+        public decimal TotalListedVATAmount { get; set; }
+        public decimal TotalVATAmount { get; set; }
+        public decimal TotalListedGrossAmount { get; set; }
+        public decimal TotalGrossAmount { get; set; }
+        public decimal AverageDiscountPercent { get; set; }
+        public decimal ReceiptAmount { get; set; }
+        public Nullable<int> VoidTypeID { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
+        public virtual Customer Customer1 { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

@@ -52,6 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseService.cs" />
+    <Compile Include="GenericService.cs" />
+    <Compile Include="GenericWithDetailService.cs" />
+    <Compile Include="GenericWithViewDetailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ namespace TotalCore.Repositories
 
 
 
-        IQueryable<TEntity> Loading(string aspUserID, GlobalEnums.NmvnTaskID nmvnTaskID);//for Loading (09/07/2015) - let review and optimize Loading laster
+        //IQueryable<TEntity> Loading(string aspUserID, GlobalEnums.NmvnTaskID nmvnTaskID);//for Loading (09/07/2015) - let review and optimize Loading laster
 
 
 

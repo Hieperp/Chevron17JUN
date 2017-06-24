@@ -68,6 +68,21 @@
     <Compile Include="Models\DeliveryAdviceDetail.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Location.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Module.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModuleDetail.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganizationalUnit.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganizationalUnitUser.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TotalSalesPortalEntities.cs" />
     <Compile Include="Models\TotalSalesPortalExtensions.cs" />
     <Compile Include="Models\TotalSmartCoding.Context.cs">

@@ -4,31 +4,41 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TotalSmartCodingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TotalSmartCodingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Commodities">
           <Key>
             <PropertyRef Name="CommodityID" />
           </Key>
-          <Property Name="CommodityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommodityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="OfficialCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodePartA" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CodePartB" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CodePartC" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CodePartD" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="OfficialName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="OriginalName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PreviousCommodityID" Type="int" />
           <Property Name="CommodityCategoryID" Type="int" Nullable="false" />
           <Property Name="CommodityTypeID" Type="int" Nullable="false" />
           <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="PiecePerPack" Type="int" />
           <Property Name="QuantityAlert" Type="int" />
+          <Property Name="ListedPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrossPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="PurchaseUnit" Type="nvarchar" MaxLength="10" />
           <Property Name="SalesUnit" Type="nvarchar" MaxLength="10" />
           <Property Name="Packing" Type="nvarchar" MaxLength="60" />
           <Property Name="Origin" Type="nvarchar" MaxLength="60" />
           <Property Name="Weight" Type="float" />
           <Property Name="LeadTime" Type="float" />
+          <Property Name="HSCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsRegularCheckUps" Type="bit" Nullable="false" />
           <Property Name="Discontinue" Type="bit" />
-          <Property Name="InActive" Type="bit" />
+          <Property Name="Specifycation" Type="nvarchar" MaxLength="500" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
+          <Property Name="InActive" Type="bit" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -38,6 +48,11 @@
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="OfficialName" Type="nvarchar" MaxLength="150" />
+          <Property Name="VendorCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="VendorCategory" Type="nvarchar" MaxLength="80" />
+          <Property Name="PriceCategoryID" Type="int" Nullable="false" />
+          <Property Name="MonetaryAccountID" Type="int" />
+          <Property Name="SalespersonID" Type="int" Nullable="false" />
           <Property Name="CustomerCategoryID" Type="int" Nullable="false" />
           <Property Name="CustomerTypeID" Type="int" Nullable="false" />
           <Property Name="TerritoryID" Type="int" Nullable="false" />
@@ -48,9 +63,13 @@
           <Property Name="Facsimile" Type="nvarchar" MaxLength="60" />
           <Property Name="AttentionName" Type="nvarchar" MaxLength="60" />
           <Property Name="AttentionTitle" Type="nvarchar" MaxLength="60" />
+          <Property Name="Birthday" Type="datetime" />
           <Property Name="LimitAmount" Type="float" />
-          <Property Name="InActive" Type="bit" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="IsCustomer" Type="bit" Nullable="false" />
+          <Property Name="IsSupplier" Type="bit" Nullable="false" />
+          <Property Name="IsFemale" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DeliveryAdviceDetails">
           <Key>
@@ -61,18 +80,42 @@
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="DeliveryAdviceID" Type="int" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="ReceiverID" Type="int" Nullable="false" />
           <Property Name="SalesOrderID" Type="int" />
           <Property Name="SalesOrderDetailID" Type="int" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="CommodityTypeID" Type="int" Nullable="false" />
           <Property Name="WarehouseID" Type="int" />
+          <Property Name="PromotionID" Type="int" />
+          <Property Name="SalespersonID" Type="int" Nullable="false" />
+          <Property Name="CalculatingTypeID" Type="int" Nullable="false" />
+          <Property Name="VATbyRow" Type="bit" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityIssue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ControlFreeQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FreeQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FreeQuantityIssue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ListedPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DiscountPercent" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TradeDiscountRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VATPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ListedGrossPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrossPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ListedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ListedVATAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VATAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ListedGrossAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrossAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsBonus" Type="bit" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="VoidTypeID" Type="int" />
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="InActive" Type="bit" Nullable="false" />
           <Property Name="InActivePartial" Type="bit" Nullable="false" />
           <Property Name="InActivePartialDate" Type="datetime" />
+          <Property Name="InActiveIssue" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DeliveryAdvices">
           <Key>
@@ -81,7 +124,17 @@
           <Property Name="DeliveryAdviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="Reference" Type="nvarchar" MaxLength="10" />
+          <Property Name="HasSalesOrder" Type="bit" Nullable="false" />
+          <Property Name="SalesOrderID" Type="int" />
+          <Property Name="SalesOrderCodes" Type="nvarchar" MaxLength="200" />
+          <Property Name="SalesOrderReferences" Type="nvarchar" MaxLength="200" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="ReceiverID" Type="int" Nullable="false" />
+          <Property Name="WarehouseID" Type="int" Nullable="false" />
+          <Property Name="PriceCategoryID" Type="int" Nullable="false" />
+          <Property Name="PromotionID" Type="int" />
+          <Property Name="PromotionVouchers" Type="nvarchar" MaxLength="50" />
+          <Property Name="SalespersonID" Type="int" Nullable="false" />
           <Property Name="DeliveryDate" Type="datetime" />
           <Property Name="ShippingAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -90,17 +143,95 @@
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="ApproverID" Type="int" Nullable="false" />
           <Property Name="PaymentTermID" Type="int" Nullable="false" />
+          <Property Name="VATbyRow" Type="bit" Nullable="false" />
+          <Property Name="VATPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalQuantityIssue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalFreeQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalFreeQuantityIssue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalListedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TradeDiscountRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ListedTradeDiscountAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TradeDiscountAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalListedTaxableAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalTaxableAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalListedVATAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalVATAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalListedGrossAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalGrossAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AverageDiscountPercent" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+          <Property Name="ReceiptAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="EditedDate" Type="datetime" Nullable="false" />
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="VoidTypeID" Type="int" />
           <Property Name="InActive" Type="bit" Nullable="false" />
           <Property Name="InActivePartial" Type="bit" Nullable="false" />
           <Property Name="InActiveDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfficialName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Facsimile" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="LockedDate" Type="datetime" Nullable="false" />
+          <Property Name="AspUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleDetails">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="SoftDescription" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Actions" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastOpen" Type="float" Nullable="false" />
+          <Property Name="SerialID" Type="float" Nullable="false" />
+          <Property Name="ImageIndex" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InActive" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionEN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SerialID" Type="int" Nullable="false" />
+          <Property Name="ImageIndex" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="InActive" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrganizationalUnits">
+          <Key>
+            <PropertyRef Name="OrganizationalUnitID" />
+          </Key>
+          <Property Name="OrganizationalUnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrganizationalUnitUsers">
+          <Key>
+            <PropertyRef Name="OrganizationalUnitUserID" />
+          </Key>
+          <Property Name="OrganizationalUnitUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrganizationalUnitID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_DeliveryAdviceDetails_Commodities">
           <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
@@ -138,11 +269,96 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DeliveryAdvices_Customers1">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="DeliveryAdvices" Type="Self.DeliveryAdvices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvices">
+              <PropertyRef Name="ReceiverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdvices_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="DeliveryAdvices" Type="Self.DeliveryAdvices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvices">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizationalUnitIUsers_OrganizationalUnits">
+          <End Role="OrganizationalUnits" Type="Self.OrganizationalUnits" Multiplicity="1" />
+          <End Role="OrganizationalUnitUsers" Type="Self.OrganizationalUnitUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrganizationalUnits">
+              <PropertyRef Name="OrganizationalUnitID" />
+            </Principal>
+            <Dependent Role="OrganizationalUnitUsers">
+              <PropertyRef Name="OrganizationalUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizationalUnits_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="OrganizationalUnits" Type="Self.OrganizationalUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="OrganizationalUnits">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAccessLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
+          <Parameter Name="OrganizationalUnitID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetApprovalPermitted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
+          <Parameter Name="OrganizationalUnitID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetShowDiscount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetShowDiscountByCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUnApprovalPermitted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
+          <Parameter Name="OrganizationalUnitID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUnVoidablePermitted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
+          <Parameter Name="OrganizationalUnitID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetVoidablePermitted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
+          <Parameter Name="OrganizationalUnitID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="TotalSmartCodingModelStoreContainer">
           <EntitySet Name="Commodities" EntityType="Self.Commodities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryAdviceDetails" EntityType="Self.DeliveryAdviceDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryAdvices" EntityType="Self.DeliveryAdvices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleDetails" EntityType="Self.ModuleDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganizationalUnits" EntityType="Self.OrganizationalUnits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganizationalUnitUsers" EntityType="Self.OrganizationalUnitUsers" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DeliveryAdviceDetails_Commodities" Association="Self.FK_DeliveryAdviceDetails_Commodities">
             <End Role="Commodities" EntitySet="Commodities" />
             <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
@@ -155,9 +371,24 @@
             <End Role="Customers" EntitySet="Customers" />
             <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
           </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Customers1" Association="Self.FK_DeliveryAdvices_Customers1">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Locations" Association="Self.FK_DeliveryAdvices_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizationalUnitIUsers_OrganizationalUnits" Association="Self.FK_OrganizationalUnitIUsers_OrganizationalUnits">
+            <End Role="OrganizationalUnits" EntitySet="OrganizationalUnits" />
+            <End Role="OrganizationalUnitUsers" EntitySet="OrganizationalUnitUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizationalUnits_Locations" Association="Self.FK_OrganizationalUnits_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="OrganizationalUnits" EntitySet="OrganizationalUnits" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalSmartCodingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -186,6 +417,16 @@
           <Property Name="InActive" Type="Boolean" />
           <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DeliveryAdviceDetails" Relationship="Self.FK_DeliveryAdviceDetails_Commodities" FromRole="Commodities" ToRole="DeliveryAdviceDetails" />
+          <Property Name="CodePartA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodePartB" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodePartC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodePartD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousCommodityID" Type="Int32" />
+          <Property Name="ListedPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="GrossPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="HSCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsRegularCheckUps" Type="Boolean" Nullable="false" />
+          <Property Name="Specifycation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -209,6 +450,16 @@
           <Property Name="InActive" Type="Boolean" Nullable="false" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DeliveryAdvices" Relationship="Self.FK_DeliveryAdvices_Customers" FromRole="Customers" ToRole="DeliveryAdvices" />
+          <Property Name="VendorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VendorCategory" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="PriceCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="MonetaryAccountID" Type="Int32" />
+          <Property Name="SalespersonID" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="IsCustomer" Type="Boolean" Nullable="false" />
+          <Property Name="IsSupplier" Type="Boolean" Nullable="false" />
+          <Property Name="IsFemale" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DeliveryAdvices1" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Customers1" FromRole="Customer" ToRole="DeliveryAdvice" />
         </EntityType>
         <EntityType Name="DeliveryAdviceDetail">
           <Key>
@@ -233,6 +484,30 @@
           <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Commodity" Relationship="Self.FK_DeliveryAdviceDetails_Commodities" FromRole="DeliveryAdviceDetails" ToRole="Commodities" />
           <NavigationProperty Name="DeliveryAdvice" Relationship="Self.FK_DeliveryAdviceDetails_DeliveryAdvices" FromRole="DeliveryAdviceDetails" ToRole="DeliveryAdvices" />
+          <Property Name="ReceiverID" Type="Int32" Nullable="false" />
+          <Property Name="PromotionID" Type="Int32" />
+          <Property Name="SalespersonID" Type="Int32" Nullable="false" />
+          <Property Name="CalculatingTypeID" Type="Int32" Nullable="false" />
+          <Property Name="VATbyRow" Type="Boolean" Nullable="false" />
+          <Property Name="ControlFreeQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FreeQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FreeQuantityIssue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ListedPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DiscountPercent" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TradeDiscountRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VATPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ListedGrossPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="GrossPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ListedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ListedVATAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VATAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ListedGrossAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="GrossAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IsBonus" Type="Boolean" />
+          <Property Name="VoidTypeID" Type="Int32" />
+          <Property Name="InActiveIssue" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="DeliveryAdvice">
           <Key>
@@ -263,6 +538,36 @@
           <Property Name="InActiveDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_DeliveryAdvices_Customers" FromRole="DeliveryAdvices" ToRole="Customers" />
           <NavigationProperty Name="DeliveryAdviceDetails" Relationship="Self.FK_DeliveryAdviceDetails_DeliveryAdvices" FromRole="DeliveryAdvices" ToRole="DeliveryAdviceDetails" />
+          <Property Name="HasSalesOrder" Type="Boolean" Nullable="false" />
+          <Property Name="SalesOrderID" Type="Int32" />
+          <Property Name="SalesOrderCodes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrderReferences" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverID" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="PriceCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="PromotionID" Type="Int32" />
+          <Property Name="PromotionVouchers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalespersonID" Type="Int32" Nullable="false" />
+          <Property Name="VATbyRow" Type="Boolean" Nullable="false" />
+          <Property Name="VATPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalFreeQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalFreeQuantityIssue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalListedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TradeDiscountRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ListedTradeDiscountAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TradeDiscountAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalListedTaxableAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalTaxableAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalListedVATAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalVATAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalListedGrossAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalGrossAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="AverageDiscountPercent" Type="Decimal" Nullable="false" Precision="18" Scale="5" />
+          <Property Name="ReceiptAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VoidTypeID" Type="Int32" />
+          <NavigationProperty Name="Customer1" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Customers1" FromRole="DeliveryAdvice" ToRole="Customer" />
+          <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Locations" FromRole="DeliveryAdvice" ToRole="Location" />
         </EntityType>
         <Association Name="FK_DeliveryAdviceDetails_Commodities">
           <End Role="Commodities" Type="Self.Commodity" Multiplicity="1" />
@@ -317,7 +622,173 @@
             <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
             <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Customers1" Association="TotalSmartCodingModel.FK_DeliveryAdvices_Customers1">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="DeliveryAdvice" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <FunctionImport Name="GetAccessLevel" ReturnType="Collection(Int32)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
+            <Parameter Name="OrganizationalUnitID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetApprovalPermitted" ReturnType="Collection(Boolean)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
+            <Parameter Name="OrganizationalUnitID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetShowDiscount" ReturnType="Collection(Boolean)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetShowDiscountByCustomer" ReturnType="Collection(Boolean)">
+          <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnApprovalPermitted" ReturnType="Collection(Boolean)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
+            <Parameter Name="OrganizationalUnitID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnVoidablePermitted" ReturnType="Collection(Boolean)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
+            <Parameter Name="OrganizationalUnitID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetVoidablePermitted" ReturnType="Collection(Boolean)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
+            <Parameter Name="OrganizationalUnitID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Locations" EntityType="TotalSmartCodingModel.Location" />
+          <AssociationSet Name="FK_DeliveryAdvices_Locations" Association="TotalSmartCodingModel.FK_DeliveryAdvices_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="DeliveryAdvice" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <EntitySet Name="ModuleDetails" EntityType="TotalSmartCodingModel.ModuleDetail" />
+          <EntitySet Name="Modules" EntityType="TotalSmartCodingModel.Module" />
+          <EntitySet Name="OrganizationalUnits" EntityType="TotalSmartCodingModel.OrganizationalUnit" />
+          <EntitySet Name="OrganizationalUnitUsers" EntityType="TotalSmartCodingModel.OrganizationalUnitUser" />
+          <AssociationSet Name="FK_OrganizationalUnits_Locations" Association="TotalSmartCodingModel.FK_OrganizationalUnits_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="OrganizationalUnit" EntitySet="OrganizationalUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizationalUnitIUsers_OrganizationalUnits" Association="TotalSmartCodingModel.FK_OrganizationalUnitIUsers_OrganizationalUnits">
+            <End Role="OrganizationalUnit" EntitySet="OrganizationalUnits" />
+            <End Role="OrganizationalUnitUser" EntitySet="OrganizationalUnitUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_DeliveryAdvices_Customers1">
+          <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.DeliveryAdvice" Role="DeliveryAdvice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvice">
+              <PropertyRef Name="ReceiverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficialName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Facsimile" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LockedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AspUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DeliveryAdvices" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Locations" FromRole="Location" ToRole="DeliveryAdvice" />
+          <NavigationProperty Name="OrganizationalUnits" Relationship="TotalSmartCodingModel.FK_OrganizationalUnits_Locations" FromRole="Location" ToRole="OrganizationalUnit" />
+        </EntityType>
+        <Association Name="FK_DeliveryAdvices_Locations">
+          <End Type="TotalSmartCodingModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.DeliveryAdvice" Role="DeliveryAdvice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvice">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModuleDetail">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="SoftDescription" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Actions" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastOpen" Type="Double" Nullable="false" />
+          <Property Name="SerialID" Type="Double" Nullable="false" />
+          <Property Name="ImageIndex" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InActive" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleID" />
+          </Key>
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SerialID" Type="Int32" Nullable="false" />
+          <Property Name="ImageIndex" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InActive" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrganizationalUnit">
+          <Key>
+            <PropertyRef Name="OrganizationalUnitID" />
+          </Key>
+          <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_OrganizationalUnits_Locations" FromRole="OrganizationalUnit" ToRole="Location" />
+          <NavigationProperty Name="OrganizationalUnitUsers" Relationship="TotalSmartCodingModel.FK_OrganizationalUnitIUsers_OrganizationalUnits" FromRole="OrganizationalUnit" ToRole="OrganizationalUnitUser" />
+        </EntityType>
+        <EntityType Name="OrganizationalUnitUser">
+          <Key>
+            <PropertyRef Name="OrganizationalUnitUserID" />
+          </Key>
+          <Property Name="OrganizationalUnitUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OrganizationalUnit" Relationship="TotalSmartCodingModel.FK_OrganizationalUnitIUsers_OrganizationalUnits" FromRole="OrganizationalUnitUser" ToRole="OrganizationalUnit" />
+        </EntityType>
+        <Association Name="FK_OrganizationalUnits_Locations">
+          <End Type="TotalSmartCodingModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.OrganizationalUnit" Role="OrganizationalUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="OrganizationalUnit">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizationalUnitIUsers_OrganizationalUnits">
+          <End Type="TotalSmartCodingModel.OrganizationalUnit" Role="OrganizationalUnit" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.OrganizationalUnitUser" Role="OrganizationalUnitUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrganizationalUnit">
+              <PropertyRef Name="OrganizationalUnitID" />
+            </Principal>
+            <Dependent Role="OrganizationalUnitUser">
+              <PropertyRef Name="OrganizationalUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -327,6 +798,16 @@
           <EntitySetMapping Name="Commodities">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Commodity">
               <MappingFragment StoreEntitySet="Commodities">
+                <ScalarProperty Name="Specifycation" ColumnName="Specifycation" />
+                <ScalarProperty Name="IsRegularCheckUps" ColumnName="IsRegularCheckUps" />
+                <ScalarProperty Name="HSCode" ColumnName="HSCode" />
+                <ScalarProperty Name="GrossPrice" ColumnName="GrossPrice" />
+                <ScalarProperty Name="ListedPrice" ColumnName="ListedPrice" />
+                <ScalarProperty Name="PreviousCommodityID" ColumnName="PreviousCommodityID" />
+                <ScalarProperty Name="CodePartD" ColumnName="CodePartD" />
+                <ScalarProperty Name="CodePartC" ColumnName="CodePartC" />
+                <ScalarProperty Name="CodePartB" ColumnName="CodePartB" />
+                <ScalarProperty Name="CodePartA" ColumnName="CodePartA" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
@@ -353,6 +834,15 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="IsFemale" ColumnName="IsFemale" />
+                <ScalarProperty Name="IsSupplier" ColumnName="IsSupplier" />
+                <ScalarProperty Name="IsCustomer" ColumnName="IsCustomer" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="SalespersonID" ColumnName="SalespersonID" />
+                <ScalarProperty Name="MonetaryAccountID" ColumnName="MonetaryAccountID" />
+                <ScalarProperty Name="PriceCategoryID" ColumnName="PriceCategoryID" />
+                <ScalarProperty Name="VendorCategory" ColumnName="VendorCategory" />
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -376,6 +866,30 @@
           <EntitySetMapping Name="DeliveryAdviceDetails">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.DeliveryAdviceDetail">
               <MappingFragment StoreEntitySet="DeliveryAdviceDetails">
+                <ScalarProperty Name="InActiveIssue" ColumnName="InActiveIssue" />
+                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
+                <ScalarProperty Name="IsBonus" ColumnName="IsBonus" />
+                <ScalarProperty Name="GrossAmount" ColumnName="GrossAmount" />
+                <ScalarProperty Name="ListedGrossAmount" ColumnName="ListedGrossAmount" />
+                <ScalarProperty Name="VATAmount" ColumnName="VATAmount" />
+                <ScalarProperty Name="ListedVATAmount" ColumnName="ListedVATAmount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ListedAmount" ColumnName="ListedAmount" />
+                <ScalarProperty Name="GrossPrice" ColumnName="GrossPrice" />
+                <ScalarProperty Name="ListedGrossPrice" ColumnName="ListedGrossPrice" />
+                <ScalarProperty Name="VATPercent" ColumnName="VATPercent" />
+                <ScalarProperty Name="TradeDiscountRate" ColumnName="TradeDiscountRate" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="ListedPrice" ColumnName="ListedPrice" />
+                <ScalarProperty Name="FreeQuantityIssue" ColumnName="FreeQuantityIssue" />
+                <ScalarProperty Name="FreeQuantity" ColumnName="FreeQuantity" />
+                <ScalarProperty Name="ControlFreeQuantity" ColumnName="ControlFreeQuantity" />
+                <ScalarProperty Name="VATbyRow" ColumnName="VATbyRow" />
+                <ScalarProperty Name="CalculatingTypeID" ColumnName="CalculatingTypeID" />
+                <ScalarProperty Name="SalespersonID" ColumnName="SalespersonID" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
                 <ScalarProperty Name="DeliveryAdviceDetailID" ColumnName="DeliveryAdviceDetailID" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
@@ -399,6 +913,34 @@
           <EntitySetMapping Name="DeliveryAdvices">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.DeliveryAdvice">
               <MappingFragment StoreEntitySet="DeliveryAdvices">
+                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
+                <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+                <ScalarProperty Name="AverageDiscountPercent" ColumnName="AverageDiscountPercent" />
+                <ScalarProperty Name="TotalGrossAmount" ColumnName="TotalGrossAmount" />
+                <ScalarProperty Name="TotalListedGrossAmount" ColumnName="TotalListedGrossAmount" />
+                <ScalarProperty Name="TotalVATAmount" ColumnName="TotalVATAmount" />
+                <ScalarProperty Name="TotalListedVATAmount" ColumnName="TotalListedVATAmount" />
+                <ScalarProperty Name="TotalTaxableAmount" ColumnName="TotalTaxableAmount" />
+                <ScalarProperty Name="TotalListedTaxableAmount" ColumnName="TotalListedTaxableAmount" />
+                <ScalarProperty Name="TradeDiscountAmount" ColumnName="TradeDiscountAmount" />
+                <ScalarProperty Name="ListedTradeDiscountAmount" ColumnName="ListedTradeDiscountAmount" />
+                <ScalarProperty Name="TradeDiscountRate" ColumnName="TradeDiscountRate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="TotalListedAmount" ColumnName="TotalListedAmount" />
+                <ScalarProperty Name="TotalFreeQuantityIssue" ColumnName="TotalFreeQuantityIssue" />
+                <ScalarProperty Name="TotalFreeQuantity" ColumnName="TotalFreeQuantity" />
+                <ScalarProperty Name="VATPercent" ColumnName="VATPercent" />
+                <ScalarProperty Name="VATbyRow" ColumnName="VATbyRow" />
+                <ScalarProperty Name="SalespersonID" ColumnName="SalespersonID" />
+                <ScalarProperty Name="PromotionVouchers" ColumnName="PromotionVouchers" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="PriceCategoryID" ColumnName="PriceCategoryID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+                <ScalarProperty Name="SalesOrderReferences" ColumnName="SalesOrderReferences" />
+                <ScalarProperty Name="SalesOrderCodes" ColumnName="SalesOrderCodes" />
+                <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
+                <ScalarProperty Name="HasSalesOrder" ColumnName="HasSalesOrder" />
                 <ScalarProperty Name="DeliveryAdviceID" ColumnName="DeliveryAdviceID" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="Reference" ColumnName="Reference" />
@@ -422,6 +964,78 @@
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAccessLevel" FunctionName="TotalSmartCodingModel.Store.GetAccessLevel" />
+          <FunctionImportMapping FunctionImportName="GetApprovalPermitted" FunctionName="TotalSmartCodingModel.Store.GetApprovalPermitted" />
+          <FunctionImportMapping FunctionImportName="GetShowDiscount" FunctionName="TotalSmartCodingModel.Store.GetShowDiscount" />
+          <FunctionImportMapping FunctionImportName="GetShowDiscountByCustomer" FunctionName="TotalSmartCodingModel.Store.GetShowDiscountByCustomer" />
+          <FunctionImportMapping FunctionImportName="GetUnApprovalPermitted" FunctionName="TotalSmartCodingModel.Store.GetUnApprovalPermitted" />
+          <FunctionImportMapping FunctionImportName="GetUnVoidablePermitted" FunctionName="TotalSmartCodingModel.Store.GetUnVoidablePermitted" />
+          <FunctionImportMapping FunctionImportName="GetVoidablePermitted" FunctionName="TotalSmartCodingModel.Store.GetVoidablePermitted" />
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="AspUserID" ColumnName="AspUserID" />
+                <ScalarProperty Name="LockedDate" ColumnName="LockedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Facsimile" ColumnName="Facsimile" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="OfficialName" ColumnName="OfficialName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleDetails">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.ModuleDetail">
+              <MappingFragment StoreEntitySet="ModuleDetails">
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
+                <ScalarProperty Name="LastOpen" ColumnName="LastOpen" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Actions" ColumnName="Actions" />
+                <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SoftDescription" ColumnName="SoftDescription" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Module">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
+                <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganizationalUnits">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.OrganizationalUnit">
+              <MappingFragment StoreEntitySet="OrganizationalUnits">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganizationalUnitUsers">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.OrganizationalUnitUser">
+              <MappingFragment StoreEntitySet="OrganizationalUnitUsers">
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
+                <ScalarProperty Name="OrganizationalUnitUserID" ColumnName="OrganizationalUnitUserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
