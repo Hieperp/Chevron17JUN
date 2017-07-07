@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using TotalBase;
 using TotalSmartCoding.Views.Mains;
 
 namespace TotalSmartCoding
@@ -16,9 +17,21 @@ namespace TotalSmartCoding
         [STAThread]
         static void Main()
         {
+            Registries.ProductName = Application.ProductName.ToUpper();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MasterMdi());
+
+
+
+            Logon logon = new Logon();
+
+            if (logon.ShowDialog() == DialogResult.OK) Application.Run(new MasterMdi());
+
+            logon.Dispose();
+
+
+            
         }
     }
 }

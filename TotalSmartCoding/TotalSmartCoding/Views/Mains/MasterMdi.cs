@@ -12,8 +12,8 @@ using TotalBase.Enums;
 using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Views.Commons;
 
+using TotalSmartCoding.Views.Sales;
 using TotalSmartCoding.Views.Inventories;
-
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -371,7 +371,8 @@ namespace TotalSmartCoding.Views.Mains
 
             //Open new form
             Form childForm;
-            childForm = new GoodsReceipts();
+            //childForm = new GoodsReceipts();
+            childForm = new DeliveryAdvices();
 
             if (childForm != null)
             {

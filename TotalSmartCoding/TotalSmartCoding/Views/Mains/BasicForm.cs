@@ -16,6 +16,8 @@ namespace TotalSmartCoding.Views.Mains
     public class BasicForm : Form, IMergeToolStrip, ICallToolStrip
     {
 
+
+
         #region <Implement Interface>
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,6 +34,7 @@ namespace TotalSmartCoding.Views.Mains
         }
 
         public virtual ToolStrip ChildToolStrip { get; set; }
+        public virtual BrightIdeasSoftware.FastObjectListView AFastObjectListView { get; set; }
         //{
         //    get
         //    {
@@ -253,7 +256,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public void SearchText(string searchText)
         {
-            //CommonFormAction.OLVFilter(this.dataListViewMaster, searchText);
+            CommonFormAction.OLVFilter(this.AFastObjectListView, searchText);
         }
 
         #endregion

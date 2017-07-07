@@ -23,9 +23,11 @@ namespace TotalSmartCoding.Controllers
         where TSimpleViewModel : TDto, ISimpleViewModel, new() //Note: constraints [TSimpleViewModel : TDto] and also [TViewDetailViewModel : TDto  -> in GenericViewDetailController]: is required for this.genericService.Editable(TDto) only!!! If there is any reason need to remove this constraints, just consider for this.genericService.Editable(TDto) only [should change this.genericService.Editable(TDto) only if needed -- means after remove this constraints]
     {
 
-
+        
         protected readonly IGenericService<TEntity, TDto, TPrimitiveDto> GenericService;
         private readonly IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder;
+
+        public readonly TSimpleViewModel SimpleViewModel;
 
         private bool isSimpleCreate;
         private bool isCreateWizard;
@@ -33,21 +35,23 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder)
-            : this(genericService, viewModelSelectListBuilder, false, true)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel)
+            : this(genericService, viewModelSelectListBuilder, simpleViewModel, false, true)
         {
         }
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, bool isCreateWizard)
-            : this(genericService, viewModelSelectListBuilder, isCreateWizard, false)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel, bool isCreateWizard)
+            : this(genericService, viewModelSelectListBuilder, simpleViewModel, isCreateWizard, false)
         {
         }
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, bool isCreateWizard, bool isSimpleCreate)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel, bool isCreateWizard, bool isSimpleCreate)
             : base(genericService)
         {
             this.GenericService = genericService;
             this.viewModelSelectListBuilder = viewModelSelectListBuilder;
+
+            this.SimpleViewModel = simpleViewModel;
 
             this.isCreateWizard = isCreateWizard;
             this.isSimpleCreate = isSimpleCreate;
@@ -89,6 +93,15 @@ namespace TotalSmartCoding.Controllers
         {
             return true;
         }
+
+
+
+
+        protected virtual TSimpleViewModel DecorateViewModel(TSimpleViewModel simpleViewModel)
+        {
+            return simpleViewModel;
+        }
+
 
     }
 }

@@ -32,29 +32,29 @@ namespace TotalModel.Models
 
 
 
-    //public partial class DeliveryAdvice : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<DeliveryAdviceDetail>
-    //{
-    //    public int GetID() { return this.DeliveryAdviceID; }
+    public partial class DeliveryAdvice : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<DeliveryAdviceDetail>
+    {
+        public int GetID() { return this.DeliveryAdviceID; }
 
-    //    public virtual Employee Salesperson { get { return this.Employee; } }
-    //    public virtual Customer Receiver { get { return this.Customer1; } }
+        //public virtual Employee Salesperson { get { return this.Employee; } }
+        public virtual Customer Receiver { get { return this.Customer1; } }
 
-    //    public ICollection<DeliveryAdviceDetail> GetDetails() { return this.DeliveryAdviceDetails; }
-    //}
-
-
-    //public partial class DeliveryAdviceDetail : IPrimitiveEntity, IHelperEntryDate, IHelperWarehouseID, IHelperCommodityID, IHelperCommodityTypeID
-    //{
-    //    public int GetID() { return this.DeliveryAdviceDetailID; }
-    //    public int GetWarehouseID() { return (int)this.WarehouseID; }
-    //}
+        public ICollection<DeliveryAdviceDetail> GetDetails() { return this.DeliveryAdviceDetails; }
+    }
 
 
-    //public partial class DeliveryAdviceIndex
-    //{
-    //    public decimal GrandTotalQuantity { get { return this.TotalQuantity + this.TotalFreeQuantity; } }
-    //    public decimal GrandTotalQuantityIssue { get { return this.TotalQuantityIssue + this.TotalFreeQuantityIssue; } }
-    //}
+    public partial class DeliveryAdviceDetail : IPrimitiveEntity, IHelperEntryDate, IHelperWarehouseID, IHelperCommodityID, IHelperCommodityTypeID
+    {
+        public int GetID() { return this.DeliveryAdviceDetailID; }
+        public int GetWarehouseID() { return (int)this.WarehouseID; }
+    }
+
+
+    public partial class DeliveryAdviceIndex
+    {
+        public decimal GrandTotalQuantity { get { return this.TotalQuantity + this.TotalFreeQuantity; } }
+        public decimal GrandTotalQuantityIssue { get { return this.TotalQuantityIssue + this.TotalFreeQuantityIssue; } }
+    }
 
 
 

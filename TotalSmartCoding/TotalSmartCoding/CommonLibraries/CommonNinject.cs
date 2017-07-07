@@ -3,14 +3,22 @@
 using TotalCore.Repositories;
 using TotalModel.Models;
 
-using TotalModel.Models;
+//using TotalModel.Models;
 
-using TotalCore.Repositories;
+//using TotalCore.Repositories;
 //using TotalCore.Repositories.Inventories;
 
 //using TotalCore.Services.Inventories;
 
 using TotalDAL.Repositories;
+using TotalDAL.Repositories.Sales;
+using TotalCore.Repositories.Sales;
+using TotalCore.Services.Sales;
+using TotalService.Sales;
+using TotalSmartCoding.Builders.Sales;
+using TotalSmartCoding.Builders.Commons;
+using TotalCore.Repositories.Commons;
+using TotalDAL.Repositories.Commons;
 //using TotalDAL.Repositories.Inventories;
 
 //using TotalService.Inventories;
@@ -39,6 +47,25 @@ namespace TotalSmartCoding.CommonLibraries
                 Kernel.Bind<TotalSmartCodingEntities>().ToSelf(); //.InRequestScope()
 
                 Kernel.Bind<IBaseRepository>().To<BaseRepository>();
+
+
+
+                Kernel.Bind<IDeliveryAdviceService>().To<DeliveryAdviceService>();
+                Kernel.Bind<IDeliveryAdviceRepository>().To<DeliveryAdviceRepository>();
+                Kernel.Bind<IDeliveryAdviceAPIRepository>().To<DeliveryAdviceAPIRepository>();
+                Kernel.Bind<IDeliveryAdviceViewModelSelectListBuilder>().To<DeliveryAdviceViewModelSelectListBuilder>();
+
+
+
+                Kernel.Bind<IAspNetUserSelectListBuilder>().To<AspNetUserSelectListBuilder>();
+                Kernel.Bind<IPaymentTermSelectListBuilder>().To<PaymentTermSelectListBuilder>();
+
+
+                Kernel.Bind<IAspNetUserRepository>().To<AspNetUserRepository>();
+                Kernel.Bind<IPaymentTermRepository>().To<PaymentTermRepository>();
+
+
+
             }
             catch
             {

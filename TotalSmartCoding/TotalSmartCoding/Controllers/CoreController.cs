@@ -1,12 +1,12 @@
-﻿//using System.Web.Mvc;
+﻿using DataTransferObject;
+//using System.Web.Mvc;
 using System.Text;
-
 using TotalBase.Enums;
 //using TotalSmartCoding.Configuration;
 
 namespace TotalSmartCoding.Controllers
 {
-    public class CoreController //: Controller
+    public class CoreController : NotifyPropertyChangeObject //: Controller
     {
         //public ActionResult GlobalJavaScriptEnums()
         //{

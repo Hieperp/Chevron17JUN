@@ -494,6 +494,7 @@
             this.toolStripButtonSearch.Name = "toolStripButtonSearch";
             this.toolStripButtonSearch.Size = new System.Drawing.Size(52, 52);
             this.toolStripButtonSearch.Text = "Find";
+            this.toolStripButtonSearch.Click += new System.EventHandler(this.toolStripButtonSearch_Click);
             // 
             // InvisibleMainMenuStripOfMDI
             // 

@@ -10,13 +10,18 @@ namespace TotalBase
     {
         private int userID;
         private int userOrganizationID;
+        private string userDescription;
 
-        public UserInformation() : this(-1, -1) { }
+        public DateTime UserDate { get; set; }
 
-        public UserInformation(int userID, int userOrganizationID)
+        public UserInformation() : this(-1, -1, "", DateTime.MinValue) { }
+
+        public UserInformation(int userID, int userOrganizationID, string userDescription, DateTime userDate)
         {
             this.UserID = userID;
             this.UserOrganizationID = userOrganizationID;
+            this.UserDescription = userDescription;
+            this.UserDate = userDate;
         }
 
         public int UserID
@@ -31,5 +36,10 @@ namespace TotalBase
             set { this.userOrganizationID = value; }
         }
 
+        public string UserDescription
+        {
+            get { return this.userDescription; }
+            set { this.userDescription = value; }
+        }
     }
 }

@@ -77,5 +77,7 @@ namespace TotalModel.Models
         public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
         public virtual Customer Customer1 { get; set; }
         public virtual Location Location { get; set; }
+        public virtual PaymentTerm PaymentTerm { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
     }
 }
