@@ -23,6 +23,7 @@ namespace TotalModel.Models
         public int PickupDetailID { get; set; }
         public int PickupID { get; set; }
         public System.DateTime EntryDate { get; set; }
+        public string Reference { get; set; }
         public int LocationID { get; set; }
         public int WarehouseID { get; set; }
         public int BinLocationID { get; set; }
@@ -30,6 +31,7 @@ namespace TotalModel.Models
         public Nullable<int> PackID { get; set; }
         public Nullable<int> CartonID { get; set; }
         public Nullable<int> PalletID { get; set; }
+        public Nullable<int> GoodsReceiptID { get; set; }
         public int EntryStatusID { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityReceipt { get; set; }

@@ -28,7 +28,7 @@ namespace TotalModel.Models
         public int CommodityID { get; set; }
         public Nullable<int> CartonID { get; set; }
         public string PCID { get; set; }
-        public string Barcode { get; set; }
+        public string Code { get; set; }
         public int EntryStatusID { get; set; }
     
         public virtual Carton Carton { get; set; }

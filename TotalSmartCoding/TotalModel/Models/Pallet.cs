@@ -27,7 +27,7 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public int CommodityID { get; set; }
         public string PCID { get; set; }
-        public string Barcode { get; set; }
+        public string Code { get; set; }
         public int EntryStatusID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

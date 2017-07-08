@@ -20,6 +20,15 @@ namespace TotalDAL.Repositories
         public BaseRepository(TotalSmartCodingEntities totalSmartCodingEntities)
         {
             this.totalSmartCodingEntities = totalSmartCodingEntities;
+
+
+
+
+            return;
+
+            Helpers.SqlProgrammability.Inventories.GoodsReceipt goodsReceipt = new Helpers.SqlProgrammability.Inventories.GoodsReceipt(totalSmartCodingEntities);
+            goodsReceipt.RestoreProcedure();
+
         }
 
         private ObjectContext TotalBikePortalsObjectContext

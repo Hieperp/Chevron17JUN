@@ -23,8 +23,10 @@ namespace TotalModel.Models
         public int GoodsReceiptID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
+        public bool HasPickup { get; set; }
+        public int GoodsReceiptTypeID { get; set; }
         public Nullable<int> PickupID { get; set; }
-        public string PickupReference { get; set; }
+        public string PickupReferences { get; set; }
         public int WarehouseID { get; set; }
         public int ForkliftDriverID { get; set; }
         public int StorekeeperID { get; set; }
@@ -42,6 +44,7 @@ namespace TotalModel.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        public virtual GoodsReceiptType GoodsReceiptType { get; set; }
         public virtual Location Location { get; set; }
         public virtual Pickup Pickup { get; set; }
         public virtual Warehouse Warehouse { get; set; }

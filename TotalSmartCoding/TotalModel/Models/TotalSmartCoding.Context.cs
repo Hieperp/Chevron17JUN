@@ -39,15 +39,16 @@ namespace TotalModel.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<PaymentTerm> PaymentTerms { get; set; }
         public virtual DbSet<BinLocation> BinLocations { get; set; }
-        public virtual DbSet<Carton> Cartons { get; set; }
         public virtual DbSet<FillingLine> FillingLines { get; set; }
-        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<Carton> Cartons { get; set; }
         public virtual DbSet<Pack> Packs { get; set; }
         public virtual DbSet<Pallet> Pallets { get; set; }
+        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
+        public virtual DbSet<GoodsReceiptType> GoodsReceiptTypes { get; set; }
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
         public virtual DbSet<Pickup> Pickups { get; set; }
-        public virtual DbSet<Warehouse> Warehouses { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -233,6 +234,132 @@ namespace TotalModel.Models
                 new ObjectParameter("DeliveryAdviceID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DeliveryAdviceViewDetail>("GetDeliveryAdviceViewDetails", deliveryAdviceIDParameter);
+        }
+    
+        public virtual ObjectResult<PendingPickupDetail> GetPendingPickupDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, Nullable<int> pickupID, Nullable<int> warehouseID, string pickupDetailIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
+                new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
+                new ObjectParameter("GoodsReceiptID", typeof(int));
+    
+            var pickupIDParameter = pickupID.HasValue ?
+                new ObjectParameter("PickupID", pickupID) :
+                new ObjectParameter("PickupID", typeof(int));
+    
+            var warehouseIDParameter = warehouseID.HasValue ?
+                new ObjectParameter("WarehouseID", warehouseID) :
+                new ObjectParameter("WarehouseID", typeof(int));
+    
+            var pickupDetailIDsParameter = pickupDetailIDs != null ?
+                new ObjectParameter("PickupDetailIDs", pickupDetailIDs) :
+                new ObjectParameter("PickupDetailIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingPickupDetail>("GetPendingPickupDetails", locationIDParameter, goodsReceiptIDParameter, pickupIDParameter, warehouseIDParameter, pickupDetailIDsParameter, isReadonlyParameter);
+        }
+    
+        public virtual ObjectResult<string> GoodsReceiptApproved(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GoodsReceiptApproved", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> GoodsReceiptEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GoodsReceiptEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> GoodsReceiptPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GoodsReceiptPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual int GoodsReceiptSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GoodsReceiptSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+        }
+    
+        public virtual int GoodsReceiptToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GoodsReceiptToggleApproved", entityIDParameter, approvedParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptIndex> GetGoodsReceiptIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptIndex>("GetGoodsReceiptIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptViewDetail> GetGoodsReceiptViewDetails(Nullable<int> goodsReceiptID)
+        {
+            var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
+                new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
+                new ObjectParameter("GoodsReceiptID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptViewDetail>("GetGoodsReceiptViewDetails", goodsReceiptIDParameter);
+        }
+    
+        public virtual ObjectResult<PendingPickup> GetPendingPickups(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingPickup>("GetPendingPickups", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<PendingPickupWarehouse> GetPendingPickupWarehouses(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingPickupWarehouse>("GetPendingPickupWarehouses", locationIDParameter);
         }
     }
 }

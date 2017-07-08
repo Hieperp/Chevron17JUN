@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\EntityFrameworkExtension.cs" />
+    <Compile Include="Helpers\SqlProgrammability\InitReference.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Inventories\GoodsReceipt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\Commons\AspNetUserRepository.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="Repositories\GenericAPIRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\GenericWithDetailRepository.cs" />
+    <Compile Include="Repositories\Inventories\GoodsReceiptRepository.cs" />
     <Compile Include="Repositories\Sales\DeliveryAdviceRepository.cs" />
   </ItemGroup>
   <ItemGroup>

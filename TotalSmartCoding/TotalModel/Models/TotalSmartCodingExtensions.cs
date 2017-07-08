@@ -149,22 +149,20 @@ namespace TotalModel.Models
 
 
 
-    //public partial class GoodsDelivery : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<GoodsDeliveryDetail>
-    //{
-    //    public int GetID() { return this.GoodsDeliveryID; }
+    public partial class GoodsReceipt : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<GoodsReceiptDetail>
+    {
+        public int GetID() { return this.GoodsReceiptID; }
 
-    //    public virtual Employee Driver { get { return this.Employee; } }
-    //    public virtual Employee Collector { get { return this.Employee1; } }
-    //    public virtual Customer Receiver { get { return this.Customer; } }
+        public int PreparedPersonID { get; set; }
 
-    //    public ICollection<GoodsDeliveryDetail> GetDetails() { return this.GoodsDeliveryDetails; }
-    //}
+        public ICollection<GoodsReceiptDetail> GetDetails() { return this.GoodsReceiptDetails; }
+    }
 
 
-    //public partial class GoodsDeliveryDetail : IPrimitiveEntity, IHelperEntryDate
-    //{
-    //    public int GetID() { return this.GoodsDeliveryDetailID; }
-    //}
+    public partial class GoodsReceiptDetail : IPrimitiveEntity, IHelperEntryDate
+    {
+        public int GetID() { return this.GoodsReceiptDetailID; }
+    }
 
 
 

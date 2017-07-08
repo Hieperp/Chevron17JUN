@@ -85,7 +85,9 @@
     <Compile Include="CommonLibraries\CommonNinject.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ControllersExtensions.cs" />
     <Compile Include="Controllers\CoreController.cs" />
+    <Compile Include="Controllers\CustomControllerAttribute.cs" />
     <Compile Include="Controllers\GenericSimpleController.cs" />
     <Compile Include="Controllers\GenericViewDetailController.cs" />
     <Compile Include="Controllers\Inventories\GoodsReceiptsController.cs" />
