@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Mvc;
 
 using TotalModel.Validations;
 
@@ -14,21 +13,21 @@ namespace TotalSmartCoding.Controllers
         /// </summary>
         /// <param name="modelState">State of the model.</param>
         /// <param name="propertyErrors">The property errors.</param>
-        public static void AddValidationErrors(this ModelStateDictionary modelState, Exception exception)
-        {
-            if (exception is IValidationErrors)
-            {
-                foreach (var databaseValidationError in (exception as ValidationErrors).Errors)
-                {
-                    modelState.AddModelError(databaseValidationError.PropertyName ?? string.Empty, databaseValidationError.PropertyExceptionMessage);
-                }
-            }
-            else
-            {
-                modelState.AddModelError(string.Empty, exception.Message + (exception.Message != exception.GetBaseException().Message ? "\r\n" + exception.GetBaseException().Message : ""));
-            }
+        //public static void AddValidationErrors(this ModelStateDictionary modelState, Exception exception)
+        //{
+        //    if (exception is IValidationErrors)
+        //    {
+        //        foreach (var databaseValidationError in (exception as ValidationErrors).Errors)
+        //        {
+        //            modelState.AddModelError(databaseValidationError.PropertyName ?? string.Empty, databaseValidationError.PropertyExceptionMessage);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        modelState.AddModelError(string.Empty, exception.Message + (exception.Message != exception.GetBaseException().Message ? "\r\n" + exception.GetBaseException().Message : ""));
+        //    }
 
-        }
+        //}
 
     }
 }

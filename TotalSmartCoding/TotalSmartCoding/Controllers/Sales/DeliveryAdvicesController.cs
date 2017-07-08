@@ -13,10 +13,11 @@ using TotalSmartCoding.ViewModels.Sales;
 
 namespace TotalSmartCoding.Controllers.Sales
 {
+    
     public class DeliveryAdvicesController : GenericViewDetailController<DeliveryAdvice, DeliveryAdviceDetail, DeliveryAdviceViewDetail, DeliveryAdviceDTO, DeliveryAdvicePrimitiveDTO, DeliveryAdviceDetailDTO, DeliveryAdviceViewModel>
     {
         public DeliveryAdvicesController(IDeliveryAdviceService deliveryAdviceService, IDeliveryAdviceViewModelSelectListBuilder deliveryAdviceViewModelSelectListBuilder)
-            : base(deliveryAdviceService, deliveryAdviceViewModelSelectListBuilder, new DeliveryAdviceViewModel(), true)
+            : base(deliveryAdviceService, deliveryAdviceViewModelSelectListBuilder)
         {
         }
     }

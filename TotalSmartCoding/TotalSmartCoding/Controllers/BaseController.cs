@@ -1,7 +1,7 @@
-﻿using RequireJsNet;
-
+﻿using TotalBase;
+using TotalBase.Enums;
 using TotalCore.Services;
-using TotalSmartCoding.APIs.Sessions;
+//using TotalSmartCoding.APIs.Sessions;
 
 
 namespace TotalSmartCoding.Controllers
@@ -10,7 +10,10 @@ namespace TotalSmartCoding.Controllers
     {
         private readonly IBaseService baseService;
         public BaseController(IBaseService baseService)
-        { this.baseService = baseService; }
+        { 
+            this.baseService = baseService;
+            this.baseService.UserID = ContextAttributes.User.UserID; //(Tamthoi)
+        }
 
 
         public IBaseService BaseService { get { return this.baseService; } }
@@ -19,12 +22,25 @@ namespace TotalSmartCoding.Controllers
 
         public virtual void AddRequireJsOptions()
         {
-            int nmvnModuleID = this.baseService.NmvnModuleID;
-            MenuSession.SetModuleID(this.HttpContext, nmvnModuleID);
+            //int nmvnModuleID = this.baseService.NmvnModuleID;
+            //MenuSession.SetModuleID(this.HttpContext, nmvnModuleID);
 
-            RequireJsOptions.Add("LocationID", this.baseService.LocationID, RequireJsOptionsScope.Page);
-            RequireJsOptions.Add("NmvnModuleID", nmvnModuleID, RequireJsOptionsScope.Page);
-            RequireJsOptions.Add("NmvnTaskID", this.baseService.NmvnTaskID, RequireJsOptionsScope.Page);
+            //RequireJsOptions.Add("LocationID", this.baseService.LocationID, RequireJsOptionsScope.Page);
+            //RequireJsOptions.Add("NmvnModuleID", nmvnModuleID, RequireJsOptionsScope.Page);
+            //RequireJsOptions.Add("NmvnTaskID", this.baseService.NmvnTaskID, RequireJsOptionsScope.Page);
+        }
+
+
+
+
+        protected virtual bool AccessLevelAuthorize ()
+        {
+            return this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Editable);
+        }
+
+        protected virtual bool AccessLevelAuthorize(GlobalEnums.AccessLevel accessLevel)
+        {
+            return this.BaseService.GetAccessLevel() >= accessLevel;
         }
 
     }

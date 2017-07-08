@@ -53,7 +53,7 @@ namespace TotalSmartCoding.Views.Sales
             this.fastObjectListViewIndex.SetObjects(deliveryAdviceAPIsController.GetDeliveryAdviceIndexes());
 
             this.deliveryAdvicesController = new DeliveryAdvicesController(CommonNinject.Kernel.Get<IDeliveryAdviceService>(), CommonNinject.Kernel.Get<IDeliveryAdviceViewModelSelectListBuilder>());
-            this.deliveryAdvicesController.PropertyChanged += new PropertyChangedEventHandler(deliveryAdvicesController_PropertyChanged);
+            //******************this.deliveryAdvicesController.PropertyChanged += new PropertyChangedEventHandler(deliveryAdvicesController_PropertyChanged);
         }
 
         private void DeliveryAdvices_Load(object sender, EventArgs e)
@@ -83,12 +83,12 @@ namespace TotalSmartCoding.Views.Sales
         {
 
 
-            this.paymentPeriodBinding = this.textBoxReference.DataBindings.Add("Text", this.deliveryAdvicesController.ViewDetailViewModel, "Reference", true);
+            //******************this.paymentPeriodBinding = this.textBoxReference.DataBindings.Add("Text", this.deliveryAdvicesController.ViewDetailViewModel, "Reference", true);
 
 
-            this.requestedDateBinding = this.datePickerEntryDate.DataBindings.Add("Value", this.deliveryAdvicesController.ViewDetailViewModel, "EntryDate", true);
+            //******************this.requestedDateBinding = this.datePickerEntryDate.DataBindings.Add("Value", this.deliveryAdvicesController.ViewDetailViewModel, "EntryDate", true);
 
-            this.isDirtyBinding = this.checkBoxIsDirty.DataBindings.Add("Checked", this.deliveryAdvicesController.ViewDetailViewModel, "IsDirty", true);
+            //******************this.isDirtyBinding = this.checkBoxIsDirty.DataBindings.Add("Checked", this.deliveryAdvicesController.ViewDetailViewModel, "IsDirty", true);
             this.isDirtyBLLBinding = this.checkBoxIsDirtyBLL.DataBindings.Add("Checked", this.deliveryAdvicesController, "IsDirty", true);
 
 
@@ -109,7 +109,7 @@ namespace TotalSmartCoding.Views.Sales
             this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].Width = 10;
             this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
 
-            this.errorProviderMaster.DataSource = this.deliveryAdvicesController.ViewDetailViewModel;
+            //******************this.errorProviderMaster.DataSource = this.deliveryAdvicesController.ViewDetailViewModel;
 
         }
 

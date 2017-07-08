@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Net;
-using System.Web.Mvc;
 using System.Linq;
-using System.Web;
 
 
 using AutoMapper;
-using RequireJsNet;
 
 using TotalBase.Enums;
 using TotalModel;
@@ -20,7 +17,6 @@ using TotalDTO.Commons;
 
 namespace TotalSmartCoding.Controllers
 {
-    [GenericSimpleAuthorizeAttribute]
     public abstract class GenericSimpleController<TEntity, TDto, TPrimitiveDto, TSimpleViewModel> : BaseController
 
         where TEntity : class, IPrimitiveEntity, IBaseEntity, new()
@@ -59,14 +55,14 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        //[AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Index(int? id)
+        
+        public virtual void Index(int? id)
         {
-            ViewBag.SelectedEntityID = id == null ? -1 : (int)id;
-            ViewBag.ShowDiscount = this.GenericService.GetShowDiscount();
+            //***********ViewBag.SelectedEntityID = id == null ? -1 : (int)id;
+            //***********ViewBag.ShowDiscount = this.GenericService.GetShowDiscount();
 
-            return View();
+            base.AddRequireJsOptions();
+            //-----return View();
         }
 
 
@@ -75,14 +71,17 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        [AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Open(int? id)
+        
+        
+        public virtual void Open(int? id)
         {
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, false, false, true);
-            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
-            return View(simpleViewModel);
+            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, false, false, true);
+            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            base.AddRequireJsOptions();
+            //-----return View(simpleViewModel);
         }
 
 
@@ -92,29 +91,33 @@ namespace TotalSmartCoding.Controllers
         /// Create NEW from an empty ViewModel object
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [AccessLevelAuthorize]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Create()
+        
+        
+        
+        public virtual void Create()
         {
-            if (!this.isSimpleCreate) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
+            if (!this.isSimpleCreate) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            return View(this.TailorViewModel(this.InitViewModelByPrior(this.InitViewModelByDefault(new TSimpleViewModel())))); //Need to call new TSimpleViewModel() to ensure construct TSimpleViewModel object using Constructor!
+            base.AddRequireJsOptions();
+            //-----return View(this.TailorViewModel(this.InitViewModelByPrior(this.InitViewModelByDefault(new TSimpleViewModel())))); //Need to call new TSimpleViewModel() to ensure construct TSimpleViewModel object using Constructor!
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Create(TSimpleViewModel simpleViewModel)
+        
+        
+        
+        public virtual void Create(TSimpleViewModel simpleViewModel)
         {
-            if (!this.isSimpleCreate) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (!this.isSimpleCreate) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            base.AddRequireJsOptions();
 
             if ((simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Closed || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Create) && this.Save(simpleViewModel))
-                return RedirectAfterSave(simpleViewModel);
+                RedirectAfterSave(simpleViewModel);
             else
             {
-                return View(this.TailorViewModel(simpleViewModel));
+                //-----return View(this.TailorViewModel(simpleViewModel));
             }
         }
 
@@ -128,14 +131,18 @@ namespace TotalSmartCoding.Controllers
         /// Create NEW by show a CreateWizard dialog, where user HAVE TO SELECT A RELATIVE OBJECT to INITIALIZE ViewModel, then SUBMIT the ViewModel
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        [AccessLevelAuthorize]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult CreateWizard()
+        
+        
+        
+        public virtual void CreateWizard()
         {
-            if (!this.isCreateWizard) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
-            return View(this.TailorViewModel(this.InitViewModelByDefault(new TSimpleViewModel())));
+            if (!this.isCreateWizard) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            base.AddRequireJsOptions();
+
+            //-----return View(this.TailorViewModel(this.InitViewModelByDefault(new TSimpleViewModel())));
         }
 
         /// <summary>
@@ -143,17 +150,19 @@ namespace TotalSmartCoding.Controllers
         /// </summary>
         /// <param name="simpleViewModel"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult CreateWizard(TSimpleViewModel simpleViewModel)
+        
+        
+        
+        public virtual void CreateWizard(TSimpleViewModel simpleViewModel)
         {
-            if (!this.isCreateWizard) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (!this.isCreateWizard) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ModelState.Clear(); //Add this on 10-Dec-2016: When using Required attribute for a Nullable<System.DateTime>, the Kendo().DateTimePickerFor can not pass when submit. Don't know why!!!
             //This ModelState.Clear(): may be a very good idea -may be very very good :), because: we don't need to pre check model error here (Note ... Note: right here then, we always to return Edit view to input data, the: the model will be check by edit view)
 
-            return View("Edit", this.TailorViewModel(this.DecorateViewModel(this.InitViewModelByPrior(simpleViewModel))));
+            base.AddRequireJsOptions();
+
+            //-----return View("Edit", this.TailorViewModel(this.DecorateViewModel(this.InitViewModelByPrior(simpleViewModel))));
         }
 
 
@@ -162,14 +171,18 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        [AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Edit(int? id)
+        
+        
+        public virtual void Edit(int? id)
         {
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
-            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");   
 
-            return View(simpleViewModel);
+            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
+            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            base.AddRequireJsOptions();
+
+            //-----return View(simpleViewModel);
         }
 
 
@@ -180,17 +193,19 @@ namespace TotalSmartCoding.Controllers
         /// </summary>
         /// <param name="simpleViewModel"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Edit(TSimpleViewModel simpleViewModel)
+        
+        
+        
+        public virtual void Edit(TSimpleViewModel simpleViewModel)
         {
+            base.AddRequireJsOptions();
+
             if ((simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Closed || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Create) && this.Save(simpleViewModel))
-                return RedirectAfterSave(simpleViewModel);
+                RedirectAfterSave(simpleViewModel);
             else
             {
                 if (simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Popup) this.DecorateViewModel(simpleViewModel);
-                return View(this.TailorViewModel(simpleViewModel));
+                //-----return View(this.TailorViewModel(simpleViewModel));
             }
         }
 
@@ -198,65 +213,64 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        public virtual ActionResult RedirectAfterSave(TSimpleViewModel simpleViewModel)
+        public virtual void RedirectAfterSave(TSimpleViewModel simpleViewModel)
         {
             if (simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Create)
                 if (this.isSimpleCreate)
-                    return RedirectToAction("Create");
+                    RedirectToAction("Create");
                 else
                 {
                     TSimpleViewModel createWizardViewModel = InitViewModelByCopy(simpleViewModel);
-                    if (createWizardViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    return CreateWizard(createWizardViewModel);
+                    if (createWizardViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    CreateWizard(createWizardViewModel);
                 }
             else
             {
                 if (simpleViewModel.PrintAfterClosedSubmit) this.TempData["PrintOptionID"] = simpleViewModel.PrintOptionID;
-                return RedirectToAction(simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save ? "Edit" : simpleViewModel.PrintAfterClosedSubmit ? "Print" : "Index", new { id = simpleViewModel.GetID() });
+                RedirectToAction(simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save ? "Edit" : simpleViewModel.PrintAfterClosedSubmit ? "Print" : "Index", new { id = simpleViewModel.GetID() });
             }
         }
 
 
 
         #region Approve/ UnApprove
-
-        [AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable), ImportModelStateFromTempData]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Approve(int? id)
+        public virtual void Approve(int? id)
         {
+            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
+
+            base.AddRequireJsOptions();
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, true);
-            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             if (!simpleViewModel.Approved)
                 if (this.GenericService.GetApprovalPermitted(simpleViewModel.OrganizationalUnitID))
                     simpleViewModel.Approvable = this.GenericService.Approvable(simpleViewModel);
                 else //USER DON'T HAVE PERMISSION TO DO
-                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
 
             if (simpleViewModel.Approved)
                 if (this.GenericService.GetUnApprovalPermitted(simpleViewModel.OrganizationalUnitID))
                     simpleViewModel.UnApprovable = this.GenericService.UnApprovable(simpleViewModel);
                 else //USER DON'T HAVE PERMISSION TO DO
-                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
 
-            return View(simpleViewModel);
+            //-----return View(simpleViewModel);
         }
 
-        [HttpPost, ActionName("Approve")]
-        [ValidateAntiForgeryToken, ExportModelStateToTempData]
-        public virtual ActionResult ApproveConfirmed(TSimpleViewModel simpleViewModel)
+        
+        public virtual void ApproveConfirmed(TSimpleViewModel simpleViewModel)
         {
             try
             {
                 if (this.GenericService.ToggleApproved(simpleViewModel))
-                    return RedirectToAction("Index");
+                    RedirectToAction("Index");
                 else
                     throw new System.ArgumentException("Lỗi vô hiệu dữ liệu", "Dữ liệu này không thể vô hiệu.");
             }
             catch (Exception exception)
             {
-                ModelState.AddValidationErrors(exception);
-                return RedirectToAction("Approve", simpleViewModel.GetID());
+                //***********ModelState.AddValidationErrors(exception);
+                RedirectToAction("Approve", simpleViewModel.GetID());
             }
         }
 
@@ -267,33 +281,36 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        [AccessLevelAuthorize, ImportModelStateFromTempData]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Delete(int? id)
+        
+        
+        public virtual void Delete(int? id)
         {
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Editable, true);
-            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
-            return View(simpleViewModel);
+            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Editable, true);
+            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            base.AddRequireJsOptions();
+
+            //-----return View(simpleViewModel);
         }
 
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken, ExportModelStateToTempData]
-        public virtual ActionResult DeleteConfirmed(int id)
+        
+        public virtual void DeleteConfirmed(int id)
         {
             try
             {
                 if (this.GenericService.Delete(id))
-                    return RedirectToAction("Index");
+                    RedirectToAction("Index");
                 else
                     throw new System.ArgumentException("Lỗi xóa dữ liệu", "Dữ liệu này không thể xóa được.");
 
             }
             catch (Exception exception)
             {
-                ModelState.AddValidationErrors(exception);
-                return RedirectToAction("Delete", id);
+                //***********ModelState.AddValidationErrors(exception);
+                RedirectToAction("Delete", id);
             }
         }
 
@@ -303,34 +320,38 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        [AccessLevelAuthorize, ImportModelStateFromTempData]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Alter(int? id)
+        
+        
+        public virtual void Alter(int? id)
         {
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Editable, false, true);
-            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
-            return View(simpleViewModel);
+            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Editable, false, true);
+            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            base.AddRequireJsOptions();
+
+            //-----return View(simpleViewModel);
         }
 
 
-        [HttpPost, ActionName("Alter")]
-        [ValidateAntiForgeryToken, ExportModelStateToTempData]
-        public virtual ActionResult AlterConfirmed(TSimpleViewModel simpleViewModel)
+        
+        
+        public virtual void AlterConfirmed(TSimpleViewModel simpleViewModel)
         {
             try
             {
                 if (this.GenericService.Alter(simpleViewModel))
-                    return RedirectToAction("Index");
+                    RedirectToAction("Index");
                 else
                     throw new System.ArgumentException("Lỗi vô hiệu dữ liệu", "Dữ liệu này không thể vô hiệu.");
 
             }
             catch (Exception exception)
             {
-                ModelState.AddValidationErrors(exception);
-                return View("Alter", this.TailorViewModel(simpleViewModel, false, true));
-                //return RedirectToAction("Alter", simpleViewModel.GetID());
+                //***********ModelState.AddValidationErrors(exception);
+                //-----return View("Alter", this.TailorViewModel(simpleViewModel, false, true));
+                //RedirectToAction("Alter", simpleViewModel.GetID());
             }
         }
 
@@ -346,109 +367,56 @@ namespace TotalSmartCoding.Controllers
 
         #region Void/ UnVoid
 
-        [AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable), ImportModelStateFromTempData]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult Void(int? id)
+        
+        
+        public virtual void Void(int? id)
         {
+            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
+
+            base.AddRequireJsOptions();
+
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, true);
-            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             if (!simpleViewModel.InActive)
                 if (this.GenericService.GetVoidablePermitted(simpleViewModel.OrganizationalUnitID))
                 {
                     simpleViewModel.Voidable = this.GenericService.Voidable(simpleViewModel);
-                    RequireJsOptions.Add("Voidable", simpleViewModel.Voidable, RequireJsOptionsScope.Page);
+                    //********RequireJsOptions.Add("Voidable", simpleViewModel.Voidable, RequireJsOptionsScope.Page);
                 }
                 else //USER DON'T HAVE PERMISSION TO DO
-                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
 
             if (simpleViewModel.InActive)
                 if (this.GenericService.GetUnVoidablePermitted(simpleViewModel.OrganizationalUnitID))
                     simpleViewModel.UnVoidable = this.GenericService.UnVoidable(simpleViewModel);
                 else //USER DON'T HAVE PERMISSION TO DO
-                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
 
-            return View(simpleViewModel);
+            //-----return View(simpleViewModel);
         }
 
-        [HttpPost, ActionName("Void")]
-        [ValidateAntiForgeryToken, ExportModelStateToTempData]
-        public virtual ActionResult VoidConfirmed(TSimpleViewModel simpleViewModel)
+        
+        public virtual void VoidConfirmed(TSimpleViewModel simpleViewModel)
         {
             try
             {
                 if (simpleViewModel.VoidTypeID == null || simpleViewModel.VoidTypeID <= 0) throw new System.ArgumentException("Lỗi hủy dữ liệu", "Vui lòng nhập lý do hủy đơn hàng.");
 
                 if (this.GenericService.ToggleVoid(simpleViewModel))
-                    return RedirectToAction("Index");
+                    RedirectToAction("Index");
                 else
                     throw new System.ArgumentException("Lỗi duyệt dữ liệu", "Dữ liệu này không thể duyệt được.");
             }
             catch (Exception exception)
             {
-                ModelState.AddValidationErrors(exception);
-                return RedirectToAction("Void", simpleViewModel.GetID());
+                //***********ModelState.AddValidationErrors(exception);
+                RedirectToAction("Void", simpleViewModel.GetID());
             }
         }
 
 
         #endregion Void/ UnVoid
-
-
-        #region VoidDetail/ UnVoidDetail
-
-        [AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable), ImportModelStateFromTempData]
-        [OnResultExecutingFilterAttribute]
-        public virtual ActionResult VoidDetail(int? id, int? detailID)
-        {
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, true);
-            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            return View(this.PrepareVoidDetail(simpleViewModel, detailID));
-        }
-
-        [HttpPost, ActionName("VoidDetail")]
-        [ValidateAntiForgeryToken, ExportModelStateToTempData]
-        public virtual ActionResult VoidDetailConfirmed(TotalPortal.ViewModels.Helpers.VoidDetailViewModel voidDetailViewModel)
-        {
-            try
-            {
-                if (voidDetailViewModel.VoidTypeID == null || voidDetailViewModel.VoidTypeID <= 0) throw new System.ArgumentException("Lỗi hủy dữ liệu", "Vui lòng nhập lý do hủy đơn hàng.");
-
-                TEntity entity = this.GetEntityAndCheckAccessLevel(voidDetailViewModel.ID, GlobalEnums.AccessLevel.Readable);
-                if (entity == null) throw new System.ArgumentException("Lỗi hủy dữ liệu", "BadRequest.");
-
-                TDto dto = Mapper.Map<TDto>(entity);
-
-                if (this.GenericService.ToggleVoidDetail(dto, voidDetailViewModel.DetailID, voidDetailViewModel.InActivePartial, (int)voidDetailViewModel.VoidTypeID))
-                {
-                    ModelState.Clear(); ////https://weblog.west-wind.com/posts/2012/apr/20/aspnet-mvc-postbacks-and-htmlhelper-controls-ignoring-model-changes
-                    //IMPORTANT NOTES: ASP.NET MVC Postbacks and HtmlHelper Controls ignoring Model Changes
-                    //HtmlHelpers controls (like .TextBoxFor() etc.) don't bind to model values on Postback, but rather get their value directly out of the POST buffer from ModelState. Effectively it looks like you can't change the display value of a control via model value updates on a Postback operation. 
-                    //When MVC binds controls like @Html.TextBoxFor() or @Html.TextBox(), it always binds values on a GET operation. On a POST operation however, it'll always used the AttemptedValue to display the control. MVC binds using the ModelState on a POST operation, not the model's value
-                    //So, if you want the behavior that I was expecting originally you can actually get it by clearing the ModelState in the controller code: ModelState.Clear();
-                    voidDetailViewModel.InActivePartial = !voidDetailViewModel.InActivePartial;
-                    return View("VoidDetailSuccess", voidDetailViewModel);
-                }
-                else
-                    throw new System.ArgumentException("Lỗi hủy dữ liệu", "Dữ liệu này không thể hủy được.");
-            }
-            catch (Exception exception)
-            {
-                ModelState.AddValidationErrors(exception);
-                return RedirectToAction("VoidDetail", new { @id = voidDetailViewModel.ID, @detailId = voidDetailViewModel.DetailID });
-            }
-        }
-
-        private TSimpleViewModel PrepareVoidDetail(TSimpleViewModel simpleViewModel, int? detailId)
-        {
-            simpleViewModel.PrepareVoidDetail(detailId);
-            return simpleViewModel;
-        }
-
-
-        #endregion VoidDetail/ UnVoidDetail
-
 
 
 
@@ -492,13 +460,16 @@ namespace TotalSmartCoding.Controllers
             }
             catch (Exception exception)
             {
-                ModelState.AddValidationErrors(exception);
+                //***********ModelState.AddValidationErrors(exception);
                 return false;
             }
         }
 
 
-
+        protected bool TryValidateModel(TDto dto)
+        {
+            return true;
+        }
 
 
 
@@ -592,8 +563,8 @@ namespace TotalSmartCoding.Controllers
 
             simpleViewModel.ShowDiscount = this.GetShowDiscount(simpleViewModel);
 
-            RequireJsOptions.Add("Editable", simpleViewModel.Editable, RequireJsOptionsScope.Page);
-            RequireJsOptions.Add("Deletable", simpleViewModel.Deletable, RequireJsOptionsScope.Page);
+            //********RequireJsOptions.Add("Editable", simpleViewModel.Editable, RequireJsOptionsScope.Page);
+            //********RequireJsOptions.Add("Deletable", simpleViewModel.Deletable, RequireJsOptionsScope.Page);
 
             simpleViewModel.UserID = this.GenericService.UserID; //CAU LENH NAY TAM THOI DUOC SU DUNG DE SORT USER DROPDWONLIST. SAU NAY NEN LAM CACH KHAC, CACH NAY KHONG HAY
 
@@ -646,10 +617,11 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        [OnResultExecutingFilterAttribute]
-        public ActionResult Print(int? id)
+        
+        public void Print(int? id)
         {
-            return View(InitPrintViewModel(id));
+            base.AddRequireJsOptions();
+            //-----return View(InitPrintViewModel(id));
         }
 
         protected virtual PrintViewModel InitPrintViewModel(int? id)

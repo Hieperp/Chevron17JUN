@@ -83,6 +83,7 @@
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
     <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
     <Compile Include="CommonLibraries\CommonNinject.cs" />
+    <Compile Include="Configuration\SettingsManager.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ControllersExtensions.cs" />
