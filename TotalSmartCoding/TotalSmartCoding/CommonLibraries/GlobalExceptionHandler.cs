@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.SqlServer.MessageBox;
 using System.Windows.Forms;
 using TotalSmartCoding.Views.Commons;
-using DataTransferObject;
+using TotalModel.Helpers;
 
 namespace TotalSmartCoding.CommonLibraries
 {

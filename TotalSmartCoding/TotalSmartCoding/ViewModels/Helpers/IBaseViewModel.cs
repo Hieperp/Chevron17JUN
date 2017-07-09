@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.Collections.Generic;
 
 using TotalBase.Enums;
 using TotalModel;
@@ -16,7 +17,7 @@ namespace TotalSmartCoding.ViewModels.Helpers
     public interface IViewDetailViewModel<TDtoDetail> : ISimpleViewModel
         where TDtoDetail : class, IPrimitiveEntity
     {
-        List<TDtoDetail> ViewDetails { get; set; } //This ViewDetails is designed to use by Mapper in GenericViewDetailController only
+        BindingList<TDtoDetail> ViewDetails { get; set; } //This ViewDetails is designed to use by Mapper in GenericViewDetailController only
     }
 
 }

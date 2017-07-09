@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-
-namespace DataTransferObject
+namespace TotalModel.Helpers
 {
     /// <summary>
     /// A simple type of domain object rule that uses a delegate for validation. 

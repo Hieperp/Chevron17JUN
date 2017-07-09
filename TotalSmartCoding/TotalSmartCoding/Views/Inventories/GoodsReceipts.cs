@@ -19,7 +19,7 @@ using TotalSmartCoding.Controllers.Inventories;
 
 namespace TotalSmartCoding.Views.Inventories
 {
-    public partial class GoodsReceipts : BasicForm
+    public partial class GoodsReceipts : BasicView
     {
         private GoodsReceiptsController goodsReceiptsController {get; set;}
 

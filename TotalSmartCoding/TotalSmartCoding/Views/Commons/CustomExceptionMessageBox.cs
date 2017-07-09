@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using DataTransferObject;
+using TotalModel.Helpers;
 using BrightIdeasSoftware;
 
 namespace TotalSmartCoding.Views.Commons

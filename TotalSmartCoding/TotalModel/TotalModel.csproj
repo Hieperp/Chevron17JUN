@@ -51,7 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
+    <Compile Include="Helpers\CustomException.cs" />
     <Compile Include="Helpers\IHelper.cs" />
+    <Compile Include="Helpers\NotifyPropertyChangeObject.cs" />
+    <Compile Include="Helpers\NotifyValidationRule.cs" />
+    <Compile Include="Helpers\RegexValidationRule.cs" />
+    <Compile Include="Helpers\SimpleValidationRule.cs" />
+    <Compile Include="Helpers\ValidationRule.cs" />
     <Compile Include="IAccessControlAttribute.cs" />
     <Compile Include="IBaseDetailEntity.cs" />
     <Compile Include="IBaseEntity.cs" />

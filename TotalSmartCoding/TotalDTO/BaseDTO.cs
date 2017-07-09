@@ -26,8 +26,14 @@ namespace TotalDTO
         }
 
         
+        
+        private string reference;
         [Display(Name = "Số phiếu")]
-        public string Reference { get; set; }
+        public string Reference
+        {
+            get { return this.reference; }
+            set { ApplyPropertyChange<BaseDTO, string>(ref this.reference, o => o.Reference, value); }
+        }
 
 
 

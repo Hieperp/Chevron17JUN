@@ -10,8 +10,7 @@ using System.Reflection;
 
 using System.Diagnostics;
 
-
-namespace DataTransferObject
+namespace TotalModel.Helpers
 {
 
     #region About this
@@ -220,7 +219,7 @@ namespace DataTransferObject
 
 
 
-        
+
 
 
     }

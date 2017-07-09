@@ -6,7 +6,7 @@ using System.Data;
 
 using System.Runtime.Serialization;
 
-namespace DataTransferObject
+namespace TotalModel.Helpers
 {
     [Serializable]
     public class CustomException : Exception
@@ -87,14 +87,14 @@ namespace DataTransferObject
                 //DataRow[] foundDataRows = this.table.Select(this.table.Columns[0].ColumnName + " = '" + arrayColumn[0] + "' " + (this.table.Columns.Count >= 2 ? " AND " + this.table.Columns[1].ColumnName + " = '" + arrayColumn[1] + "' " : "") + (this.table.Columns.Count >= 3 ? " AND " + this.table.Columns[2].ColumnName + " = '" + arrayColumn[2] + "' " : ""));
                 //if (foundDataRows == null || foundDataRows.Length == 0)
                 //{
-                    DataRow dataRow = this.table.NewRow();
-                    for (int i = 0; i < this.table.Columns.Count; i++)
-                    {
-                        dataRow[i] = arrayColumn[i];
-                    }
+                DataRow dataRow = this.table.NewRow();
+                for (int i = 0; i < this.table.Columns.Count; i++)
+                {
+                    dataRow[i] = arrayColumn[i];
+                }
 
-                    this.table.Rows.Add(dataRow);
-                    this.isDirty = true;
+                this.table.Rows.Add(dataRow);
+                this.isDirty = true;
                 //}
             }
         }

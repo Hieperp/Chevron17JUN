@@ -56,14 +56,8 @@
     <Compile Include="BaseWithDetailDTO.cs" />
     <Compile Include="Commons\CommodityDTO.cs" />
     <Compile Include="Commons\CustomerDTO.cs" />
-    <Compile Include="Commons\CustomException.cs" />
     <Compile Include="Commons\EmployeeDTO.cs" />
-    <Compile Include="Commons\NotifyPropertyChangeObject.cs" />
-    <Compile Include="Commons\NotifyValidationRule.cs" />
     <Compile Include="Commons\PromotionDTO.cs" />
-    <Compile Include="Commons\RegexValidationRule.cs" />
-    <Compile Include="Commons\SimpleValidationRule.cs" />
-    <Compile Include="Commons\ValidationRule.cs" />
     <Compile Include="Commons\VoidTypeDTO.cs" />
     <Compile Include="Commons\WarehouseDTO.cs" />
     <Compile Include="CustomValidation.cs" />

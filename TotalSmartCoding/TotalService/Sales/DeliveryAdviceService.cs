@@ -6,6 +6,7 @@ using System.Data.Entity.Core.Objects;
 using AutoMapper;
 
 using TotalBase.Enums;
+using TotalBase;
 using TotalModel.Models;
 using TotalDTO.Sales;
 using TotalCore.Repositories.Sales;

@@ -13,7 +13,7 @@ using TotalSmartCoding.CommonLibraries;
 
 namespace TotalSmartCoding.Views.Mains
 {
-    public class BasicForm : Form, IMergeToolStrip, ICallToolStrip
+    public class BasicView : Form, IMergeToolStrip, ICallToolStrip
     {
 
 
@@ -22,7 +22,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        public void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -34,7 +34,7 @@ namespace TotalSmartCoding.Views.Mains
         }
 
         public virtual ToolStrip ChildToolStrip { get; set; }
-        public virtual BrightIdeasSoftware.FastObjectListView AFastObjectListView { get; set; }
+        public virtual BrightIdeasSoftware.FastObjectListView FastObjectListView { get; set; }
         //{
         //    get
         //    {
@@ -256,10 +256,22 @@ namespace TotalSmartCoding.Views.Mains
 
         public void SearchText(string searchText)
         {
-            CommonFormAction.OLVFilter(this.AFastObjectListView, searchText);
+            CommonFormAction.OLVFilter(this.FastObjectListView, searchText);
         }
 
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // BasicView
+            // 
+            this.ClientSize = new System.Drawing.Size(861, 375);
+            this.Name = "BasicView";
+            this.ResumeLayout(false);
+
+        }
 
 
 

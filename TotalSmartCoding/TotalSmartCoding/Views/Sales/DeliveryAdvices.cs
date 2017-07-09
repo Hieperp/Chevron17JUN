@@ -23,17 +23,10 @@ using TotalSmartCoding.Builders.Sales;
 
 namespace TotalSmartCoding.Views.Sales
 {
-    public partial class DeliveryAdvices : BasicForm
+    public partial class DeliveryAdvices : BasicView
     {
         DeliveryAdvicesController deliveryAdvicesController;
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private void deliveryAdvicesController_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -45,7 +38,7 @@ namespace TotalSmartCoding.Views.Sales
             InitializeComponent();
 
             this.ChildToolStrip = this.toolStripChildForm;
-            this.AFastObjectListView = this.fastObjectListViewIndex;
+            this.FastObjectListView = this.fastObjectListViewIndex;
 
             var deliveryAdviceAPIRepository = CommonNinject.Kernel.Get<IDeliveryAdviceAPIRepository>();
             DeliveryAdviceAPIsController deliveryAdviceAPIsController = new DeliveryAdviceAPIsController(deliveryAdviceAPIRepository);
@@ -116,7 +109,7 @@ namespace TotalSmartCoding.Views.Sales
 
         private void InitializeDataGridBinding()
         {
-            //this.dataGridViewDetails.AutoGenerateColumns = false;
+            this.dataGridViewDetails.AutoGenerateColumns = false;
             //marketingIncentiveDetailListView = new BindingListView<DeliveryAdviceViewDetail>(this.deliveryAdvicesController.ViewDetailViewModel.DeliveryAdviceViewDetails);
             //this.dataGridViewDetails.DataSource = marketingIncentiveDetailListView;
 
@@ -143,6 +136,9 @@ namespace TotalSmartCoding.Views.Sales
 
             //this.dataListViewMaster.DataBindings.Add("Enabled", this, "ReadonlyMode");
         }
+
+
+
 
 
 

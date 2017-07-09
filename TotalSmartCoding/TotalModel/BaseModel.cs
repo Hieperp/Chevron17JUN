@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using TotalModel.Helpers;
+
 namespace TotalModel
 {
     public interface IBaseModel : IValidatableObject
@@ -23,15 +25,21 @@ namespace TotalModel
 
     }
 
-    public abstract class BaseModel : IBaseModel
+    public abstract class BaseModel : NotifyPropertyChangeObject, IBaseModel
     {
         protected BaseModel() { this.EntryDate = DateTime.Now; }
 
 
+        private DateTime? entryDate;
         [UIHint("DateTimeReadonly")]
         [Display(Name = "Ngày lập")]
         [Required(ErrorMessage = "Vui lòng nhập ngày lập")]
-        public DateTime? EntryDate { get; set; }
+        public DateTime? EntryDate {
+            get { return this.entryDate; }
+            set { ApplyPropertyChange<BaseModel, DateTime?>(ref this.entryDate, o => o.EntryDate, value); }
+        }
+
+
 
         public int LocationID { get; set; }
 

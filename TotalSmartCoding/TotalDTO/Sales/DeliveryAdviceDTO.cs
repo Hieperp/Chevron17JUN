@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 using TotalModel;
+using TotalBase;
 using TotalBase.Enums;
 using TotalDTO.Helpers;
 using TotalDTO.Commons;
@@ -79,7 +80,7 @@ namespace TotalDTO.Sales
     {
         public DeliveryAdviceDTO()
         {
-            this.DeliveryAdviceViewDetails = new List<DeliveryAdviceDetailDTO>();
+            this.DeliveryAdviceViewDetails = new BindingList<DeliveryAdviceDetailDTO>();
         }
 
         public override int CustomerID { get { return (this.Customer != null ? this.Customer.CustomerID : 0); } }
@@ -110,8 +111,8 @@ namespace TotalDTO.Sales
         [UIHint("AutoCompletes/VoidType")]
         public VoidTypeBaseDTO VoidType { get; set; }
 
-        public List<DeliveryAdviceDetailDTO> DeliveryAdviceViewDetails { get; set; }
-        public List<DeliveryAdviceDetailDTO> ViewDetails { get { return this.DeliveryAdviceViewDetails; } set { this.DeliveryAdviceViewDetails = value; } }
+        public BindingList<DeliveryAdviceDetailDTO> DeliveryAdviceViewDetails { get; set; }
+        public BindingList<DeliveryAdviceDetailDTO> ViewDetails { get { return this.DeliveryAdviceViewDetails; } set { this.DeliveryAdviceViewDetails = value; } }
 
         public ICollection<DeliveryAdviceDetailDTO> GetDetails() { return this.DeliveryAdviceViewDetails; }
 

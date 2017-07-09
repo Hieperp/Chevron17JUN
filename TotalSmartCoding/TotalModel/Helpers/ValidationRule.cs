@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataTransferObject
+namespace TotalModel.Helpers
 {
     /// <summary>
     /// An abstract class that contains information about a rule as well as a method to validate it.
@@ -50,7 +50,7 @@ namespace DataTransferObject
         /// <summary>
         /// Validates that the rule has been followed.
         /// </summary>
-        public abstract bool ValidateRule(NotifyValidationRule  domainObject);
+        public abstract bool ValidateRule(NotifyValidationRule domainObject);
 
         /// <summary>
         /// Gets a string representation of this rule.

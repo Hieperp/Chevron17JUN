@@ -5,9 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-using TotalBase.Enums;
-
-namespace DataTransferObject
+namespace TotalModel.Helpers
 {
     public abstract class NotifyValidationRule
     {
@@ -83,7 +81,7 @@ namespace DataTransferObject
             foreach (ValidationRule rule in GetBrokenRules(propertyName))
             {
                 if (propertyName == string.Empty || rule.PropertyName == propertyName)
-                    exceptionTable.AddException(new string[] { GlobalEnums.stringFieldRequired, rule.Description });
+                    exceptionTable.AddException(new string[] { "Input not correct. Please make sure all required fields are filled out correctly", rule.Description });
             }
         }
 

@@ -4,7 +4,7 @@ using System.Text;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace DataTransferObject
+namespace TotalModel.Helpers
 {
     public class RegexValidationRule : ValidationRule
     {

@@ -1,13 +1,16 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using System.Collections.Generic;
 
+using TotalModel.Helpers;
+using TotalDTO.Commons;
 using TotalBase.Enums;
 using TotalSmartCoding.Configuration;
-using System.Net;
+
 
 namespace TotalSmartCoding.Controllers
 {
-    public class CoreController //: Controller
+    public class CoreController: NotifyPropertyChangeObject //: Controller
     {
         public Dictionary<string, object> TempData { get; private set; }
         public Dictionary<string, object> ViewData { get; private set; }

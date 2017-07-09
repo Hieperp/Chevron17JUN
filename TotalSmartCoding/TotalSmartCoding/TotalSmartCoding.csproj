@@ -110,7 +110,7 @@
     <Compile Include="Views\Inventories\GoodsReceipts.Designer.cs">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Mains\BasicForm.cs">
+    <Compile Include="Views\Mains\BasicView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Mains\MasterMdi.cs">
@@ -147,8 +147,8 @@
     <EmbeddedResource Include="Views\Inventories\GoodsReceipts.resx">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Mains\BasicForm.resx">
-      <DependentUpon>BasicForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Mains\BasicView.resx">
+      <DependentUpon>BasicView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\MasterMdi.resx">
       <DependentUpon>MasterMdi.cs</DependentUpon>
