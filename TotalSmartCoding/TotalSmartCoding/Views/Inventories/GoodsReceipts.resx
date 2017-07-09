@@ -117,7 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripButtonShowDetailsExtend.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAFpSURBVDhPxZHNS8JwHMb9W4oudYwOntIouhQEIwx6ISqP
+        XaJzV/+YCDxUVJeILp1MTdqbbWnK1OZiMp0vk6d99/slRYd5CPrAh/l9eB5kLPInJFOmkEy9a8lUE+FS
+        zxT4lLFx8qbllC7GgXrU51PG2pGI4XCIwWAQqud5oD6fMhYOHtDv99HpdELt9XqgPp8y5hI3cF0Xtm2P
+        NE0TpVIZoighl8sjk8kEqqoK6vMpY3oljXa7DcuysHl8i9jOpT96QjabD5zfOodweBX8FkUZ1OdTxuTS
+        KRzHQbVqoCAboDuaSKNQkIIn3ZTTLUnF4OZTxsTiGRqNJhSlBFl+xbPSAGVf0k05qarlIONTxtTyhf/v
+        JnTdGCm9WKCcnt9zXa8FOZ8yZlbvYBg2KpWPH7Za3V8ZSX0+ZcyuP/qv0EWt5o4l9fmUEd0uatf3jv/p
+        vFCpR30+ZcT26kJ8t67F9+sI1e9Rn0//nUjkE0vtKHLJa5yJAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="toolStripNaviGroupDetails.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>945, 17</value>
+  </metadata>
+  <metadata name="errorProviderMaster.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 60</value>
+  </metadata>
+  <metadata name="CommodityCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="CommodityName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Quantity.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Remarks.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="toolStripChildForm.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>312, 17</value>
+    <value>210, 60</value>
   </metadata>
 </root>
