@@ -38,12 +38,14 @@ namespace TotalSmartCoding.Views.Sales
             InitializeComponent();
 
             this.ChildToolStrip = this.toolStripChildForm;
-            this.FastObjectListView = this.fastObjectListViewIndex;
+            //this.FastObjectListView = this.fastObjectListViewIndex;
 
             var deliveryAdviceAPIRepository = CommonNinject.Kernel.Get<IDeliveryAdviceAPIRepository>();
             DeliveryAdviceAPIsController deliveryAdviceAPIsController = new DeliveryAdviceAPIsController(deliveryAdviceAPIRepository);
 
             this.fastObjectListViewIndex.SetObjects(deliveryAdviceAPIsController.GetDeliveryAdviceIndexes());
+
+            this.fastObjectListViewIndex.CheckBoxes = false;
 
             this.deliveryAdvicesController = new DeliveryAdvicesController(CommonNinject.Kernel.Get<IDeliveryAdviceService>(), CommonNinject.Kernel.Get<IDeliveryAdviceViewModelSelectListBuilder>());
             //******************this.deliveryAdvicesController.PropertyChanged += new PropertyChangedEventHandler(deliveryAdvicesController_PropertyChanged);
@@ -117,8 +119,8 @@ namespace TotalSmartCoding.Views.Sales
         }
 
 
-        private void InitializeReadOnlyModeBinding()
-        {
+        //private void InitializeReadOnlyModeBinding()
+        //{
             //List<Control> controlList = GlobalStaticFunction.GetAllControls(this);
 
             //foreach (Control control in controlList)
@@ -135,7 +137,7 @@ namespace TotalSmartCoding.Views.Sales
             //}
 
             //this.dataListViewMaster.DataBindings.Add("Enabled", this, "ReadonlyMode");
-        }
+        //}
 
 
 

@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using TotalBase;
 using TotalSmartCoding.Views.Mains;
 
+using TotalSmartCoding.CommonLibraries;
+
 namespace TotalSmartCoding
 {
     static class Program
@@ -23,6 +25,7 @@ namespace TotalSmartCoding
             Application.SetCompatibleTextRenderingDefault(false);
 
 
+            AutoMapperConfig.SetupMappings();
 
             Logon logon = new Logon();
 

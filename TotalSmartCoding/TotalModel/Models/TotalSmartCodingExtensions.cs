@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TotalModel.Helpers;
+using TotalModel.Interfaces;
 
 namespace TotalModel.Models
 {
-    
+
     //public partial class SalesOrder : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<SalesOrderDetail>
     //{
     //    public int GetID() { return this.SalesOrderID; }
@@ -148,6 +149,10 @@ namespace TotalModel.Models
 
 
 
+    public partial class GoodsReceiptIndex : IBaseIndex
+    {
+        public int Id { get { return this.GoodsReceiptID; } }
+    }
 
     public partial class GoodsReceipt : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<GoodsReceiptDetail>
     {
@@ -241,7 +246,7 @@ namespace TotalModel.Models
     //    public int GetID() { return this.CreditNoteDetailID; }
     //}
 
-    
+
 
 
 

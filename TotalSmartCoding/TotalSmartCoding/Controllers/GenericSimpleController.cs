@@ -51,9 +51,12 @@ namespace TotalSmartCoding.Controllers
 
             this.isCreateWizard = isCreateWizard;
             this.isSimpleCreate = isSimpleCreate;
+
+            this.DtoViewModel = new TSimpleViewModel();
         }
 
 
+        public TSimpleViewModel DtoViewModel { get; private set; }
 
         
         public virtual void Index(int? id)
@@ -73,9 +76,9 @@ namespace TotalSmartCoding.Controllers
 
         
         
-        public virtual void Open(int? id)
+        public override void Open(int? id)
         {
-            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
+            if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, false, false, true);
             if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);

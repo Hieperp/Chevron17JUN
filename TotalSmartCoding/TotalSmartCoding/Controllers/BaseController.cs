@@ -43,5 +43,32 @@ namespace TotalSmartCoding.Controllers
             return this.BaseService.GetAccessLevel() >= accessLevel;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public virtual void Open(int? id)
+        {
+        }
+
     }
 }

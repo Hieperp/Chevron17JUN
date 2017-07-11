@@ -77,13 +77,16 @@
   <ItemGroup>
     <Compile Include="Builders\Commons\IAspNetUserSelectListBuilder.cs" />
     <Compile Include="Builders\Commons\IPaymentTermSelectListBuilder.cs" />
+    <Compile Include="Builders\Inventories\GoodsReceiptViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\IViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\Sales\DeliveryAdviceViewModelSelectListBuilder.cs" />
+    <Compile Include="CommonLibraries\AutoMapperConfig.cs" />
     <Compile Include="CommonLibraries\CommonFormAction.cs" />
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
     <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
     <Compile Include="CommonLibraries\CommonNinject.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
+    <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIsController.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ControllersExtensions.cs" />
@@ -97,6 +100,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Helpers\IBaseViewModel.cs" />
     <Compile Include="ViewModels\Helpers\PrintViewModel.cs" />
+    <Compile Include="ViewModels\Inventories\GoodsReceiptViewModel.cs" />
     <Compile Include="ViewModels\Sales\DeliveryAdviceViewModel.cs" />
     <Compile Include="Views\Commons\CustomExceptionMessageBox.cs">
       <SubType>Form</SubType>
@@ -109,6 +113,12 @@
     </Compile>
     <Compile Include="Views\Inventories\GoodsReceipts.Designer.cs">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mains\BaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\BaseView.Designer.cs">
+      <DependentUpon>BaseView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Mains\BasicView.cs">
       <SubType>Form</SubType>
@@ -146,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Inventories\GoodsReceipts.resx">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\BaseView.resx">
+      <DependentUpon>BaseView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\BasicView.resx">
       <DependentUpon>BasicView.cs</DependentUpon>

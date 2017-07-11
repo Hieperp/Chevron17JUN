@@ -39,15 +39,15 @@ namespace TotalDTO.Inventories
     {
         public GoodsReceiptDTO()
         {
-            this.GoodsReceiptViewDetails = new List<GoodsReceiptDetailDTO>();
+            this.GoodsReceiptViewDetails = new BindingList<GoodsReceiptDetailDTO>();
         }
 
         public override Nullable<int> PickupID { get { return (this.Pickup != null ? (this.Pickup.PickupID > 0 ? (Nullable<int>)this.Pickup.PickupID : null) : null); } }
         [UIHint("Commons/PickupBox")]
         public PickupBoxDTO Pickup { get; set; }
 
-        public List<GoodsReceiptDetailDTO> GoodsReceiptViewDetails { get; set; }
-        public List<GoodsReceiptDetailDTO> ViewDetails { get { return this.GoodsReceiptViewDetails; } set { this.GoodsReceiptViewDetails = value; } }
+        public BindingList<GoodsReceiptDetailDTO> GoodsReceiptViewDetails { get; set; }
+        public BindingList<GoodsReceiptDetailDTO> ViewDetails { get { return this.GoodsReceiptViewDetails; } set { this.GoodsReceiptViewDetails = value; } }
 
         public ICollection<GoodsReceiptDetailDTO> GetDetails() { return this.GoodsReceiptViewDetails; }
 

@@ -371,8 +371,8 @@ namespace TotalSmartCoding.Views.Mains
 
             //Open new form
             Form childForm;
-            //childForm = new GoodsReceipts();
-            childForm = new DeliveryAdvices();
+            childForm = new GoodsReceipts();
+            //childForm = new DeliveryAdvices();
 
             if (childForm != null)
             {

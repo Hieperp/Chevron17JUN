@@ -3,22 +3,44 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TotalBase.Enums;
+using TotalModel.Interfaces;
+using TotalModel.Models;
 using TotalSmartCoding.CommonLibraries;
-
-
 using TotalSmartCoding.Controllers;
 
 namespace TotalSmartCoding.Views.Mains
 {
-    public class BasicView : Form, IMergeToolStrip, ICallToolStrip
+    public partial class BaseView : Form, IMergeToolStrip, ICallToolStrip
     {
+        public BaseView()
+        {
+            InitializeComponent();
+            this.FastObjectListView = new FastObjectListView();
+        }
 
-        public BaseController BaseController { get; private set; }
+
+        private void BaseView_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                InitializeReadOnlyModeBinding();
+                this.FastObjectListView.CheckBoxes = false;
+                this.FastObjectListView.SelectedIndexChanged += new System.EventHandler(this.dataListViewMaster_SelectedIndexChanged);
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        public BaseController BaseController { get; protected set; }
+
 
         #region <Implement Interface>
 
@@ -36,7 +58,7 @@ namespace TotalSmartCoding.Views.Mains
         }
 
         public virtual ToolStrip ChildToolStrip { get; set; }
-        //public virtual BrightIdeasSoftware.FastObjectListView FastObjectListView { get; set; }
+        public virtual BrightIdeasSoftware.FastObjectListView FastObjectListView { get; set; }
         //{
         //    get
         //    {
@@ -47,8 +69,6 @@ namespace TotalSmartCoding.Views.Mains
         //        this.toolStripChildForm = value;
         //    }
         //}
-
-
 
 
 
@@ -135,7 +155,6 @@ namespace TotalSmartCoding.Views.Mains
         #endregion Context toolbar
 
 
-
         #region ICallToolStrip
 
         public void Escape()
@@ -176,7 +195,7 @@ namespace TotalSmartCoding.Views.Mains
             this.ControlBox = false;
             //MessageBox.Show("New");
 
-            string plainText ="nguyễnđạtphú";
+            string plainText = "nguyễnđạtphú";
             // Convert the plain string pwd into bytes
             //byte[] plainTextBytes = UnicodeEncoding.Unicode.GetBytes(plainText);
             //System.Security.Cryptography.HashAlgorithm hashAlgo = new System.Security.Cryptography.SHA256Managed();
@@ -259,54 +278,14 @@ namespace TotalSmartCoding.Views.Mains
 
         public void SearchText(string searchText)
         {
-            //CommonFormAction.OLVFilter(this.FastObjectListView, searchText);
+            CommonFormAction.OLVFilter(this.FastObjectListView, searchText);
         }
 
         #endregion
 
-        private void InitializeComponent()
-        {
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.SuspendLayout();
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(629, 112);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(98, 21);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // BasicView
-            // 
-            this.ClientSize = new System.Drawing.Size(1107, 395);
-            this.Controls.Add(this.checkBox1);
-            this.Name = "BasicView";
-            this.Load += new System.EventHandler(this.BasicView_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
-        }
-
-
 
         #endregion <Implement Interface>
 
-        private void BasicView_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                InitializeReadOnlyModeBinding();
-
-                //this.FastObjectListView.SelectedIndexChanged += new System.EventHandler(this.dataListViewMaster_SelectedIndexChanged);
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-        }
 
 
 
@@ -327,27 +306,21 @@ namespace TotalSmartCoding.Views.Mains
                 }
             }
 
-            //this.FastObjectListView.DataBindings.Add("Enabled", this, "ReadonlyMode");
+            this.FastObjectListView.DataBindings.Add("Enabled", this, "ReadonlyMode");
         }
-
-
 
 
         private void dataListViewMaster_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                //ObjectListView objectListView = (ObjectListView)sender;
-                //DataRowView row = (DataRowView)objectListView.SelectedObject;
-
-                //if (row != null)
-                //{
-                //    int dtoID;
-
-                //    if (int.TryParse(row.Row["MarketingIncentiveID"].ToString(), out dtoID)) this.marketingIncentiveBLL.Fill(dtoID);
-                //    else this.marketingIncentiveBLL.Fill(0);
-                //}
-                //else this.marketingIncentiveBLL.Fill(0);
+                FastObjectListView fastObjectListView = (FastObjectListView)sender;
+                if (fastObjectListView.SelectedObject != null)
+                {
+                    IBaseIndex baseIndex = (IBaseIndex)fastObjectListView.SelectedObject;
+                    if (baseIndex != null) this.BaseController.Open(baseIndex.Id);
+                }
+                //else this.BaseController.Open(0);
             }
             catch (Exception exception)
             {

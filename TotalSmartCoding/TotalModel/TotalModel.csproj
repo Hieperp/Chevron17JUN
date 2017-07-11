@@ -61,6 +61,7 @@
     <Compile Include="IAccessControlAttribute.cs" />
     <Compile Include="IBaseDetailEntity.cs" />
     <Compile Include="IBaseEntity.cs" />
+    <Compile Include="Interfaces\IBaseIndex.cs" />
     <Compile Include="IPrimitiveEntity.cs" />
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
