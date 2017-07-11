@@ -484,9 +484,11 @@ namespace TotalSmartCoding.Controllers
 
         protected virtual TSimpleViewModel MapEntityToViewModel(TEntity entity)
         {
-            TSimpleViewModel simpleViewModel = Mapper.Map<TSimpleViewModel>(entity);
+            //TSimpleViewModel simpleViewModel = Mapper.Map<TSimpleViewModel>(entity);
+            //return simpleViewModel;
 
-            return simpleViewModel;
+            Mapper.Map<TEntity, TSimpleViewModel>(entity, this.DtoViewModel);
+            return this.DtoViewModel;
         }
 
 

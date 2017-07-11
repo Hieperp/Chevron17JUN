@@ -29,14 +29,13 @@ namespace TotalSmartCoding.Views.Inventories
 {
     public partial class GoodsReceipts : BaseView
     {
-        private GoodsReceiptsController goodsReceiptsController { get; set; }
+        private GoodsReceiptController Controller { get; set; }
 
         public GoodsReceipts()
             : base()
         {
             InitializeComponent();
 
-            this.BaseController = new GoodsReceiptsController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<IGoodsReceiptViewModelSelectListBuilder>());
 
             this.ChildToolStrip = this.toolStripChildForm;
             this.FastObjectListView = this.fastObjectListViewIndex;
@@ -46,8 +45,10 @@ namespace TotalSmartCoding.Views.Inventories
 
             this.fastObjectListViewIndex.SetObjects(goodsReceiptAPIsController.GetGoodsReceiptIndexes());
 
-            this.goodsReceiptsController = new GoodsReceiptsController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<IGoodsReceiptViewModelSelectListBuilder>());
-            this.goodsReceiptsController.PropertyChanged += new PropertyChangedEventHandler(goodsReceiptsController_PropertyChanged);
+            this.Controller = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<IGoodsReceiptViewModelSelectListBuilder>());
+            this.Controller.PropertyChanged += new PropertyChangedEventHandler(goodsReceiptsController_PropertyChanged);
+
+            this.BaseController = this.Controller;
         }
 
         private void GoodsReceipts_Load(object sender, EventArgs e)
@@ -83,12 +84,12 @@ namespace TotalSmartCoding.Views.Inventories
         {
 
 
-            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.goodsReceiptsController.DtoViewModel, "Reference", true);
+            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.Controller.DtoViewModel, "Reference", true);
 
-            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.goodsReceiptsController.DtoViewModel, "EntryDate", true);
+            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.DtoViewModel, "EntryDate", true);
 
-            this.bindingIsDirty = this.checkBoxIsDirty.DataBindings.Add("Checked", this.goodsReceiptsController.DtoViewModel, "IsDirty", true);
-            this.bindingIsDirtyBLL = this.checkBoxIsDirtyBLL.DataBindings.Add("Checked", this.goodsReceiptsController, "IsDirty", true);
+            this.bindingIsDirty = this.checkBoxIsDirty.DataBindings.Add("Checked", this.Controller.DtoViewModel, "IsDirty", true);
+            this.bindingIsDirtyBLL = this.checkBoxIsDirtyBLL.DataBindings.Add("Checked", this.Controller, "IsDirty", true);
 
 
 
@@ -108,7 +109,7 @@ namespace TotalSmartCoding.Views.Inventories
             this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].Width = 10;
             this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
 
-            this.errorProviderMaster.DataSource = this.goodsReceiptsController.DtoViewModel;
+            this.errorProviderMaster.DataSource = this.Controller.DtoViewModel;
 
         }
 

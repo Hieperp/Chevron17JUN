@@ -94,7 +94,7 @@
     <Compile Include="Controllers\CustomControllerAttribute.cs" />
     <Compile Include="Controllers\GenericSimpleController.cs" />
     <Compile Include="Controllers\GenericViewDetailController.cs" />
-    <Compile Include="Controllers\Inventories\GoodsReceiptsController.cs" />
+    <Compile Include="Controllers\Inventories\GoodsReceiptController.cs" />
     <Compile Include="Controllers\Sales\DeliveryAdvicesController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
