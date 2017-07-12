@@ -263,6 +263,7 @@
             this.toolStripButtonEscape.Name = "toolStripButtonEscape";
             this.toolStripButtonEscape.Size = new System.Drawing.Size(52, 52);
             this.toolStripButtonEscape.Text = "ESC";
+            this.toolStripButtonEscape.Click += new System.EventHandler(this.toolStripButtonEscape_Click);
             // 
             // toolStripSeparator10
             // 
@@ -289,6 +290,7 @@
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
             this.toolStripButtonEdit.Size = new System.Drawing.Size(87, 52);
             this.toolStripButtonEdit.Text = "Edit";
+            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // toolStripButtonSave
             // 

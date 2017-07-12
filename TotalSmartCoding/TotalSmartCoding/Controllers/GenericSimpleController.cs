@@ -26,6 +26,7 @@ namespace TotalSmartCoding.Controllers
     {
         protected readonly IGenericService<TEntity, TDto, TPrimitiveDto> GenericService;
         private readonly IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder;
+        private readonly TSimpleViewModel simpleViewModel;
 
         private bool isSimpleCreate;
         private bool isCreateWizard;
@@ -33,32 +34,28 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder)
-            : this(genericService, viewModelSelectListBuilder, false, true)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel)
+            : this(genericService, viewModelSelectListBuilder, simpleViewModel, false, true)
         {
         }
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, bool isCreateWizard)
-            : this(genericService, viewModelSelectListBuilder, isCreateWizard, false)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel, bool isCreateWizard)
+            : this(genericService, viewModelSelectListBuilder, simpleViewModel, isCreateWizard, false)
         {
         }
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, bool isCreateWizard, bool isSimpleCreate)
-            : base(genericService)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel, bool isCreateWizard, bool isSimpleCreate)
+            : base(genericService, simpleViewModel)
         {
             this.GenericService = genericService;
             this.viewModelSelectListBuilder = viewModelSelectListBuilder;
 
+            this.simpleViewModel = simpleViewModel; //New object vs MVC
+
             this.isCreateWizard = isCreateWizard;
             this.isSimpleCreate = isSimpleCreate;
-
-            this.DtoViewModel = new TSimpleViewModel();
         }
 
-
-        public TSimpleViewModel DtoViewModel { get; private set; }
-
-        
         public virtual void Index(int? id)
         {
             //***********ViewBag.SelectedEntityID = id == null ? -1 : (int)id;
@@ -82,6 +79,7 @@ namespace TotalSmartCoding.Controllers
 
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, false, false, true);
             if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
 
             base.AddRequireJsOptions();
             //-----return View(simpleViewModel);
@@ -174,14 +172,19 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        
-        
-        public virtual void Edit(int? id)
+
+
+        public override void Edit(int? id)
         {
-            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");   
+            if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
+            
+            this.StopTracking();
 
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
             if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+            this.StartTracking();
+            this.Reset();
 
             base.AddRequireJsOptions();
 
@@ -487,8 +490,12 @@ namespace TotalSmartCoding.Controllers
             //TSimpleViewModel simpleViewModel = Mapper.Map<TSimpleViewModel>(entity);
             //return simpleViewModel;
 
-            Mapper.Map<TEntity, TSimpleViewModel>(entity, this.DtoViewModel);
-            return this.DtoViewModel;
+            this.simpleViewModel.StopTracking();
+            Mapper.Map<TEntity, TSimpleViewModel>(entity, this.simpleViewModel);
+            this.simpleViewModel.StartTracking();
+            this.simpleViewModel.Reset();
+
+            return this.simpleViewModel;
         }
 
 

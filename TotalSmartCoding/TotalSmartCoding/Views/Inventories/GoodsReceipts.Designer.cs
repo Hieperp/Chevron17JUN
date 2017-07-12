@@ -48,7 +48,6 @@
             this.textBoxPaymentMachanics = new System.Windows.Forms.TextBox();
             this.toolStripNaviGroupDetails = new System.Windows.Forms.ToolStrip();
             this.label11 = new System.Windows.Forms.Label();
-            this.errorProviderMaster = new System.Windows.Forms.ErrorProvider(this.components);
             this.label12 = new System.Windows.Forms.Label();
             this.fastObjectListViewIndex = new BrightIdeasSoftware.FastObjectListView();
             this.olvColumn18 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -57,14 +56,14 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.naviGroupDetails = new Guifreaks.Navisuite.NaviGroup(this.components);
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.dataGridViewDetails = new System.Windows.Forms.DataGridView();
             this.CommodityCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CommodityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numericUpDownSizingDetail = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxIsDirtyBLL = new System.Windows.Forms.CheckBox();
-            this.checkBoxIsDirty = new System.Windows.Forms.CheckBox();
             this.naviGroupDetailsExtend = new Guifreaks.Navisuite.NaviGroup(this.components);
             this.tableLayoutPanelExtend = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxApprovedEmployeeID = new System.Windows.Forms.ComboBox();
@@ -72,7 +71,6 @@
             this.comboBoxRequestedEmployeeID = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanelMaster.SuspendLayout();
             this.toolStripNaviGroupDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewIndex)).BeginInit();
             this.toolStripChildForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.naviGroupDetails)).BeginInit();
@@ -91,10 +89,10 @@
             this.comboBoxNotedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxNotedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNotedEmployeeID.FormattingEnabled = true;
-            this.comboBoxNotedEmployeeID.Location = new System.Drawing.Point(519, 3);
+            this.comboBoxNotedEmployeeID.Location = new System.Drawing.Point(508, 3);
             this.comboBoxNotedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxNotedEmployeeID.Name = "comboBoxNotedEmployeeID";
-            this.comboBoxNotedEmployeeID.Size = new System.Drawing.Size(272, 24);
+            this.comboBoxNotedEmployeeID.Size = new System.Drawing.Size(265, 24);
             this.comboBoxNotedEmployeeID.TabIndex = 53;
             // 
             // toolStripButtonShowDetailsExtend
@@ -119,7 +117,7 @@
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0191F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32023F));
-            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 113F));
+            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanelMaster.Controls.Add(this.comboBoxMarketingPaymentTypeID, 4, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanelMaster.Controls.Add(this.comboBoxMarketingProgramID, 1, 1);
@@ -150,10 +148,10 @@
             this.comboBoxMarketingPaymentTypeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxMarketingPaymentTypeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMarketingPaymentTypeID.FormattingEnabled = true;
-            this.comboBoxMarketingPaymentTypeID.Location = new System.Drawing.Point(519, 39);
+            this.comboBoxMarketingPaymentTypeID.Location = new System.Drawing.Point(508, 39);
             this.comboBoxMarketingPaymentTypeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxMarketingPaymentTypeID.Name = "comboBoxMarketingPaymentTypeID";
-            this.comboBoxMarketingPaymentTypeID.Size = new System.Drawing.Size(272, 24);
+            this.comboBoxMarketingPaymentTypeID.Size = new System.Drawing.Size(265, 24);
             this.comboBoxMarketingPaymentTypeID.TabIndex = 47;
             // 
             // label6
@@ -163,7 +161,7 @@
             this.label6.Location = new System.Drawing.Point(1, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(1);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(115, 34);
+            this.label6.Size = new System.Drawing.Size(113, 34);
             this.label6.TabIndex = 30;
             this.label6.Text = "Date";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -175,10 +173,10 @@
             this.comboBoxMarketingProgramID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxMarketingProgramID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMarketingProgramID.FormattingEnabled = true;
-            this.comboBoxMarketingProgramID.Location = new System.Drawing.Point(118, 39);
+            this.comboBoxMarketingProgramID.Location = new System.Drawing.Point(116, 39);
             this.comboBoxMarketingProgramID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxMarketingProgramID.Name = "comboBoxMarketingProgramID";
-            this.comboBoxMarketingProgramID.Size = new System.Drawing.Size(272, 24);
+            this.comboBoxMarketingProgramID.Size = new System.Drawing.Size(265, 24);
             this.comboBoxMarketingProgramID.TabIndex = 48;
             // 
             // label7
@@ -188,7 +186,7 @@
             this.label7.Location = new System.Drawing.Point(3, 41);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(111, 14);
+            this.label7.Size = new System.Drawing.Size(109, 14);
             this.label7.TabIndex = 31;
             this.label7.Text = "Marketing Program";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -196,29 +194,29 @@
             // textBoxRemarks
             // 
             this.textBoxRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxRemarks.Location = new System.Drawing.Point(920, 39);
+            this.textBoxRemarks.Location = new System.Drawing.Point(900, 39);
             this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxRemarks.Name = "textBoxRemarks";
-            this.textBoxRemarks.Size = new System.Drawing.Size(272, 22);
+            this.textBoxRemarks.Size = new System.Drawing.Size(265, 22);
             this.textBoxRemarks.TabIndex = 14;
             // 
             // datePickerEntryDate
             // 
             this.datePickerEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.datePickerEntryDate.Location = new System.Drawing.Point(118, 3);
+            this.datePickerEntryDate.Location = new System.Drawing.Point(116, 3);
             this.datePickerEntryDate.Margin = new System.Windows.Forms.Padding(1);
             this.datePickerEntryDate.Name = "datePickerEntryDate";
-            this.datePickerEntryDate.Size = new System.Drawing.Size(272, 22);
+            this.datePickerEntryDate.Size = new System.Drawing.Size(265, 22);
             this.datePickerEntryDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(805, 41);
+            this.label1.Location = new System.Drawing.Point(787, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 14);
+            this.label1.Size = new System.Drawing.Size(109, 14);
             this.label1.TabIndex = 57;
             this.label1.Text = "Remarks";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -227,10 +225,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(402, 3);
+            this.label4.Location = new System.Drawing.Point(393, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(1);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(115, 34);
+            this.label4.Size = new System.Drawing.Size(113, 34);
             this.label4.TabIndex = 28;
             this.label4.Text = "Payment Period";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -238,20 +236,20 @@
             // textBoxReference
             // 
             this.textBoxReference.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxReference.Location = new System.Drawing.Point(519, 3);
+            this.textBoxReference.Location = new System.Drawing.Point(508, 3);
             this.textBoxReference.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxReference.Name = "textBoxReference";
-            this.textBoxReference.Size = new System.Drawing.Size(272, 22);
+            this.textBoxReference.Size = new System.Drawing.Size(265, 22);
             this.textBoxReference.TabIndex = 21;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(803, 3);
+            this.label14.Location = new System.Drawing.Point(785, 3);
             this.label14.Margin = new System.Windows.Forms.Padding(1);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(115, 34);
+            this.label14.Size = new System.Drawing.Size(113, 34);
             this.label14.TabIndex = 51;
             this.label14.Text = "Payment Machanic";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -260,10 +258,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(404, 41);
+            this.label2.Location = new System.Drawing.Point(395, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 14);
+            this.label2.Size = new System.Drawing.Size(109, 14);
             this.label2.TabIndex = 56;
             this.label2.Text = "Payment Type";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -271,10 +269,10 @@
             // textBoxPaymentMachanics
             // 
             this.textBoxPaymentMachanics.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxPaymentMachanics.Location = new System.Drawing.Point(920, 3);
+            this.textBoxPaymentMachanics.Location = new System.Drawing.Point(900, 3);
             this.textBoxPaymentMachanics.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxPaymentMachanics.Name = "textBoxPaymentMachanics";
-            this.textBoxPaymentMachanics.Size = new System.Drawing.Size(272, 22);
+            this.textBoxPaymentMachanics.Size = new System.Drawing.Size(265, 22);
             this.textBoxPaymentMachanics.TabIndex = 20;
             // 
             // toolStripNaviGroupDetails
@@ -297,26 +295,22 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(404, 5);
+            this.label11.Location = new System.Drawing.Point(395, 5);
             this.label11.Margin = new System.Windows.Forms.Padding(3);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(111, 20);
+            this.label11.Size = new System.Drawing.Size(109, 20);
             this.label11.TabIndex = 45;
             this.label11.Text = "Noted By";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // errorProviderMaster
-            // 
-            this.errorProviderMaster.ContainerControl = this;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(805, 5);
+            this.label12.Location = new System.Drawing.Point(787, 5);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(111, 20);
+            this.label12.Size = new System.Drawing.Size(109, 20);
             this.label12.TabIndex = 47;
             this.label12.Text = "Approved By";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -333,6 +327,7 @@
             this.fastObjectListViewIndex.CellEditEnterChangesRows = true;
             this.fastObjectListViewIndex.CellEditTabChangesRows = true;
             this.fastObjectListViewIndex.CellEditUseWholeCell = false;
+            this.fastObjectListViewIndex.CheckBoxes = true;
             this.fastObjectListViewIndex.CheckedAspectName = "";
             this.fastObjectListViewIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn18,
@@ -415,10 +410,10 @@
             // naviGroupDetails
             // 
             this.naviGroupDetails.Caption = "   Details";
+            this.naviGroupDetails.Controls.Add(this.checkBox2);
+            this.naviGroupDetails.Controls.Add(this.checkBox1);
             this.naviGroupDetails.Controls.Add(this.dataGridViewDetails);
             this.naviGroupDetails.Controls.Add(this.numericUpDownSizingDetail);
-            this.naviGroupDetails.Controls.Add(this.checkBoxIsDirtyBLL);
-            this.naviGroupDetails.Controls.Add(this.checkBoxIsDirty);
             this.naviGroupDetails.Controls.Add(this.naviGroupDetailsExtend);
             this.naviGroupDetails.Controls.Add(this.tableLayoutPanelMaster);
             this.naviGroupDetails.Controls.Add(this.toolStripNaviGroupDetails);
@@ -432,6 +427,26 @@
             this.naviGroupDetails.Size = new System.Drawing.Size(1309, 425);
             this.naviGroupDetails.TabIndex = 30;
             this.naviGroupDetails.Text = "naviGroup1";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(376, -1);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(98, 21);
+            this.checkBox2.TabIndex = 67;
+            this.checkBox2.Text = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(220, 2);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(98, 21);
+            this.checkBox1.TabIndex = 66;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // dataGridViewDetails
             // 
@@ -520,26 +535,6 @@
             0,
             0});
             // 
-            // checkBoxIsDirtyBLL
-            // 
-            this.checkBoxIsDirtyBLL.AutoSize = true;
-            this.checkBoxIsDirtyBLL.Location = new System.Drawing.Point(-300, 0);
-            this.checkBoxIsDirtyBLL.Name = "checkBoxIsDirtyBLL";
-            this.checkBoxIsDirtyBLL.Size = new System.Drawing.Size(59, 21);
-            this.checkBoxIsDirtyBLL.TabIndex = 63;
-            this.checkBoxIsDirtyBLL.Text = "Dirty";
-            this.checkBoxIsDirtyBLL.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxIsDirty
-            // 
-            this.checkBoxIsDirty.AutoSize = true;
-            this.checkBoxIsDirty.Location = new System.Drawing.Point(-300, 0);
-            this.checkBoxIsDirty.Name = "checkBoxIsDirty";
-            this.checkBoxIsDirty.Size = new System.Drawing.Size(59, 21);
-            this.checkBoxIsDirty.TabIndex = 24;
-            this.checkBoxIsDirty.Text = "Dirty";
-            this.checkBoxIsDirty.UseVisualStyleBackColor = true;
-            // 
             // naviGroupDetailsExtend
             // 
             this.naviGroupDetailsExtend.Caption = "";
@@ -571,7 +566,7 @@
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.019F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32099F));
-            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 113F));
+            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanelExtend.Controls.Add(this.comboBoxNotedEmployeeID, 4, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label11, 3, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label12, 6, 0);
@@ -595,10 +590,10 @@
             this.comboBoxApprovedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxApprovedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxApprovedEmployeeID.FormattingEnabled = true;
-            this.comboBoxApprovedEmployeeID.Location = new System.Drawing.Point(920, 3);
+            this.comboBoxApprovedEmployeeID.Location = new System.Drawing.Point(900, 3);
             this.comboBoxApprovedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxApprovedEmployeeID.Name = "comboBoxApprovedEmployeeID";
-            this.comboBoxApprovedEmployeeID.Size = new System.Drawing.Size(272, 24);
+            this.comboBoxApprovedEmployeeID.Size = new System.Drawing.Size(265, 24);
             this.comboBoxApprovedEmployeeID.TabIndex = 46;
             // 
             // label10
@@ -608,7 +603,7 @@
             this.label10.Location = new System.Drawing.Point(3, 5);
             this.label10.Margin = new System.Windows.Forms.Padding(3);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(111, 20);
+            this.label10.Size = new System.Drawing.Size(109, 20);
             this.label10.TabIndex = 35;
             this.label10.Text = "Requested By";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -620,10 +615,10 @@
             this.comboBoxRequestedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxRequestedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRequestedEmployeeID.FormattingEnabled = true;
-            this.comboBoxRequestedEmployeeID.Location = new System.Drawing.Point(118, 3);
+            this.comboBoxRequestedEmployeeID.Location = new System.Drawing.Point(116, 3);
             this.comboBoxRequestedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxRequestedEmployeeID.Name = "comboBoxRequestedEmployeeID";
-            this.comboBoxRequestedEmployeeID.Size = new System.Drawing.Size(272, 24);
+            this.comboBoxRequestedEmployeeID.Size = new System.Drawing.Size(265, 24);
             this.comboBoxRequestedEmployeeID.TabIndex = 52;
             // 
             // GoodsReceipts
@@ -637,11 +632,13 @@
             this.Name = "GoodsReceipts";
             this.Text = "GoodsReceipts";
             this.Load += new System.EventHandler(this.GoodsReceipts_Load);
+            this.Controls.SetChildIndex(this.toolStripChildForm, 0);
+            this.Controls.SetChildIndex(this.naviGroupDetails, 0);
+            this.Controls.SetChildIndex(this.fastObjectListViewIndex, 0);
             this.tableLayoutPanelMaster.ResumeLayout(false);
             this.tableLayoutPanelMaster.PerformLayout();
             this.toolStripNaviGroupDetails.ResumeLayout(false);
             this.toolStripNaviGroupDetails.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewIndex)).EndInit();
             this.toolStripChildForm.ResumeLayout(false);
             this.toolStripChildForm.PerformLayout();
@@ -679,7 +676,6 @@
         private System.Windows.Forms.TextBox textBoxPaymentMachanics;
         private System.Windows.Forms.ToolStrip toolStripNaviGroupDetails;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ErrorProvider errorProviderMaster;
         private BrightIdeasSoftware.FastObjectListView fastObjectListViewIndex;
         private BrightIdeasSoftware.OLVColumn olvColumn18;
         private BrightIdeasSoftware.OLVColumn olvColumn28;
@@ -690,8 +686,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
         private System.Windows.Forms.NumericUpDown numericUpDownSizingDetail;
-        private System.Windows.Forms.CheckBox checkBoxIsDirtyBLL;
-        private System.Windows.Forms.CheckBox checkBoxIsDirty;
         private Guifreaks.Navisuite.NaviGroup naviGroupDetailsExtend;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelExtend;
         private System.Windows.Forms.Label label12;
@@ -701,6 +695,8 @@
         private System.Windows.Forms.ToolStrip toolStripChildForm;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
 
     }
 }

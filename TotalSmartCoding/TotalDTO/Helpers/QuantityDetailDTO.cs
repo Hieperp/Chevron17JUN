@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using TotalModel;
 
 namespace TotalDTO.Helpers
@@ -32,9 +32,19 @@ namespace TotalDTO.Helpers
         public virtual int CommodityTypeID { get; set; }
 
 
-        [Display(Name = "SL")]        
-        [Range(0, 99999999999, ErrorMessage = "Số lượng không hợp lệ")]
-        [Required(ErrorMessage = "Vui lòng nhập số lượng")]
-        public virtual decimal Quantity { get; set; }
+        //[Display(Name = "SL")]        
+        //[Range(0, 99999999999, ErrorMessage = "Số lượng không hợp lệ")]
+        //[Required(ErrorMessage = "Vui lòng nhập số lượng")]
+        //public virtual decimal Quantity { get; set; }
+
+
+        private decimal quantity;
+        public virtual decimal Quantity
+        {
+            get { return this.quantity; }
+            set { ApplyPropertyChange<QuantityDetailDTO, decimal>(ref this.quantity, o => o.Quantity, Math.Round(value, 0)); } //GlobalVariables.Round0Amount
+        }
+
+
     }
 }

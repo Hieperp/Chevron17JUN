@@ -24,8 +24,8 @@ namespace TotalDTO.Inventories
         public Nullable<int> PalletID { get; set; }
         public string PalletCode { get; set; }
 
-        [UIHint("DecimalReadonly")]
-        public override decimal Quantity { get; set; }
+        //[UIHint("DecimalReadonly")]
+        //public override decimal Quantity { get; set; }
 
         [UIHint("DecimalReadonly")]
         public decimal QuantitySKU { get; set; }

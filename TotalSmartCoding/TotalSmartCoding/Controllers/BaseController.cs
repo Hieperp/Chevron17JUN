@@ -1,24 +1,46 @@
-﻿using TotalBase;
+﻿using System.ComponentModel;
+
+using TotalBase;
+using TotalDTO;
 using TotalBase.Enums;
 using TotalCore.Services;
+
 //using TotalSmartCoding.APIs.Sessions;
 
 
 namespace TotalSmartCoding.Controllers
 {
-    public abstract class BaseController : CoreController
+    public class BaseController : CoreController
     {
         private readonly IBaseService baseService;
-        public BaseController(IBaseService baseService)
-        { 
-            this.baseService = baseService;
-            this.baseService.UserID = ContextAttributes.User.UserID; //(Tamthoi)
+        private readonly BaseDTO baseDTO;
+
+        public BaseController() : this(null, null) { } //JUST FOR CREATE AN EMPTY BaseController IN BaseView AT DESIGN TIME ONLY (NOT FUNCTIONAL AT RUN TIME) 
+
+        public BaseController(IBaseService baseService, BaseDTO baseDTO)
+        {
+            if (baseService != null && baseDTO != null)
+            {
+                this.baseService = baseService;
+                this.baseDTO = baseDTO;
+
+                this.baseDTO.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(baseDTO_PropertyChanged);
+
+                this.baseService.UserID = ContextAttributes.User.UserID; //(Tamthoi)
+            }
+            else
+                this.baseDTO = new BaseDTO(); //JUST FOR CREATE AN EMPTY BaseController IN BaseView AT DESIGN TIME ONLY (NOT FUNCTIONAL AT RUN TIME) 
         }
 
 
         public IBaseService BaseService { get { return this.baseService; } }
+        public BaseDTO BaseDTO { get { return this.baseDTO; } }
 
 
+        protected void baseDTO_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.SetDirty();  //SHOULD USE this.SetDirty(); INSTEAD OF FORWARD EVENT BY USING: this.NotifyPropertyChanged(e.PropertyName); BECAUSE: IF e.PropertyName NOT FOUND IN THE RECEIVED OBJECT (HERE IS BaseController OBJECT): IT WILL NOT ADD TO Changes Dictionary => SO THE OBJECT IS NOT Dirty
+        }
 
         public virtual void AddRequireJsOptions()
         {
@@ -33,7 +55,7 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        protected virtual bool AccessLevelAuthorize ()
+        protected virtual bool AccessLevelAuthorize()
         {
             return this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Editable);
         }
@@ -69,6 +91,8 @@ namespace TotalSmartCoding.Controllers
         public virtual void Open(int? id)
         {
         }
-
+        public virtual void Edit(int? id)
+        {
+        }
     }
 }

@@ -14,6 +14,9 @@ using TotalModel.Models;
 using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Controllers;
 
+using TotalDAL.Repositories;
+using TotalService;
+
 namespace TotalSmartCoding.Views.Mains
 {
     public partial class BaseView : Form, IMergeToolStrip, ICallToolStrip
@@ -22,6 +25,7 @@ namespace TotalSmartCoding.Views.Mains
         {
             InitializeComponent();
             this.FastObjectListView = new FastObjectListView();
+            this.baseController = new BaseController();
         }
 
 
@@ -29,9 +33,13 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                InitializeReadOnlyModeBinding();
                 this.FastObjectListView.CheckBoxes = false;
                 this.FastObjectListView.SelectedIndexChanged += new System.EventHandler(this.dataListViewMaster_SelectedIndexChanged);
+
+                this.baseController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+
+                InitializeCommonControlBinding();
+                InitializeReadOnlyModeBinding();
             }
             catch (Exception exception)
             {
@@ -39,7 +47,7 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        public BaseController BaseController { get; protected set; }
+        public BaseController baseController { get; protected set; }
 
 
         #region <Implement Interface>
@@ -50,6 +58,12 @@ namespace TotalSmartCoding.Views.Mains
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        protected void baseController_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.NotifyPropertyChanged(e.PropertyName);
+        }
+
 
         public GlobalEnums.TaskID TaskID
         {
@@ -74,25 +88,24 @@ namespace TotalSmartCoding.Views.Mains
 
         #region Context toolbar
 
-        public virtual bool IsDirty { get { return false; } }
-        public virtual bool IsValid { get { return false; } }
+        public bool IsDirty
+        {
+            get { return this.baseController.IsDirty; }
+        }
 
-        //public bool IsDirty
-        //{
-        //    get { return this.marketingProgramBLL.IsDirty; }
-        //}
-
-        //public bool IsValid
-        //{
-        //    get { return this.marketingProgramBLL.IsValid; }
-        //}
+        public bool IsValid
+        {
+            get { return this.baseController.IsValid; }
+        }
 
         public virtual bool Closable { get { return true; } }
         public virtual bool Loadable { get { return true; } }
 
-        public virtual bool Newable { get { return true; } }
-        public virtual bool Editable { get { return false; } }
-        public virtual bool Deletable { get { return false; } }
+        public virtual bool Newable { get { return this.baseController.BaseDTO.Editable; } }
+        public virtual bool Editable { 
+            get { return this.baseController.BaseDTO.Editable; } 
+        }
+        public virtual bool Deletable { get { return this.baseController.BaseDTO.Deletable; } }
 
         public virtual bool Importable { get { return true; } }
         public virtual bool Exportable { get { return true; } }
@@ -124,30 +137,30 @@ namespace TotalSmartCoding.Views.Mains
         /// <param name="editableMode"></param>
         private void SetEditableMode(bool editableMode)
         {
-            //if (this.editableMode != editableMode)
-            //{
-            //    this.lastMarketingProgramID = this.marketingProgramBLL.MarketingProgramID;
-            //    this.editableMode = editableMode;
-            //    this.NotifyPropertyChanged("EditableMode");
+            if (this.editableMode != editableMode)
+            {
+                //this.lastMarketingProgramID = this.marketingProgramBLL.MarketingProgramID;
+                this.editableMode = editableMode;
+                this.NotifyPropertyChanged("EditableMode");
 
-            //    this.toolStripMenuCustomerImport.Enabled = this.editableMode;
-            //}
+                //this.toolStripMenuCustomerImport.Enabled = this.editableMode;
+            }
         }
 
 
         private void CancelDirty(bool restoreSavedData)
         {
-            //try
-            //{
-            //    if (restoreSavedData || this.marketingProgramBLL.MarketingProgramID <= 0)
-            //        this.marketingProgramBLL.Fill(this.lastMarketingProgramID);
+            try
+            {
+                //if (restoreSavedData || this.marketingProgramBLL.MarketingProgramID <= 0)
+                //    this.marketingProgramBLL.Fill(this.lastMarketingProgramID);
 
-            //    this.SetEditableMode(false);
-            //}
-            //catch (Exception exception)
-            //{
-            //    throw exception;
-            //}
+                this.SetEditableMode(false);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
 
@@ -208,11 +221,12 @@ namespace TotalSmartCoding.Views.Mains
 
             //this.marketingProgramBLL.New();
             //this.SetEditableMode(true);
+
         }
 
         public void Edit()
         {
-            //this.SetEditableMode(true);
+            this.SetEditableMode(true);
         }
 
         public void Save()
@@ -288,6 +302,22 @@ namespace TotalSmartCoding.Views.Mains
 
 
 
+        Binding bindingIsDirty;
+        Binding bindingIsDirtyBLL;
+
+        protected virtual void InitializeCommonControlBinding()
+        {
+            //IMPORTANT: SHOULD BINDING IsDirty TO CONTROL, BECAUSE: THE PropertyChanged EVENT NEED THE BINDING TARGET IN ORDER TO RAISE: SEE HERE: if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName))
+            this.bindingIsDirty = this.checkBoxIsDirty.DataBindings.Add("Checked", this.baseController.BaseDTO, "IsDirty", true);
+            this.bindingIsDirtyBLL = this.checkBoxIsDirtyBLL.DataBindings.Add("Checked", this.baseController, "IsDirty", true);
+
+            this.bindingIsDirty.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingIsDirtyBLL.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+            //SHOULD MOVE errorProviderMaster TO EVERY VIEW
+            this.errorProviderMaster.DataSource = this.baseController.BaseDTO;
+
+        }
 
         protected virtual void InitializeReadOnlyModeBinding()
         {
@@ -310,6 +340,11 @@ namespace TotalSmartCoding.Views.Mains
         }
 
 
+        protected void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
+        {
+            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+        }
+
         private void dataListViewMaster_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -318,7 +353,7 @@ namespace TotalSmartCoding.Views.Mains
                 if (fastObjectListView.SelectedObject != null)
                 {
                     IBaseIndex baseIndex = (IBaseIndex)fastObjectListView.SelectedObject;
-                    if (baseIndex != null) this.BaseController.Open(baseIndex.Id);
+                    if (baseIndex != null) this.baseController.Edit(baseIndex.Id);
                 }
                 //else this.BaseController.Open(0);
             }

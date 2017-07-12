@@ -24,6 +24,8 @@ using TotalCore.Services.Inventories;
 using TotalDAL.Repositories.Inventories;
 using TotalCore.Repositories.Inventories;
 using TotalSmartCoding.Builders.Inventories;
+using TotalSmartCoding.ViewModels.Inventories;
+using TotalSmartCoding.ViewModels.Sales;
 //using TotalDAL.Repositories.Inventories;
 
 //using TotalService.Inventories;
@@ -49,7 +51,7 @@ namespace TotalSmartCoding.CommonLibraries
                 //Kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
 
-                Kernel.Bind<TotalSmartCodingEntities>().ToSelf(); //.InRequestScope()
+                Kernel.Bind<TotalSmartCodingEntities>().ToSelf().InSingletonScope(); //.InRequestScope()
 
                 Kernel.Bind<IBaseRepository>().To<BaseRepository>();
 
@@ -59,14 +61,16 @@ namespace TotalSmartCoding.CommonLibraries
                 Kernel.Bind<IDeliveryAdviceRepository>().To<DeliveryAdviceRepository>();
                 Kernel.Bind<IDeliveryAdviceAPIRepository>().To<DeliveryAdviceAPIRepository>();
                 Kernel.Bind<IDeliveryAdviceViewModelSelectListBuilder>().To<DeliveryAdviceViewModelSelectListBuilder>();
-
-
+                Kernel.Bind<DeliveryAdviceViewModel>().ToSelf();
+                
 
 
                 Kernel.Bind<IGoodsReceiptService>().To<GoodsReceiptService>();
                 Kernel.Bind<IGoodsReceiptRepository>().To<GoodsReceiptRepository>();
                 Kernel.Bind<IGoodsReceiptAPIRepository>().To<GoodsReceiptAPIRepository>();
                 Kernel.Bind<IGoodsReceiptViewModelSelectListBuilder>().To<GoodsReceiptViewModelSelectListBuilder>();
+                Kernel.Bind<GoodsReceiptViewModel>().ToSelf();
+                
 
 
 

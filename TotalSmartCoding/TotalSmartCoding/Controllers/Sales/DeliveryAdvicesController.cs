@@ -15,8 +15,8 @@ namespace TotalSmartCoding.Controllers.Sales
 {   
     public class DeliveryAdvicesController : GenericViewDetailController<DeliveryAdvice, DeliveryAdviceDetail, DeliveryAdviceViewDetail, DeliveryAdviceDTO, DeliveryAdvicePrimitiveDTO, DeliveryAdviceDetailDTO, DeliveryAdviceViewModel>
     {
-        public DeliveryAdvicesController(IDeliveryAdviceService deliveryAdviceService, IDeliveryAdviceViewModelSelectListBuilder deliveryAdviceViewModelSelectListBuilder)
-            : base(deliveryAdviceService, deliveryAdviceViewModelSelectListBuilder)
+        public DeliveryAdvicesController(IDeliveryAdviceService deliveryAdviceService, IDeliveryAdviceViewModelSelectListBuilder deliveryAdviceViewModelSelectListBuilder, DeliveryAdviceViewModel deliveryAdviceViewModel)
+            : base(deliveryAdviceService, deliveryAdviceViewModelSelectListBuilder, deliveryAdviceViewModel)
         {
         }
     }

@@ -17,12 +17,16 @@ namespace TotalSmartCoding.Controllers.Inventories
 {
     public class GoodsReceiptController : GenericViewDetailController<GoodsReceipt, GoodsReceiptDetail, GoodsReceiptViewDetail, GoodsReceiptDTO, GoodsReceiptPrimitiveDTO, GoodsReceiptDetailDTO, GoodsReceiptViewModel>
     {
-        public GoodsReceiptController(IGoodsReceiptService goodsReceiptService, IGoodsReceiptViewModelSelectListBuilder goodsReceiptViewModelSelectListBuilder)
-            : base(goodsReceiptService, goodsReceiptViewModelSelectListBuilder)
+        public GoodsReceiptViewModel GoodsReceiptViewModel { get; private set; }
+        public GoodsReceiptController(IGoodsReceiptService goodsReceiptService, IGoodsReceiptViewModelSelectListBuilder goodsReceiptViewModelSelectListBuilder, GoodsReceiptViewModel goodsReceiptViewModel)
+            : base(goodsReceiptService, goodsReceiptViewModelSelectListBuilder, goodsReceiptViewModel)
         {
+            this.GoodsReceiptViewModel = goodsReceiptViewModel;
+
             //this.DtoViewModel.PropertyChanged += new PropertyChangedEventHandler(MarketingIncentiveMaster_PropertyChanged);
-            this.DtoViewModel.Reference = "123456";
-            this.DtoViewModel.EntryDate = new System.DateTime(2018, 1, 1);
+            this.GoodsReceiptViewModel.Reference = "123456";
+            this.GoodsReceiptViewModel.EntryDate = new System.DateTime(2018, 1, 1);
+            
         }
 
 

@@ -8,9 +8,9 @@ using TotalBase.Enums;
 
 namespace TotalDTO
 {
-    public abstract class BaseDTO : BaseModel, IAccessControlAttribute 
+    public class BaseDTO : BaseModel, IAccessControlAttribute 
     {
-        protected BaseDTO()
+        public BaseDTO()
         {
             // apply any DefaultValueAttribute settings to their properties
             var propertyInfos = this.GetType().GetProperties();
@@ -53,7 +53,20 @@ namespace TotalDTO
         
 
         public bool GlobalLocked { get; set; }
-        public bool Editable { get; set; }
+
+        //public bool Editable { get; set; }
+
+        private bool editable;
+        [Display(Name = "Số phiếu")]
+        public bool Editable
+        {
+            get { return this.editable; }
+            set { ApplyPropertyChange<BaseDTO, bool>(ref this.editable, o => o.Editable, value); }
+        }
+
+
+
+
         public bool Approvable { get; set; }
         public bool UnApprovable { get; set; }
         public bool Deletable { get; set; }

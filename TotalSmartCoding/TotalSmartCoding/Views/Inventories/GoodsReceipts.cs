@@ -24,6 +24,7 @@ using TotalCore.Repositories.Inventories;
 using TotalSmartCoding.Controllers.APIs.Inventories;
 using TotalCore.Services.Inventories;
 using TotalSmartCoding.Builders.Inventories;
+using TotalSmartCoding.ViewModels.Inventories;
 
 namespace TotalSmartCoding.Views.Inventories
 {
@@ -45,19 +46,19 @@ namespace TotalSmartCoding.Views.Inventories
 
             this.fastObjectListViewIndex.SetObjects(goodsReceiptAPIsController.GetGoodsReceiptIndexes());
 
-            this.Controller = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<IGoodsReceiptViewModelSelectListBuilder>());
+            this.Controller = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<IGoodsReceiptViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<GoodsReceiptViewModel>());
             this.Controller.PropertyChanged += new PropertyChangedEventHandler(goodsReceiptsController_PropertyChanged);
 
-            this.BaseController = this.Controller;
+            this.baseController = this.Controller;
         }
 
         private void GoodsReceipts_Load(object sender, EventArgs e)
         {
             try
             {
-                InitializeCommonControlBinding();
+                //InitializeCommonControlBinding();
 
-                //InitializeDataGridBinding();
+                InitializeDataGridBinding();
 
                 //InitializeReadOnlyModeBinding();
             }
@@ -77,28 +78,18 @@ namespace TotalSmartCoding.Views.Inventories
         Binding bindingEntryDate;
         Binding bindingReference;
 
-        Binding bindingIsDirty;
-        Binding bindingIsDirtyBLL;
-
-        private void InitializeCommonControlBinding()
+        protected override void InitializeCommonControlBinding()
         {
+            base.InitializeCommonControlBinding();
 
+            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.Controller.GoodsReceiptViewModel, "Reference", true);
 
-            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.Controller.DtoViewModel, "Reference", true);
-
-            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.DtoViewModel, "EntryDate", true);
-
-            this.bindingIsDirty = this.checkBoxIsDirty.DataBindings.Add("Checked", this.Controller.DtoViewModel, "IsDirty", true);
-            this.bindingIsDirtyBLL = this.checkBoxIsDirtyBLL.DataBindings.Add("Checked", this.Controller, "IsDirty", true);
-
+            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.GoodsReceiptViewModel, "EntryDate", true);
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-
-            this.bindingIsDirty.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-            this.bindingIsDirtyBLL.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
 
 
@@ -108,32 +99,31 @@ namespace TotalSmartCoding.Views.Inventories
 
             this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].Width = 10;
             this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
-
-            this.errorProviderMaster.DataSource = this.Controller.DtoViewModel;
-
         }
 
+
+        //private void InitializeDataGridBinding()
+        //{
+        //    this.dataGridViewDetails.AutoGenerateColumns = false;
+        //    //marketingIncentiveDetailListView = new BindingListView<GoodsReceiptViewDetail>(this.goodsReceiptsController.ViewModel.GoodsReceiptViewDetails);
+        //    //this.dataGridViewDetails.DataSource = marketingIncentiveDetailListView;
+
+        //    //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
+        //}
+
+
+        ///lấy cái này!!!
 
         private void InitializeDataGridBinding()
         {
             this.dataGridViewDetails.AutoGenerateColumns = false;
-            //marketingIncentiveDetailListView = new BindingListView<GoodsReceiptViewDetail>(this.goodsReceiptsController.ViewModel.GoodsReceiptViewDetails);
-            //this.dataGridViewDetails.DataSource = marketingIncentiveDetailListView;
+            //marketingIncentiveDetailListView = new BindingListView<DeliveryAdviceDetailDTO>(this.deliveryAdvicesController.ViewDetailViewModel.DeliveryAdviceViewDetails);
+            this.dataGridViewDetails.DataSource = this.Controller.GoodsReceiptViewModel.ViewDetails;
 
             //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
         }
 
 
-        ///lấy cái này!!!
-
-        //////private void InitializeDataGridBinding()
-        //////{
-        //////    this.dataGridViewDetails.AutoGenerateColumns = false;
-        //////    //marketingIncentiveDetailListView = new BindingListView<DeliveryAdviceDetailDTO>(this.deliveryAdvicesController.ViewDetailViewModel.DeliveryAdviceViewDetails);
-        //////    this.dataGridViewDetails.DataSource = this.deliveryAdvicesController.ViewDetailViewModel.DeliveryAdviceViewDetails;
-
-        //////    //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
-        //////}
 
 
 
@@ -142,12 +132,6 @@ namespace TotalSmartCoding.Views.Inventories
 
 
 
-
-
-        private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
-        {
-            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
-        }
 
 
     }
