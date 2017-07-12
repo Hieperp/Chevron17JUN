@@ -91,6 +91,8 @@ namespace TotalSmartCoding.Views.Mains
         /// </summary>
         private bool editableMode;
         private CheckBox checkBox1;
+        private ToolStrip toolStrip1;
+        private ToolStripButton toolStripButton1;
         private int lastMarketingProgramID;
         public bool EditableMode { get { return this.editableMode; } }
         /// <summary>
@@ -267,6 +269,9 @@ namespace TotalSmartCoding.Views.Mains
         private void InitializeComponent()
         {
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBox1
@@ -279,12 +284,35 @@ namespace TotalSmartCoding.Views.Mains
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1107, 27);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::TotalSmartCoding.Properties.Resources.Hopstarter_Warning;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
             // BasicView
             // 
             this.ClientSize = new System.Drawing.Size(1107, 395);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.checkBox1);
             this.Name = "BasicView";
             this.Load += new System.EventHandler(this.BasicView_Load);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -81,6 +81,17 @@
     <Compile Include="Builders\IViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\Sales\DeliveryAdviceViewModelSelectListBuilder.cs" />
     <Compile Include="CommonLibraries\AutoMapperConfig.cs" />
+    <Compile Include="CommonLibraries\BP\ADODatabase.cs" />
+    <Compile Include="CommonLibraries\BP\BarcodeScannerBLL.cs" />
+    <Compile Include="CommonLibraries\BP\CommonThreadProperty.cs" />
+    <Compile Include="CommonLibraries\BP\FillingLineData.cs" />
+    <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />
+    <Compile Include="CommonLibraries\BP\GlobalNetSockets.cs" />
+    <Compile Include="CommonLibraries\BP\GlobalRegistry.cs" />
+    <Compile Include="CommonLibraries\BP\InkjetDominoPrinterBLL.cs" />
+    <Compile Include="CommonLibraries\BP\MessageData.cs" />
+    <Compile Include="CommonLibraries\BP\MessageQueue.cs" />
+    <Compile Include="CommonLibraries\BP\SQLDatabase.cs" />
     <Compile Include="CommonLibraries\CommonFormAction.cs" />
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
     <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
@@ -135,6 +146,12 @@
     <Compile Include="Views\Mains\Logon.designer.cs">
       <DependentUpon>Logon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Productions\SmartCoding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\SmartCoding.designer.cs">
+      <DependentUpon>SmartCoding.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Sales\DeliveryAdvices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\Logon.resx">
       <DependentUpon>Logon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\SmartCoding.resx">
+      <DependentUpon>SmartCoding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Sales\DeliveryAdvices.resx">
       <DependentUpon>DeliveryAdvices.cs</DependentUpon>
@@ -610,6 +630,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hopstarter-Warning.ico" />
+    <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
+    <None Include="Resources\Land-Play.ico" />
+    <Content Include="Resources\Toolbar Image1.png" />
+    <Content Include="Resources\warning__1_.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

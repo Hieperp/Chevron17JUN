@@ -913,6 +913,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Hopstarter_Warning {
+            get {
+                object obj = ResourceManager.GetObject("Hopstarter-Warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Icojam_Onebit_Currency_dollar {
             get {
                 object obj = ResourceManager.GetObject("Icojam-Onebit-Currency-dollar", resourceCulture);
@@ -1036,6 +1046,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Kyo_Tux_Phuzion_Folder_Blue_Tools {
             get {
                 object obj = ResourceManager.GetObject("Kyo-Tux-Phuzion-Folder-Blue-Tools", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Land_Play {
+            get {
+                object obj = ResourceManager.GetObject("Land-Play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

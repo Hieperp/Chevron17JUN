@@ -43,6 +43,7 @@
     <Compile Include="ContextAttributes.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Enums\GlobalEnums.cs" />
+    <Compile Include="BP\GlobalVariables.cs" />
     <Compile Include="ModelSettingManager.cs" />
     <Compile Include="OptionSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
