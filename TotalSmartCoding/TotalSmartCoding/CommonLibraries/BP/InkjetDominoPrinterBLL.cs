@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using TotalBase;
+using TotalDTO.Productions;
 
 
 //using Global.Class.Library;
@@ -495,7 +496,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 }
                 else//  !=  : Need to check some other condition
                 {
-                    int countPrintingACK = GlobalStaticFunction.CountStringOccurrences(stringReadFrom, GlobalVariables.charPrintingACK.ToString());
+                    int countPrintingACK = 1;// GlobalStaticFunction.CountStringOccurrences(stringReadFrom, GlobalVariables.charPrintingACK.ToString());
 
                     if (countPrintingACK == 1)      //OK: but in case of receive only one PrintingACK, following by something: Ignore. Later: Maybe ADD SOME CODE to SHOW on screen what stringReadFrom is
                     {

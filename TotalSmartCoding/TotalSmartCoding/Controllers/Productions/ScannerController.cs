@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data;
 using System.IO.Ports;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
-using System.ComponentModel;
-using System.Data;
-
-//using Global.Class.Library;
-//using DataTransferObject;
-
-//using DataAccessLayer;
-//using DataAccessLayer.DataDetailTableAdapters;
-using System.Data.SqlClient;
+using System.Threading.Tasks;
 using TotalBase;
 using TotalDTO.Productions;
+using TotalService.Productions;
+using TotalSmartCoding.CommonLibraries.BP;
 
-
-namespace TotalSmartCoding.CommonLibraries.BP
+namespace TotalSmartCoding.Controllers.Productions
 {
-    public class BarcodeScannerBLL : CommonThreadProperty
+    public class ScannerController : CodingController //this is CommonThreadProperty
     {
+
+
         public bool MyTest; //Test only
         public bool MyHold;//Test only
 
@@ -41,10 +37,11 @@ namespace TotalSmartCoding.CommonLibraries.BP
         private SerialPort serialPort;
 
 
-        private MessageQueue matchingPackList;
-        private MessageQueue packInOneCarton;
+        private BarcodeQueue<OnlinePackDTO> matchingPackList;
+        private BarcodeQueue<OnlinePackDTO> packInOneCarton;
 
-        //private DataDetail.DataDetailCartonDataTable cartonDataTable;
+        private BarcodeQueue<OnlineCartonDTO> cartonDataTable;
+        private BarcodeQueue<OnlinePalletDTO> OnlinePalletQueue;
 
         private bool onPrinting;
         private bool resetMessage;
@@ -62,8 +59,11 @@ namespace TotalSmartCoding.CommonLibraries.BP
         //Servernme + database name
         //Toolbar enable
 
+        private OnlinePackService onlinePackService;
+        private OnlineCartonService onlineCartonService;
+        private OnlinePalletService onlinePalletService;
 
-        public BarcodeScannerBLL(FillingLineData fillingLineData)
+        public ScannerController(FillingLineData fillingLineData, OnlinePackService onlinePackService, OnlineCartonService onlineCartonService, OnlinePalletService onlinePalletService)
         {
             try
             {
@@ -76,6 +76,10 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
+
+                this.onlinePackService = onlinePackService;
+                this.onlineCartonService = onlineCartonService;
+                this.onlinePalletService = onlinePalletService;
 
 
 
@@ -107,10 +111,10 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 //}
 
 
-                this.matchingPackList = new MessageQueue(GlobalVariables.NoItemDiverter());
-                this.packInOneCarton = new MessageQueue();
-                //this.cartonDataTable = new DataDetail.DataDetailCartonDataTable();
-
+                this.matchingPackList = new BarcodeQueue<OnlinePackDTO>(GlobalVariables.NoItemDiverter());
+                this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>();
+                this.cartonDataTable =  new BarcodeQueue<OnlineCartonDTO>();
+                this.OnlinePalletQueue = new BarcodeQueue<OnlinePalletDTO>();
             }
             catch (Exception exception)
             {
@@ -135,9 +139,9 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 //////{
                 //////    if (packRow.FillingLineID == (int)this.FillingLineData.FillingLineID)
                 //////    {
-                //////        MessageData messageData = new MessageData(packRow.PackBarcode);
+                //////        OnlinePackDTO messageData = new OnlinePackDTO(packRow.PackBarcode);
                 //////        messageData.PackID = packRow.PackID;
-                //////        messageData.PackSubQueueID = packRow.PackSubQueueID;
+                //////        messageData.QueueID = packRow.QueueID;
 
                 //////        if (packRow.PackStatus == (byte)GlobalVariables.BarcodeStatus.Normal)
                 //////            this.matchingPackList.AddPack(messageData);
@@ -152,9 +156,9 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 ////////////--------------
                 //HIEP*******************************22-MAY-2017.BEGIN
 
-                //Initialize CartonList
-                //this.cartonDataTable = this.CartonTableAdapter.GetDataByCartonStatus((byte)GlobalVariables.BarcodeStatus.BlankBarcode);
-                this.NotifyPropertyChanged("CartonList");
+                ////////Initialize CartonList
+                //////this.cartonDataTable = this.CartonTableAdapter.GetDataByCartonStatus((byte)GlobalVariables.BarcodeStatus.BlankBarcode);
+                //////this.NotifyPropertyChanged("CartonList");
 
             }
             catch (Exception exception)
@@ -252,13 +256,6 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
-
-
-
-
-
-
-
         public string BatchSerialNumber { get { return this.privateFillingLineData.BatchSerialNumber; } }
 
         public string MonthSerialNumber { get { return this.privateFillingLineData.MonthSerialNumber; } }
@@ -300,15 +297,26 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
         public DataTable GetCartonList()
         {
-            //if (this.cartonDataTable != null)
-            //{
-            //    lock (this.cartonDataTable)
-            //    {
-            //        return (DataDetail.DataDetailCartonDataTable)this.cartonDataTable.Copy();
-            //    }
-            //}
-            //else return null;
-            return null;
+            if (this.cartonDataTable != null)
+            {
+                lock (this.cartonDataTable)
+                {
+                    return this.packInOneCarton.GetAllElements();
+                }
+            }
+            else return null;
+        }
+
+        public DataTable GetOnlinePalletQueue()
+        {
+            if (this.OnlinePalletQueue != null)
+            {
+                lock (this.OnlinePalletQueue)
+                {
+                    return this.OnlinePalletQueue.GetAllElements();
+                }
+            }
+            else return null;
         }
 
         private bool Connect(bool connectMatchingScanner)
@@ -441,142 +449,69 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
-        private MessageData AddDataDetailPack(string printedBarcode, int packSubQueueID)
+        private OnlinePackDTO AddDataDetailPack(string code, int queueID)
         {
-            return null;
-
             try
             {
-                //lock (this.PackDataTable)
-                //{
-                //    lock (this.PackTableAdapter)
-                //    {
-                //        MessageData messageData = new MessageData(printedBarcode);
-                //        messageData.PackSubQueueID = packSubQueueID;
+                OnlinePackDTO onlinePackDTO = new OnlinePackDTO() { QueueID = queueID, Code = code };
 
-                //        DataDetail.DataDetailPackRow dataDetailPackRow = this.PackDataTable.NewDataDetailPackRow();
-
-                //        dataDetailPackRow.PackDate = DateTime.Now;
-                //        dataDetailPackRow.PackBarcode = messageData.PrintedBarcode;
-                //        dataDetailPackRow.PackSubQueueID = messageData.PackSubQueueID;
-                //        dataDetailPackRow.PackStatus = (byte)GlobalVariables.BarcodeStatus.Normal;
-                //        dataDetailPackRow.FillingLineID = (int)this.FillingLineData.FillingLineID;
-                //        this.PackDataTable.AddDataDetailPackRow(dataDetailPackRow);
-
-                //        int rowsAffected = this.PackTableAdapter.Update(dataDetailPackRow);
-
-                //        if (rowsAffected == 1) //Save successfully
-                //        {
-                //            messageData.PackID = dataDetailPackRow.PackID;
-                //            this.PackDataTable.RemoveDataDetailPackRow(dataDetailPackRow);
-
-                //            return messageData;
-                //        }
-                //        else
-                //        {
-                //            this.MainStatus = "Insufficient save pack: " + printedBarcode;
-                //            return null;
-                //        }
-                //    }
-                //}
+                if (this.onlinePackService.Save(onlinePackDTO))
+                    return onlinePackDTO;
+                else
+                {
+                    this.MainStatus = "Insufficient save pack: " + code;
+                    return null;
+                }
             }
             catch (System.Exception exception)
             {
-                throw new Exception(exception.Message + " [" + printedBarcode + "]");
+                throw new Exception(exception.Message + " [" + code + "]");
             }
         }
 
 
-        private void MatchingAndAddCarton(string cartonBarcode)
+        private void MatchingAndAddCarton(string cartonCode)
         {
+            if (GlobalVariables.IgnoreEmptyCarton && this.packInOneCarton.Count <= 0) return;
 
-            //if (GlobalVariables.IgnoreEmptyCarton && this.packInOneCarton.Count <= 0) return;
+            lock (this.cartonDataTable)
+            {
+                lock (this.packInOneCarton)
+                {
+                    //CẦN CHÚ Ý: this.packInOneCarton.Count = 0: CARTON RỔNG => PHẢI XỬ LÝ NHƯ THẾ NÀO???
 
-            //lock (this.cartonDataTable)
-            //{
-            //    lock (this.packInOneCarton)
-            //    {
-            //        lock (this.CartonTableAdapter)
-            //        {
-            //            try
-            //            {
-            //                using (System.Transactions.TransactionScope transactionScope = new System.Transactions.TransactionScope())
-            //                {
+                    OnlineCartonDTO onlineCartonDTO = new OnlineCartonDTO() { Code = cartonCode };
 
-            //                    DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.NewDataDetailCartonRow();
-
-            //                    dataDetailCartonRow.CartonDate = DateTime.Now;
-            //                    dataDetailCartonRow.CartonBarcode = cartonBarcode;
-            //                    dataDetailCartonRow.CartonStatus = (byte)(cartonBarcode == GlobalVariables.BlankBarcode ? GlobalVariables.BarcodeStatus.BlankBarcode : (this.packInOneCarton.Count == this.packInOneCarton.NoItemPerCarton || this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail ? GlobalVariables.BarcodeStatus.Normal : GlobalVariables.BarcodeStatus.EmptyCarton));
-            //                    dataDetailCartonRow.FillingLineID = (int)this.FillingLineData.FillingLineID;
-
-            //                    for (int i = 0; i < 24; i++)
-            //                    {       //This use NON TYPED DATASET  -- Not so good, bescause the compiler can not detect error at compile time, but it is ok (I know exactly what in every row)
-            //                        dataDetailCartonRow["Pack" + i.ToString("00") + "Barcode"] = this.packInOneCarton.Count > i ? this.packInOneCarton.ElementAt(i).PrintedBarcode : "";
-            //                    }
-
-            //                    this.cartonDataTable.Rows.InsertAt(dataDetailCartonRow, 0);     //this.cartonDataTable.AddDataDetailCartonRow(dataDetailCartonRow); 
-
-            //                    int rowsAffected = this.CartonTableAdapter.Update(dataDetailCartonRow);//Save
-
-            //                    if (rowsAffected == 1) //Add Whole Carton Successfully
-            //                    {
-            //                        if (this.packInOneCarton.Count > 0)   //Try to remove detail pack
-            //                        {
-            //                            if (UpdateDataDetailPack(GlobalVariables.BarcodeStatus.Deleted)) this.packInOneCarton = new MessageQueue(); else throw new Exception("Insufficient remove detailing pack: " + dataDetailCartonRow.CartonBarcode); //Only on if save ok
-            //                        }
-            //                    }
-            //                    else throw new Exception("Insufficient save carton: " + dataDetailCartonRow.CartonBarcode); //Only on if save ok
+                    this.onlineCartonService.ServiceBag["OnlinePackIDs"] = this.packInOneCarton.EntityIDs; //VERY IMPORTANT: NEED TO ADD OnlinePackIDs TO NEW OnlineCartonDTO
+                    if (this.onlineCartonService.Save(onlineCartonDTO))
+                        this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>(); //CLEAR AFTER ADD TO OnlineCartonDTO
+                    else
+                        throw new Exception("Insufficient save carton: " + onlineCartonDTO.Code);
 
 
-            //                    transactionScope.Complete(); //this.cartonDataTable.AcceptChanges();
-
-
-
-            //                    #region Just maintain 300 rows only
-            //                    if (this.cartonDataTable.Rows.Count > (this.FillingLineData.FillingLineID == Global.Class.Library.GlobalVariables.FillingLine.Pail ? 300 : 300))
-            //                    {
-            //                        for (int j = this.cartonDataTable.Rows.Count - 1; j >= 0; j--)
-            //                        {
-            //                            DataDetail.DataDetailCartonRow cartonRow = this.cartonDataTable.Rows[j] as DataDetail.DataDetailCartonRow;
-            //                            if (cartonRow != null && cartonRow.CartonStatus != (byte)GlobalVariables.BarcodeStatus.BlankBarcode) { this.cartonDataTable.Rows.RemoveAt(j); break; }
-            //                        }
-            //                    }
-            //                    #endregion Just maintain 300 rows only
-
-
-            //                }
-
-            //            }
-            //            catch (System.Exception exception)
-            //            {
-            //                this.MainStatus = exception.Message;
-            //            }
-            //        }
-            //    }
-            //}
+                    this.cartonDataTable.Enqueue(onlineCartonDTO);
+                }
+            }
         }
 
-        private bool UpdateDataDetailPack(GlobalVariables.BarcodeStatus barcodeStatus)
-        {
-            return true;
+        //private bool UpdateDataDetailPack(GlobalVariables.BarcodeStatus barcodeStatus)
+        //{
+        //    string listOfPackID = ""; int rowsAffected = 0;
+        //    for (int i = 0; i < this.packInOneCarton.NoItemPerCarton; i++)
+        //    {
+        //        listOfPackID = listOfPackID + (listOfPackID != "" ? ";" : "") + this.packInOneCarton.ElementAt(i).PackID.ToString();
+        //    }
 
-            //string listOfPackID = ""; int rowsAffected = 0;
-            //for (int i = 0; i < this.packInOneCarton.NoItemPerCarton; i++)
-            //{
-            //    listOfPackID = listOfPackID + (listOfPackID != "" ? ";" : "") + this.packInOneCarton.ElementAt(i).PackID.ToString();
-            //}
+        //    lock (this.PackTableAdapter)
+        //    {
+        //        if (barcodeStatus == GlobalVariables.BarcodeStatus.Deleted)
+        //            rowsAffected = this.PackTableAdapter.DeleteListOfPack(listOfPackID);
+        //        else
+        //            rowsAffected = this.PackTableAdapter.UpdateListOfPackStatus(listOfPackID, (byte)barcodeStatus);
+        //    }
 
-            //lock (this.PackTableAdapter)
-            //{
-            //    if (barcodeStatus == GlobalVariables.BarcodeStatus.Deleted)
-            //        rowsAffected = this.PackTableAdapter.DeleteListOfPack(listOfPackID);
-            //    else
-            //        rowsAffected = this.PackTableAdapter.UpdateListOfPackStatus(listOfPackID, (byte)barcodeStatus);
-            //}
-
-            //return rowsAffected == this.packInOneCarton.NoItemPerCarton;
-        }
+        //    return rowsAffected == this.packInOneCarton.NoItemPerCarton;
+        //}
 
 
 
@@ -592,10 +527,6 @@ namespace TotalSmartCoding.CommonLibraries.BP
             string stringReadFrom = ""; bool matchingPackListChanged = false; bool packInOneCartonChanged = false;
 
             this.LoopRoutine = true; this.StopPrint();
-
-
-            return;
-
 
 
             try
@@ -624,16 +555,13 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 {
                                     lock (this.matchingPackList)
                                     {
-                                        MessageData messageData = this.AddDataDetailPack(receivedBarcode + " " + this.privateFillingLineData.BatchSerialNumber, this.matchingPackList.NextPackSubQueueID);
+                                        OnlinePackDTO messageData = this.AddDataDetailPack(receivedBarcode, this.matchingPackList.NextQueueID);
                                         if (messageData != null)
                                         {
                                             this.matchingPackList.Enqueue(messageData);
                                             matchingPackListChanged = true;
                                         }
                                     }
-
-                                    this.privateFillingLineData.BatchSerialNumber = (int.Parse(this.privateFillingLineData.BatchSerialNumber) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
-                                    this.NotifyPropertyChanged("BatchSerialNumber"); //APPEND TO receivedBarcode, and then: Increase BatchSerialNumber by 1 PROGRAMMATICALLY BY SOFTWARE
 
                                 }
                             }
@@ -652,7 +580,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 {
                                     lock (this.matchingPackList)
                                     {                             //<Dequeue from matchingPackList to this.packInOneCarton>
-                                        this.packInOneCarton = this.matchingPackList.DequeuePack(); //This Dequeue successful WHEN There is enought MessageData IN THE COMMON GLOBAL matchingPackList, ELSE: this.packListInCarton is still NULL
+                                        this.packInOneCarton = this.matchingPackList.DequeuePack(); //This Dequeue successful WHEN There is enought OnlinePackDTO IN THE COMMON GLOBAL matchingPackList, ELSE: this.packListInCarton is still NULL
                                     }
 
                                     if (this.packInOneCarton.Count > 0)
@@ -660,7 +588,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                         matchingPackListChanged = true;
                                         packInOneCartonChanged = true;
 
-                                        if (!UpdateDataDetailPack(GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status";
+                                        if (!this.onlinePackService.UpdateEntryStatus(this.packInOneCarton.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.onlinePackService.ServiceTag;
                                     }
                                 }
                             }
@@ -776,213 +704,205 @@ namespace TotalSmartCoding.CommonLibraries.BP
         #endregion Public Thread
 
 
-        #region Handle Exception
+        //#region Handle Exception
 
 
-        /// <summary>
-        /// If this.Count = noItemPerCarton then Reallocation an equal amount of messageData to every subQueue. Each subQueue will have the same NoItemPerSubQueue.
-        /// </summary>
-        /// <returns></returns>
-        public bool ReAllocation()
-        {
-            return true;
-            ////if (this.matchingPackList.Count >= this.matchingPackList.NoItemPerCarton)
-            ////{
-            ////    lock (this.matchingPackList)
-            ////    {
-            ////        for (int subQueueID = 0; subQueueID < this.matchingPackList.NoSubQueue; subQueueID++)
-            ////        {
-            ////            while (this.matchingPackList.GetSubQueueCount(subQueueID) < (this.matchingPackList.NoItemPerCarton / this.matchingPackList.NoSubQueue) && this.matchingPackList.Count >= this.matchingPackList.NoItemPerCarton)
-            ////            {
-            ////                #region Get a message and swap its' PackSubQueueID
+        ///// <summary>
+        ///// If this.Count = noItemPerCarton then Reallocation an equal amount of messageData to every subQueue. Each subQueue will have the same NoItemPerSubQueue.
+        ///// </summary>
+        ///// <returns></returns>
+        //public bool ReAllocation()
+        //{
+        //    if (this.matchingPackList.Count >= this.matchingPackList.NoItemPerCarton)
+        //    {
+        //        lock (this.matchingPackList)
+        //        {
+        //            for (int subQueueID = 0; subQueueID < this.matchingPackList.NoSubQueue; subQueueID++)
+        //            {
+        //                while (this.matchingPackList.GetSubQueueCount(subQueueID) < (this.matchingPackList.NoItemPerCarton / this.matchingPackList.NoSubQueue) && this.matchingPackList.Count >= this.matchingPackList.NoItemPerCarton)
+        //                {
+        //                    #region Get a message and swap its' QueueID
 
-            ////                for (int i = 0; i < this.matchingPackList.NoSubQueue; i++)
-            ////                {
-            ////                    if (this.matchingPackList.GetSubQueueCount(i) > (this.matchingPackList.NoItemPerCarton / this.matchingPackList.NoSubQueue))
-            ////                    {
-            ////                        MessageData messageData = this.matchingPackList.ElementAt(i, this.matchingPackList.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
-            ////                        messageData.PackSubQueueID = subQueueID; //Set new PackSubQueueID
+        //                    for (int i = 0; i < this.matchingPackList.NoSubQueue; i++)
+        //                    {
+        //                        if (this.matchingPackList.GetSubQueueCount(i) > (this.matchingPackList.NoItemPerCarton / this.matchingPackList.NoSubQueue))
+        //                        {
+        //                            OnlinePackDTO messageData = this.matchingPackList.ElementAt(i, this.matchingPackList.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
+        //                            messageData.QueueID = subQueueID; //Set new QueueID
 
-            ////                        lock (this.PackTableAdapter)
-            ////                        {
-            ////                            lock (this.PackDataTable)
-            ////                            {
-            ////                                if (this.PackTableAdapter.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.PackSubQueueID) == 1)
-            ////                                {
-            ////                                    this.matchingPackList.Dequeue(messageData.PackID); //First: Remove from old subQueue
-            ////                                    this.matchingPackList.AddPack(messageData);//Next: Add to new subQueue
-            ////                                }
-            ////                                else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue: " + messageData.PrintedBarcode);
-            ////                            }
-            ////                        }
-            ////                    }
-            ////                }
+        //                            lock (this.PackTableAdapter)
+        //                            {
+        //                                lock (this.PackDataTable)
+        //                                {
+        //                                    if (this.PackTableAdapter.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID) == 1)
+        //                                    {
+        //                                        this.matchingPackList.Dequeue(messageData.PackID); //First: Remove from old subQueue
+        //                                        this.matchingPackList.AddPack(messageData);//Next: Add to new subQueue
+        //                                    }
+        //                                    else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue: " + messageData.Code);
+        //                                }
+        //                            }
+        //                        }
+        //                    }
 
-            ////                #endregion
-            ////            }
-            ////        }
-            ////    }
+        //                    #endregion
+        //                }
+        //            }
+        //        }
 
-            ////    this.NotifyPropertyChanged("MatchingPackList");
-            //    return true;
-            //}
-            //else return false;
-        }
-
-
+        //        this.NotifyPropertyChanged("MatchingPackList");
+        //        return true;
+        //    }
+        //    else return false;
+        //}
 
 
 
 
-        public bool RemoveItemInMatchingPackList(int packID)
-        {
-            return true;
-            //if (packID <= 0) return false;
-
-            //lock (this.matchingPackList)
-            //{
-            //    if (this.matchingPackList.Count > 0)
-            //    {
-            //        MessageData messageData = this.matchingPackList.Dequeue(packID);
-            //        if (messageData != null)
-            //        {
-            //            this.NotifyPropertyChanged("MatchingPackList");
-
-            //            lock (this.PackDataTable)
-            //            {
-            //                lock (this.PackTableAdapter)
-            //                {
-            //                    if (this.PackTableAdapter.Delete(messageData.PackID) == 1) return true; //Delete successfully
-            //                    else throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
-            //                }
-            //            }
-            //        }
-            //        else throw new System.ArgumentException("Fail to handle this pack", "Can not remove pack from the line");
-            //    }
-            //    else throw new System.ArgumentException("Fail to handle this pack", "No pack found on the line");
-            //}
-        }
 
 
-        public bool RemoveItemInPackInOneCarton(int packID)
-        {
-            return true;
+        //public bool RemoveItemInMatchingPackList(int packID)
+        //{
+        //    if (packID <= 0) return false;
 
-            //if (packID <= 0) return false;
+        //    lock (this.matchingPackList)
+        //    {
+        //        if (this.matchingPackList.Count > 0)
+        //        {
+        //            OnlinePackDTO messageData = this.matchingPackList.Dequeue(packID);
+        //            if (messageData != null)
+        //            {
+        //                this.NotifyPropertyChanged("MatchingPackList");
 
-            //lock (this.matchingPackList)
-            //{
-            //    lock (this.packInOneCarton)
-            //    {
-            //        if (this.matchingPackList.Count > 0 && this.packInOneCarton.Count == this.packInOneCarton.NoItemPerCarton)
-            //        {
-            //            MessageData messageData = this.matchingPackList.ElementAt(0).ShallowClone(); //Get the first pack
-
-            //            if (this.packInOneCarton.Replace(packID, messageData)) //messageData.PackSubQueueID: Will change to new value (new position) after replace
-            //            {
-            //                this.matchingPackList.Dequeue(messageData.PackID); //Dequeue the first pack
-
-            //                this.NotifyPropertyChanged("PackInOneCarton");
-            //                this.NotifyPropertyChanged("MatchingPackList");
-
-            //                lock (this.PackTableAdapter)
-            //                {
-            //                    lock (this.PackDataTable)
-            //                    {
-            //                        if (this.PackTableAdapter.Delete(packID) != 1) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
-
-            //                        if (this.PackTableAdapter.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.PackSubQueueID) != 1) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
-
-            //                        if (this.PackTableAdapter.UpdateListOfPackStatus(messageData.PackID.ToString(), (byte)GlobalVariables.BarcodeStatus.ReadyToCarton) == 1) return true;
-            //                        else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack status");
-            //                    }
-            //                }
-            //            }
-            //            else throw new System.ArgumentException("Fail to handle this pack", "Can not replace pack");
-            //        }
-            //        else throw new System.ArgumentException("Fail to handle this pack", "No pack found on the matching line");
-            //    }
-            //}
-        }
+        //                lock (this.PackDataTable)
+        //                {
+        //                    lock (this.PackTableAdapter)
+        //                    {
+        //                        if (this.PackTableAdapter.Delete(messageData.PackID) == 1) return true; //Delete successfully
+        //                        else throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
+        //                    }
+        //                }
+        //            }
+        //            else throw new System.ArgumentException("Fail to handle this pack", "Can not remove pack from the line");
+        //        }
+        //        else throw new System.ArgumentException("Fail to handle this pack", "No pack found on the line");
+        //    }
+        //}
 
 
-        public Boolean UndoCartonToPack(int cartonID)
-        {
-            return true;
+        //public bool RemoveItemInPackInOneCarton(int packID)
+        //{
+        //    if (packID <= 0) return false;
 
-            //if (cartonID <= 0) return false;
+        //    lock (this.matchingPackList)
+        //    {
+        //        lock (this.packInOneCarton)
+        //        {
+        //            if (this.matchingPackList.Count > 0 && this.packInOneCarton.Count == this.packInOneCarton.NoItemPerCarton)
+        //            {
+        //                OnlinePackDTO messageData = this.matchingPackList.ElementAt(0).ShallowClone(); //Get the first pack
 
-            //lock (this.packInOneCarton)
-            //{
-            //    if (this.packInOneCarton.Count <= 0)
-            //    {
-            //        lock (this.cartonDataTable)
-            //        {
-            //            DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.FindByCartonID(cartonID);
-            //            if (dataDetailCartonRow != null && dataDetailCartonRow.CartonStatus == (byte)GlobalVariables.BarcodeStatus.BlankBarcode)
-            //            {
-            //                //COPY Data FROM cartonDataTable TO packInOneCarton
-            //                for (int i = 0; i < this.packInOneCarton.NoItemPerCarton; i++)
-            //                {                               //This use NON TYPED DATASET  -- Not so good, bescause the compiler can not detect error at compile time, but it is ok (I know exactly what in every row)
-            //                    MessageData messageData = this.AddDataDetailPack(dataDetailCartonRow["Pack" + i.ToString("00") + "Barcode"].ToString(), packInOneCarton.NextPackSubQueueID);
-            //                    if (messageData != null) this.packInOneCarton.Enqueue(messageData);
-            //                }
+        //                if (this.packInOneCarton.Replace(packID, messageData)) //messageData.QueueID: Will change to new value (new position) after replace
+        //                {
+        //                    this.matchingPackList.Dequeue(messageData.PackID); //Dequeue the first pack
 
-            //                if (this.packInOneCarton.Count > 0) UpdateDataDetailPack(GlobalVariables.BarcodeStatus.ReadyToCarton);
+        //                    this.NotifyPropertyChanged("PackInOneCarton");
+        //                    this.NotifyPropertyChanged("MatchingPackList");
 
-            //                this.NotifyPropertyChanged("PackInOneCarton");
+        //                    lock (this.PackTableAdapter)
+        //                    {
+        //                        lock (this.PackDataTable)
+        //                        {
+        //                            if (this.PackTableAdapter.Delete(packID) != 1) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
 
-            //                lock (this.CartonTableAdapter)
-            //                {
-            //                    //REMOVE data IN cartonDataTable
-            //                    int rowsAffected = this.CartonTableAdapter.Delete(dataDetailCartonRow.CartonID);//Delete
-            //                    if (rowsAffected == 1) this.cartonDataTable.Rows.Remove(dataDetailCartonRow); else throw new System.ArgumentException("Fail to handle this carton", "Insufficient remove carton");
-            //                }
+        //                            if (this.PackTableAdapter.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID) != 1) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
 
-            //                this.NotifyPropertyChanged("CartonList");
-
-            //                return true;
-            //            }
-            //            else return false;
-            //        }
-            //    }
-            //    else throw new System.ArgumentException("Fail to handle this carton", "Another carton is on the line");
-            //}
-        }
+        //                            if (this.PackTableAdapter.UpdateListOfPackStatus(messageData.PackID.ToString(), (byte)GlobalVariables.BarcodeStatus.ReadyToCarton) == 1) return true;
+        //                            else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack status");
+        //                        }
+        //                    }
+        //                }
+        //                else throw new System.ArgumentException("Fail to handle this pack", "Can not replace pack");
+        //            }
+        //            else throw new System.ArgumentException("Fail to handle this pack", "No pack found on the matching line");
+        //        }
+        //    }
+        //}
 
 
-        public Boolean UpdateCartonBarcode(int cartonID, string cartonBarcode)
-        {
-            return true;
+        //public Boolean UndoCartonToPack(int cartonID)
+        //{
+        //    if (cartonID <= 0) return false;
 
-            //if (cartonID <= 0 || cartonBarcode.Length < 12) throw new Exception("Invalid barcode: It is required 12 letters barcode [" + cartonBarcode + "]");
+        //    lock (this.packInOneCarton)
+        //    {
+        //        if (this.packInOneCarton.Count <= 0)
+        //        {
+        //            lock (this.cartonDataTable)
+        //            {
+        //                DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.FindByCartonID(cartonID);
+        //                if (dataDetailCartonRow != null && dataDetailCartonRow.CartonStatus == (byte)GlobalVariables.BarcodeStatus.BlankBarcode)
+        //                {
+        //                    //COPY Data FROM cartonDataTable TO packInOneCarton
+        //                    for (int i = 0; i < this.packInOneCarton.NoItemPerCarton; i++)
+        //                    {                               //This use NON TYPED DATASET  -- Not so good, bescause the compiler can not detect error at compile time, but it is ok (I know exactly what in every row)
+        //                        OnlinePackDTO messageData = this.AddDataDetailPack(dataDetailCartonRow["Pack" + i.ToString("00") + "Barcode"].ToString(), packInOneCarton.NextPackSubQueueID);
+        //                        if (messageData != null) this.packInOneCarton.Enqueue(messageData);
+        //                    }
 
-            //lock (this.cartonDataTable)
-            //{
-            //    DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.FindByCartonID(cartonID);
-            //    if (dataDetailCartonRow != null && dataDetailCartonRow.CartonStatus == (byte)GlobalVariables.BarcodeStatus.BlankBarcode)
-            //    {
-            //        lock (this.CartonTableAdapter)
-            //        {
-            //            int rowsAffected = this.CartonTableAdapter.UpdateCartonBarcode((byte)GlobalVariables.BarcodeStatus.Normal, cartonBarcode, dataDetailCartonRow.CartonID);
-            //            if (rowsAffected == 1)
-            //            {
-            //                dataDetailCartonRow.CartonStatus = (byte)GlobalVariables.BarcodeStatus.Normal;
-            //                dataDetailCartonRow.CartonBarcode = cartonBarcode;
-            //            }
-            //            else throw new System.ArgumentException("Fail to handle this carton", "Insufficient update carton");
-            //        }
+        //                    if (this.packInOneCarton.Count > 0) UpdateDataDetailPack(GlobalVariables.BarcodeStatus.ReadyToCarton);
 
-            //        this.NotifyPropertyChanged("CartonList");
+        //                    this.NotifyPropertyChanged("PackInOneCarton");
 
-            //        return true;
-            //    }
-            //    else return false;
-            //}
+        //                    lock (this.CartonTableAdapter)
+        //                    {
+        //                        //REMOVE data IN cartonDataTable
+        //                        int rowsAffected = this.CartonTableAdapter.Delete(dataDetailCartonRow.CartonID);//Delete
+        //                        if (rowsAffected == 1) this.cartonDataTable.Rows.Remove(dataDetailCartonRow); else throw new System.ArgumentException("Fail to handle this carton", "Insufficient remove carton");
+        //                    }
 
-        }
+        //                    this.NotifyPropertyChanged("CartonList");
 
-        #endregion Handle Exception
+        //                    return true;
+        //                }
+        //                else return false;
+        //            }
+        //        }
+        //        else throw new System.ArgumentException("Fail to handle this carton", "Another carton is on the line");
+        //    }
+        //}
+
+
+        //public Boolean UpdateCartonBarcode(int cartonID, string cartonBarcode)
+        //{
+        //    if (cartonID <= 0 || cartonBarcode.Length < 12) throw new Exception("Invalid barcode: It is required 12 letters barcode [" + cartonBarcode + "]");
+
+        //    lock (this.cartonDataTable)
+        //    {
+        //        DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.FindByCartonID(cartonID);
+        //        if (dataDetailCartonRow != null && dataDetailCartonRow.CartonStatus == (byte)GlobalVariables.BarcodeStatus.BlankBarcode)
+        //        {
+        //            lock (this.CartonTableAdapter)
+        //            {
+        //                int rowsAffected = this.CartonTableAdapter.UpdateCartonBarcode((byte)GlobalVariables.BarcodeStatus.Normal, cartonBarcode, dataDetailCartonRow.CartonID);
+        //                if (rowsAffected == 1)
+        //                {
+        //                    dataDetailCartonRow.CartonStatus = (byte)GlobalVariables.BarcodeStatus.Normal;
+        //                    dataDetailCartonRow.CartonBarcode = cartonBarcode;
+        //                }
+        //                else throw new System.ArgumentException("Fail to handle this carton", "Insufficient update carton");
+        //            }
+
+        //            this.NotifyPropertyChanged("CartonList");
+
+        //            return true;
+        //        }
+        //        else return false;
+        //    }
+
+        //}
+
+        //#endregion Handle Exception
 
 
 
@@ -990,6 +910,79 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
+
+
+
+
+
+        //#region NmvnBackup
+
+
+
+        //private BackupLogEventTableAdapter backupLogEventTableAdapter;
+        //protected BackupLogEventTableAdapter BackupLogEventTableAdapter
+        //{
+        //    get
+        //    {
+        //        if (backupLogEventTableAdapter == null) backupLogEventTableAdapter = new BackupLogEventTableAdapter();
+        //        return backupLogEventTableAdapter;
+        //    }
+        //}
+
+
+        //public void NmvnBackupDataMaster()
+        //{
+        //    int backupID = 0;
+        //    try
+        //    {
+        //        string backupLocation = "C:\\BPFillingSystem\\Database\\BACKUP";
+
+        //        DataDetailCartonTableAdapter dataDetailCartonTableAdapter = new DataDetailCartonTableAdapter();
+        //        DateTime? minOfCartonDate = (DateTime?)dataDetailCartonTableAdapter.GetMinOfCartonDate();
+        //        DateTime? maxOfCartonDate = (DateTime?)dataDetailCartonTableAdapter.GetMaxOfCartonDate();
+
+        //        int noBackupDate = 45 + 1;
+
+        //        if (minOfCartonDate != null && maxOfCartonDate != null && ((DateTime)minOfCartonDate).AddDays(noBackupDate).Date.AddSeconds(-1) < maxOfCartonDate)
+        //        { //NEED TO BACKUP
+        //            //
+
+        //            //==OKKK== ADODatabase.ExecuteNonQuery("EXEC BackupNmvnDatabases 'BPFillingSystem' , 'D:\\VC PROJECTS\\BP\DATA\\bak'")
+        //            //==OKKK== EXEC RestoreNmvnDatabases 'BPFillingSystem_ok', 'D:\\VC PROJECTS\\BP\\DATA\\BakBPFillingSystem_FULL_04192017_202140.BAK' , 'D:\\VC PROJECTS\\BP\DATA\\bak1'
+
+        //            DataDetail.BackupLogEventDataTable backupLogEventDataTable = new DataDetail.BackupLogEventDataTable();
+        //            DataDetail.BackupLogEventRow backupLogEventRow = backupLogEventDataTable.NewBackupLogEventRow();
+
+        //            backupLogEventDataTable.AddBackupLogEventRow(backupLogEventRow);
+
+        //            if (this.BackupLogEventTableAdapter.Update(backupLogEventRow) == 1) { backupID = backupLogEventRow.BackupID; } else throw new Exception("Insufficient save backup log");
+
+
+        //            SqlParameter[] sqlParameter = new SqlParameter[6];
+        //            sqlParameter[0] = new SqlParameter("databaseName", GlobalMsADO.DatabaseName); sqlParameter[0].SqlDbType = SqlDbType.NVarChar; sqlParameter[0].Direction = ParameterDirection.Input;
+        //            sqlParameter[1] = new SqlParameter("backupLocation", backupLocation); sqlParameter[1].SqlDbType = SqlDbType.NVarChar; sqlParameter[1].Direction = ParameterDirection.Input;
+        //            sqlParameter[2] = new SqlParameter("restoreLocation", ""); sqlParameter[2].SqlDbType = SqlDbType.NVarChar; sqlParameter[2].Direction = ParameterDirection.Input;
+        //            sqlParameter[3] = new SqlParameter("backupID", backupID); sqlParameter[3].SqlDbType = SqlDbType.Int; sqlParameter[3].Direction = ParameterDirection.Input;
+        //            sqlParameter[4] = new SqlParameter("beginningCartonDate", minOfCartonDate); sqlParameter[4].SqlDbType = SqlDbType.DateTime; sqlParameter[4].Direction = ParameterDirection.Input;
+        //            sqlParameter[5] = new SqlParameter("endingCartonDate", ((DateTime)minOfCartonDate).AddDays(noBackupDate).Date.AddSeconds(-1)); sqlParameter[5].SqlDbType = SqlDbType.DateTime; sqlParameter[5].Direction = ParameterDirection.Input;
+        //            ADODatabase.ExecuteNonQuery("BackupNmvnDatabases", CommandType.StoredProcedure, "", sqlParameter, 60 * 15);
+
+        //            //this.BackupLogEventTableAdapter.BackupNmvnDatabases(GlobalMsADO.DatabaseName, backupLocation, restoreLocation, backupID, minOfCartonDate, ((DateTime)minOfCartonDate).AddDays(10));
+
+        //            //this.NmvnBackupLogEventChange = false;
+        //            //this.NmvnBackupLogEventChange = true; //NO NEED TO RAISE EVENT
+        //        }
+
+        //    }
+        //    catch (System.Exception exception)
+        //    {
+        //        ADODatabase.ExecuteNonQuery("UPDATE BackupLogEvent SET Description = CASE WHEN Description IS NULL THEN '' ELSE Description END + N'" + exception.Message.Substring(0, exception.Message.Length > 50 ? 50 : exception.Message.Length) + "' WHERE BackupID = " + backupID);
+        //    }
+        //}
+
+
+
+        //#endregion NmvnBackup
 
 
 

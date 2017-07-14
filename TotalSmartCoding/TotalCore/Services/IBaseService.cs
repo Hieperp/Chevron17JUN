@@ -1,4 +1,6 @@
-﻿using TotalBase.Enums;
+﻿using System.Collections.Generic;
+
+using TotalBase.Enums;
 
 namespace TotalCore.Services
 {
@@ -28,5 +30,7 @@ namespace TotalCore.Services
         
         bool GetShowDiscount();
 
+        string ServiceTag { get; set; }
+        Dictionary<string, object> ServiceBag { get; set; }
     }
 }

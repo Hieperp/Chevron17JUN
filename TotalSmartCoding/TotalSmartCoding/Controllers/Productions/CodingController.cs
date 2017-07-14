@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TotalDTO.Productions;
 using TotalModel.Helpers;
 
-
-//using Global.Class.Library;
-//using DataTransferObject;
-
-
-namespace TotalSmartCoding.CommonLibraries.BP
+namespace TotalSmartCoding.Controllers.Productions
 {
-    public class CommonThreadProperty : NotifyPropertyChangeObject
+    public class CodingController : NotifyPropertyChangeObject
     {
         private FillingLineData fillingLineData;
 
@@ -121,3 +117,4 @@ namespace TotalSmartCoding.CommonLibraries.BP
     }
 
 }
+

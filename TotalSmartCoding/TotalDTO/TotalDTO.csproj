@@ -79,6 +79,12 @@
     <Compile Include="Inventories\GoodsReceiptDTO.cs" />
     <Compile Include="Inventories\PickupDTO.cs" />
     <Compile Include="IPrimitiveDTO.cs" />
+    <Compile Include="Productions\BarcodeDTO.cs" />
+    <Compile Include="Productions\BarcodeQueue.cs" />
+    <Compile Include="Productions\CartonDTO.cs" />
+    <Compile Include="Productions\FillingLineData.cs" />
+    <Compile Include="Productions\PackDTO.cs" />
+    <Compile Include="Productions\PalletDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sales\DeliveryAdviceDetailDTO.cs" />
     <Compile Include="Sales\DeliveryAdviceDTO.cs" />

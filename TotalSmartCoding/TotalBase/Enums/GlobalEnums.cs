@@ -36,6 +36,13 @@
             UnKnown = 0,
 
 
+            Pack = 28001,
+            OnlinePack = 28002,
+            Carton = 28003,
+            OnlineCarton = 28004,
+            Pallet = 28005,
+            OnlinePallet = 28006,
+
 
             Customer = 8001,
             Commodity = 8002,

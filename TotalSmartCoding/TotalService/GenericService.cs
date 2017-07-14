@@ -470,10 +470,13 @@ namespace TotalService
         {
             if (this.functionNameSaveRelative != null && this.functionNameSaveRelative != "")
             {
-                ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("EntityID", entity.GetID()), new ObjectParameter("SaveRelativeOption", (int)saveRelativeOption) };
-                this.genericRepository.ExecuteFunction(this.functionNameSaveRelative, parameters);
+                this.genericRepository.ExecuteFunction(this.functionNameSaveRelative, this.SaveRelativeParameters(entity, saveRelativeOption));
             }
         }
 
+        protected virtual ObjectParameter[] SaveRelativeParameters(TEntity entity, SaveRelativeOption saveRelativeOption)
+        {
+            return new ObjectParameter[] { new ObjectParameter("EntityID", entity.GetID()), new ObjectParameter("SaveRelativeOption", (int)saveRelativeOption) };
+        }
     }
 }

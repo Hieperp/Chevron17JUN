@@ -84,7 +84,6 @@
     <Compile Include="CommonLibraries\BP\ADODatabase.cs" />
     <Compile Include="CommonLibraries\BP\BarcodeScannerBLL.cs" />
     <Compile Include="CommonLibraries\BP\CommonThreadProperty.cs" />
-    <Compile Include="CommonLibraries\BP\FillingLineData.cs" />
     <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />
     <Compile Include="CommonLibraries\BP\GlobalNetSockets.cs" />
     <Compile Include="CommonLibraries\BP\GlobalRegistry.cs" />
@@ -106,6 +105,8 @@
     <Compile Include="Controllers\GenericSimpleController.cs" />
     <Compile Include="Controllers\GenericViewDetailController.cs" />
     <Compile Include="Controllers\Inventories\GoodsReceiptController.cs" />
+    <Compile Include="Controllers\Productions\CodingController.cs" />
+    <Compile Include="Controllers\Productions\ScannerController.cs" />
     <Compile Include="Controllers\Sales\DeliveryAdvicesController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

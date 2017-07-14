@@ -22,7 +22,15 @@ namespace TotalDAL.Repositories
             this.totalSmartCodingEntities = totalSmartCodingEntities;
 
 
+            //return;
 
+            Helpers.SqlProgrammability.Productions.OnlinePack onlinePack = new Helpers.SqlProgrammability.Productions.OnlinePack(totalSmartCodingEntities);
+            onlinePack.RestoreProcedure();
+
+            //return;
+
+            Helpers.SqlProgrammability.Productions.OnlineCarton onlineCarton = new Helpers.SqlProgrammability.Productions.OnlineCarton(totalSmartCodingEntities);
+            onlineCarton.RestoreProcedure();
 
             return;
 

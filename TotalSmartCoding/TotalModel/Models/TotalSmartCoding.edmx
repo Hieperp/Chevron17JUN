@@ -25,6 +25,25 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Batches">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="10" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="LastPackNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastCartonNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastPalletNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="BinLocations">
           <Key>
             <PropertyRef Name="BinLocationID" />
@@ -225,8 +244,14 @@
           </Key>
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="LastLogonFillingLineID" Type="int" />
+          <Property Name="PortName" Type="nvarchar" MaxLength="20" />
+          <Property Name="ServerID" Type="int" />
+          <Property Name="ServerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DatabaseName" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="GoodsReceiptDetails">
           <Key>
@@ -329,6 +354,45 @@
           <Property Name="SerialID" Type="int" Nullable="false" />
           <Property Name="ImageIndex" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="InActive" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OnlineCartons">
+          <Key>
+            <PropertyRef Name="OnlineCartonID" />
+          </Key>
+          <Property Name="OnlineCartonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="OnlinePalletID" Type="int" />
+          <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntryStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OnlinePacks">
+          <Key>
+            <PropertyRef Name="OnlinePackID" />
+          </Key>
+          <Property Name="OnlinePackID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="QueueID" Type="int" Nullable="false" />
+          <Property Name="OnlineCartonID" Type="int" />
+          <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntryStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OnlinePallets">
+          <Key>
+            <PropertyRef Name="OnlinePalletID" />
+          </Key>
+          <Property Name="OnlinePalletID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntryStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrganizationalUnits">
           <Key>
@@ -444,6 +508,30 @@
           <Property Name="IsDefault" Type="bit" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_Batches_Commodities">
+          <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodities">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_FillingLines">
+          <End Role="FillingLines" Type="Self.FillingLines" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FillingLines">
+              <PropertyRef Name="FillingLineID" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="FillingLineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BinLocations_Warehouses">
           <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="1" />
           <End Role="BinLocations" Type="Self.BinLocations" Multiplicity="*" />
@@ -1032,8 +1120,24 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
         </Function>
+        <Function Name="OnlineCartonEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="OnlineCartonSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
+          <Parameter Name="OnlinePackIDs" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="OnlinePackEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="OnlinePackUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OnlinePackIDs" Type="varchar" Mode="In" />
+          <Parameter Name="EntryStatusID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="TotalSmartCodingModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BinLocations" EntityType="Self.BinLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cartons" EntityType="Self.Cartons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commodities" EntityType="Self.Commodities" Schema="dbo" store:Type="Tables" />
@@ -1047,6 +1151,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleDetails" EntityType="Self.ModuleDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnlineCartons" EntityType="Self.OnlineCartons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnlinePacks" EntityType="Self.OnlinePacks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnlinePallets" EntityType="Self.OnlinePallets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrganizationalUnits" EntityType="Self.OrganizationalUnits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrganizationalUnitUsers" EntityType="Self.OrganizationalUnitUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Packs" EntityType="Self.Packs" Schema="dbo" store:Type="Tables" />
@@ -1055,6 +1162,14 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySet Name="PickupDetails" EntityType="Self.PickupDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pickups" EntityType="Self.Pickups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Batches_Commodities" Association="Self.FK_Batches_Commodities">
+            <End Role="Commodities" EntitySet="Commodities" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_FillingLines" Association="Self.FK_Batches_FillingLines">
+            <End Role="FillingLines" EntitySet="FillingLines" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
           <AssociationSet Name="FK_BinLocations_Warehouses" Association="Self.FK_BinLocations_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="BinLocations" EntitySet="BinLocations" />
@@ -1260,6 +1375,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Pallets" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Commodity" ToRole="Pallet" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="Commodity" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="Commodity" ToRole="PickupDetail" />
+          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Commodity" ToRole="Batch" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1714,10 +1830,37 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Parameter Name="GoodsReceiptID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPendingPickups" ReturnType="Collection(TotalSmartCodingModel.PendingPickup)">
-            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPendingPickupWarehouses" ReturnType="Collection(TotalSmartCodingModel.PendingPickupWarehouse)">
-            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="OnlineCartons" EntityType="TotalSmartCodingModel.OnlineCarton" />
+          <EntitySet Name="OnlinePacks" EntityType="TotalSmartCodingModel.OnlinePack" />
+          <EntitySet Name="OnlinePallets" EntityType="TotalSmartCodingModel.OnlinePallet" />
+          <FunctionImport Name="OnlineCartonSaveRelative">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
+            <Parameter Name="OnlinePackIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Batches" EntityType="TotalSmartCodingModel.Batch" />
+          <AssociationSet Name="FK_Batches_Commodities" Association="TotalSmartCodingModel.FK_Batches_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_FillingLines" Association="TotalSmartCodingModel.FK_Batches_FillingLines">
+            <End Role="FillingLine" EntitySet="FillingLines" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <FunctionImport Name="OnlineCartonEditable" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="OnlinePackEditable" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="OnlinePackUpdateEntryStatus">
+            <Parameter Name="OnlinePackIDs" Mode="In" Type="String" />
+            <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
@@ -1963,10 +2106,17 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </Key>
           <Property Name="FillingLineID" Type="Int32" Nullable="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="FillingLine" ToRole="Carton" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="FillingLine" ToRole="Pack" />
+          <Property Name="LastLogonFillingLineID" Type="Int32" />
+          <Property Name="PortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ServerID" Type="Int32" />
+          <Property Name="ServerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DatabaseName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="FillingLine" ToRole="Batch" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -2622,6 +2772,90 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="String" Name="WarehouseCode" Nullable="false" MaxLength="10" />
           <Property Type="Decimal" Name="TotalQuantity" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
+        <EntityType Name="OnlineCarton">
+          <Key>
+            <PropertyRef Name="OnlineCartonID" />
+          </Key>
+          <Property Name="OnlineCartonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="OnlinePalletID" Type="Int32" />
+          <Property Name="PCID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OnlinePack">
+          <Key>
+            <PropertyRef Name="OnlinePackID" />
+          </Key>
+          <Property Name="OnlinePackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="QueueID" Type="Int32" Nullable="false" />
+          <Property Name="OnlineCartonID" Type="Int32" />
+          <Property Name="PCID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OnlinePallet">
+          <Key>
+            <PropertyRef Name="OnlinePalletID" />
+          </Key>
+          <Property Name="OnlinePalletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="PCID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="LastPackNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LastCartonNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LastPalletNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
+          <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
+        </EntityType>
+        <Association Name="FK_Batches_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_FillingLines">
+          <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FillingLine">
+              <PropertyRef Name="FillingLineID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="FillingLineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2996,6 +3230,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="FillingLines">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.FillingLine">
               <MappingFragment StoreEntitySet="FillingLines">
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="DatabaseName" ColumnName="DatabaseName" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="ServerID" ColumnName="ServerID" />
+                <ScalarProperty Name="PortName" ColumnName="PortName" />
+                <ScalarProperty Name="LastLogonFillingLineID" ColumnName="LastLogonFillingLineID" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -3257,6 +3497,72 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="OnlineCartons">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.OnlineCarton">
+              <MappingFragment StoreEntitySet="OnlineCartons">
+                <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PCID" ColumnName="PCID" />
+                <ScalarProperty Name="OnlinePalletID" ColumnName="OnlinePalletID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="OnlineCartonID" ColumnName="OnlineCartonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnlinePacks">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.OnlinePack">
+              <MappingFragment StoreEntitySet="OnlinePacks">
+                <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PCID" ColumnName="PCID" />
+                <ScalarProperty Name="OnlineCartonID" ColumnName="OnlineCartonID" />
+                <ScalarProperty Name="QueueID" ColumnName="QueueID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="OnlinePackID" ColumnName="OnlinePackID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnlinePallets">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.OnlinePallet">
+              <MappingFragment StoreEntitySet="OnlinePallets">
+                <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PCID" ColumnName="PCID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="OnlinePalletID" ColumnName="OnlinePalletID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="OnlineCartonSaveRelative" FunctionName="TotalSmartCodingModel.Store.OnlineCartonSaveRelative" />
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
+              <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastPalletNo" ColumnName="LastPalletNo" />
+                <ScalarProperty Name="LastCartonNo" ColumnName="LastCartonNo" />
+                <ScalarProperty Name="LastPackNo" ColumnName="LastPackNo" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="OnlineCartonEditable" FunctionName="TotalSmartCodingModel.Store.OnlineCartonEditable" />
+          <FunctionImportMapping FunctionImportName="OnlinePackEditable" FunctionName="TotalSmartCodingModel.Store.OnlinePackEditable" />
+          <FunctionImportMapping FunctionImportName="OnlinePackUpdateEntryStatus" FunctionName="TotalSmartCodingModel.Store.OnlinePackUpdateEntryStatus" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

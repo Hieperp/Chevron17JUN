@@ -49,6 +49,10 @@ namespace TotalModel.Models
         public virtual DbSet<GoodsReceiptType> GoodsReceiptTypes { get; set; }
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
         public virtual DbSet<Pickup> Pickups { get; set; }
+        public virtual DbSet<OnlineCarton> OnlineCartons { get; set; }
+        public virtual DbSet<OnlinePack> OnlinePacks { get; set; }
+        public virtual DbSet<OnlinePallet> OnlinePallets { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -360,6 +364,54 @@ namespace TotalModel.Models
                 new ObjectParameter("LocationID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingPickupWarehouse>("GetPendingPickupWarehouses", locationIDParameter);
+        }
+    
+        public virtual int OnlineCartonSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string onlinePackIDs)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            var onlinePackIDsParameter = onlinePackIDs != null ?
+                new ObjectParameter("OnlinePackIDs", onlinePackIDs) :
+                new ObjectParameter("OnlinePackIDs", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("OnlineCartonSaveRelative", entityIDParameter, saveRelativeOptionParameter, onlinePackIDsParameter);
+        }
+    
+        public virtual ObjectResult<string> OnlineCartonEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("OnlineCartonEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> OnlinePackEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("OnlinePackEditable", entityIDParameter);
+        }
+    
+        public virtual int OnlinePackUpdateEntryStatus(string onlinePackIDs, Nullable<int> entryStatusID)
+        {
+            var onlinePackIDsParameter = onlinePackIDs != null ?
+                new ObjectParameter("OnlinePackIDs", onlinePackIDs) :
+                new ObjectParameter("OnlinePackIDs", typeof(string));
+    
+            var entryStatusIDParameter = entryStatusID.HasValue ?
+                new ObjectParameter("EntryStatusID", entryStatusID) :
+                new ObjectParameter("EntryStatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("OnlinePackUpdateEntryStatus", onlinePackIDsParameter, entryStatusIDParameter);
         }
     }
 }

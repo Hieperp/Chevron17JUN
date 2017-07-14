@@ -328,6 +328,49 @@ namespace TotalModel.Models
 
 
 
+    public partial class OnlinePack : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.OnlinePackID; }
+
+        public int LocationID { get; set; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
+    }
+
+
+    public partial class OnlineCarton : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.OnlineCartonID; }
+
+        public int LocationID { get; set; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
+    }
+
+
+    public partial class OnlinePallet : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.OnlinePalletID; }
+
+        public int LocationID { get; set; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
+    }
 
 
 }

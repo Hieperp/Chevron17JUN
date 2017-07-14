@@ -67,6 +67,12 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Pickups" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Warehouses" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Pickups_Warehouses" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.OnlineCarton" Width="1.5" PointX="17.125" PointY="26.375" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.OnlinePack" Width="1.5" PointX="19.125" PointY="22.375" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.OnlinePallet" Width="1.5" PointX="19.125" PointY="26.375" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Batch" Width="1.5" PointX="17" PointY="17.375" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_FillingLines" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

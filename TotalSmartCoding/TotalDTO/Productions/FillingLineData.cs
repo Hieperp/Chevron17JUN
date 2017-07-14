@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data;
+using System.Threading.Tasks;
+using TotalModel.Helpers;
 
-//using Global.Class.Library;
-//using DataAccessLayer;
-//using DataTransferObject;
 using TotalModel.Helpers;
 using TotalBase;
 
-
-namespace TotalSmartCoding.CommonLibraries.BP
+namespace TotalDTO.Productions
 {
-
     public class FillingLineData : NotifyPropertyChangeObject
     {
 
@@ -36,39 +32,55 @@ namespace TotalSmartCoding.CommonLibraries.BP
         private string remarks;
 
 
+
+
+
+
+
+
+
+        public int CommodityID { get { return 1; } }
+
+
+
+
+
+
+
+
         #region Contructor
 
         public FillingLineData()
         {
 
-            DataTable defaultFillingLineData = ADODatabase.GetDataTable("SELECT FillingLineData.ProductID, ListProductName.ProductCode, ListProductName.ProductCodeOriginal, ListProductName.NoItemPerCarton, ListProductName.NoExpiryDate, ListProductName.IsPailLabel, FillingLineData.BatchNo, FillingLineData.SettingDate, FillingLineData.SettingMonthID, FillingLineData.BatchSerialNumber, FillingLineData.MonthSerialNumber, FillingLineData.BatchCartonNumber, FillingLineData.MonthCartonNumber FROM FillingLineData INNER JOIN ListProductName ON FillingLineData.ProductID = ListProductName.ProductID WHERE FillingLineData.FillingLineID = " + (int)this.FillingLineID + " AND FillingLineData.IsDefault = 1");
+            //DataTable defaultFillingLineData = ADODatabase.GetDataTable("SELECT FillingLineData.ProductID, ListProductName.ProductCode, ListProductName.ProductCodeOriginal, ListProductName.NoItemPerCarton, ListProductName.NoExpiryDate, ListProductName.IsPailLabel, FillingLineData.BatchNo, FillingLineData.SettingDate, FillingLineData.SettingMonthID, FillingLineData.BatchSerialNumber, FillingLineData.MonthSerialNumber, FillingLineData.BatchCartonNumber, FillingLineData.MonthCartonNumber FROM FillingLineData INNER JOIN ListProductName ON FillingLineData.ProductID = ListProductName.ProductID WHERE FillingLineData.FillingLineID = " + (int)this.FillingLineID + " AND FillingLineData.IsDefault = 1");
 
-            if (defaultFillingLineData.Rows.Count > 0)
-            {
-                this.StartTracking();
+            //if (defaultFillingLineData.Rows.Count > 0)
+            //{
+            //    this.StartTracking();
 
-                this.ProductID = int.Parse(defaultFillingLineData.Rows[0]["ProductID"].ToString());
-                this.ProductCode = defaultFillingLineData.Rows[0]["ProductCode"].ToString();
-                this.ProductCodeOriginal = defaultFillingLineData.Rows[0]["ProductCodeOriginal"].ToString();
+            //    this.ProductID = int.Parse(defaultFillingLineData.Rows[0]["ProductID"].ToString());
+            //    this.ProductCode = defaultFillingLineData.Rows[0]["ProductCode"].ToString();
+            //    this.ProductCodeOriginal = defaultFillingLineData.Rows[0]["ProductCodeOriginal"].ToString();
 
-                this.NoExpiryDate = int.Parse(defaultFillingLineData.Rows[0]["NoExpiryDate"].ToString());
-                this.IsPailLabel = bool.Parse(defaultFillingLineData.Rows[0]["IsPailLabel"] is DBNull ? "False" : defaultFillingLineData.Rows[0]["IsPailLabel"].ToString());
+            //    this.NoExpiryDate = int.Parse(defaultFillingLineData.Rows[0]["NoExpiryDate"].ToString());
+            //    this.IsPailLabel = bool.Parse(defaultFillingLineData.Rows[0]["IsPailLabel"] is DBNull ? "False" : defaultFillingLineData.Rows[0]["IsPailLabel"].ToString());
 
-                GlobalVariables.noItemPerCartonSetByProductID = int.Parse(defaultFillingLineData.Rows[0]["NoItemPerCarton"].ToString());
+            //    GlobalVariables.noItemPerCartonSetByProductID = int.Parse(defaultFillingLineData.Rows[0]["NoItemPerCarton"].ToString());
 
-                this.BatchNo = defaultFillingLineData.Rows[0]["BatchNo"].ToString();
+            //    this.BatchNo = defaultFillingLineData.Rows[0]["BatchNo"].ToString();
 
-                this.SettingDate = DateTime.Parse(defaultFillingLineData.Rows[0]["SettingDate"].ToString());
-                this.SettingMonthID = int.Parse(defaultFillingLineData.Rows[0]["SettingMonthID"].ToString());
+            //    this.SettingDate = DateTime.Parse(defaultFillingLineData.Rows[0]["SettingDate"].ToString());
+            //    this.SettingMonthID = int.Parse(defaultFillingLineData.Rows[0]["SettingMonthID"].ToString());
 
-                this.BatchSerialNumber = defaultFillingLineData.Rows[0]["BatchSerialNumber"].ToString();
-                this.MonthSerialNumber = defaultFillingLineData.Rows[0]["MonthSerialNumber"].ToString();
+            //    this.BatchSerialNumber = defaultFillingLineData.Rows[0]["BatchSerialNumber"].ToString();
+            //    this.MonthSerialNumber = defaultFillingLineData.Rows[0]["MonthSerialNumber"].ToString();
 
-                this.BatchCartonNumber = defaultFillingLineData.Rows[0]["BatchCartonNumber"].ToString();
-                this.MonthCartonNumber = defaultFillingLineData.Rows[0]["MonthCartonNumber"].ToString();
+            //    this.BatchCartonNumber = defaultFillingLineData.Rows[0]["BatchCartonNumber"].ToString();
+            //    this.MonthCartonNumber = defaultFillingLineData.Rows[0]["MonthCartonNumber"].ToString();
 
-                this.StartTracking();
-            }
+            //    this.StartTracking();
+            //}
 
 
         }
@@ -105,11 +117,11 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 {
                     ApplyPropertyChange<FillingLineData, int>(ref this.productID, o => o.ProductID, value);
 
-                    DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchNo, BatchSerialNumber, MonthSerialNumber, BatchCartonNumber, MonthCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID);
-                    if (dataTableFillingLineData.Rows.Count > 0)
-                        this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["BatchSerialNumber"].ToString() : "000001", dataTableFillingLineData.Rows[0]["MonthSerialNumber"].ToString(), dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["BatchCartonNumber"].ToString() : "900001", dataTableFillingLineData.Rows[0]["MonthCartonNumber"].ToString());
-                    else
-                        this.ResetSerialNumber("000001", "000001", "900001", "900001");
+                    //DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchNo, BatchSerialNumber, MonthSerialNumber, BatchCartonNumber, MonthCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID);
+                    //if (dataTableFillingLineData.Rows.Count > 0)
+                    //    this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["BatchSerialNumber"].ToString() : "000001", dataTableFillingLineData.Rows[0]["MonthSerialNumber"].ToString(), dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["BatchCartonNumber"].ToString() : "900001", dataTableFillingLineData.Rows[0]["MonthCartonNumber"].ToString());
+                    //else
+                    //    this.ResetSerialNumber("000001", "000001", "900001", "900001");
                 }
             }
         }
@@ -156,11 +168,11 @@ namespace TotalSmartCoding.CommonLibraries.BP
                     {
                         ApplyPropertyChange<FillingLineData, string>(ref this.batchNo, o => o.BatchNo, value);
 
-                        DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchSerialNumber, BatchCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID + " AND BatchNo = " + this.BatchNo);
-                        if (dataTableFillingLineData.Rows.Count > 0)
-                            this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["BatchSerialNumber"].ToString(), this.MonthSerialNumber, dataTableFillingLineData.Rows[0]["BatchCartonNumber"].ToString(), this.MonthCartonNumber);
-                        else
-                            this.ResetSerialNumber("000001", this.MonthSerialNumber, "900001", this.MonthCartonNumber);
+                        //DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchSerialNumber, BatchCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID + " AND BatchNo = " + this.BatchNo);
+                        //if (dataTableFillingLineData.Rows.Count > 0)
+                        //    this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["BatchSerialNumber"].ToString(), this.MonthSerialNumber, dataTableFillingLineData.Rows[0]["BatchCartonNumber"].ToString(), this.MonthCartonNumber);
+                        //else
+                        //    this.ResetSerialNumber("000001", this.MonthSerialNumber, "900001", this.MonthCartonNumber);
                     }
                     else
                     {
@@ -177,7 +189,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             set
             {
                 ApplyPropertyChange<FillingLineData, DateTime>(ref this.settingDate, o => o.SettingDate, value);
-                this.SettingMonthID = GlobalStaticFunction.DateToContinuosMonth(this.SettingDate);
+                //this.SettingMonthID = GlobalStaticFunction.DateToContinuosMonth(this.SettingDate);
             }
         }
 
@@ -326,19 +338,20 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
         public bool Update()
         {
+            return true;
             try
             {
-                int rowsAffected = ADODatabase.ExecuteTransaction("UPDATE FillingLineData SET IsDefault = 0 WHERE FillingLineID = " + (int)this.FillingLineID + "; " +
-                                                                  "UPDATE FillingLineData SET BatchNo = N'" + this.BatchNo.ToString() + "', " +
-                                                                                            " SettingDate = CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "', 103), " +
-                                                                                            " SettingMonthID = " + this.SettingMonthID.ToString() + ", " +
-                                                                                            " BatchSerialNumber = N'" + this.BatchSerialNumber.ToString() + "', " +
-                                                                                            " MonthSerialNumber = N'" + this.MonthSerialNumber.ToString() + "', " +
-                                                                                            " BatchCartonNumber = N'" + this.BatchCartonNumber.ToString() + "', " +
-                                                                                            " MonthCartonNumber = N'" + this.MonthCartonNumber.ToString() + "', " +
-                                                                                            " LastSerialDate = GetDate(), IsDefault = 1 " +
-                                                                  "WHERE FillingLineID   =  " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID);
-                return rowsAffected > 0;
+                //int rowsAffected = ADODatabase.ExecuteTransaction("UPDATE FillingLineData SET IsDefault = 0 WHERE FillingLineID = " + (int)this.FillingLineID + "; " +
+                //                                                  "UPDATE FillingLineData SET BatchNo = N'" + this.BatchNo.ToString() + "', " +
+                //                                                                            " SettingDate = CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "', 103), " +
+                //                                                                            " SettingMonthID = " + this.SettingMonthID.ToString() + ", " +
+                //                                                                            " BatchSerialNumber = N'" + this.BatchSerialNumber.ToString() + "', " +
+                //                                                                            " MonthSerialNumber = N'" + this.MonthSerialNumber.ToString() + "', " +
+                //                                                                            " BatchCartonNumber = N'" + this.BatchCartonNumber.ToString() + "', " +
+                //                                                                            " MonthCartonNumber = N'" + this.MonthCartonNumber.ToString() + "', " +
+                //                                                                            " LastSerialDate = GetDate(), IsDefault = 1 " +
+                //                                                  "WHERE FillingLineID   =  " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID);
+                //return rowsAffected > 0;
             }
             catch (Exception exception)
             {
@@ -348,24 +361,25 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
         public bool Save()
         {
+            return true;
             try
             {
-                int rowsAffected = ADODatabase.ExecuteNonQuery("UPDATE FillingLineData SET IsDefault = 1 WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID);
+                //int rowsAffected = ADODatabase.ExecuteNonQuery("UPDATE FillingLineData SET IsDefault = 1 WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID);
 
 
-                if (rowsAffected <= 0) //Add New
-                {
-                    rowsAffected = ADODatabase.ExecuteTransaction("UPDATE FillingLineData SET IsDefault = 0 WHERE FillingLineID = " + (int)this.FillingLineID + "; " +
-                                                                  "INSERT INTO FillingLineData (FillingLineID, ProductID, BatchNo, SettingDate, SettingMonthID, BatchSerialNumber, MonthSerialNumber, BatchCartonNumber, MonthCartonNumber, Remarks, LastSettingDate, LastSerialDate, IsDefault) " +
-                                                                  "VALUES (" + (int)this.FillingLineID + ", " + this.ProductID + ", N'" + this.BatchNo + "', CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "',103), " + this.SettingMonthID.ToString() + ", N'" + this.BatchSerialNumber + "', N'" + this.MonthSerialNumber + "', N'" + this.BatchCartonNumber + "', N'" + this.MonthCartonNumber + "', N'" + this.Remarks + "', GetDate(), GetDate(), 1) ");
+                //if (rowsAffected <= 0) //Add New
+                //{
+                //    rowsAffected = ADODatabase.ExecuteTransaction("UPDATE FillingLineData SET IsDefault = 0 WHERE FillingLineID = " + (int)this.FillingLineID + "; " +
+                //                                                  "INSERT INTO FillingLineData (FillingLineID, ProductID, BatchNo, SettingDate, SettingMonthID, BatchSerialNumber, MonthSerialNumber, BatchCartonNumber, MonthCartonNumber, Remarks, LastSettingDate, LastSerialDate, IsDefault) " +
+                //                                                  "VALUES (" + (int)this.FillingLineID + ", " + this.ProductID + ", N'" + this.BatchNo + "', CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "',103), " + this.SettingMonthID.ToString() + ", N'" + this.BatchSerialNumber + "', N'" + this.MonthSerialNumber + "', N'" + this.BatchCartonNumber + "', N'" + this.MonthCartonNumber + "', N'" + this.Remarks + "', GetDate(), GetDate(), 1) ");
 
-                    return rowsAffected > 0;
-                }
+                //    return rowsAffected > 0;
+                //}
 
-                else //Update Only
-                {
-                    return Update();
-                }
+                //else //Update Only
+                //{
+                //    return Update();
+                //}
             }
             catch (Exception exception)
             {
