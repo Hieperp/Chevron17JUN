@@ -11,6 +11,9 @@ namespace TotalBase
         {
             switch (nmvnTaskID)
             {
+                case GlobalEnums.NmvnTaskID.Batch:
+                    return "B";
+
                 case GlobalEnums.NmvnTaskID.PurchaseOrder:
                     return "D";
                 case GlobalEnums.NmvnTaskID.PurchaseInvoice:

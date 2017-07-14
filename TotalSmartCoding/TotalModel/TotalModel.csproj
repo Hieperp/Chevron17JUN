@@ -69,6 +69,9 @@
     <Compile Include="Models\Batch.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BatchIndex.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BinLocation.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>

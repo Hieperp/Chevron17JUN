@@ -41,7 +41,7 @@ namespace TotalModel.Models
         public string SalesUnit { get; set; }
         public string Packing { get; set; }
         public string Origin { get; set; }
-        public Nullable<double> Weight { get; set; }
+        public double Weight { get; set; }
         public Nullable<double> LeadTime { get; set; }
         public Nullable<bool> Discontinue { get; set; }
         public Nullable<bool> InActive { get; set; }
@@ -56,6 +56,11 @@ namespace TotalModel.Models
         public string HSCode { get; set; }
         public bool IsRegularCheckUps { get; set; }
         public string Specifycation { get; set; }
+        public double Volume { get; set; }
+        public int PiecePerCarton { get; set; }
+        public int CartonPerPallet { get; set; }
+        public int NoExpiryDate { get; set; }
+        public bool IsPailLabel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }

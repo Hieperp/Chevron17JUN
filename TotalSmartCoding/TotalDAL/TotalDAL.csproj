@@ -51,6 +51,7 @@
     <Compile Include="Helpers\EntityFrameworkExtension.cs" />
     <Compile Include="Helpers\SqlProgrammability\InitReference.cs" />
     <Compile Include="Helpers\SqlProgrammability\Inventories\GoodsReceipt.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\Batch.cs" />
     <Compile Include="Helpers\SqlProgrammability\Productions\OnlineCarton.cs" />
     <Compile Include="Helpers\SqlProgrammability\Productions\OnlinePack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\GenericWithDetailRepository.cs" />
     <Compile Include="Repositories\Inventories\GoodsReceiptRepository.cs" />
+    <Compile Include="Repositories\Productions\BatchRepository.cs" />
     <Compile Include="Repositories\Productions\OnlineCartonRepository.cs" />
     <Compile Include="Repositories\Productions\OnlinePackRepository.cs" />
     <Compile Include="Repositories\Productions\OnlinePalletRepository.cs" />

@@ -35,6 +35,7 @@
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="LastPackNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="LastCartonNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="LastPalletNo" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -96,7 +97,8 @@
           <Property Name="SalesUnit" Type="nvarchar" MaxLength="10" />
           <Property Name="Packing" Type="nvarchar" MaxLength="60" />
           <Property Name="Origin" Type="nvarchar" MaxLength="60" />
-          <Property Name="Weight" Type="float" />
+          <Property Name="Volume" Type="float" Nullable="false" />
+          <Property Name="Weight" Type="float" Nullable="false" />
           <Property Name="LeadTime" Type="float" />
           <Property Name="HSCode" Type="nvarchar" MaxLength="20" />
           <Property Name="IsRegularCheckUps" Type="bit" Nullable="false" />
@@ -104,6 +106,10 @@
           <Property Name="Specifycation" Type="nvarchar" MaxLength="500" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
           <Property Name="InActive" Type="bit" />
+          <Property Name="PiecePerCarton" Type="int" Nullable="false" />
+          <Property Name="CartonPerPallet" Type="int" Nullable="false" />
+          <Property Name="NoExpiryDate" Type="int" Nullable="false" />
+          <Property Name="IsPailLabel" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -1024,6 +1030,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BatchEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeliveryAdviceApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -1050,6 +1059,11 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
           <Parameter Name="OrganizationalUnitID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBatchIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="GetDeliveryAdviceIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
@@ -1354,7 +1368,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="SalesUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Packing" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Origin" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Weight" Type="Double" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
           <Property Name="LeadTime" Type="Double" />
           <Property Name="Discontinue" Type="Boolean" />
           <Property Name="InActive" Type="Boolean" />
@@ -1376,6 +1390,11 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="Commodity" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="Commodity" ToRole="PickupDetail" />
           <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Commodity" ToRole="Batch" />
+          <Property Name="Volume" Type="Double" Nullable="false" />
+          <Property Name="PiecePerCarton" Type="Int32" Nullable="false" />
+          <Property Name="CartonPerPallet" Type="Int32" Nullable="false" />
+          <Property Name="NoExpiryDate" Type="Int32" Nullable="false" />
+          <Property Name="IsPailLabel" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1853,14 +1872,22 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Batch" EntitySet="Batches" />
           </AssociationSet>
           <FunctionImport Name="OnlineCartonEditable" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="OnlinePackEditable" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="OnlinePackUpdateEntryStatus">
             <Parameter Name="OnlinePackIDs" Mode="In" Type="String" />
             <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BatchEditable" ReturnType="Collection(String)">
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBatchIndexes" ReturnType="Collection(TotalSmartCodingModel.BatchIndex)">
+            <Parameter Name="AspUserID" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
@@ -2831,6 +2858,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="IsDefault" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Batches_Commodities">
           <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -2856,6 +2884,29 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="BatchIndex">
+          <Property Type="Int32" Name="BatchID" Nullable="false" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="true" />
+          <Property Type="String" Name="Reference" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="FillingLineID" Nullable="false" />
+          <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="OfficialCode" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PiecePerCarton" Nullable="false" />
+          <Property Type="Int32" Name="CartonPerPallet" Nullable="false" />
+          <Property Type="Int32" Name="NoExpiryDate" Nullable="false" />
+          <Property Type="Boolean" Name="IsPailLabel" Nullable="false" />
+          <Property Type="String" Name="LastPackNo" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="LastCartonNo" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="LastPalletNo" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="EditedDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2865,6 +2916,11 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Commodities">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Commodity">
               <MappingFragment StoreEntitySet="Commodities">
+                <ScalarProperty Name="IsPailLabel" ColumnName="IsPailLabel" />
+                <ScalarProperty Name="NoExpiryDate" ColumnName="NoExpiryDate" />
+                <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
+                <ScalarProperty Name="PiecePerCarton" ColumnName="PiecePerCarton" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
                 <ScalarProperty Name="Specifycation" ColumnName="Specifycation" />
                 <ScalarProperty Name="IsRegularCheckUps" ColumnName="IsRegularCheckUps" />
                 <ScalarProperty Name="HSCode" ColumnName="HSCode" />
@@ -3543,6 +3599,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -3563,6 +3620,34 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <FunctionImportMapping FunctionImportName="OnlineCartonEditable" FunctionName="TotalSmartCodingModel.Store.OnlineCartonEditable" />
           <FunctionImportMapping FunctionImportName="OnlinePackEditable" FunctionName="TotalSmartCodingModel.Store.OnlinePackEditable" />
           <FunctionImportMapping FunctionImportName="OnlinePackUpdateEntryStatus" FunctionName="TotalSmartCodingModel.Store.OnlinePackUpdateEntryStatus" />
+          <FunctionImportMapping FunctionImportName="BatchEditable" FunctionName="TotalSmartCodingModel.Store.BatchEditable" />
+          <FunctionImportMapping FunctionImportName="GetBatchIndexes" FunctionName="TotalSmartCodingModel.Store.GetBatchIndexes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchIndex">
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
+                <ScalarProperty Name="PiecePerCarton" ColumnName="PiecePerCarton" />
+                <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
+                <ScalarProperty Name="NoExpiryDate" ColumnName="NoExpiryDate" />
+                <ScalarProperty Name="IsPailLabel" ColumnName="IsPailLabel" />
+                <ScalarProperty Name="LastPackNo" ColumnName="LastPackNo" />
+                <ScalarProperty Name="LastCartonNo" ColumnName="LastCartonNo" />
+                <ScalarProperty Name="LastPalletNo" ColumnName="LastPalletNo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

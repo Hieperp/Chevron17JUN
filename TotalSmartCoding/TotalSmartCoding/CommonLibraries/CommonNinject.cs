@@ -26,6 +26,11 @@ using TotalCore.Repositories.Inventories;
 using TotalSmartCoding.Builders.Inventories;
 using TotalSmartCoding.ViewModels.Inventories;
 using TotalSmartCoding.ViewModels.Sales;
+using TotalCore.Services.Productions;
+using TotalService.Productions;
+using TotalDAL.Repositories.Productions;
+using TotalCore.Repositories.Productions;
+using TotalDTO.Productions;
 //using TotalDAL.Repositories.Inventories;
 
 //using TotalService.Inventories;
@@ -70,10 +75,9 @@ namespace TotalSmartCoding.CommonLibraries
                 Kernel.Bind<IGoodsReceiptAPIRepository>().To<GoodsReceiptAPIRepository>();
                 Kernel.Bind<IGoodsReceiptViewModelSelectListBuilder>().To<GoodsReceiptViewModelSelectListBuilder>();
                 Kernel.Bind<GoodsReceiptViewModel>().ToSelf();
+
+
                 
-
-
-
 
                 Kernel.Bind<IAspNetUserSelectListBuilder>().To<AspNetUserSelectListBuilder>();
                 Kernel.Bind<IPaymentTermSelectListBuilder>().To<PaymentTermSelectListBuilder>();
@@ -81,6 +85,31 @@ namespace TotalSmartCoding.CommonLibraries
 
                 Kernel.Bind<IAspNetUserRepository>().To<AspNetUserRepository>();
                 Kernel.Bind<IPaymentTermRepository>().To<PaymentTermRepository>();
+
+
+
+
+
+
+
+
+
+                Kernel.Bind<IBatchRepository>().To<BatchRepository>();
+                Kernel.Bind<IBatchAPIRepository>().To<BatchAPIRepository>();
+
+
+
+                Kernel.Bind<IOnlinePackService>().To<OnlinePackService>();
+                Kernel.Bind<IOnlinePackRepository>().To<OnlinePackRepository>();
+
+                Kernel.Bind<IOnlineCartonService>().To<OnlineCartonService>();
+                Kernel.Bind<IOnlineCartonRepository>().To<OnlineCartonRepository>();
+
+                Kernel.Bind<IOnlinePalletService>().To<OnlinePalletService>();
+                Kernel.Bind<IOnlinePalletRepository>().To<OnlinePalletRepository>();
+
+                Kernel.Bind<FillingLineData>().ToSelf();
+
 
 
 

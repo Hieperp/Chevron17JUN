@@ -14,6 +14,8 @@ using TotalSmartCoding.Views.Commons;
 
 using TotalSmartCoding.Views.Sales;
 using TotalSmartCoding.Views.Inventories;
+using TotalSmartCoding.Views.Productions;
+
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -190,6 +192,10 @@ namespace TotalSmartCoding.Views.Mains
                     this.toolStripButtonPrintPreview.Visible = printable;
                     this.toolStripButtonPrintPreview.Enabled = printable;
                     this.toolStripSeparatorPrint.Visible = printable;
+
+
+
+
                 }
             }
             catch (Exception exception)
@@ -387,6 +393,36 @@ namespace TotalSmartCoding.Views.Mains
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             OpenTestView();
+        }
+
+        private void MasterMdi_Load(object sender, EventArgs e)
+        {
+            //this.toolStripMDIMain.Visible = false;
+
+            SmartCoding mainServerInterface = new SmartCoding();
+            mainServerInterface.MdiParent = this;
+            mainServerInterface.WindowState = FormWindowState.Maximized;
+            mainServerInterface.Show();
+
+
+
+            this.toolStripButtonEscape.Visible = false;
+            this.toolStripButtonLoad.Visible = false;
+            this.toolStripButtonNew.Visible = false;
+            this.toolStripButtonEdit.Visible = false;
+            this.toolStripButtonSave.Visible = false;
+            this.toolStripButtonDelete.Visible = false;
+            this.toolStripButtonImport.Visible = false;
+            this.toolStripButtonExport.Visible = false;
+            this.toolStripSeparatorImport.Visible = false;
+            this.toolStripButtonVerify.Visible = false;
+            this.toolStripSeparatorVerify.Visible = false;
+            this.toolStripButtonPrint.Visible = false;
+            this.toolStripButtonPrintPreview.Visible = false;
+            this.toolStripSeparatorPrint.Visible = false;
+
+            this.toolStrip1.Visible = false;
+            this.naviBarModuleMaster.Visible = false;
         }
 
 

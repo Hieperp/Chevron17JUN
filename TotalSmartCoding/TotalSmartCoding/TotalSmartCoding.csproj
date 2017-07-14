@@ -96,7 +96,8 @@
     <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
     <Compile Include="CommonLibraries\CommonNinject.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
-    <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIsController.cs" />
+    <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIController.cs" />
+    <Compile Include="Controllers\APIs\Productions\BatchAPIController.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ControllersExtensions.cs" />

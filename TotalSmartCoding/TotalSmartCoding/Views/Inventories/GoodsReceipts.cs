@@ -42,7 +42,7 @@ namespace TotalSmartCoding.Views.Inventories
             this.FastObjectListView = this.fastObjectListViewIndex;
 
             var goodsReceiptAPIRepository = CommonNinject.Kernel.Get<IGoodsReceiptAPIRepository>();
-            GoodsReceiptAPIsController goodsReceiptAPIsController = new GoodsReceiptAPIsController(goodsReceiptAPIRepository);
+            GoodsReceiptAPIController goodsReceiptAPIsController = new GoodsReceiptAPIController(goodsReceiptAPIRepository);
 
             this.fastObjectListViewIndex.SetObjects(goodsReceiptAPIsController.GetGoodsReceiptIndexes());
 

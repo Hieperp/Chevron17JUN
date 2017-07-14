@@ -11,6 +11,8 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 
+using Ninject;
+
 //using Global.Class.Library;
 //using BusinessLogicLayer;
 //using BusinessLogicLayer.InkjetDominoPrinter;
@@ -24,7 +26,13 @@ using TotalBase;
 using TotalSmartCoding.CommonLibraries.BP;
 using TotalDTO.Productions;
 
-namespace TotalSmartCoding
+using TotalSmartCoding.Controllers.Productions;
+using TotalCore.Services.Productions;
+using TotalCore.Repositories.Productions;
+using TotalSmartCoding.Controllers.APIs.Productions;
+using TotalModel.Models;
+
+namespace TotalSmartCoding.Views.Productions
 {
     /// <summary>
     /// "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\Ssms.exe"
@@ -49,7 +57,7 @@ namespace TotalSmartCoding
 
         
 
-        private BarcodeScannerBLL barcodeScannerMCU;
+        private ScannerController barcodeScannerMCU;
         private Thread barcodeScannerMCUThread;
 
 
@@ -125,14 +133,13 @@ namespace TotalSmartCoding
 
 
 
-                
-
+                BatchAPIController batchAPIController = new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+                BatchIndex activeBatchIndex = batchAPIController.GetActiveBatchIndex();
 
                 this.dataGridViewCartonList.AutoGenerateColumns = false;
 
 
-                //FillingLineData
-                this.fillingLineData = new FillingLineData();
+                this.fillingLineData = new FillingLineData() { ProductID = activeBatchIndex.CommodityID, ProductCode = activeBatchIndex.CommodityCode, ProductCodeOriginal = activeBatchIndex.OfficialCode, BatchNo = activeBatchIndex.Code, MonthSerialNumber = activeBatchIndex.LastPackNo, MonthCartonNumber = activeBatchIndex.LastPackNo, NoExpiryDate = activeBatchIndex.NoExpiryDate, BatchSerialNumber = "000001", BatchCartonNumber = "900001" };
 
                 this.toolStripTextBoxFillingLineID.TextBox.DataBindings.Add("Text", this.fillingLineData, "FillingLineName");
                 this.toolStripTextBoxProductID.TextBox.DataBindings.Add("Text", this.fillingLineData, "ProductCode");
@@ -160,8 +167,7 @@ namespace TotalSmartCoding
 
 
                 //Barcode Scanner
-                barcodeScannerMCU = new BarcodeScannerBLL(this.fillingLineData);
-
+                this.barcodeScannerMCU = new ScannerController(CommonNinject.Kernel.Get<FillingLineData>(), CommonNinject.Kernel.Get<IOnlinePackService>(), CommonNinject.Kernel.Get<IOnlineCartonService>(), CommonNinject.Kernel.Get<IOnlinePalletService>());
                 barcodeScannerMCU.PropertyChanged += new PropertyChangedEventHandler(InkjetDominoPrinter_PropertyChanged);
 
 
@@ -575,20 +581,20 @@ namespace TotalSmartCoding
         /// <param name="e"></param>
         private void dataGridViewMatchingPackList_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && this.dataGridViewMatchingPackList.CurrentCell != null)
-            {
-                try
-                {                //Handle exception for PackInOneCarton
-                    string selectedBarcode = "";
-                    int packID = this.GetPackID(this.dataGridViewMatchingPackList.CurrentCell, out selectedBarcode);
-                    if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.barcodeScannerMCU.RemoveItemInMatchingPackList(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception exception)
-                {
-                    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-                }
-            }
+            //if (e.KeyCode == Keys.Delete && this.dataGridViewMatchingPackList.CurrentCell != null)
+            //{
+            //    try
+            //    {                //Handle exception for PackInOneCarton
+            //        string selectedBarcode = "";
+            //        int packID = this.GetPackID(this.dataGridViewMatchingPackList.CurrentCell, out selectedBarcode);
+            //        if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+            //            if (this.barcodeScannerMCU.RemoveItemInMatchingPackList(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
+            //    catch (Exception exception)
+            //    {
+            //        GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            //    }
+            //}
         }
 
         /// <summary>
@@ -598,20 +604,20 @@ namespace TotalSmartCoding
         /// <param name="e"></param>
         private void dataGridViewPackInOneCarton_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && this.dataGridViewPackInOneCarton.CurrentCell != null)
-            {
-                try
-                {                //Handle exception for PackInOneCarton
-                    string selectedBarcode = "";
-                    int packID = this.GetPackID(this.dataGridViewPackInOneCarton.CurrentCell, out selectedBarcode);
-                    if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.barcodeScannerMCU.RemoveItemInPackInOneCarton(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception exception)
-                {
-                    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-                }
-            }
+            //if (e.KeyCode == Keys.Delete && this.dataGridViewPackInOneCarton.CurrentCell != null)
+            //{
+            //    try
+            //    {                //Handle exception for PackInOneCarton
+            //        string selectedBarcode = "";
+            //        int packID = this.GetPackID(this.dataGridViewPackInOneCarton.CurrentCell, out selectedBarcode);
+            //        if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+            //            if (this.barcodeScannerMCU.RemoveItemInPackInOneCarton(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
+            //    catch (Exception exception)
+            //    {
+            //        GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            //    }
+            //}
         }
 
         /// <summary>
@@ -846,15 +852,15 @@ namespace TotalSmartCoding
 
         private void toolStripButtonMessageCount_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (MessageBox.Show("Are you sure you want to reallocate the matching pack queue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                    this.barcodeScannerMCU.ReAllocation();
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
+            //try
+            //{
+            //    if (MessageBox.Show("Are you sure you want to reallocate the matching pack queue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+            //        this.barcodeScannerMCU.ReAllocation();
+            //}
+            //catch (Exception exception)
+            //{
+            //    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            //}
         }
 
 

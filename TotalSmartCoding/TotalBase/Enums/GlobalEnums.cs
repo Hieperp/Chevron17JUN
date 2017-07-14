@@ -44,6 +44,9 @@
             OnlinePallet = 28006,
 
 
+            Batch = 28106,
+
+
             Customer = 8001,
             Commodity = 8002,
             Promotion = 8003,

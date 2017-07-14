@@ -15,11 +15,11 @@ using TotalBase;
 
 namespace TotalSmartCoding.Controllers.APIs.Inventories
 {
-    public class GoodsReceiptAPIsController
+    public class GoodsReceiptAPIController
     {
         private readonly IGoodsReceiptAPIRepository goodsReceiptAPIRepository;
 
-        public GoodsReceiptAPIsController(IGoodsReceiptAPIRepository goodsReceiptAPIRepository)
+        public GoodsReceiptAPIController(IGoodsReceiptAPIRepository goodsReceiptAPIRepository)
         {
             this.goodsReceiptAPIRepository = goodsReceiptAPIRepository;
         }

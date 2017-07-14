@@ -328,6 +328,15 @@ namespace TotalModel.Models
 
 
 
+    public partial class Batch : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.BatchID; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+    }
+
     public partial class OnlinePack : IPrimitiveEntity, IBaseEntity
     {
         public int GetID() { return this.OnlinePackID; }

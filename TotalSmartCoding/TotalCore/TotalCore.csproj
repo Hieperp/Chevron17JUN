@@ -57,6 +57,7 @@
     <Compile Include="Repositories\IGenericRepository.cs" />
     <Compile Include="Repositories\IGenericWithDetailRepository.cs" />
     <Compile Include="Repositories\Inventories\IGoodsReceiptRepository.cs" />
+    <Compile Include="Repositories\Productions\IBatchRepository.cs" />
     <Compile Include="Repositories\Productions\IOnlineCartonRepository.cs" />
     <Compile Include="Repositories\Productions\IOnlinePackRepository.cs" />
     <Compile Include="Repositories\Productions\IOnlinePalletRepository.cs" />

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TotalBase;
+using TotalCore.Services.Productions;
 using TotalDTO.Productions;
 using TotalService.Productions;
 using TotalSmartCoding.CommonLibraries.BP;
@@ -59,11 +60,11 @@ namespace TotalSmartCoding.Controllers.Productions
         //Servernme + database name
         //Toolbar enable
 
-        private OnlinePackService onlinePackService;
-        private OnlineCartonService onlineCartonService;
-        private OnlinePalletService onlinePalletService;
+        private IOnlinePackService onlinePackService;
+        private IOnlineCartonService onlineCartonService;
+        private IOnlinePalletService onlinePalletService;
 
-        public ScannerController(FillingLineData fillingLineData, OnlinePackService onlinePackService, OnlineCartonService onlineCartonService, OnlinePalletService onlinePalletService)
+        public ScannerController(FillingLineData fillingLineData, IOnlinePackService onlinePackService, IOnlineCartonService onlineCartonService, IOnlinePalletService onlinePalletService)
         {
             try
             {
