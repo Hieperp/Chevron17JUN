@@ -301,7 +301,7 @@ namespace TotalDTO.Productions
                 DataRow dataRow = dataTableAllElements.NewRow(); //add row for each sub queue
                 for (int i = 0; i < maxSubQueueCount; i++)
                 {//Zero base queue element
-                    //CẦN PHẢI XEM XÉT::  if (subQueue.Count > i) dataRow[i] = subQueue.ElementAt<TBarcodeDTO>(i).Code + GlobalVariables.doubleTabChar + GlobalVariables.doubleTabChar + subQueue.ElementAt<TBarcodeDTO>(i).PackID; //Fill data row
+                    if (subQueue.Count > i) dataRow[i] = subQueue.ElementAt<TBarcodeDTO>(i).Code + GlobalVariables.doubleTabChar + GlobalVariables.doubleTabChar + subQueue.ElementAt<TBarcodeDTO>(i).GetID(); //Fill data row
                 }
                 dataTableAllElements.Rows.Add(dataRow);
             }

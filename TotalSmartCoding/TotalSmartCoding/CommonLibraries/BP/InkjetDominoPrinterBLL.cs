@@ -636,7 +636,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         {
             this.privateFillingLineData = this.FillingLineData.ShallowClone();
 
-
+            return;
             string stringReadFrom = ""; bool lPrinterReady = false;
             bool ReadyToPrint = false; bool HeadEnable = false;
 

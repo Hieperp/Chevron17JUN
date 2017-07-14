@@ -12,6 +12,8 @@ using TotalDTO.Commons;
 
 using TotalSmartCoding.ViewModels.Sales;
 using TotalSmartCoding.ViewModels.Inventories;
+using TotalDTO.Productions;
+using TotalSmartCoding.ViewModels.Productions;
 
 namespace TotalSmartCoding.CommonLibraries
 {
@@ -41,6 +43,22 @@ namespace TotalSmartCoding.CommonLibraries
                 cfg.CreateMap<GoodsReceiptPrimitiveDTO, GoodsReceipt>();
                 cfg.CreateMap<GoodsReceiptViewDetail, GoodsReceiptDetailDTO>();
                 cfg.CreateMap<GoodsReceiptDetailDTO, GoodsReceiptDetail>();
+
+
+
+                cfg.CreateMap<OnlinePack, OnlinePackViewModel>();
+                cfg.CreateMap<OnlinePack, OnlinePackDTO>();
+                cfg.CreateMap<OnlinePackPrimitiveDTO, OnlinePack>();
+
+
+                cfg.CreateMap<OnlineCarton, OnlineCartonViewModel>();
+                cfg.CreateMap<OnlineCarton, OnlineCartonDTO>();
+                cfg.CreateMap<OnlineCartonPrimitiveDTO, OnlineCarton>();
+
+
+                cfg.CreateMap<OnlinePallet, OnlinePalletViewModel>();
+                cfg.CreateMap<OnlinePallet, OnlinePalletDTO>();
+                cfg.CreateMap<OnlinePalletPrimitiveDTO, OnlinePallet>();
 
 
 

@@ -10,6 +10,9 @@ namespace TotalDAL.Repositories.Productions
             : base(totalSmartCodingEntities)
         {
         }
-        public void UpdateEntryStatus(string onlinePackIDs, GlobalVariables.BarcodeStatus barcodeStatus){}
+        public void UpdateEntryStatus(string onlinePackIDs, GlobalVariables.BarcodeStatus barcodeStatus)
+        {
+            this.TotalSmartCodingEntities.OnlinePackUpdateEntryStatus(onlinePackIDs, (int) barcodeStatus);
+        }
     }
 }

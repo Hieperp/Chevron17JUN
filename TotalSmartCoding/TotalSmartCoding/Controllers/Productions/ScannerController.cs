@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ninject;
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO.Ports;
@@ -13,6 +15,13 @@ using TotalCore.Services.Productions;
 using TotalDTO.Productions;
 using TotalService.Productions;
 using TotalSmartCoding.CommonLibraries.BP;
+
+using TotalBase.Enums;
+using TotalSmartCoding.ViewModels.Productions;
+using TotalSmartCoding.Builders.Productions;
+using TotalSmartCoding.CommonLibraries;
+
+using TotalSmartCoding.Controllers.Productions;
 
 namespace TotalSmartCoding.Controllers.Productions
 {
@@ -60,11 +69,11 @@ namespace TotalSmartCoding.Controllers.Productions
         //Servernme + database name
         //Toolbar enable
 
-        private IOnlinePackService onlinePackService;
-        private IOnlineCartonService onlineCartonService;
-        private IOnlinePalletService onlinePalletService;
+        private OnlinePackController onlinePackService;
+        private OnlineCartonController onlineCartonService;
+        private OnlinePalletController onlinePalletService;
 
-        public ScannerController(FillingLineData fillingLineData, IOnlinePackService onlinePackService, IOnlineCartonService onlineCartonService, IOnlinePalletService onlinePalletService)
+        public ScannerController(FillingLineData fillingLineData)
         {
             try
             {
@@ -76,11 +85,9 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.ipAddress = IPAddress.Parse(GlobalVariables.IpAddress(this.BarcodeScannerName));
 
 
-
-
-                this.onlinePackService = onlinePackService;
-                this.onlineCartonService = onlineCartonService;
-                this.onlinePalletService = onlinePalletService;
+                this.onlinePackService = new OnlinePackController(CommonNinject.Kernel.Get<IOnlinePackService>(), CommonNinject.Kernel.Get<IOnlinePackViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<OnlinePackViewModel>());
+                this.onlineCartonService = new OnlineCartonController(CommonNinject.Kernel.Get<IOnlineCartonService>(), CommonNinject.Kernel.Get<IOnlineCartonViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<OnlineCartonViewModel>());
+                this.onlinePalletService = new OnlinePalletController(CommonNinject.Kernel.Get<IOnlinePalletService>(), CommonNinject.Kernel.Get<IOnlinePalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<OnlinePalletViewModel>());
 
 
 
@@ -114,7 +121,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                 this.matchingPackList = new BarcodeQueue<OnlinePackDTO>(GlobalVariables.NoItemDiverter());
                 this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>();
-                this.cartonDataTable =  new BarcodeQueue<OnlineCartonDTO>();
+                this.cartonDataTable = new BarcodeQueue<OnlineCartonDTO>();
                 this.OnlinePalletQueue = new BarcodeQueue<OnlinePalletDTO>();
             }
             catch (Exception exception)
@@ -324,28 +331,32 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                this.MainStatus = "Try to connect....";
-
-                if (GlobalVariables.PortName != "COM 0")
+                if (GlobalEnums.OnTestOnly)
+                    this.StartPrint();
+                else
                 {
-                    if (this.serialPort.IsOpen) this.serialPort.Close();
-                    this.serialPort.Open();
+                    this.MainStatus = "Try to connect....";
 
-                    if (!this.serialPort.IsOpen) throw new System.InvalidOperationException("NMVN: Can not connect to COMPORT: " + this.serialPort.PortName);
-                }
-
-
-                if (connectMatchingScanner)
-                {
-                    this.barcodeTcpClient = new TcpClient();
-
-                    if (!this.barcodeTcpClient.Connected)
+                    if (GlobalVariables.PortName != "COM 0")
                     {
-                        this.barcodeTcpClient.Connect(this.IpAddress, this.PortNumber);
-                        this.barcodeNetworkStream = barcodeTcpClient.GetStream();
+                        if (this.serialPort.IsOpen) this.serialPort.Close();
+                        this.serialPort.Open();
+
+                        if (!this.serialPort.IsOpen) throw new System.InvalidOperationException("NMVN: Can not connect to COMPORT: " + this.serialPort.PortName);
+                    }
+
+
+                    if (connectMatchingScanner)
+                    {
+                        this.barcodeTcpClient = new TcpClient();
+
+                        if (!this.barcodeTcpClient.Connected)
+                        {
+                            this.barcodeTcpClient.Connect(this.IpAddress, this.PortNumber);
+                            this.barcodeNetworkStream = barcodeTcpClient.GetStream();
+                        }
                     }
                 }
-
 
                 this.LedGreenOn = true;
                 this.LedAmberOn = false;
@@ -409,14 +420,20 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                this.barcodeNetworkStream.ReadTimeout = 120; //Default = -1; 
+                if (GlobalEnums.OnTestOnly)
+                    if ((DateTime.Now.Second % 4) == 0) stringReadFrom = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReadFrom = "";
+                else
+                {
+                    this.barcodeNetworkStream.ReadTimeout = 120; //Default = -1; 
 
-                stringReadFrom = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
+                    stringReadFrom = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
 
-                this.barcodeNetworkStream.ReadTimeout = -1; //Default = -1
+                    this.barcodeNetworkStream.ReadTimeout = -1; //Default = -1
 
-                if (stringReadFrom != "") this.MainStatus = stringReadFrom;
+                    if (stringReadFrom != "") this.MainStatus = stringReadFrom;
 
+
+                }
                 return stringReadFrom != "";
             }
 
@@ -454,9 +471,9 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                OnlinePackDTO onlinePackDTO = new OnlinePackDTO() { QueueID = queueID, Code = code };
+                OnlinePackViewModel onlinePackDTO = new OnlinePackViewModel() { QueueID = queueID, Code = code };
 
-                if (this.onlinePackService.Save(onlinePackDTO))
+                if (this.onlinePackService.onlinePackService.Save(onlinePackDTO))
                     return onlinePackDTO;
                 else
                 {
@@ -466,7 +483,7 @@ namespace TotalSmartCoding.Controllers.Productions
             }
             catch (System.Exception exception)
             {
-                throw new Exception(exception.Message + " [" + code + "]");
+                throw new Exception("Insufficient save pack: " + exception.Message + " [" + code + "]");
             }
         }
 
@@ -483,8 +500,8 @@ namespace TotalSmartCoding.Controllers.Productions
 
                     OnlineCartonDTO onlineCartonDTO = new OnlineCartonDTO() { Code = cartonCode };
 
-                    this.onlineCartonService.ServiceBag["OnlinePackIDs"] = this.packInOneCarton.EntityIDs; //VERY IMPORTANT: NEED TO ADD OnlinePackIDs TO NEW OnlineCartonDTO
-                    if (this.onlineCartonService.Save(onlineCartonDTO))
+                    this.onlineCartonService.onlineCartonService.ServiceBag["OnlinePackIDs"] = this.packInOneCarton.EntityIDs; //VERY IMPORTANT: NEED TO ADD OnlinePackIDs TO NEW OnlineCartonDTO
+                    if (this.onlineCartonService.onlineCartonService.Save(onlineCartonDTO))
                         this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>(); //CLEAR AFTER ADD TO OnlineCartonDTO
                     else
                         throw new Exception("Insufficient save carton: " + onlineCartonDTO.Code);
@@ -589,7 +606,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                         matchingPackListChanged = true;
                                         packInOneCartonChanged = true;
 
-                                        if (!this.onlinePackService.UpdateEntryStatus(this.packInOneCarton.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.onlinePackService.ServiceTag;
+                                        if (!this.onlinePackService.onlinePackService.UpdateEntryStatus(this.packInOneCarton.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.onlinePackService.onlinePackService.ServiceTag;
                                     }
                                 }
                             }

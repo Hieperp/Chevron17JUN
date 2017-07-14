@@ -31,6 +31,8 @@ using TotalService.Productions;
 using TotalDAL.Repositories.Productions;
 using TotalCore.Repositories.Productions;
 using TotalDTO.Productions;
+using TotalSmartCoding.Builders.Productions;
+using TotalSmartCoding.ViewModels.Productions;
 //using TotalDAL.Repositories.Inventories;
 
 //using TotalService.Inventories;
@@ -99,14 +101,23 @@ namespace TotalSmartCoding.CommonLibraries
 
 
 
+
                 Kernel.Bind<IOnlinePackService>().To<OnlinePackService>();
                 Kernel.Bind<IOnlinePackRepository>().To<OnlinePackRepository>();
+                Kernel.Bind<IOnlinePackViewModelSelectListBuilder>().To<OnlinePackViewModelSelectListBuilder>();
+                Kernel.Bind<OnlinePackViewModel>().ToSelf();
 
                 Kernel.Bind<IOnlineCartonService>().To<OnlineCartonService>();
                 Kernel.Bind<IOnlineCartonRepository>().To<OnlineCartonRepository>();
+                Kernel.Bind<IOnlineCartonViewModelSelectListBuilder>().To<OnlineCartonViewModelSelectListBuilder>();
+                Kernel.Bind<OnlineCartonViewModel>().ToSelf();
 
                 Kernel.Bind<IOnlinePalletService>().To<OnlinePalletService>();
                 Kernel.Bind<IOnlinePalletRepository>().To<OnlinePalletRepository>();
+                Kernel.Bind<IOnlinePalletViewModelSelectListBuilder>().To<OnlinePalletViewModelSelectListBuilder>();
+                Kernel.Bind<OnlinePalletViewModel>().ToSelf();
+
+
 
                 Kernel.Bind<FillingLineData>().ToSelf();
 

@@ -9,5 +9,7 @@
         public int EntryStatusID { get; set; }
 
         public int QueueID { get; set; } //JUST FOR OnlinePackDTO ONLY
+
+        public override int PreparedPersonID { get { return 1; } }
     }
 }
