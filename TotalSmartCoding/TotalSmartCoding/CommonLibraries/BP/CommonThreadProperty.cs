@@ -14,7 +14,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 {
     public class CommonThreadProperty : NotifyPropertyChangeObject
     {
-        private FillingLineData fillingLineData;
+        private FillingData fillingLineData;
 
         private bool loopRoutine = false;
 
@@ -28,7 +28,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         #region Public Properties
 
 
-        public FillingLineData FillingLineData
+        public FillingData FillingLineData
         {
             get
             {

@@ -25,7 +25,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
         private GlobalVariables.DominoPrinterName dominoPrinterNameID;
 
-        private FillingLineData privateFillingLineData;
+        private FillingData privateFillingLineData;
 
 
         private IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
@@ -39,7 +39,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
         #region Contructor
 
-        public InkjetDominoPrinterBLL(GlobalVariables.DominoPrinterName dominoPrinterNameID, FillingLineData fillingLineData, bool isLaser)
+        public InkjetDominoPrinterBLL(GlobalVariables.DominoPrinterName dominoPrinterNameID, FillingData fillingLineData, bool isLaser)
         {
 
             try
@@ -114,11 +114,11 @@ namespace TotalSmartCoding.CommonLibraries.BP
         public void StopPrint() { this.OnPrinting = false; }
 
 
-        public string BatchSerialNumber { get { return this.privateFillingLineData.BatchSerialNumber; } }
+        public string LastPackNo { get { return this.privateFillingLineData.LastPackNo; } }
 
         public string MonthSerialNumber { get { return this.privateFillingLineData.MonthSerialNumber; } }
 
-        public string BatchCartonNumber { get { return this.privateFillingLineData.BatchCartonNumber; } }
+        public string LastCartonNo { get { return this.privateFillingLineData.LastCartonNo; } }
 
         public string MonthCartonNumber { get { return this.privateFillingLineData.MonthCartonNumber; } }
 
@@ -131,14 +131,14 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
-        private string FirstMessageLine(bool isReadableText) //Only DominoPrinterName.CartonInkJet: HAS SERIAL NUMBER (BUT WILL BE UPDATE MANUAL FOR EACH CARTON - BECAUSE: [EAN BARCODE] DOES NOT ALLOW INSERT SERIAL NUMBER) ===> FOR THIS: BatchSerialNumber FOR EVERY PACK: NEVER USE
+        private string FirstMessageLine(bool isReadableText) //Only DominoPrinterName.CartonInkJet: HAS SERIAL NUMBER (BUT WILL BE UPDATE MANUAL FOR EACH CARTON - BECAUSE: [EAN BARCODE] DOES NOT ALLOW INSERT SERIAL NUMBER) ===> FOR THIS: LastPackNo FOR EVERY PACK: NEVER USE
         {
-            return (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet && isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") + " " : "") + this.privateFillingLineData.BatchNo + (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet ? "/" + "  " + "/" + this.privateFillingLineData.BatchCartonNumber.Substring(2) : "");
+            return (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet && isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") + " " : "") + this.privateFillingLineData.BatchCode + (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet ? "/" + "  " + "/" + this.privateFillingLineData.LastCartonNo.Substring(2) : "");
         }
 
         private string SecondMessageLine(bool isReadableText)
         {
-            return (isReadableText ? this.privateFillingLineData.NoExpiryDate.ToString("00") : "") + (!isReadableText ? this.privateFillingLineData.ProductCode + " " : "NSX") + DateTime.Now.ToString("dd/MM/yy");
+            return (isReadableText ? this.privateFillingLineData.NoExpiryDate.ToString("00") : "") + (!isReadableText ? this.privateFillingLineData.CommodityCode + " " : "NSX") + DateTime.Now.ToString("dd/MM/yy");
             //return "NSX " + GlobalVariables.charESC + "/n/1/A/" + GlobalVariables.charESC + "/n/1/F/" + GlobalVariables.charESC + "/n/1/D/";
         }
 
@@ -152,21 +152,21 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 serialNumberFormat = this.privateFillingLineData.MonthCartonNumber.Substring(1); //---Dont use counter (This will be updated MANUALLY for each carton)
 
 
-            //return this.privateFillingLineData.ProductCode + serialNumberFormat;
-            return (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || isReadableText ? this.privateFillingLineData.ProductCode : "") + (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || !isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") : "") + "/" + this.privateFillingLineData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
+            //return this.privateFillingLineData.CommodityCode + serialNumberFormat;
+            return (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || isReadableText ? this.privateFillingLineData.CommodityCode : "") + (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || !isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") : "") + "/" + this.privateFillingLineData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
         }
 
 
 
         //#region TEST CHEVRON
-        //private string FirstMessageLine(bool isReadableText) //Only DominoPrinterName.CartonInkJet: HAS SERIAL NUMBER (BUT WILL BE UPDATE MANUAL FOR EACH CARTON - BECAUSE: [EAN BARCODE] DOES NOT ALLOW INSERT SERIAL NUMBER) ===> FOR THIS: BatchSerialNumber FOR EVERY PACK: NEVER USE
+        //private string FirstMessageLine(bool isReadableText) //Only DominoPrinterName.CartonInkJet: HAS SERIAL NUMBER (BUT WILL BE UPDATE MANUAL FOR EACH CARTON - BECAUSE: [EAN BARCODE] DOES NOT ALLOW INSERT SERIAL NUMBER) ===> FOR THIS: LastPackNo FOR EVERY PACK: NEVER USE
         //{
-        //    return (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet && isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") + " " : "") + this.privateFillingLineData.BatchNo + (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet ? "/" + "  " + "/" + this.privateFillingLineData.BatchCartonNumber.Substring(2) : "");
+        //    return (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet && isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") + " " : "") + this.privateFillingLineData.BatchNo + (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet ? "/" + "  " + "/" + this.privateFillingLineData.LastCartonNo.Substring(2) : "");
         //}
 
         //private string SecondMessageLine(bool isReadableText)
         //{
-        //    return (isReadableText ? this.privateFillingLineData.NoExpiryDate.ToString("00") : "") + (!isReadableText ? this.privateFillingLineData.ProductCode + " " : "NSX") + DateTime.Now.ToString("dd/MM/yy");
+        //    return (isReadableText ? this.privateFillingLineData.NoExpiryDate.ToString("00") : "") + (!isReadableText ? this.privateFillingLineData.CommodityCode + " " : "NSX") + DateTime.Now.ToString("dd/MM/yy");
         //    //return "NSX " + GlobalVariables.charESC + "/n/1/A/" + GlobalVariables.charESC + "/n/1/F/" + GlobalVariables.charESC + "/n/1/D/";
         //}
 
@@ -182,7 +182,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         //        serialNumberFormat = this.privateFillingLineData.MonthCartonNumber.Substring(1); //---Dont use counter (This will be updated MANUALLY for each carton)
 
 
-        //    return (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || isReadableText ? this.privateFillingLineData.ProductCode : "") + (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || !isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") : "") + "/" + this.privateFillingLineData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
+        //    return (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || isReadableText ? this.privateFillingLineData.CommodityCode : "") + (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || !isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") : "") + "/" + this.privateFillingLineData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
         //}
 
         //#endregion TEST CHEVRON
@@ -286,7 +286,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 //           GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + thirdMessageLine + "/ " + DateTime.Now.ToString("dd/MM/yy");
 
 
-                return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/6/" + this.ThirdMessageLine(1, false) + "/" + this.privateFillingLineData.BatchCartonNumber.Substring(2) + GlobalVariables.charESC + "/q/0" +
+                return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/6/" + this.ThirdMessageLine(1, false) + "/" + this.privateFillingLineData.LastCartonNo.Substring(2) + GlobalVariables.charESC + "/q/0" +
                            GlobalVariables.charESC + "u/1/  " + this.FirstMessageLine(true) + "/ " + this.privateFillingLineData.NoExpiryDate.ToString("00") + "/" + //First Line
                            GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true) + "/ " + DateTime.Now.ToString("dd/MM/yy");
 
@@ -298,7 +298,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             if (isSerialNumber)
                 return this.privateFillingLineData.MonthSerialNumber;
             else
-                return this.privateFillingLineData.ProductCode + this.privateFillingLineData.SettingMonthID.ToString("00") + this.privateFillingLineData.FillingLineCode;
+                return this.privateFillingLineData.CommodityCode + this.privateFillingLineData.SettingMonthID.ToString("00") + this.privateFillingLineData.FillingLineCode;
         }//NOTE: NEVER CHANGE THIS FUNCTION WITHOUT HAVE A LOOK AT this.WholeMessageLine
 
 
@@ -333,7 +333,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         //        //           GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + thirdMessageLine + "/ " + DateTime.Now.ToString("dd/MM/yy");
 
 
-        //        return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/6/" + this.ThirdMessageLine(1, false) + "/" + this.privateFillingLineData.BatchCartonNumber.Substring(2) + GlobalVariables.charESC + "/q/0" +
+        //        return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/6/" + this.ThirdMessageLine(1, false) + "/" + this.privateFillingLineData.LastCartonNo.Substring(2) + GlobalVariables.charESC + "/q/0" +
         //                   GlobalVariables.charESC + "u/1/  " + this.FirstMessageLine(true) + "/ " + this.privateFillingLineData.NoExpiryDate.ToString("00") + "/" + //First Line
         //                   GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true) + "/ " + DateTime.Now.ToString("dd/MM/yy");
 
@@ -345,7 +345,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         //    if (isSerialNumber)
         //        return this.privateFillingLineData.MonthSerialNumber;
         //    else
-        //        return this.privateFillingLineData.ProductCode + this.privateFillingLineData.SettingMonthID.ToString("00") + this.privateFillingLineData.FillingLineCode;
+        //        return this.privateFillingLineData.CommodityCode + this.privateFillingLineData.SettingMonthID.ToString("00") + this.privateFillingLineData.FillingLineCode;
         //}//NOTE: NEVER CHANGE THIS FUNCTION WITHOUT HAVE A LOOK AT this.WholeMessageLine
 
         #endregion Message Configuration
@@ -921,15 +921,15 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 {
                                     this.MainStatus = "PrintingAcknowledge";
 
-                                    //Manual increase BatchCartonNumber & MonthCartonNumber
-                                    this.privateFillingLineData.BatchCartonNumber = (int.Parse(this.privateFillingLineData.BatchCartonNumber) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
+                                    //Manual increase LastCartonNo & MonthCartonNumber
+                                    this.privateFillingLineData.LastCartonNo = (int.Parse(this.privateFillingLineData.LastCartonNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
                                     this.privateFillingLineData.MonthCartonNumber = (int.Parse(this.privateFillingLineData.MonthCartonNumber) + 1).ToString("0000000").Substring(1);
 
                                     Thread.Sleep(20); this.WriteToStream(GlobalVariables.charESC + "/S001/" + this.WholeMessageLine() + "/" + GlobalVariables.charEOT);//Required 20ms? For sure only, this maybe no need
                                     if (this.ReadFromStream(ref stringReadFrom, true)) Thread.Sleep(300); //else throw new System.InvalidOperationException("NMVN: Can not set message: " + stringReadFrom);
 
-                                    //If place this COMMAND BEFORE increase BatchCartonNumber & MonthCartonNumber, It will show the printed value on User Interface
-                                    this.NotifyPropertyChanged("BatchCartonNumber"); //this.NotifyPropertyChanged("MonthCartonNumber"); //Just NotifyPropertyChanged only, no need to duplicate
+                                    //If place this COMMAND BEFORE increase LastCartonNo & MonthCartonNumber, It will show the printed value on User Interface
+                                    this.NotifyPropertyChanged("LastCartonNo"); //this.NotifyPropertyChanged("MonthCartonNumber"); //Just NotifyPropertyChanged only, no need to duplicate
                                 }
                         }
 

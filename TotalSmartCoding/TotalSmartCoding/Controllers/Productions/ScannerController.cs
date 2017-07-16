@@ -32,7 +32,7 @@ namespace TotalSmartCoding.Controllers.Productions
         public bool MyTest; //Test only
         public bool MyHold;//Test only
 
-        private FillingLineData privateFillingLineData;
+        private FillingData privateFillingData;
 
         private TcpClient barcodeTcpClient;
         private NetworkStream barcodeNetworkStream;
@@ -73,12 +73,12 @@ namespace TotalSmartCoding.Controllers.Productions
         private FillingCartonController fillingCartonService;
         private FillingPalletController fillingPalletService;
 
-        public ScannerController(FillingLineData fillingLineData)
+        public ScannerController(FillingData fillingData)
         {
             try
             {
-                base.FillingLineData = fillingLineData;
-                this.privateFillingLineData = this.FillingLineData.ShallowClone();
+                base.FillingData = fillingData;
+                this.privateFillingData = this.FillingData.ShallowClone();
 
                 this.barcodeScannerName = GlobalVariables.BarcodeScannerName.MatchingScanner;
 
@@ -141,11 +141,11 @@ namespace TotalSmartCoding.Controllers.Productions
 
                 //HIEP*******************************22-MAY-2017.BEGIN
                 ////////////--------------DON'T LOAD. THIS IS VERY OK, AND READY TO LOAD PACK IF NEEDED.
-                //////////////Initialize MatchingPackList and PackInOneCarton (of the this.FillingLineData.FillingLineID ONLY)
+                //////////////Initialize MatchingPackList and PackInOneCarton (of the this.FillingData.FillingLineID ONLY)
                 //////this.PackDataTable = this.PackTableAdapter.GetData();
                 //////foreach (DataDetail.DataDetailPackRow packRow in this.PackDataTable)
                 //////{
-                //////    if (packRow.FillingLineID == (int)this.FillingLineData.FillingLineID)
+                //////    if (packRow.FillingLineID == (int)this.FillingData.FillingLineID)
                 //////    {
                 //////        FillingPackDTO messageData = new FillingPackDTO(packRow.PackBarcode);
                 //////        messageData.PackID = packRow.PackID;
@@ -264,13 +264,13 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        public string BatchSerialNumber { get { return this.privateFillingLineData.BatchSerialNumber; } }
+        public string LastPackNo { get { return this.privateFillingData.LastPackNo; } }
 
-        public string MonthSerialNumber { get { return this.privateFillingLineData.MonthSerialNumber; } }
+        public string MonthSerialNumber { get { return this.privateFillingData.MonthSerialNumber; } }
 
-        public string BatchCartonNumber { get { return this.privateFillingLineData.BatchCartonNumber; } }
+        public string LastCartonNo { get { return this.privateFillingData.LastCartonNo; } }
 
-        public string MonthCartonNumber { get { return this.privateFillingLineData.MonthCartonNumber; } }
+        public string MonthCartonNumber { get { return this.privateFillingData.MonthCartonNumber; } }
 
         public int MatchingPackCount { get { return this.matchingPackList.Count; } }
         public int PackInOneCartonCount { get { return this.packInOneCarton.Count; } }
@@ -556,7 +556,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public void ThreadRoutine()
         {
-            this.privateFillingLineData = this.FillingLineData.ShallowClone();
+            this.privateFillingData = this.FillingData.ShallowClone();
 
             string stringReadFrom = ""; bool matchingPackListChanged = false; bool packInOneCartonChanged = false;
 
@@ -566,13 +566,13 @@ namespace TotalSmartCoding.Controllers.Productions
             try
             {
 
-                if (this.Connect(this.FillingLineData.FillingLineID != GlobalVariables.FillingLine.Pail)) this.serialPort.NewLine = GlobalVariables.charETX.ToString(); else throw new System.InvalidOperationException("NMVN: Can not connect to comport.");
+                if (this.Connect(this.FillingData.FillingLineID != GlobalVariables.FillingLine.Pail)) this.serialPort.NewLine = GlobalVariables.charETX.ToString(); else throw new System.InvalidOperationException("NMVN: Can not connect to comport.");
 
                 while (this.LoopRoutine)    //MAIN LOOP. STOP WHEN PRESS DISCONNECT
                 {
                     this.MainStatus = this.OnPrinting ? "Scanning..." : "Ready to scan";
 
-                    if (this.FillingLineData.FillingLineID != GlobalVariables.FillingLine.Pail)
+                    if (this.FillingData.FillingLineID != GlobalVariables.FillingLine.Pail)
                     {
 
                         #region Read every pack
@@ -712,14 +712,14 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.lastStringBarcode = receivedBarcode;
 
 
-                            MatchingAndAddCarton(receivedBarcode + (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail ? " " + this.privateFillingLineData.BatchSerialNumber : ""));
+                            MatchingAndAddCarton(receivedBarcode + (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail ? " " + this.privateFillingData.LastPackNo : ""));
 
 
 
-                            if (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail)
+                            if (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail)
                             {//ONLY FOR PAIL LINE: BECAUSE: With PAIL Line: use CartonScanner (datalogic) to read Packbarcode
-                                this.privateFillingLineData.BatchSerialNumber = (int.Parse(this.privateFillingLineData.BatchSerialNumber) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
-                                this.NotifyPropertyChanged("BatchSerialNumber"); //APPEND TO receivedBarcode, and then: Increase BatchSerialNumber by 1 PROGRAMMATICALLY BY SOFTWARE
+                                this.privateFillingData.LastPackNo = (int.Parse(this.privateFillingData.LastPackNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
+                                this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
                             }
 
 
@@ -743,7 +743,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                if (this.FillingLineData.FillingLineID != GlobalVariables.FillingLine.Pail) //FillingLine.Pail: No need to read [Blank]
+                if (this.FillingData.FillingLineID != GlobalVariables.FillingLine.Pail) //FillingLine.Pail: No need to read [Blank]
                 {
                     if (e.EventType == SerialPinChange.CDChanged && this.OnPrinting)
                     {

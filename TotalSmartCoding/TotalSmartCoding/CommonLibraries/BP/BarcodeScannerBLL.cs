@@ -26,7 +26,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         public bool MyTest; //Test only
         public bool MyHold;//Test only
 
-        private FillingLineData privateFillingLineData;
+        private FillingData privateFillingLineData;
 
         private TcpClient barcodeTcpClient;
         private NetworkStream barcodeNetworkStream;
@@ -63,7 +63,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         //Toolbar enable
 
 
-        public BarcodeScannerBLL(FillingLineData fillingLineData)
+        public BarcodeScannerBLL(FillingData fillingLineData)
         {
             try
             {
@@ -259,11 +259,11 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
-        public string BatchSerialNumber { get { return this.privateFillingLineData.BatchSerialNumber; } }
+        public string LastPackNo { get { return this.privateFillingLineData.LastPackNo; } }
 
         public string MonthSerialNumber { get { return this.privateFillingLineData.MonthSerialNumber; } }
 
-        public string BatchCartonNumber { get { return this.privateFillingLineData.BatchCartonNumber; } }
+        public string LastCartonNo { get { return this.privateFillingLineData.LastCartonNo; } }
 
         public string MonthCartonNumber { get { return this.privateFillingLineData.MonthCartonNumber; } }
 
@@ -624,7 +624,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 {
                                     lock (this.matchingPackList)
                                     {
-                                        MessageData messageData = this.AddDataDetailPack(receivedBarcode + " " + this.privateFillingLineData.BatchSerialNumber, this.matchingPackList.NextPackSubQueueID);
+                                        MessageData messageData = this.AddDataDetailPack(receivedBarcode + " " + this.privateFillingLineData.LastPackNo, this.matchingPackList.NextPackSubQueueID);
                                         if (messageData != null)
                                         {
                                             this.matchingPackList.Enqueue(messageData);
@@ -632,8 +632,8 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                         }
                                     }
 
-                                    this.privateFillingLineData.BatchSerialNumber = (int.Parse(this.privateFillingLineData.BatchSerialNumber) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
-                                    this.NotifyPropertyChanged("BatchSerialNumber"); //APPEND TO receivedBarcode, and then: Increase BatchSerialNumber by 1 PROGRAMMATICALLY BY SOFTWARE
+                                    this.privateFillingLineData.LastPackNo = (int.Parse(this.privateFillingLineData.LastPackNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
+                                    this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
 
                                 }
                             }
@@ -723,14 +723,14 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 this.lastStringBarcode = receivedBarcode;
 
 
-                            MatchingAndAddCarton(receivedBarcode + (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail ? " " + this.privateFillingLineData.BatchSerialNumber : ""));
+                            MatchingAndAddCarton(receivedBarcode + (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail ? " " + this.privateFillingLineData.LastPackNo : ""));
 
 
 
                             if (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail)
                             {//ONLY FOR PAIL LINE: BECAUSE: With PAIL Line: use CartonScanner (datalogic) to read Packbarcode
-                                this.privateFillingLineData.BatchSerialNumber = (int.Parse(this.privateFillingLineData.BatchSerialNumber) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
-                                this.NotifyPropertyChanged("BatchSerialNumber"); //APPEND TO receivedBarcode, and then: Increase BatchSerialNumber by 1 PROGRAMMATICALLY BY SOFTWARE
+                                this.privateFillingLineData.LastPackNo = (int.Parse(this.privateFillingLineData.LastPackNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
+                                this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
                             }
 
 

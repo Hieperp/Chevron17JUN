@@ -1816,7 +1816,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="PickupDetail" EntitySet="PickupDetails" />
           </AssociationSet>
           <FunctionImport Name="FillingCartonEditable" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FillingCartonSaveRelative">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
@@ -1824,7 +1824,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <Parameter Name="FillingPackIDs" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="FillingPackEditable" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FillingPackUpdateEntryStatus">
             <Parameter Name="FillingPackIDs" Mode="In" Type="String" />
@@ -2497,7 +2497,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="Int32" Name="FillingLineID" Nullable="false" />
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
           <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="OfficialCode" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="CartonPerPallet" Nullable="false" />
           <Property Type="Int32" Name="NoExpiryDate" Nullable="false" />
           <Property Type="Boolean" Name="IsPailLabel" Nullable="false" />
@@ -2512,6 +2511,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="PackPerCarton" Nullable="false" />
+          <Property Type="String" Name="CommodityOfficialCode" Nullable="false" MaxLength="50" />
         </ComplexType>
         <EntityType Name="Commodity">
           <Key>
@@ -3478,7 +3478,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
                 <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
                 <ScalarProperty Name="NoExpiryDate" ColumnName="NoExpiryDate" />
                 <ScalarProperty Name="IsPailLabel" ColumnName="IsPailLabel" />
@@ -3493,6 +3492,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
                 <ScalarProperty Name="PackPerCarton" ColumnName="PackPerCarton" />
+                <ScalarProperty Name="CommodityOfficialCode" ColumnName="CommodityOfficialCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -10,7 +10,7 @@ namespace TotalSmartCoding.Controllers.Productions
 {
     public class CodingController : NotifyPropertyChangeObject
     {
-        private FillingLineData fillingLineData;
+        private FillingData fillingData;
 
         private bool loopRoutine = false;
 
@@ -24,16 +24,16 @@ namespace TotalSmartCoding.Controllers.Productions
         #region Public Properties
 
 
-        public FillingLineData FillingLineData
+        public FillingData FillingData
         {
             get
             {
-                return this.fillingLineData;
+                return this.fillingData;
             }
 
             protected set
             {
-                this.fillingLineData = value;
+                this.fillingData = value;
             }
         }
 

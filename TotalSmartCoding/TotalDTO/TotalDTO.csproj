@@ -82,7 +82,7 @@
     <Compile Include="Productions\BarcodeDTO.cs" />
     <Compile Include="Productions\BarcodeQueue.cs" />
     <Compile Include="Productions\CartonDTO.cs" />
-    <Compile Include="Productions\FillingLineData.cs" />
+    <Compile Include="Productions\FillingData.cs" />
     <Compile Include="Productions\PackDTO.cs" />
     <Compile Include="Productions\PalletDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

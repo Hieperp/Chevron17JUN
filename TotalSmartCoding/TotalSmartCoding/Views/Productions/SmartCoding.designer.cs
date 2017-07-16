@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SmartCoding));
             this.textBoxDigitStatus = new System.Windows.Forms.TextBox();
             this.dataGridViewMatchingPackList = new System.Windows.Forms.DataGridView();
@@ -101,27 +101,21 @@
             this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBoxProductID = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripTextBoxProductCodeOriginal = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxCommodityID = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxCommodityOfficialCode = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBoxBatchNo = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxBatchCode = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonStart = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBoxMonthSerialNo = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBoxBatchSerialNo = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxLastPackNo = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBoxMonthCartonNo = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxLastCartonNo = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBoxBatchCartonNo = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.textBoxLastPalletNo = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMatchingPackList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPackInOneCarton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCartonList)).BeginInit();
@@ -167,7 +161,7 @@
             this.textBoxDigitStatus.Name = "textBoxDigitStatus";
             this.textBoxDigitStatus.ReadOnly = true;
             this.textBoxDigitStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDigitStatus.Size = new System.Drawing.Size(124, 165);
+            this.textBoxDigitStatus.Size = new System.Drawing.Size(124, 143);
             this.textBoxDigitStatus.TabIndex = 3;
             // 
             // dataGridViewMatchingPackList
@@ -180,23 +174,23 @@
             this.dataGridViewMatchingPackList.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewMatchingPackList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewMatchingPackList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewMatchingPackList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewMatchingPackList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewMatchingPackList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewMatchingPackList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewMatchingPackList.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewMatchingPackList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewMatchingPackList.EnableHeadersVisualStyles = false;
             this.dataGridViewMatchingPackList.Location = new System.Drawing.Point(0, 0);
@@ -206,15 +200,15 @@
             this.dataGridViewMatchingPackList.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridViewMatchingPackList.RowHeadersVisible = false;
             this.dataGridViewMatchingPackList.RowHeadersWidth = 40;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMatchingPackList.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMatchingPackList.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewMatchingPackList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewMatchingPackList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewMatchingPackList.RowTemplate.Height = 47;
             this.dataGridViewMatchingPackList.RowTemplate.ReadOnly = true;
             this.dataGridViewMatchingPackList.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridViewMatchingPackList.Size = new System.Drawing.Size(837, 240);
+            this.dataGridViewMatchingPackList.Size = new System.Drawing.Size(837, 215);
             this.dataGridViewMatchingPackList.TabIndex = 8;
             this.dataGridViewMatchingPackList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewBarcodeList_CellFormatting);
             this.dataGridViewMatchingPackList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewBarcodeList_CellPainting);
@@ -234,23 +228,23 @@
             this.dataGridViewPackInOneCarton.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewPackInOneCarton.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewPackInOneCarton.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPackInOneCarton.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPackInOneCarton.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewPackInOneCarton.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewPackInOneCarton.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPackInOneCarton.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewPackInOneCarton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewPackInOneCarton.EnableHeadersVisualStyles = false;
             this.dataGridViewPackInOneCarton.Location = new System.Drawing.Point(0, 0);
@@ -260,15 +254,15 @@
             this.dataGridViewPackInOneCarton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridViewPackInOneCarton.RowHeadersVisible = false;
             this.dataGridViewPackInOneCarton.RowHeadersWidth = 40;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPackInOneCarton.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPackInOneCarton.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewPackInOneCarton.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewPackInOneCarton.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewPackInOneCarton.RowTemplate.Height = 47;
             this.dataGridViewPackInOneCarton.RowTemplate.ReadOnly = true;
             this.dataGridViewPackInOneCarton.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridViewPackInOneCarton.Size = new System.Drawing.Size(525, 240);
+            this.dataGridViewPackInOneCarton.Size = new System.Drawing.Size(525, 215);
             this.dataGridViewPackInOneCarton.TabIndex = 9;
             this.dataGridViewPackInOneCarton.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewBarcodeList_CellFormatting);
             this.dataGridViewPackInOneCarton.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewBarcodeList_CellPainting);
@@ -285,23 +279,23 @@
             this.dataGridViewCartonList.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewCartonList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewCartonList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCartonList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewCartonList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewCartonList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCartonList.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCartonList.DefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewCartonList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCartonList.EnableHeadersVisualStyles = false;
             this.dataGridViewCartonList.Location = new System.Drawing.Point(0, 39);
@@ -311,15 +305,15 @@
             this.dataGridViewCartonList.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridViewCartonList.RowHeadersVisible = false;
             this.dataGridViewCartonList.RowHeadersWidth = 40;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCartonList.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCartonList.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewCartonList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewCartonList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewCartonList.RowTemplate.Height = 47;
             this.dataGridViewCartonList.RowTemplate.ReadOnly = true;
             this.dataGridViewCartonList.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridViewCartonList.Size = new System.Drawing.Size(1363, 240);
+            this.dataGridViewCartonList.Size = new System.Drawing.Size(1363, 212);
             this.dataGridViewCartonList.TabIndex = 10;
             this.dataGridViewCartonList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewBarcodeList_CellFormatting);
             this.dataGridViewCartonList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewBarcodeList_CellPainting);
@@ -335,7 +329,7 @@
             this.textBoxCartonStatus.Name = "textBoxCartonStatus";
             this.textBoxCartonStatus.ReadOnly = true;
             this.textBoxCartonStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxCartonStatus.Size = new System.Drawing.Size(152, 165);
+            this.textBoxCartonStatus.Size = new System.Drawing.Size(152, 143);
             this.textBoxCartonStatus.TabIndex = 11;
             // 
             // timerEverySecond
@@ -347,7 +341,7 @@
             // splitContainerQuality
             // 
             this.splitContainerQuality.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerQuality.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerQuality.Location = new System.Drawing.Point(0, 75);
             this.splitContainerQuality.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainerQuality.Name = "splitContainerQuality";
             this.splitContainerQuality.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -361,8 +355,8 @@
             // 
             this.splitContainerQuality.Panel2.Controls.Add(this.splitContainerCarton);
             this.splitContainerQuality.Panel2MinSize = 0;
-            this.splitContainerQuality.Size = new System.Drawing.Size(1363, 741);
-            this.splitContainerQuality.SplitterDistance = 240;
+            this.splitContainerQuality.Size = new System.Drawing.Size(1363, 666);
+            this.splitContainerQuality.SplitterDistance = 215;
             this.splitContainerQuality.SplitterWidth = 1;
             this.splitContainerQuality.TabIndex = 24;
             // 
@@ -382,7 +376,7 @@
             // 
             this.splitContainerMatching.Panel2.Controls.Add(this.dataGridViewPackInOneCarton);
             this.splitContainerMatching.Panel2MinSize = 39;
-            this.splitContainerMatching.Size = new System.Drawing.Size(1363, 240);
+            this.splitContainerMatching.Size = new System.Drawing.Size(1363, 215);
             this.splitContainerMatching.SplitterDistance = 837;
             this.splitContainerMatching.SplitterWidth = 1;
             this.splitContainerMatching.TabIndex = 0;
@@ -405,8 +399,8 @@
             // 
             this.splitContainerCarton.Panel2.Controls.Add(this.splitContainerDigitInkJetPrinter);
             this.splitContainerCarton.Panel2MinSize = 39;
-            this.splitContainerCarton.Size = new System.Drawing.Size(1363, 500);
-            this.splitContainerCarton.SplitterDistance = 279;
+            this.splitContainerCarton.Size = new System.Drawing.Size(1363, 450);
+            this.splitContainerCarton.SplitterDistance = 251;
             this.splitContainerCarton.SplitterWidth = 1;
             this.splitContainerCarton.TabIndex = 0;
             // 
@@ -516,7 +510,7 @@
             // 
             this.splitContainerDigitInkJetPrinter.Panel2.Controls.Add(this.splitContainerBarcodeInkJetPrinter);
             this.splitContainerDigitInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerDigitInkJetPrinter.Size = new System.Drawing.Size(1363, 220);
+            this.splitContainerDigitInkJetPrinter.Size = new System.Drawing.Size(1363, 198);
             this.splitContainerDigitInkJetPrinter.SplitterDistance = 124;
             this.splitContainerDigitInkJetPrinter.SplitterWidth = 1;
             this.splitContainerDigitInkJetPrinter.TabIndex = 25;
@@ -613,7 +607,7 @@
             // 
             this.splitContainerBarcodeInkJetPrinter.Panel2.Controls.Add(this.splitContainerCartonInkJetPrinter);
             this.splitContainerBarcodeInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerBarcodeInkJetPrinter.Size = new System.Drawing.Size(1238, 220);
+            this.splitContainerBarcodeInkJetPrinter.Size = new System.Drawing.Size(1238, 198);
             this.splitContainerBarcodeInkJetPrinter.SplitterDistance = 203;
             this.splitContainerBarcodeInkJetPrinter.SplitterWidth = 1;
             this.splitContainerBarcodeInkJetPrinter.TabIndex = 0;
@@ -627,7 +621,7 @@
             this.textBoxBarcodeStatus.Name = "textBoxBarcodeStatus";
             this.textBoxBarcodeStatus.ReadOnly = true;
             this.textBoxBarcodeStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxBarcodeStatus.Size = new System.Drawing.Size(203, 165);
+            this.textBoxBarcodeStatus.Size = new System.Drawing.Size(203, 143);
             this.textBoxBarcodeStatus.TabIndex = 20;
             // 
             // toolStrip2
@@ -724,7 +718,7 @@
             this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.textBoxScannerStatus);
             this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.toolStrip4);
             this.splitContainerCartonInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerCartonInkJetPrinter.Size = new System.Drawing.Size(1034, 220);
+            this.splitContainerCartonInkJetPrinter.Size = new System.Drawing.Size(1034, 198);
             this.splitContainerCartonInkJetPrinter.SplitterDistance = 152;
             this.splitContainerCartonInkJetPrinter.SplitterWidth = 1;
             this.splitContainerCartonInkJetPrinter.TabIndex = 0;
@@ -814,7 +808,7 @@
             this.textBoxScannerStatus.Name = "textBoxScannerStatus";
             this.textBoxScannerStatus.ReadOnly = true;
             this.textBoxScannerStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxScannerStatus.Size = new System.Drawing.Size(881, 165);
+            this.textBoxScannerStatus.Size = new System.Drawing.Size(881, 143);
             this.textBoxScannerStatus.TabIndex = 22;
             // 
             // toolStrip4
@@ -960,27 +954,21 @@
             this.toolStripButtonSetting,
             this.toolStripSeparator5,
             this.toolStripLabel2,
-            this.toolStripTextBoxProductID,
-            this.toolStripTextBoxProductCodeOriginal,
+            this.textBoxCommodityID,
+            this.textBoxCommodityOfficialCode,
             this.toolStripLabel6,
-            this.toolStripTextBoxBatchNo,
+            this.textBoxBatchCode,
             this.toolStripSeparator6,
             this.toolStripButtonStart,
             this.toolStripButtonStop,
             this.toolStripSeparator4,
             this.toolStripLabel4,
-            this.toolStripTextBoxMonthSerialNo,
-            this.toolStripLabel3,
-            this.toolStripTextBoxBatchSerialNo,
+            this.textBoxLastPackNo,
             this.toolStripSeparator3,
             this.toolStripLabel5,
-            this.toolStripTextBoxMonthCartonNo,
+            this.textBoxLastCartonNo,
             this.toolStripLabel7,
-            this.toolStripTextBoxBatchCartonNo,
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4});
+            this.textBoxLastPalletNo});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
             this.toolStripChildForm.Name = "toolStripChildForm";
             this.toolStripChildForm.Size = new System.Drawing.Size(1363, 75);
@@ -1061,23 +1049,23 @@
             this.toolStripLabel2.Size = new System.Drawing.Size(60, 72);
             this.toolStripLabel2.Text = "Product";
             // 
-            // toolStripTextBoxProductID
+            // textBoxCommodityID
             // 
-            this.toolStripTextBoxProductID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxProductID.Name = "toolStripTextBoxProductID";
-            this.toolStripTextBoxProductID.ReadOnly = true;
-            this.toolStripTextBoxProductID.Size = new System.Drawing.Size(49, 75);
-            this.toolStripTextBoxProductID.Text = "515";
-            this.toolStripTextBoxProductID.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCommodityID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxCommodityID.Name = "textBoxCommodityID";
+            this.textBoxCommodityID.ReadOnly = true;
+            this.textBoxCommodityID.Size = new System.Drawing.Size(49, 75);
+            this.textBoxCommodityID.Text = "515";
+            this.textBoxCommodityID.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // toolStripTextBoxProductCodeOriginal
+            // textBoxCommodityOfficialCode
             // 
-            this.toolStripTextBoxProductCodeOriginal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxProductCodeOriginal.Name = "toolStripTextBoxProductCodeOriginal";
-            this.toolStripTextBoxProductCodeOriginal.ReadOnly = true;
-            this.toolStripTextBoxProductCodeOriginal.Size = new System.Drawing.Size(79, 75);
-            this.toolStripTextBoxProductCodeOriginal.Text = "8984568";
-            this.toolStripTextBoxProductCodeOriginal.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCommodityOfficialCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxCommodityOfficialCode.Name = "textBoxCommodityOfficialCode";
+            this.textBoxCommodityOfficialCode.ReadOnly = true;
+            this.textBoxCommodityOfficialCode.Size = new System.Drawing.Size(79, 75);
+            this.textBoxCommodityOfficialCode.Text = "8984568";
+            this.textBoxCommodityOfficialCode.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripLabel6
             // 
@@ -1085,14 +1073,14 @@
             this.toolStripLabel6.Size = new System.Drawing.Size(73, 72);
             this.toolStripLabel6.Text = "Batch No.";
             // 
-            // toolStripTextBoxBatchNo
+            // textBoxBatchCode
             // 
-            this.toolStripTextBoxBatchNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxBatchNo.Name = "toolStripTextBoxBatchNo";
-            this.toolStripTextBoxBatchNo.ReadOnly = true;
-            this.toolStripTextBoxBatchNo.Size = new System.Drawing.Size(86, 75);
-            this.toolStripTextBoxBatchNo.Text = "08889990";
-            this.toolStripTextBoxBatchNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxBatchCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxBatchCode.Name = "textBoxBatchCode";
+            this.textBoxBatchCode.ReadOnly = true;
+            this.textBoxBatchCode.Size = new System.Drawing.Size(86, 75);
+            this.textBoxBatchCode.Text = "08889990";
+            this.textBoxBatchCode.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripSeparator6
             // 
@@ -1131,35 +1119,17 @@
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(124, 72);
-            this.toolStripLabel4.Text = "Monthly Pack No.";
+            this.toolStripLabel4.Size = new System.Drawing.Size(66, 72);
+            this.toolStripLabel4.Text = "Pack No.";
             // 
-            // toolStripTextBoxMonthSerialNo
+            // textBoxLastPackNo
             // 
-            this.toolStripTextBoxMonthSerialNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxMonthSerialNo.Name = "toolStripTextBoxMonthSerialNo";
-            this.toolStripTextBoxMonthSerialNo.ReadOnly = true;
-            this.toolStripTextBoxMonthSerialNo.Size = new System.Drawing.Size(73, 75);
-            this.toolStripTextBoxMonthSerialNo.Text = "909808";
-            this.toolStripTextBoxMonthSerialNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(107, 72);
-            this.toolStripLabel3.Text = "Batch Pack No.";
-            // 
-            // toolStripTextBoxBatchSerialNo
-            // 
-            this.toolStripTextBoxBatchSerialNo.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripTextBoxBatchSerialNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxBatchSerialNo.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.toolStripTextBoxBatchSerialNo.Name = "toolStripTextBoxBatchSerialNo";
-            this.toolStripTextBoxBatchSerialNo.ReadOnly = true;
-            this.toolStripTextBoxBatchSerialNo.Size = new System.Drawing.Size(55, 75);
-            this.toolStripTextBoxBatchSerialNo.Text = "888888";
-            this.toolStripTextBoxBatchSerialNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxLastPackNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxLastPackNo.Name = "textBoxLastPackNo";
+            this.textBoxLastPackNo.ReadOnly = true;
+            this.textBoxLastPackNo.Size = new System.Drawing.Size(73, 75);
+            this.textBoxLastPackNo.Text = "909808";
+            this.textBoxLastPackNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripSeparator3
             // 
@@ -1169,76 +1139,32 @@
             // toolStripLabel5
             // 
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(138, 20);
-            this.toolStripLabel5.Text = "Monthly Carton No.";
+            this.toolStripLabel5.Size = new System.Drawing.Size(80, 72);
+            this.toolStripLabel5.Text = "Carton No.";
             // 
-            // toolStripTextBoxMonthCartonNo
+            // textBoxLastCartonNo
             // 
-            this.toolStripTextBoxMonthCartonNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxMonthCartonNo.Name = "toolStripTextBoxMonthCartonNo";
-            this.toolStripTextBoxMonthCartonNo.ReadOnly = true;
-            this.toolStripTextBoxMonthCartonNo.Size = new System.Drawing.Size(42, 27);
-            this.toolStripTextBoxMonthCartonNo.Text = "909808";
-            this.toolStripTextBoxMonthCartonNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxLastCartonNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxLastCartonNo.Name = "textBoxLastCartonNo";
+            this.textBoxLastCartonNo.ReadOnly = true;
+            this.textBoxLastCartonNo.Size = new System.Drawing.Size(73, 75);
+            this.textBoxLastCartonNo.Text = "909808";
+            this.textBoxLastCartonNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripLabel7
             // 
             this.toolStripLabel7.Name = "toolStripLabel7";
-            this.toolStripLabel7.Size = new System.Drawing.Size(121, 20);
-            this.toolStripLabel7.Text = "Batch Carton No.";
+            this.toolStripLabel7.Size = new System.Drawing.Size(73, 72);
+            this.toolStripLabel7.Text = "Pallet No.";
             // 
-            // toolStripTextBoxBatchCartonNo
+            // textBoxLastPalletNo
             // 
-            this.toolStripTextBoxBatchCartonNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxBatchCartonNo.Name = "toolStripTextBoxBatchCartonNo";
-            this.toolStripTextBoxBatchCartonNo.ReadOnly = true;
-            this.toolStripTextBoxBatchCartonNo.Size = new System.Drawing.Size(42, 27);
-            this.toolStripTextBoxBatchCartonNo.Text = "888888";
-            this.toolStripTextBoxBatchCartonNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.ToolTipText = "Start";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton2.Text = "toolStripButton2";
-            this.toolStripButton2.ToolTipText = "Stop";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.ToolTipText = "Don\'t play matching";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton4.Text = "toolStripButton4";
-            this.toolStripButton4.ToolTipText = "Pause";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            this.textBoxLastPalletNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxLastPalletNo.Name = "textBoxLastPalletNo";
+            this.textBoxLastPalletNo.ReadOnly = true;
+            this.textBoxLastPalletNo.Size = new System.Drawing.Size(73, 75);
+            this.textBoxLastPalletNo.Text = "888888";
+            this.textBoxLastPalletNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // SmartCoding
             // 
@@ -1315,10 +1241,8 @@
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxCurrentDate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxBatchSerialNo;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxMonthSerialNo;
+        private System.Windows.Forms.ToolStripTextBox textBoxLastPackNo;
         private System.Windows.Forms.DataGridView dataGridViewPackInOneCarton;
         private System.Windows.Forms.DataGridView dataGridViewCartonList;
         private System.Windows.Forms.TextBox textBoxCartonStatus;
@@ -1342,16 +1266,16 @@
         private System.Windows.Forms.ToolStripButton toolStripScannerLEDAmber;
         private System.Windows.Forms.ToolStripButton toolStripScannerLEDRed;
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxBatchNo;
+        private System.Windows.Forms.ToolStripTextBox textBoxBatchCode;
         private System.Windows.Forms.ToolStripLabel toolStripLabel7;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxBatchCartonNo;
+        private System.Windows.Forms.ToolStripTextBox textBoxLastPalletNo;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxMonthCartonNo;
+        private System.Windows.Forms.ToolStripTextBox textBoxLastCartonNo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Timer timerEverySecond;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxFillingLineID;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxProductID;
+        private System.Windows.Forms.ToolStripTextBox textBoxCommodityID;
         private System.Windows.Forms.ToolStripButton toolStripButtonSetting;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
@@ -1370,12 +1294,8 @@
         private System.Windows.Forms.ToolStripButton toolStripBarcodeOnPrinting;
         private System.Windows.Forms.ToolStripButton toolStripCartonOnPrinting;
         private System.Windows.Forms.ToolStripButton toolStripScannerOnPrinting;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripComboBox comboBoxEmptyCarton;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxProductCodeOriginal;
+        private System.Windows.Forms.ToolStripTextBox textBoxCommodityOfficialCode;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton toolStripMCUQuanlity;
         private System.Windows.Forms.ToolStripButton toolStripMCUMatching;

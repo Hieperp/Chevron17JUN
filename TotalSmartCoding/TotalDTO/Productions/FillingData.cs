@@ -5,29 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using TotalModel.Helpers;
 
-using TotalModel.Helpers;
 using TotalBase;
 
 namespace TotalDTO.Productions
 {
-    public class FillingLineData : NotifyPropertyChangeObject
+    public class FillingData : NotifyPropertyChangeObject
     {
 
-        private int productID;
-        private string productCode;
-        private string productCodeOriginal;
+        private int commodityID;
+        private string commodityCode;
+        private string commodityOfficialCode;
 
         private int noExpiryDate;
         private bool isPailLabel;
 
-        private string batchNo;
+        private string batchCode;
         private DateTime settingDate;
         private int settingMonthID;
 
 
         private string batchSerialNumber;
         private string monthSerialNumber;
-        private string batchCartonNumber;
+        private string lastCartonNo;
         private string monthCartonNumber;
         private string remarks;
 
@@ -50,10 +49,10 @@ namespace TotalDTO.Productions
 
         #region Contructor
 
-        public FillingLineData()
+        public FillingData()
         {
 
-            //DataTable defaultFillingLineData = ADODatabase.GetDataTable("SELECT FillingLineData.ProductID, ListProductName.ProductCode, ListProductName.ProductCodeOriginal, ListProductName.NoItemPerCarton, ListProductName.NoExpiryDate, ListProductName.IsPailLabel, FillingLineData.BatchNo, FillingLineData.SettingDate, FillingLineData.SettingMonthID, FillingLineData.BatchSerialNumber, FillingLineData.MonthSerialNumber, FillingLineData.BatchCartonNumber, FillingLineData.MonthCartonNumber FROM FillingLineData INNER JOIN ListProductName ON FillingLineData.ProductID = ListProductName.ProductID WHERE FillingLineData.FillingLineID = " + (int)this.FillingLineID + " AND FillingLineData.IsDefault = 1");
+            //DataTable defaultFillingLineData = ADODatabase.GetDataTable("SELECT FillingLineData.ProductID, ListProductName.ProductCode, ListProductName.ProductCodeOriginal, ListProductName.NoItemPerCarton, ListProductName.NoExpiryDate, ListProductName.IsPailLabel, FillingLineData.BatchNo, FillingLineData.SettingDate, FillingLineData.SettingMonthID, FillingLineData.LastPackNo, FillingLineData.MonthSerialNumber, FillingLineData.LastCartonNo, FillingLineData.MonthCartonNumber FROM FillingLineData INNER JOIN ListProductName ON FillingLineData.ProductID = ListProductName.ProductID WHERE FillingLineData.FillingLineID = " + (int)this.FillingLineID + " AND FillingLineData.IsDefault = 1");
 
             //if (defaultFillingLineData.Rows.Count > 0)
             //{
@@ -73,10 +72,10 @@ namespace TotalDTO.Productions
             //    this.SettingDate = DateTime.Parse(defaultFillingLineData.Rows[0]["SettingDate"].ToString());
             //    this.SettingMonthID = int.Parse(defaultFillingLineData.Rows[0]["SettingMonthID"].ToString());
 
-            //    this.BatchSerialNumber = defaultFillingLineData.Rows[0]["BatchSerialNumber"].ToString();
+            //    this.LastPackNo = defaultFillingLineData.Rows[0]["LastPackNo"].ToString();
             //    this.MonthSerialNumber = defaultFillingLineData.Rows[0]["MonthSerialNumber"].ToString();
 
-            //    this.BatchCartonNumber = defaultFillingLineData.Rows[0]["BatchCartonNumber"].ToString();
+            //    this.LastCartonNo = defaultFillingLineData.Rows[0]["LastCartonNo"].ToString();
             //    this.MonthCartonNumber = defaultFillingLineData.Rows[0]["MonthCartonNumber"].ToString();
 
             //    this.StartTracking();
@@ -110,16 +109,16 @@ namespace TotalDTO.Productions
 
         public int ProductID    //ResetSerialNumber
         {
-            get { return this.productID; }
+            get { return this.commodityID; }
             set
             {
-                if (this.productID != value)
+                if (this.commodityID != value)
                 {
-                    ApplyPropertyChange<FillingLineData, int>(ref this.productID, o => o.ProductID, value);
+                    ApplyPropertyChange<FillingData, int>(ref this.commodityID, o => o.ProductID, value);
 
-                    //DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchNo, BatchSerialNumber, MonthSerialNumber, BatchCartonNumber, MonthCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID);
+                    //DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchNo, LastPackNo, MonthSerialNumber, LastCartonNo, MonthCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID);
                     //if (dataTableFillingLineData.Rows.Count > 0)
-                    //    this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["BatchSerialNumber"].ToString() : "000001", dataTableFillingLineData.Rows[0]["MonthSerialNumber"].ToString(), dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["BatchCartonNumber"].ToString() : "900001", dataTableFillingLineData.Rows[0]["MonthCartonNumber"].ToString());
+                    //    this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["LastPackNo"].ToString() : "000001", dataTableFillingLineData.Rows[0]["MonthSerialNumber"].ToString(), dataTableFillingLineData.Rows[0]["BatchNo"].ToString() == this.BatchNo ? dataTableFillingLineData.Rows[0]["LastCartonNo"].ToString() : "900001", dataTableFillingLineData.Rows[0]["MonthCartonNumber"].ToString());
                     //else
                     //    this.ResetSerialNumber("000001", "000001", "900001", "900001");
                 }
@@ -127,16 +126,16 @@ namespace TotalDTO.Productions
         }
 
 
-        public string ProductCode
+        public string CommodityCode
         {
-            get { return this.productCode; }
-            set { ApplyPropertyChange<FillingLineData, string>(ref this.productCode, o => o.ProductCode, value); }
+            get { return this.commodityCode; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.commodityCode, o => o.CommodityCode, value); }
         }
 
-        public string ProductCodeOriginal
+        public string CommodityOfficialCode
         {
-            get { return this.productCodeOriginal; }
-            set { ApplyPropertyChange<FillingLineData, string>(ref this.productCodeOriginal, o => o.ProductCodeOriginal, value); }
+            get { return this.commodityOfficialCode; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.commodityOfficialCode, o => o.CommodityOfficialCode, value); }
         }
 
 
@@ -144,33 +143,33 @@ namespace TotalDTO.Productions
         public int NoExpiryDate
         {
             get { return this.noExpiryDate; }
-            set { ApplyPropertyChange<FillingLineData, int>(ref this.noExpiryDate, o => o.NoExpiryDate, value); }
+            set { ApplyPropertyChange<FillingData, int>(ref this.noExpiryDate, o => o.NoExpiryDate, value); }
         }
 
         public bool IsPailLabel
         {
             get { return this.isPailLabel; }
-            set { ApplyPropertyChange<FillingLineData, bool>(ref this.isPailLabel, o => o.IsPailLabel, value); }
+            set { ApplyPropertyChange<FillingData, bool>(ref this.isPailLabel, o => o.IsPailLabel, value); }
         }
 
 
         //-------------------------
 
 
-        public string BatchNo   //ResetSerialNumber
+        public string BatchCode   //ResetSerialNumber
         {
-            get { return this.batchNo; }
+            get { return this.batchCode; }
             set
             {
-                if (this.batchNo != value)
+                if (this.batchCode != value)
                 {
                     if (value.Length == 8)
                     {
-                        ApplyPropertyChange<FillingLineData, string>(ref this.batchNo, o => o.BatchNo, value);
+                        ApplyPropertyChange<FillingData, string>(ref this.batchCode, o => o.BatchCode, value);
 
-                        //DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchSerialNumber, BatchCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID + " AND BatchNo = " + this.BatchNo);
+                        //DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT LastPackNo, LastCartonNo FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID + " AND BatchNo = " + this.BatchNo);
                         //if (dataTableFillingLineData.Rows.Count > 0)
-                        //    this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["BatchSerialNumber"].ToString(), this.MonthSerialNumber, dataTableFillingLineData.Rows[0]["BatchCartonNumber"].ToString(), this.MonthCartonNumber);
+                        //    this.ResetSerialNumber(dataTableFillingLineData.Rows[0]["LastPackNo"].ToString(), this.MonthSerialNumber, dataTableFillingLineData.Rows[0]["LastCartonNo"].ToString(), this.MonthCartonNumber);
                         //else
                         //    this.ResetSerialNumber("000001", this.MonthSerialNumber, "900001", this.MonthCartonNumber);
                     }
@@ -188,7 +187,7 @@ namespace TotalDTO.Productions
             get { return this.settingDate; }
             set
             {
-                ApplyPropertyChange<FillingLineData, DateTime>(ref this.settingDate, o => o.SettingDate, value);
+                ApplyPropertyChange<FillingData, DateTime>(ref this.settingDate, o => o.SettingDate, value);
                 //this.SettingMonthID = GlobalStaticFunction.DateToContinuosMonth(this.SettingDate);
             }
         }
@@ -200,15 +199,15 @@ namespace TotalDTO.Productions
             {
                 if (this.settingMonthID != value)
                 {
-                    ApplyPropertyChange<FillingLineData, int>(ref this.settingMonthID, o => o.SettingMonthID, value);
-                    this.ResetSerialNumber(this.BatchSerialNumber, "000001", this.BatchCartonNumber, "900001");
+                    ApplyPropertyChange<FillingData, int>(ref this.settingMonthID, o => o.SettingMonthID, value);
+                    this.ResetSerialNumber(this.LastPackNo, "000001", this.LastCartonNo, "900001");
                 }
             }
         }
 
         //-------------------------
 
-        public string BatchSerialNumber
+        public string LastPackNo
         {
             get { return this.batchSerialNumber; }
 
@@ -219,7 +218,7 @@ namespace TotalDTO.Productions
                     int intValue = 0;
                     if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
-                        ApplyPropertyChange<FillingLineData, string>(ref this.batchSerialNumber, o => o.BatchSerialNumber, value);
+                        ApplyPropertyChange<FillingData, string>(ref this.batchSerialNumber, o => o.LastPackNo, value);
                     }
                     else
                     {
@@ -240,7 +239,7 @@ namespace TotalDTO.Productions
                     int intValue = 0;
                     if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
-                        ApplyPropertyChange<FillingLineData, string>(ref this.monthSerialNumber, o => o.MonthSerialNumber, value);
+                        ApplyPropertyChange<FillingData, string>(ref this.monthSerialNumber, o => o.MonthSerialNumber, value);
                     }
                     else
                     {
@@ -250,18 +249,18 @@ namespace TotalDTO.Productions
             }
         }
 
-        public string BatchCartonNumber
+        public string LastCartonNo
         {
-            get { return this.batchCartonNumber; }
+            get { return this.lastCartonNo; }
 
             set
             {
-                if (value != this.batchCartonNumber)
+                if (value != this.lastCartonNo)
                 {
                     int intValue = 0;
                     if (int.TryParse(value, out intValue) && value.Length == 6 && value.Substring(0, 1) == "9")
                     {
-                        ApplyPropertyChange<FillingLineData, string>(ref this.batchCartonNumber, o => o.BatchCartonNumber, value);
+                        ApplyPropertyChange<FillingData, string>(ref this.lastCartonNo, o => o.LastCartonNo, value);
                     }
                     else
                     {
@@ -282,7 +281,7 @@ namespace TotalDTO.Productions
                     int intValue = 0;
                     if (int.TryParse(value, out intValue) && value.Length == 6 && value.Substring(0, 1) == "9")
                     {
-                        ApplyPropertyChange<FillingLineData, string>(ref this.monthCartonNumber, o => o.MonthCartonNumber, value);
+                        ApplyPropertyChange<FillingData, string>(ref this.monthCartonNumber, o => o.MonthCartonNumber, value);
                     }
                     else
                     {
@@ -292,48 +291,37 @@ namespace TotalDTO.Productions
             }
         }
 
-
+        public string LastPalletNo { get; set; }
         //-------------------------
-
 
 
         public string Remarks
         {
-            get
-            {
-                return this.remarks;
-            }
-
-            set
-            {
-                if (value != this.remarks)
-                {
-                    this.remarks = value;
-                    this.NotifyPropertyChanged("Remarks");
-                }
-            }
+            get { return this.remarks; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.remarks, o => o.Remarks, value); }
         }
+
 
         #endregion Public Properties
 
         #region Method
 
-        public FillingLineData ShallowClone()
+        public FillingData ShallowClone()
         {
-            return (FillingLineData)this.MemberwiseClone();
+            return (FillingData)this.MemberwiseClone();
         }
 
-        private void ResetSerialNumber(string batchSerialNumber, string monthSerialNumber, string batchCartonNumber, string monthCartonNumber)
+        private void ResetSerialNumber(string batchSerialNumber, string monthSerialNumber, string LastCartonNo, string monthCartonNumber)
         {
-            if (this.BatchSerialNumber != batchSerialNumber) this.BatchSerialNumber = batchSerialNumber;
+            if (this.LastPackNo != batchSerialNumber) this.LastPackNo = batchSerialNumber;
             if (this.MonthSerialNumber != monthSerialNumber) this.MonthSerialNumber = monthSerialNumber;
-            if (this.BatchCartonNumber != batchCartonNumber) this.BatchCartonNumber = batchCartonNumber;
+            if (this.LastCartonNo != LastCartonNo) this.LastCartonNo = LastCartonNo;
             if (this.MonthCartonNumber != monthCartonNumber) this.MonthCartonNumber = monthCartonNumber;
         }
 
         public bool DataValidated()
         {
-            return this.FillingLineID != 0 && this.ProductID != 0 && this.BatchNo != "" & this.BatchSerialNumber != "" & this.MonthSerialNumber != "" & this.BatchCartonNumber != "" & this.MonthCartonNumber != "";
+            return this.FillingLineID != 0 && this.ProductID != 0 && this.BatchCode != "" & this.LastPackNo != "" & this.MonthSerialNumber != "" & this.LastCartonNo != "" & this.MonthCartonNumber != "";
         }
 
         public bool Update()
@@ -345,9 +333,9 @@ namespace TotalDTO.Productions
                 //                                                  "UPDATE FillingLineData SET BatchNo = N'" + this.BatchNo.ToString() + "', " +
                 //                                                                            " SettingDate = CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "', 103), " +
                 //                                                                            " SettingMonthID = " + this.SettingMonthID.ToString() + ", " +
-                //                                                                            " BatchSerialNumber = N'" + this.BatchSerialNumber.ToString() + "', " +
+                //                                                                            " LastPackNo = N'" + this.LastPackNo.ToString() + "', " +
                 //                                                                            " MonthSerialNumber = N'" + this.MonthSerialNumber.ToString() + "', " +
-                //                                                                            " BatchCartonNumber = N'" + this.BatchCartonNumber.ToString() + "', " +
+                //                                                                            " LastCartonNo = N'" + this.LastCartonNo.ToString() + "', " +
                 //                                                                            " MonthCartonNumber = N'" + this.MonthCartonNumber.ToString() + "', " +
                 //                                                                            " LastSerialDate = GetDate(), IsDefault = 1 " +
                 //                                                  "WHERE FillingLineID   =  " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID);
@@ -370,8 +358,8 @@ namespace TotalDTO.Productions
                 //if (rowsAffected <= 0) //Add New
                 //{
                 //    rowsAffected = ADODatabase.ExecuteTransaction("UPDATE FillingLineData SET IsDefault = 0 WHERE FillingLineID = " + (int)this.FillingLineID + "; " +
-                //                                                  "INSERT INTO FillingLineData (FillingLineID, ProductID, BatchNo, SettingDate, SettingMonthID, BatchSerialNumber, MonthSerialNumber, BatchCartonNumber, MonthCartonNumber, Remarks, LastSettingDate, LastSerialDate, IsDefault) " +
-                //                                                  "VALUES (" + (int)this.FillingLineID + ", " + this.ProductID + ", N'" + this.BatchNo + "', CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "',103), " + this.SettingMonthID.ToString() + ", N'" + this.BatchSerialNumber + "', N'" + this.MonthSerialNumber + "', N'" + this.BatchCartonNumber + "', N'" + this.MonthCartonNumber + "', N'" + this.Remarks + "', GetDate(), GetDate(), 1) ");
+                //                                                  "INSERT INTO FillingLineData (FillingLineID, ProductID, BatchNo, SettingDate, SettingMonthID, LastPackNo, MonthSerialNumber, LastCartonNo, MonthCartonNumber, Remarks, LastSettingDate, LastSerialDate, IsDefault) " +
+                //                                                  "VALUES (" + (int)this.FillingLineID + ", " + this.ProductID + ", N'" + this.BatchNo + "', CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "',103), " + this.SettingMonthID.ToString() + ", N'" + this.LastPackNo + "', N'" + this.MonthSerialNumber + "', N'" + this.LastCartonNo + "', N'" + this.MonthCartonNumber + "', N'" + this.Remarks + "', GetDate(), GetDate(), 1) ");
 
                 //    return rowsAffected > 0;
                 //}

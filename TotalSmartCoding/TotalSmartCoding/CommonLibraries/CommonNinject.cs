@@ -119,7 +119,7 @@ namespace TotalSmartCoding.CommonLibraries
 
 
 
-                Kernel.Bind<FillingLineData>().ToSelf();
+                Kernel.Bind<FillingData>().ToSelf();
 
 
 

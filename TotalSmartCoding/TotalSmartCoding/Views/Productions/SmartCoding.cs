@@ -66,7 +66,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-        private FillingLineData fillingLineData;
+        private FillingData fillingLineData;
 
 
         #endregion Declaration
@@ -88,13 +88,7 @@ namespace TotalSmartCoding.Views.Productions
 
             try
             {
-                //Test Only
-                this.toolStripButton1.Visible = GlobalVariables.MyTest;
-                this.toolStripButton2.Visible = GlobalVariables.MyTest;
-                this.toolStripButton3.Visible = GlobalVariables.MyTest;
-                this.toolStripButton4.Visible = GlobalVariables.MyTest;
-                //Test Only
-
+                
 
                 //DataTable aa = new DataTable();
                 //aa.Columns.Add("1");
@@ -137,19 +131,16 @@ namespace TotalSmartCoding.Views.Productions
                 BatchAPIController batchAPIController = new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>());
                 BatchIndex activeBatchIndex = batchAPIController.GetActiveBatchIndex();
 
-                //this.dataGridViewCartonList.AutoGenerateColumns = false;
-
-
-                this.fillingLineData = new FillingLineData() { ProductID = activeBatchIndex.CommodityID, ProductCode = activeBatchIndex.CommodityCode, ProductCodeOriginal = activeBatchIndex.OfficialCode, BatchNo = activeBatchIndex.Code, MonthSerialNumber = activeBatchIndex.LastPackNo, MonthCartonNumber = activeBatchIndex.LastPackNo, NoExpiryDate = activeBatchIndex.NoExpiryDate, BatchSerialNumber = "000001", BatchCartonNumber = "900001" };
+                this.fillingLineData = new FillingData() { ProductID = activeBatchIndex.CommodityID, CommodityCode = activeBatchIndex.CommodityCode, CommodityOfficialCode = activeBatchIndex.CommodityOfficialCode, BatchCode = activeBatchIndex.Code, MonthSerialNumber = activeBatchIndex.LastPackNo, MonthCartonNumber = activeBatchIndex.LastPackNo, NoExpiryDate = activeBatchIndex.NoExpiryDate, LastPackNo = "000001", LastCartonNo = "900001" };
 
                 this.toolStripTextBoxFillingLineID.TextBox.DataBindings.Add("Text", this.fillingLineData, "FillingLineName");
-                this.toolStripTextBoxProductID.TextBox.DataBindings.Add("Text", this.fillingLineData, "ProductCode");
-                this.toolStripTextBoxProductCodeOriginal.TextBox.DataBindings.Add("Text", this.fillingLineData, "ProductCodeOriginal");
-                this.toolStripTextBoxBatchNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "BatchNo");
-                this.toolStripTextBoxBatchSerialNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "BatchSerialNumber");
-                this.toolStripTextBoxMonthSerialNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "MonthSerialNumber");
-                this.toolStripTextBoxBatchCartonNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "BatchCartonNumber");
-                this.toolStripTextBoxMonthCartonNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "MonthCartonNumber");
+                this.textBoxCommodityID.TextBox.DataBindings.Add("Text", this.fillingLineData, "CommodityCode");
+                this.textBoxCommodityOfficialCode.TextBox.DataBindings.Add("Text", this.fillingLineData, "CommodityOfficialCode");
+                this.textBoxBatchCode.TextBox.DataBindings.Add("Text", this.fillingLineData, "BatchCode");
+                this.textBoxLastPackNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "LastPackNo");
+                this.textBoxLastCartonNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "LastCartonNo");
+                this.textBoxLastPalletNo.TextBox.DataBindings.Add("Text", this.fillingLineData, "LastPalletNo");
+                
 
 
 
@@ -168,7 +159,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
                 //Barcode Scanner
-                this.barcodeScannerMCU = new ScannerController(CommonNinject.Kernel.Get<FillingLineData>());
+                this.barcodeScannerMCU = new ScannerController(CommonNinject.Kernel.Get<FillingData>());
                 barcodeScannerMCU.PropertyChanged += new PropertyChangedEventHandler(InkjetDominoPrinter_PropertyChanged);
 
 
@@ -434,8 +425,8 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "MainStatus") { this.textBoxCartonStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.cartonInkjetDominoPrinter.MainStatus + "\r\n" + this.textBoxCartonStatus.Text; this.CutTextBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.toolStripCartonLEDGreen.Enabled = this.cartonInkjetDominoPrinter.LedGreenOn; this.toolStripCartonLEDAmber.Enabled = this.cartonInkjetDominoPrinter.LedAmberOn; this.toolStripCartonLEDRed.Enabled = this.cartonInkjetDominoPrinter.LedRedOn; return; }//if (this.cartonInkjetDominoPrinter.LedRedOn) this.StopPrint(); 
 
-                    if (e.PropertyName == "BatchCartonNumber") { this.fillingLineData.BatchCartonNumber = this.cartonInkjetDominoPrinter.BatchCartonNumber; this.fillingLineData.MonthCartonNumber = this.cartonInkjetDominoPrinter.MonthCartonNumber; this.fillingLineData.Update(); return; }
-                    if (e.PropertyName == "MonthCartonNumber") { this.fillingLineData.BatchCartonNumber = this.cartonInkjetDominoPrinter.BatchCartonNumber; this.fillingLineData.MonthCartonNumber = this.cartonInkjetDominoPrinter.MonthCartonNumber; this.fillingLineData.Update(); return; }
+                    if (e.PropertyName == "LastCartonNo") { this.fillingLineData.LastCartonNo = this.cartonInkjetDominoPrinter.LastCartonNo; this.fillingLineData.MonthCartonNumber = this.cartonInkjetDominoPrinter.MonthCartonNumber; this.fillingLineData.Update(); return; }
+                    if (e.PropertyName == "MonthCartonNumber") { this.fillingLineData.LastCartonNo = this.cartonInkjetDominoPrinter.LastCartonNo; this.fillingLineData.MonthCartonNumber = this.cartonInkjetDominoPrinter.MonthCartonNumber; this.fillingLineData.Update(); return; }
                 }
                 else if (sender.Equals(this.barcodeScannerMCU))
                 {
@@ -445,7 +436,7 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "LedMCU") { this.toolStripMCUQuanlity.Enabled = this.barcodeScannerMCU.LedMCUQualityOn; this.toolStripMCUMatching.Enabled = this.barcodeScannerMCU.LedMCUMatchingOn; this.toolStripMCUCarton.Enabled = this.barcodeScannerMCU.LedMCUCartonOn; return; }
 
 
-                    if (e.PropertyName == "BatchSerialNumber") { this.fillingLineData.BatchSerialNumber = this.barcodeScannerMCU.BatchSerialNumber; this.fillingLineData.Update(); return; }
+                    if (e.PropertyName == "LastPackNo") { this.fillingLineData.LastPackNo = this.barcodeScannerMCU.LastPackNo; this.fillingLineData.Update(); return; }
 
                     if (e.PropertyName == "MatchingPackList")
                     {
