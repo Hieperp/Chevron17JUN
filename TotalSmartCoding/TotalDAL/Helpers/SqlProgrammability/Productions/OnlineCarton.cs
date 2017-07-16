@@ -43,7 +43,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               SET         OnlineCartonID = NULL " + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME OnlinePackID PASS BY VARIBLE: OnlinePackIDs
             queryString = queryString + "               WHERE       OnlineCartonID = @EntityID AND OnlinePackID IN (SELECT Id FROM dbo.SplitToIntList (@OnlinePackIDs)) " + "\r\n";
 
-            queryString = queryString + "           IF @@ROWCOUNT <> (SELECT (LEN(@OnlinePackIDs) - LEN(REPLACE(@OnlinePackIDs, ',', '')))) " + "\r\n";
+            queryString = queryString + "           IF @@ROWCOUNT <> ((SELECT (LEN(@OnlinePackIDs) - LEN(REPLACE(@OnlinePackIDs, ',', '')))) + 1) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
             queryString = queryString + "                   DECLARE     @msg NVARCHAR(300) = N'System Error: Some pack does not exist!' ; " + "\r\n";
             queryString = queryString + "                   THROW       61001,  @msg, 1; " + "\r\n";

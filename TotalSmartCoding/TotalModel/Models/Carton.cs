@@ -37,7 +37,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons1 { get; set; }
         public virtual Carton Carton1 { get; set; }
-        public virtual Commodity Commodity { get; set; }
         public virtual FillingLine FillingLine { get; set; }
         public virtual Pallet Pallet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,5 +45,6 @@ namespace TotalModel.Models
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PickupDetail> PickupDetails { get; set; }
+        public virtual Commodity Commodity { get; set; }
     }
 }

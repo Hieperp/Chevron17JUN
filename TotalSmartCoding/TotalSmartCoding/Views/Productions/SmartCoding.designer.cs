@@ -29,45 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SmartCoding));
             this.textBoxDigitStatus = new System.Windows.Forms.TextBox();
             this.dataGridViewMatchingPackList = new System.Windows.Forms.DataGridView();
             this.dataGridViewPackInOneCarton = new System.Windows.Forms.DataGridView();
             this.dataGridViewCartonList = new System.Windows.Forms.DataGridView();
-            this.CartonBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack00Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack01Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack02Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack03Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack04Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack05Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack06Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack07Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack08Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack09Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack10Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack11Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack12Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack13Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack14Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack15Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack16Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack17Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack18Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack19Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack20Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack21Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack22Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack23Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxCartonStatus = new System.Windows.Forms.TextBox();
             this.timerEverySecond = new System.Windows.Forms.Timer(this.components);
             this.splitContainerQuality = new System.Windows.Forms.SplitContainer();
@@ -205,23 +180,23 @@
             this.dataGridViewMatchingPackList.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewMatchingPackList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewMatchingPackList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewMatchingPackList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewMatchingPackList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewMatchingPackList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewMatchingPackList.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewMatchingPackList.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewMatchingPackList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewMatchingPackList.EnableHeadersVisualStyles = false;
             this.dataGridViewMatchingPackList.Location = new System.Drawing.Point(0, 0);
@@ -231,9 +206,9 @@
             this.dataGridViewMatchingPackList.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridViewMatchingPackList.RowHeadersVisible = false;
             this.dataGridViewMatchingPackList.RowHeadersWidth = 40;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewMatchingPackList.RowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewMatchingPackList.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewMatchingPackList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewMatchingPackList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewMatchingPackList.RowTemplate.Height = 47;
@@ -259,23 +234,23 @@
             this.dataGridViewPackInOneCarton.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewPackInOneCarton.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewPackInOneCarton.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPackInOneCarton.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPackInOneCarton.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewPackInOneCarton.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewPackInOneCarton.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPackInOneCarton.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPackInOneCarton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewPackInOneCarton.EnableHeadersVisualStyles = false;
             this.dataGridViewPackInOneCarton.Location = new System.Drawing.Point(0, 0);
@@ -285,9 +260,9 @@
             this.dataGridViewPackInOneCarton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridViewPackInOneCarton.RowHeadersVisible = false;
             this.dataGridViewPackInOneCarton.RowHeadersWidth = 40;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewPackInOneCarton.RowsDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewPackInOneCarton.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewPackInOneCarton.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewPackInOneCarton.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewPackInOneCarton.RowTemplate.Height = 47;
@@ -306,297 +281,50 @@
             this.dataGridViewCartonList.AllowUserToDeleteRows = false;
             this.dataGridViewCartonList.AllowUserToResizeColumns = false;
             this.dataGridViewCartonList.AllowUserToResizeRows = false;
-            this.dataGridViewCartonList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewCartonList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridViewCartonList.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewCartonList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridViewCartonList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCartonList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
-            this.dataGridViewCartonList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CartonBarcode,
-            this.Pack00Barcode,
-            this.Pack01Barcode,
-            this.Pack02Barcode,
-            this.Pack03Barcode,
-            this.Pack04Barcode,
-            this.Pack05Barcode,
-            this.Pack06Barcode,
-            this.Pack07Barcode,
-            this.Pack08Barcode,
-            this.Pack09Barcode,
-            this.Pack10Barcode,
-            this.Pack11Barcode,
-            this.Pack12Barcode,
-            this.Pack13Barcode,
-            this.Pack14Barcode,
-            this.Pack15Barcode,
-            this.Pack16Barcode,
-            this.Pack17Barcode,
-            this.Pack18Barcode,
-            this.Pack19Barcode,
-            this.Pack20Barcode,
-            this.Pack21Barcode,
-            this.Pack22Barcode,
-            this.Pack23Barcode});
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCartonList.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewCartonList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewCartonList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCartonList.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewCartonList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCartonList.EnableHeadersVisualStyles = false;
             this.dataGridViewCartonList.Location = new System.Drawing.Point(0, 39);
-            this.dataGridViewCartonList.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewCartonList.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.dataGridViewCartonList.Name = "dataGridViewCartonList";
             this.dataGridViewCartonList.ReadOnly = true;
+            this.dataGridViewCartonList.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dataGridViewCartonList.RowHeadersVisible = false;
             this.dataGridViewCartonList.RowHeadersWidth = 40;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCartonList.RowsDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewCartonList.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewCartonList.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewCartonList.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewCartonList.RowTemplate.Height = 23;
+            this.dataGridViewCartonList.RowTemplate.Height = 47;
             this.dataGridViewCartonList.RowTemplate.ReadOnly = true;
-            this.dataGridViewCartonList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridViewCartonList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewCartonList.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewCartonList.Size = new System.Drawing.Size(1363, 240);
             this.dataGridViewCartonList.TabIndex = 10;
             this.dataGridViewCartonList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewBarcodeList_CellFormatting);
+            this.dataGridViewCartonList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewBarcodeList_CellPainting);
+            this.dataGridViewCartonList.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridViewBarcodeList_ColumnAdded);
             this.dataGridViewCartonList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewCartonList_KeyDown);
-            // 
-            // CartonBarcode
-            // 
-            this.CartonBarcode.DataPropertyName = "CartonBarcode";
-            this.CartonBarcode.HeaderText = "Carton";
-            this.CartonBarcode.MinimumWidth = 54;
-            this.CartonBarcode.Name = "CartonBarcode";
-            this.CartonBarcode.ReadOnly = true;
-            // 
-            // Pack00Barcode
-            // 
-            this.Pack00Barcode.DataPropertyName = "Pack00Barcode";
-            this.Pack00Barcode.HeaderText = "Pack 1";
-            this.Pack00Barcode.MinimumWidth = 50;
-            this.Pack00Barcode.Name = "Pack00Barcode";
-            this.Pack00Barcode.ReadOnly = true;
-            this.Pack00Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack01Barcode
-            // 
-            this.Pack01Barcode.DataPropertyName = "Pack01Barcode";
-            this.Pack01Barcode.HeaderText = "Pack 2";
-            this.Pack01Barcode.MinimumWidth = 50;
-            this.Pack01Barcode.Name = "Pack01Barcode";
-            this.Pack01Barcode.ReadOnly = true;
-            this.Pack01Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack02Barcode
-            // 
-            this.Pack02Barcode.DataPropertyName = "Pack02Barcode";
-            this.Pack02Barcode.HeaderText = "Pack 3";
-            this.Pack02Barcode.MinimumWidth = 50;
-            this.Pack02Barcode.Name = "Pack02Barcode";
-            this.Pack02Barcode.ReadOnly = true;
-            this.Pack02Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack03Barcode
-            // 
-            this.Pack03Barcode.DataPropertyName = "Pack03Barcode";
-            this.Pack03Barcode.HeaderText = "Pack 4";
-            this.Pack03Barcode.MinimumWidth = 50;
-            this.Pack03Barcode.Name = "Pack03Barcode";
-            this.Pack03Barcode.ReadOnly = true;
-            this.Pack03Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack04Barcode
-            // 
-            this.Pack04Barcode.DataPropertyName = "Pack04Barcode";
-            this.Pack04Barcode.HeaderText = "Pack 5";
-            this.Pack04Barcode.MinimumWidth = 50;
-            this.Pack04Barcode.Name = "Pack04Barcode";
-            this.Pack04Barcode.ReadOnly = true;
-            this.Pack04Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack05Barcode
-            // 
-            this.Pack05Barcode.DataPropertyName = "Pack05Barcode";
-            this.Pack05Barcode.HeaderText = "Pack 6";
-            this.Pack05Barcode.MinimumWidth = 50;
-            this.Pack05Barcode.Name = "Pack05Barcode";
-            this.Pack05Barcode.ReadOnly = true;
-            this.Pack05Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack06Barcode
-            // 
-            this.Pack06Barcode.DataPropertyName = "Pack06Barcode";
-            this.Pack06Barcode.HeaderText = "Pack 7";
-            this.Pack06Barcode.MinimumWidth = 50;
-            this.Pack06Barcode.Name = "Pack06Barcode";
-            this.Pack06Barcode.ReadOnly = true;
-            this.Pack06Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack07Barcode
-            // 
-            this.Pack07Barcode.DataPropertyName = "Pack07Barcode";
-            this.Pack07Barcode.HeaderText = "Pack 8";
-            this.Pack07Barcode.MinimumWidth = 50;
-            this.Pack07Barcode.Name = "Pack07Barcode";
-            this.Pack07Barcode.ReadOnly = true;
-            this.Pack07Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack08Barcode
-            // 
-            this.Pack08Barcode.DataPropertyName = "Pack08Barcode";
-            this.Pack08Barcode.HeaderText = "Pack 9";
-            this.Pack08Barcode.MinimumWidth = 50;
-            this.Pack08Barcode.Name = "Pack08Barcode";
-            this.Pack08Barcode.ReadOnly = true;
-            this.Pack08Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack09Barcode
-            // 
-            this.Pack09Barcode.DataPropertyName = "Pack09Barcode";
-            this.Pack09Barcode.HeaderText = "Pack 10";
-            this.Pack09Barcode.MinimumWidth = 52;
-            this.Pack09Barcode.Name = "Pack09Barcode";
-            this.Pack09Barcode.ReadOnly = true;
-            this.Pack09Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack10Barcode
-            // 
-            this.Pack10Barcode.DataPropertyName = "Pack10Barcode";
-            this.Pack10Barcode.HeaderText = "Pack 11";
-            this.Pack10Barcode.MinimumWidth = 52;
-            this.Pack10Barcode.Name = "Pack10Barcode";
-            this.Pack10Barcode.ReadOnly = true;
-            this.Pack10Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack11Barcode
-            // 
-            this.Pack11Barcode.DataPropertyName = "Pack11Barcode";
-            this.Pack11Barcode.HeaderText = "Pack 12";
-            this.Pack11Barcode.MinimumWidth = 52;
-            this.Pack11Barcode.Name = "Pack11Barcode";
-            this.Pack11Barcode.ReadOnly = true;
-            this.Pack11Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack12Barcode
-            // 
-            this.Pack12Barcode.DataPropertyName = "Pack12Barcode";
-            this.Pack12Barcode.HeaderText = "Pack 13";
-            this.Pack12Barcode.MinimumWidth = 52;
-            this.Pack12Barcode.Name = "Pack12Barcode";
-            this.Pack12Barcode.ReadOnly = true;
-            this.Pack12Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack13Barcode
-            // 
-            this.Pack13Barcode.DataPropertyName = "Pack13Barcode";
-            this.Pack13Barcode.HeaderText = "Pack 14";
-            this.Pack13Barcode.MinimumWidth = 52;
-            this.Pack13Barcode.Name = "Pack13Barcode";
-            this.Pack13Barcode.ReadOnly = true;
-            this.Pack13Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack14Barcode
-            // 
-            this.Pack14Barcode.DataPropertyName = "Pack14Barcode";
-            this.Pack14Barcode.HeaderText = "Pack 15";
-            this.Pack14Barcode.MinimumWidth = 52;
-            this.Pack14Barcode.Name = "Pack14Barcode";
-            this.Pack14Barcode.ReadOnly = true;
-            this.Pack14Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack15Barcode
-            // 
-            this.Pack15Barcode.DataPropertyName = "Pack15Barcode";
-            this.Pack15Barcode.HeaderText = "Pack 16";
-            this.Pack15Barcode.MinimumWidth = 52;
-            this.Pack15Barcode.Name = "Pack15Barcode";
-            this.Pack15Barcode.ReadOnly = true;
-            this.Pack15Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack16Barcode
-            // 
-            this.Pack16Barcode.DataPropertyName = "Pack16Barcode";
-            this.Pack16Barcode.HeaderText = "Pack 17";
-            this.Pack16Barcode.MinimumWidth = 52;
-            this.Pack16Barcode.Name = "Pack16Barcode";
-            this.Pack16Barcode.ReadOnly = true;
-            this.Pack16Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack17Barcode
-            // 
-            this.Pack17Barcode.DataPropertyName = "Pack17Barcode";
-            this.Pack17Barcode.HeaderText = "Pack 18";
-            this.Pack17Barcode.MinimumWidth = 52;
-            this.Pack17Barcode.Name = "Pack17Barcode";
-            this.Pack17Barcode.ReadOnly = true;
-            this.Pack17Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack18Barcode
-            // 
-            this.Pack18Barcode.DataPropertyName = "Pack18Barcode";
-            this.Pack18Barcode.HeaderText = "Pack 19";
-            this.Pack18Barcode.MinimumWidth = 52;
-            this.Pack18Barcode.Name = "Pack18Barcode";
-            this.Pack18Barcode.ReadOnly = true;
-            this.Pack18Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack19Barcode
-            // 
-            this.Pack19Barcode.DataPropertyName = "Pack19Barcode";
-            this.Pack19Barcode.HeaderText = "Pack 20";
-            this.Pack19Barcode.MinimumWidth = 52;
-            this.Pack19Barcode.Name = "Pack19Barcode";
-            this.Pack19Barcode.ReadOnly = true;
-            this.Pack19Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack20Barcode
-            // 
-            this.Pack20Barcode.DataPropertyName = "Pack20Barcode";
-            this.Pack20Barcode.HeaderText = "Pack 21";
-            this.Pack20Barcode.MinimumWidth = 52;
-            this.Pack20Barcode.Name = "Pack20Barcode";
-            this.Pack20Barcode.ReadOnly = true;
-            this.Pack20Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack21Barcode
-            // 
-            this.Pack21Barcode.DataPropertyName = "Pack21Barcode";
-            this.Pack21Barcode.HeaderText = "Pack 22";
-            this.Pack21Barcode.MinimumWidth = 52;
-            this.Pack21Barcode.Name = "Pack21Barcode";
-            this.Pack21Barcode.ReadOnly = true;
-            this.Pack21Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack22Barcode
-            // 
-            this.Pack22Barcode.DataPropertyName = "Pack22Barcode";
-            this.Pack22Barcode.HeaderText = "Pack 23";
-            this.Pack22Barcode.MinimumWidth = 52;
-            this.Pack22Barcode.Name = "Pack22Barcode";
-            this.Pack22Barcode.ReadOnly = true;
-            this.Pack22Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pack23Barcode
-            // 
-            this.Pack23Barcode.DataPropertyName = "Pack23Barcode";
-            this.Pack23Barcode.HeaderText = "Pack 24";
-            this.Pack23Barcode.MinimumWidth = 52;
-            this.Pack23Barcode.Name = "Pack23Barcode";
-            this.Pack23Barcode.ReadOnly = true;
-            this.Pack23Barcode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // textBoxCartonStatus
             // 
@@ -1658,31 +1386,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton toolStripButtonMessageCount;
         private System.Windows.Forms.ToolStripLabel toolStripLabel9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CartonBarcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack00Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack01Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack02Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack03Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack04Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack05Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack06Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack07Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack08Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack09Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack10Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack11Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack12Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack13Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack14Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack15Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack16Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack17Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack18Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack19Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack20Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack21Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack22Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack23Barcode;
         private System.Windows.Forms.Timer timerNmvnBackup;
     }
 }

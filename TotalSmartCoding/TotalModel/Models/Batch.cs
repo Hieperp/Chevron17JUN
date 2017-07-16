@@ -30,7 +30,7 @@ namespace TotalModel.Models
         public bool IsDefault { get; set; }
         public int LocationID { get; set; }
     
-        public virtual Commodity Commodity { get; set; }
         public virtual FillingLine FillingLine { get; set; }
+        public virtual Commodity Commodity { get; set; }
     }
 }

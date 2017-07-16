@@ -31,6 +31,21 @@ namespace TotalService.Productions
                 return false;
             }
         }
+        //CAI NAY TAM TOI VAY THOI, CHUA CO CODE DAY DU!!! CAN PHAI XEM LAI
+        public bool UpdateListOfPackSubQueueID(string onlinePackIDs, int QueueID)
+        {
+            try
+            {
+                //this.goodsReceiptRepository.UpdateEntryStatus(onlinePackIDs, barcodeStatus);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                this.ServiceTag = ex.Message;
+                return false;
+            }
+        }
+
 
         protected override bool TryValidateModel(OnlinePackDTO dto, ref StringBuilder invalidMessage)
         {

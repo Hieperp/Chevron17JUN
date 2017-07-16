@@ -56,7 +56,7 @@ namespace TotalModel.Models
         public Nullable<int> VoidTypeID { get; set; }
         public bool InActiveIssue { get; set; }
     
-        public virtual Commodity Commodity { get; set; }
         public virtual DeliveryAdvice DeliveryAdvice { get; set; }
+        public virtual Commodity Commodity { get; set; }
     }
 }

@@ -75,7 +75,7 @@
           <Key>
             <PropertyRef Name="CommodityID" />
           </Key>
-          <Property Name="CommodityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="OfficialCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CodePartA" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -106,7 +106,7 @@
           <Property Name="Specifycation" Type="nvarchar" MaxLength="500" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
           <Property Name="InActive" Type="bit" />
-          <Property Name="PiecePerCarton" Type="int" Nullable="false" />
+          <Property Name="PackPerCarton" Type="int" Nullable="false" />
           <Property Name="CartonPerPallet" Type="int" Nullable="false" />
           <Property Name="NoExpiryDate" Type="int" Nullable="false" />
           <Property Name="IsPailLabel" Type="bit" Nullable="false" />
@@ -1349,53 +1349,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalSmartCodingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Commodity">
-          <Key>
-            <PropertyRef Name="CommodityID" />
-          </Key>
-          <Property Name="CommodityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OfficialCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OfficialName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OriginalName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CommodityCategoryID" Type="Int32" Nullable="false" />
-          <Property Name="CommodityTypeID" Type="Int32" Nullable="false" />
-          <Property Name="SupplierID" Type="Int32" Nullable="false" />
-          <Property Name="PiecePerPack" Type="Int32" />
-          <Property Name="QuantityAlert" Type="Int32" />
-          <Property Name="PurchaseUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SalesUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Packing" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Origin" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Weight" Type="Double" Nullable="false" />
-          <Property Name="LeadTime" Type="Double" />
-          <Property Name="Discontinue" Type="Boolean" />
-          <Property Name="InActive" Type="Boolean" />
-          <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DeliveryAdviceDetails" Relationship="Self.FK_DeliveryAdviceDetails_Commodities" FromRole="Commodities" ToRole="DeliveryAdviceDetails" />
-          <Property Name="CodePartA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CodePartB" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CodePartC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CodePartD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PreviousCommodityID" Type="Int32" />
-          <Property Name="ListedPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="GrossPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="HSCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IsRegularCheckUps" Type="Boolean" Nullable="false" />
-          <Property Name="Specifycation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Commodity" ToRole="Carton" />
-          <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_Commodities" FromRole="Commodity" ToRole="Pack" />
-          <NavigationProperty Name="Pallets" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Commodity" ToRole="Pallet" />
-          <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="Commodity" ToRole="GoodsReceiptDetail" />
-          <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="Commodity" ToRole="PickupDetail" />
-          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Commodity" ToRole="Batch" />
-          <Property Name="Volume" Type="Double" Nullable="false" />
-          <Property Name="PiecePerCarton" Type="Int32" Nullable="false" />
-          <Property Name="CartonPerPallet" Type="Int32" Nullable="false" />
-          <Property Name="NoExpiryDate" Type="Int32" Nullable="false" />
-          <Property Name="IsPailLabel" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -1450,7 +1403,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="InActive" Type="Boolean" Nullable="false" />
           <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
           <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Commodity" Relationship="Self.FK_DeliveryAdviceDetails_Commodities" FromRole="DeliveryAdviceDetails" ToRole="Commodities" />
           <NavigationProperty Name="DeliveryAdvice" Relationship="Self.FK_DeliveryAdviceDetails_DeliveryAdvices" FromRole="DeliveryAdviceDetails" ToRole="DeliveryAdvices" />
           <Property Name="ReceiverID" Type="Int32" Nullable="false" />
           <Property Name="PromotionID" Type="Int32" />
@@ -1476,6 +1428,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="IsBonus" Type="Boolean" />
           <Property Name="VoidTypeID" Type="Int32" />
           <Property Name="InActiveIssue" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities" FromRole="DeliveryAdviceDetail" ToRole="Commodity" />
         </EntityType>
         <EntityType Name="DeliveryAdvice">
           <Key>
@@ -1539,18 +1492,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="PaymentTerm" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_PaymentTerms" FromRole="DeliveryAdvice" ToRole="PaymentTerm" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses" FromRole="DeliveryAdvice" ToRole="Warehouse" />
         </EntityType>
-        <Association Name="FK_DeliveryAdviceDetails_Commodities">
-          <End Role="Commodities" Type="Self.Commodity" Multiplicity="1" />
-          <End Role="DeliveryAdviceDetails" Type="Self.DeliveryAdviceDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodities">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="DeliveryAdviceDetails">
-              <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DeliveryAdvices_Customers">
           <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
           <End Role="DeliveryAdvices" Type="Self.DeliveryAdvice" Multiplicity="*" />
@@ -1576,14 +1517,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TotalSmartCodingEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Commodities" EntityType="Self.Commodity" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="DeliveryAdviceDetails" EntityType="Self.DeliveryAdviceDetail" />
           <EntitySet Name="DeliveryAdvices" EntityType="Self.DeliveryAdvice" />
-          <AssociationSet Name="FK_DeliveryAdviceDetails_Commodities" Association="Self.FK_DeliveryAdviceDetails_Commodities">
-            <End Role="Commodities" EntitySet="Commodities" />
-            <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_DeliveryAdvices_Customers" Association="Self.FK_DeliveryAdvices_Customers">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
@@ -1698,10 +1634,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Carton" EntitySet="Cartons" />
             <End Role="Carton1" EntitySet="Cartons" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cartons_Commodities" Association="TotalSmartCodingModel.FK_Cartons_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="Carton" EntitySet="Cartons" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cartons_FillingLines" Association="TotalSmartCodingModel.FK_Cartons_FillingLines">
             <End Role="FillingLine" EntitySet="FillingLines" />
             <End Role="Carton" EntitySet="Cartons" />
@@ -1713,14 +1645,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <AssociationSet Name="FK_Packs_Cartons" Association="TotalSmartCodingModel.FK_Packs_Cartons">
             <End Role="Carton" EntitySet="Cartons" />
             <End Role="Pack" EntitySet="Packs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Packs_Commodities" Association="TotalSmartCodingModel.FK_Packs_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="Pack" EntitySet="Packs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pallets_Commodities" Association="TotalSmartCodingModel.FK_Pallets_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="Pallet" EntitySet="Pallets" />
           </AssociationSet>
           <AssociationSet Name="FK_Packs_FillingLines" Association="TotalSmartCodingModel.FK_Packs_FillingLines">
             <End Role="FillingLine" EntitySet="FillingLines" />
@@ -1745,14 +1669,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </AssociationSet>
           <AssociationSet Name="FK_PickupDetails_Cartons" Association="TotalSmartCodingModel.FK_PickupDetails_Cartons">
             <End Role="Carton" EntitySet="Cartons" />
-            <End Role="PickupDetail" EntitySet="PickupDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GoodsReceiptDetails_Commodities" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PickupDetails_Commodities" Association="TotalSmartCodingModel.FK_PickupDetails_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
             <End Role="PickupDetail" EntitySet="PickupDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceiptDetails_GoodsReceipts" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts">
@@ -1863,10 +1779,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <Parameter Name="OnlinePackIDs" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Batches" EntityType="TotalSmartCodingModel.Batch" />
-          <AssociationSet Name="FK_Batches_Commodities" Association="TotalSmartCodingModel.FK_Batches_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="Batch" EntitySet="Batches" />
-          </AssociationSet>
           <AssociationSet Name="FK_Batches_FillingLines" Association="TotalSmartCodingModel.FK_Batches_FillingLines">
             <End Role="FillingLine" EntitySet="FillingLines" />
             <End Role="Batch" EntitySet="Batches" />
@@ -1889,6 +1801,35 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="Commodities" EntityType="TotalSmartCodingModel.Commodity" />
+          <AssociationSet Name="FK_Batches_Commodities" Association="TotalSmartCodingModel.FK_Batches_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cartons_Commodities" Association="TotalSmartCodingModel.FK_Cartons_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="Carton" EntitySet="Cartons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdviceDetails_Commodities" Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="DeliveryAdviceDetail" EntitySet="DeliveryAdviceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceiptDetails_Commodities" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packs_Commodities" Association="TotalSmartCodingModel.FK_Packs_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="Pack" EntitySet="Packs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pallets_Commodities" Association="TotalSmartCodingModel.FK_Pallets_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="Pallet" EntitySet="Pallets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickupDetails_Commodities" Association="TotalSmartCodingModel.FK_PickupDetails_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="PickupDetail" EntitySet="PickupDetails" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
           <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
@@ -2218,12 +2159,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cartons1" Relationship="TotalSmartCodingModel.FK_Cartons_Cartons" FromRole="Carton" ToRole="Carton1" />
           <NavigationProperty Name="Carton1" Relationship="TotalSmartCodingModel.FK_Cartons_Cartons" FromRole="Carton1" ToRole="Carton" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Carton" ToRole="Commodity" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="Carton" ToRole="FillingLine" />
           <NavigationProperty Name="Pallet" Relationship="TotalSmartCodingModel.FK_Cartons_Pallets" FromRole="Carton" ToRole="Pallet" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_Cartons" FromRole="Carton" ToRole="Pack" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="Carton" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Cartons" FromRole="Carton" ToRole="PickupDetail" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Carton" ToRole="Commodity" />
         </EntityType>
         <EntityType Name="Pack">
           <Key>
@@ -2239,10 +2180,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_Packs_Cartons" FromRole="Pack" ToRole="Carton" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Packs_Commodities" FromRole="Pack" ToRole="Commodity" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="Pack" ToRole="FillingLine" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="Pack" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Packs" FromRole="Pack" ToRole="PickupDetail" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Packs_Commodities" FromRole="Pack" ToRole="Commodity" />
         </EntityType>
         <EntityType Name="Pallet">
           <Key>
@@ -2256,9 +2197,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_Pallets" FromRole="Pallet" ToRole="Carton" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Pallet" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" FromRole="Pallet" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pallets" FromRole="Pallet" ToRole="PickupDetail" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Pallet" ToRole="Commodity" />
         </EntityType>
         <Association Name="FK_Cartons_Cartons">
           <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
@@ -2269,18 +2210,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Principal>
             <Dependent Role="Carton1">
               <PropertyRef Name="AncestorCartonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cartons_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="Carton">
-              <PropertyRef Name="CommodityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2317,30 +2246,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Principal>
             <Dependent Role="Pack">
               <PropertyRef Name="CartonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Packs_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Pack" Role="Pack" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="Pack">
-              <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pallets_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Pallet" Role="Pallet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="Pallet">
-              <PropertyRef Name="CommodityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2381,12 +2286,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BinLocation" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_BinLocations" FromRole="GoodsReceiptDetail" ToRole="BinLocation" />
           <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="GoodsReceiptDetail" ToRole="Carton" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="GoodsReceiptDetail" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceipt" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts" FromRole="GoodsReceiptDetail" ToRole="GoodsReceipt" />
           <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="GoodsReceiptDetail" ToRole="Pack" />
           <NavigationProperty Name="Pallet" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" FromRole="GoodsReceiptDetail" ToRole="Pallet" />
           <NavigationProperty Name="PickupDetail" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_PickupDetails" FromRole="GoodsReceiptDetail" ToRole="PickupDetail" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses" FromRole="GoodsReceiptDetail" ToRole="Warehouse" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="GoodsReceiptDetail" ToRole="Commodity" />
         </EntityType>
         <EntityType Name="GoodsReceipt">
           <Key>
@@ -2454,12 +2359,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BinLocation" Relationship="TotalSmartCodingModel.FK_PickupDetails_BinLocations" FromRole="PickupDetail" ToRole="BinLocation" />
           <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_PickupDetails_Cartons" FromRole="PickupDetail" ToRole="Carton" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="PickupDetail" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_PickupDetails" FromRole="PickupDetail" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_PickupDetails_Packs" FromRole="PickupDetail" ToRole="Pack" />
           <NavigationProperty Name="Pallet" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pallets" FromRole="PickupDetail" ToRole="Pallet" />
           <NavigationProperty Name="Pickup" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pickups" FromRole="PickupDetail" ToRole="Pickup" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_PickupDetails_Warehouses" FromRole="PickupDetail" ToRole="Warehouse" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="PickupDetail" ToRole="Commodity" />
         </EntityType>
         <EntityType Name="Pickup">
           <Key>
@@ -2532,30 +2437,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Principal>
             <Dependent Role="PickupDetail">
               <PropertyRef Name="CartonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GoodsReceiptDetails_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.GoodsReceiptDetail" Role="GoodsReceiptDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="GoodsReceiptDetail">
-              <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PickupDetails_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.PickupDetail" Role="PickupDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="PickupDetail">
-              <PropertyRef Name="CommodityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2856,22 +2737,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDefault" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
         </EntityType>
-        <Association Name="FK_Batches_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="Batch">
-              <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Batches_FillingLines">
           <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
           <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
@@ -2907,53 +2776,143 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
         </ComplexType>
+        <EntityType Name="Commodity">
+          <Key>
+            <PropertyRef Name="CommodityID" />
+          </Key>
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficialCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodePartA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodePartB" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodePartC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CodePartD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OfficialName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousCommodityID" Type="Int32" />
+          <Property Name="CommodityCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="PiecePerPack" Type="Int32" />
+          <Property Name="QuantityAlert" Type="Int32" />
+          <Property Name="ListedPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="GrossPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PurchaseUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SalesUnit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Packing" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Origin" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Volume" Type="Double" Nullable="false" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <Property Name="LeadTime" Type="Double" />
+          <Property Name="HSCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsRegularCheckUps" Type="Boolean" Nullable="false" />
+          <Property Name="Discontinue" Type="Boolean" />
+          <Property Name="Specifycation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="InActive" Type="Boolean" />
+          <Property Name="PackPerCarton" Type="Int32" Nullable="false" />
+          <Property Name="CartonPerPallet" Type="Int32" Nullable="false" />
+          <Property Name="NoExpiryDate" Type="Int32" Nullable="false" />
+          <Property Name="IsPailLabel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Commodity" ToRole="Batch" />
+          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Commodity" ToRole="Carton" />
+          <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities" FromRole="Commodity" ToRole="DeliveryAdviceDetail" />
+          <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="Commodity" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_Commodities" FromRole="Commodity" ToRole="Pack" />
+          <NavigationProperty Name="Pallets" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Commodity" ToRole="Pallet" />
+          <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="Commodity" ToRole="PickupDetail" />
+        </EntityType>
+        <Association Name="FK_Batches_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cartons_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Carton">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdviceDetails_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.DeliveryAdviceDetail" Role="DeliveryAdviceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="DeliveryAdviceDetail">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsReceiptDetails_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.GoodsReceiptDetail" Role="GoodsReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="GoodsReceiptDetail">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packs_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Pack" Role="Pack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Pack">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pallets_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Pallet" Role="Pallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Pallet">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickupDetails_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.PickupDetail" Role="PickupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="PickupDetail">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TotalSmartCodingModelStoreContainer" CdmEntityContainer="TotalSmartCodingEntities">
-          <EntitySetMapping Name="Commodities">
-            <EntityTypeMapping TypeName="TotalSmartCodingModel.Commodity">
-              <MappingFragment StoreEntitySet="Commodities">
-                <ScalarProperty Name="IsPailLabel" ColumnName="IsPailLabel" />
-                <ScalarProperty Name="NoExpiryDate" ColumnName="NoExpiryDate" />
-                <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
-                <ScalarProperty Name="PiecePerCarton" ColumnName="PiecePerCarton" />
-                <ScalarProperty Name="Volume" ColumnName="Volume" />
-                <ScalarProperty Name="Specifycation" ColumnName="Specifycation" />
-                <ScalarProperty Name="IsRegularCheckUps" ColumnName="IsRegularCheckUps" />
-                <ScalarProperty Name="HSCode" ColumnName="HSCode" />
-                <ScalarProperty Name="GrossPrice" ColumnName="GrossPrice" />
-                <ScalarProperty Name="ListedPrice" ColumnName="ListedPrice" />
-                <ScalarProperty Name="PreviousCommodityID" ColumnName="PreviousCommodityID" />
-                <ScalarProperty Name="CodePartD" ColumnName="CodePartD" />
-                <ScalarProperty Name="CodePartC" ColumnName="CodePartC" />
-                <ScalarProperty Name="CodePartB" ColumnName="CodePartB" />
-                <ScalarProperty Name="CodePartA" ColumnName="CodePartA" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="OfficialName" ColumnName="OfficialName" />
-                <ScalarProperty Name="OriginalName" ColumnName="OriginalName" />
-                <ScalarProperty Name="CommodityCategoryID" ColumnName="CommodityCategoryID" />
-                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
-                <ScalarProperty Name="QuantityAlert" ColumnName="QuantityAlert" />
-                <ScalarProperty Name="PurchaseUnit" ColumnName="PurchaseUnit" />
-                <ScalarProperty Name="SalesUnit" ColumnName="SalesUnit" />
-                <ScalarProperty Name="Packing" ColumnName="Packing" />
-                <ScalarProperty Name="Origin" ColumnName="Origin" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
-                <ScalarProperty Name="Discontinue" ColumnName="Discontinue" />
-                <ScalarProperty Name="InActive" ColumnName="InActive" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Customer">
               <MappingFragment StoreEntitySet="Customers">
@@ -3648,6 +3607,47 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Commodities">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Commodity">
+              <MappingFragment StoreEntitySet="Commodities">
+                <ScalarProperty Name="IsPailLabel" ColumnName="IsPailLabel" />
+                <ScalarProperty Name="NoExpiryDate" ColumnName="NoExpiryDate" />
+                <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
+                <ScalarProperty Name="PackPerCarton" ColumnName="PackPerCarton" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Specifycation" ColumnName="Specifycation" />
+                <ScalarProperty Name="Discontinue" ColumnName="Discontinue" />
+                <ScalarProperty Name="IsRegularCheckUps" ColumnName="IsRegularCheckUps" />
+                <ScalarProperty Name="HSCode" ColumnName="HSCode" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="Packing" ColumnName="Packing" />
+                <ScalarProperty Name="SalesUnit" ColumnName="SalesUnit" />
+                <ScalarProperty Name="PurchaseUnit" ColumnName="PurchaseUnit" />
+                <ScalarProperty Name="GrossPrice" ColumnName="GrossPrice" />
+                <ScalarProperty Name="ListedPrice" ColumnName="ListedPrice" />
+                <ScalarProperty Name="QuantityAlert" ColumnName="QuantityAlert" />
+                <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
+                <ScalarProperty Name="CommodityCategoryID" ColumnName="CommodityCategoryID" />
+                <ScalarProperty Name="PreviousCommodityID" ColumnName="PreviousCommodityID" />
+                <ScalarProperty Name="OriginalName" ColumnName="OriginalName" />
+                <ScalarProperty Name="OfficialName" ColumnName="OfficialName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CodePartD" ColumnName="CodePartD" />
+                <ScalarProperty Name="CodePartC" ColumnName="CodePartC" />
+                <ScalarProperty Name="CodePartB" ColumnName="CodePartB" />
+                <ScalarProperty Name="CodePartA" ColumnName="CodePartA" />
+                <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

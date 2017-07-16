@@ -131,6 +131,7 @@
     <Compile Include="Views\Commons\CustomExceptionMessageBox.designer.cs">
       <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Commons\CustomInputBox.cs" />
     <Compile Include="Views\Inventories\GoodsReceipts.cs">
       <SubType>Form</SubType>
     </Compile>

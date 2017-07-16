@@ -40,8 +40,13 @@ namespace TotalDTO.Productions
     {
     }
 
-    public class OnlineCartonDTO : OnlineCartonPrimitiveDTO
+    public class OnlineCartonDTO : OnlineCartonPrimitiveDTO, IShallowClone<OnlineCartonDTO>
     {
         public string OnlinePackIDs { get; set; }
+
+        public OnlineCartonDTO ShallowClone()
+        {
+            return (OnlineCartonDTO)this.MemberwiseClone();
+        }
     }
 }

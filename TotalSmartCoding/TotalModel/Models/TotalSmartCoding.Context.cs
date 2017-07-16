@@ -27,7 +27,6 @@ namespace TotalModel.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Commodity> Commodities { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
         public virtual DbSet<DeliveryAdvice> DeliveryAdvices { get; set; }
@@ -53,6 +52,7 @@ namespace TotalModel.Models
         public virtual DbSet<OnlinePack> OnlinePacks { get; set; }
         public virtual DbSet<OnlinePallet> OnlinePallets { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<Commodity> Commodities { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {

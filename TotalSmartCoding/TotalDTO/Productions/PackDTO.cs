@@ -39,7 +39,11 @@ namespace TotalDTO.Productions
     {
     }
 
-    public class OnlinePackDTO : OnlinePackPrimitiveDTO
+    public class OnlinePackDTO : OnlinePackPrimitiveDTO, IShallowClone<OnlinePackDTO>
     {
+        public OnlinePackDTO ShallowClone()
+        {
+            return (OnlinePackDTO)this.MemberwiseClone();
+        }
     }
 }
