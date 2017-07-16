@@ -22,6 +22,7 @@ namespace TotalDTO.Productions
         /// This property should be set right after change commodity by setting function
         /// </summary>
         public int ItemPerSet { get; set; } //!!! carton per palllet?? THUC TE: PACK PER CARTON: TUY THEO SAN PHAM => CAN PHAI XEM XET: EMPTY AL QUEUE: IN ORDEER TO CHANGE COMMODITY!!!
+        //PHAI HET SU CHU Y: ItemPerSet
 
         //private int itemPerSet { get; set; }
 

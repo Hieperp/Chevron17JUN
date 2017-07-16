@@ -217,8 +217,8 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        public void StartPrint() { this.lastStringBarcode = ""; GlobalVariables.DuplicateCartonBarcodeFound = false; this.bufferReset = true; this.OnPrinting = true; } //ONLY bufferReset WHEN StartPrint
-        public void StopPrint() { this.OnPrinting = false; }
+        public void StartScanner() { this.lastStringBarcode = ""; GlobalVariables.DuplicateCartonBarcodeFound = false; this.bufferReset = true; this.OnPrinting = true; } //ONLY bufferReset WHEN StartPrint
+        public void StopScanner() { this.OnPrinting = false; }
 
 
 
@@ -332,7 +332,7 @@ namespace TotalSmartCoding.Controllers.Productions
             try
             {
                 if (GlobalEnums.OnTestOnly)
-                    this.StartPrint();
+                    this.StartScanner();
                 else
                 {
                     this.MainStatus = "Try to connect....";
@@ -560,7 +560,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             string stringReadFrom = ""; bool matchingPackListChanged = false; bool packInOneCartonChanged = false;
 
-            this.LoopRoutine = true; this.StopPrint();
+            this.LoopRoutine = true; this.StopScanner();
 
 
             try

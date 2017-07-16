@@ -90,7 +90,6 @@
     <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />
     <Compile Include="CommonLibraries\BP\GlobalNetSockets.cs" />
     <Compile Include="CommonLibraries\BP\GlobalRegistry.cs" />
-    <Compile Include="CommonLibraries\BP\InkjetDominoPrinterBLL.cs" />
     <Compile Include="CommonLibraries\BP\MessageData.cs" />
     <Compile Include="CommonLibraries\BP\MessageQueue.cs" />
     <Compile Include="CommonLibraries\BP\SQLDatabase.cs" />
@@ -113,6 +112,7 @@
     <Compile Include="Controllers\Productions\FillingCartonController.cs" />
     <Compile Include="Controllers\Productions\FillingPackController.cs" />
     <Compile Include="Controllers\Productions\FillingPalletController.cs" />
+    <Compile Include="Controllers\Productions\PrinterController.cs" />
     <Compile Include="Controllers\Productions\ScannerController.cs" />
     <Compile Include="Controllers\Sales\DeliveryAdvicesController.cs" />
     <Compile Include="Program.cs" />

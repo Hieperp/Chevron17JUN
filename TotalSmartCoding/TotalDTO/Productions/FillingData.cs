@@ -31,22 +31,6 @@ namespace TotalDTO.Productions
         private string remarks;
 
 
-
-
-
-
-
-
-
-        public int CommodityID { get { return 1; } }
-
-
-
-
-
-
-
-
         #region Contructor
 
         public FillingData()
@@ -107,14 +91,14 @@ namespace TotalDTO.Productions
         }
 
 
-        public int ProductID    //ResetSerialNumber
+        public int CommodityID    //ResetSerialNumber
         {
             get { return this.commodityID; }
             set
             {
                 if (this.commodityID != value)
                 {
-                    ApplyPropertyChange<FillingData, int>(ref this.commodityID, o => o.ProductID, value);
+                    ApplyPropertyChange<FillingData, int>(ref this.commodityID, o => o.CommodityID, value);
 
                     //DataTable dataTableFillingLineData = SQLDatabase.GetDataTable("SELECT BatchNo, LastPackNo, MonthSerialNumber, LastCartonNo, MonthCartonNumber FROM FillingLineData WHERE FillingLineID = " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID + " AND SettingMonthID = " + this.SettingMonthID);
                     //if (dataTableFillingLineData.Rows.Count > 0)
@@ -321,7 +305,7 @@ namespace TotalDTO.Productions
 
         public bool DataValidated()
         {
-            return this.FillingLineID != 0 && this.ProductID != 0 && this.BatchCode != "" & this.LastPackNo != "" & this.MonthSerialNumber != "" & this.LastCartonNo != "" & this.MonthCartonNumber != "";
+            return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" & this.LastPackNo != "" & this.MonthSerialNumber != "" & this.LastCartonNo != "" & this.MonthCartonNumber != "";
         }
 
         public bool Update()

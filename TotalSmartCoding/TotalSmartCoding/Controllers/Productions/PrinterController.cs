@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using TotalBase;
 using TotalDTO.Productions;
+using TotalSmartCoding.CommonLibraries.BP;
 
-
-//using Global.Class.Library;
-//using DataTransferObject;
-
-
-
-namespace TotalSmartCoding.CommonLibraries.BP
+namespace TotalSmartCoding.Controllers.Productions
 {
-    public class InkjetDominoPrinterBLL : CommonThreadProperty
+    public class PrinterController : CodingController
     {
         private bool isLaser;
 
@@ -39,13 +35,13 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
         #region Contructor
 
-        public InkjetDominoPrinterBLL(GlobalVariables.DominoPrinterName dominoPrinterNameID, FillingData fillingLineData, bool isLaser)
+        public PrinterController(GlobalVariables.DominoPrinterName dominoPrinterNameID, FillingData fillingLineData, bool isLaser)
         {
 
             try
             {
-                this.FillingLineData = fillingLineData;
-                this.privateFillingLineData = this.FillingLineData.ShallowClone();
+                this.FillingData = fillingLineData;
+                this.privateFillingLineData = this.FillingData.ShallowClone();
 
                 this.dominoPrinterNameID = dominoPrinterNameID;
 
@@ -634,7 +630,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
         public void ThreadRoutine()
         {
-            this.privateFillingLineData = this.FillingLineData.ShallowClone();
+            this.privateFillingLineData = this.FillingData.ShallowClone();
 
             return;
             string stringReadFrom = ""; bool lPrinterReady = false;
@@ -645,10 +641,10 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
             //This command line is specific to CartonInkJet ON FillingLine.Pail (Just here only for this specific)
-            if ((this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.DegitInkJet || this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet)) { this.LedGreenOn = true; return; } //TEST FOR CHEVRON: this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail &&  *********===> DO NOTHING 
+            if ((this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.DegitInkJet || this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet)) { this.LedGreenOn = true; return; } //TEST FOR CHEVRON: this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail &&  *********===> DO NOTHING 
 
             /////-23.Jan.2015 This is test only (disable barcode)
-            /////-23.Jan.2015 if (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail && (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet || this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet)) { this.LedGreenOn = true; return; } //DO NOTHING
+            /////-23.Jan.2015 if (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail && (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet || this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet)) { this.LedGreenOn = true; return; } //DO NOTHING
 
             try
             {
@@ -841,7 +837,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 //this.WriteToStream("BEGINTRANS");
                                 //if (this.ReadFromStream(ref stringReadFrom, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message: " + stringReadFrom);
 
-                                this.WriteToStream("LOADPROJECT store: SLASHSYMBOL " + (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.CO ? "BPCODigit" : (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail ? "BPPailDigit" : "BPPailDigit")));
+                                this.WriteToStream("LOADPROJECT store: SLASHSYMBOL " + (this.FillingData.FillingLineID == GlobalVariables.FillingLine.CO ? "BPCODigit" : (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail ? "BPPailDigit" : "BPPailDigit")));
                                 if (this.ReadFromStream(ref stringReadFrom, false, "OK", "OK".Length)) Thread.Sleep(500); else throw new System.InvalidOperationException("NMVN: Can not load message: " + stringReadFrom);
 
                                 this.WriteToStream("SETVARIABLES \"MonthCodeAndLine\" \"" + this.LaserDigitMessage(false) + "\"");

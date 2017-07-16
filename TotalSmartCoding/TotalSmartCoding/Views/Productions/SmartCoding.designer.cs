@@ -92,22 +92,22 @@
             this.toolStripMCUCarton = new System.Windows.Forms.ToolStripButton();
             this.timerNmvnBackup = new System.Windows.Forms.Timer(this.components);
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonConnect = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDisconnect = new System.Windows.Forms.ToolStripButton();
+            this.buttonConnect = new System.Windows.Forms.ToolStripButton();
+            this.buttonDisconnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBoxFillingLineID = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripTextBoxCurrentDate = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxFillingLineName = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxCurrentDate = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonSetting = new System.Windows.Forms.ToolStripButton();
+            this.buttonBatches = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.textBoxCommodityID = new System.Windows.Forms.ToolStripTextBox();
+            this.textBoxCommodityCode = new System.Windows.Forms.ToolStripTextBox();
             this.textBoxCommodityOfficialCode = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.textBoxBatchCode = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonStart = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonStop = new System.Windows.Forms.ToolStripButton();
+            this.buttonStart = new System.Windows.Forms.ToolStripButton();
+            this.buttonStop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.textBoxLastPackNo = new System.Windows.Forms.ToolStripTextBox();
@@ -210,13 +210,13 @@
             this.dataGridViewMatchingPackList.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewMatchingPackList.Size = new System.Drawing.Size(837, 215);
             this.dataGridViewMatchingPackList.TabIndex = 8;
-            this.dataGridViewMatchingPackList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewBarcodeList_CellFormatting);
-            this.dataGridViewMatchingPackList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewBarcodeList_CellPainting);
-            this.dataGridViewMatchingPackList.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridViewBarcodeList_ColumnAdded);
+            this.dataGridViewMatchingPackList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            this.dataGridViewMatchingPackList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
+            this.dataGridViewMatchingPackList.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             this.dataGridViewMatchingPackList.DoubleClick += new System.EventHandler(this.dataGridViewMatchingPackList_DoubleClick);
-            this.dataGridViewMatchingPackList.Enter += new System.EventHandler(this.dataGridViewMatchingPackList_Enter);
+            this.dataGridViewMatchingPackList.Enter += new System.EventHandler(this.dataGridView_Enter);
             this.dataGridViewMatchingPackList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewMatchingPackList_KeyDown);
-            this.dataGridViewMatchingPackList.Leave += new System.EventHandler(this.dataGridViewMatchingPackList_Leave);
+            this.dataGridViewMatchingPackList.Leave += new System.EventHandler(this.dataGridView_Leave);
             // 
             // dataGridViewPackInOneCarton
             // 
@@ -264,9 +264,9 @@
             this.dataGridViewPackInOneCarton.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewPackInOneCarton.Size = new System.Drawing.Size(525, 215);
             this.dataGridViewPackInOneCarton.TabIndex = 9;
-            this.dataGridViewPackInOneCarton.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewBarcodeList_CellFormatting);
-            this.dataGridViewPackInOneCarton.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewBarcodeList_CellPainting);
-            this.dataGridViewPackInOneCarton.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridViewBarcodeList_ColumnAdded);
+            this.dataGridViewPackInOneCarton.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            this.dataGridViewPackInOneCarton.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
+            this.dataGridViewPackInOneCarton.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             this.dataGridViewPackInOneCarton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewPackInOneCarton_KeyDown);
             // 
             // dataGridViewCartonList
@@ -315,9 +315,9 @@
             this.dataGridViewCartonList.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewCartonList.Size = new System.Drawing.Size(1363, 212);
             this.dataGridViewCartonList.TabIndex = 10;
-            this.dataGridViewCartonList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewBarcodeList_CellFormatting);
-            this.dataGridViewCartonList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewBarcodeList_CellPainting);
-            this.dataGridViewCartonList.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridViewBarcodeList_ColumnAdded);
+            this.dataGridViewCartonList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            this.dataGridViewCartonList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
+            this.dataGridViewCartonList.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             this.dataGridViewCartonList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewCartonList_KeyDown);
             // 
             // textBoxCartonStatus
@@ -945,22 +945,22 @@
             this.toolStripChildForm.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonConnect,
-            this.toolStripButtonDisconnect,
+            this.buttonConnect,
+            this.buttonDisconnect,
             this.toolStripSeparator1,
-            this.toolStripTextBoxFillingLineID,
-            this.toolStripTextBoxCurrentDate,
+            this.textBoxFillingLineName,
+            this.textBoxCurrentDate,
             this.toolStripSeparator2,
-            this.toolStripButtonSetting,
+            this.buttonBatches,
             this.toolStripSeparator5,
             this.toolStripLabel2,
-            this.textBoxCommodityID,
+            this.textBoxCommodityCode,
             this.textBoxCommodityOfficialCode,
             this.toolStripLabel6,
             this.textBoxBatchCode,
             this.toolStripSeparator6,
-            this.toolStripButtonStart,
-            this.toolStripButtonStop,
+            this.buttonStart,
+            this.buttonStop,
             this.toolStripSeparator4,
             this.toolStripLabel4,
             this.textBoxLastPackNo,
@@ -976,67 +976,67 @@
             this.toolStripChildForm.Text = "toolStrip1";
             this.toolStripChildForm.Visible = false;
             // 
-            // toolStripButtonConnect
+            // buttonConnect
             // 
-            this.toolStripButtonConnect.Image = global::TotalSmartCoding.Properties.Resources.connect__2_;
-            this.toolStripButtonConnect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonConnect.Name = "toolStripButtonConnect";
-            this.toolStripButtonConnect.Size = new System.Drawing.Size(67, 72);
-            this.toolStripButtonConnect.Text = "Connect";
-            this.toolStripButtonConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonConnect.Click += new System.EventHandler(this.toolStripButtonConnect_Click);
+            this.buttonConnect.Image = global::TotalSmartCoding.Properties.Resources.connect__2_;
+            this.buttonConnect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(67, 72);
+            this.buttonConnect.Text = "Connect";
+            this.buttonConnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
             // 
-            // toolStripButtonDisconnect
+            // buttonDisconnect
             // 
-            this.toolStripButtonDisconnect.Enabled = false;
-            this.toolStripButtonDisconnect.Image = global::TotalSmartCoding.Properties.Resources.output_disconnect_icone_6892__2_;
-            this.toolStripButtonDisconnect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDisconnect.Name = "toolStripButtonDisconnect";
-            this.toolStripButtonDisconnect.Size = new System.Drawing.Size(86, 72);
-            this.toolStripButtonDisconnect.Text = "Disconnect";
-            this.toolStripButtonDisconnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonDisconnect.Click += new System.EventHandler(this.toolStripButtonDisconnect_Click);
+            this.buttonDisconnect.Enabled = false;
+            this.buttonDisconnect.Image = global::TotalSmartCoding.Properties.Resources.output_disconnect_icone_6892__2_;
+            this.buttonDisconnect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonDisconnect.Name = "buttonDisconnect";
+            this.buttonDisconnect.Size = new System.Drawing.Size(86, 72);
+            this.buttonDisconnect.Text = "Disconnect";
+            this.buttonDisconnect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonDisconnect.Click += new System.EventHandler(this.buttonDisconnect_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 75);
             // 
-            // toolStripTextBoxFillingLineID
+            // textBoxFillingLineName
             // 
-            this.toolStripTextBoxFillingLineID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxFillingLineID.Name = "toolStripTextBoxFillingLineID";
-            this.toolStripTextBoxFillingLineID.ReadOnly = true;
-            this.toolStripTextBoxFillingLineID.Size = new System.Drawing.Size(62, 75);
-            this.toolStripTextBoxFillingLineID.Text = "OCME";
-            this.toolStripTextBoxFillingLineID.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxFillingLineName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxFillingLineName.Name = "textBoxFillingLineName";
+            this.textBoxFillingLineName.ReadOnly = true;
+            this.textBoxFillingLineName.Size = new System.Drawing.Size(62, 75);
+            this.textBoxFillingLineName.Text = "OCME";
+            this.textBoxFillingLineName.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // toolStripTextBoxCurrentDate
+            // textBoxCurrentDate
             // 
-            this.toolStripTextBoxCurrentDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBoxCurrentDate.Name = "toolStripTextBoxCurrentDate";
-            this.toolStripTextBoxCurrentDate.ReadOnly = true;
-            this.toolStripTextBoxCurrentDate.Size = new System.Drawing.Size(79, 75);
-            this.toolStripTextBoxCurrentDate.Text = "12/12/12";
-            this.toolStripTextBoxCurrentDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCurrentDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxCurrentDate.Name = "textBoxCurrentDate";
+            this.textBoxCurrentDate.ReadOnly = true;
+            this.textBoxCurrentDate.Size = new System.Drawing.Size(79, 75);
+            this.textBoxCurrentDate.Text = "12/12/12";
+            this.textBoxCurrentDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 75);
             // 
-            // toolStripButtonSetting
+            // buttonBatches
             // 
-            this.toolStripButtonSetting.Image = global::TotalSmartCoding.Properties.Resources.Honeycomb_Barcode_Scanner_32;
-            this.toolStripButtonSetting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonSetting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSetting.Name = "toolStripButtonSetting";
-            this.toolStripButtonSetting.Size = new System.Drawing.Size(60, 72);
-            this.toolStripButtonSetting.Text = "Setting";
-            this.toolStripButtonSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonSetting.Click += new System.EventHandler(this.toolStripButtonSetting_Click);
+            this.buttonBatches.Image = global::TotalSmartCoding.Properties.Resources.Honeycomb_Barcode_Scanner_32;
+            this.buttonBatches.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatches.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatches.Name = "buttonBatches";
+            this.buttonBatches.Size = new System.Drawing.Size(60, 72);
+            this.buttonBatches.Text = "Setting";
+            this.buttonBatches.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonBatches.Click += new System.EventHandler(this.toolStripButtonSetting_Click);
             // 
             // toolStripSeparator5
             // 
@@ -1049,14 +1049,14 @@
             this.toolStripLabel2.Size = new System.Drawing.Size(60, 72);
             this.toolStripLabel2.Text = "Product";
             // 
-            // textBoxCommodityID
+            // textBoxCommodityCode
             // 
-            this.textBoxCommodityID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxCommodityID.Name = "textBoxCommodityID";
-            this.textBoxCommodityID.ReadOnly = true;
-            this.textBoxCommodityID.Size = new System.Drawing.Size(49, 75);
-            this.textBoxCommodityID.Text = "515";
-            this.textBoxCommodityID.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCommodityCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxCommodityCode.Name = "textBoxCommodityCode";
+            this.textBoxCommodityCode.ReadOnly = true;
+            this.textBoxCommodityCode.Size = new System.Drawing.Size(49, 75);
+            this.textBoxCommodityCode.Text = "515";
+            this.textBoxCommodityCode.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxCommodityOfficialCode
             // 
@@ -1087,29 +1087,29 @@
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 75);
             // 
-            // toolStripButtonStart
+            // buttonStart
             // 
-            this.toolStripButtonStart.Enabled = false;
-            this.toolStripButtonStart.Image = global::TotalSmartCoding.Properties.Resources.Play_Normal;
-            this.toolStripButtonStart.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonStart.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonStart.Name = "toolStripButtonStart";
-            this.toolStripButtonStart.Size = new System.Drawing.Size(60, 72);
-            this.toolStripButtonStart.Text = "  Start  ";
-            this.toolStripButtonStart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonStart.Click += new System.EventHandler(this.toolStripButtonStart_Click);
+            this.buttonStart.Enabled = false;
+            this.buttonStart.Image = global::TotalSmartCoding.Properties.Resources.Play_Normal;
+            this.buttonStart.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonStart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(60, 72);
+            this.buttonStart.Text = "  Start  ";
+            this.buttonStart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // toolStripButtonStop
+            // buttonStop
             // 
-            this.toolStripButtonStop.Enabled = false;
-            this.toolStripButtonStop.Image = global::TotalSmartCoding.Properties.Resources.Stop_Normal_Red;
-            this.toolStripButtonStop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonStop.Name = "toolStripButtonStop";
-            this.toolStripButtonStop.Size = new System.Drawing.Size(60, 72);
-            this.toolStripButtonStop.Text = "  Stop  ";
-            this.toolStripButtonStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButtonStop.Click += new System.EventHandler(this.toolStripButtonStop_Click);
+            this.buttonStop.Enabled = false;
+            this.buttonStop.Image = global::TotalSmartCoding.Properties.Resources.Stop_Normal_Red;
+            this.buttonStop.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(60, 72);
+            this.buttonStop.Text = "  Stop  ";
+            this.buttonStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // toolStripSeparator4
             // 
@@ -1231,14 +1231,14 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStripChildForm;
-        private System.Windows.Forms.ToolStripButton toolStripButtonStart;
+        private System.Windows.Forms.ToolStripButton buttonStart;
         private System.Windows.Forms.TextBox textBoxDigitStatus;
-        private System.Windows.Forms.ToolStripButton toolStripButtonStop;
-        private System.Windows.Forms.ToolStripButton toolStripButtonConnect;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDisconnect;
+        private System.Windows.Forms.ToolStripButton buttonStop;
+        private System.Windows.Forms.ToolStripButton buttonConnect;
+        private System.Windows.Forms.ToolStripButton buttonDisconnect;
         private System.Windows.Forms.DataGridView dataGridViewMatchingPackList;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxCurrentDate;
+        private System.Windows.Forms.ToolStripTextBox textBoxCurrentDate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
@@ -1274,9 +1274,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Timer timerEverySecond;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxFillingLineID;
-        private System.Windows.Forms.ToolStripTextBox textBoxCommodityID;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSetting;
+        private System.Windows.Forms.ToolStripTextBox textBoxFillingLineName;
+        private System.Windows.Forms.ToolStripTextBox textBoxCommodityCode;
+        private System.Windows.Forms.ToolStripButton buttonBatches;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.SplitContainer splitContainerQuality;
