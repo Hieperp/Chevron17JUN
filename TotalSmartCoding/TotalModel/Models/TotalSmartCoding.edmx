@@ -2761,7 +2761,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
           <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="OfficialCode" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="PiecePerCarton" Nullable="false" />
           <Property Type="Int32" Name="CartonPerPallet" Nullable="false" />
           <Property Type="Int32" Name="NoExpiryDate" Nullable="false" />
           <Property Type="Boolean" Name="IsPailLabel" Nullable="false" />
@@ -2775,6 +2774,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="Boolean" Name="IsDefault" Nullable="false" />
           <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="PackPerCarton" Nullable="false" />
         </ComplexType>
         <EntityType Name="Commodity">
           <Key>
@@ -3590,7 +3590,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
-                <ScalarProperty Name="PiecePerCarton" ColumnName="PiecePerCarton" />
                 <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
                 <ScalarProperty Name="NoExpiryDate" ColumnName="NoExpiryDate" />
                 <ScalarProperty Name="IsPailLabel" ColumnName="IsPailLabel" />
@@ -3604,6 +3603,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="PackPerCarton" ColumnName="PackPerCarton" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -20,7 +20,6 @@ namespace TotalModel.Models
         public int CommodityID { get; set; }
         public string Code { get; set; }
         public string OfficialCode { get; set; }
-        public int PiecePerCarton { get; set; }
         public int CartonPerPallet { get; set; }
         public int NoExpiryDate { get; set; }
         public bool IsPailLabel { get; set; }
@@ -34,5 +33,6 @@ namespace TotalModel.Models
         public bool IsDefault { get; set; }
         public string CommodityCode { get; set; }
         public string CommodityName { get; set; }
+        public int PackPerCarton { get; set; }
     }
 }

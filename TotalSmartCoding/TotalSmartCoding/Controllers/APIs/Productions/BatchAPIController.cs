@@ -27,14 +27,14 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
 
         public ICollection<BatchIndex> GetBatchIndexes()
         {
-            ICollection<BatchIndex> goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
+            ICollection<BatchIndex> goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate).Where(w => w.FillingLineID == (int)GlobalVariables.FillingLineID).ToList();
 
             return goodsReceiptIndexes;
         }
 
         public BatchIndex GetActiveBatchIndex()
         {
-            BatchIndex goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate).Where(a => a.IsDefault = true).FirstOrDefault();
+            BatchIndex goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate).Where(w => w.FillingLineID == (int)GlobalVariables.FillingLineID && w.IsDefault).FirstOrDefault();
 
             return goodsReceiptIndexes;
         }

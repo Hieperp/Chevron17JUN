@@ -119,10 +119,10 @@ namespace TotalSmartCoding.Controllers.Productions
                 //}
 
 
-                this.matchingPackList = new BarcodeQueue<OnlinePackDTO>(GlobalVariables.NoItemDiverter());
-                this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>();
-                this.cartonDataTable = new BarcodeQueue<OnlineCartonDTO>();
-                this.OnlinePalletQueue = new BarcodeQueue<OnlinePalletDTO>();
+                this.matchingPackList = new BarcodeQueue<OnlinePackDTO>(GlobalVariables.NoSubQueue(), GlobalVariables.NoItemDiverter(), GlobalVariables.RepeatedSubQueueIndex()) { ItemPerSet = GlobalVariables.NoItemPerCarton() };
+                this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>(GlobalVariables.NoSubQueue(), GlobalVariables.NoItemDiverter(), false) { ItemPerSet = GlobalVariables.NoItemPerCarton() };
+                this.cartonDataTable = new BarcodeQueue<OnlineCartonDTO>();//??
+                this.OnlinePalletQueue = new BarcodeQueue<OnlinePalletDTO>();//??
             }
             catch (Exception exception)
             {
@@ -614,7 +614,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 {
                                     lock (this.matchingPackList)
                                     {                             //<Dequeue from matchingPackList to this.packInOneCarton>
-                                        this.packInOneCarton = this.matchingPackList.DequeuePack(); //This Dequeue successful WHEN There is enought OnlinePackDTO IN THE COMMON GLOBAL matchingPackList, ELSE: this.packListInCarton is still NULL
+                                        this.packInOneCarton = this.matchingPackList.DequeueWholePackage(); //This Dequeue successful WHEN There is enought OnlinePackDTO IN THE COMMON GLOBAL matchingPackList, ELSE: this.packListInCarton is still NULL
                                     }
 
                                     if (this.packInOneCarton.Count > 0)
@@ -774,19 +774,19 @@ namespace TotalSmartCoding.Controllers.Productions
         /// <returns></returns>
         public bool ReAllocation()
         {
-            if (this.matchingPackList.Count >= this.matchingPackList.NoItemPerCarton)
+            if (this.matchingPackList.Count >= this.matchingPackList.ItemPerSet)
             {
                 lock (this.matchingPackList)
                 {
-                    for (int subQueueID = 0; subQueueID < this.matchingPackList.SubQueueCount; subQueueID++)
+                    for (int subQueueID = 0; subQueueID < this.matchingPackList.NoSubQueue; subQueueID++)
                     {
-                        while (this.matchingPackList.GetSubQueueCount(subQueueID) < (this.matchingPackList.NoItemPerCarton / this.matchingPackList.SubQueueCount) && this.matchingPackList.Count >= this.matchingPackList.NoItemPerCarton)
+                        while (this.matchingPackList.GetSubQueueCount(subQueueID) < (this.matchingPackList.ItemPerSet / this.matchingPackList.NoSubQueue) && this.matchingPackList.Count >= this.matchingPackList.ItemPerSet)
                         {
                             #region Get a message and swap its' QueueID
 
-                            for (int i = 0; i < this.matchingPackList.SubQueueCount; i++)
+                            for (int i = 0; i < this.matchingPackList.NoSubQueue; i++)
                             {
-                                if (this.matchingPackList.GetSubQueueCount(i) > (this.matchingPackList.NoItemPerCarton / this.matchingPackList.SubQueueCount))
+                                if (this.matchingPackList.GetSubQueueCount(i) > (this.matchingPackList.ItemPerSet / this.matchingPackList.NoSubQueue))
                                 {
                                     OnlinePackDTO messageData = this.matchingPackList.ElementAt(i, this.matchingPackList.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
                                     messageData.QueueID = subQueueID; //Set new QueueID
@@ -853,7 +853,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 lock (this.packInOneCarton)
                 {
-                    if (this.matchingPackList.Count > 0 && this.packInOneCarton.Count == this.packInOneCarton.NoItemPerCarton)
+                    if (this.matchingPackList.Count > 0 && this.packInOneCarton.Count == this.packInOneCarton.ItemPerSet)
                     {
                         OnlinePackDTO messageData = this.matchingPackList.ElementAt(0).ShallowClone(); //Get the first pack
 

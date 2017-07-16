@@ -317,7 +317,7 @@ namespace TotalBase
             switch (GlobalVariables.FillingLineID)
             {
                 case FillingLine.Ocme:
-                    return 24;
+                    return 12;
                 case FillingLine.CO:
                     return 24;
                 case FillingLine.WH:

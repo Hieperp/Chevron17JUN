@@ -17,15 +17,17 @@ namespace TotalDTO.Productions
     public class BarcodeQueue<TBarcodeDTO>
         where TBarcodeDTO : BarcodeDTO, IPrimitiveEntity, IShallowClone<TBarcodeDTO>, new()
     {
+        /// <summary>
+        /// Number of item per whole package: Pack per carton, carton per pallet
+        /// This property should be set right after change commodity by setting function
+        /// </summary>
+        public int ItemPerSet { get; set; } //!!! carton per palllet?? THUC TE: PACK PER CARTON: TUY THEO SAN PHAM => CAN PHAI XEM XET: EMPTY AL QUEUE: IN ORDEER TO CHANGE COMMODITY!!!
 
+        //private int itemPerSet { get; set; }
 
-        private string messageQueueName;
-
-        private int subQueueCount;     //No row
-        private int noItemPerSubQueue;
-
-        private bool repeatedSubQueueIndex;
-        private bool invertSubQueueIndex;
+        private int itemPerSubQueue { get; set; }
+        private bool repeatSubQueueIndex { get; set; }
+        private bool invertSubQueueIndex { get; set; }
 
         private int noItemAdded;        //total item added, use this for Enqueue Method to add item for each sub queue
 
@@ -33,42 +35,50 @@ namespace TotalDTO.Productions
 
         #region Contructor
 
+        //public BarcodeQueue()
+        //    : this(GlobalVariables.NoItemPerCarton() / GlobalVariables.NoSubQueue())
+        //{ }
+
+        ///// <summary>
+        ///// ONLY matchingPackList USE THIS CONTRUCTOR. This contructor beside allow to set NoItemPerSubQueue, it is also allow to set RepeatedSubQueueIndex
+        ///// </summary>
+        ///// <param name="itemPerSubQueue"></param>
+        //public BarcodeQueue(int itemPerSubQueue)
+        //{
+        //    this.SubQueueCount = GlobalVariables.NoSubQueue();
+        //    this.ItemPerSubQueue = itemPerSubQueue;
+
+
+        //    this.NoItemAdded = 0; //Inititalize
+
+        //    this.RepeatedSubQueueIndex = GlobalVariables.RepeatedSubQueueIndex();
+
+        //    if (this.RepeatedSubQueueIndex) this.NoItemAdded = 0 - this.ItemPerSubQueue;
+        //}
+
+
         public BarcodeQueue()
-            : this(GlobalVariables.NoItemPerCarton() / GlobalVariables.NoSubQueue())
+            : this(1, 1, false)
         { }
 
-        /// <summary>
-        /// ONLY matchingPackList USE THIS CONTRUCTOR. This contructor beside allow to set NoItemPerSubQueue, it is also allow to set RepeatedSubQueueIndex
-        /// </summary>
-        /// <param name="noItemPerSubQueue"></param>
-        public BarcodeQueue(int noItemPerSubQueue)
+        public BarcodeQueue(int noSubQueue, int itemPerSubQueue, bool repeatSubQueueIndex)
         {
-            this.SubQueueCount = GlobalVariables.NoSubQueue();
-            this.NoItemPerSubQueue = noItemPerSubQueue;
-
-            this.RepeatedSubQueueIndex = false;
-            this.invertSubQueueIndex = false;
-
-            this.noItemAdded = 0; //Inititalize
-
-            this.RepeatedSubQueueIndex = GlobalVariables.RepeatedSubQueueIndex();
-
-            if (this.RepeatedSubQueueIndex) this.noItemAdded = 0 - this.NoItemPerSubQueue;
-        }
-
-
-
-
-        public BarcodeQueue(int subQueueCount, int iz)
-        {
-            if (subQueueCount > 0)
+            if (noSubQueue > 0)
             {
                 this.messageSubQueue = new List<List<TBarcodeDTO>>();
-                for (int i = 1; i <= subQueueCount; i++)
+                for (int i = 1; i <= noSubQueue; i++)
                 {
                     this.messageSubQueue.Add(new List<TBarcodeDTO>());
                 }
+
+                this.itemPerSubQueue = itemPerSubQueue;
+
+                this.repeatSubQueueIndex = repeatSubQueueIndex;
+
+                if (this.repeatSubQueueIndex) this.noItemAdded = 0 - this.itemPerSubQueue;//SHOULD CHECK AGAIN. HAVE NOT CHECK YET FOR CHEVRON
             }
+            else
+                throw new Exception("Invalid queue!");
 
         }
 
@@ -80,114 +90,23 @@ namespace TotalDTO.Productions
 
         #region Public Properties
 
-        public string BarcodeQueueName
-        {
-            get
-            {
-                return this.messageQueueName;
-            }
-
-            set
-            {
-                if (value != this.messageQueueName)
-                {
-                    this.messageQueueName = value;
-                }
-            }
-        }
-
-
-        public int SubQueueCount
-        {
-            get
-            {
-                return this.MessageSubQueue.Count;
-            }
-            protected set
-            {
-                if (this.subQueueCount != value)
-                {
-                    this.subQueueCount = value;
-
-                    this.messageSubQueue = new List<List<TBarcodeDTO>>();
-                    for (int i = 1; i <= this.SubQueueCount; i++)
-                    {
-                        this.messageSubQueue.Add(new List<TBarcodeDTO>());
-                    }
-                }
-            }
-
-        }
-
-
-        public int NoItemPerCarton
-        {
-            get
-            {
-                return GlobalVariables.NoItemPerCarton(); ;
-            }
-        }
-
-        private int NoItemPerSubQueue
-        {
-            get
-            {
-                return this.noItemPerSubQueue;
-            }
-            set
-            {
-                this.noItemPerSubQueue = value;
-            }
-        }
-
-
-        private bool RepeatedSubQueueIndex
-        {
-            get
-            {
-                return this.repeatedSubQueueIndex;
-            }
-            set
-            {
-                this.repeatedSubQueueIndex = value;
-            }
-        }
+        public int NoSubQueue { get { return this.messageSubQueue.Count; } }
 
         /// <summary>
         /// Return the total number of items in BarcodeQueue
         /// </summary>
-        public int Count
-        {
-            get
-            {
-                int count = 0;
-
-                foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
-                {
-                    count = count + subQueue.Count;
-                }
-
-                return count;
-            }
-        }
-
+        public int Count { get { int count = 0; this.messageSubQueue.Each(e => count += e.Count); return count; } }
         /// <summary>
         /// Return the number of items of a specific subQueueID
         /// </summary>
         public int GetSubQueueCount(int subQueueID)
         {
-            return this.MessageSubQueue[subQueueID].Count;
+            return this.messageSubQueue[subQueueID].Count;
         }
-
-        private List<List<TBarcodeDTO>> MessageSubQueue
-        {
-            get { return this.messageSubQueue; }
-        }
-
         #endregion Public Properties
 
-        #region Public Method
 
+        #region Public Method
         /// <summary>
         /// The SubQueueID of Next Pack when Enqueue
         /// </summary>
@@ -195,12 +114,12 @@ namespace TotalDTO.Productions
         {       //Sequence Enqueue to each sub queue, this line will return: index : 0, 1, 3, ... NoSubQueue-1 (Comfort with: Zero base index)
             get
             {
-                if (!this.RepeatedSubQueueIndex)
-                    return (this.noItemAdded / this.NoItemPerSubQueue) % this.SubQueueCount;
+                if (!this.repeatSubQueueIndex)
+                    return (this.noItemAdded / this.itemPerSubQueue) % this.NoSubQueue;
                 else
                 {
-                    int nextQueueID = this.noItemAdded < 0 ? 0 : (this.noItemAdded / this.NoItemPerSubQueue) % this.SubQueueCount;
-                    if (this.invertSubQueueIndex) nextQueueID = (this.SubQueueCount - 1) - nextQueueID;
+                    int nextQueueID = this.noItemAdded < 0 ? 0 : (this.noItemAdded / this.itemPerSubQueue) % this.NoSubQueue;
+                    if (this.invertSubQueueIndex) nextQueueID = (this.NoSubQueue - 1) - nextQueueID;
 
                     return nextQueueID;
                 }
@@ -213,10 +132,10 @@ namespace TotalDTO.Productions
         /// </summary>
         /// <param name="messageData"></param>
         /// <param name="packSubQueueID"></param>
-        public void AddPack(TBarcodeDTO messageData)
+        public void AddPack(TBarcodeDTO messageData) //CAN PHAI XEM XET LAI CHO NAY: GOM CHUNG VOI Enqueue. that ra: cai nay van co tac dung, nham muc dich reset autopacker, reallocate
         {
-            if (messageData.QueueID < this.MessageSubQueue.Count)
-                this.MessageSubQueue[messageData.QueueID].Add(messageData);
+            if (messageData.QueueID < this.messageSubQueue.Count)
+                this.messageSubQueue[messageData.QueueID].Add(messageData);
         }
 
         /// <summary>
@@ -225,44 +144,20 @@ namespace TotalDTO.Productions
         /// <param name="messageData"></param>
         public void Enqueue(TBarcodeDTO messageData)
         {
-            this.MessageSubQueue[this.NextQueueID].Add(messageData);
+            this.messageSubQueue[this.NextQueueID].Add(messageData);
             this.noItemAdded++; //Note: Always increase noItemAdded by 1 after Enqueue
 
-            if (this.RepeatedSubQueueIndex && this.noItemAdded > 0 && (this.noItemAdded % (this.SubQueueCount * this.NoItemPerSubQueue) == 0)) this.invertSubQueueIndex = !this.invertSubQueueIndex;
+            if (this.repeatSubQueueIndex && this.noItemAdded > 0 && (this.noItemAdded % (this.NoSubQueue * this.itemPerSubQueue) == 0)) this.invertSubQueueIndex = !this.invertSubQueueIndex;
 
         }
 
 
-        /// <summary>
-        /// Dequeue a batch of noItemPerCarton of elements from this Matching Queue, by sequence Dequeue from each sub queue, with index 0, 1, 2, 3, ... NoSubQueue-1 (Comfort with: Zero base index)
-        /// </summary>
-        /// <returns></returns>
-        public BarcodeQueue<TBarcodeDTO> DequeuePack()
-        {
-            BarcodeQueue<TBarcodeDTO> packInOneCarton = new BarcodeQueue<TBarcodeDTO>();
 
-            //chu y: o day: NoItemPerSubQueue co ve khong chac chan lam, nen lap trinh lai: cho no hop ly hon: lay tong so PackPerCarton/ no Sub queue
-            foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
-            {
-                if (packInOneCarton.NoItemPerSubQueue > subQueue.Count) return packInOneCarton; //There is not enough element in this sub queue to dequeue. In this case, return empty
-            }
-
-
-            foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
-            {
-                for (int i = 0; i < packInOneCarton.NoItemPerSubQueue; i++)
-                {
-                    if (subQueue.Count > 0) { packInOneCarton.Enqueue(subQueue.ElementAt(0)); subQueue.RemoveAt(0); }//Check subQueue.Count > 0 just for sure, however, we check it already at the begining of this method
-                }
-            }
-
-            return packInOneCarton;
-        }
 
         public TBarcodeDTO Dequeue(int packID)
         {
             //CẦN PHẢI XEM XÉT
-            foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
+            foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
             {
                 foreach (TBarcodeDTO packData in subQueue)
                 {
@@ -279,6 +174,36 @@ namespace TotalDTO.Productions
         }
 
 
+        /// <summary>
+        /// Dequeue a batch of noItemPerCarton of elements from this Matching Queue, by sequence Dequeue from each sub queue, with index 0, 1, 2, 3, ... NoSubQueue-1 (Comfort with: Zero base index)
+        /// </summary>
+        /// <returns></returns>
+        public BarcodeQueue<TBarcodeDTO> DequeueWholePackage()
+        {
+            if (((this.ItemPerSet / this.NoSubQueue) % 1) == 0) //CHECK FOR AN Integer RESULT
+            {
+                BarcodeQueue<TBarcodeDTO> wholePackage = new BarcodeQueue<TBarcodeDTO>(this.NoSubQueue, this.ItemPerSet / this.NoSubQueue, false) { ItemPerSet = this.ItemPerSet };
+
+                //chu y: o day: NoItemPerSubQueue co ve khong chac chan lam, nen lap trinh lai: cho no hop ly hon: lay tong so PackPerCarton/ no Sub queue
+                foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
+                {
+                    if (wholePackage.itemPerSubQueue > subQueue.Count) return wholePackage; //There is not enough element in this sub queue to dequeue. In this case, return empty
+                }
+
+
+                foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
+                {
+                    for (int i = 0; i < wholePackage.itemPerSubQueue; i++)
+                    {
+                        if (subQueue.Count > 0) { wholePackage.Enqueue(subQueue.ElementAt(0)); subQueue.RemoveAt(0); }//Check subQueue.Count > 0 just for sure, however, we check it already at the begining of this method
+                    }
+                }
+
+                return wholePackage;
+            }
+            else
+                throw new Exception("Can not make carton for this item on this filling line!");
+        }
 
         /// <summary>
         /// messageData.QueueID: Will change to new value (new position) after replace
@@ -288,7 +213,7 @@ namespace TotalDTO.Productions
         /// <returns></returns>
         public bool Replace(int packID, TBarcodeDTO messageData)
         {
-            foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
+            foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
             {
                 for (int i = 0; i < subQueue.Count; i++)
                 {
@@ -309,7 +234,7 @@ namespace TotalDTO.Productions
             int maxSubQueueCount = 0;
             DataTable dataTableAllElements = new DataTable("AllElements");
 
-            foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
+            foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
             {
                 maxSubQueueCount = maxSubQueueCount <= subQueue.Count ? subQueue.Count : maxSubQueueCount;
             }
@@ -319,7 +244,7 @@ namespace TotalDTO.Productions
                 dataTableAllElements.Columns.Add((i < 9 ? " " : "") + (i + 1).ToString().Trim());
             }
 
-            foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
+            foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
             {
                 DataRow dataRow = dataTableAllElements.NewRow(); //add row for each sub queue
                 for (int i = 0; i < maxSubQueueCount; i++)
@@ -343,7 +268,7 @@ namespace TotalDTO.Productions
             if (index < this.Count)  //Zero base index
             {
                 int findIndex = -1;
-                foreach (List<TBarcodeDTO> subQueue in this.MessageSubQueue)
+                foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
                 {
                     for (int i = 0; i < subQueue.Count; i++)
                     {
@@ -363,9 +288,9 @@ namespace TotalDTO.Productions
         /// <returns></returns>
         public TBarcodeDTO ElementAt(int subQueueID, int index)
         {
-            if (subQueueID >= 0 && subQueueID < this.SubQueueCount && index >= 0 && index < this.MessageSubQueue[subQueueID].Count)  //Zero base index
+            if (subQueueID >= 0 && subQueueID < this.NoSubQueue && index >= 0 && index < this.messageSubQueue[subQueueID].Count)  //Zero base index
             {
-                return this.MessageSubQueue[subQueueID].ElementAt(index);
+                return this.messageSubQueue[subQueueID].ElementAt(index);
             }
             return null; //Return Null if index out of range
         }
@@ -374,7 +299,7 @@ namespace TotalDTO.Productions
 
 
 
-        public string EntityIDs { get { return string.Join(",", this.MessageSubQueue.Select(q => string.Join(",", q.Select(l => l.GetID().ToString()).ToArray())).ToArray()); } }
+        public string EntityIDs { get { return string.Join(",", this.messageSubQueue.Select(q => string.Join(",", q.Select(l => l.GetID().ToString()).ToArray())).ToArray()); } }
 
 
     }
