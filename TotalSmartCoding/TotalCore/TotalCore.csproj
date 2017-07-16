@@ -58,18 +58,18 @@
     <Compile Include="Repositories\IGenericWithDetailRepository.cs" />
     <Compile Include="Repositories\Inventories\IGoodsReceiptRepository.cs" />
     <Compile Include="Repositories\Productions\IBatchRepository.cs" />
-    <Compile Include="Repositories\Productions\IOnlineCartonRepository.cs" />
-    <Compile Include="Repositories\Productions\IOnlinePackRepository.cs" />
-    <Compile Include="Repositories\Productions\IOnlinePalletRepository.cs" />
+    <Compile Include="Repositories\Productions\IFillingCartonRepository.cs" />
+    <Compile Include="Repositories\Productions\IFillingPackRepository.cs" />
+    <Compile Include="Repositories\Productions\IFillingPalletRepository.cs" />
     <Compile Include="Repositories\Sales\IDeliveryAdviceRepository.cs" />
     <Compile Include="Services\IBaseService.cs" />
     <Compile Include="Services\IGenericService.cs" />
     <Compile Include="Services\IGenericWithDetailService.cs" />
     <Compile Include="Services\IGenericWithViewDetailService.cs" />
     <Compile Include="Services\Inventories\IGoodsReceiptService.cs" />
-    <Compile Include="Services\Productions\IOnlineCartonService.cs" />
-    <Compile Include="Services\Productions\IOnlinePackService.cs" />
-    <Compile Include="Services\Productions\IOnlinePalletService.cs" />
+    <Compile Include="Services\Productions\IFillingCartonService.cs" />
+    <Compile Include="Services\Productions\IFillingPackService.cs" />
+    <Compile Include="Services\Productions\IFillingPalletService.cs" />
     <Compile Include="Services\Sales\IDeliveryAdviceService.cs" />
   </ItemGroup>
   <ItemGroup>

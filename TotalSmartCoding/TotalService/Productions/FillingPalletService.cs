@@ -5,9 +5,9 @@ using TotalCore.Services.Productions;
 
 namespace TotalService.Productions
 {
-    public class OnlinePalletService : GenericService<OnlinePallet, OnlinePalletDTO, OnlinePalletPrimitiveDTO>, IOnlinePalletService
+    public class FillingPalletService : GenericService<FillingPallet, FillingPalletDTO, FillingPalletPrimitiveDTO>, IFillingPalletService
     {
-        public OnlinePalletService(IOnlinePalletRepository goodsReceiptRepository)
+        public FillingPalletService(IFillingPalletRepository goodsReceiptRepository)
             : base(goodsReceiptRepository)
         {
         }

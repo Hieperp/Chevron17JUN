@@ -765,7 +765,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
                 //P: Message To Head Assugment '//CHU Y QUAN TRONG: DUA MSG SO 1 LEN DAU IN (SAN SANG KHI IN, BOI VI KHI IN TA STORAGE MSG VAO VI TRI SO 1 MA KHONG QUAN TAM DEN VI TRI SO 2, 3,...)
                 this.WriteToStream(GlobalVariables.charESC + "/P/1/001/" + GlobalVariables.charEOT);
-                if (this.ReadFromStream(ref stringReadFrom, true)) { this.MainStatus = "Get message from store and put online"; Thread.Sleep(1000); } else throw new System.InvalidOperationException("NMVN: Can not assign message to head: " + stringReadFrom);
+                if (this.ReadFromStream(ref stringReadFrom, true)) { this.MainStatus = "Get message from store and put filling"; Thread.Sleep(1000); } else throw new System.InvalidOperationException("NMVN: Can not assign message to head: " + stringReadFrom);
 
 
                 #region Status (NOT LASER ONLY)
@@ -807,7 +807,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
                                 //P: Message To Head Assugment '//CHU Y QUAN TRONG: DUA MSG SO 1 LEN DAU IN (SAN SANG KHI IN, BOI VI KHI IN TA STORAGE MSG VAO VI TRI SO 1 MA KHONG QUAN TAM DEN VI TRI SO 2, 3,...)
                                 this.WriteToStream(GlobalVariables.charESC + "/P/1/001/" + GlobalVariables.charEOT);
-                                if (this.ReadFromStream(ref stringReadFrom, true)) { this.MainStatus = "Get message from store and put online"; Thread.Sleep(1000); } else throw new System.InvalidOperationException("NMVN: Can not assign message to head: " + stringReadFrom);
+                                if (this.ReadFromStream(ref stringReadFrom, true)) { this.MainStatus = "Get message from store and put filling"; Thread.Sleep(1000); } else throw new System.InvalidOperationException("NMVN: Can not assign message to head: " + stringReadFrom);
 
 
                             }
@@ -867,7 +867,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
                                 //P: Message To Head Assugment '//CHU Y QUAN TRONG: DUA MSG SO 1 LEN DAU IN (SAN SANG KHI IN, BOI VI KHI IN TA STORAGE MSG VAO VI TRI SO 1 MA KHONG QUAN TAM DEN VI TRI SO 2, 3,...)
                                 this.WriteToStream(GlobalVariables.charESC + "/P/1/001/" + GlobalVariables.charEOT);
-                                if (this.ReadFromStream(ref stringReadFrom, true)) { this.MainStatus = "Get message from store and put online"; Thread.Sleep(1000); } else throw new System.InvalidOperationException("NMVN: Can not assign message to head: " + stringReadFrom);
+                                if (this.ReadFromStream(ref stringReadFrom, true)) { this.MainStatus = "Get message from store and put filling"; Thread.Sleep(1000); } else throw new System.InvalidOperationException("NMVN: Can not assign message to head: " + stringReadFrom);
 
 
                             }

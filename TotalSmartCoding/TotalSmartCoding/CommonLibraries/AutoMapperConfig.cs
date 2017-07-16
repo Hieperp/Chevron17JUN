@@ -46,19 +46,19 @@ namespace TotalSmartCoding.CommonLibraries
 
 
 
-                cfg.CreateMap<OnlinePack, OnlinePackViewModel>();
-                cfg.CreateMap<OnlinePack, OnlinePackDTO>();
-                cfg.CreateMap<OnlinePackPrimitiveDTO, OnlinePack>();
+                cfg.CreateMap<FillingPack, FillingPackViewModel>();
+                cfg.CreateMap<FillingPack, FillingPackDTO>();
+                cfg.CreateMap<FillingPackPrimitiveDTO, FillingPack>();
 
 
-                cfg.CreateMap<OnlineCarton, OnlineCartonViewModel>();
-                cfg.CreateMap<OnlineCarton, OnlineCartonDTO>();
-                cfg.CreateMap<OnlineCartonPrimitiveDTO, OnlineCarton>();
+                cfg.CreateMap<FillingCarton, FillingCartonViewModel>();
+                cfg.CreateMap<FillingCarton, FillingCartonDTO>();
+                cfg.CreateMap<FillingCartonPrimitiveDTO, FillingCarton>();
 
 
-                cfg.CreateMap<OnlinePallet, OnlinePalletViewModel>();
-                cfg.CreateMap<OnlinePallet, OnlinePalletDTO>();
-                cfg.CreateMap<OnlinePalletPrimitiveDTO, OnlinePallet>();
+                cfg.CreateMap<FillingPallet, FillingPalletViewModel>();
+                cfg.CreateMap<FillingPallet, FillingPalletDTO>();
+                cfg.CreateMap<FillingPalletPrimitiveDTO, FillingPallet>();
 
 
 

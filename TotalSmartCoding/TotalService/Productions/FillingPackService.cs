@@ -9,20 +9,20 @@ using System;
 
 namespace TotalService.Productions
 {
-    public class OnlinePackService : GenericService<OnlinePack, OnlinePackDTO, OnlinePackPrimitiveDTO>, IOnlinePackService
+    public class FillingPackService : GenericService<FillingPack, FillingPackDTO, FillingPackPrimitiveDTO>, IFillingPackService
     {
-        IOnlinePackRepository goodsReceiptRepository;
-        public OnlinePackService(IOnlinePackRepository goodsReceiptRepository)
+        IFillingPackRepository goodsReceiptRepository;
+        public FillingPackService(IFillingPackRepository goodsReceiptRepository)
             : base(goodsReceiptRepository)
         {
             this.goodsReceiptRepository = goodsReceiptRepository;
         }
 
-        public bool UpdateEntryStatus(string onlinePackIDs, GlobalVariables.BarcodeStatus barcodeStatus)
+        public bool UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus)
         {
             try
             {
-                this.goodsReceiptRepository.UpdateEntryStatus(onlinePackIDs, barcodeStatus);
+                this.goodsReceiptRepository.UpdateEntryStatus(fillingPackIDs, barcodeStatus);
                 return true;
             }
             catch (Exception ex)
@@ -32,11 +32,11 @@ namespace TotalService.Productions
             }
         }
         //CAI NAY TAM TOI VAY THOI, CHUA CO CODE DAY DU!!! CAN PHAI XEM LAI
-        public bool UpdateListOfPackSubQueueID(string onlinePackIDs, int QueueID)
+        public bool UpdateListOfPackSubQueueID(string fillingPackIDs, int QueueID)
         {
             try
             {
-                //this.goodsReceiptRepository.UpdateEntryStatus(onlinePackIDs, barcodeStatus);
+                //this.goodsReceiptRepository.UpdateEntryStatus(fillingPackIDs, barcodeStatus);
                 return true;
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace TotalService.Productions
         }
 
 
-        protected override bool TryValidateModel(OnlinePackDTO dto, ref StringBuilder invalidMessage)
+        protected override bool TryValidateModel(FillingPackDTO dto, ref StringBuilder invalidMessage)
         {
             if (!base.TryValidateModel(dto, ref invalidMessage)) return false;
             // cần phải ktra DTO here in order to save: có nên kết hợp IsValid của DTO để ktra ngay trong GenericService cho tất cả DTO object??? if (dto.EntryDate < new DateTime(2015, 7, 1) || dto.EntryDate > DateTime.Today.AddDays(2)) invalidMessage.Append(" Ngày không hợp lệ;");

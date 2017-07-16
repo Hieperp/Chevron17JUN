@@ -23,7 +23,7 @@ namespace TotalModel.Models
         }
     
         public int PalletID { get; set; }
-        public int OnlinePalletID { get; set; }
+        public int FillingPalletID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int CommodityID { get; set; }
         public string PCID { get; set; }
@@ -32,10 +32,10 @@ namespace TotalModel.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons { get; set; }
+        public virtual Commodity Commodity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PickupDetail> PickupDetails { get; set; }
-        public virtual Commodity Commodity { get; set; }
     }
 }

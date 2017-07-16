@@ -4,7 +4,7 @@ using TotalDTO.Productions;
 
 namespace TotalCore.Services.Productions
 {
-    public interface IOnlineCartonService : IGenericService<OnlineCarton, OnlineCartonDTO, OnlineCartonPrimitiveDTO>
+    public interface IFillingPalletService : IGenericService<FillingPallet, FillingPalletDTO, FillingPalletPrimitiveDTO>
     {
     }
 }

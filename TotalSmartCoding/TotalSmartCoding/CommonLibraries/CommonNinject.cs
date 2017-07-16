@@ -102,20 +102,20 @@ namespace TotalSmartCoding.CommonLibraries
 
 
 
-                Kernel.Bind<IOnlinePackService>().To<OnlinePackService>();
-                Kernel.Bind<IOnlinePackRepository>().To<OnlinePackRepository>();
-                Kernel.Bind<IOnlinePackViewModelSelectListBuilder>().To<OnlinePackViewModelSelectListBuilder>();
-                Kernel.Bind<OnlinePackViewModel>().ToSelf();
+                Kernel.Bind<IFillingPackService>().To<FillingPackService>();
+                Kernel.Bind<IFillingPackRepository>().To<FillingPackRepository>();
+                Kernel.Bind<IFillingPackViewModelSelectListBuilder>().To<FillingPackViewModelSelectListBuilder>();
+                Kernel.Bind<FillingPackViewModel>().ToSelf();
 
-                Kernel.Bind<IOnlineCartonService>().To<OnlineCartonService>();
-                Kernel.Bind<IOnlineCartonRepository>().To<OnlineCartonRepository>();
-                Kernel.Bind<IOnlineCartonViewModelSelectListBuilder>().To<OnlineCartonViewModelSelectListBuilder>();
-                Kernel.Bind<OnlineCartonViewModel>().ToSelf();
+                Kernel.Bind<IFillingCartonService>().To<FillingCartonService>();
+                Kernel.Bind<IFillingCartonRepository>().To<FillingCartonRepository>();
+                Kernel.Bind<IFillingCartonViewModelSelectListBuilder>().To<FillingCartonViewModelSelectListBuilder>();
+                Kernel.Bind<FillingCartonViewModel>().ToSelf();
 
-                Kernel.Bind<IOnlinePalletService>().To<OnlinePalletService>();
-                Kernel.Bind<IOnlinePalletRepository>().To<OnlinePalletRepository>();
-                Kernel.Bind<IOnlinePalletViewModelSelectListBuilder>().To<OnlinePalletViewModelSelectListBuilder>();
-                Kernel.Bind<OnlinePalletViewModel>().ToSelf();
+                Kernel.Bind<IFillingPalletService>().To<FillingPalletService>();
+                Kernel.Bind<IFillingPalletRepository>().To<FillingPalletRepository>();
+                Kernel.Bind<IFillingPalletViewModelSelectListBuilder>().To<FillingPalletViewModelSelectListBuilder>();
+                Kernel.Bind<FillingPalletViewModel>().ToSelf();
 
 
 

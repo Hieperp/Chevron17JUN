@@ -39,11 +39,11 @@
 
 
             Pack = 28001,
-            OnlinePack = 28002,
+            FillingPack = 28002,
             Carton = 28003,
-            OnlineCarton = 28004,
+            FillingCarton = 28004,
             Pallet = 28005,
-            OnlinePallet = 28006,
+            FillingPallet = 28006,
 
 
             Batch = 28106,

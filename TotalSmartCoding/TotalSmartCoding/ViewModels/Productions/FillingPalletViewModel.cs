@@ -3,7 +3,7 @@ using TotalSmartCoding.ViewModels.Helpers;
 
 namespace TotalSmartCoding.ViewModels.Productions
 {
-    public class OnlineCartonViewModel : OnlineCartonDTO, ISimpleViewModel
+    public class FillingPalletViewModel : FillingPalletDTO, ISimpleViewModel
     {
     }
 }

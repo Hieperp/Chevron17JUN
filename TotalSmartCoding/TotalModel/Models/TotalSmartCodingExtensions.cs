@@ -337,9 +337,9 @@ namespace TotalModel.Models
         public int OrganizationalUnitID { get; set; }
     }
 
-    public partial class OnlinePack : IPrimitiveEntity, IBaseEntity
+    public partial class FillingPack : IPrimitiveEntity, IBaseEntity
     {
-        public int GetID() { return this.OnlinePackID; }
+        public int GetID() { return this.FillingPackID; }
 
         public int LocationID { get; set; }
 
@@ -352,9 +352,9 @@ namespace TotalModel.Models
     }
 
 
-    public partial class OnlineCarton : IPrimitiveEntity, IBaseEntity
+    public partial class FillingCarton : IPrimitiveEntity, IBaseEntity
     {
-        public int GetID() { return this.OnlineCartonID; }
+        public int GetID() { return this.FillingCartonID; }
 
         public int LocationID { get; set; }
 
@@ -367,9 +367,9 @@ namespace TotalModel.Models
     }
 
 
-    public partial class OnlinePallet : IPrimitiveEntity, IBaseEntity
+    public partial class FillingPallet : IPrimitiveEntity, IBaseEntity
     {
-        public int GetID() { return this.OnlinePalletID; }
+        public int GetID() { return this.FillingPalletID; }
 
         public int LocationID { get; set; }
 

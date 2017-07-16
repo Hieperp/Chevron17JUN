@@ -47,11 +47,11 @@ namespace TotalSmartCoding.Controllers.Productions
         private SerialPort serialPort;
 
 
-        private BarcodeQueue<OnlinePackDTO> matchingPackList;
-        private BarcodeQueue<OnlinePackDTO> packInOneCarton;
+        private BarcodeQueue<FillingPackDTO> matchingPackList;
+        private BarcodeQueue<FillingPackDTO> packInOneCarton;
 
-        private BarcodeQueue<OnlineCartonDTO> cartonDataTable;
-        private BarcodeQueue<OnlinePalletDTO> OnlinePalletQueue;
+        private BarcodeQueue<FillingCartonDTO> cartonDataTable;
+        private BarcodeQueue<FillingPalletDTO> FillingPalletQueue;
 
         private bool onPrinting;
         private bool resetMessage;
@@ -69,9 +69,9 @@ namespace TotalSmartCoding.Controllers.Productions
         //Servernme + database name
         //Toolbar enable
 
-        private OnlinePackController onlinePackService;
-        private OnlineCartonController onlineCartonService;
-        private OnlinePalletController onlinePalletService;
+        private FillingPackController fillingPackService;
+        private FillingCartonController fillingCartonService;
+        private FillingPalletController fillingPalletService;
 
         public ScannerController(FillingLineData fillingLineData)
         {
@@ -85,9 +85,9 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.ipAddress = IPAddress.Parse(GlobalVariables.IpAddress(this.BarcodeScannerName));
 
 
-                this.onlinePackService = new OnlinePackController(CommonNinject.Kernel.Get<IOnlinePackService>(), CommonNinject.Kernel.Get<IOnlinePackViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<OnlinePackViewModel>());
-                this.onlineCartonService = new OnlineCartonController(CommonNinject.Kernel.Get<IOnlineCartonService>(), CommonNinject.Kernel.Get<IOnlineCartonViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<OnlineCartonViewModel>());
-                this.onlinePalletService = new OnlinePalletController(CommonNinject.Kernel.Get<IOnlinePalletService>(), CommonNinject.Kernel.Get<IOnlinePalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<OnlinePalletViewModel>());
+                this.fillingPackService = new FillingPackController(CommonNinject.Kernel.Get<IFillingPackService>(), CommonNinject.Kernel.Get<IFillingPackViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPackViewModel>());
+                this.fillingCartonService = new FillingCartonController(CommonNinject.Kernel.Get<IFillingCartonService>(), CommonNinject.Kernel.Get<IFillingCartonViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingCartonViewModel>());
+                this.fillingPalletService = new FillingPalletController(CommonNinject.Kernel.Get<IFillingPalletService>(), CommonNinject.Kernel.Get<IFillingPalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPalletViewModel>());
 
 
 
@@ -119,10 +119,10 @@ namespace TotalSmartCoding.Controllers.Productions
                 //}
 
 
-                this.matchingPackList = new BarcodeQueue<OnlinePackDTO>(GlobalVariables.NoSubQueue(), GlobalVariables.NoItemDiverter(), GlobalVariables.RepeatedSubQueueIndex()) { ItemPerSet = GlobalVariables.NoItemPerCarton() };
-                this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>(GlobalVariables.NoSubQueue(), GlobalVariables.NoItemDiverter(), false) { ItemPerSet = GlobalVariables.NoItemPerCarton() };
-                this.cartonDataTable = new BarcodeQueue<OnlineCartonDTO>();//??
-                this.OnlinePalletQueue = new BarcodeQueue<OnlinePalletDTO>();//??
+                this.matchingPackList = new BarcodeQueue<FillingPackDTO>(GlobalVariables.NoSubQueue(), GlobalVariables.NoItemDiverter(), GlobalVariables.RepeatedSubQueueIndex()) { ItemPerSet = GlobalVariables.NoItemPerCarton() };
+                this.packInOneCarton = new BarcodeQueue<FillingPackDTO>(GlobalVariables.NoSubQueue(), GlobalVariables.NoItemDiverter(), false) { ItemPerSet = GlobalVariables.NoItemPerCarton() };
+                this.cartonDataTable = new BarcodeQueue<FillingCartonDTO>();//??
+                this.FillingPalletQueue = new BarcodeQueue<FillingPalletDTO>();//??
             }
             catch (Exception exception)
             {
@@ -147,7 +147,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 //////{
                 //////    if (packRow.FillingLineID == (int)this.FillingLineData.FillingLineID)
                 //////    {
-                //////        OnlinePackDTO messageData = new OnlinePackDTO(packRow.PackBarcode);
+                //////        FillingPackDTO messageData = new FillingPackDTO(packRow.PackBarcode);
                 //////        messageData.PackID = packRow.PackID;
                 //////        messageData.QueueID = packRow.QueueID;
 
@@ -315,13 +315,13 @@ namespace TotalSmartCoding.Controllers.Productions
             else return null;
         }
 
-        public DataTable GetOnlinePalletQueue()
+        public DataTable GetFillingPalletQueue()
         {
-            if (this.OnlinePalletQueue != null)
+            if (this.FillingPalletQueue != null)
             {
-                lock (this.OnlinePalletQueue)
+                lock (this.FillingPalletQueue)
                 {
-                    return this.OnlinePalletQueue.GetAllElements();
+                    return this.FillingPalletQueue.GetAllElements();
                 }
             }
             else return null;
@@ -501,14 +501,14 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        private OnlinePackDTO AddDataDetailPack(string code, int queueID)
+        private FillingPackDTO AddDataDetailPack(string code, int queueID)
         {
             try
             {
-                OnlinePackViewModel onlinePackDTO = new OnlinePackViewModel() { QueueID = queueID, Code = code };
+                FillingPackViewModel fillingPackDTO = new FillingPackViewModel() { QueueID = queueID, Code = code };
 
-                if (this.onlinePackService.onlinePackService.Save(onlinePackDTO))
-                    return onlinePackDTO;
+                if (this.fillingPackService.fillingPackService.Save(fillingPackDTO))
+                    return fillingPackDTO;
                 else
                 {
                     this.MainStatus = "Insufficient save pack: " + code;
@@ -532,16 +532,16 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     //CẦN CHÚ Ý: this.packInOneCarton.Count = 0: CARTON RỔNG => PHẢI XỬ LÝ NHƯ THẾ NÀO???
 
-                    OnlineCartonDTO onlineCartonDTO = new OnlineCartonDTO() { Code = cartonCode };
+                    FillingCartonDTO fillingCartonDTO = new FillingCartonDTO() { Code = cartonCode };
 
-                    this.onlineCartonService.onlineCartonService.ServiceBag["OnlinePackIDs"] = this.packInOneCarton.EntityIDs; //VERY IMPORTANT: NEED TO ADD OnlinePackIDs TO NEW OnlineCartonDTO
-                    if (this.onlineCartonService.onlineCartonService.Save(onlineCartonDTO))
-                        this.packInOneCarton = new BarcodeQueue<OnlinePackDTO>(); //CLEAR AFTER ADD TO OnlineCartonDTO
+                    this.fillingCartonService.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packInOneCarton.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
+                    if (this.fillingCartonService.fillingCartonService.Save(fillingCartonDTO))
+                        this.packInOneCarton = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
                     else
-                        throw new Exception("Insufficient save carton: " + onlineCartonDTO.Code);
+                        throw new Exception("Insufficient save carton: " + fillingCartonDTO.Code);
 
 
-                    this.cartonDataTable.Enqueue(onlineCartonDTO);
+                    this.cartonDataTable.Enqueue(fillingCartonDTO);
                 }
             }
         }
@@ -589,7 +589,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 {
                                     lock (this.matchingPackList)
                                     {
-                                        OnlinePackDTO messageData = this.AddDataDetailPack(receivedBarcode, this.matchingPackList.NextQueueID);
+                                        FillingPackDTO messageData = this.AddDataDetailPack(receivedBarcode, this.matchingPackList.NextQueueID);
                                         if (messageData != null)
                                         {
                                             this.matchingPackList.Enqueue(messageData);
@@ -614,7 +614,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 {
                                     lock (this.matchingPackList)
                                     {                             //<Dequeue from matchingPackList to this.packInOneCarton>
-                                        this.packInOneCarton = this.matchingPackList.DequeueWholePackage(); //This Dequeue successful WHEN There is enought OnlinePackDTO IN THE COMMON GLOBAL matchingPackList, ELSE: this.packListInCarton is still NULL
+                                        this.packInOneCarton = this.matchingPackList.DequeueWholePackage(); //This Dequeue successful WHEN There is enought FillingPackDTO IN THE COMMON GLOBAL matchingPackList, ELSE: this.packListInCarton is still NULL
                                     }
 
                                     if (this.packInOneCarton.Count > 0)
@@ -622,7 +622,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                         matchingPackListChanged = true;
                                         packInOneCartonChanged = true;
 
-                                        if (!this.onlinePackService.onlinePackService.UpdateEntryStatus(this.packInOneCarton.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.onlinePackService.onlinePackService.ServiceTag;
+                                        if (!this.fillingPackService.fillingPackService.UpdateEntryStatus(this.packInOneCarton.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.fillingPackService.fillingPackService.ServiceTag;
                                     }
                                 }
                             }
@@ -788,12 +788,12 @@ namespace TotalSmartCoding.Controllers.Productions
                             {
                                 if (this.matchingPackList.GetSubQueueCount(i) > (this.matchingPackList.ItemPerSet / this.matchingPackList.NoSubQueue))
                                 {
-                                    OnlinePackDTO messageData = this.matchingPackList.ElementAt(i, this.matchingPackList.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
+                                    FillingPackDTO messageData = this.matchingPackList.ElementAt(i, this.matchingPackList.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
                                     messageData.QueueID = subQueueID; //Set new QueueID
 
-                                    lock (this.onlinePackService)
+                                    lock (this.fillingPackService)
                                     {
-                                        if (this.onlinePackService.onlinePackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID))
+                                        if (this.fillingPackService.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID))
                                         {
                                             this.matchingPackList.Dequeue(messageData.PackID); //First: Remove from old subQueue
                                             this.matchingPackList.AddPack(messageData);//Next: Add to new subQueue
@@ -827,14 +827,14 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 if (this.matchingPackList.Count > 0)
                 {
-                    OnlinePackDTO messageData = this.matchingPackList.Dequeue(packID);
+                    FillingPackDTO messageData = this.matchingPackList.Dequeue(packID);
                     if (messageData != null)
                     {
                         this.NotifyPropertyChanged("MatchingPackList");
 
-                        lock (this.onlinePackService)
+                        lock (this.fillingPackService)
                         {
-                            this.onlinePackService.DeleteConfirmed(messageData.PackID); return true; //if (!this.onlinePackService.DeleteConfirmed(messageData.PackID)) return true; //Delete successfully
+                            this.fillingPackService.DeleteConfirmed(messageData.PackID); return true; //if (!this.fillingPackService.DeleteConfirmed(messageData.PackID)) return true; //Delete successfully
                             //else throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
                         }
                     }
@@ -855,7 +855,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     if (this.matchingPackList.Count > 0 && this.packInOneCarton.Count == this.packInOneCarton.ItemPerSet)
                     {
-                        OnlinePackDTO messageData = this.matchingPackList.ElementAt(0).ShallowClone(); //Get the first pack
+                        FillingPackDTO messageData = this.matchingPackList.ElementAt(0).ShallowClone(); //Get the first pack
 
                         if (this.packInOneCarton.Replace(packID, messageData)) //messageData.QueueID: Will change to new value (new position) after replace
                         {
@@ -864,13 +864,13 @@ namespace TotalSmartCoding.Controllers.Productions
                             this.NotifyPropertyChanged("PackInOneCarton");
                             this.NotifyPropertyChanged("MatchingPackList");
 
-                            lock (this.onlinePalletService)
+                            lock (this.fillingPalletService)
                             {
-                                this.onlinePalletService.Delete(packID);//if ( !) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
+                                this.fillingPalletService.Delete(packID);//if ( !) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
 
-                                if (!this.onlinePackService.onlinePackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
+                                if (!this.fillingPackService.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
 
-                                if (!this.onlinePackService.onlinePackService.UpdateEntryStatus(messageData.PackID.ToString(), GlobalVariables.BarcodeStatus.ReadyToCarton)) return true;
+                                if (!this.fillingPackService.fillingPackService.UpdateEntryStatus(messageData.PackID.ToString(), GlobalVariables.BarcodeStatus.ReadyToCarton)) return true;
                                 else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack status");
                             }
                         }
@@ -896,8 +896,8 @@ namespace TotalSmartCoding.Controllers.Productions
 
                         //CAN PHAI XEM XET LAI DOAN CODE NAY, CODE LAI CHO THICH HOP
                         //CO THE LAM NHU SAU
-                        //1) XEM LAI SAVE CARTON: SAU KHI SAVE -> NGOAI VIEC UPDATE OnlineCartonID TO OnlinePacks => can phai update them EntryStatus to 3: carton already
-                        //2) tai cho nay: hien tai da lock(packInOneCarton) => sau do: can kiem tra xem o table OnlinePack: xem co phai con dung 1 pack list where Status = 2 hay kg? (cung san pham, so luong pack: bang chinh xac so luong Pack per caton: cua chuyen hien tai), neu ok: thi cho phep xoa carton
+                        //1) XEM LAI SAVE CARTON: SAU KHI SAVE -> NGOAI VIEC UPDATE FillingCartonID TO FillingPacks => can phai update them EntryStatus to 3: carton already
+                        //2) tai cho nay: hien tai da lock(packInOneCarton) => sau do: can kiem tra xem o table FillingPack: xem co phai con dung 1 pack list where Status = 2 hay kg? (cung san pham, so luong pack: bang chinh xac so luong Pack per caton: cua chuyen hien tai), neu ok: thi cho phep xoa carton
                         //3) sau khi xoa carton: thi add pack to packInOneCarton: nen: lam cung 1 cach giong nhu load packInOneCarton tai thoi diem mo phan mem
                         //TOM LAI: tai day, chung ta quan tam den viec: dam bao du lieu sach se, thong nhat voi cai gi hien thi tren giao dien (hien tai, BP: du lieu sau khi tat phan mem mo lai khong con chinh xac nua
                         //DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.FindByCartonID(cartonID);
@@ -906,7 +906,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         //    //COPY Data FROM cartonDataTable TO packInOneCarton
                         //    for (int i = 0; i < this.packInOneCarton.NoItemPerCarton; i++)
                         //    {                               //This use NON TYPED DATASET  -- Not so good, bescause the compiler can not detect error at compile time, but it is ok (I know exactly what in every row)
-                        //        OnlinePackDTO messageData = this.AddDataDetailPack(dataDetailCartonRow["Pack" + i.ToString("00") + "Barcode"].ToString(), packInOneCarton.NextQueueID);
+                        //        FillingPackDTO messageData = this.AddDataDetailPack(dataDetailCartonRow["Pack" + i.ToString("00") + "Barcode"].ToString(), packInOneCarton.NextQueueID);
                         //        if (messageData != null) this.packInOneCarton.Enqueue(messageData);
                         //    }
 

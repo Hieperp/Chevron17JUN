@@ -20,6 +20,7 @@ namespace TotalModel.Models
         public string Code { get; set; }
         public int FillingLineID { get; set; }
         public int CommodityID { get; set; }
+        public int LocationID { get; set; }
         public string LastPackNo { get; set; }
         public string LastCartonNo { get; set; }
         public string LastPalletNo { get; set; }
@@ -28,9 +29,8 @@ namespace TotalModel.Models
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime EditedDate { get; set; }
         public bool IsDefault { get; set; }
-        public int LocationID { get; set; }
     
-        public virtual FillingLine FillingLine { get; set; }
         public virtual Commodity Commodity { get; set; }
+        public virtual FillingLine FillingLine { get; set; }
     }
 }

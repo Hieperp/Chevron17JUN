@@ -96,7 +96,16 @@
     <Compile Include="Models\DeliveryAdviceViewDetail.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FillingCarton.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FillingLine.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FillingPack.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FillingPallet.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GoodsReceipt.cs">
@@ -121,15 +130,6 @@
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModuleDetail.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlineCarton.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlinePack.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OnlinePallet.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrganizationalUnit.cs">

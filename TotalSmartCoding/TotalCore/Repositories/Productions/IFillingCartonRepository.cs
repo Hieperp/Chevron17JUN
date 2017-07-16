@@ -2,7 +2,7 @@
 
 namespace TotalCore.Repositories.Productions
 {
-    public interface IOnlinePalletRepository : IGenericRepository<OnlinePallet>
+    public interface IFillingCartonRepository : IGenericRepository<FillingCarton>
     {
     }
 }

@@ -12,12 +12,14 @@ namespace TotalModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OnlinePallet
+    public partial class FillingPack
     {
-        public int OnlinePalletID { get; set; }
+        public int FillingPackID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int FillingLineID { get; set; }
         public int CommodityID { get; set; }
+        public int QueueID { get; set; }
+        public Nullable<int> FillingCartonID { get; set; }
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }

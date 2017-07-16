@@ -79,9 +79,9 @@
     <Compile Include="Builders\Commons\IPaymentTermSelectListBuilder.cs" />
     <Compile Include="Builders\Inventories\GoodsReceiptViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\IViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Productions\OnlineCartonViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Productions\OnlinePackViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Productions\OnlinePalletViewModelSelectListBuilder.cs" />
+    <Compile Include="Builders\Productions\FillingCartonViewModelSelectListBuilder.cs" />
+    <Compile Include="Builders\Productions\FillingPackViewModelSelectListBuilder.cs" />
+    <Compile Include="Builders\Productions\FillingPalletViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\Sales\DeliveryAdviceViewModelSelectListBuilder.cs" />
     <Compile Include="CommonLibraries\AutoMapperConfig.cs" />
     <Compile Include="CommonLibraries\BP\ADODatabase.cs" />
@@ -110,9 +110,9 @@
     <Compile Include="Controllers\GenericViewDetailController.cs" />
     <Compile Include="Controllers\Inventories\GoodsReceiptController.cs" />
     <Compile Include="Controllers\Productions\CodingController.cs" />
-    <Compile Include="Controllers\Productions\OnlineCartonController.cs" />
-    <Compile Include="Controllers\Productions\OnlinePackController.cs" />
-    <Compile Include="Controllers\Productions\OnlinePalletController.cs" />
+    <Compile Include="Controllers\Productions\FillingCartonController.cs" />
+    <Compile Include="Controllers\Productions\FillingPackController.cs" />
+    <Compile Include="Controllers\Productions\FillingPalletController.cs" />
     <Compile Include="Controllers\Productions\ScannerController.cs" />
     <Compile Include="Controllers\Sales\DeliveryAdvicesController.cs" />
     <Compile Include="Program.cs" />
@@ -121,9 +121,9 @@
     <Compile Include="ViewModels\Helpers\PrintViewModel.cs" />
     <Compile Include="ViewModels\Inventories\GoodsReceiptViewModel.cs" />
     <Compile Include="ViewModels\Productions\BatchViewModel.cs" />
-    <Compile Include="ViewModels\Productions\OnlineCartonViewModel.cs" />
-    <Compile Include="ViewModels\Productions\OnlinePackViewModel.cs" />
-    <Compile Include="ViewModels\Productions\OnlinePalletViewModel.cs" />
+    <Compile Include="ViewModels\Productions\FillingCartonViewModel.cs" />
+    <Compile Include="ViewModels\Productions\FillingPackViewModel.cs" />
+    <Compile Include="ViewModels\Productions\FillingPalletViewModel.cs" />
     <Compile Include="ViewModels\Sales\DeliveryAdviceViewModel.cs" />
     <Compile Include="Views\Commons\CustomExceptionMessageBox.cs">
       <SubType>Form</SubType>

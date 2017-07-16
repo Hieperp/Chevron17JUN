@@ -13,26 +13,26 @@ namespace TotalDTO.Productions
         public virtual void SetID(int id) { this.CartonID = id; }
 
         public int CartonID { get; set; }
-        public int OnlineCartonID { get; set; }
+        public int FillingCartonID { get; set; }
         public Nullable<int> PalletID { get; set; }
     }
 
-    public class OnlineCartonPrimitiveDTO : CartonPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO
+    public class FillingCartonPrimitiveDTO : CartonPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO
     {
-        public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.OnlineCarton; } }
+        public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.FillingCarton; } }
 
-        public override int GetID() { return this.OnlineCartonID; }
-        public override void SetID(int id) { this.OnlineCartonID = id; }
+        public override int GetID() { return this.FillingCartonID; }
+        public override void SetID(int id) { this.FillingCartonID = id; }
 
-        public OnlineCartonPrimitiveDTO()
+        public FillingCartonPrimitiveDTO()
         {
             this.FillingLineID = 1; //this.FillingLineData.FillingLineID
             this.CommodityID = 1; //this.FillingLineData.CommodityID
             this.PCID = "ABCD123456EF";
             this.EntryStatusID = 1; //(byte)GlobalVariables.BarcodeStatus.Normal
         }
-        
-        public Nullable<int> OnlinePalletID { get; set; }
+
+        public Nullable<int> FillingPalletID { get; set; }
     }
 
 
@@ -40,13 +40,13 @@ namespace TotalDTO.Productions
     {
     }
 
-    public class OnlineCartonDTO : OnlineCartonPrimitiveDTO, IShallowClone<OnlineCartonDTO>
+    public class FillingCartonDTO : FillingCartonPrimitiveDTO, IShallowClone<FillingCartonDTO>
     {
-        public string OnlinePackIDs { get; set; }
+        public string FillingPackIDs { get; set; }
 
-        public OnlineCartonDTO ShallowClone()
+        public FillingCartonDTO ShallowClone()
         {
-            return (OnlineCartonDTO)this.MemberwiseClone();
+            return (FillingCartonDTO)this.MemberwiseClone();
         }
     }
 }

@@ -13,15 +13,15 @@ namespace TotalDTO.Productions
         public virtual void SetID(int id) { this.PalletID = id; }
 
         public int PalletID { get; set; }
-        public int OnlinePalletID { get; set; }
+        public int FillingPalletID { get; set; }
     }
 
-    public class OnlinePalletPrimitiveDTO : PalletPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO
+    public class FillingPalletPrimitiveDTO : PalletPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO
     {
-        public new GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.OnlinePallet; } }
+        public new GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.FillingPallet; } }
 
-        public override int GetID() { return this.OnlinePalletID; }
-        public override void SetID(int id) { this.OnlinePalletID = id; }
+        public override int GetID() { return this.FillingPalletID; }
+        public override void SetID(int id) { this.FillingPalletID = id; }
     }
 
 
@@ -29,14 +29,14 @@ namespace TotalDTO.Productions
     {
     }
 
-    public class OnlinePalletDTO : OnlinePalletPrimitiveDTO, IShallowClone<OnlinePalletDTO>
+    public class FillingPalletDTO : FillingPalletPrimitiveDTO, IShallowClone<FillingPalletDTO>
     {
-        public string OnlineCartonIDs { get; set; }
+        public string FillingCartonIDs { get; set; }
 
 
-        public OnlinePalletDTO ShallowClone()
+        public FillingPalletDTO ShallowClone()
         {
-            return (OnlinePalletDTO)this.MemberwiseClone();
+            return (FillingPalletDTO)this.MemberwiseClone();
         }
     }
 }

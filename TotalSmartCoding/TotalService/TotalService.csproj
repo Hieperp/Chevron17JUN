@@ -57,9 +57,9 @@
     <Compile Include="GenericWithDetailService.cs" />
     <Compile Include="GenericWithViewDetailService.cs" />
     <Compile Include="Inventories\GoodsReceiptService.cs" />
-    <Compile Include="Productions\OnlineCartonService.cs" />
-    <Compile Include="Productions\OnlinePackService.cs" />
-    <Compile Include="Productions\OnlinePalletService.cs" />
+    <Compile Include="Productions\FillingCartonService.cs" />
+    <Compile Include="Productions\FillingPackService.cs" />
+    <Compile Include="Productions\FillingPalletService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sales\DeliveryAdviceService.cs" />
   </ItemGroup>

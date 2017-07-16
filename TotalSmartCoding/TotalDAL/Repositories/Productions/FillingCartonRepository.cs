@@ -3,9 +3,9 @@ using TotalCore.Repositories.Productions;
 
 namespace TotalDAL.Repositories.Productions
 {
-    public class OnlinePalletRepository : GenericRepository<OnlinePallet>, IOnlinePalletRepository
+    public class FillingCartonRepository : GenericRepository<FillingCarton>, IFillingCartonRepository
     {
-        public OnlinePalletRepository(TotalSmartCodingEntities totalSmartCodingEntities)
+        public FillingCartonRepository(TotalSmartCodingEntities totalSmartCodingEntities)
             : base(totalSmartCodingEntities)
         {
         }
