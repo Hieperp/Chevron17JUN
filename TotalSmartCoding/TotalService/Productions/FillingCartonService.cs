@@ -29,7 +29,7 @@ namespace TotalService.Productions
         {
             try
             {
-                //this.fillingCartonRepository.UpdateEntryStatus(fillingCartonIDs, barcodeStatus);
+                this.fillingCartonRepository.UpdateEntryStatus(fillingCartonIDs, barcodeStatus);
                 return true;
             }
             catch (Exception ex)
