@@ -81,6 +81,7 @@
     <Compile Include="IPrimitiveDTO.cs" />
     <Compile Include="Productions\BarcodeDTO.cs" />
     <Compile Include="Productions\BarcodeQueue.cs" />
+    <Compile Include="Productions\BatchDTO.cs" />
     <Compile Include="Productions\CartonDTO.cs" />
     <Compile Include="Productions\FillingData.cs" />
     <Compile Include="Productions\PackDTO.cs" />

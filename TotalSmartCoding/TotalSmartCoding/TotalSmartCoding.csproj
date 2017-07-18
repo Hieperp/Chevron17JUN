@@ -79,6 +79,7 @@
     <Compile Include="Builders\Commons\IPaymentTermSelectListBuilder.cs" />
     <Compile Include="Builders\Inventories\GoodsReceiptViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\IViewModelSelectListBuilder.cs" />
+    <Compile Include="Builders\Productions\BatchViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\Productions\FillingCartonViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\Productions\FillingPackViewModelSelectListBuilder.cs" />
     <Compile Include="Builders\Productions\FillingPalletViewModelSelectListBuilder.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Controllers\GenericSimpleController.cs" />
     <Compile Include="Controllers\GenericViewDetailController.cs" />
     <Compile Include="Controllers\Inventories\GoodsReceiptController.cs" />
+    <Compile Include="Controllers\Productions\BatchController.cs" />
     <Compile Include="Controllers\Productions\CodingController.cs" />
     <Compile Include="Controllers\Productions\FillingCartonController.cs" />
     <Compile Include="Controllers\Productions\FillingPackController.cs" />
