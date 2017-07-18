@@ -189,7 +189,7 @@ namespace TotalDTO.Productions
         /// Dequeue a batch of noItemPerCarton of elements from this Matching Queue, by sequence Dequeue from each sub queue, with index 0, 1, 2, 3, ... NoSubQueue-1 (Comfort with: Zero base index)
         /// </summary>
         /// <returns></returns>
-        public BarcodeQueue<TBarcodeDTO> DequeueWholePackage()
+        public BarcodeQueue<TBarcodeDTO> Dequeueset()
         {
             if (((this.ItemPerSet / this.NoSubQueue) % 1) == 0) //CHECK FOR AN Integer RESULT
             {

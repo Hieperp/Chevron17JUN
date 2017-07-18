@@ -11,18 +11,18 @@ namespace TotalService.Productions
 {
     public class FillingPackService : GenericService<FillingPack, FillingPackDTO, FillingPackPrimitiveDTO>, IFillingPackService
     {
-        IFillingPackRepository goodsReceiptRepository;
-        public FillingPackService(IFillingPackRepository goodsReceiptRepository)
-            : base(goodsReceiptRepository)
+        IFillingPackRepository fillingPackRepository;
+        public FillingPackService(IFillingPackRepository fillingPackRepository)
+            : base(fillingPackRepository)
         {
-            this.goodsReceiptRepository = goodsReceiptRepository;
+            this.fillingPackRepository = fillingPackRepository;
         }
 
         public bool UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus)
         {
             try
             {
-                this.goodsReceiptRepository.UpdateEntryStatus(fillingPackIDs, barcodeStatus);
+                this.fillingPackRepository.UpdateEntryStatus(fillingPackIDs, barcodeStatus);
                 return true;
             }
             catch (Exception ex)

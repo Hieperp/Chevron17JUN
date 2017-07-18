@@ -716,7 +716,7 @@ namespace TotalSmartCoding.Views.Productions
             bool anyLoopRoutine = digitPrinterController.LoopRoutine | barcodePrinterController.LoopRoutine | cartonPrinterController.LoopRoutine | scannerController.LoopRoutine;
             bool allLoopRoutine = digitPrinterController.LoopRoutine && barcodePrinterController.LoopRoutine && cartonPrinterController.LoopRoutine && scannerController.LoopRoutine;
 
-            bool anyOnPrinting = digitPrinterController.OnPrinting | barcodePrinterController.OnPrinting | cartonPrinterController.OnPrinting | scannerController.OnPrinting;
+            bool anyOnPrinting = digitPrinterController.OnPrinting | barcodePrinterController.OnPrinting | cartonPrinterController.OnPrinting | scannerController.OnScanning;
             //bool allOnPrinting = digitInkjetDominoPrinter.OnPrinting && barcodeInkjetDominoPrinter.OnPrinting && cartonInkjetDominoPrinter.OnPrinting && barcodeScannerMCU.OnPrinting;
 
             bool allLedGreenOn = digitPrinterController.LedGreenOn && barcodePrinterController.LedGreenOn && cartonPrinterController.LedGreenOn && scannerController.LedGreenOn;
@@ -739,7 +739,7 @@ namespace TotalSmartCoding.Views.Productions
             this.toolStripDigitOnPrinting.Enabled = digitPrinterController.OnPrinting && this.digitPrinterController.LedGreenOn;
             this.toolStripBarcodeOnPrinting.Enabled = barcodePrinterController.OnPrinting && this.barcodePrinterController.LedGreenOn;
             this.toolStripCartonOnPrinting.Enabled = cartonPrinterController.OnPrinting && this.cartonPrinterController.LedGreenOn;
-            this.toolStripScannerOnPrinting.Enabled = scannerController.OnPrinting && this.scannerController.LedGreenOn;
+            this.toolStripScannerOnPrinting.Enabled = scannerController.OnScanning && this.scannerController.LedGreenOn;
         }
 
         private void CutTextBox(bool clearTextBox)
@@ -780,7 +780,7 @@ namespace TotalSmartCoding.Views.Productions
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            if (scannerController.OnPrinting)
+            if (scannerController.OnScanning)
                 scannerController.StopScanner();
             else
                 scannerController.StartScanner();
