@@ -45,6 +45,13 @@ namespace TotalSmartCoding.CommonLibraries
                 cfg.CreateMap<GoodsReceiptDetailDTO, GoodsReceiptDetail>();
 
 
+                cfg.CreateMap<Batch, BatchViewModel>();
+                cfg.CreateMap<Batch, BatchDTO>();
+                cfg.CreateMap<BatchPrimitiveDTO, Batch>();
+
+                cfg.CreateMap<BatchIndex, FillingData>();
+                
+
 
                 cfg.CreateMap<FillingPack, FillingPackViewModel>();
                 cfg.CreateMap<FillingPack, FillingPackDTO>();

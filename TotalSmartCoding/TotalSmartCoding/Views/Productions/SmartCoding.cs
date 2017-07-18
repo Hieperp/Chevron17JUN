@@ -33,6 +33,10 @@ using TotalSmartCoding.Controllers.APIs.Productions;
 using TotalModel.Models;
 using TotalSmartCoding.Views.Commons;
 
+using TotalSmartCoding.Views.Mains;
+using TotalBase.Enums;
+using AutoMapper;
+
 namespace TotalSmartCoding.Views.Productions
 {
     /// <summary>
@@ -57,7 +61,7 @@ namespace TotalSmartCoding.Views.Productions
         private Thread digitPrinterThread;
         private Thread barcodePrinterThread;
         private Thread cartonPrinterThread;
-        
+
         private Thread scannerThread;
 
         private Thread backupDataThread;
@@ -85,10 +89,17 @@ namespace TotalSmartCoding.Views.Productions
 
             try
             {
-                BatchAPIController batchAPIController = new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>());
-                BatchIndex activeBatchIndex = batchAPIController.GetActiveBatchIndex();
+                this.fillingData = new FillingData();
 
-                this.fillingData = new FillingData() { CommodityID = activeBatchIndex.CommodityID, CommodityCode = activeBatchIndex.CommodityCode, CommodityOfficialCode = activeBatchIndex.CommodityOfficialCode, BatchCode = activeBatchIndex.Code, MonthSerialNumber = activeBatchIndex.LastPackNo, MonthCartonNumber = activeBatchIndex.LastPackNo, NoExpiryDate = activeBatchIndex.NoExpiryDate, LastPackNo = "000001", LastCartonNo = "900001" };
+                BatchAPIController batchAPIController = new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+                BatchIndex batchIndex = batchAPIController.GetActiveBatchIndex();
+                if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
+
+
+
+
+
+
 
                 this.textBoxFillingLineName.TextBox.DataBindings.Add("Text", this.fillingData, "FillingLineName");
                 this.textBoxCommodityCode.TextBox.DataBindings.Add("Text", this.fillingData, "CommodityCode");
@@ -97,7 +108,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.textBoxLastPackNo.TextBox.DataBindings.Add("Text", this.fillingData, "LastPackNo");
                 this.textBoxLastCartonNo.TextBox.DataBindings.Add("Text", this.fillingData, "LastCartonNo");
                 this.textBoxLastPalletNo.TextBox.DataBindings.Add("Text", this.fillingData, "LastPalletNo");
-                
+
 
 
 
@@ -112,7 +123,7 @@ namespace TotalSmartCoding.Views.Productions
                 digitPrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
                 barcodePrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
                 cartonPrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
-                
+
                 scannerController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
 
 
@@ -248,7 +259,7 @@ namespace TotalSmartCoding.Views.Productions
 
                     if (cartonPrinterThread != null && cartonPrinterThread.IsAlive) cartonPrinterThread.Abort();
                     cartonPrinterThread = new Thread(new ThreadStart(cartonPrinterController.ThreadRoutine));
-                    
+
                     if (scannerThread != null && scannerThread.IsAlive) scannerThread.Abort();
                     scannerThread = new Thread(new ThreadStart(scannerController.ThreadRoutine));
 
@@ -683,11 +694,11 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                //SettingFillingLineData settingFillingLineData = new SettingFillingLineData(this.fillingLineData, this.barcodeScannerMCU.MatchingPackCount == 0 & this.barcodeScannerMCU.PackInOneCartonCount == 0);
+                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this.fillingData, true));
 
-                //settingFillingLineData.ShowDialog();
+                masterMDI.ShowDialog();
 
-                //settingFillingLineData.Dispose();
+                masterMDI.Dispose();
 
                 //this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
             }
@@ -782,7 +793,7 @@ namespace TotalSmartCoding.Views.Productions
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            scannerController.MyHold = !scannerController.MyHold;
+            //scannerController.MyHold = !scannerController.MyHold;
         }
 
         #endregion Test only

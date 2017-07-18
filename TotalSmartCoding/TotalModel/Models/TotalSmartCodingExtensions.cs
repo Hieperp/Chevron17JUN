@@ -327,6 +327,10 @@ namespace TotalModel.Models
     //}
 
 
+    public partial class BatchIndex : IBaseIndex
+    {
+        public int Id { get { return this.BatchID; } }
+    }
 
     public partial class Batch : IPrimitiveEntity, IBaseEntity
     {
@@ -336,6 +340,7 @@ namespace TotalModel.Models
         public int PreparedPersonID { get; set; }
         public int OrganizationalUnitID { get; set; }
     }
+
 
     public partial class FillingPack : IPrimitiveEntity, IBaseEntity
     {

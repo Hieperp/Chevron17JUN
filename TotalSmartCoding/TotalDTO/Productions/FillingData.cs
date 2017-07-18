@@ -12,6 +12,15 @@ namespace TotalDTO.Productions
     public class FillingData : NotifyPropertyChangeObject
     {
 
+        public int NoSubQueue { get { return GlobalVariables.NoSubQueue(); } }
+        public int ItemPerSubQueue { get { return GlobalVariables.NoItemDiverter(); } }
+        public bool RepeatSubQueueIndex { get { return GlobalVariables.RepeatedSubQueueIndex(); } }
+
+
+
+
+
+
         private int commodityID;
         private string commodityCode;
         private string commodityOfficialCode;
@@ -284,6 +293,40 @@ namespace TotalDTO.Productions
             get { return this.remarks; }
             set { ApplyPropertyChange<FillingData, string>(ref this.remarks, o => o.Remarks, value); }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private int packPerCarton;
+        public int PackPerCarton
+        {
+            get { return this.packPerCarton; }
+            set { ApplyPropertyChange<FillingData, int>(ref this.packPerCarton, o => o.PackPerCarton, value); }
+        }
+
+        
+        private int cartonPerPallet;
+        public int CartonPerPallet
+        {
+            get { return this.cartonPerPallet; }
+            set { ApplyPropertyChange<FillingData, int>(ref this.cartonPerPallet, o => o.CartonPerPallet, value); }
+        }
+    
+
+
+
+
+
+
 
 
         #endregion Public Properties

@@ -17,15 +17,25 @@ namespace TotalDTO.Productions
     public class BarcodeQueue<TBarcodeDTO>
         where TBarcodeDTO : BarcodeDTO, IPrimitiveEntity, IShallowClone<TBarcodeDTO>, new()
     {
+
         /// <summary>
         /// Number of item per whole package: Pack per carton, carton per pallet
         /// This property should be set right after change commodity by setting function
         /// </summary>
-        public int ItemPerSet { get; set; } //!!! carton per palllet?? THUC TE: PACK PER CARTON: TUY THEO SAN PHAM => CAN PHAI XEM XET: EMPTY AL QUEUE: IN ORDEER TO CHANGE COMMODITY!!!
+        public int ItemPerSet { get; set; }         //!!! carton per palllet?? THUC TE: PACK PER CARTON: TUY THEO SAN PHAM => CAN PHAI XEM XET: EMPTY AL QUEUE: IN ORDEER TO CHANGE COMMODITY!!!
         //PHAI HET SU CHU Y: ItemPerSet
 
-        //private int itemPerSet { get; set; }
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         private int itemPerSubQueue { get; set; }
         private bool repeatSubQueueIndex { get; set; }
         private bool invertSubQueueIndex { get; set; }

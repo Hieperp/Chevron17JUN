@@ -1,6 +1,6 @@
 ﻿namespace TotalSmartCoding.Views.Mains
 {
-    partial class MasterMdi
+    partial class MasterMDI
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterMdi));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MasterMDI));
             this.imageListModuleMasterSmall = new System.Windows.Forms.ImageList(this.components);
             this.imageListModuleMasterLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageListTaskMaster = new System.Windows.Forms.ImageList(this.components);
@@ -509,7 +509,7 @@
             this.InvisibleMainMenuStripOfMDI.Text = "MenuStrip";
             this.InvisibleMainMenuStripOfMDI.Visible = false;
             // 
-            // MasterMdi
+            // MasterMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -521,7 +521,7 @@
             this.Controls.Add(this.InvisibleMainMenuStripOfMDI);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.InvisibleMainMenuStripOfMDI;
-            this.Name = "MasterMdi";
+            this.Name = "MasterMDI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Total 2D Coding Solution";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -25,18 +25,25 @@ using TotalCore.Services.Productions;
 using TotalSmartCoding.Builders.Productions;
 using TotalSmartCoding.ViewModels.Productions;
 using TotalSmartCoding.Controllers.Productions;
+using TotalDTO.Productions;
+using AutoMapper;
+using TotalModel.Models;
 
 namespace TotalSmartCoding.Views.Productions
 {
     public partial class Batches : BaseView
     {
         private BatchController Controller { get; set; }
+        private FillingData fillingData;
+        private bool isAllQueuesEmpty;
 
-        public Batches()
+        public Batches(FillingData fillingData, bool isAllQueuesEmpty)
             : base()
         {
             InitializeComponent();
 
+            this.fillingData = fillingData;
+            this.isAllQueuesEmpty = isAllQueuesEmpty;
 
             this.ChildToolStrip = this.toolStripChildForm;
             this.FastObjectListView = this.fastObjectListViewIndex;
@@ -100,8 +107,24 @@ namespace TotalSmartCoding.Views.Productions
             this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
         }
 
+        private void buttonApply_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if ( this.isAllQueuesEmpty && this.fastObjectListViewIndex.SelectedObject != null)
+                {
+                    BatchIndex batchIndex = (BatchIndex)fastObjectListViewIndex.SelectedObject;
+                    if (batchIndex != null) { Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData); this.MdiParent.DialogResult = System.Windows.Forms.DialogResult.OK; }
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
 
-        
+
+
 
 
 

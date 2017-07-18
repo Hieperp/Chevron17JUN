@@ -47,7 +47,7 @@
 
 
             Batch = 28106,
-
+            SmartCoding = 888888,
 
             Customer = 8001,
             Commodity = 8002,

@@ -52,9 +52,12 @@
             this.fastObjectListViewIndex = new BrightIdeasSoftware.FastObjectListView();
             this.olvColumn18 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn28 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonApply = new System.Windows.Forms.ToolStripButton();
             this.naviGroupDetails = new Guifreaks.Navisuite.NaviGroup(this.components);
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -89,10 +92,10 @@
             this.comboBoxNotedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxNotedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNotedEmployeeID.FormattingEnabled = true;
-            this.comboBoxNotedEmployeeID.Location = new System.Drawing.Point(498, 3);
+            this.comboBoxNotedEmployeeID.Location = new System.Drawing.Point(495, 3);
             this.comboBoxNotedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxNotedEmployeeID.Name = "comboBoxNotedEmployeeID";
-            this.comboBoxNotedEmployeeID.Size = new System.Drawing.Size(261, 24);
+            this.comboBoxNotedEmployeeID.Size = new System.Drawing.Size(258, 24);
             this.comboBoxNotedEmployeeID.TabIndex = 53;
             // 
             // tableLayoutPanelMaster
@@ -108,7 +111,7 @@
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0191F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32023F));
-            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
             this.tableLayoutPanelMaster.Controls.Add(this.comboBoxMarketingPaymentTypeID, 4, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanelMaster.Controls.Add(this.comboBoxMarketingProgramID, 1, 1);
@@ -139,10 +142,10 @@
             this.comboBoxMarketingPaymentTypeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxMarketingPaymentTypeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMarketingPaymentTypeID.FormattingEnabled = true;
-            this.comboBoxMarketingPaymentTypeID.Location = new System.Drawing.Point(498, 39);
+            this.comboBoxMarketingPaymentTypeID.Location = new System.Drawing.Point(495, 39);
             this.comboBoxMarketingPaymentTypeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxMarketingPaymentTypeID.Name = "comboBoxMarketingPaymentTypeID";
-            this.comboBoxMarketingPaymentTypeID.Size = new System.Drawing.Size(261, 24);
+            this.comboBoxMarketingPaymentTypeID.Size = new System.Drawing.Size(258, 24);
             this.comboBoxMarketingPaymentTypeID.TabIndex = 47;
             // 
             // label6
@@ -167,7 +170,7 @@
             this.comboBoxMarketingProgramID.Location = new System.Drawing.Point(113, 39);
             this.comboBoxMarketingProgramID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxMarketingProgramID.Name = "comboBoxMarketingProgramID";
-            this.comboBoxMarketingProgramID.Size = new System.Drawing.Size(261, 24);
+            this.comboBoxMarketingProgramID.Size = new System.Drawing.Size(258, 24);
             this.comboBoxMarketingProgramID.TabIndex = 48;
             // 
             // label7
@@ -185,10 +188,10 @@
             // textBoxRemarks
             // 
             this.textBoxRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxRemarks.Location = new System.Drawing.Point(884, 39);
+            this.textBoxRemarks.Location = new System.Drawing.Point(877, 39);
             this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxRemarks.Name = "textBoxRemarks";
-            this.textBoxRemarks.Size = new System.Drawing.Size(261, 22);
+            this.textBoxRemarks.Size = new System.Drawing.Size(258, 22);
             this.textBoxRemarks.TabIndex = 14;
             // 
             // datePickerEntryDate
@@ -197,17 +200,17 @@
             this.datePickerEntryDate.Location = new System.Drawing.Point(113, 3);
             this.datePickerEntryDate.Margin = new System.Windows.Forms.Padding(1);
             this.datePickerEntryDate.Name = "datePickerEntryDate";
-            this.datePickerEntryDate.Size = new System.Drawing.Size(261, 22);
+            this.datePickerEntryDate.Size = new System.Drawing.Size(258, 22);
             this.datePickerEntryDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(773, 41);
+            this.label1.Location = new System.Drawing.Point(767, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 14);
+            this.label1.Size = new System.Drawing.Size(106, 14);
             this.label1.TabIndex = 57;
             this.label1.Text = "Remarks";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -216,7 +219,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(386, 3);
+            this.label4.Location = new System.Drawing.Point(383, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 34);
@@ -227,20 +230,20 @@
             // textBoxReference
             // 
             this.textBoxReference.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxReference.Location = new System.Drawing.Point(498, 3);
+            this.textBoxReference.Location = new System.Drawing.Point(495, 3);
             this.textBoxReference.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxReference.Name = "textBoxReference";
-            this.textBoxReference.Size = new System.Drawing.Size(261, 22);
+            this.textBoxReference.Size = new System.Drawing.Size(258, 22);
             this.textBoxReference.TabIndex = 21;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(771, 3);
+            this.label14.Location = new System.Drawing.Point(765, 3);
             this.label14.Margin = new System.Windows.Forms.Padding(1);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(111, 34);
+            this.label14.Size = new System.Drawing.Size(110, 34);
             this.label14.TabIndex = 51;
             this.label14.Text = "Payment Machanic";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -249,7 +252,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(388, 41);
+            this.label2.Location = new System.Drawing.Point(385, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 14);
@@ -260,10 +263,10 @@
             // textBoxPaymentMachanics
             // 
             this.textBoxPaymentMachanics.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxPaymentMachanics.Location = new System.Drawing.Point(884, 3);
+            this.textBoxPaymentMachanics.Location = new System.Drawing.Point(877, 3);
             this.textBoxPaymentMachanics.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxPaymentMachanics.Name = "textBoxPaymentMachanics";
-            this.textBoxPaymentMachanics.Size = new System.Drawing.Size(261, 22);
+            this.textBoxPaymentMachanics.Size = new System.Drawing.Size(258, 22);
             this.textBoxPaymentMachanics.TabIndex = 20;
             // 
             // toolStripNaviGroupDetails
@@ -295,7 +298,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(388, 5);
+            this.label11.Location = new System.Drawing.Point(385, 5);
             this.label11.Margin = new System.Windows.Forms.Padding(3);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(106, 20);
@@ -307,10 +310,10 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(773, 5);
+            this.label12.Location = new System.Drawing.Point(767, 5);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(107, 20);
+            this.label12.Size = new System.Drawing.Size(106, 20);
             this.label12.TabIndex = 47;
             this.label12.Text = "Approved By";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -319,6 +322,8 @@
             // 
             this.fastObjectListViewIndex.AllColumns.Add(this.olvColumn18);
             this.fastObjectListViewIndex.AllColumns.Add(this.olvColumn28);
+            this.fastObjectListViewIndex.AllColumns.Add(this.olvColumn1);
+            this.fastObjectListViewIndex.AllColumns.Add(this.olvColumn2);
             this.fastObjectListViewIndex.AllowColumnReorder = true;
             this.fastObjectListViewIndex.AllowDrop = true;
             this.fastObjectListViewIndex.AlternateRowBackColor = System.Drawing.Color.White;
@@ -331,13 +336,15 @@
             this.fastObjectListViewIndex.CheckedAspectName = "";
             this.fastObjectListViewIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn18,
-            this.olvColumn28});
+            this.olvColumn28,
+            this.olvColumn1,
+            this.olvColumn2});
             this.fastObjectListViewIndex.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastObjectListViewIndex.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fastObjectListViewIndex.EmptyListMsg = "This fast list is empty";
             this.fastObjectListViewIndex.FullRowSelect = true;
             this.fastObjectListViewIndex.HideSelection = false;
-            this.fastObjectListViewIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastObjectListViewIndex.Location = new System.Drawing.Point(0, 39);
             this.fastObjectListViewIndex.Margin = new System.Windows.Forms.Padding(4);
             this.fastObjectListViewIndex.Name = "fastObjectListViewIndex";
             this.fastObjectListViewIndex.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -347,7 +354,7 @@
             this.fastObjectListViewIndex.ShowGroups = false;
             this.fastObjectListViewIndex.ShowImagesOnSubItems = true;
             this.fastObjectListViewIndex.ShowItemToolTips = true;
-            this.fastObjectListViewIndex.Size = new System.Drawing.Size(1309, 189);
+            this.fastObjectListViewIndex.Size = new System.Drawing.Size(1309, 150);
             this.fastObjectListViewIndex.SpaceBetweenGroups = 20;
             this.fastObjectListViewIndex.TabIndex = 28;
             this.fastObjectListViewIndex.TintSortColumn = true;
@@ -379,13 +386,26 @@
             this.olvColumn28.Text = "EntryDate";
             this.olvColumn28.Width = 111;
             // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "CommodityID";
+            this.olvColumn1.Text = "ID";
+            this.olvColumn1.Width = 100;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "CommodityCode";
+            this.olvColumn2.Text = "Code";
+            this.olvColumn2.Width = 120;
+            // 
             // toolStripChildForm
             // 
             this.toolStripChildForm.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton2,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.buttonApply});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
             this.toolStripChildForm.Name = "toolStripChildForm";
             this.toolStripChildForm.Size = new System.Drawing.Size(1309, 39);
@@ -406,6 +426,16 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            // 
+            // buttonApply
+            // 
+            this.buttonApply.Image = global::TotalSmartCoding.Properties.Resources._20130106011449193_easyicon_cn_32;
+            this.buttonApply.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonApply.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonApply.Name = "buttonApply";
+            this.buttonApply.Size = new System.Drawing.Size(204, 36);
+            this.buttonApply.Text = "Applying for Production";
+            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
             // naviGroupDetails
             // 
@@ -566,7 +596,7 @@
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.019F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32099F));
-            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
             this.tableLayoutPanelExtend.Controls.Add(this.comboBoxNotedEmployeeID, 4, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label11, 3, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label12, 6, 0);
@@ -590,10 +620,10 @@
             this.comboBoxApprovedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxApprovedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxApprovedEmployeeID.FormattingEnabled = true;
-            this.comboBoxApprovedEmployeeID.Location = new System.Drawing.Point(884, 3);
+            this.comboBoxApprovedEmployeeID.Location = new System.Drawing.Point(877, 3);
             this.comboBoxApprovedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxApprovedEmployeeID.Name = "comboBoxApprovedEmployeeID";
-            this.comboBoxApprovedEmployeeID.Size = new System.Drawing.Size(261, 24);
+            this.comboBoxApprovedEmployeeID.Size = new System.Drawing.Size(258, 24);
             this.comboBoxApprovedEmployeeID.TabIndex = 46;
             // 
             // label10
@@ -618,7 +648,7 @@
             this.comboBoxRequestedEmployeeID.Location = new System.Drawing.Point(113, 3);
             this.comboBoxRequestedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxRequestedEmployeeID.Name = "comboBoxRequestedEmployeeID";
-            this.comboBoxRequestedEmployeeID.Size = new System.Drawing.Size(261, 24);
+            this.comboBoxRequestedEmployeeID.Size = new System.Drawing.Size(258, 24);
             this.comboBoxRequestedEmployeeID.TabIndex = 52;
             // 
             // Batches
@@ -697,6 +727,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private System.Windows.Forms.ToolStripButton buttonApply;
 
     }
 }

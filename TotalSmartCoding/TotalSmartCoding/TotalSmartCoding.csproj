@@ -149,11 +149,11 @@
     <Compile Include="Views\Mains\BasicView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Mains\MasterMdi.cs">
+    <Compile Include="Views\Mains\MasterMDI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Mains\MasterMdi.Designer.cs">
-      <DependentUpon>MasterMdi.cs</DependentUpon>
+    <Compile Include="Views\Mains\MasterMDI.Designer.cs">
+      <DependentUpon>MasterMDI.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Mains\Logon.cs">
       <SubType>Form</SubType>
@@ -201,8 +201,8 @@
     <EmbeddedResource Include="Views\Mains\BasicView.resx">
       <DependentUpon>BasicView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Mains\MasterMdi.resx">
-      <DependentUpon>MasterMdi.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Mains\MasterMDI.resx">
+      <DependentUpon>MasterMDI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\Logon.resx">
       <DependentUpon>Logon.cs</DependentUpon>

@@ -8,6 +8,7 @@ using TotalBase;
 using TotalSmartCoding.Views.Mains;
 
 using TotalSmartCoding.CommonLibraries;
+using TotalBase.Enums;
 
 namespace TotalSmartCoding
 {
@@ -29,7 +30,7 @@ namespace TotalSmartCoding
 
             Logon logon = new Logon();
 
-            if (logon.ShowDialog() == DialogResult.OK) Application.Run(new MasterMdi());
+            if (logon.ShowDialog() == DialogResult.OK) Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.SmartCoding));
 
             logon.Dispose();
 

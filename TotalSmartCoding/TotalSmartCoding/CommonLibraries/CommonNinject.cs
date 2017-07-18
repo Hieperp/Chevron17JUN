@@ -96,8 +96,12 @@ namespace TotalSmartCoding.CommonLibraries
 
 
 
+                Kernel.Bind<IBatchService>().To<BatchService>();
                 Kernel.Bind<IBatchRepository>().To<BatchRepository>();
                 Kernel.Bind<IBatchAPIRepository>().To<BatchAPIRepository>();
+                Kernel.Bind<IBatchViewModelSelectListBuilder>().To<BatchViewModelSelectListBuilder>();
+                Kernel.Bind<BatchViewModel>().ToSelf();
+
 
 
 
