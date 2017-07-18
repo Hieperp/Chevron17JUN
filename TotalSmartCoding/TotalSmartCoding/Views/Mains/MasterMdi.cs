@@ -13,7 +13,7 @@ using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Views.Commons;
 
 using TotalSmartCoding.Views.Sales;
-using TotalSmartCoding.Views.Inventories;
+using TotalSmartCoding.Views.Productions;
 using TotalSmartCoding.Views.Productions;
 
 
@@ -377,7 +377,7 @@ namespace TotalSmartCoding.Views.Mains
 
             //Open new form
             Form childForm;
-            childForm = new GoodsReceipts();
+            childForm = new Batches();
             //childForm = new DeliveryAdvices();
 
             if (childForm != null)

@@ -137,7 +137,7 @@
     <Compile Include="Views\Inventories\GoodsReceipts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Inventories\GoodsReceipts.Designer.cs">
+    <Compile Include="Views\Inventories\GoodsReceipts.designer.cs">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Mains\BaseView.cs">
@@ -160,6 +160,12 @@
     </Compile>
     <Compile Include="Views\Mains\Logon.designer.cs">
       <DependentUpon>Logon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Productions\Batches.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\Batches.Designer.cs">
+      <DependentUpon>Batches.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Productions\SmartCoding.cs">
       <SubType>Form</SubType>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\Logon.resx">
       <DependentUpon>Logon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\Batches.resx">
+      <DependentUpon>Batches.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Productions\SmartCoding.resx">
       <DependentUpon>SmartCoding.cs</DependentUpon>
