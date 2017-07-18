@@ -630,7 +630,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public void ThreadRoutine()
         {
-            this.privateFillingLineData = this.FillingData.ShallowClone();
+            this.privateFillingLineData = this.FillingData.ShallowClone(); //WE NEED TO CLONE FillingData, BECAUSE: IN THIS CONTROLLER: WE HAVE TO UPDATE THE NEW PRINTED BARCODE NUMBER TO FillingData, WHICH IS CREATED IN ANOTHER THREAD (FillingData IS CREATED IN VIEW: SmartCoding). SO THAT: WE CAN NOT UPDATE FillingData DIRECTLY, INSTEAD: WE REAISE EVENT ProertyChanged => THEN: WE CATCH THE EVENT IN SmartCoding VIEW AND UPDATE BACK TO THE FillingData, BECAUSE: THE FillingData IS CREATED AND BINDED IN THE VIEW: SmartCoding
 
             return;
             string stringReadFrom = ""; bool lPrinterReady = false;

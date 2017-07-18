@@ -534,7 +534,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
-        public void RestoreBackupDatabase()
+        public void RestoreBackupData()
         {
             // Copyright © Microsoft Corporation.  All Rights Reserved.
             // This code released under the terms of the

@@ -60,7 +60,7 @@ namespace TotalSmartCoding.Views.Productions
         
         private Thread scannerThread;
 
-        private Thread nmvnBackupDataThread;
+        private Thread backupDataThread;
 
 
         private FillingData fillingData;
@@ -78,53 +78,13 @@ namespace TotalSmartCoding.Views.Productions
             {
                 SQLRestore sqlRestore = new SQLRestore();
                 sqlRestore.RestoreProcedure();
-                sqlRestore.RestoreBackupDatabase();
+                sqlRestore.RestoreBackupData();
             }
 
             InitializeComponent();
 
             try
             {
-                
-
-                //DataTable aa = new DataTable();
-                //aa.Columns.Add("1");
-                //aa.Columns.Add("2");
-                //aa.Columns.Add("3");
-                //aa.Columns.Add("4");
-                //aa.Columns.Add("5");
-                //aa.Columns.Add("6");
-
-                //aa.Rows.Add("123456", "123456", "123456", "123456", "123456", "123456");
-
-                //this.dataGridViewPackInOneCarton.DataSource = aa;
-
-
-                //DataTable a = new DataTable();
-                //a.Columns.Add("1", typeof(string));
-                //a.Columns.Add("2", typeof(string));
-                //a.Columns.Add("3", typeof(string));
-                //a.Columns.Add("4", typeof(string));
-                ////a.Columns.Add("E", typeof(string));
-                ////a.Columns.Add("F", typeof(string));
-
-                //a.Rows.Add("111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111");
-                //a.Rows.Add("111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111");
-                //a.Rows.Add("111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111");
-                //a.Rows.Add("111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111");
-                //a.Rows.Add("111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111");
-                //a.Rows.Add("111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111", "111111111111111111111111111111");
-
-                //this.dataGridViewPackInOneCarton.DataSource = a;
-
-
-
-
-
-
-
-
-
                 BatchAPIController batchAPIController = new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>());
                 BatchIndex activeBatchIndex = batchAPIController.GetActiveBatchIndex();
 
@@ -147,7 +107,7 @@ namespace TotalSmartCoding.Views.Productions
                 barcodePrinterController = new PrinterController(GlobalVariables.DominoPrinterName.BarCodeInkJet, this.fillingData, false);
                 cartonPrinterController = new PrinterController(GlobalVariables.DominoPrinterName.CartonInkJet, this.fillingData, false);
 
-                this.scannerController = new ScannerController(CommonNinject.Kernel.Get<FillingData>());
+                this.scannerController = new ScannerController(this.fillingData);
 
                 digitPrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
                 barcodePrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
@@ -167,7 +127,7 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        private void MainControllingInterface_Load(object sender, EventArgs e)
+        private void SmartCoding_Load(object sender, EventArgs e)
         {
             try
             {
@@ -188,7 +148,7 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        private void MainControllingInterface_Activated(object sender, EventArgs e)
+        private void SmartCoding_Activated(object sender, EventArgs e)
         {
             if (this.dataGridViewCartonList.CanSelect) this.dataGridViewCartonList.Select();
         }
@@ -278,7 +238,7 @@ namespace TotalSmartCoding.Views.Productions
             {
                 this.CutTextBox(true);
 
-                if (nmvnBackupDataThread == null || !nmvnBackupDataThread.IsAlive)
+                if (backupDataThread == null || !backupDataThread.IsAlive)
                 {
                     if (digitPrinterThread != null && digitPrinterThread.IsAlive) digitPrinterThread.Abort();
                     digitPrinterThread = new Thread(new ThreadStart(digitPrinterController.ThreadRoutine));
@@ -425,7 +385,6 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "LedMCU") { this.toolStripMCUQuanlity.Enabled = this.scannerController.LedMCUQualityOn; this.toolStripMCUMatching.Enabled = this.scannerController.LedMCUMatchingOn; this.toolStripMCUCarton.Enabled = this.scannerController.LedMCUCartonOn; return; }
 
 
-                    if (e.PropertyName == "LastPackNo") { this.fillingData.LastPackNo = this.scannerController.LastPackNo; this.fillingData.Update(); return; }
 
                     if (e.PropertyName == "MatchingPackList")
                     {
@@ -702,20 +661,17 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        private void MainControllingInterface_FormClosing(object sender, FormClosingEventArgs e)
+        private void SmartCoding_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 if (digitPrinterThread != null && digitPrinterThread.IsAlive) { e.Cancel = true; return; }
-
                 if (barcodePrinterThread != null && barcodePrinterThread.IsAlive) { e.Cancel = true; return; }
-
                 if (cartonPrinterThread != null && cartonPrinterThread.IsAlive) { e.Cancel = true; return; }
-
 
                 if (scannerThread != null && scannerThread.IsAlive) { e.Cancel = true; return; }
 
-                if (nmvnBackupDataThread != null && nmvnBackupDataThread.IsAlive) { e.Cancel = true; return; }
+                if (backupDataThread != null && backupDataThread.IsAlive) { e.Cancel = true; return; }
             }
             catch (Exception exception)
             {
@@ -868,7 +824,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                this.NmvnBackupDataMaster();
+                this.BackupDataHandler();
             }
             catch (Exception exception)
             {
@@ -878,7 +834,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-        private void NmvnBackupDataMaster()
+        private void BackupDataHandler()
         {
             try
             {
@@ -890,10 +846,10 @@ namespace TotalSmartCoding.Views.Productions
                         {
                             if (scannerThread == null || !scannerThread.IsAlive)
                             {
-                                if (nmvnBackupDataThread == null || !nmvnBackupDataThread.IsAlive)
+                                if (backupDataThread == null || !backupDataThread.IsAlive)
                                 {
-                                    //nmvnBackupDataThread = new Thread(new ThreadStart(this.barcodeScannerMCU.NmvnBackupDataMaster));
-                                    //nmvnBackupDataThread.Start();
+                                    backupDataThread = new Thread(new ThreadStart(this.scannerController.BackupData));
+                                    backupDataThread.Start();
                                 }
                             }
                         }

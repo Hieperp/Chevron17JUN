@@ -32,8 +32,6 @@ namespace TotalSmartCoding.Controllers.Productions
         public bool MyTest; //Test only
         public bool MyHold;//Test only
 
-        private FillingData privateFillingData;
-
         private TcpClient barcodeTcpClient;
         private NetworkStream barcodeNetworkStream;
 
@@ -69,25 +67,24 @@ namespace TotalSmartCoding.Controllers.Productions
         //Servernme + database name
         //Toolbar enable
 
-        private FillingPackController fillingPackService;
-        private FillingCartonController fillingCartonService;
-        private FillingPalletController fillingPalletService;
+        private FillingPackController fillingPackController;
+        private FillingCartonController fillingCartonController;
+        private FillingPalletController fillingPalletController;
 
         public ScannerController(FillingData fillingData)
         {
             try
             {
                 base.FillingData = fillingData;
-                this.privateFillingData = this.FillingData.ShallowClone();
 
                 this.barcodeScannerName = GlobalVariables.BarcodeScannerName.MatchingScanner;
 
                 this.ipAddress = IPAddress.Parse(GlobalVariables.IpAddress(this.BarcodeScannerName));
 
 
-                this.fillingPackService = new FillingPackController(CommonNinject.Kernel.Get<IFillingPackService>(), CommonNinject.Kernel.Get<IFillingPackViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPackViewModel>());
-                this.fillingCartonService = new FillingCartonController(CommonNinject.Kernel.Get<IFillingCartonService>(), CommonNinject.Kernel.Get<IFillingCartonViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingCartonViewModel>());
-                this.fillingPalletService = new FillingPalletController(CommonNinject.Kernel.Get<IFillingPalletService>(), CommonNinject.Kernel.Get<IFillingPalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPalletViewModel>());
+                this.fillingPackController = new FillingPackController(CommonNinject.Kernel.Get<IFillingPackService>(), CommonNinject.Kernel.Get<IFillingPackViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPackViewModel>());
+                this.fillingCartonController = new FillingCartonController(CommonNinject.Kernel.Get<IFillingCartonService>(), CommonNinject.Kernel.Get<IFillingCartonViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingCartonViewModel>());
+                this.fillingPalletController = new FillingPalletController(CommonNinject.Kernel.Get<IFillingPalletService>(), CommonNinject.Kernel.Get<IFillingPalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPalletViewModel>());
 
 
 
@@ -260,17 +257,6 @@ namespace TotalSmartCoding.Controllers.Productions
             this.SetBarcodeScannerStatus(barcodeScannerNameID, false);
         }
 
-
-
-
-
-        public string LastPackNo { get { return this.privateFillingData.LastPackNo; } }
-
-        public string MonthSerialNumber { get { return this.privateFillingData.MonthSerialNumber; } }
-
-        public string LastCartonNo { get { return this.privateFillingData.LastCartonNo; } }
-
-        public string MonthCartonNumber { get { return this.privateFillingData.MonthCartonNumber; } }
 
         public int MatchingPackCount { get { return this.matchingPackList.Count; } }
         public int PackInOneCartonCount { get { return this.packInOneCarton.Count; } }
@@ -505,9 +491,9 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                FillingPackViewModel fillingPackDTO = new FillingPackViewModel() { QueueID = queueID, Code = code };
+                FillingPackDTO fillingPackDTO = new FillingPackDTO() { FillingLineID = (int)this.FillingData.FillingLineID, CommodityID = this.FillingData.CommodityID, PCID = "ABCD123456EF", EntryStatusID = (int)GlobalVariables.BarcodeStatus.Normal, QueueID = queueID, Code = code };
 
-                if (this.fillingPackService.fillingPackService.Save(fillingPackDTO))
+                if (this.fillingPackController.fillingPackService.Save(fillingPackDTO))
                     return fillingPackDTO;
                 else
                 {
@@ -532,10 +518,10 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     //CẦN CHÚ Ý: this.packInOneCarton.Count = 0: CARTON RỔNG => PHẢI XỬ LÝ NHƯ THẾ NÀO???
 
-                    FillingCartonDTO fillingCartonDTO = new FillingCartonDTO() { Code = cartonCode };
+                    FillingCartonDTO fillingCartonDTO = new FillingCartonDTO() { FillingLineID = (int)this.FillingData.FillingLineID, CommodityID = this.FillingData.CommodityID, PCID = "ABCD123456EF", EntryStatusID = (int)GlobalVariables.BarcodeStatus.Normal, Code = cartonCode };
 
-                    this.fillingCartonService.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packInOneCarton.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
-                    if (this.fillingCartonService.fillingCartonService.Save(fillingCartonDTO))
+                    this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packInOneCarton.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
+                    if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
                         this.packInOneCarton = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
                     else
                         throw new Exception("Insufficient save carton: " + fillingCartonDTO.Code);
@@ -556,8 +542,6 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public void ThreadRoutine()
         {
-            this.privateFillingData = this.FillingData.ShallowClone();
-
             string stringReadFrom = ""; bool matchingPackListChanged = false; bool packInOneCartonChanged = false;
 
             this.LoopRoutine = true; this.StopScanner();
@@ -622,7 +606,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                         matchingPackListChanged = true;
                                         packInOneCartonChanged = true;
 
-                                        if (!this.fillingPackService.fillingPackService.UpdateEntryStatus(this.packInOneCarton.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.fillingPackService.fillingPackService.ServiceTag;
+                                        if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(this.packInOneCarton.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.fillingPackController.fillingPackService.ServiceTag;
                                     }
                                 }
                             }
@@ -712,17 +696,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.lastStringBarcode = receivedBarcode;
 
 
-                            MatchingAndAddCarton(receivedBarcode + (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail ? " " + this.privateFillingData.LastPackNo : ""));
-
-
-
-                            if (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail)
-                            {//ONLY FOR PAIL LINE: BECAUSE: With PAIL Line: use CartonScanner (datalogic) to read Packbarcode
-                                this.privateFillingData.LastPackNo = (int.Parse(this.privateFillingData.LastPackNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
-                                this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
-                            }
-
-
+                            MatchingAndAddCarton(receivedBarcode);
 
                             barcodeReceived = true;
                         }
@@ -791,9 +765,9 @@ namespace TotalSmartCoding.Controllers.Productions
                                     FillingPackDTO messageData = this.matchingPackList.ElementAt(i, this.matchingPackList.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
                                     messageData.QueueID = subQueueID; //Set new QueueID
 
-                                    lock (this.fillingPackService)
+                                    lock (this.fillingPackController)
                                     {
-                                        if (this.fillingPackService.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID))
+                                        if (this.fillingPackController.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID))
                                         {
                                             this.matchingPackList.Dequeue(messageData.PackID); //First: Remove from old subQueue
                                             this.matchingPackList.AddPack(messageData);//Next: Add to new subQueue
@@ -832,9 +806,9 @@ namespace TotalSmartCoding.Controllers.Productions
                     {
                         this.NotifyPropertyChanged("MatchingPackList");
 
-                        lock (this.fillingPackService)
+                        lock (this.fillingPackController)
                         {
-                            this.fillingPackService.DeleteConfirmed(messageData.PackID); return true; //if (!this.fillingPackService.DeleteConfirmed(messageData.PackID)) return true; //Delete successfully
+                            this.fillingPackController.DeleteConfirmed(messageData.PackID); return true; //if (!this.fillingPackService.DeleteConfirmed(messageData.PackID)) return true; //Delete successfully
                             //else throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
                         }
                     }
@@ -864,13 +838,13 @@ namespace TotalSmartCoding.Controllers.Productions
                             this.NotifyPropertyChanged("PackInOneCarton");
                             this.NotifyPropertyChanged("MatchingPackList");
 
-                            lock (this.fillingPalletService)
+                            lock (this.fillingPalletController)
                             {
-                                this.fillingPalletService.Delete(packID);//if ( !) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
+                                this.fillingPalletController.Delete(packID);//if ( !) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
 
-                                if (!this.fillingPackService.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
+                                if (!this.fillingPackController.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
 
-                                if (!this.fillingPackService.fillingPackService.UpdateEntryStatus(messageData.PackID.ToString(), GlobalVariables.BarcodeStatus.ReadyToCarton)) return true;
+                                if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(messageData.PackID.ToString(), GlobalVariables.BarcodeStatus.ReadyToCarton)) return true;
                                 else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack status");
                             }
                         }
@@ -992,8 +966,8 @@ namespace TotalSmartCoding.Controllers.Productions
         //}
 
 
-        //public void NmvnBackupDataMaster()
-        //{
+        public void BackupData()
+        {
         //    int backupID = 0;
         //    try
         //    {
@@ -1040,7 +1014,7 @@ namespace TotalSmartCoding.Controllers.Productions
         //    {
         //        ADODatabase.ExecuteNonQuery("UPDATE BackupLogEvent SET Description = CASE WHEN Description IS NULL THEN '' ELSE Description END + N'" + exception.Message.Substring(0, exception.Message.Length > 50 ? 50 : exception.Message.Length) + "' WHERE BackupID = " + backupID);
         //    }
-        //}
+        }
 
 
 

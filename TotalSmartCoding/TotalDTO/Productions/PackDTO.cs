@@ -24,14 +24,6 @@ namespace TotalDTO.Productions
         public override int GetID() { return this.FillingPackID; }
         public override void SetID(int id) { this.FillingPackID = id; }
 
-        public FillingPackPrimitiveDTO()
-        {
-            this.FillingLineID = 1; //this.FillingLineData.FillingLineID
-            this.CommodityID = 1; //this.FillingLineData.CommodityID
-            this.PCID = "ABCD123456EF";
-            this.EntryStatusID = 1; ////STATUS: dataDetailCartonRow.CartonStatus = (byte)(cartonBarcode == GlobalVariables.BlankBarcode ? GlobalVariables.BarcodeStatus.BlankBarcode : (this.packInOneCarton.Count == this.packInOneCarton.NoItemPerCarton || this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail ? GlobalVariables.BarcodeStatus.Normal : GlobalVariables.BarcodeStatus.EmptyCarton));
-        }
-
         public Nullable<int> FillingCartonID { get; set; }
     }
 
