@@ -439,5 +439,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingPackUpdateEntryStatus", fillingPackIDsParameter, entryStatusIDParameter);
         }
+    
+        public virtual int FillingCartonUpdateEntryStatus(string fillingCartonIDs, Nullable<int> entryStatusID)
+        {
+            var fillingCartonIDsParameter = fillingCartonIDs != null ?
+                new ObjectParameter("FillingCartonIDs", fillingCartonIDs) :
+                new ObjectParameter("FillingCartonIDs", typeof(string));
+    
+            var entryStatusIDParameter = entryStatusID.HasValue ?
+                new ObjectParameter("EntryStatusID", entryStatusID) :
+                new ObjectParameter("EntryStatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingCartonUpdateEntryStatus", fillingCartonIDsParameter, entryStatusIDParameter);
+        }
     }
 }

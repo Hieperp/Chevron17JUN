@@ -18,9 +18,18 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         public void RestoreProcedure()
         {
-            this.FillingPackUpdateEntryStatus();
-
             this.FillingPackEditable();
+
+            this.FillingPackUpdateEntryStatus();
+        }
+
+        private void FillingPackEditable()
+        {
+            string[] queryArray = new string[1];
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = FillingPackID FROM FillingPacks WHERE FillingPackID = @EntityID AND NOT FillingCartonID IS NULL";
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("FillingPackEditable", queryArray);
         }
 
         private void FillingPackUpdateEntryStatus()
@@ -35,17 +44,5 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartCodingEntities.CreateStoredProcedure("FillingPackUpdateEntryStatus", queryString);
         }
-
-
-        private void FillingPackEditable()
-        {
-            string[] queryArray = new string[1];
-
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = FillingPackID FROM FillingPacks WHERE FillingPackID = @EntityID AND NOT FillingCartonID IS NULL";
-
-            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("FillingPackEditable", queryArray);
-        }
-
-
     }
 }

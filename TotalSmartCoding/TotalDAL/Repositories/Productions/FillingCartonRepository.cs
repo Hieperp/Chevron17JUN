@@ -1,4 +1,5 @@
-﻿using TotalModel.Models;
+﻿using TotalBase;
+using TotalModel.Models;
 using TotalCore.Repositories.Productions;
 
 namespace TotalDAL.Repositories.Productions
@@ -8,6 +9,12 @@ namespace TotalDAL.Repositories.Productions
         public FillingCartonRepository(TotalSmartCodingEntities totalSmartCodingEntities)
             : base(totalSmartCodingEntities)
         {
+        }
+
+
+        public void UpdateEntryStatus(string fillingCartonIDs, GlobalVariables.BarcodeStatus barcodeStatus)
+        {
+            this.TotalSmartCodingEntities.FillingCartonUpdateEntryStatus(fillingCartonIDs, (int)barcodeStatus);
         }
     }
 }

@@ -21,6 +21,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.FillingCartonSaveRelative();
 
             this.FillingCartonEditable();
+
+            this.FillingCartonUpdateEntryStatus();
         }
 
         private void FillingCartonSaveRelative()
@@ -63,6 +65,20 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("FillingCartonEditable", queryArray);
         }
 
+
+
+        private void FillingCartonUpdateEntryStatus()
+        {
+            //BE CAREFULL WHEN SAVE: NEED TO SET @FillingCartonIDs (FOR BOTH WHEN SAVE - Update AND DELETE - Undo
+            string queryString = " @FillingCartonIDs varchar(3999), @EntryStatusID int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "       UPDATE      FillingCartons" + "\r\n";
+            queryString = queryString + "       SET         EntryStatusID = @EntryStatusID " + "\r\n";
+            queryString = queryString + "       WHERE       FillingCartonID IN (SELECT Id FROM dbo.SplitToIntList (@FillingCartonIDs)) " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("FillingCartonUpdateEntryStatus", queryString);
+        }
 
     }
 }

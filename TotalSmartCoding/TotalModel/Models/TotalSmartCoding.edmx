@@ -1058,6 +1058,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
           <Parameter Name="FillingPackIDs" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="FillingCartonUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FillingCartonIDs" Type="varchar" Mode="In" />
+          <Parameter Name="EntryStatusID" Type="int" Mode="In" />
+        </Function>
         <Function Name="FillingPackEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -1828,6 +1832,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </FunctionImport>
           <FunctionImport Name="FillingPackUpdateEntryStatus">
             <Parameter Name="FillingPackIDs" Mode="In" Type="String" />
+            <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FillingCartonUpdateEntryStatus">
+            <Parameter Name="FillingCartonIDs" Mode="In" Type="String" />
             <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -3648,6 +3656,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <FunctionImportMapping FunctionImportName="FillingCartonSaveRelative" FunctionName="TotalSmartCodingModel.Store.FillingCartonSaveRelative" />
           <FunctionImportMapping FunctionImportName="FillingPackEditable" FunctionName="TotalSmartCodingModel.Store.FillingPackEditable" />
           <FunctionImportMapping FunctionImportName="FillingPackUpdateEntryStatus" FunctionName="TotalSmartCodingModel.Store.FillingPackUpdateEntryStatus" />
+          <FunctionImportMapping FunctionImportName="FillingCartonUpdateEntryStatus" FunctionName="TotalSmartCodingModel.Store.FillingCartonUpdateEntryStatus" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
