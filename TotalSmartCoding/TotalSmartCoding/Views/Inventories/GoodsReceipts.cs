@@ -102,6 +102,7 @@ namespace TotalSmartCoding.Views.Inventories
         }
 
 
+
         //private void InitializeDataGridBinding()
         //{
         //    this.dataGridViewDetails.AutoGenerateColumns = false;
