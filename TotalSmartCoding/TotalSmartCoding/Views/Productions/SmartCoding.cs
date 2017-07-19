@@ -144,12 +144,6 @@ namespace TotalSmartCoding.Views.Productions
             {
                 scannerController.Initialize();
 
-                this.toolStripButton4.Image = Properties.Resources.Antrepo_Cargo_Boxes_Palet_01; this.toolStripButton4.ImageScaling = ToolStripItemImageScaling.SizeToFit;
-
-                this.comboBoxViewOption.ComboBox.Items.AddRange(new string[] { "Compact View", "Normal View" });
-                this.comboBoxViewOption.ComboBox.SelectedIndex = this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail ? 1 : 0;
-                this.comboBoxViewOption.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
-
                 this.comboBoxEmptyCarton.ComboBox.Items.AddRange(new string[] { "Ignore Empty Carton", "Keep Empty Carton" });
                 this.comboBoxEmptyCarton.ComboBox.SelectedIndex = (this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail || !GlobalVariables.IgnoreEmptyCarton) ? 1 : 0;
                 this.comboBoxEmptyCarton.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
@@ -163,7 +157,7 @@ namespace TotalSmartCoding.Views.Productions
 
         private void SmartCoding_Activated(object sender, EventArgs e)
         {
-            if (this.dataGridViewCartonList.CanSelect) this.dataGridViewCartonList.Select();
+            if (this.dgvCartonQueue.CanSelect) this.dgvCartonQueue.Select();
         }
 
         public ToolStrip ChildToolStrip
@@ -402,18 +396,18 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "PackQueue")
                     {
                         int currentRowIndex = -1; int currentColumnIndex = -1;
-                        if (this.dataGridViewMatchingPackList.CurrentCell != null) { currentRowIndex = this.dataGridViewMatchingPackList.CurrentCell.RowIndex; currentColumnIndex = this.dataGridViewMatchingPackList.CurrentCell.ColumnIndex; }
+                        if (this.dgvPackQueue.CurrentCell != null) { currentRowIndex = this.dgvPackQueue.CurrentCell.RowIndex; currentColumnIndex = this.dgvPackQueue.CurrentCell.ColumnIndex; }
 
-                        this.dataGridViewMatchingPackList.DataSource = this.scannerController.GetPackQueue();
+                        this.dgvPackQueue.DataSource = this.scannerController.GetPackQueue();
 
-                        if (currentRowIndex >= 0 && currentRowIndex < this.dataGridViewMatchingPackList.Rows.Count && currentColumnIndex >= 0 && currentColumnIndex < this.dataGridViewMatchingPackList.ColumnCount) this.dataGridViewMatchingPackList.CurrentCell = this.dataGridViewMatchingPackList[currentColumnIndex, currentRowIndex]; //Keep current cell
+                        if (currentRowIndex >= 0 && currentRowIndex < this.dgvPackQueue.Rows.Count && currentColumnIndex >= 0 && currentColumnIndex < this.dgvPackQueue.ColumnCount) this.dgvPackQueue.CurrentCell = this.dgvPackQueue[currentColumnIndex, currentRowIndex]; //Keep current cell
 
                         this.toolStripButtonMessageCount.Text = "[" + this.scannerController.MatchingPackCount.ToString("N0") + "]";
                     }
 
-                    if (e.PropertyName == "PacksetQueue") { this.dataGridViewPackInOneCarton.DataSource = this.scannerController.GetPacksetQueue(); }
+                    if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); }
 
-                    if (e.PropertyName == "CartonQueue") { this.dataGridViewCartonList.DataSource = this.scannerController.GetCartonQueue(); if (this.dataGridViewCartonList.Rows.Count > 1) this.dataGridViewCartonList.CurrentCell = this.dataGridViewCartonList.Rows[0].Cells[0]; }
+                    if (e.PropertyName == "CartonQueue") { this.dgvCartonQueue.DataSource = this.scannerController.GetCartonQueue(); if (this.dgvCartonQueue.Rows.Count > 1) this.dgvCartonQueue.CurrentCell = this.dgvCartonQueue.Rows[0].Cells[0]; }
                     if (e.PropertyName == "CartonsetQueue") { this.dgvCartonsetQueue.DataSource = this.scannerController.GetCartonsetQueue(); }
 
                     if (e.PropertyName == "PalletQueue") { this.dgvPalletQueue.DataSource = this.scannerController.GetPalletQueue(); }
@@ -438,24 +432,11 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
-        private bool displayCommpactView;
-
-        private void comboBoxViewOption_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                displayCommpactView = this.comboBoxViewOption.SelectedIndex == 0;
-            }
-            catch
-            { }
-        }
-
         private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             try
             {
-                if (displayCommpactView || !sender.Equals(this.dataGridViewCartonList))
-                    e.Value = this.GetSerialNumber(e.Value.ToString());
+                e.Value = this.GetSerialNumber(e.Value.ToString());
             }
             catch
             { }
@@ -486,13 +467,13 @@ namespace TotalSmartCoding.Views.Productions
 
         private void dataGridView_Enter(object sender, EventArgs e)
         {
-            this.dataGridViewMatchingPackList.ScrollBars = ScrollBars.Horizontal;
+            this.dgvPackQueue.ScrollBars = ScrollBars.Horizontal;
         }
 
 
         private void dataGridView_Leave(object sender, EventArgs e)
         {
-            this.dataGridViewMatchingPackList.ScrollBars = ScrollBars.None;
+            this.dgvPackQueue.ScrollBars = ScrollBars.None;
         }
 
 
@@ -501,23 +482,23 @@ namespace TotalSmartCoding.Views.Productions
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewMatchingPackList_DoubleClick(object sender, EventArgs e)
+        private void dgvPackQueue_DoubleClick(object sender, EventArgs e)
         {
             try
             {
                 string cellValue = "";
                 if (CustomInputBox.Show("BP Filling System", "Please input pack number", ref cellValue) == System.Windows.Forms.DialogResult.OK)
                 {
-                    for (int rowIndex = 0; rowIndex < this.dataGridViewMatchingPackList.Rows.Count; rowIndex++)
+                    for (int rowIndex = 0; rowIndex < this.dgvPackQueue.Rows.Count; rowIndex++)
                     {
-                        for (int columnIndex = 0; columnIndex < this.dataGridViewMatchingPackList.Rows[rowIndex].Cells.Count; columnIndex++)
+                        for (int columnIndex = 0; columnIndex < this.dgvPackQueue.Rows[rowIndex].Cells.Count; columnIndex++)
                         {
-                            if (this.GetSerialNumber(this.dataGridViewMatchingPackList[columnIndex, rowIndex].Value.ToString()).IndexOf(cellValue) != -1)
+                            if (this.GetSerialNumber(this.dgvPackQueue[columnIndex, rowIndex].Value.ToString()).IndexOf(cellValue) != -1)
                             {
-                                if (rowIndex >= 0 && rowIndex < this.dataGridViewMatchingPackList.Rows.Count && columnIndex >= 0 && columnIndex < this.dataGridViewMatchingPackList.ColumnCount)
-                                    this.dataGridViewMatchingPackList.CurrentCell = this.dataGridViewMatchingPackList[columnIndex, rowIndex];
+                                if (rowIndex >= 0 && rowIndex < this.dgvPackQueue.Rows.Count && columnIndex >= 0 && columnIndex < this.dgvPackQueue.ColumnCount)
+                                    this.dgvPackQueue.CurrentCell = this.dgvPackQueue[columnIndex, rowIndex];
                                 else
-                                    this.dataGridViewMatchingPackList.CurrentCell = null;
+                                    this.dgvPackQueue.CurrentCell = null;
                                 break;
                             }
                         }
@@ -526,7 +507,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch
             {
-                this.dataGridViewMatchingPackList.CurrentCell = null;
+                this.dgvPackQueue.CurrentCell = null;
             }
         }
 
@@ -535,14 +516,14 @@ namespace TotalSmartCoding.Views.Productions
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewMatchingPackList_KeyDown(object sender, KeyEventArgs e)
+        private void dgvPackQueue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && this.dataGridViewMatchingPackList.CurrentCell != null)
+            if (e.KeyCode == Keys.Delete && this.dgvPackQueue.CurrentCell != null)
             {
                 try
                 {                //Handle exception for PackInOneCarton
                     string selectedBarcode = "";
-                    int packID = this.GetPackID(this.dataGridViewMatchingPackList.CurrentCell, out selectedBarcode);
+                    int packID = this.GetPackID(this.dgvPackQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                         if (this.scannerController.RemoveItemInMatchingPackList(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -560,12 +541,12 @@ namespace TotalSmartCoding.Views.Productions
         /// <param name="e"></param>
         private void dataGridViewPackInOneCarton_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && this.dataGridViewPackInOneCarton.CurrentCell != null)
+            if (e.KeyCode == Keys.Delete && this.dgvPacksetQueue.CurrentCell != null)
             {
                 try
                 {                //Handle exception for PackInOneCarton
                     string selectedBarcode = "";
-                    int packID = this.GetPackID(this.dataGridViewPackInOneCarton.CurrentCell, out selectedBarcode);
+                    int packID = this.GetPackID(this.dgvPacksetQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                         if (this.scannerController.RemoveItemInPackInOneCarton(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -583,11 +564,11 @@ namespace TotalSmartCoding.Views.Productions
         /// <param name="e"></param>
         private void dataGridViewCartonList_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyCode == Keys.Space || e.KeyCode == Keys.Delete) && this.dataGridViewCartonList.CurrentRow != null)
+            if ((e.KeyCode == Keys.Space || e.KeyCode == Keys.Delete) && this.dgvCartonQueue.CurrentRow != null)
             {
                 try
                 {                //Handle exception for carton
-                    DataGridViewRow dataGridViewRow = this.dataGridViewCartonList.CurrentRow;
+                    DataGridViewRow dataGridViewRow = this.dgvCartonQueue.CurrentRow;
                     if (dataGridViewRow != null)
                     {
                         //DataRowView dataRowView = dataGridViewRow.DataBoundItem as DataRowView;
@@ -877,6 +858,7 @@ namespace TotalSmartCoding.Views.Productions
                 throw exception;
             }
         }
+
 
     }
 }

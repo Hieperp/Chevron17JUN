@@ -656,6 +656,7 @@
     <None Include="Resources\Warning.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\White-Pallet.ico" />
     <None Include="Resources\Hopstarter-Warning.ico" />
     <None Include="Resources\fork6.ico" />
     <None Include="Resources\Antrepo-Cargo-Boxes-Palet-02.ico" />
@@ -664,6 +665,8 @@
     <None Include="Resources\Antrepo-Cargo-Boxes-Shipping-5.ico" />
     <None Include="Resources\Antrepo-Cargo-Boxes-Palet-01.ico" />
     <None Include="Resources\Emey87-Trainee-Box-double-tape.ico" />
+    <None Include="Resources\Fuel-icon-32.png" />
+    <None Include="Resources\Fuel-icon-24.png" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
     <None Include="Resources\palet031.ico" />
@@ -673,6 +676,15 @@
     <None Include="Resources\palet04.ico" />
     <None Include="Resources\if_oil_64502.ico" />
     <None Include="Resources\if_gas_1055052.ico" />
+    <None Include="Resources\palet-01-png-48.png" />
+    <None Include="Resources\Outline-Fuel.ico" />
+    <None Include="Resources\palet-01-png-32.png" />
+    <None Include="Resources\if_oil_64502.png" />
+    <None Include="Resources\if_oil_64502-24.png" />
+    <None Include="Resources\if_oil_64502-28.png" />
+    <None Include="Resources\if_oil_64502-26.png" />
+    <None Include="Resources\palet-01-png-34.png" />
+    <None Include="Resources\palet-01-png-36.png" />
     <Content Include="Resources\Toolbar Image1.png" />
     <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />
