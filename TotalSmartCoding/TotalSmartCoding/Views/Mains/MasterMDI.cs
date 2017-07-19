@@ -14,7 +14,7 @@ using TotalSmartCoding.Views.Commons;
 
 using TotalSmartCoding.Views.Sales;
 using TotalSmartCoding.Views.Productions;
-
+using TotalSmartCoding.Views.Inventories;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -400,18 +400,19 @@ namespace TotalSmartCoding.Views.Mains
         private void OpenTestView()
         {
 
-            ////Open new form
-            //Form childForm;
+            //Open new form
+            Form childForm;
             //childForm = new Batches();
-            ////childForm = new DeliveryAdvices();
+            //childForm = new DeliveryAdvices();
+            childForm = new GoodsReceipts();
 
-            //if (childForm != null)
-            //{
-            //    childForm.MdiParent = this;
-            //    childForm.WindowState = FormWindowState.Maximized;
-            //    childForm.ControlBox = false;
-            //    childForm.Show();
-            //}
+            if (childForm != null)
+            {
+                childForm.MdiParent = this;
+                childForm.WindowState = FormWindowState.Maximized;
+                childForm.ControlBox = false;
+                childForm.Show();
+            }
 
         }
 
