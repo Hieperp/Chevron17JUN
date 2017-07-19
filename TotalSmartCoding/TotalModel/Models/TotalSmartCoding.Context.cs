@@ -452,5 +452,44 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingCartonUpdateEntryStatus", fillingCartonIDsParameter, entryStatusIDParameter);
         }
+    
+        public virtual ObjectResult<string> FillingPalletEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("FillingPalletEditable", entityIDParameter);
+        }
+    
+        public virtual int FillingPalletSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string fillingCartonIDs)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            var fillingCartonIDsParameter = fillingCartonIDs != null ?
+                new ObjectParameter("FillingCartonIDs", fillingCartonIDs) :
+                new ObjectParameter("FillingCartonIDs", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingPalletSaveRelative", entityIDParameter, saveRelativeOptionParameter, fillingCartonIDsParameter);
+        }
+    
+        public virtual int FillingPalletUpdateEntryStatus(string fillingPalletIDs, Nullable<int> entryStatusID)
+        {
+            var fillingPalletIDsParameter = fillingPalletIDs != null ?
+                new ObjectParameter("FillingPalletIDs", fillingPalletIDs) :
+                new ObjectParameter("FillingPalletIDs", typeof(string));
+    
+            var entryStatusIDParameter = entryStatusID.HasValue ?
+                new ObjectParameter("EntryStatusID", entryStatusID) :
+                new ObjectParameter("EntryStatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingPalletUpdateEntryStatus", fillingPalletIDsParameter, entryStatusIDParameter);
+        }
     }
 }

@@ -38,6 +38,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SmartCoding));
             this.textBoxDigitStatus = new System.Windows.Forms.TextBox();
             this.dataGridViewMatchingPackList = new System.Windows.Forms.DataGridView();
@@ -48,38 +57,56 @@
             this.splitContainerQuality = new System.Windows.Forms.SplitContainer();
             this.splitContainerMatching = new System.Windows.Forms.SplitContainer();
             this.splitContainerCarton = new System.Windows.Forms.SplitContainer();
+            this.splitContainerPallet = new System.Windows.Forms.SplitContainer();
+            this.splitContainerCartonQueue = new System.Windows.Forms.SplitContainer();
+            this.dgvCartonsetQueue = new System.Windows.Forms.DataGridView();
+            this.splitContainerPalletQueue = new System.Windows.Forms.SplitContainer();
+            this.dgvPalletQueue = new System.Windows.Forms.DataGridView();
+            this.dgvPalletsetQueue = new System.Windows.Forms.DataGridView();
+            this.splitContainerDigitInkJetPrinter = new System.Windows.Forms.SplitContainer();
+            this.splitContainerBarcodeInkJetPrinter = new System.Windows.Forms.SplitContainer();
+            this.textBoxBarcodeStatus = new System.Windows.Forms.TextBox();
+            this.splitContainerCartonInkJetPrinter = new System.Windows.Forms.SplitContainer();
+            this.textBoxScannerStatus = new System.Windows.Forms.TextBox();
+            this.timerNmvnBackup = new System.Windows.Forms.Timer(this.components);
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
             this.comboBoxViewOption = new System.Windows.Forms.ToolStripComboBox();
             this.comboBoxEmptyCarton = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonMessageCount = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonWarningNewMonth = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabelWarningNewMonth = new System.Windows.Forms.ToolStripLabel();
-            this.splitContainerDigitInkJetPrinter = new System.Windows.Forms.SplitContainer();
+            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel11 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDigitLEDGreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripDigitOnPrinting = new System.Windows.Forms.ToolStripButton();
             this.toolStripDigitLEDAmber = new System.Windows.Forms.ToolStripButton();
             this.toolStripDigitLEDRed = new System.Windows.Forms.ToolStripButton();
-            this.splitContainerBarcodeInkJetPrinter = new System.Windows.Forms.SplitContainer();
-            this.textBoxBarcodeStatus = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripBarcodeLEDGreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripBarcodeOnPrinting = new System.Windows.Forms.ToolStripButton();
             this.toolStripBarcodeLEDAmber = new System.Windows.Forms.ToolStripButton();
             this.toolStripBarcodeLEDRed = new System.Windows.Forms.ToolStripButton();
-            this.splitContainerCartonInkJetPrinter = new System.Windows.Forms.SplitContainer();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripCartonLEDGreen = new System.Windows.Forms.ToolStripButton();
             this.toolStripCartonOnPrinting = new System.Windows.Forms.ToolStripButton();
             this.toolStripCartonLEDAmber = new System.Windows.Forms.ToolStripButton();
             this.toolStripCartonLEDRed = new System.Windows.Forms.ToolStripButton();
-            this.textBoxScannerStatus = new System.Windows.Forms.TextBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripScannerLEDGreen = new System.Windows.Forms.ToolStripButton();
@@ -90,7 +117,6 @@
             this.toolStripMCUQuanlity = new System.Windows.Forms.ToolStripButton();
             this.toolStripMCUMatching = new System.Windows.Forms.ToolStripButton();
             this.toolStripMCUCarton = new System.Windows.Forms.ToolStripButton();
-            this.timerNmvnBackup = new System.Windows.Forms.Timer(this.components);
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.buttonConnect = new System.Windows.Forms.ToolStripButton();
             this.buttonDisconnect = new System.Windows.Forms.ToolStripButton();
@@ -116,6 +142,7 @@
             this.textBoxLastCartonNo = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
             this.textBoxLastPalletNo = new System.Windows.Forms.ToolStripTextBox();
+            this.masterImageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMatchingPackList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPackInOneCarton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCartonList)).BeginInit();
@@ -131,21 +158,37 @@
             this.splitContainerCarton.Panel1.SuspendLayout();
             this.splitContainerCarton.Panel2.SuspendLayout();
             this.splitContainerCarton.SuspendLayout();
-            this.toolStrip5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPallet)).BeginInit();
+            this.splitContainerPallet.Panel1.SuspendLayout();
+            this.splitContainerPallet.Panel2.SuspendLayout();
+            this.splitContainerPallet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCartonQueue)).BeginInit();
+            this.splitContainerCartonQueue.Panel1.SuspendLayout();
+            this.splitContainerCartonQueue.Panel2.SuspendLayout();
+            this.splitContainerCartonQueue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCartonsetQueue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPalletQueue)).BeginInit();
+            this.splitContainerPalletQueue.Panel1.SuspendLayout();
+            this.splitContainerPalletQueue.Panel2.SuspendLayout();
+            this.splitContainerPalletQueue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalletQueue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalletsetQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDigitInkJetPrinter)).BeginInit();
             this.splitContainerDigitInkJetPrinter.Panel1.SuspendLayout();
             this.splitContainerDigitInkJetPrinter.Panel2.SuspendLayout();
             this.splitContainerDigitInkJetPrinter.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBarcodeInkJetPrinter)).BeginInit();
             this.splitContainerBarcodeInkJetPrinter.Panel1.SuspendLayout();
             this.splitContainerBarcodeInkJetPrinter.Panel2.SuspendLayout();
             this.splitContainerBarcodeInkJetPrinter.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCartonInkJetPrinter)).BeginInit();
             this.splitContainerCartonInkJetPrinter.Panel1.SuspendLayout();
             this.splitContainerCartonInkJetPrinter.Panel2.SuspendLayout();
             this.splitContainerCartonInkJetPrinter.SuspendLayout();
+            this.toolStrip5.SuspendLayout();
+            this.toolStrip6.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.toolStripChildForm.SuspendLayout();
@@ -298,7 +341,7 @@
             this.dataGridViewCartonList.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewCartonList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCartonList.EnableHeadersVisualStyles = false;
-            this.dataGridViewCartonList.Location = new System.Drawing.Point(0, 39);
+            this.dataGridViewCartonList.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewCartonList.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.dataGridViewCartonList.Name = "dataGridViewCartonList";
             this.dataGridViewCartonList.ReadOnly = true;
@@ -313,7 +356,7 @@
             this.dataGridViewCartonList.RowTemplate.Height = 47;
             this.dataGridViewCartonList.RowTemplate.ReadOnly = true;
             this.dataGridViewCartonList.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridViewCartonList.Size = new System.Drawing.Size(1363, 240);
+            this.dataGridViewCartonList.Size = new System.Drawing.Size(454, 84);
             this.dataGridViewCartonList.TabIndex = 10;
             this.dataGridViewCartonList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dataGridViewCartonList.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
@@ -391,8 +434,7 @@
             // 
             // splitContainerCarton.Panel1
             // 
-            this.splitContainerCarton.Panel1.Controls.Add(this.dataGridViewCartonList);
-            this.splitContainerCarton.Panel1.Controls.Add(this.toolStrip5);
+            this.splitContainerCarton.Panel1.Controls.Add(this.splitContainerPallet);
             this.splitContainerCarton.Panel1MinSize = 39;
             // 
             // splitContainerCarton.Panel2
@@ -404,94 +446,209 @@
             this.splitContainerCarton.SplitterWidth = 1;
             this.splitContainerCarton.TabIndex = 0;
             // 
-            // toolStrip5
+            // splitContainerPallet
             // 
-            this.toolStrip5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStrip5.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
-            this.toolStrip5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton15,
-            this.comboBoxViewOption,
-            this.comboBoxEmptyCarton,
-            this.toolStripLabel8,
-            this.toolStripButtonMessageCount,
-            this.toolStripLabel9,
-            this.toolStripButtonWarningNewMonth,
-            this.toolStripLabelWarningNewMonth});
-            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.Size = new System.Drawing.Size(1363, 39);
-            this.toolStrip5.TabIndex = 18;
-            this.toolStrip5.Text = "toolStrip5";
+            this.splitContainerPallet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerPallet.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerPallet.Name = "splitContainerPallet";
+            this.splitContainerPallet.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // toolStripButton15
+            // splitContainerPallet.Panel1
             // 
-            this.toolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton15.Image = global::TotalSmartCoding.Properties.Resources.Barcode_green_32;
-            this.toolStripButton15.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton15.Name = "toolStripButton15";
-            this.toolStripButton15.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButton15.Text = "toolStripButton3";
-            this.toolStripButton15.Click += new System.EventHandler(this.timerNmvnBackup_Tick);
+            this.splitContainerPallet.Panel1.Controls.Add(this.splitContainerCartonQueue);
+            this.splitContainerPallet.Panel1.Controls.Add(this.toolStrip5);
             // 
-            // comboBoxViewOption
+            // splitContainerPallet.Panel2
             // 
-            this.comboBoxViewOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxViewOption.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.comboBoxViewOption.Name = "comboBoxViewOption";
-            this.comboBoxViewOption.Size = new System.Drawing.Size(145, 39);
-            this.comboBoxViewOption.SelectedIndexChanged += new System.EventHandler(this.comboBoxViewOption_SelectedIndexChanged);
+            this.splitContainerPallet.Panel2.Controls.Add(this.splitContainerPalletQueue);
+            this.splitContainerPallet.Panel2.Controls.Add(this.toolStrip6);
+            this.splitContainerPallet.Size = new System.Drawing.Size(1363, 279);
+            this.splitContainerPallet.SplitterDistance = 139;
+            this.splitContainerPallet.TabIndex = 19;
             // 
-            // comboBoxEmptyCarton
+            // splitContainerCartonQueue
             // 
-            this.comboBoxEmptyCarton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEmptyCarton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.comboBoxEmptyCarton.Name = "comboBoxEmptyCarton";
-            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(179, 39);
-            this.comboBoxEmptyCarton.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmptyCarton_SelectedIndexChanged);
+            this.splitContainerCartonQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerCartonQueue.Location = new System.Drawing.Point(0, 55);
+            this.splitContainerCartonQueue.Name = "splitContainerCartonQueue";
             // 
-            // toolStripLabel8
+            // splitContainerCartonQueue.Panel1
             // 
-            this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(65, 36);
-            this.toolStripLabel8.Text = "              ";
+            this.splitContainerCartonQueue.Panel1.Controls.Add(this.dataGridViewCartonList);
             // 
-            // toolStripButtonMessageCount
+            // splitContainerCartonQueue.Panel2
             // 
-            this.toolStripButtonMessageCount.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonMessageCount.Image")));
-            this.toolStripButtonMessageCount.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonMessageCount.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonMessageCount.Name = "toolStripButtonMessageCount";
-            this.toolStripButtonMessageCount.Size = new System.Drawing.Size(63, 36);
-            this.toolStripButtonMessageCount.Text = "[0]";
-            this.toolStripButtonMessageCount.Click += new System.EventHandler(this.toolStripButtonMessageCount_Click);
+            this.splitContainerCartonQueue.Panel2.Controls.Add(this.dgvCartonsetQueue);
+            this.splitContainerCartonQueue.Size = new System.Drawing.Size(1363, 84);
+            this.splitContainerCartonQueue.SplitterDistance = 454;
+            this.splitContainerCartonQueue.TabIndex = 19;
             // 
-            // toolStripLabel9
+            // dgvCartonsetQueue
             // 
-            this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(65, 36);
-            this.toolStripLabel9.Text = "              ";
+            this.dgvCartonsetQueue.AllowUserToAddRows = false;
+            this.dgvCartonsetQueue.AllowUserToDeleteRows = false;
+            this.dgvCartonsetQueue.AllowUserToResizeColumns = false;
+            this.dgvCartonsetQueue.AllowUserToResizeRows = false;
+            this.dgvCartonsetQueue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvCartonsetQueue.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvCartonsetQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvCartonsetQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCartonsetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvCartonsetQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCartonsetQueue.DefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvCartonsetQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCartonsetQueue.EnableHeadersVisualStyles = false;
+            this.dgvCartonsetQueue.Location = new System.Drawing.Point(0, 0);
+            this.dgvCartonsetQueue.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.dgvCartonsetQueue.Name = "dgvCartonsetQueue";
+            this.dgvCartonsetQueue.ReadOnly = true;
+            this.dgvCartonsetQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dgvCartonsetQueue.RowHeadersVisible = false;
+            this.dgvCartonsetQueue.RowHeadersWidth = 40;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCartonsetQueue.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.dgvCartonsetQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvCartonsetQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCartonsetQueue.RowTemplate.Height = 47;
+            this.dgvCartonsetQueue.RowTemplate.ReadOnly = true;
+            this.dgvCartonsetQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvCartonsetQueue.Size = new System.Drawing.Size(905, 84);
+            this.dgvCartonsetQueue.TabIndex = 11;
+            this.dgvCartonsetQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            this.dgvCartonsetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
+            this.dgvCartonsetQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             // 
-            // toolStripButtonWarningNewMonth
+            // splitContainerPalletQueue
             // 
-            this.toolStripButtonWarningNewMonth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonWarningNewMonth.Image = global::TotalSmartCoding.Properties.Resources.Hopstarter_Warning;
-            this.toolStripButtonWarningNewMonth.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonWarningNewMonth.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonWarningNewMonth.Name = "toolStripButtonWarningNewMonth";
-            this.toolStripButtonWarningNewMonth.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButtonWarningNewMonth.Text = "toolStripButton3";
-            this.toolStripButtonWarningNewMonth.Visible = false;
+            this.splitContainerPalletQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerPalletQueue.Location = new System.Drawing.Point(0, 39);
+            this.splitContainerPalletQueue.Name = "splitContainerPalletQueue";
             // 
-            // toolStripLabelWarningNewMonth
+            // splitContainerPalletQueue.Panel1
             // 
-            this.toolStripLabelWarningNewMonth.Name = "toolStripLabelWarningNewMonth";
-            this.toolStripLabelWarningNewMonth.Size = new System.Drawing.Size(634, 36);
-            this.toolStripLabelWarningNewMonth.Text = "New month! Please STOP and change the PRINTED MONTH in order to reset the serial " +
-    "number.";
-            this.toolStripLabelWarningNewMonth.Visible = false;
+            this.splitContainerPalletQueue.Panel1.Controls.Add(this.dgvPalletQueue);
+            // 
+            // splitContainerPalletQueue.Panel2
+            // 
+            this.splitContainerPalletQueue.Panel2.Controls.Add(this.dgvPalletsetQueue);
+            this.splitContainerPalletQueue.Size = new System.Drawing.Size(1363, 97);
+            this.splitContainerPalletQueue.SplitterDistance = 454;
+            this.splitContainerPalletQueue.TabIndex = 20;
+            // 
+            // dgvPalletQueue
+            // 
+            this.dgvPalletQueue.AllowUserToAddRows = false;
+            this.dgvPalletQueue.AllowUserToDeleteRows = false;
+            this.dgvPalletQueue.AllowUserToResizeColumns = false;
+            this.dgvPalletQueue.AllowUserToResizeRows = false;
+            this.dgvPalletQueue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvPalletQueue.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvPalletQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvPalletQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPalletQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.dgvPalletQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPalletQueue.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvPalletQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPalletQueue.EnableHeadersVisualStyles = false;
+            this.dgvPalletQueue.Location = new System.Drawing.Point(0, 0);
+            this.dgvPalletQueue.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.dgvPalletQueue.Name = "dgvPalletQueue";
+            this.dgvPalletQueue.ReadOnly = true;
+            this.dgvPalletQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dgvPalletQueue.RowHeadersVisible = false;
+            this.dgvPalletQueue.RowHeadersWidth = 40;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPalletQueue.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            this.dgvPalletQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvPalletQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPalletQueue.RowTemplate.Height = 47;
+            this.dgvPalletQueue.RowTemplate.ReadOnly = true;
+            this.dgvPalletQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvPalletQueue.Size = new System.Drawing.Size(454, 97);
+            this.dgvPalletQueue.TabIndex = 12;
+            this.dgvPalletQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            this.dgvPalletQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
+            this.dgvPalletQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
+            // 
+            // dgvPalletsetQueue
+            // 
+            this.dgvPalletsetQueue.AllowUserToAddRows = false;
+            this.dgvPalletsetQueue.AllowUserToDeleteRows = false;
+            this.dgvPalletsetQueue.AllowUserToResizeColumns = false;
+            this.dgvPalletsetQueue.AllowUserToResizeRows = false;
+            this.dgvPalletsetQueue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvPalletsetQueue.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvPalletsetQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvPalletsetQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPalletsetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            this.dgvPalletsetQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPalletsetQueue.DefaultCellStyle = dataGridViewCellStyle17;
+            this.dgvPalletsetQueue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPalletsetQueue.EnableHeadersVisualStyles = false;
+            this.dgvPalletsetQueue.Location = new System.Drawing.Point(0, 0);
+            this.dgvPalletsetQueue.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.dgvPalletsetQueue.Name = "dgvPalletsetQueue";
+            this.dgvPalletsetQueue.ReadOnly = true;
+            this.dgvPalletsetQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dgvPalletsetQueue.RowHeadersVisible = false;
+            this.dgvPalletsetQueue.RowHeadersWidth = 40;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPalletsetQueue.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            this.dgvPalletsetQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvPalletsetQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPalletsetQueue.RowTemplate.Height = 47;
+            this.dgvPalletsetQueue.RowTemplate.ReadOnly = true;
+            this.dgvPalletsetQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgvPalletsetQueue.Size = new System.Drawing.Size(905, 97);
+            this.dgvPalletsetQueue.TabIndex = 13;
+            this.dgvPalletsetQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            this.dgvPalletsetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
+            this.dgvPalletsetQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             // 
             // splitContainerDigitInkJetPrinter
             // 
@@ -514,6 +671,276 @@
             this.splitContainerDigitInkJetPrinter.SplitterDistance = 124;
             this.splitContainerDigitInkJetPrinter.SplitterWidth = 1;
             this.splitContainerDigitInkJetPrinter.TabIndex = 25;
+            // 
+            // splitContainerBarcodeInkJetPrinter
+            // 
+            this.splitContainerBarcodeInkJetPrinter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerBarcodeInkJetPrinter.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerBarcodeInkJetPrinter.Margin = new System.Windows.Forms.Padding(4);
+            this.splitContainerBarcodeInkJetPrinter.Name = "splitContainerBarcodeInkJetPrinter";
+            // 
+            // splitContainerBarcodeInkJetPrinter.Panel1
+            // 
+            this.splitContainerBarcodeInkJetPrinter.Panel1.Controls.Add(this.textBoxBarcodeStatus);
+            this.splitContainerBarcodeInkJetPrinter.Panel1.Controls.Add(this.toolStrip2);
+            this.splitContainerBarcodeInkJetPrinter.Panel1MinSize = 39;
+            // 
+            // splitContainerBarcodeInkJetPrinter.Panel2
+            // 
+            this.splitContainerBarcodeInkJetPrinter.Panel2.Controls.Add(this.splitContainerCartonInkJetPrinter);
+            this.splitContainerBarcodeInkJetPrinter.Panel2MinSize = 39;
+            this.splitContainerBarcodeInkJetPrinter.Size = new System.Drawing.Size(1238, 221);
+            this.splitContainerBarcodeInkJetPrinter.SplitterDistance = 203;
+            this.splitContainerBarcodeInkJetPrinter.SplitterWidth = 1;
+            this.splitContainerBarcodeInkJetPrinter.TabIndex = 0;
+            // 
+            // textBoxBarcodeStatus
+            // 
+            this.textBoxBarcodeStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxBarcodeStatus.Location = new System.Drawing.Point(0, 55);
+            this.textBoxBarcodeStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxBarcodeStatus.Multiline = true;
+            this.textBoxBarcodeStatus.Name = "textBoxBarcodeStatus";
+            this.textBoxBarcodeStatus.ReadOnly = true;
+            this.textBoxBarcodeStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxBarcodeStatus.Size = new System.Drawing.Size(203, 166);
+            this.textBoxBarcodeStatus.TabIndex = 20;
+            // 
+            // splitContainerCartonInkJetPrinter
+            // 
+            this.splitContainerCartonInkJetPrinter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerCartonInkJetPrinter.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerCartonInkJetPrinter.Margin = new System.Windows.Forms.Padding(4);
+            this.splitContainerCartonInkJetPrinter.Name = "splitContainerCartonInkJetPrinter";
+            // 
+            // splitContainerCartonInkJetPrinter.Panel1
+            // 
+            this.splitContainerCartonInkJetPrinter.Panel1.Controls.Add(this.textBoxCartonStatus);
+            this.splitContainerCartonInkJetPrinter.Panel1.Controls.Add(this.toolStrip3);
+            this.splitContainerCartonInkJetPrinter.Panel1MinSize = 39;
+            // 
+            // splitContainerCartonInkJetPrinter.Panel2
+            // 
+            this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.textBoxScannerStatus);
+            this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.toolStrip4);
+            this.splitContainerCartonInkJetPrinter.Panel2MinSize = 39;
+            this.splitContainerCartonInkJetPrinter.Size = new System.Drawing.Size(1034, 221);
+            this.splitContainerCartonInkJetPrinter.SplitterDistance = 152;
+            this.splitContainerCartonInkJetPrinter.SplitterWidth = 1;
+            this.splitContainerCartonInkJetPrinter.TabIndex = 0;
+            // 
+            // textBoxScannerStatus
+            // 
+            this.textBoxScannerStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxScannerStatus.Location = new System.Drawing.Point(0, 55);
+            this.textBoxScannerStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxScannerStatus.Multiline = true;
+            this.textBoxScannerStatus.Name = "textBoxScannerStatus";
+            this.textBoxScannerStatus.ReadOnly = true;
+            this.textBoxScannerStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxScannerStatus.Size = new System.Drawing.Size(881, 166);
+            this.textBoxScannerStatus.TabIndex = 22;
+            // 
+            // timerNmvnBackup
+            // 
+            this.timerNmvnBackup.Enabled = true;
+            this.timerNmvnBackup.Interval = 300000;
+            this.timerNmvnBackup.Tick += new System.EventHandler(this.timerNmvnBackup_Tick);
+            // 
+            // toolStrip5
+            // 
+            this.toolStrip5.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.toolStrip5.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
+            this.toolStrip5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton15,
+            this.comboBoxViewOption,
+            this.comboBoxEmptyCarton,
+            this.toolStripLabel8,
+            this.toolStripButton9,
+            this.toolStripButtonMessageCount,
+            this.toolStripButton4,
+            this.toolStripLabel9,
+            this.toolStripButtonWarningNewMonth,
+            this.toolStripLabelWarningNewMonth});
+            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip5.Name = "toolStrip5";
+            this.toolStrip5.Size = new System.Drawing.Size(1363, 55);
+            this.toolStrip5.TabIndex = 18;
+            this.toolStrip5.Text = "toolStrip5";
+            // 
+            // toolStripButton15
+            // 
+            this.toolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton15.Image = global::TotalSmartCoding.Properties.Resources.Barcode_green_32;
+            this.toolStripButton15.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton15.Name = "toolStripButton15";
+            this.toolStripButton15.Size = new System.Drawing.Size(36, 52);
+            this.toolStripButton15.Text = "toolStripButton3";
+            this.toolStripButton15.Click += new System.EventHandler(this.timerNmvnBackup_Tick);
+            // 
+            // comboBoxViewOption
+            // 
+            this.comboBoxViewOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxViewOption.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.comboBoxViewOption.Name = "comboBoxViewOption";
+            this.comboBoxViewOption.Size = new System.Drawing.Size(145, 55);
+            this.comboBoxViewOption.SelectedIndexChanged += new System.EventHandler(this.comboBoxViewOption_SelectedIndexChanged);
+            // 
+            // comboBoxEmptyCarton
+            // 
+            this.comboBoxEmptyCarton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEmptyCarton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.comboBoxEmptyCarton.Name = "comboBoxEmptyCarton";
+            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(179, 55);
+            this.comboBoxEmptyCarton.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmptyCarton_SelectedIndexChanged);
+            // 
+            // toolStripLabel8
+            // 
+            this.toolStripLabel8.Name = "toolStripLabel8";
+            this.toolStripLabel8.Size = new System.Drawing.Size(65, 52);
+            this.toolStripLabel8.Text = "              ";
+            // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton9.Image = global::TotalSmartCoding.Properties.Resources.Antrepo_Cargo_Boxes_Palet_01;
+            this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Size = new System.Drawing.Size(52, 52);
+            this.toolStripButton9.Text = "toolStripButton9";
+            // 
+            // toolStripButtonMessageCount
+            // 
+            this.toolStripButtonMessageCount.Image = global::TotalSmartCoding.Properties.Resources.Emey87_Trainee_Box_double_tape;
+            this.toolStripButtonMessageCount.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonMessageCount.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonMessageCount.Name = "toolStripButtonMessageCount";
+            this.toolStripButtonMessageCount.Size = new System.Drawing.Size(79, 52);
+            this.toolStripButtonMessageCount.Text = "[0]";
+            this.toolStripButtonMessageCount.Click += new System.EventHandler(this.toolStripButtonMessageCount_Click);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.Image = global::TotalSmartCoding.Properties.Resources.Antrepo_Cargo_Boxes_Palet_01;
+            this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(87, 52);
+            this.toolStripButton4.Text = "[20]";
+            // 
+            // toolStripLabel9
+            // 
+            this.toolStripLabel9.Name = "toolStripLabel9";
+            this.toolStripLabel9.Size = new System.Drawing.Size(65, 52);
+            this.toolStripLabel9.Text = "              ";
+            // 
+            // toolStripButtonWarningNewMonth
+            // 
+            this.toolStripButtonWarningNewMonth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonWarningNewMonth.Image = global::TotalSmartCoding.Properties.Resources.Hopstarter_Warning;
+            this.toolStripButtonWarningNewMonth.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonWarningNewMonth.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonWarningNewMonth.Name = "toolStripButtonWarningNewMonth";
+            this.toolStripButtonWarningNewMonth.Size = new System.Drawing.Size(52, 52);
+            this.toolStripButtonWarningNewMonth.Text = "toolStripButton3";
+            this.toolStripButtonWarningNewMonth.Visible = false;
+            // 
+            // toolStripLabelWarningNewMonth
+            // 
+            this.toolStripLabelWarningNewMonth.Name = "toolStripLabelWarningNewMonth";
+            this.toolStripLabelWarningNewMonth.Size = new System.Drawing.Size(634, 20);
+            this.toolStripLabelWarningNewMonth.Text = "New month! Please STOP and change the PRINTED MONTH in order to reset the serial " +
+    "number.";
+            this.toolStripLabelWarningNewMonth.Visible = false;
+            // 
+            // toolStrip6
+            // 
+            this.toolStrip6.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.toolStrip6.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
+            this.toolStrip6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripComboBox1,
+            this.toolStripComboBox2,
+            this.toolStripLabel3,
+            this.toolStripButton2,
+            this.toolStripLabel10,
+            this.toolStripButton3,
+            this.toolStripLabel11});
+            this.toolStrip6.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip6.Name = "toolStrip6";
+            this.toolStrip6.Size = new System.Drawing.Size(1363, 39);
+            this.toolStrip6.TabIndex = 19;
+            this.toolStrip6.Text = "toolStrip6";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::TotalSmartCoding.Properties.Resources.Barcode_green_32;
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton1.Text = "toolStripButton3";
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(145, 39);
+            // 
+            // toolStripComboBox2
+            // 
+            this.toolStripComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.toolStripComboBox2.Name = "toolStripComboBox2";
+            this.toolStripComboBox2.Size = new System.Drawing.Size(179, 39);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(65, 36);
+            this.toolStripLabel3.Text = "              ";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(63, 36);
+            this.toolStripButton2.Text = "[0]";
+            // 
+            // toolStripLabel10
+            // 
+            this.toolStripLabel10.Name = "toolStripLabel10";
+            this.toolStripLabel10.Size = new System.Drawing.Size(65, 36);
+            this.toolStripLabel10.Text = "              ";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = global::TotalSmartCoding.Properties.Resources.Hopstarter_Warning;
+            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(52, 52);
+            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Visible = false;
+            // 
+            // toolStripLabel11
+            // 
+            this.toolStripLabel11.Name = "toolStripLabel11";
+            this.toolStripLabel11.Size = new System.Drawing.Size(634, 36);
+            this.toolStripLabel11.Text = "New month! Please STOP and change the PRINTED MONTH in order to reset the serial " +
+    "number.";
+            this.toolStripLabel11.Visible = false;
             // 
             // toolStrip1
             // 
@@ -589,40 +1016,6 @@
             this.toolStripDigitLEDRed.Size = new System.Drawing.Size(52, 52);
             this.toolStripDigitLEDRed.Text = "Error";
             this.toolStripDigitLEDRed.ToolTipText = "Error";
-            // 
-            // splitContainerBarcodeInkJetPrinter
-            // 
-            this.splitContainerBarcodeInkJetPrinter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerBarcodeInkJetPrinter.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerBarcodeInkJetPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.splitContainerBarcodeInkJetPrinter.Name = "splitContainerBarcodeInkJetPrinter";
-            // 
-            // splitContainerBarcodeInkJetPrinter.Panel1
-            // 
-            this.splitContainerBarcodeInkJetPrinter.Panel1.Controls.Add(this.textBoxBarcodeStatus);
-            this.splitContainerBarcodeInkJetPrinter.Panel1.Controls.Add(this.toolStrip2);
-            this.splitContainerBarcodeInkJetPrinter.Panel1MinSize = 39;
-            // 
-            // splitContainerBarcodeInkJetPrinter.Panel2
-            // 
-            this.splitContainerBarcodeInkJetPrinter.Panel2.Controls.Add(this.splitContainerCartonInkJetPrinter);
-            this.splitContainerBarcodeInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerBarcodeInkJetPrinter.Size = new System.Drawing.Size(1238, 221);
-            this.splitContainerBarcodeInkJetPrinter.SplitterDistance = 203;
-            this.splitContainerBarcodeInkJetPrinter.SplitterWidth = 1;
-            this.splitContainerBarcodeInkJetPrinter.TabIndex = 0;
-            // 
-            // textBoxBarcodeStatus
-            // 
-            this.textBoxBarcodeStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxBarcodeStatus.Location = new System.Drawing.Point(0, 55);
-            this.textBoxBarcodeStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxBarcodeStatus.Multiline = true;
-            this.textBoxBarcodeStatus.Name = "textBoxBarcodeStatus";
-            this.textBoxBarcodeStatus.ReadOnly = true;
-            this.textBoxBarcodeStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxBarcodeStatus.Size = new System.Drawing.Size(203, 166);
-            this.textBoxBarcodeStatus.TabIndex = 20;
             // 
             // toolStrip2
             // 
@@ -700,29 +1093,6 @@
             this.toolStripBarcodeLEDRed.Text = "Error";
             this.toolStripBarcodeLEDRed.ToolTipText = "Error";
             // 
-            // splitContainerCartonInkJetPrinter
-            // 
-            this.splitContainerCartonInkJetPrinter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerCartonInkJetPrinter.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerCartonInkJetPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.splitContainerCartonInkJetPrinter.Name = "splitContainerCartonInkJetPrinter";
-            // 
-            // splitContainerCartonInkJetPrinter.Panel1
-            // 
-            this.splitContainerCartonInkJetPrinter.Panel1.Controls.Add(this.textBoxCartonStatus);
-            this.splitContainerCartonInkJetPrinter.Panel1.Controls.Add(this.toolStrip3);
-            this.splitContainerCartonInkJetPrinter.Panel1MinSize = 39;
-            // 
-            // splitContainerCartonInkJetPrinter.Panel2
-            // 
-            this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.textBoxScannerStatus);
-            this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.toolStrip4);
-            this.splitContainerCartonInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerCartonInkJetPrinter.Size = new System.Drawing.Size(1034, 221);
-            this.splitContainerCartonInkJetPrinter.SplitterDistance = 152;
-            this.splitContainerCartonInkJetPrinter.SplitterWidth = 1;
-            this.splitContainerCartonInkJetPrinter.TabIndex = 0;
-            // 
             // toolStrip3
             // 
             this.toolStrip3.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -798,18 +1168,6 @@
             this.toolStripCartonLEDRed.Size = new System.Drawing.Size(52, 52);
             this.toolStripCartonLEDRed.Text = "Error";
             this.toolStripCartonLEDRed.ToolTipText = "Error";
-            // 
-            // textBoxScannerStatus
-            // 
-            this.textBoxScannerStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxScannerStatus.Location = new System.Drawing.Point(0, 55);
-            this.textBoxScannerStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxScannerStatus.Multiline = true;
-            this.textBoxScannerStatus.Name = "textBoxScannerStatus";
-            this.textBoxScannerStatus.ReadOnly = true;
-            this.textBoxScannerStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxScannerStatus.Size = new System.Drawing.Size(881, 166);
-            this.textBoxScannerStatus.TabIndex = 22;
             // 
             // toolStrip4
             // 
@@ -932,12 +1290,6 @@
             this.toolStripMCUCarton.Size = new System.Drawing.Size(23, 52);
             this.toolStripMCUCarton.Text = "Carton scanner";
             this.toolStripMCUCarton.Visible = false;
-            // 
-            // timerNmvnBackup
-            // 
-            this.timerNmvnBackup.Enabled = true;
-            this.timerNmvnBackup.Interval = 300000;
-            this.timerNmvnBackup.Tick += new System.EventHandler(this.timerNmvnBackup_Tick);
             // 
             // toolStripChildForm
             // 
@@ -1166,6 +1518,12 @@
             this.textBoxLastPalletNo.Text = "888888";
             this.textBoxLastPalletNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // masterImageList
+            // 
+            this.masterImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("masterImageList.ImageStream")));
+            this.masterImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.masterImageList.Images.SetKeyName(0, "Palet-01.ico");
+            // 
             // SmartCoding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1191,32 +1549,50 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMatching)).EndInit();
             this.splitContainerMatching.ResumeLayout(false);
             this.splitContainerCarton.Panel1.ResumeLayout(false);
-            this.splitContainerCarton.Panel1.PerformLayout();
             this.splitContainerCarton.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCarton)).EndInit();
             this.splitContainerCarton.ResumeLayout(false);
-            this.toolStrip5.ResumeLayout(false);
-            this.toolStrip5.PerformLayout();
+            this.splitContainerPallet.Panel1.ResumeLayout(false);
+            this.splitContainerPallet.Panel1.PerformLayout();
+            this.splitContainerPallet.Panel2.ResumeLayout(false);
+            this.splitContainerPallet.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPallet)).EndInit();
+            this.splitContainerPallet.ResumeLayout(false);
+            this.splitContainerCartonQueue.Panel1.ResumeLayout(false);
+            this.splitContainerCartonQueue.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCartonQueue)).EndInit();
+            this.splitContainerCartonQueue.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCartonsetQueue)).EndInit();
+            this.splitContainerPalletQueue.Panel1.ResumeLayout(false);
+            this.splitContainerPalletQueue.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPalletQueue)).EndInit();
+            this.splitContainerPalletQueue.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalletQueue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPalletsetQueue)).EndInit();
             this.splitContainerDigitInkJetPrinter.Panel1.ResumeLayout(false);
             this.splitContainerDigitInkJetPrinter.Panel1.PerformLayout();
             this.splitContainerDigitInkJetPrinter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDigitInkJetPrinter)).EndInit();
             this.splitContainerDigitInkJetPrinter.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.splitContainerBarcodeInkJetPrinter.Panel1.ResumeLayout(false);
             this.splitContainerBarcodeInkJetPrinter.Panel1.PerformLayout();
             this.splitContainerBarcodeInkJetPrinter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBarcodeInkJetPrinter)).EndInit();
             this.splitContainerBarcodeInkJetPrinter.ResumeLayout(false);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.splitContainerCartonInkJetPrinter.Panel1.ResumeLayout(false);
             this.splitContainerCartonInkJetPrinter.Panel1.PerformLayout();
             this.splitContainerCartonInkJetPrinter.Panel2.ResumeLayout(false);
             this.splitContainerCartonInkJetPrinter.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCartonInkJetPrinter)).EndInit();
             this.splitContainerCartonInkJetPrinter.ResumeLayout(false);
+            this.toolStrip5.ResumeLayout(false);
+            this.toolStrip5.PerformLayout();
+            this.toolStrip6.ResumeLayout(false);
+            this.toolStrip6.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
@@ -1307,5 +1683,23 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonMessageCount;
         private System.Windows.Forms.ToolStripLabel toolStripLabel9;
         private System.Windows.Forms.Timer timerNmvnBackup;
+        private System.Windows.Forms.SplitContainer splitContainerPallet;
+        private System.Windows.Forms.ToolStrip toolStrip6;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel10;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel11;
+        private System.Windows.Forms.SplitContainer splitContainerCartonQueue;
+        private System.Windows.Forms.DataGridView dgvCartonsetQueue;
+        private System.Windows.Forms.SplitContainer splitContainerPalletQueue;
+        private System.Windows.Forms.DataGridView dgvPalletQueue;
+        private System.Windows.Forms.DataGridView dgvPalletsetQueue;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ImageList masterImageList;
     }
 }

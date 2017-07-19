@@ -283,7 +283,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
         public virtual DataTable GetAllElements()
         {
             int maxSubQueueCount = 0;
-            DataTable dataTableAllElements = new DataTable("AllElements");
+            DataTable dataTableAllElements = new DataTable("BarcodeTable");
 
             foreach (List<MessageData> subQueue in this.MessageSubQueue)
             {

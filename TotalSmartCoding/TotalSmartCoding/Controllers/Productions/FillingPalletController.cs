@@ -19,7 +19,7 @@ namespace TotalSmartCoding.Controllers.Productions
 {
     public class FillingPalletController : GenericSimpleController<FillingPallet, FillingPalletDTO, FillingPalletPrimitiveDTO, FillingPalletViewModel>
     {
-        private IFillingPalletService fillingPalletService;
+        public IFillingPalletService fillingPalletService;
 
         public FillingPalletController(IFillingPalletService fillingPalletService, IFillingPalletViewModelSelectListBuilder fillingPalletSelectListBuilder, FillingPalletViewModel fillingPalletViewModel)
             : base(fillingPalletService, fillingPalletSelectListBuilder, fillingPalletViewModel)

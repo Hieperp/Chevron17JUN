@@ -147,14 +147,14 @@ namespace TotalSmartCoding.CommonLibraries.BP
                 //////}
                 //////this.PackDataTable = null;
 
-                //////this.NotifyPropertyChanged("MatchingPackList");
-                //////this.NotifyPropertyChanged("PackInOneCarton");
+                //////this.NotifyPropertyChanged("PackQueue");
+                //////this.NotifyPropertyChanged("PacksetQueue");
                 ////////////--------------
                 //HIEP*******************************22-MAY-2017.BEGIN
 
                 //Initialize CartonList
                 //this.cartonDataTable = this.CartonTableAdapter.GetDataByCartonStatus((byte)GlobalVariables.BarcodeStatus.BlankBarcode);
-                this.NotifyPropertyChanged("CartonList");
+                this.NotifyPropertyChanged("CartonQueue");
 
             }
             catch (Exception exception)
@@ -669,8 +669,8 @@ namespace TotalSmartCoding.CommonLibraries.BP
                         #endregion Make One Carton
 
 
-                        if (matchingPackListChanged) { this.NotifyPropertyChanged("MatchingPackList"); matchingPackListChanged = false; }
-                        if (packInOneCartonChanged) { this.NotifyPropertyChanged("PackInOneCarton"); packInOneCartonChanged = false; }
+                        if (matchingPackListChanged) { this.NotifyPropertyChanged("PackQueue"); matchingPackListChanged = false; }
+                        if (packInOneCartonChanged) { this.NotifyPropertyChanged("PacksetQueue"); packInOneCartonChanged = false; }
 
                     }
                     Thread.Sleep(100);
@@ -739,7 +739,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                         }
                     }
 
-                    if (barcodeReceived) { this.NotifyPropertyChanged("PackInOneCarton"); this.NotifyPropertyChanged("CartonList"); barcodeReceived = false; }
+                    if (barcodeReceived) { this.NotifyPropertyChanged("PacksetQueue"); this.NotifyPropertyChanged("CartonQueue"); barcodeReceived = false; }
                 }
             }
             catch (Exception exception)
@@ -762,7 +762,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                         if (pinChangedToSlow)
                         {
                             MatchingAndAddCarton(GlobalVariables.BlankBarcode);
-                            this.NotifyPropertyChanged("PackInOneCarton"); this.NotifyPropertyChanged("CartonList");
+                            this.NotifyPropertyChanged("PacksetQueue"); this.NotifyPropertyChanged("CartonQueue");
                         }
                     }
                 }
@@ -823,7 +823,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             ////        }
             ////    }
 
-            ////    this.NotifyPropertyChanged("MatchingPackList");
+            ////    this.NotifyPropertyChanged("PackQueue");
             //    return true;
             //}
             //else return false;
@@ -846,7 +846,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             //        MessageData messageData = this.matchingPackList.Dequeue(packID);
             //        if (messageData != null)
             //        {
-            //            this.NotifyPropertyChanged("MatchingPackList");
+            //            this.NotifyPropertyChanged("PackQueue");
 
             //            lock (this.PackDataTable)
             //            {
@@ -882,8 +882,8 @@ namespace TotalSmartCoding.CommonLibraries.BP
             //            {
             //                this.matchingPackList.Dequeue(messageData.PackID); //Dequeue the first pack
 
-            //                this.NotifyPropertyChanged("PackInOneCarton");
-            //                this.NotifyPropertyChanged("MatchingPackList");
+            //                this.NotifyPropertyChanged("PacksetQueue");
+            //                this.NotifyPropertyChanged("PackQueue");
 
             //                lock (this.PackTableAdapter)
             //                {
@@ -930,7 +930,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
             //                if (this.packInOneCarton.Count > 0) UpdateDataDetailPack(GlobalVariables.BarcodeStatus.ReadyToCarton);
 
-            //                this.NotifyPropertyChanged("PackInOneCarton");
+            //                this.NotifyPropertyChanged("PacksetQueue");
 
             //                lock (this.CartonTableAdapter)
             //                {
@@ -939,7 +939,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             //                    if (rowsAffected == 1) this.cartonDataTable.Rows.Remove(dataDetailCartonRow); else throw new System.ArgumentException("Fail to handle this carton", "Insufficient remove carton");
             //                }
 
-            //                this.NotifyPropertyChanged("CartonList");
+            //                this.NotifyPropertyChanged("CartonQueue");
 
             //                return true;
             //            }
@@ -973,7 +973,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             //            else throw new System.ArgumentException("Fail to handle this carton", "Insufficient update carton");
             //        }
 
-            //        this.NotifyPropertyChanged("CartonList");
+            //        this.NotifyPropertyChanged("CartonQueue");
 
             //        return true;
             //    }

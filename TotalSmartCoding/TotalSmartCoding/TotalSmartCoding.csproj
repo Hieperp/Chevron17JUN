@@ -657,9 +657,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Hopstarter-Warning.ico" />
+    <None Include="Resources\fork6.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Palet-02.ico" />
+    <None Include="Resources\Designcontest-Ecommerce-Business-Shipping.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Shipping-1.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Shipping-5.ico" />
+    <None Include="Resources\Antrepo-Cargo-Boxes-Palet-01.ico" />
+    <None Include="Resources\Emey87-Trainee-Box-double-tape.ico" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
+    <None Include="Resources\palet031.ico" />
+    <None Include="Resources\self2.ico" />
+    <None Include="Resources\self.ico" />
+    <None Include="Resources\Shipping5.ico" />
+    <None Include="Resources\palet04.ico" />
+    <None Include="Resources\if_oil_64502.ico" />
+    <None Include="Resources\if_gas_1055052.ico" />
     <Content Include="Resources\Toolbar Image1.png" />
+    <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />
   </ItemGroup>
   <ItemGroup />

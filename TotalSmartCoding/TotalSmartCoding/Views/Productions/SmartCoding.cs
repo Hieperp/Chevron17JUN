@@ -144,6 +144,8 @@ namespace TotalSmartCoding.Views.Productions
             {
                 scannerController.Initialize();
 
+                this.toolStripButton4.Image = Properties.Resources.Antrepo_Cargo_Boxes_Palet_01; this.toolStripButton4.ImageScaling = ToolStripItemImageScaling.SizeToFit;
+
                 this.comboBoxViewOption.ComboBox.Items.AddRange(new string[] { "Compact View", "Normal View" });
                 this.comboBoxViewOption.ComboBox.SelectedIndex = this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail ? 1 : 0;
                 this.comboBoxViewOption.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
@@ -397,21 +399,24 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-                    if (e.PropertyName == "MatchingPackList")
+                    if (e.PropertyName == "PackQueue")
                     {
                         int currentRowIndex = -1; int currentColumnIndex = -1;
                         if (this.dataGridViewMatchingPackList.CurrentCell != null) { currentRowIndex = this.dataGridViewMatchingPackList.CurrentCell.RowIndex; currentColumnIndex = this.dataGridViewMatchingPackList.CurrentCell.ColumnIndex; }
 
-                        this.dataGridViewMatchingPackList.DataSource = this.scannerController.GetMatchingPackList();
+                        this.dataGridViewMatchingPackList.DataSource = this.scannerController.GetPackQueue();
 
                         if (currentRowIndex >= 0 && currentRowIndex < this.dataGridViewMatchingPackList.Rows.Count && currentColumnIndex >= 0 && currentColumnIndex < this.dataGridViewMatchingPackList.ColumnCount) this.dataGridViewMatchingPackList.CurrentCell = this.dataGridViewMatchingPackList[currentColumnIndex, currentRowIndex]; //Keep current cell
 
                         this.toolStripButtonMessageCount.Text = "[" + this.scannerController.MatchingPackCount.ToString("N0") + "]";
                     }
 
-                    if (e.PropertyName == "PackInOneCarton") { this.dataGridViewPackInOneCarton.DataSource = this.scannerController.GetPackInOneCarton(); }
-                    if (e.PropertyName == "CartonList") { this.dataGridViewCartonList.DataSource = this.scannerController.GetCartonList(); if (this.dataGridViewCartonList.Rows.Count > 1) this.dataGridViewCartonList.CurrentCell = this.dataGridViewCartonList.Rows[0].Cells[0]; }
+                    if (e.PropertyName == "PacksetQueue") { this.dataGridViewPackInOneCarton.DataSource = this.scannerController.GetPacksetQueue(); }
 
+                    if (e.PropertyName == "CartonQueue") { this.dataGridViewCartonList.DataSource = this.scannerController.GetCartonQueue(); if (this.dataGridViewCartonList.Rows.Count > 1) this.dataGridViewCartonList.CurrentCell = this.dataGridViewCartonList.Rows[0].Cells[0]; }
+                    if (e.PropertyName == "CartonsetQueue") { this.dgvCartonsetQueue.DataSource = this.scannerController.GetCartonsetQueue(); }
+
+                    if (e.PropertyName == "PalletQueue") { this.dgvPalletQueue.DataSource = this.scannerController.GetPalletQueue(); }
                 }
 
             }

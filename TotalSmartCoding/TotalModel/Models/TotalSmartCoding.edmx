@@ -1069,6 +1069,18 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Parameter Name="FillingPackIDs" Type="varchar" Mode="In" />
           <Parameter Name="EntryStatusID" Type="int" Mode="In" />
         </Function>
+        <Function Name="FillingPalletEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FillingPalletSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
+          <Parameter Name="FillingCartonIDs" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="FillingPalletUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FillingPalletIDs" Type="varchar" Mode="In" />
+          <Parameter Name="EntryStatusID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetAccessLevel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
@@ -1836,6 +1848,18 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </FunctionImport>
           <FunctionImport Name="FillingCartonUpdateEntryStatus">
             <Parameter Name="FillingCartonIDs" Mode="In" Type="String" />
+            <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FillingPalletEditable" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FillingPalletSaveRelative">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
+            <Parameter Name="FillingCartonIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FillingPalletUpdateEntryStatus">
+            <Parameter Name="FillingPalletIDs" Mode="In" Type="String" />
             <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -3657,6 +3681,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <FunctionImportMapping FunctionImportName="FillingPackEditable" FunctionName="TotalSmartCodingModel.Store.FillingPackEditable" />
           <FunctionImportMapping FunctionImportName="FillingPackUpdateEntryStatus" FunctionName="TotalSmartCodingModel.Store.FillingPackUpdateEntryStatus" />
           <FunctionImportMapping FunctionImportName="FillingCartonUpdateEntryStatus" FunctionName="TotalSmartCodingModel.Store.FillingCartonUpdateEntryStatus" />
+          <FunctionImportMapping FunctionImportName="FillingPalletEditable" FunctionName="TotalSmartCodingModel.Store.FillingPalletEditable" />
+          <FunctionImportMapping FunctionImportName="FillingPalletSaveRelative" FunctionName="TotalSmartCodingModel.Store.FillingPalletSaveRelative" />
+          <FunctionImportMapping FunctionImportName="FillingPalletUpdateEntryStatus" FunctionName="TotalSmartCodingModel.Store.FillingPalletUpdateEntryStatus" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

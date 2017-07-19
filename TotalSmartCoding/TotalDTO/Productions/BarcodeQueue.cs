@@ -240,10 +240,10 @@ namespace TotalDTO.Productions
         }
 
 
-        public virtual DataTable GetAllElements()
+        public virtual DataTable ConverttoTable()
         {
             int maxSubQueueCount = 0;
-            DataTable dataTableAllElements = new DataTable("AllElements");
+            DataTable barcodeTable = new DataTable("BarcodeTable");
 
             foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
             {
@@ -252,20 +252,20 @@ namespace TotalDTO.Productions
 
             for (int i = 0; i < maxSubQueueCount; i++)//Make a table with number of column equal to maxSubQueueCount
             {
-                dataTableAllElements.Columns.Add((i < 9 ? " " : "") + (i + 1).ToString().Trim());
+                barcodeTable.Columns.Add((i < 9 ? " " : "") + (i + 1).ToString().Trim());
             }
 
             foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
             {
-                DataRow dataRow = dataTableAllElements.NewRow(); //add row for each sub queue
+                DataRow dataRow = barcodeTable.NewRow(); //add row for each sub queue
                 for (int i = 0; i < maxSubQueueCount; i++)
                 {//Zero base queue element
                     if (subQueue.Count > i) dataRow[i] = subQueue.ElementAt<TBarcodeDTO>(i).Code + GlobalVariables.doubleTabChar + GlobalVariables.doubleTabChar + subQueue.ElementAt<TBarcodeDTO>(i).GetID(); //Fill data row
                 }
-                dataTableAllElements.Rows.Add(dataRow);
+                barcodeTable.Rows.Add(dataRow);
             }
 
-            return dataTableAllElements;
+            return barcodeTable;
 
         }
 

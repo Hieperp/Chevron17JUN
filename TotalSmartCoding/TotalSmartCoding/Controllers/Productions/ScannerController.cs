@@ -159,14 +159,14 @@ namespace TotalSmartCoding.Controllers.Productions
                 //////}
                 //////this.PackDataTable = null;
 
-                //////this.NotifyPropertyChanged("MatchingPackList");
-                //////this.NotifyPropertyChanged("PackInOneCarton");
+                //////this.NotifyPropertyChanged("PackQueue");
+                //////this.NotifyPropertyChanged("PacksetQueue");
                 ////////////--------------
                 //HIEP*******************************22-MAY-2017.BEGIN
 
                 ////////Initialize CartonList
                 //////this.cartonDataTable = this.CartonTableAdapter.GetDataByCartonStatus((byte)GlobalVariables.BarcodeStatus.BlankBarcode);
-                //////this.NotifyPropertyChanged("CartonList");
+                //////this.NotifyPropertyChanged("CartonQueue");
 
             }
             catch (Exception exception)
@@ -283,41 +283,69 @@ namespace TotalSmartCoding.Controllers.Productions
 
         #region Public Method
 
-        public DataTable GetMatchingPackList()
+        public DataTable GetPackQueue()
         {
             if (this.packQueue != null)
             {
                 lock (this.packQueue)
                 {
-                    return this.packQueue.GetAllElements();
+                    return this.packQueue.ConverttoTable();
                 }
             }
             else return null;
         }
 
-        public DataTable GetPackInOneCarton()
+        public DataTable GetPacksetQueue()
         {
             if (this.packsetQueue != null)
             {
                 lock (this.packsetQueue)
                 {
-                    return this.packsetQueue.GetAllElements();
+                    return this.packsetQueue.ConverttoTable();
                 }
             }
             else return null;
         }
 
-        public DataTable GetCartonList()
+        public DataTable GetCartonQueue()
         {
             if (this.cartonQueue != null)
             {
                 lock (this.cartonQueue)
                 {
-                    return this.cartonQueue.GetAllElements();
+                    return this.cartonQueue.ConverttoTable();
                 }
             }
             else return null;
         }
+
+        public DataTable GetCartonsetQueue()
+        {
+            if (this.cartonsetQueue != null)
+            {
+                lock (this.cartonsetQueue)
+                {
+                    return this.cartonsetQueue.ConverttoTable();
+                }
+            }
+            else return null;
+        }
+
+
+        public DataTable GetPalletQueue()
+        {
+            if (this.palletQueue != null)
+            {
+                lock (this.palletQueue)
+                {
+                    return this.palletQueue.ConverttoTable();
+                }
+            }
+            else return null;
+        }
+
+
+
 
         public DataTable GetFillingPalletQueue()
         {
@@ -325,7 +353,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 lock (this.palletQueue)
                 {
-                    return this.palletQueue.GetAllElements();
+                    return this.palletQueue.ConverttoTable();
                 }
             }
             else return null;
@@ -498,7 +526,7 @@ namespace TotalSmartCoding.Controllers.Productions
             try
             {
                 if (GlobalEnums.OnTestOnly)
-                    if ((DateTime.Now.Second % 6) == 0 && this.cartonsetQueue.Count > 0) stringReadFrom = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReadFrom = "";
+                    if ((DateTime.Now.Second % 30) == 0 && this.cartonsetQueue.Count > 0) stringReadFrom = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReadFrom = "";
                 else
                 {
                     
@@ -569,6 +597,30 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
+        private void MatchingAndAddPallet(string palletCode)
+        {
+            if (this.cartonsetQueue.Count <= 0) return; //GlobalVariables.IgnoreEmptyPallet && 
+
+            lock (this.palletQueue)
+            {
+                lock (this.cartonsetQueue)
+                {
+                    //CẦN CHÚ Ý: this.cartonInOnePallet.Count = 0: CARTON RỔNG => PHẢI XỬ LÝ NHƯ THẾ NÀO???
+
+                    FillingPalletDTO fillingPalletDTO = new FillingPalletDTO() { FillingLineID = (int)this.FillingData.FillingLineID, CommodityID = this.FillingData.CommodityID, PCID = "ABCD123456EF", EntryStatusID = (int)GlobalVariables.BarcodeStatus.Normal, Code = palletCode };
+
+                    this.fillingPalletController.fillingPalletService.ServiceBag["FillingCartonIDs"] = this.cartonsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingCartonIDs TO NEW FillingPalletDTO
+                    if (this.fillingPalletController.fillingPalletService.Save(fillingPalletDTO))
+                        this.cartonsetQueue = new BarcodeQueue<FillingCartonDTO>(); //CLEAR AFTER ADD TO FillingPalletDTO
+                    else
+                        throw new Exception("Insufficient save pallet: " + fillingPalletDTO.Code);
+
+
+                    this.palletQueue.Enqueue(fillingPalletDTO);
+                }
+            }
+        }
+
 
         #endregion Public Method
 
@@ -577,7 +629,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public void ThreadRoutine()
         {
-            string stringReadFrom = ""; bool packQueueChanged = false; bool packsetQueueChanged = false; bool cartonQueueChanged = false; bool cartonsetQueueChanged = false;
+            string stringReadFrom = ""; bool packQueueChanged = false; bool packsetQueueChanged = false; bool cartonQueueChanged = false; bool cartonsetQueueChanged = false; bool palletQueueChanged = false;
 
             this.LoopRoutine = true; this.StopScanner();
 
@@ -606,12 +658,21 @@ namespace TotalSmartCoding.Controllers.Productions
                     cartonsetQueueChanged = this.MakeCartonset(); cartonQueueChanged = cartonQueueChanged || cartonsetQueueChanged;
 
 
+                    if (this.OnScanning && this.WaitforPallet(ref stringReadFrom))
+                    {
+                        palletQueueChanged = this.ReceivePallet(stringReadFrom) || palletQueueChanged;
+                        cartonsetQueueChanged = cartonsetQueueChanged || palletQueueChanged;
+                    }
 
 
 
-                    if (packQueueChanged) { this.NotifyPropertyChanged("MatchingPackList"); packQueueChanged = false; }
-                    if (packsetQueueChanged) { this.NotifyPropertyChanged("PackInOneCarton"); packsetQueueChanged = false; }
-                    if (cartonQueueChanged) { this.NotifyPropertyChanged("CartonList"); packQueueChanged = false; }
+                    if (packQueueChanged) { this.NotifyPropertyChanged("PackQueue"); packQueueChanged = false; }
+                    if (packsetQueueChanged) { this.NotifyPropertyChanged("PacksetQueue"); packsetQueueChanged = false; }
+
+                    if (cartonQueueChanged) { this.NotifyPropertyChanged("CartonQueue"); cartonQueueChanged = false; }
+                    if (cartonsetQueueChanged) { this.NotifyPropertyChanged("CartonsetQueue"); cartonsetQueueChanged = false; }
+
+                    if (palletQueueChanged) { this.NotifyPropertyChanged("PalletQueue"); palletQueueChanged = false; }
 
 
                     Thread.Sleep(100);
@@ -728,6 +789,23 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
+        private bool ReceivePallet(string stringReadFrom)
+        {
+            bool barcodeReceived = false; //doc nhieu lan thi xu ly ntn? manual read
+            string[] arrayBarcode = stringReadFrom.Split(new Char[] { GlobalVariables.charETX });
+
+            foreach (string stringBarcode in arrayBarcode)
+            {
+                //stringBarcode = stringBarcode.Replace("NoRead", ""); //FOR CARTON: NoRead: MEANS: CAN NOT READ => SHOULD HANDLE LATER FOR NoRead. SHOULD NOT IGNORE NoRead
+                if (stringBarcode.Trim() != "" && stringBarcode.Trim() != "NoRead")
+                {
+                    this.MatchingAndAddPallet(stringBarcode);
+                    barcodeReceived = true;
+                }
+            }
+            return barcodeReceived;
+        }
+
         #endregion Public Thread
 
 
@@ -774,7 +852,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     }
                 }
 
-                this.NotifyPropertyChanged("MatchingPackList");
+                this.NotifyPropertyChanged("PackQueue");
                 return true;
             }
             else return false;
@@ -796,7 +874,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     FillingPackDTO messageData = this.packQueue.Dequeue(packID);
                     if (messageData != null)
                     {
-                        this.NotifyPropertyChanged("MatchingPackList");
+                        this.NotifyPropertyChanged("PackQueue");
 
                         lock (this.fillingPackController)
                         {
@@ -827,8 +905,8 @@ namespace TotalSmartCoding.Controllers.Productions
                         {
                             this.packQueue.Dequeue(messageData.PackID); //Dequeue the first pack
 
-                            this.NotifyPropertyChanged("PackInOneCarton");
-                            this.NotifyPropertyChanged("MatchingPackList");
+                            this.NotifyPropertyChanged("PacksetQueue");
+                            this.NotifyPropertyChanged("PackQueue");
 
                             lock (this.fillingPalletController)
                             {
@@ -878,7 +956,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                         //    if (this.packInOneCarton.Count > 0) UpdateDataDetailPack(GlobalVariables.BarcodeStatus.ReadyToCarton);
 
-                        //    this.NotifyPropertyChanged("PackInOneCarton");
+                        //    this.NotifyPropertyChanged("PacksetQueue");
 
                         //    lock (this.CartonTableAdapter)
                         //    {
@@ -887,7 +965,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         //        if (rowsAffected == 1) this.cartonDataTable.Rows.Remove(dataDetailCartonRow); else throw new System.ArgumentException("Fail to handle this carton", "Insufficient remove carton");
                         //    }
 
-                        //    this.NotifyPropertyChanged("CartonList");
+                        //    this.NotifyPropertyChanged("CartonQueue");
 
                         //    return true;
                         //}
@@ -921,7 +999,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 //        else throw new System.ArgumentException("Fail to handle this carton", "Insufficient update carton");
                 //    }
 
-                //    this.NotifyPropertyChanged("CartonList");
+                //    this.NotifyPropertyChanged("CartonQueue");
 
                 //    return true;
                 //}

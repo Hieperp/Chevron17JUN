@@ -21,7 +21,13 @@ namespace TotalDAL.Repositories
         {
             this.totalSmartCodingEntities = totalSmartCodingEntities;
 
-            //return;
+            return;
+
+            Helpers.SqlProgrammability.Productions.FillingPallet fillingPallet = new Helpers.SqlProgrammability.Productions.FillingPallet(totalSmartCodingEntities);
+            fillingPallet.RestoreProcedure();
+
+
+            return;
 
             Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
             batch.RestoreProcedure();

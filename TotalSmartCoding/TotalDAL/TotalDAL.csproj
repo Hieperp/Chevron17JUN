@@ -54,6 +54,7 @@
     <Compile Include="Helpers\SqlProgrammability\Productions\Batch.cs" />
     <Compile Include="Helpers\SqlProgrammability\Productions\FillingCarton.cs" />
     <Compile Include="Helpers\SqlProgrammability\Productions\FillingPack.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Productions\FillingPallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\Commons\AspNetUserRepository.cs" />
