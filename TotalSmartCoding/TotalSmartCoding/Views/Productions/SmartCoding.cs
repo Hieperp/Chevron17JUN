@@ -114,9 +114,9 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-                digitPrinterController = new PrinterController(GlobalVariables.DominoPrinterName.DegitInkJet, this.fillingData, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail);
-                barcodePrinterController = new PrinterController(GlobalVariables.DominoPrinterName.BarCodeInkJet, this.fillingData, false);
-                cartonPrinterController = new PrinterController(GlobalVariables.DominoPrinterName.CartonInkJet, this.fillingData, false);
+                digitPrinterController = new PrinterController(GlobalVariables.PrinterName.DegitInkjet, this.fillingData, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail);
+                barcodePrinterController = new PrinterController(GlobalVariables.PrinterName.BarcodeInkjet, this.fillingData, false);
+                cartonPrinterController = new PrinterController(GlobalVariables.PrinterName.CartonInkjet, this.fillingData, false);
 
                 this.scannerController = new ScannerController(this.fillingData);
 
@@ -178,9 +178,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 case GlobalVariables.FillingLine.Ocme:
                     return 115; //142
-                case GlobalVariables.FillingLine.CO:
+                case GlobalVariables.FillingLine.Smallpack:
                     return 296; //364 
-                case GlobalVariables.FillingLine.WH:
+                case GlobalVariables.FillingLine.Drum:
                     return 70; //86;
                 case GlobalVariables.FillingLine.CM:
                     return 86;
@@ -203,9 +203,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 case GlobalVariables.FillingLine.Ocme:
                     return 821; //1032
-                case GlobalVariables.FillingLine.CO:
+                case GlobalVariables.FillingLine.Smallpack:
                     return 955;//1199
-                case GlobalVariables.FillingLine.WH:
+                case GlobalVariables.FillingLine.Drum:
                     return GlobalVariables.noItemPerCartonSetByProductID == 6 ? 860 : 880;
                 case GlobalVariables.FillingLine.CM:
                     return GlobalVariables.noItemPerCartonSetByProductID == 6 ? 860 : 880;
@@ -222,9 +222,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 case GlobalVariables.FillingLine.Ocme:
                     return 330; //430
-                case GlobalVariables.FillingLine.CO:
+                case GlobalVariables.FillingLine.Smallpack:
                     return 160; //213
-                case GlobalVariables.FillingLine.WH:
+                case GlobalVariables.FillingLine.Drum:
                     return 361; //485
                 case GlobalVariables.FillingLine.CM:
                     return 361;

@@ -49,18 +49,18 @@ namespace TotalBase
         public enum FillingLine
         {
             Ocme = 1,
-            CO = 2,
-            WH = 3,
+            Smallpack = 2,
+            Drum = 3,
             CM = 4,
             Pail = 5
         }
 
 
-        public enum DominoPrinterName
+        public enum PrinterName
         {
-            DegitInkJet = 1,
-            BarCodeInkJet = 2,
-            CartonInkJet = 3
+            DegitInkjet = 1,
+            BarcodeInkjet = 2,
+            CartonInkjet = 3
         }
 
 
@@ -86,6 +86,8 @@ namespace TotalBase
         public const string BlankBarcode = "[Blank]";
 
         public static bool IgnoreEmptyCarton = true;
+        public static bool IgnoreEmptyPallet = true;
+
         public static bool DuplicateCartonBarcodeFound = false;
 
         public static int LocationID = -1;
@@ -105,30 +107,30 @@ namespace TotalBase
         public const int ServerLineID = 99;
 
 
-        public static string IpAddress(DominoPrinterName dominoPrinterNameID)
+        public static string IpAddress(PrinterName dominoPrinterNameID)
         {
             switch (GlobalVariables.FillingLineID)
             {
                 case FillingLine.Ocme:
                     switch (dominoPrinterNameID)
                     {
-                        case DominoPrinterName.DegitInkJet:
+                        case PrinterName.DegitInkjet:
                             return "192.168.1.101";
-                        case DominoPrinterName.BarCodeInkJet:
+                        case PrinterName.BarcodeInkjet:
                             return "192.168.1.102";
-                        case DominoPrinterName.CartonInkJet:
+                        case PrinterName.CartonInkjet:
                             return "192.168.1.163";
                         default:
                             return "127.0.0.1";
                     }
-                case FillingLine.CO:
+                case FillingLine.Smallpack:
                     switch (dominoPrinterNameID)
                     {
-                        case DominoPrinterName.DegitInkJet:
+                        case PrinterName.DegitInkjet:
                             return "192.168.1.104";
-                        case DominoPrinterName.BarCodeInkJet:
+                        case PrinterName.BarcodeInkjet:
                             return "192.168.1.105";
-                        case DominoPrinterName.CartonInkJet:
+                        case PrinterName.CartonInkjet:
                             return "192.168.1.106";
                         default:
                             return "127.0.0.1";
@@ -137,24 +139,24 @@ namespace TotalBase
                 case FillingLine.CM:
                     switch (dominoPrinterNameID)
                     {
-                        case DominoPrinterName.DegitInkJet:
+                        case PrinterName.DegitInkjet:
                             return "192.168.1.107";
-                        case DominoPrinterName.BarCodeInkJet:
+                        case PrinterName.BarcodeInkjet:
                             return "192.168.1.108";
-                        case DominoPrinterName.CartonInkJet:
+                        case PrinterName.CartonInkjet:
                             return "192.168.1.109";
                         default:
                             return "127.0.0.1";
                     }
 
-                case FillingLine.WH:
+                case FillingLine.Drum:
                     switch (dominoPrinterNameID)
                     {
-                        case DominoPrinterName.DegitInkJet:
+                        case PrinterName.DegitInkjet:
                             return "192.168.1.110";
-                        case DominoPrinterName.BarCodeInkJet:
+                        case PrinterName.BarcodeInkjet:
                             return "192.168.1.111";
-                        case DominoPrinterName.CartonInkJet:
+                        case PrinterName.CartonInkjet:
                             return "192.168.1.112";
                         default:
                             return "127.0.0.1";
@@ -163,11 +165,11 @@ namespace TotalBase
                 case FillingLine.Pail:
                     switch (dominoPrinterNameID)
                     {
-                        case DominoPrinterName.DegitInkJet:
+                        case PrinterName.DegitInkjet:
                             return "192.168.1.113";
-                        case DominoPrinterName.BarCodeInkJet:
+                        case PrinterName.BarcodeInkjet:
                             return "192.168.1.114";
-                        case DominoPrinterName.CartonInkJet:
+                        case PrinterName.CartonInkjet:
                             return "127.0.0.1";
                         default:
                             return "127.0.0.1";
@@ -197,7 +199,7 @@ namespace TotalBase
                         default:
                             return "127.0.0.1";
                     }
-                case FillingLine.CO:
+                case FillingLine.Smallpack:
                     switch (barcodeScannerName)
                     {
                         case BarcodeScannerName.QualityScanner:
@@ -223,7 +225,7 @@ namespace TotalBase
                             return "127.0.0.1";
                     }
 
-                case FillingLine.WH:
+                case FillingLine.Drum:
                     switch (barcodeScannerName)
                     {
                         case BarcodeScannerName.QualityScanner:
@@ -264,9 +266,9 @@ namespace TotalBase
             {
                 case FillingLine.Ocme:
                     return 8;
-                case FillingLine.CO:
+                case FillingLine.Smallpack:
                     return 6;
-                case FillingLine.WH:
+                case FillingLine.Drum:
                     return 1;
                 case FillingLine.CM:
                     return 1;
@@ -288,9 +290,9 @@ namespace TotalBase
             {
                 case FillingLine.Ocme:
                     return 2;
-                case FillingLine.CO:
+                case FillingLine.Smallpack:
                     return 6;
-                case FillingLine.WH:
+                case FillingLine.Drum:
                     return 1;
                 case FillingLine.CM:
                     return 1;
@@ -318,9 +320,9 @@ namespace TotalBase
             {
                 case FillingLine.Ocme:
                     return 12;
-                case FillingLine.CO:
+                case FillingLine.Smallpack:
                     return 24;
-                case FillingLine.WH:
+                case FillingLine.Drum:
                     return GlobalVariables.noItemPerCartonSetByProductID;
                 case FillingLine.CM:
                     return GlobalVariables.noItemPerCartonSetByProductID;
@@ -338,9 +340,9 @@ namespace TotalBase
             {
                 case FillingLine.Ocme:
                     return false;
-                case FillingLine.CO:
+                case FillingLine.Smallpack:
                     return true;
-                case FillingLine.WH:
+                case FillingLine.Drum:
                     return false;
                 case FillingLine.CM:
                     return false;
@@ -369,7 +371,7 @@ namespace TotalBase
                         default:
                             return char.ConvertFromUtf32(Convert.ToInt32("3F", 16)); //3FH
                     }
-                case FillingLine.CO:
+                case FillingLine.Smallpack:
                     switch (barcodeScannerNameID)
                     {
                         case BarcodeScannerName.QualityScanner:
@@ -381,7 +383,7 @@ namespace TotalBase
                         default:
                             return char.ConvertFromUtf32(Convert.ToInt32("3F", 16));
                     }
-                case FillingLine.WH:
+                case FillingLine.Drum:
                     switch (barcodeScannerNameID)
                     {
                         case BarcodeScannerName.QualityScanner:

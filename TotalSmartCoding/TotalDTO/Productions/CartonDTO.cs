@@ -7,6 +7,14 @@ namespace TotalDTO.Productions
 {
     public class CartonPrimitiveDTO : BarcodeDTO, IPrimitiveEntity, IPrimitiveDTO
     {
+        public CartonPrimitiveDTO()
+            : this(null)
+        { }
+        public CartonPrimitiveDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
+
+
         public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Carton; } }
 
         public virtual int GetID() { return this.CartonID; }
@@ -19,18 +27,18 @@ namespace TotalDTO.Productions
 
     public class FillingCartonPrimitiveDTO : CartonPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO
     {
-        public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.FillingCarton; } }
+        public FillingCartonPrimitiveDTO()
+            : this(null)
+        { }
+        public FillingCartonPrimitiveDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
+
+
+        public new GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.FillingCarton; } }
 
         public override int GetID() { return this.FillingCartonID; }
-        public override void SetID(int id) { this.FillingCartonID = id; }
-
-        public FillingCartonPrimitiveDTO()
-        {
-            this.FillingLineID = 1; //this.FillingLineData.FillingLineID
-            this.CommodityID = 1; //this.FillingLineData.CommodityID
-            this.PCID = "ABCD123456EF";
-            this.EntryStatusID = 1; //(byte)GlobalVariables.BarcodeStatus.Normal
-        }
+        public override void SetID(int id) { this.FillingCartonID = id; }       
 
         public Nullable<int> FillingPalletID { get; set; }
     }
@@ -38,10 +46,24 @@ namespace TotalDTO.Productions
 
     public class CartonDTO : CartonPrimitiveDTO
     {
+        public CartonDTO()
+            : this(null)
+        { }
+        public CartonDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
     }
 
     public class FillingCartonDTO : FillingCartonPrimitiveDTO, IShallowClone<FillingCartonDTO>
     {
+        public FillingCartonDTO()
+            : this(null)
+        { }
+        public FillingCartonDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
+
+
         public string FillingPackIDs { get; set; }
 
         public FillingCartonDTO ShallowClone()

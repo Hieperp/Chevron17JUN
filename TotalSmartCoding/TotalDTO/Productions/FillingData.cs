@@ -16,6 +16,7 @@ namespace TotalDTO.Productions
         public int ItemPerSubQueue { get { return GlobalVariables.NoItemDiverter(); } }
         public bool RepeatSubQueueIndex { get { return GlobalVariables.RepeatedSubQueueIndex(); } }
 
+        public string PCID { get { return "ABCD123456EF"; } }
 
 
 

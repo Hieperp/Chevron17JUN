@@ -7,6 +7,14 @@ namespace TotalDTO.Productions
 {
     public class PalletPrimitiveDTO : BarcodeDTO, IPrimitiveEntity, IPrimitiveDTO
     {
+        public PalletPrimitiveDTO()
+            : this(null)
+        { }
+        public PalletPrimitiveDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
+
+
         public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Pallet; } }
 
         public virtual int GetID() { return this.PalletID; }
@@ -18,6 +26,14 @@ namespace TotalDTO.Productions
 
     public class FillingPalletPrimitiveDTO : PalletPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO
     {
+        public FillingPalletPrimitiveDTO()
+            : this(null)
+        { }
+        public FillingPalletPrimitiveDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
+
+
         public new GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.FillingPallet; } }
 
         public override int GetID() { return this.FillingPalletID; }
@@ -27,10 +43,24 @@ namespace TotalDTO.Productions
 
     public class PalletDTO : PalletPrimitiveDTO
     {
+        public PalletDTO()
+            : this(null)
+        { }
+        public PalletDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
     }
 
     public class FillingPalletDTO : FillingPalletPrimitiveDTO, IShallowClone<FillingPalletDTO>
     {
+        public FillingPalletDTO()
+            : this(null)
+        { }
+        public FillingPalletDTO(FillingData fillingData)
+            : base(fillingData)
+        { }
+
+
         public string FillingCartonIDs { get; set; }
 
 

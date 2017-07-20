@@ -84,6 +84,9 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
+
+
+
                 this.barcodeScannerName = GlobalVariables.BarcodeScannerName.MatchingScanner;
 
                 this.ipAddress = IPAddress.Parse(GlobalVariables.IpAddress(this.BarcodeScannerName));
@@ -344,21 +347,6 @@ namespace TotalSmartCoding.Controllers.Productions
             else return null;
         }
 
-
-
-
-        public DataTable GetFillingPalletQueue()
-        {
-            if (this.palletQueue != null)
-            {
-                lock (this.palletQueue)
-                {
-                    return this.palletQueue.ConverttoTable();
-                }
-            }
-            else return null;
-        }
-
         private bool Connect(bool connectMatchingScanner)
         {
             try
@@ -436,25 +424,25 @@ namespace TotalSmartCoding.Controllers.Productions
 
         }
 
-        private bool WaitforPack(ref string stringReadFrom)
+        private bool WaitforPack(ref string stringReceived)
         {
             try
             {
                 if (GlobalEnums.OnTestOnly)
-                    if ((DateTime.Now.Second % 4) == 0) stringReadFrom = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReadFrom = "";
+                    if ((DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
                 else
                 {
                     this.barcodeNetworkStream.ReadTimeout = 120; //Default = -1; 
 
-                    stringReadFrom = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
+                    stringReceived = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
 
                     this.barcodeNetworkStream.ReadTimeout = -1; //Default = -1
 
-                    if (stringReadFrom != "") this.MainStatus = stringReadFrom;
+                    if (stringReceived != "") this.MainStatus = stringReceived;
 
 
                 }
-                return stringReadFrom != "";
+                return stringReceived != "";
             }
 
             catch (Exception exception)
@@ -464,7 +452,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 //Ignore when timeout
                 if (exception.Message == "Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.")
                 {
-                    stringReadFrom = "";
+                    stringReceived = "";
                     return false;
                 }
                 else
@@ -485,23 +473,23 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        private bool WaitforCarton(ref string stringReadFrom)
+        private bool WaitforCarton(ref string stringReceived)
         {
             try
             {
                 if (GlobalEnums.OnTestOnly)
-                    if ((DateTime.Now.Second % 6) == 0 && this.packsetQueue.Count > 0) stringReadFrom = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReadFrom = "";
+                    if ((DateTime.Now.Second % 6) == 0 && this.packsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
                 else
                 {
                     //*****MODIFY HERE: this.barcodeNetworkStream.ReadTimeout = 120; //Default = -1; 
 
-                    //*****MODIFY HERE: stringReadFrom = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
+                    //*****MODIFY HERE: stringReceived = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
 
                     //*****MODIFY HERE: this.barcodeNetworkStream.ReadTimeout = -1; //Default = -1
 
-                    //*****MODIFY HERE: if (stringReadFrom != "") this.MainStatus = stringReadFrom;
+                    //*****MODIFY HERE: if (stringReceived != "") this.MainStatus = stringReceived;
                 }
-                return stringReadFrom != "";
+                return stringReceived != "";
             }
 
             catch (Exception exception)
@@ -511,7 +499,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 //Ignore when timeout
                 if (exception.Message == "Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.")
                 {
-                    stringReadFrom = "";
+                    stringReceived = "";
                     return false;
                 }
                 else
@@ -521,17 +509,17 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        private bool WaitforPallet(ref string stringReadFrom)
+        private bool WaitforPallet(ref string stringReceived)
         {
             try
             {
                 if (GlobalEnums.OnTestOnly)
-                    if ((DateTime.Now.Second % 30) == 0 && this.cartonsetQueue.Count > 0) stringReadFrom = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReadFrom = "";
+                    if ((DateTime.Now.Second % 30) == 0 && this.cartonsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
                 else
                 {
-                    
+
                 }
-                return stringReadFrom != "";
+                return stringReceived != "";
             }
 
             catch (Exception exception)
@@ -541,7 +529,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 //Ignore when timeout
                 if (exception.Message == "Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.")
                 {
-                    stringReadFrom = "";
+                    stringReceived = "";
                     return false;
                 }
                 else
@@ -550,73 +538,76 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        private FillingPackDTO AddDataDetailPack(string code, int queueID)
+        private FillingPackDTO AddPack(string packCode, int queueID)
         {
             try
             {
-                FillingPackDTO fillingPackDTO = new FillingPackDTO() { FillingLineID = (int)this.FillingData.FillingLineID, CommodityID = this.FillingData.CommodityID, PCID = "ABCD123456EF", EntryStatusID = (int)GlobalVariables.BarcodeStatus.Normal, QueueID = queueID, Code = code };
+                FillingPackDTO fillingPackDTO = new FillingPackDTO(this.FillingData) { Code = packCode, QueueID = queueID };
 
                 if (this.fillingPackController.fillingPackService.Save(fillingPackDTO))
                     return fillingPackDTO;
                 else
                 {
-                    this.MainStatus = "Insufficient save pack: " + code;
+                    this.MainStatus = "Insufficient save pack: " + packCode;
                     return null;
                 }
             }
             catch (System.Exception exception)
             {
-                throw new Exception("Insufficient save pack: " + exception.Message + " [" + code + "]");
+                throw new Exception("Insufficient save pack: " + exception.Message + " [" + packCode + "]");
             }
         }
 
 
         private void MatchingAndAddCarton(string cartonCode)
         {
-            if (GlobalVariables.IgnoreEmptyCarton && this.packsetQueue.Count <= 0) return;
-
             lock (this.cartonQueue)
             {
                 lock (this.packsetQueue)
                 {
-                    //CẦN CHÚ Ý: this.packInOneCarton.Count = 0: CARTON RỔNG => PHẢI XỬ LÝ NHƯ THẾ NÀO???
+                    if (!GlobalVariables.IgnoreEmptyCarton || this.packsetQueue.Count > 0) //BY NOW: GlobalVariables.IgnoreEmptyCarton = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED
+                    {//IF this.packsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY CARTON. this.packsetQueue.EntityIDs WILL BE BLANK => NO PACK BE UPDATED FOR THIS CARTON
 
-                    FillingCartonDTO fillingCartonDTO = new FillingCartonDTO() { FillingLineID = (int)this.FillingData.FillingLineID, CommodityID = this.FillingData.CommodityID, PCID = "ABCD123456EF", EntryStatusID = (int)GlobalVariables.BarcodeStatus.Normal, Code = cartonCode };
+                        FillingCartonDTO fillingCartonDTO = new FillingCartonDTO(this.FillingData) { Code = cartonCode };
 
-                    this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
-                    if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
-                        this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
-                    else
-                        throw new Exception("Insufficient save carton: " + fillingCartonDTO.Code);
+                        this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
+                        if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
+                            this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
+                        else
+                            throw new Exception("Insufficient save carton: " + fillingCartonDTO.Code);
 
 
-                    this.cartonQueue.Enqueue(fillingCartonDTO);
+                        this.cartonQueue.Enqueue(fillingCartonDTO);
+                    }
                 }
             }
         }
 
 
 
-        private void MatchingAndAddPallet(string palletCode)
+        private bool MatchingAndAddPallet(string palletCode)
         {
-            if (this.cartonsetQueue.Count <= 0) return; //GlobalVariables.IgnoreEmptyPallet && 
-
             lock (this.palletQueue)
             {
                 lock (this.cartonsetQueue)
                 {
-                    //CẦN CHÚ Ý: this.cartonInOnePallet.Count = 0: CARTON RỔNG => PHẢI XỬ LÝ NHƯ THẾ NÀO???
+                    if (!GlobalVariables.IgnoreEmptyPallet || this.cartonsetQueue.Count > 0) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED
+                    {//IF this.cartonsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY PALLET: this.cartonsetQueue.EntityIDs WILL BE BLANK => NO CARTON BE UPDATED FOR THIS PALLET
 
-                    FillingPalletDTO fillingPalletDTO = new FillingPalletDTO() { FillingLineID = (int)this.FillingData.FillingLineID, CommodityID = this.FillingData.CommodityID, PCID = "ABCD123456EF", EntryStatusID = (int)GlobalVariables.BarcodeStatus.Normal, Code = palletCode };
+                        FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode };
 
-                    this.fillingPalletController.fillingPalletService.ServiceBag["FillingCartonIDs"] = this.cartonsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingCartonIDs TO NEW FillingPalletDTO
-                    if (this.fillingPalletController.fillingPalletService.Save(fillingPalletDTO))
-                        this.cartonsetQueue = new BarcodeQueue<FillingCartonDTO>(); //CLEAR AFTER ADD TO FillingPalletDTO
+                        this.fillingPalletController.fillingPalletService.ServiceBag["FillingCartonIDs"] = this.cartonsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingCartonIDs TO NEW FillingPalletDTO
+                        if (this.fillingPalletController.fillingPalletService.Save(fillingPalletDTO))
+                            this.cartonsetQueue = new BarcodeQueue<FillingCartonDTO>(); //CLEAR AFTER ADD TO FillingPalletDTO
+                        else
+                            throw new Exception("Insufficient save pallet: " + fillingPalletDTO.Code);
+
+
+                        this.palletQueue.Enqueue(fillingPalletDTO);
+                        return true;
+                    }
                     else
-                        throw new Exception("Insufficient save pallet: " + fillingPalletDTO.Code);
-
-
-                    this.palletQueue.Enqueue(fillingPalletDTO);
+                        return false;
                 }
             }
         }
@@ -627,40 +618,48 @@ namespace TotalSmartCoding.Controllers.Productions
 
         #region Public Thread
 
+        /// <summary>
+        /// TEST: 
+        /// 1) CARTON: NO READ
+        /// 2) PALLET: MORE THAN 1 PALLET IS IN THE QUEUE. 
+        /// HOW THE ZEBRA WORK? 
+        /// WHAT'S HAPPEND WHEN 1 BARCODE PRINTED BY ZEBRA IS READ MORE THAN 1 TIMES (DUPLICATE READ)?
+        /// HOW TO RE-PRINNT?
+        /// HOW TO PROCESS DUPLICATE CODE IN THE WHOLE TABLE (BY READ 1 CODE MORE THAN 1 TIMES: PACK/ CARTON/ PALLET)
+        /// </summary>
         public void ThreadRoutine()
         {
-            string stringReadFrom = ""; bool packQueueChanged = false; bool packsetQueueChanged = false; bool cartonQueueChanged = false; bool cartonsetQueueChanged = false; bool palletQueueChanged = false;
+            string stringReceived = ""; bool packQueueChanged = false; bool packsetQueueChanged = false; bool cartonQueueChanged = false; bool cartonsetQueueChanged = false; bool palletQueueChanged = false;
 
             this.LoopRoutine = true; this.StopScanner();
 
 
             try
             {
-
-                if (!this.Connect(this.FillingData.FillingLineID != GlobalVariables.FillingLine.Pail)) throw new System.InvalidOperationException("NMVN: Can not connect to comport.");
+                if (!this.Connect(this.FillingData.FillingLineID != GlobalVariables.FillingLine.Pail)) throw new System.InvalidOperationException("Can not connect to scanner");
 
                 while (this.LoopRoutine)    //MAIN LOOP. STOP WHEN PRESS DISCONNECT
                 {
                     this.MainStatus = this.OnScanning ? "Scanning..." : "Ready to scan";
 
 
-                    if (this.OnScanning && this.WaitforPack(ref stringReadFrom))
-                        packQueueChanged = this.ReceivePack(stringReadFrom) || packQueueChanged;
+                    if (this.OnScanning && this.WaitforPack(ref stringReceived))
+                        packQueueChanged = this.ReceivePack(stringReceived) || packQueueChanged;
 
                     packsetQueueChanged = this.MakePackset(); packQueueChanged = packQueueChanged || packsetQueueChanged;
 
 
-                    if (this.OnScanning && this.WaitforCarton(ref stringReadFrom))
+                    if (this.OnScanning && this.WaitforCarton(ref stringReceived))
                     {
-                        cartonQueueChanged = this.ReceiveCarton(stringReadFrom) || cartonQueueChanged;
+                        cartonQueueChanged = this.ReceiveCarton(stringReceived) || cartonQueueChanged;
                         packsetQueueChanged = packsetQueueChanged || cartonQueueChanged;
                     }
                     cartonsetQueueChanged = this.MakeCartonset(); cartonQueueChanged = cartonQueueChanged || cartonsetQueueChanged;
 
 
-                    if (this.OnScanning && this.WaitforPallet(ref stringReadFrom))
+                    if (this.OnScanning && this.WaitforPallet(ref stringReceived))
                     {
-                        palletQueueChanged = this.ReceivePallet(stringReadFrom) || palletQueueChanged;
+                        palletQueueChanged = this.ReceivePallet(stringReceived) || palletQueueChanged;
                         cartonsetQueueChanged = cartonsetQueueChanged || palletQueueChanged;
                     }
 
@@ -695,20 +694,20 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        private bool ReceivePack(string stringReadFrom)
+        private bool ReceivePack(string stringReceived)
         {
             bool barcodeReceived = false;
-            string[] arrayBarcode = stringReadFrom.Split(new Char[] { GlobalVariables.charETX });
+            string[] arrayBarcode = stringReceived.Split(new Char[] { GlobalVariables.charETX });
 
             foreach (string stringBarcode in arrayBarcode)
             {
-                string receivedBarcode = stringBarcode.Replace("NoRead", "");
+                string receivedBarcode = stringBarcode.Replace("NoRead", "").Trim();
 
-                if (receivedBarcode.Trim() != "" && receivedBarcode.Trim() != "NoRead") //Add to MatchingPackList
+                if (receivedBarcode != "") //Add to MatchingPackList
                 {
                     lock (this.packQueue)
                     {
-                        FillingPackDTO messageData = this.AddDataDetailPack(receivedBarcode, this.packQueue.NextQueueID);
+                        FillingPackDTO messageData = this.AddPack(receivedBarcode, this.packQueue.NextQueueID);
                         if (messageData != null)
                         {
                             this.packQueue.Enqueue(messageData);
@@ -746,15 +745,22 @@ namespace TotalSmartCoding.Controllers.Productions
             return packsetSuccessfully;
         }
 
-        private bool ReceiveCarton(string stringReadFrom)
+        /// <summary>
+        /// NOW: WHEN RECEIVE NoRead: IT WILL ADD NEW CARTON, WHICH CODE WILL BE 'NoRead'
+        /// AND THEN: USER MUST UPDATE ACTUAL BARCODE BY MANUALLY
+        /// WHEN this.packsetQueue.Count = 0: EMPTY CARTON WILL BE IGNORE. SEE MatchingAndAddCarton FOR MORE INFORMATION
+        /// </summary>
+        /// <param name="stringReceived"></param>
+        /// <returns></returns>
+        private bool ReceiveCarton(string stringReceived)
         {
             bool barcodeReceived = false;
-            string[] arrayBarcode = stringReadFrom.Split(new Char[] { GlobalVariables.charETX });
+            string[] arrayBarcode = stringReceived.Split(new Char[] { GlobalVariables.charETX });
 
             foreach (string stringBarcode in arrayBarcode)
             {
                 //stringBarcode = stringBarcode.Replace("NoRead", ""); //FOR CARTON: NoRead: MEANS: CAN NOT READ => SHOULD HANDLE LATER FOR NoRead. SHOULD NOT IGNORE NoRead
-                if (stringBarcode.Trim() != "" && stringBarcode.Trim() != "NoRead")
+                if (stringBarcode.Trim() != "")
                 {
                     this.MatchingAndAddCarton(stringBarcode);
                     barcodeReceived = true;
@@ -788,20 +794,28 @@ namespace TotalSmartCoding.Controllers.Productions
             return cartonsetSuccessfully;
         }
 
-
-        private bool ReceivePallet(string stringReadFrom)
+        /// <summary>
+        /// ONLY WHEN cartonsetQueue IS FULL (MEANS: ONE PALLET IS AVAILABLE): THE SOFTWARE WILL SEND DATA TO ZEBRA FOR PRINTING ONE LABEL
+        /// AND: ONLY ONE PRINT PER PALLET (MEANS: PER EACH FULL cartonsetQueue). IF NEEDED: USER MUST PRESS PRINT AGAIN => TO PRINT MANUALLY
+        /// THE SOFTWARE ONLY CHECK DUPLICATE CODE FOR CURRENT PALLET WITH THE PREVIOUS RECEIVED CODE ONLY. THE UNIQUE CONSTRAINT ON TABLE WILL CHECK THE WHOLE TABLE FOR DUPLICATE CODE
+        /// </summary>
+        /// <param name="stringReceived"></param>
+        /// <returns></returns>
+        private string lastPalletCode = "";
+        private bool ReceivePallet(string stringReceived) //ONLY WHEN cartonsetQueue IS FULL + ONLY ONE PRINT PER PALLET: thêm số đếm printed cho cartonsetQueue?????
         {
-            bool barcodeReceived = false; //doc nhieu lan thi xu ly ntn? manual read
-            string[] arrayBarcode = stringReadFrom.Split(new Char[] { GlobalVariables.charETX });
+            bool barcodeReceived = false;
+            string[] arrayBarcode = stringReceived.Split(new Char[] { GlobalVariables.charETX });
 
             foreach (string stringBarcode in arrayBarcode)
             {
-                //stringBarcode = stringBarcode.Replace("NoRead", ""); //FOR CARTON: NoRead: MEANS: CAN NOT READ => SHOULD HANDLE LATER FOR NoRead. SHOULD NOT IGNORE NoRead
-                if (stringBarcode.Trim() != "" && stringBarcode.Trim() != "NoRead")
-                {
-                    this.MatchingAndAddPallet(stringBarcode);
-                    barcodeReceived = true;
-                }
+                string receivedBarcode = stringBarcode.Replace("NoRead", "").Trim();//FOR PALLET: IGNORE FOR NoRead => USER MUST TRY TO READ AGAIN, OR EVENT PRESS TO RE-PRINT MANUALLY
+                if (receivedBarcode != "" && lastPalletCode != receivedBarcode)
+                    if (this.MatchingAndAddPallet(receivedBarcode))
+                    {
+                        lastPalletCode = receivedBarcode;
+                        barcodeReceived = true;
+                    }
             }
             return barcodeReceived;
         }

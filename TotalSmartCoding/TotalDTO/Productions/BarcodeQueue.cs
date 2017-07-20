@@ -26,8 +26,14 @@ namespace TotalDTO.Productions
         //PHAI HET SU CHU Y: ItemPerSet
 
 
-        
-        
+
+
+        /// <summary>
+        /// This property is used to count number of times the Queueset data is sent to Zebra printer. 
+        /// By now, this is used to control how the pallet label is printed by Zebra (Print the cartonsetQueue)
+        /// At the initialize of cartonsetQueue, this property will be zero. The software will automatical print for the first time. Then, user may manual re-print if needed
+        /// </summary>
+        public int SendtoPrintCount { get; set; }
         
         
         
@@ -193,24 +199,24 @@ namespace TotalDTO.Productions
         {
             if (((this.ItemPerSet / this.NoSubQueue) % 1) == 0) //CHECK FOR AN Integer RESULT
             {
-                BarcodeQueue<TBarcodeDTO> wholePackage = new BarcodeQueue<TBarcodeDTO>(this.NoSubQueue, this.ItemPerSet / this.NoSubQueue, false) { ItemPerSet = this.ItemPerSet };
+                BarcodeQueue<TBarcodeDTO> barcodesetQueue = new BarcodeQueue<TBarcodeDTO>(this.NoSubQueue, this.ItemPerSet / this.NoSubQueue, false) { ItemPerSet = this.ItemPerSet };
 
                 //chu y: o day: NoItemPerSubQueue co ve khong chac chan lam, nen lap trinh lai: cho no hop ly hon: lay tong so PackPerCarton/ no Sub queue
                 foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
                 {
-                    if (wholePackage.itemPerSubQueue > subQueue.Count) return wholePackage; //There is not enough element in this sub queue to dequeue. In this case, return empty
+                    if (barcodesetQueue.itemPerSubQueue > subQueue.Count) return barcodesetQueue; //There is not enough element in this sub queue to dequeue. In this case, return empty
                 }
 
 
                 foreach (List<TBarcodeDTO> subQueue in this.messageSubQueue)
                 {
-                    for (int i = 0; i < wholePackage.itemPerSubQueue; i++)
+                    for (int i = 0; i < barcodesetQueue.itemPerSubQueue; i++)
                     {
-                        if (subQueue.Count > 0) { wholePackage.Enqueue(subQueue.ElementAt(0)); subQueue.RemoveAt(0); }//Check subQueue.Count > 0 just for sure, however, we check it already at the begining of this method
+                        if (subQueue.Count > 0) { barcodesetQueue.Enqueue(subQueue.ElementAt(0)); subQueue.RemoveAt(0); }//Check subQueue.Count > 0 just for sure, however, we check it already at the begining of this method
                     }
                 }
 
-                return wholePackage;
+                return barcodesetQueue;
             }
             else
                 throw new Exception("Can not make carton for this item on this filling line!");
