@@ -31,13 +31,12 @@ namespace TotalDTO.Productions
 
         private string batchCode;
         private DateTime settingDate;
-        private int settingMonthID;
 
 
-        private string batchSerialNumber;
-        private string monthSerialNumber;
+        private string lastPackNo;
         private string lastCartonNo;
-        private string monthCartonNumber;
+        private string lastPalletNo;
+
         private string remarks;
 
 
@@ -186,58 +185,26 @@ namespace TotalDTO.Productions
             }
         }
 
-        public int SettingMonthID   //ResetSerialNumber
-        {
-            get { return this.settingMonthID; }
-            set
-            {
-                if (this.settingMonthID != value)
-                {
-                    ApplyPropertyChange<FillingData, int>(ref this.settingMonthID, o => o.SettingMonthID, value);
-                    this.ResetSerialNumber(this.LastPackNo, "000001", this.LastCartonNo, "900001");
-                }
-            }
-        }
+
 
         //-------------------------
 
         public string LastPackNo
         {
-            get { return this.batchSerialNumber; }
+            get { return this.lastPackNo; }
 
             set
             {
-                if (value != this.batchSerialNumber)
+                if (value != this.lastPackNo)
                 {
                     int intValue = 0;
                     if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
-                        ApplyPropertyChange<FillingData, string>(ref this.batchSerialNumber, o => o.LastPackNo, value);
+                        ApplyPropertyChange<FillingData, string>(ref this.lastPackNo, o => o.LastPackNo, value);
                     }
                     else
                     {
-                        throw new System.InvalidOperationException("NMVN: Invalid serial number format.");
-                    }
-                }
-            }
-        }
-
-        public string MonthSerialNumber
-        {
-            get { return this.monthSerialNumber; }
-
-            set
-            {
-                if (value != this.monthSerialNumber)
-                {
-                    int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 6)
-                    {
-                        ApplyPropertyChange<FillingData, string>(ref this.monthSerialNumber, o => o.MonthSerialNumber, value);
-                    }
-                    else
-                    {
-                        throw new System.InvalidOperationException("NMVN: Invalid serial number format.");
+                        throw new System.InvalidOperationException("Lỗi sai định dạng số đếm");
                     }
                 }
             }
@@ -252,41 +219,43 @@ namespace TotalDTO.Productions
                 if (value != this.lastCartonNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 6 && value.Substring(0, 1) == "9")
+                    if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.lastCartonNo, o => o.LastCartonNo, value);
                     }
                     else
                     {
-                        throw new System.InvalidOperationException("NMVN: Invalid serial number format.");
+                        throw new System.InvalidOperationException("Lỗi sai định dạng số đếm");
                     }
                 }
             }
         }
 
-        public string MonthCartonNumber
+
+        public string LastPalletNo
         {
-            get { return this.monthCartonNumber; }
+            get { return this.lastPalletNo; }
 
             set
             {
-                if (value != this.monthCartonNumber)
+                if (value != this.lastPalletNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 6 && value.Substring(0, 1) == "9")
+                    if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
-                        ApplyPropertyChange<FillingData, string>(ref this.monthCartonNumber, o => o.MonthCartonNumber, value);
+                        ApplyPropertyChange<FillingData, string>(ref this.lastPalletNo, o => o.LastPalletNo, value);
                     }
                     else
                     {
-                        throw new System.InvalidOperationException("NMVN: Invalid serial number format.");
+                        throw new System.InvalidOperationException("Lỗi sai định dạng số đếm");
                     }
                 }
             }
         }
 
-        public string LastPalletNo { get; set; }
+
         //-------------------------
+
 
 
         public string Remarks
@@ -341,15 +310,13 @@ namespace TotalDTO.Productions
 
         private void ResetSerialNumber(string batchSerialNumber, string monthSerialNumber, string LastCartonNo, string monthCartonNumber)
         {
-            if (this.LastPackNo != batchSerialNumber) this.LastPackNo = batchSerialNumber;
-            if (this.MonthSerialNumber != monthSerialNumber) this.MonthSerialNumber = monthSerialNumber;
+            if (this.LastPackNo != monthSerialNumber) this.LastPackNo = monthSerialNumber;
             if (this.LastCartonNo != LastCartonNo) this.LastCartonNo = LastCartonNo;
-            if (this.MonthCartonNumber != monthCartonNumber) this.MonthCartonNumber = monthCartonNumber;
         }
 
         public bool DataValidated()
         {
-            return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" & this.LastPackNo != "" & this.MonthSerialNumber != "" & this.LastCartonNo != "" & this.MonthCartonNumber != "";
+            return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" & this.LastPackNo != "" & this.LastCartonNo != "" & this.LastPalletNo != "";
         }
 
         public bool Update()

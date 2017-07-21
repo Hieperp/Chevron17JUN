@@ -434,7 +434,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     this.barcodeNetworkStream.ReadTimeout = 120; //Default = -1; 
 
-                    stringReceived = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
+                    stringReceived = GlobalNetSockets.ReadoutStream(barcodeTcpClient, barcodeNetworkStream).Trim();
 
                     this.barcodeNetworkStream.ReadTimeout = -1; //Default = -1
 

@@ -89,7 +89,7 @@
     <Compile Include="CommonLibraries\BP\BarcodeScannerBLL.cs" />
     <Compile Include="CommonLibraries\BP\CommonThreadProperty.cs" />
     <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />
-    <Compile Include="CommonLibraries\BP\GlobalNetSockets.cs" />
+    <Compile Include="CommonLibraries\GlobalNetSockets.cs" />
     <Compile Include="CommonLibraries\BP\GlobalRegistry.cs" />
     <Compile Include="CommonLibraries\BP\MessageData.cs" />
     <Compile Include="CommonLibraries\BP\MessageQueue.cs" />

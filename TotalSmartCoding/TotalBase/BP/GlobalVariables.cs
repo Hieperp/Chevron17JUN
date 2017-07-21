@@ -60,7 +60,8 @@ namespace TotalBase
         {
             DegitInkjet = 1,
             BarcodeInkjet = 2,
-            CartonInkjet = 3
+            CartonInkjet = 3,
+            PalletLabel = 6
         }
 
 

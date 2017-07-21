@@ -374,15 +374,15 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "MainStatus") { this.textBoxBarcodeStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.barcodePrinterController.MainStatus + "\r\n" + this.textBoxBarcodeStatus.Text; this.CutTextBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.toolStripBarcodeLEDGreen.Enabled = this.barcodePrinterController.LedGreenOn; this.toolStripBarcodeLEDAmber.Enabled = this.barcodePrinterController.LedAmberOn; this.toolStripBarcodeLEDRed.Enabled = this.barcodePrinterController.LedRedOn; if (this.barcodePrinterController.LedRedOn) this.StopPrint(true, true, false); return; }
 
-                    if (e.PropertyName == "MonthSerialNumber") { this.fillingData.MonthSerialNumber = this.barcodePrinterController.MonthSerialNumber; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "MonthSerialNumber") { this.fillingData.LastPackNo = this.barcodePrinterController.MonthSerialNumber; this.fillingData.Update(); return; }
                 }
                 else if (sender.Equals(this.cartonPrinterController))
                 {
                     if (e.PropertyName == "MainStatus") { this.textBoxCartonStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.cartonPrinterController.MainStatus + "\r\n" + this.textBoxCartonStatus.Text; this.CutTextBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.toolStripCartonLEDGreen.Enabled = this.cartonPrinterController.LedGreenOn; this.toolStripCartonLEDAmber.Enabled = this.cartonPrinterController.LedAmberOn; this.toolStripCartonLEDRed.Enabled = this.cartonPrinterController.LedRedOn; return; }//if (this.cartonInkjetDominoPrinter.LedRedOn) this.StopPrint(); 
 
-                    if (e.PropertyName == "LastCartonNo") { this.fillingData.LastCartonNo = this.cartonPrinterController.LastCartonNo; this.fillingData.MonthCartonNumber = this.cartonPrinterController.MonthCartonNumber; this.fillingData.Update(); return; }
-                    if (e.PropertyName == "MonthCartonNumber") { this.fillingData.LastCartonNo = this.cartonPrinterController.LastCartonNo; this.fillingData.MonthCartonNumber = this.cartonPrinterController.MonthCartonNumber; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "LastCartonNo") { this.fillingData.LastCartonNo = this.cartonPrinterController.LastCartonNo; this.fillingData.LastPalletNo = this.cartonPrinterController.LastPalletNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "MonthCartonNumber") { this.fillingData.LastCartonNo = this.cartonPrinterController.LastCartonNo; this.fillingData.LastPalletNo = this.cartonPrinterController.LastPalletNo; this.fillingData.Update(); return; }
                 }
                 else if (sender.Equals(this.scannerController))
                 {
@@ -642,14 +642,14 @@ namespace TotalSmartCoding.Views.Productions
                 this.textBoxCurrentDate.TextBox.Text = DateTime.Now.ToString("dd/MM/yy");
                 if (this.fillingData != null)
                 {
-                    if (this.fillingData.SettingMonthID != 1) //GlobalStaticFunction.DateToContinuosMonth()
-                    {
-                        this.toolStripButtonWarningNewMonth.Visible = !this.toolStripButtonWarningNewMonth.Visible; this.toolStripLabelWarningNewMonth.Visible = !this.toolStripLabelWarningNewMonth.Visible;
-                    }
-                    else
-                    {
-                        this.toolStripButtonWarningNewMonth.Visible = false; this.toolStripLabelWarningNewMonth.Visible = false;
-                    }
+                    //if (this.fillingData.SettingMonthID != 1) //GlobalStaticFunction.DateToContinuosMonth()
+                    //{
+                    //    this.toolStripButtonWarningNewMonth.Visible = !this.toolStripButtonWarningNewMonth.Visible; this.toolStripLabelWarningNewMonth.Visible = !this.toolStripLabelWarningNewMonth.Visible;
+                    //}
+                    //else
+                    //{
+                    //    this.toolStripButtonWarningNewMonth.Visible = false; this.toolStripLabelWarningNewMonth.Visible = false;
+                    //}
                 }
             }
             catch (Exception exception)

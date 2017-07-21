@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+
 using TotalBase;
 using TotalDTO.Productions;
-using TotalSmartCoding.CommonLibraries.BP;
+using TotalSmartCoding.CommonLibraries;
 
 namespace TotalSmartCoding.Controllers.Productions
 {
@@ -20,11 +18,11 @@ namespace TotalSmartCoding.Controllers.Productions
         private readonly GlobalVariables.PrinterName printerName;
         private readonly bool isLaser;
 
-        private TcpClient inkjetTcpClient;
-        private NetworkStream inkjetNetworkStream;
+        private readonly IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+        private readonly int portNumber = 7000;
 
-        private IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
-        private int portNumber = 7000;
+        private TcpClient tcpClient;
+        private NetworkStream networkStream;
 
 
         private string lastNACKCode;
@@ -33,6 +31,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool resetMessage;
 
         #endregion Storage
+
 
         #region Contructor
 
@@ -45,51 +44,21 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.privateFillingData = this.FillingData.ShallowClone();
 
                 this.printerName = printerName;
-
-                this.ipAddress = IPAddress.Parse(GlobalVariables.IpAddress(this.printerName));
-
                 this.isLaser = isLaser;
 
+                this.ipAddress = IPAddress.Parse(GlobalVariables.IpAddress(this.printerName));
             }
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message; // ToString();
+                this.MainStatus = exception.Message;
             }
-
         }
 
         #endregion Contructor
 
 
-
         #region Public Properties
-
-        public IPAddress IpAddress
-        {
-            get
-            {
-                return this.ipAddress;
-            }
-        }
-
-
-        public int PortNumber
-        {
-            get
-            {
-                return this.portNumber;
-            }
-        }
-
-        public bool IsLaser
-        {
-            get
-            {
-                return this.isLaser;
-            }
-        }
-
-
+        
         public bool OnPrinting
         {
             get { return this.onPrinting; }
@@ -101,13 +70,12 @@ namespace TotalSmartCoding.Controllers.Productions
         public void StopPrint() { this.OnPrinting = false; }
 
 
-        public string LastPackNo { get { return this.privateFillingData.LastPackNo; } }
 
-        public string MonthSerialNumber { get { return this.privateFillingData.MonthSerialNumber; } }
+        public string MonthSerialNumber { get { return this.privateFillingData.LastPackNo; } }
 
         public string LastCartonNo { get { return this.privateFillingData.LastCartonNo; } }
 
-        public string MonthCartonNumber { get { return this.privateFillingData.MonthCartonNumber; } }
+        public string LastPalletNo { get { return this.privateFillingData.LastPalletNo; } }
 
 
 
@@ -116,11 +84,9 @@ namespace TotalSmartCoding.Controllers.Productions
 
         #region Message Configuration
 
-
-
         private string FirstMessageLine(bool isReadableText) //Only DominoPrinterName.CartonInkJet: HAS SERIAL NUMBER (BUT WILL BE UPDATE MANUAL FOR EACH CARTON - BECAUSE: [EAN BARCODE] DOES NOT ALLOW INSERT SERIAL NUMBER) ===> FOR THIS: LastPackNo FOR EVERY PACK: NEVER USE
         {
-            return (this.printerName == GlobalVariables.PrinterName.BarcodeInkjet && isReadableText ? this.privateFillingData.SettingMonthID.ToString("00") + " " : "") + this.privateFillingData.BatchCode + (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "/" + "  " + "/" + this.privateFillingData.LastCartonNo.Substring(2) : "");
+            return this.privateFillingData.BatchCode + (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "/" + "  " + "/" + this.privateFillingData.LastCartonNo.Substring(2) : "");
         }
 
         private string SecondMessageLine(bool isReadableText)
@@ -136,44 +102,13 @@ namespace TotalSmartCoding.Controllers.Productions
                 //////---- Don use this Startup Serial Value, because some Dimino printer do no work!!! - DON't KNOW!!! serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/" + this.privateFillingLineData.MonthSerialNumber + "/00000/N/"; //WITH START VALUE---No need to update serial number
                 serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/000000/00000/N/"; //WITH START VALUE = 1 ---> NEED TO UPDATE serial number
             else //this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet
-                serialNumberFormat = this.privateFillingData.MonthCartonNumber.Substring(1); //---Dont use counter (This will be updated MANUALLY for each carton)
+                serialNumberFormat = this.privateFillingData.LastPalletNo.Substring(1); //---Dont use counter (This will be updated MANUALLY for each carton)
 
 
             //return this.privateFillingLineData.CommodityCode + serialNumberFormat;
-            return (this.printerName != GlobalVariables.PrinterName.BarcodeInkjet || isReadableText ? this.privateFillingData.CommodityCode : "") + (this.printerName != GlobalVariables.PrinterName.BarcodeInkjet || !isReadableText ? this.privateFillingData.SettingMonthID.ToString("00") : "") + "/" + this.privateFillingData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
+            return (this.printerName != GlobalVariables.PrinterName.BarcodeInkjet || isReadableText ? this.privateFillingData.CommodityCode : "")  + "/" + this.privateFillingData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
         }
-
-
-
-        //#region TEST CHEVRON
-        //private string FirstMessageLine(bool isReadableText) //Only DominoPrinterName.CartonInkJet: HAS SERIAL NUMBER (BUT WILL BE UPDATE MANUAL FOR EACH CARTON - BECAUSE: [EAN BARCODE] DOES NOT ALLOW INSERT SERIAL NUMBER) ===> FOR THIS: LastPackNo FOR EVERY PACK: NEVER USE
-        //{
-        //    return (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet && isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") + " " : "") + this.privateFillingLineData.BatchNo + (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet ? "/" + "  " + "/" + this.privateFillingLineData.LastCartonNo.Substring(2) : "");
-        //}
-
-        //private string SecondMessageLine(bool isReadableText)
-        //{
-        //    return (isReadableText ? this.privateFillingLineData.NoExpiryDate.ToString("00") : "") + (!isReadableText ? this.privateFillingLineData.CommodityCode + " " : "NSX") + DateTime.Now.ToString("dd/MM/yy");
-        //    //return "NSX " + GlobalVariables.charESC + "/n/1/A/" + GlobalVariables.charESC + "/n/1/F/" + GlobalVariables.charESC + "/n/1/D/";
-        //}
-
-        //private string ThirdMessageLine(int serialNumberIndentity, bool isReadableText) //serialNumberIndentity = 1 when print as text on first line, 2 when insert into 2D Barcode
-        //{
-        //    string serialNumberFormat = ""; //Numeric Serial Only, No Alpha Serial, Zero Leading, 6 Digit: 000001 -> 999999, Step 1, Start this.privateFillingLineData.MonthSerialNumber, Repeat: 0
-        //    if (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.DegitInkJet || this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet)
-        //        //////---- Don use this Startup Serial Value, because some Dimino printer do no work!!! - DON't KNOW!!! serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/" + this.privateFillingLineData.MonthSerialNumber + "/00000/N/"; //WITH START VALUE---No need to update serial number
-        //        serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/" + this.privateFillingLineData.MonthSerialNumber + "/00000/N/"; //WITH START VALUE = 1 ---> NEED TO UPDATE serial number
-        //    //-ORIGINAL OF BP: serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/000000/00000/N/"; //WITH START VALUE = 1 ---> NEED TO UPDATE serial number
-
-        //    else //this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet
-        //        serialNumberFormat = this.privateFillingLineData.MonthCartonNumber.Substring(1); //---Dont use counter (This will be updated MANUALLY for each carton)
-
-
-        //    return (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || isReadableText ? this.privateFillingLineData.CommodityCode : "") + (this.DominoPrinterNameID != GlobalVariables.DominoPrinterName.BarCodeInkJet || !isReadableText ? this.privateFillingLineData.SettingMonthID.ToString("00") : "") + "/" + this.privateFillingLineData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
-        //}
-
-        //#endregion TEST CHEVRON
-
+        
         private string EANInitialize(string twelveDigitCode)
         {
 
@@ -247,9 +182,6 @@ namespace TotalSmartCoding.Controllers.Productions
 
         }
 
-
-
-
         private string WholeMessageLine()
         {//THE FUNCTION LaserDigitMessage totally base on this.WholeMessageLine. Later, if there is any thing change in this.WholeMessageLine, THE FUNCTION LaserDigitMessage should be considered
             if (this.printerName == GlobalVariables.PrinterName.DegitInkjet)
@@ -283,57 +215,10 @@ namespace TotalSmartCoding.Controllers.Productions
         private string LaserDigitMessage(bool isSerialNumber)
         {//THE FUNCTION LaserDigitMessage totally base on this.WholeMessageLine. Later, if there is any thing change in this.WholeMessageLine, THE FUNCTION LaserDigitMessage should be considered
             if (isSerialNumber)
-                return this.privateFillingData.MonthSerialNumber;
+                return this.privateFillingData.LastPackNo;
             else
-                return this.privateFillingData.CommodityCode + this.privateFillingData.SettingMonthID.ToString("00") + this.privateFillingData.FillingLineCode;
+                return this.privateFillingData.CommodityCode  + this.privateFillingData.FillingLineCode;
         }//NOTE: NEVER CHANGE THIS FUNCTION WITHOUT HAVE A LOOK AT this.WholeMessageLine
-
-
-
-
-        //private string WholeMessageLine()
-        //{//THE FUNCTION LaserDigitMessage totally base on this.WholeMessageLine. Later, if there is any thing change in this.WholeMessageLine, THE FUNCTION LaserDigitMessage should be considered
-        //    if (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.DegitInkJet)
-        //        return GlobalVariables.charESC + "u/1/ " + GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true);
-        //    else if (this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.BarCodeInkJet) //DATE: 18FEB2017: IN THE READABLE TEXT ONLY: SWAP BETWEEN Second Line <-> Third Line (EVERY THING IN THE BARCODE KEEP CURRENT VERSION)
-
-        //        ////2D BARCODE CHUAN - BP CASTROL
-        //        //return GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.FirstMessageLine(false) + " " + this.SecondMessageLine(false) + " " + this.ThirdMessageLine(2, false) + "/" + GlobalVariables.charESC + "/z/0" + //2D Barcode
-        //        //       GlobalVariables.charESC + "u/1/" + this.FirstMessageLine(true) + "/" +  //First Line
-        //        //       GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true) +   //Second Line
-        //        //       GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.SecondMessageLine(true);     //Third Line   
-
-
-        //        //TEST CHEVRON
-        //        return this.ThirdMessageLine(1, true) + this.ThirdMessageLine(2, true);
-
-        //        //return GlobalVariables.charESC + "u/1/" + this.SecondMessageLine(true) + "/" +  //First Line
-        //        //       GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.SecondMessageLine(true) +   //Second Line
-        //        //       GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.SecondMessageLine(true);     //Third Line   
-
-
-        //    else //this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet
-        //    {
-        //        //string thirdMessageLine = EANInitialize(this.ThirdMessageLine(1));
-        //        //return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/4/@/" + thirdMessageLine + "/@/" + GlobalVariables.charESC + "/q/0" +   //EAN13 Barcode: the first digit MUST be inserted again at the end as the digit number 14   + thirdMessageLine.Substring(0,1)
-        //        //           GlobalVariables.charESC + "u/1/  " + this.FirstMessageLine() + "/" + //First Line
-        //        //           GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + thirdMessageLine + "/ " + DateTime.Now.ToString("dd/MM/yy");
-
-
-        //        return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/6/" + this.ThirdMessageLine(1, false) + "/" + this.privateFillingLineData.LastCartonNo.Substring(2) + GlobalVariables.charESC + "/q/0" +
-        //                   GlobalVariables.charESC + "u/1/  " + this.FirstMessageLine(true) + "/ " + this.privateFillingLineData.NoExpiryDate.ToString("00") + "/" + //First Line
-        //                   GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true) + "/ " + DateTime.Now.ToString("dd/MM/yy");
-
-        //    }
-        //}
-
-        //private string LaserDigitMessage(bool isSerialNumber)
-        //{//THE FUNCTION LaserDigitMessage totally base on this.WholeMessageLine. Later, if there is any thing change in this.WholeMessageLine, THE FUNCTION LaserDigitMessage should be considered
-        //    if (isSerialNumber)
-        //        return this.privateFillingLineData.MonthSerialNumber;
-        //    else
-        //        return this.privateFillingLineData.CommodityCode + this.privateFillingLineData.SettingMonthID.ToString("00") + this.privateFillingLineData.FillingLineCode;
-        //}//NOTE: NEVER CHANGE THIS FUNCTION WITHOUT HAVE A LOOK AT this.WholeMessageLine
 
         #endregion Message Configuration
 
@@ -345,22 +230,21 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                this.MainStatus = "Try to connect....";
+                this.MainStatus = "Bắt đầu kết nối ....";
 
-                this.inkjetTcpClient = new TcpClient();
+                this.tcpClient = new TcpClient();
 
-                if (!this.inkjetTcpClient.Connected)
+                if (!this.tcpClient.Connected)
                 {
-                    this.inkjetTcpClient.Connect(this.IpAddress, this.PortNumber);
-                    this.inkjetNetworkStream = inkjetTcpClient.GetStream();
+                    this.tcpClient.Connect(this.ipAddress, this.portNumber);
+                    this.networkStream = tcpClient.GetStream();
                 }
-
                 return true;
             }
 
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message; // ToString();
+                this.MainStatus = exception.Message;
                 return false;
             }
 
@@ -372,13 +256,11 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 this.MainStatus = "Disconnect....";
 
-                //if (this.inkJetTcpClient.Connected) --- Theoryly, it should CHECK this.inkJetTcpClient.Connected BEFORE close. BUT: DON'T KNOW why GlobalVariables.DominoPrinterName.CartonInkJet DISCONECTED ALREADY!!!! Should check this cerefully later!
+                //if (this.tcpClient.Connected) --- Theoryly, it should CHECK this.tcpClient.Connected BEFORE close. BUT: DON'T KNOW why GlobalVariables.PrinterName.CartonInkjet DISCONECTED ALREADY!!!! Should check this cerefully later!
                 //{
-                if (this.inkjetNetworkStream != null) { this.inkjetNetworkStream.Close(); this.inkjetNetworkStream.Dispose(); }
-
-                if (this.inkjetTcpClient != null) this.inkjetTcpClient.Close();
+                if (this.networkStream != null) { this.networkStream.Close(); this.networkStream.Dispose(); }
+                if (this.tcpClient != null) this.tcpClient.Close();
                 //}
-
 
                 this.LedGreenOn = false;
                 this.LedAmberOn = false;
@@ -401,39 +283,39 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                if (this.IsLaser) stringWriteTo = stringWriteTo + GlobalVariables.charCR + GlobalVariables.charLF;
-                GlobalNetSockets.WriteToStream(inkjetNetworkStream, stringWriteTo);
+                if (this.isLaser) stringWriteTo = stringWriteTo + GlobalVariables.charCR + GlobalVariables.charLF;
+                GlobalNetSockets.WritetoStream(networkStream, stringWriteTo);
             }
             catch (Exception exception)
             { throw exception; }
         }
 
         /// <summary>
-        /// NEVER waitForACK WHEN This.IsLaser
+        /// NEVER waiforACK WHEN This.IsLaser
         /// </summary>
         /// <param name="receivedFeedback"></param>
-        /// <param name="waitForACK"></param>
+        /// <param name="waitforACK"></param>
         /// <returns></returns>
-        private bool ReadFromStream(ref string receivedFeedback, bool waitForACK)
+        private bool ReadoutStream(ref string receivedFeedback, bool waitforACK)
         {
-            return ReadFromStream(ref receivedFeedback, waitForACK, "", 0);
+            return ReadFromStream(ref receivedFeedback, waitforACK, "", 0);
         }
 
         /// <summary>
         /// /// NEVER waitForACK WHEN This.IsLaser
         /// </summary>
         /// <param name="receivedFeedback"></param>
-        /// <param name="waitForACK"></param>
+        /// <param name="waitforACK"></param>
         /// <param name="commandCode"></param>
         /// <param name="commandLength"></param>
         /// <returns></returns>
-        private bool ReadFromStream(ref string receivedFeedback, bool waitForACK, string commandCode, long commandLength)
+        private bool ReadFromStream(ref string receivedFeedback, bool waitforACK, string commandCode, long commandLength)
         {
             try
             {
-                receivedFeedback = GlobalNetSockets.ReadFromStream(inkjetTcpClient, inkjetNetworkStream);
+                receivedFeedback = GlobalNetSockets.ReadoutStream(tcpClient, networkStream);
 
-                if (!this.IsLaser && waitForACK)
+                if (!this.isLaser && waitforACK)
                 {
                     if (receivedFeedback.ElementAt(0) == GlobalVariables.charACK)
                         return true;
@@ -445,7 +327,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 }
                 else if (commandLength == 0 || receivedFeedback.Length >= commandLength)
                 {
-                    if (this.IsLaser)
+                    if (this.isLaser)
                         return receivedFeedback.Contains(commandCode);
                     else//receivedFeedback(0): ESC;----receivedFeedback(1): COMMAND;----receivedFeedback(2->N): PARAMETER;----receivedFeedback(receivedFeedback.Length): EOT
                         if (receivedFeedback.ElementAt(0) == GlobalVariables.charESC && receivedFeedback.ElementAt(1) == commandCode.ElementAt(0) && receivedFeedback.ElementAt(receivedFeedback.Length - 1) == GlobalVariables.charEOT) return true; else return false;
@@ -469,24 +351,24 @@ namespace TotalSmartCoding.Controllers.Productions
 
             //S: Message Storage
             this.WriteToStream(GlobalVariables.charESC + "/S/001/" + stringMessage + "/" + GlobalVariables.charEOT);
-            if (this.ReadFromStream(ref receivedFeedback, true)) Thread.Sleep(750); else throw new System.InvalidOperationException("Lỗi cài đặt bản tin 001: " + receivedFeedback);
+            if (this.ReadoutStream(ref receivedFeedback, true)) Thread.Sleep(750); else throw new System.InvalidOperationException("Lỗi cài đặt bản tin 001: " + receivedFeedback);
 
             //P: Message To Head Assignment '//CHU Y QUAN TRONG: DUA MSG SO 1 LEN DAU IN (SAN SANG KHI IN, BOI VI KHI IN TA STORAGE MSG VAO VI TRI SO 1 MA KHONG QUAN TAM DEN VI TRI SO 2, 3,...)
             this.WriteToStream(GlobalVariables.charESC + "/P/1/001/" + GlobalVariables.charEOT); //FOR AX SERIES: MUST CALL P: Message To Head Assignment FOR EVERY CALL S: Message Storage
-            if (this.ReadFromStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi sẳn sàng in phun, bản tin 001: " + receivedFeedback);
+            if (this.ReadoutStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi sẳn sàng in phun, bản tin 001: " + receivedFeedback);
         }
 
 
-        private bool WaitForPrintingAcknowledge(ref string receivedFeedback)
+        private bool WaitforPrintingAcknowledge(ref string receivedFeedback)
         {
             try
             {
                 bool returnValue = false;
-                this.inkjetNetworkStream.ReadTimeout = 300; //Default = -1; 
+                this.networkStream.ReadTimeout = 300; //Default = -1; 
 
                 //this.MainStatus = "Wait for PrintingAcknowledge";
 
-                receivedFeedback = GlobalNetSockets.ReadFromStream(inkjetTcpClient, inkjetNetworkStream);
+                receivedFeedback = GlobalNetSockets.ReadoutStream(tcpClient, networkStream);
 
                 if (receivedFeedback == GlobalVariables.charPrintingACK.ToString())   //OK State
                 {
@@ -513,9 +395,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     }
                 }
 
-                this.MainStatus = returnValue ? "YES ACK" : "NO ACK";
-
-                this.inkjetNetworkStream.ReadTimeout = -1; //Default = -1
+                this.networkStream.ReadTimeout = -1; //Default = -1
                 return returnValue;
             }
 
@@ -525,18 +405,18 @@ namespace TotalSmartCoding.Controllers.Productions
                 //Ignore when timeout
                 if (exception.Message != "Unable to read data from the transport connection: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.") this.MainStatus = exception.Message;
 
-                this.inkjetNetworkStream.ReadTimeout = -1; //Default = -1
+                this.networkStream.ReadTimeout = -1; //Default = -1
                 return false;
             }
         }
 
 
-
+        #region STASTUS
         private bool lfStatusLED(ref string receivedFeedback)
         {//DISPLAY 3 LEDS STATUS
             try
             {
-                if (this.IsLaser)
+                if (this.isLaser)
                 {//RESULT GETSTATUS <severity>: • 0=information • 1=warning • 2=temporary fault • 3=critical fault • 4=critical fault (needs to be reset by hardware) 
                     this.LedGreenOn = receivedFeedback.ElementAt(17).ToString() == "0" || receivedFeedback.ElementAt(17).ToString() == "1";
                     this.LedAmberOn = receivedFeedback.ElementAt(17).ToString() == "1" || receivedFeedback.ElementAt(17).ToString() == "2";
@@ -563,7 +443,6 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
         private string lStatusHHMM;
-
         private bool lfStatusHistory(ref string receivedFeedback)
         {
             try
@@ -618,9 +497,8 @@ namespace TotalSmartCoding.Controllers.Productions
         //ERR_HANDLER:
         //    Call psShowError: lfStatusAlert = False: GoTo ERR_RESUME
         //End Function
-
-
-
+        
+        #endregion STASTUS
 
 
 
@@ -653,7 +531,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 #region INITIALISATION PRINTER
                 do  //INITIALISATION COMMAND
                 {
-                    if (this.IsLaser)
+                    if (this.isLaser)
                     {
                         this.WriteToStream("GETVERSION"); //Obtains the alphanumeric identifier of the printer
                         if (this.ReadFromStream(ref receivedFeedback, false, "RESULT GETVERSION", "RESULT GETVERSION".Length)) printerReady = true; //Printer Identity OK"
@@ -669,13 +547,13 @@ namespace TotalSmartCoding.Controllers.Productions
                     {
                         do //CHECK PRINTER READY TO PRINT
                         {
-                            if (this.IsLaser)
+                            if (this.isLaser)
                                 this.WriteToStream("GETSTATUS"); //Determines the current status of the controller
                             else
                                 this.WriteToStream(GlobalVariables.charESC + "/O/1/?/" + GlobalVariables.charEOT);  //O/1: Current status
 
 
-                            if ((this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
+                            if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
                             {
                                 lfStatusLED(ref receivedFeedback);
                                 readytoPrint = this.LedGreenOn || this.LedAmberOn; this.LedGreenOn = false; //After Set LED, If LedGreenOn => ReadyToPrint
@@ -684,7 +562,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                             if (!readytoPrint)
                             {
-                                if (this.IsLaser)
+                                if (this.isLaser)
                                 {
                                     this.MainStatus = "Máy in laser chưa sẳn sàng in, vui lòng kiểm tra lại.";
                                     Thread.Sleep(20000);
@@ -692,7 +570,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 else
                                 {
                                     this.WriteToStream(GlobalVariables.charESC + "/O/S/1/" + GlobalVariables.charEOT); //O/S/1: Turn on ink-jet
-                                    if (this.ReadFromStream(ref receivedFeedback, true))
+                                    if (this.ReadoutStream(ref receivedFeedback, true))
                                     {
                                         this.MainStatus = "Đang khởi động máy in, vui lòng chờ trong ít phút.";
                                         Thread.Sleep(50000);
@@ -702,27 +580,27 @@ namespace TotalSmartCoding.Controllers.Productions
                             }
                             else //readytoPrint: OK
                             {
-                                if (this.IsLaser)
+                                if (this.isLaser)
                                     this.WriteToStream("GETMARKMODE"); //Determines the current state of the marking engine on the laser controller
                                 else
                                     this.WriteToStream(GlobalVariables.charESC + "/Q/1/?/" + GlobalVariables.charEOT);    //Q: HEAD ENABLE: ENABLE
 
 
-                                if ((this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETMARKMODE", "RESULT GETMARKMODE".Length)) || (!this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "Q", 5)))
+                                if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETMARKMODE", "RESULT GETMARKMODE".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "Q", 5)))
                                 {
-                                    if ((this.IsLaser && receivedFeedback.ElementAt(19).ToString() == "1") || (!this.IsLaser && receivedFeedback.ElementAt(3).ToString() == "Y"))
+                                    if ((this.isLaser && receivedFeedback.ElementAt(19).ToString() == "1") || (!this.isLaser && receivedFeedback.ElementAt(3).ToString() == "Y"))
                                         headEnable = true;
                                     else
                                     {
-                                        if (this.IsLaser)
+                                        if (this.isLaser)
                                             this.WriteToStream("MARK START");
                                         else
                                             this.WriteToStream(GlobalVariables.charESC + "/Q/1/Y/" + GlobalVariables.charEOT);
 
 
-                                        if ((this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.IsLaser && this.ReadFromStream(ref receivedFeedback, true)))
+                                        if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, true)))
                                         {
-                                            this.MainStatus = this.IsLaser ? "Đang bật chế độ in" : "Đang mở in phun" + ", vui lòng chờ trong ít phút.";
+                                            this.MainStatus = this.isLaser ? "Đang bật chế độ in" : "Đang mở in phun" + ", vui lòng chờ trong ít phút.";
                                             Thread.Sleep(10000);
                                         }
                                         else throw new System.InvalidOperationException("Lỗi mở in phun: " + receivedFeedback);
@@ -742,25 +620,25 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
                 #region GENERAL SETUP (NOT LASER ONLY)
-                if (!this.IsLaser)
+                if (!this.isLaser)
                 {
                     //C: Set Clock
                     this.WriteToStream(GlobalVariables.charESC + "/C/" + DateTime.Now.ToString("yyyy/MM/dd/00/hh/mm/ss") + "/" + GlobalVariables.charEOT);     //C: Set Clock
-                    if (!this.ReadFromStream(ref receivedFeedback, true)) throw new System.InvalidOperationException("Lỗi cài đặt ngày giờ máy in phun: " + receivedFeedback);
+                    if (!this.ReadoutStream(ref receivedFeedback, true)) throw new System.InvalidOperationException("Lỗi cài đặt ngày giờ máy in phun: " + receivedFeedback);
 
                     //T: Reset Product Counting
                     this.WriteToStream(GlobalVariables.charESC + "/T/1/0/" + GlobalVariables.charEOT);
-                    if (!this.ReadFromStream(ref receivedFeedback, true)) throw new System.InvalidOperationException("Lỗi cài đặt bộ đếm số lần in phun: " + receivedFeedback);
+                    if (!this.ReadoutStream(ref receivedFeedback, true)) throw new System.InvalidOperationException("Lỗi cài đặt bộ đếm số lần in phun: " + receivedFeedback);
                 }
                 #endregion GENERAL SETUP
 
 
                 #region Status (NOT LASER ONLY)
                 //SET STATUS
-                if (!this.IsLaser)
+                if (!this.isLaser)
                 {
                     this.WriteToStream(GlobalVariables.charESC + "/0/N/0/" + GlobalVariables.charEOT);     //0: Status Report Mode: OFF: NO ERROR REPORTING
-                    if (!this.ReadFromStream(ref receivedFeedback, true)) throw new System.InvalidOperationException("NMVN: Can not set status report mode: " + receivedFeedback);
+                    if (!this.ReadoutStream(ref receivedFeedback, true)) throw new System.InvalidOperationException("NMVN: Can not set status report mode: " + receivedFeedback);
 
                     //co gang viet cho nay cho hay hay
                     //this.WriteToStream( GlobalVariables.charESC + "/1/C/?/" + GlobalVariables.charEOT) ;   //1: REQUEST CURRENT STATUS
@@ -785,7 +663,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             this.resetMessage = false; //Setup first message: Only one times                            
                             this.MainStatus = "Please wait .... ";
 
-                            if (this.IsLaser)
+                            if (this.isLaser)
                             {
                                 this.WriteToStream("MARK STOP");
                                 if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(7000); else throw new System.InvalidOperationException("Can not disables printing ... : " + receivedFeedback);
@@ -794,12 +672,12 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.storeMessage("  ");
 
 
-                            if (this.IsLaser)
+                            if (this.isLaser)
                                 this.WriteToStream("LOADPROJECT store: SLASHSYMBOL Demo");
                             else
                                 this.WriteToStream(GlobalVariables.charESC + "/I/1/ /" + GlobalVariables.charEOT); //SET OF: Print Acknowledgement Flags I
 
-                            if ((this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.IsLaser && this.ReadFromStream(ref receivedFeedback, true))) Thread.Sleep(250); else throw new System.InvalidOperationException("Can not set off printing acknowledge/ Load Demo project: " + receivedFeedback);
+                            if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, true))) Thread.Sleep(250); else throw new System.InvalidOperationException("Can not set off printing acknowledge/ Load Demo project: " + receivedFeedback);
 
 
                             this.MainStatus = "Ready to print";
@@ -816,7 +694,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             #region SETUP MESSAGE
                             this.MainStatus = "Please wait ...";
 
-                            if (this.IsLaser && this.printerName == GlobalVariables.PrinterName.DegitInkjet) //stringWriteTo = " SETVARIABLES \"MonthCodeAndLine\" \"10081\"\r\n"
+                            if (this.isLaser && this.printerName == GlobalVariables.PrinterName.DegitInkjet) //stringWriteTo = " SETVARIABLES \"MonthCodeAndLine\" \"10081\"\r\n"
                             {//BEGINTRANS [ENTER] OK   SETTEXT "Text 1" "Domino AG" [ENTER]   OK   SETTEXT "Barcode 1" "Sator Laser GmbH" [ENTER]   OK EXECTRANS [ENTER] OK MSG 1 
                                 //this.WriteToStream("BEGINTRANS");
                                 //if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message: " + receivedFeedback);
@@ -841,12 +719,12 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.storeMessage(this.WholeMessageLine()); //SHOULD Update serial number: - Note: Some DOMINO firmware version does not need to update serial number. Just set startup serial number only when insert serial number. BUT: FOR SURE, It will be updated FOR ALL
 
                                 //    U: UPDATE SERIAL NUMBER - Counter 1
-                                this.WriteToStream(GlobalVariables.charESC + "/U/001/1/" + this.privateFillingData.MonthSerialNumber + "/" + GlobalVariables.charEOT);
-                                if (this.ReadFromStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                this.WriteToStream(GlobalVariables.charESC + "/U/001/1/" + this.privateFillingData.LastPackNo + "/" + GlobalVariables.charEOT);
+                                if (this.ReadoutStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
 
                                 //    U: UPDATE SERIAL NUMBER - Counter 2
-                                this.WriteToStream(GlobalVariables.charESC + "/U/001/2/" + this.privateFillingData.MonthSerialNumber + "/" + GlobalVariables.charEOT);
-                                if (this.ReadFromStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                this.WriteToStream(GlobalVariables.charESC + "/U/001/2/" + this.privateFillingData.LastPackNo + "/" + GlobalVariables.charEOT);
+                                if (this.ReadoutStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
                             }
                             #endregion Reset Message
 
@@ -869,9 +747,9 @@ namespace TotalSmartCoding.Controllers.Productions
                                 //this.MainStatus = receivedFeedback;
 
                                 int serialNumber = 0;
-                                if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber) && int.Parse(this.privateFillingData.MonthSerialNumber) != ++serialNumber) //Increase serialNumber by 1: Because: this.privateFillingLineData.MonthSerialNumber MUST GO AHEAD BY 1
+                                if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber) && int.Parse(this.privateFillingData.LastPackNo) != ++serialNumber) //Increase serialNumber by 1: Because: this.privateFillingLineData.MonthSerialNumber MUST GO AHEAD BY 1
                                 {
-                                    this.privateFillingData.MonthSerialNumber = serialNumber.ToString("0000000").Substring(1);
+                                    this.privateFillingData.LastPackNo = serialNumber.ToString("0000000").Substring(1);
                                     this.NotifyPropertyChanged("MonthSerialNumber");
                                 }
                             }
@@ -884,12 +762,12 @@ namespace TotalSmartCoding.Controllers.Productions
                     {
                         #region Get current status
 
-                        if (this.IsLaser)
+                        if (this.isLaser)
                             this.WriteToStream("GETSTATUS"); //Determines the current status of the controller
                         else
                             this.WriteToStream(GlobalVariables.charESC + "/O/1/?/" + GlobalVariables.charEOT);  //O/1: Current status
 
-                        if ((this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
+                        if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
                         {
                             lfStatusLED(ref receivedFeedback);
                             if (!this.LedGreenOn && !this.LedAmberOn) throw new System.InvalidOperationException("Connection fail! Please check your printer.");
@@ -915,12 +793,12 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
                 //DISCONNECT.BEGIN
-                if (this.IsLaser)
+                if (this.isLaser)
                     this.WriteToStream("GETSTATUS"); //Determines the current status of the controller
                 else
                     this.WriteToStream(GlobalVariables.charESC + "/O/1/?/" + GlobalVariables.charEOT);  //O/1: Current status
 
-                if ((this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.IsLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
+                if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
                     lfStatusLED(ref receivedFeedback);
                 //DISCONNECT.END
 
@@ -942,8 +820,6 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
         }
-
-
 
         #endregion Public Thread
 

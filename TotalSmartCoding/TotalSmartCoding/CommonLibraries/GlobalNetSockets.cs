@@ -6,14 +6,13 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 
-namespace TotalSmartCoding.CommonLibraries.BP
+namespace TotalSmartCoding.CommonLibraries
 {
     public class GlobalNetSockets
     {
         #region Common Stream action
 
-
-        public static void WriteToStream(NetworkStream networkStream, string stringToWrite)
+        public static void WritetoStream(NetworkStream networkStream, string stringToWrite)
         {
             try
             {
@@ -35,7 +34,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             { throw exception; }
         }
 
-        public static string ReadFromStream(TcpClient tcpClient, NetworkStream networkStream)
+        public static string ReadoutStream(TcpClient tcpClient, NetworkStream networkStream)
         {
             try
             {

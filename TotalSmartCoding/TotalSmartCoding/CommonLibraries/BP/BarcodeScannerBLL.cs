@@ -259,13 +259,12 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
-        public string LastPackNo { get { return this.privateFillingLineData.LastPackNo; } }
 
-        public string MonthSerialNumber { get { return this.privateFillingLineData.MonthSerialNumber; } }
+        public string MonthSerialNumber { get { return this.privateFillingLineData.LastPackNo; } }
 
         public string LastCartonNo { get { return this.privateFillingLineData.LastCartonNo; } }
 
-        public string MonthCartonNumber { get { return this.privateFillingLineData.MonthCartonNumber; } }
+        public string MonthCartonNumber { get { return this.privateFillingLineData.LastPalletNo; } }
 
         public int MatchingPackCount { get { return this.matchingPackList.Count; } }
         public int PackInOneCartonCount { get { return this.packInOneCarton.Count; } }
@@ -402,7 +401,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
             {
                 this.barcodeNetworkStream.ReadTimeout = 120; //Default = -1; 
 
-                stringReadFrom = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
+                stringReadFrom = GlobalNetSockets.ReadoutStream(barcodeTcpClient, barcodeNetworkStream).Trim();
 
                 this.barcodeNetworkStream.ReadTimeout = -1; //Default = -1
 
@@ -624,7 +623,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 {
                                     lock (this.matchingPackList)
                                     {
-                                        MessageData messageData = this.AddDataDetailPack(receivedBarcode + " " + this.privateFillingLineData.LastPackNo, this.matchingPackList.NextPackSubQueueID);
+                                        MessageData messageData = this.AddDataDetailPack(receivedBarcode, this.matchingPackList.NextPackSubQueueID);
                                         if (messageData != null)
                                         {
                                             this.matchingPackList.Enqueue(messageData);
@@ -632,7 +631,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                         }
                                     }
 
-                                    this.privateFillingLineData.LastPackNo = (int.Parse(this.privateFillingLineData.LastPackNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
+                                    //this.privateFillingLineData.NmvnNMVNNo = (int.Parse(this.privateFillingLineData.NmvnNMVNNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
                                     this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
 
                                 }
@@ -723,13 +722,13 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                 this.lastStringBarcode = receivedBarcode;
 
 
-                            MatchingAndAddCarton(receivedBarcode + (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail ? " " + this.privateFillingLineData.LastPackNo : ""));
+                            MatchingAndAddCarton(receivedBarcode);
 
 
 
                             if (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail)
                             {//ONLY FOR PAIL LINE: BECAUSE: With PAIL Line: use CartonScanner (datalogic) to read Packbarcode
-                                this.privateFillingLineData.LastPackNo = (int.Parse(this.privateFillingLineData.LastPackNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
+                                //this.privateFillingLineData.NmvnNMVNNo = (int.Parse(this.privateFillingLineData.NmvnNMVNNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
                                 this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
                             }
 

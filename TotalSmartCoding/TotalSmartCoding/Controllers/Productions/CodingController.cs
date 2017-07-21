@@ -77,7 +77,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             get
             {
-                return true; // this.ledGreenOn;
+                return this.ledGreenOn;
             }
             protected set
             {
