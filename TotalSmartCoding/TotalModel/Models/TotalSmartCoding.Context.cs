@@ -46,13 +46,13 @@ namespace TotalModel.Models
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
         public virtual DbSet<Pickup> Pickups { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
-        public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<Carton> Cartons { get; set; }
         public virtual DbSet<FillingCarton> FillingCartons { get; set; }
         public virtual DbSet<FillingPack> FillingPacks { get; set; }
         public virtual DbSet<FillingPallet> FillingPallets { get; set; }
         public virtual DbSet<Pack> Packs { get; set; }
         public virtual DbSet<Pallet> Pallets { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {

@@ -50,15 +50,12 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Commodities" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.Batch" Width="1.5" PointX="34.5" PointY="11.5" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.Carton" Width="1.5" PointX="34.5" PointY="17.5" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.FillingCarton" Width="1.5" PointX="9.375" PointY="10.75" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.FillingPack" Width="1.5" PointX="11.375" PointY="6.75" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.FillingPallet" Width="1.5" PointX="11.375" PointY="10.75" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.Pack" Width="1.5" PointX="39.75" PointY="18.625" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.Pallet" Width="1.5" PointX="3" PointY="17.125" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_FillingLines" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Cartons_Cartons" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Cartons_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Cartons_FillingLines" />
@@ -73,6 +70,9 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Packs" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Pallets" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Batch" Width="1.5" PointX="34.5" PointY="11.5" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_FillingLines" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

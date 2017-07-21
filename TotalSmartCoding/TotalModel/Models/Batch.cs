@@ -21,9 +21,9 @@ namespace TotalModel.Models
         public int FillingLineID { get; set; }
         public int CommodityID { get; set; }
         public int LocationID { get; set; }
-        public string LastPackNo { get; set; }
-        public string LastCartonNo { get; set; }
-        public string LastPalletNo { get; set; }
+        public string NextPackNo { get; set; }
+        public string NextCartonNo { get; set; }
+        public string NextPalletNo { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }

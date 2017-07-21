@@ -18,13 +18,9 @@ namespace TotalModel.Models
         public string Reference { get; set; }
         public int FillingLineID { get; set; }
         public int CommodityID { get; set; }
-        public string Code { get; set; }
         public int CartonPerPallet { get; set; }
         public int NoExpiryDate { get; set; }
         public bool IsPailLabel { get; set; }
-        public string LastPackNo { get; set; }
-        public string LastCartonNo { get; set; }
-        public string LastPalletNo { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -34,5 +30,9 @@ namespace TotalModel.Models
         public string CommodityName { get; set; }
         public int PackPerCarton { get; set; }
         public string CommodityOfficialCode { get; set; }
+        public string NextPackNo { get; set; }
+        public string NextCartonNo { get; set; }
+        public string NextPalletNo { get; set; }
+        public string BatchCode { get; set; }
     }
 }

@@ -59,7 +59,7 @@ namespace TotalBase
         public enum PrinterName
         {
             DegitInkjet = 1,
-            BarcodeInkjet = 2,
+            PackInkjet = 2,
             CartonInkjet = 3,
             PalletLabel = 6
         }
@@ -117,7 +117,7 @@ namespace TotalBase
                     {
                         case PrinterName.DegitInkjet:
                             return "192.168.1.101";
-                        case PrinterName.BarcodeInkjet:
+                        case PrinterName.PackInkjet:
                             return "192.168.1.102";
                         case PrinterName.CartonInkjet:
                             return "192.168.1.163";
@@ -129,7 +129,7 @@ namespace TotalBase
                     {
                         case PrinterName.DegitInkjet:
                             return "192.168.1.104";
-                        case PrinterName.BarcodeInkjet:
+                        case PrinterName.PackInkjet:
                             return "192.168.1.105";
                         case PrinterName.CartonInkjet:
                             return "192.168.1.106";
@@ -142,7 +142,7 @@ namespace TotalBase
                     {
                         case PrinterName.DegitInkjet:
                             return "192.168.1.107";
-                        case PrinterName.BarcodeInkjet:
+                        case PrinterName.PackInkjet:
                             return "192.168.1.108";
                         case PrinterName.CartonInkjet:
                             return "192.168.1.109";
@@ -155,7 +155,7 @@ namespace TotalBase
                     {
                         case PrinterName.DegitInkjet:
                             return "192.168.1.110";
-                        case PrinterName.BarcodeInkjet:
+                        case PrinterName.PackInkjet:
                             return "192.168.1.111";
                         case PrinterName.CartonInkjet:
                             return "192.168.1.112";
@@ -168,7 +168,7 @@ namespace TotalBase
                     {
                         case PrinterName.DegitInkjet:
                             return "192.168.1.113";
-                        case PrinterName.BarcodeInkjet:
+                        case PrinterName.PackInkjet:
                             return "192.168.1.114";
                         case PrinterName.CartonInkjet:
                             return "127.0.0.1";

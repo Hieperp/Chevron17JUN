@@ -260,11 +260,11 @@ namespace TotalSmartCoding.CommonLibraries.BP
 
 
 
-        public string MonthSerialNumber { get { return this.privateFillingLineData.LastPackNo; } }
+        public string MonthSerialNumber { get { return this.privateFillingLineData.NextPackNo; } }
 
-        public string LastCartonNo { get { return this.privateFillingLineData.LastCartonNo; } }
+        public string LastCartonNo { get { return this.privateFillingLineData.NextCartonNo; } }
 
-        public string MonthCartonNumber { get { return this.privateFillingLineData.LastPalletNo; } }
+        public string MonthCartonNumber { get { return this.privateFillingLineData.NextPalletNo; } }
 
         public int MatchingPackCount { get { return this.matchingPackList.Count; } }
         public int PackInOneCartonCount { get { return this.packInOneCarton.Count; } }
@@ -632,7 +632,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                                     }
 
                                     //this.privateFillingLineData.NmvnNMVNNo = (int.Parse(this.privateFillingLineData.NmvnNMVNNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
-                                    this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
+                                    this.NotifyPropertyChanged("NextPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
 
                                 }
                             }
@@ -729,7 +729,7 @@ namespace TotalSmartCoding.CommonLibraries.BP
                             if (this.FillingLineData.FillingLineID == GlobalVariables.FillingLine.Pail)
                             {//ONLY FOR PAIL LINE: BECAUSE: With PAIL Line: use CartonScanner (datalogic) to read Packbarcode
                                 //this.privateFillingLineData.NmvnNMVNNo = (int.Parse(this.privateFillingLineData.NmvnNMVNNo) + 1).ToString("0000000").Substring(1);//Format 7 digit, then cut 6 right digit: This will reset a 0 when reach the limit of 6 digit
-                                this.NotifyPropertyChanged("LastPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
+                                this.NotifyPropertyChanged("NextPackNo"); //APPEND TO receivedBarcode, and then: Increase LastPackNo by 1 PROGRAMMATICALLY BY SOFTWARE
                             }
 
 

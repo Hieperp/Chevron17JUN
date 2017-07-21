@@ -58,7 +58,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
         #region Public Properties
-        
+
         public bool OnPrinting
         {
             get { return this.onPrinting; }
@@ -71,13 +71,44 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        public string MonthSerialNumber { get { return this.privateFillingData.LastPackNo; } }
+        public string NextPackNo
+        {
+            get { return this.privateFillingData.NextPackNo; }
+            private set
+            {
+                if (this.privateFillingData.NextPackNo != value)
+                {
+                    this.privateFillingData.NextPackNo = value;
+                    this.NotifyPropertyChanged("NextPackNo");
+                }
+            }
+        }
 
-        public string LastCartonNo { get { return this.privateFillingData.LastCartonNo; } }
+        public string NextCartonNo
+        {
+            get { return this.privateFillingData.NextCartonNo; }
+            private set
+            {
+                if (this.privateFillingData.NextCartonNo != value)
+                {
+                    this.privateFillingData.NextCartonNo = value;
+                    this.NotifyPropertyChanged("NextCartonNo");
+                }
+            }
+        }
 
-        public string LastPalletNo { get { return this.privateFillingData.LastPalletNo; } }
-
-
+        public string NextPalletNo
+        {
+            get { return this.privateFillingData.NextPalletNo; }
+            private set
+            {
+                if (this.privateFillingData.NextPalletNo != value)
+                {
+                    this.privateFillingData.NextPalletNo = value;
+                    this.NotifyPropertyChanged("NextPalletNo");
+                }
+            }
+        }
 
         #endregion Public Properties
 
@@ -86,7 +117,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private string FirstMessageLine(bool isReadableText) //Only DominoPrinterName.CartonInkJet: HAS SERIAL NUMBER (BUT WILL BE UPDATE MANUAL FOR EACH CARTON - BECAUSE: [EAN BARCODE] DOES NOT ALLOW INSERT SERIAL NUMBER) ===> FOR THIS: LastPackNo FOR EVERY PACK: NEVER USE
         {
-            return this.privateFillingData.BatchCode + (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "/" + "  " + "/" + this.privateFillingData.LastCartonNo.Substring(2) : "");
+            return this.privateFillingData.BatchCode + (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "/" + "  " + "/" + this.privateFillingData.NextCartonNo.Substring(2) : "");
         }
 
         private string SecondMessageLine(bool isReadableText)
@@ -97,18 +128,18 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private string ThirdMessageLine(int serialNumberIndentity, bool isReadableText) //serialNumberIndentity = 1 when print as text on first line, 2 when insert into 2D Barcode
         {
-            string serialNumberFormat = ""; //Numeric Serial Only, No Alpha Serial, Zero Leading, 6 Digit: 000001 -> 999999, Step 1, Start this.privateFillingLineData.MonthSerialNumber, Repeat: 0
-            if (this.printerName == GlobalVariables.PrinterName.DegitInkjet || this.printerName == GlobalVariables.PrinterName.BarcodeInkjet)
-                //////---- Don use this Startup Serial Value, because some Dimino printer do no work!!! - DON't KNOW!!! serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/" + this.privateFillingLineData.MonthSerialNumber + "/00000/N/"; //WITH START VALUE---No need to update serial number
+            string serialNumberFormat = ""; //Numeric Serial Only, No Alpha Serial, Zero Leading, 6 Digit: 000001 -> 999999, Step 1, Start this.currentSerialNumber, Repeat: 0
+            if (this.printerName == GlobalVariables.PrinterName.DegitInkjet || this.printerName == GlobalVariables.PrinterName.PackInkjet)
+                //////---- Don use this Startup Serial Value, because some Dimino printer do no work!!! - DON't KNOW!!! serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/" + this.currentSerialNumber + "/00000/N/"; //WITH START VALUE---No need to update serial number
                 serialNumberFormat = GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/000000/00000/N/"; //WITH START VALUE = 1 ---> NEED TO UPDATE serial number
             else //this.DominoPrinterNameID == GlobalVariables.DominoPrinterName.CartonInkJet
-                serialNumberFormat = this.privateFillingData.LastPalletNo.Substring(1); //---Dont use counter (This will be updated MANUALLY for each carton)
+                serialNumberFormat = this.privateFillingData.NextPalletNo.Substring(1); //---Dont use counter (This will be updated MANUALLY for each carton)
 
 
             //return this.privateFillingLineData.CommodityCode + serialNumberFormat;
-            return (this.printerName != GlobalVariables.PrinterName.BarcodeInkjet || isReadableText ? this.privateFillingData.CommodityCode : "")  + "/" + this.privateFillingData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
+            return (this.printerName != GlobalVariables.PrinterName.PackInkjet || isReadableText ? this.privateFillingData.CommodityCode : "") + "/" + this.privateFillingData.FillingLineCode + (isReadableText ? " " : "") + "/" + serialNumberFormat;
         }
-        
+
         private string EANInitialize(string twelveDigitCode)
         {
 
@@ -186,7 +217,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {//THE FUNCTION LaserDigitMessage totally base on this.WholeMessageLine. Later, if there is any thing change in this.WholeMessageLine, THE FUNCTION LaserDigitMessage should be considered
             if (this.printerName == GlobalVariables.PrinterName.DegitInkjet)
                 return GlobalVariables.charESC + "u/1/ " + GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true);
-            else if (this.printerName == GlobalVariables.PrinterName.BarcodeInkjet) //DATE: 18FEB2017: IN THE READABLE TEXT ONLY: SWAP BETWEEN Second Line <-> Third Line (EVERY THING IN THE BARCODE KEEP CURRENT VERSION)
+            else if (this.printerName == GlobalVariables.PrinterName.PackInkjet) //DATE: 18FEB2017: IN THE READABLE TEXT ONLY: SWAP BETWEEN Second Line <-> Third Line (EVERY THING IN THE BARCODE KEEP CURRENT VERSION)
             {
                 //return GlobalVariables.charESC + "u/1/" + this.FirstMessageLine(true) + "/" +  //First Line
                 //       GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true) +   //Second Line
@@ -205,7 +236,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 //           GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + thirdMessageLine + "/ " + DateTime.Now.ToString("dd/MM/yy");
 
 
-                return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/6/" + this.ThirdMessageLine(1, false) + "/" + this.privateFillingData.LastCartonNo.Substring(2) + GlobalVariables.charESC + "/q/0" +
+                return GlobalVariables.charESC + "u/2/" + GlobalVariables.charESC + "/q/6/" + this.ThirdMessageLine(1, false) + "/" + this.privateFillingData.NextCartonNo.Substring(2) + GlobalVariables.charESC + "/q/0" +
                            GlobalVariables.charESC + "u/1/  " + this.FirstMessageLine(true) + "/ " + this.privateFillingData.NoExpiryDate.ToString("00") + "/" + //First Line
                            GlobalVariables.charESC + "/r/  " + GlobalVariables.charESC + "u/1/" + this.ThirdMessageLine(1, true) + "/ " + DateTime.Now.ToString("dd/MM/yy");
 
@@ -215,9 +246,9 @@ namespace TotalSmartCoding.Controllers.Productions
         private string LaserDigitMessage(bool isSerialNumber)
         {//THE FUNCTION LaserDigitMessage totally base on this.WholeMessageLine. Later, if there is any thing change in this.WholeMessageLine, THE FUNCTION LaserDigitMessage should be considered
             if (isSerialNumber)
-                return this.privateFillingData.LastPackNo;
+                return this.nextNo;
             else
-                return this.privateFillingData.CommodityCode  + this.privateFillingData.FillingLineCode;
+                return this.privateFillingData.CommodityCode + this.privateFillingData.FillingLineCode;
         }//NOTE: NEVER CHANGE THIS FUNCTION WITHOUT HAVE A LOOK AT this.WholeMessageLine
 
         #endregion Message Configuration
@@ -298,7 +329,7 @@ namespace TotalSmartCoding.Controllers.Productions
         /// <returns></returns>
         private bool ReadoutStream(ref string receivedFeedback, bool waitforACK)
         {
-            return ReadFromStream(ref receivedFeedback, waitforACK, "", 0);
+            return ReadoutStream(ref receivedFeedback, waitforACK, "", 0);
         }
 
         /// <summary>
@@ -309,7 +340,7 @@ namespace TotalSmartCoding.Controllers.Productions
         /// <param name="commandCode"></param>
         /// <param name="commandLength"></param>
         /// <returns></returns>
-        private bool ReadFromStream(ref string receivedFeedback, bool waitforACK, string commandCode, long commandLength)
+        private bool ReadoutStream(ref string receivedFeedback, bool waitforACK, string commandCode, long commandLength)
         {
             try
             {
@@ -359,7 +390,7 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        private bool WaitforPrintingAcknowledge(ref string receivedFeedback)
+        private bool waitforPrintingAcknowledge(ref string receivedFeedback)
         {
             try
             {
@@ -410,6 +441,40 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
+        private string nextNo
+        {
+            get
+            {
+                if (this.printerName == GlobalVariables.PrinterName.PackInkjet)
+                    return this.privateFillingData.NextPackNo;
+                else
+                    if (this.printerName == GlobalVariables.PrinterName.CartonInkjet)
+                        return this.privateFillingData.NextCartonNo;
+                    else
+                        if (this.printerName == GlobalVariables.PrinterName.PalletLabel)
+                            return this.privateFillingData.NextPalletNo;
+                        else
+                            return "XXXXXX"; //THIS return value WILL RAISE ERROR TO THE CALLER FUNCTION, BUCAUSE IT DON'T HAVE A CORRECT FORMAT
+            }
+        }
+
+        private void feedbackNextNo(string receivedFeedback)
+        {
+            int serialNumber = 0; string nextNo = "";
+            if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber))
+            {
+                nextNo = (+serialNumber).ToString("0000000").Substring(1);//Increase serialNumber by 1: Because: nextNo MUST GO AHEAD BY 1
+
+                if (this.printerName == GlobalVariables.PrinterName.PackInkjet)
+                    this.NextPackNo = nextNo;
+                else
+                    if (this.printerName == GlobalVariables.PrinterName.CartonInkjet)
+                        this.NextCartonNo = nextNo;
+                    else
+                        if (this.printerName == GlobalVariables.PrinterName.PalletLabel)
+                            this.NextPalletNo = nextNo;
+            }
+        }
 
         #region STASTUS
         private bool lfStatusLED(ref string receivedFeedback)
@@ -497,7 +562,7 @@ namespace TotalSmartCoding.Controllers.Productions
         //ERR_HANDLER:
         //    Call psShowError: lfStatusAlert = False: GoTo ERR_RESUME
         //End Function
-        
+
         #endregion STASTUS
 
 
@@ -534,12 +599,12 @@ namespace TotalSmartCoding.Controllers.Productions
                     if (this.isLaser)
                     {
                         this.WriteToStream("GETVERSION"); //Obtains the alphanumeric identifier of the printer
-                        if (this.ReadFromStream(ref receivedFeedback, false, "RESULT GETVERSION", "RESULT GETVERSION".Length)) printerReady = true; //Printer Identity OK"
+                        if (this.ReadoutStream(ref receivedFeedback, false, "RESULT GETVERSION", "RESULT GETVERSION".Length)) printerReady = true; //Printer Identity OK"
                     }
                     else
                     {
                         this.WriteToStream(GlobalVariables.charESC + "/A/?/" + GlobalVariables.charEOT);   //A: Printer Identity
-                        if (this.ReadFromStream(ref receivedFeedback, false, "A", 14)) printerReady = true; //A: Printer Identity OK"
+                        if (this.ReadoutStream(ref receivedFeedback, false, "A", 14)) printerReady = true; //A: Printer Identity OK"
                     }
 
 
@@ -553,7 +618,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.WriteToStream(GlobalVariables.charESC + "/O/1/?/" + GlobalVariables.charEOT);  //O/1: Current status
 
 
-                            if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
+                            if ((this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "O", 9)))
                             {
                                 lfStatusLED(ref receivedFeedback);
                                 readytoPrint = this.LedGreenOn || this.LedAmberOn; this.LedGreenOn = false; //After Set LED, If LedGreenOn => ReadyToPrint
@@ -586,7 +651,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                     this.WriteToStream(GlobalVariables.charESC + "/Q/1/?/" + GlobalVariables.charEOT);    //Q: HEAD ENABLE: ENABLE
 
 
-                                if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETMARKMODE", "RESULT GETMARKMODE".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "Q", 5)))
+                                if ((this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "RESULT GETMARKMODE", "RESULT GETMARKMODE".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "Q", 5)))
                                 {
                                     if ((this.isLaser && receivedFeedback.ElementAt(19).ToString() == "1") || (!this.isLaser && receivedFeedback.ElementAt(3).ToString() == "Y"))
                                         headEnable = true;
@@ -598,7 +663,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                             this.WriteToStream(GlobalVariables.charESC + "/Q/1/Y/" + GlobalVariables.charEOT);
 
 
-                                        if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, true)))
+                                        if ((this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, true)))
                                         {
                                             this.MainStatus = this.isLaser ? "Đang bật chế độ in" : "Đang mở in phun" + ", vui lòng chờ trong ít phút.";
                                             Thread.Sleep(10000);
@@ -666,7 +731,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             if (this.isLaser)
                             {
                                 this.WriteToStream("MARK STOP");
-                                if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(7000); else throw new System.InvalidOperationException("Can not disables printing ... : " + receivedFeedback);
+                                if (this.ReadoutStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(7000); else throw new System.InvalidOperationException("Can not disables printing ... : " + receivedFeedback);
                             }
                             else
                                 this.storeMessage("  ");
@@ -677,7 +742,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             else
                                 this.WriteToStream(GlobalVariables.charESC + "/I/1/ /" + GlobalVariables.charEOT); //SET OF: Print Acknowledgement Flags I
 
-                            if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, true))) Thread.Sleep(250); else throw new System.InvalidOperationException("Can not set off printing acknowledge/ Load Demo project: " + receivedFeedback);
+                            if ((this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, true))) Thread.Sleep(250); else throw new System.InvalidOperationException("Can not set off printing acknowledge/ Load Demo project: " + receivedFeedback);
 
 
                             this.MainStatus = "Ready to print";
@@ -700,16 +765,16 @@ namespace TotalSmartCoding.Controllers.Productions
                                 //if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message: " + receivedFeedback);
 
                                 this.WriteToStream("LOADPROJECT store: SLASHSYMBOL " + (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Smallpack ? "BPCODigit" : (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail ? "BPPailDigit" : "BPPailDigit")));
-                                if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(500); else throw new System.InvalidOperationException("NMVN: Can not load message: " + receivedFeedback);
+                                if (this.ReadoutStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(500); else throw new System.InvalidOperationException("NMVN: Can not load message: " + receivedFeedback);
 
                                 this.WriteToStream("SETVARIABLES \"MonthCodeAndLine\" \"" + this.LaserDigitMessage(false) + "\"");
-                                if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message code: " + receivedFeedback);
+                                if (this.ReadoutStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message code: " + receivedFeedback);
 
                                 this.WriteToStream("SETCOUNTERVALUE Serialnumber01 " + this.LaserDigitMessage(true));
-                                if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message counter: " + receivedFeedback);
+                                if (this.ReadoutStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message counter: " + receivedFeedback);
 
                                 this.WriteToStream("MARK START");
-                                if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(7000); else throw new System.InvalidOperationException("NMVN: Can not enables marking ... : " + receivedFeedback);
+                                if (this.ReadoutStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(7000); else throw new System.InvalidOperationException("NMVN: Can not enables marking ... : " + receivedFeedback);
 
                                 //this.WriteToStream("EXECTRANS");
                                 //if (this.ReadFromStream(ref receivedFeedback, false, "OK", "OK".Length)) Thread.Sleep(20); else throw new System.InvalidOperationException("NMVN: Can not set message: " + receivedFeedback);
@@ -719,11 +784,11 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.storeMessage(this.WholeMessageLine()); //SHOULD Update serial number: - Note: Some DOMINO firmware version does not need to update serial number. Just set startup serial number only when insert serial number. BUT: FOR SURE, It will be updated FOR ALL
 
                                 //    U: UPDATE SERIAL NUMBER - Counter 1
-                                this.WriteToStream(GlobalVariables.charESC + "/U/001/1/" + this.privateFillingData.LastPackNo + "/" + GlobalVariables.charEOT);
+                                this.WriteToStream(GlobalVariables.charESC + "/U/001/1/" + this.nextNo + "/" + GlobalVariables.charEOT);
                                 if (this.ReadoutStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
 
                                 //    U: UPDATE SERIAL NUMBER - Counter 2
-                                this.WriteToStream(GlobalVariables.charESC + "/U/001/2/" + this.privateFillingData.LastPackNo + "/" + GlobalVariables.charEOT);
+                                this.WriteToStream(GlobalVariables.charESC + "/U/001/2/" + this.nextNo + "/" + GlobalVariables.charEOT);
                                 if (this.ReadoutStream(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
                             }
                             #endregion Reset Message
@@ -736,23 +801,12 @@ namespace TotalSmartCoding.Controllers.Productions
                         #endregion Reset Message: Setup FirstMessage
 
 
-                        //TO READ FOR ALL PRINTER!!!!
-                        #region Read counter; only for DominoPrinterName.BarCodeInkJet
+                        #region Read counter; for NOT GlobalVariables.PrinterName.DegitInkjet
                         if (this.printerName != GlobalVariables.PrinterName.DegitInkjet)
                         {
-                            //    U: Read Counter 1 (ONLY COUNTER 1---COUNTER 2: THE SAME COUNTER 1: Principlely)
-                            this.WriteToStream(GlobalVariables.charESC + "/U/001/1/?/" + GlobalVariables.charEOT);
-                            if (this.ReadFromStream(ref receivedFeedback, false, "U", 13))
-                            {
-                                //this.MainStatus = receivedFeedback;
-
-                                int serialNumber = 0;
-                                if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber) && int.Parse(this.privateFillingData.LastPackNo) != ++serialNumber) //Increase serialNumber by 1: Because: this.privateFillingLineData.MonthSerialNumber MUST GO AHEAD BY 1
-                                {
-                                    this.privateFillingData.LastPackNo = serialNumber.ToString("0000000").Substring(1);
-                                    this.NotifyPropertyChanged("MonthSerialNumber");
-                                }
-                            }
+                            this.WriteToStream(GlobalVariables.charESC + "/U/001/1/?/" + GlobalVariables.charEOT);//    U: Read Counter 1 (ONLY COUNTER 1---COUNTER 2: THE SAME COUNTER 1: Principlely)
+                            if (this.ReadoutStream(ref receivedFeedback, false, "U", 13))
+                                this.feedbackNextNo(receivedFeedback);
                         }
                         #endregion Read counter
                     }
@@ -767,7 +821,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         else
                             this.WriteToStream(GlobalVariables.charESC + "/O/1/?/" + GlobalVariables.charEOT);  //O/1: Current status
 
-                        if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
+                        if ((this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "O", 9)))
                         {
                             lfStatusLED(ref receivedFeedback);
                             if (!this.LedGreenOn && !this.LedAmberOn) throw new System.InvalidOperationException("Connection fail! Please check your printer.");
@@ -798,7 +852,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 else
                     this.WriteToStream(GlobalVariables.charESC + "/O/1/?/" + GlobalVariables.charEOT);  //O/1: Current status
 
-                if ((this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadFromStream(ref receivedFeedback, false, "O", 9)))
+                if ((this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "RESULT GETSTATUS", "RESULT GETSTATUS".Length)) || (!this.isLaser && this.ReadoutStream(ref receivedFeedback, false, "O", 9)))
                     lfStatusLED(ref receivedFeedback);
                 //DISCONNECT.END
 

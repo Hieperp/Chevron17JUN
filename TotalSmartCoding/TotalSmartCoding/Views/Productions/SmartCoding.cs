@@ -105,9 +105,9 @@ namespace TotalSmartCoding.Views.Productions
                 this.textBoxCommodityCode.TextBox.DataBindings.Add("Text", this.fillingData, "CommodityCode");
                 this.textBoxCommodityOfficialCode.TextBox.DataBindings.Add("Text", this.fillingData, "CommodityOfficialCode");
                 this.textBoxBatchCode.TextBox.DataBindings.Add("Text", this.fillingData, "BatchCode");
-                this.textBoxLastPackNo.TextBox.DataBindings.Add("Text", this.fillingData, "LastPackNo");
-                this.textBoxLastCartonNo.TextBox.DataBindings.Add("Text", this.fillingData, "LastCartonNo");
-                this.textBoxLastPalletNo.TextBox.DataBindings.Add("Text", this.fillingData, "LastPalletNo");
+                this.textBoxNextPackNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextPackNo");
+                this.textBoxNextCartonNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextCartonNo");
+                this.textBoxNextPalletNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextPalletNo");
 
 
 
@@ -115,7 +115,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
                 digitPrinterController = new PrinterController(GlobalVariables.PrinterName.DegitInkjet, this.fillingData, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail);
-                barcodePrinterController = new PrinterController(GlobalVariables.PrinterName.BarcodeInkjet, this.fillingData, false);
+                barcodePrinterController = new PrinterController(GlobalVariables.PrinterName.PackInkjet, this.fillingData, false);
                 cartonPrinterController = new PrinterController(GlobalVariables.PrinterName.CartonInkjet, this.fillingData, false);
 
                 this.scannerController = new ScannerController(this.fillingData);
@@ -374,15 +374,15 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "MainStatus") { this.textBoxBarcodeStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.barcodePrinterController.MainStatus + "\r\n" + this.textBoxBarcodeStatus.Text; this.CutTextBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.toolStripBarcodeLEDGreen.Enabled = this.barcodePrinterController.LedGreenOn; this.toolStripBarcodeLEDAmber.Enabled = this.barcodePrinterController.LedAmberOn; this.toolStripBarcodeLEDRed.Enabled = this.barcodePrinterController.LedRedOn; if (this.barcodePrinterController.LedRedOn) this.StopPrint(true, true, false); return; }
 
-                    if (e.PropertyName == "MonthSerialNumber") { this.fillingData.LastPackNo = this.barcodePrinterController.MonthSerialNumber; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.barcodePrinterController.NextPackNo; this.fillingData.Update(); return; }
                 }
                 else if (sender.Equals(this.cartonPrinterController))
                 {
                     if (e.PropertyName == "MainStatus") { this.textBoxCartonStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.cartonPrinterController.MainStatus + "\r\n" + this.textBoxCartonStatus.Text; this.CutTextBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.toolStripCartonLEDGreen.Enabled = this.cartonPrinterController.LedGreenOn; this.toolStripCartonLEDAmber.Enabled = this.cartonPrinterController.LedAmberOn; this.toolStripCartonLEDRed.Enabled = this.cartonPrinterController.LedRedOn; return; }//if (this.cartonInkjetDominoPrinter.LedRedOn) this.StopPrint(); 
 
-                    if (e.PropertyName == "LastCartonNo") { this.fillingData.LastCartonNo = this.cartonPrinterController.LastCartonNo; this.fillingData.LastPalletNo = this.cartonPrinterController.LastPalletNo; this.fillingData.Update(); return; }
-                    if (e.PropertyName == "MonthCartonNumber") { this.fillingData.LastCartonNo = this.cartonPrinterController.LastCartonNo; this.fillingData.LastPalletNo = this.cartonPrinterController.LastPalletNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "NextCartonNo") { this.fillingData.NextCartonNo = this.cartonPrinterController.NextCartonNo; this.fillingData.NextPalletNo = this.cartonPrinterController.NextPalletNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "MonthCartonNumber") { this.fillingData.NextCartonNo = this.cartonPrinterController.NextCartonNo; this.fillingData.NextPalletNo = this.cartonPrinterController.NextPalletNo; this.fillingData.Update(); return; }
                 }
                 else if (sender.Equals(this.scannerController))
                 {

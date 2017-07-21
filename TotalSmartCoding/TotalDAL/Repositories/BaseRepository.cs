@@ -27,7 +27,7 @@ namespace TotalDAL.Repositories
             fillingPallet.RestoreProcedure();
 
 
-            return;
+            //return;
 
             Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
             batch.RestoreProcedure();

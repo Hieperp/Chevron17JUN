@@ -20,9 +20,9 @@ namespace TotalDTO.Productions
         public int FillingLineID { get { return (int)GlobalVariables.FillingLineID; } }
         public int CommodityID { get; set; }
 
-        public string LastPackNo { get; set; }
-        public string LastCartonNo { get; set; }
-        public string LastPalletNo { get; set; }
+        public string NextPackNo { get; set; }
+        public string NextCartonNo { get; set; }
+        public string NextPalletNo { get; set; }
 
         public bool IsDefault { get; set; }
     }
