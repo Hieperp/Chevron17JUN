@@ -83,6 +83,26 @@ namespace TotalBase
             HasSent = 99,
             Deleted = 199
         }
+        
+        public enum ZebraStatus
+        {
+            Freshnew = 0,
+            Reprint = -1,
+
+
+            Successfully = 1,
+            
+            
+            //WAIT FOR 3 TIMES TO ENSURE RECEIVE ACK/ NACK FROM ZEBRA PRINTER
+            Printing1 = 90,
+            Printing2 = 91,
+            Printing3 = 92,
+            
+            Reprinting1 = -90,
+            Reprinting2 = -91,
+            Reprinting3 = -92
+        }
+
 
         public const string BlankBarcode = "[Blank]";
 
