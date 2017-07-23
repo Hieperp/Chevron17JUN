@@ -375,7 +375,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("BatchEditable", entityIDParameter);
         }
     
-        public virtual ObjectResult<BatchIndex> GetBatchIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        public virtual ObjectResult<BatchIndex> GetBatchIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> fillingLineID)
         {
             var aspUserIDParameter = aspUserID != null ?
                 new ObjectParameter("AspUserID", aspUserID) :
@@ -389,7 +389,11 @@ namespace TotalModel.Models
                 new ObjectParameter("ToDate", toDate) :
                 new ObjectParameter("ToDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchIndex>("GetBatchIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+            var fillingLineIDParameter = fillingLineID.HasValue ?
+                new ObjectParameter("FillingLineID", fillingLineID) :
+                new ObjectParameter("FillingLineID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchIndex>("GetBatchIndexes", aspUserIDParameter, fromDateParameter, toDateParameter, fillingLineIDParameter);
         }
     
         public virtual ObjectResult<string> FillingCartonEditable(Nullable<int> entityID)

@@ -114,9 +114,9 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-                digitPrinterController = new PrinterController(GlobalVariables.PrinterName.DegitInkjet, this.fillingData, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail);
-                barcodePrinterController = new PrinterController(GlobalVariables.PrinterName.PackInkjet, this.fillingData, false);
-                cartonPrinterController = new PrinterController(GlobalVariables.PrinterName.CartonInkjet, this.fillingData, false);
+                digitPrinterController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.DegitInkjet);
+                barcodePrinterController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PackInkjet);
+                cartonPrinterController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
 
                 this.scannerController = new ScannerController(this.fillingData);
 
@@ -176,16 +176,12 @@ namespace TotalSmartCoding.Views.Productions
         {
             switch (GlobalVariables.FillingLineID)
             {
-                case GlobalVariables.FillingLine.Ocme:
-                    return 115; //142
                 case GlobalVariables.FillingLine.Smallpack:
                     return 296; //364 
-                case GlobalVariables.FillingLine.Drum:
-                    return 70; //86;
-                case GlobalVariables.FillingLine.CM:
-                    return 86;
                 case GlobalVariables.FillingLine.Pail:
                     return 0;
+                case GlobalVariables.FillingLine.Drum:
+                    return 70; //86;
                 default:
                     return 1;
             }
@@ -201,16 +197,12 @@ namespace TotalSmartCoding.Views.Productions
 
             switch (GlobalVariables.FillingLineID)
             {
-                case GlobalVariables.FillingLine.Ocme:
-                    return 821; //1032
                 case GlobalVariables.FillingLine.Smallpack:
                     return 955;//1199
-                case GlobalVariables.FillingLine.Drum:
-                    return GlobalVariables.noItemPerCartonSetByProductID == 6 ? 860 : 880;
-                case GlobalVariables.FillingLine.CM:
-                    return GlobalVariables.noItemPerCartonSetByProductID == 6 ? 860 : 880;
                 case GlobalVariables.FillingLine.Pail:
                     return 760;//760---24
+                case GlobalVariables.FillingLine.Drum:
+                    return GlobalVariables.noItemPerCartonSetByProductID == 6 ? 860 : 880;
                 default:
                     return 1;
             }
@@ -220,16 +212,12 @@ namespace TotalSmartCoding.Views.Productions
         {
             switch (GlobalVariables.FillingLineID)
             {
-                case GlobalVariables.FillingLine.Ocme:
-                    return 330; //430
                 case GlobalVariables.FillingLine.Smallpack:
                     return 160; //213
-                case GlobalVariables.FillingLine.Drum:
-                    return 361; //485
-                case GlobalVariables.FillingLine.CM:
-                    return 361;
                 case GlobalVariables.FillingLine.Pail:
                     return 429;
+                case GlobalVariables.FillingLine.Drum:
+                    return 361; //485
                 default:
                     return 1;
             }
@@ -402,15 +390,25 @@ namespace TotalSmartCoding.Views.Productions
 
                         if (currentRowIndex >= 0 && currentRowIndex < this.dgvPackQueue.Rows.Count && currentColumnIndex >= 0 && currentColumnIndex < this.dgvPackQueue.ColumnCount) this.dgvPackQueue.CurrentCell = this.dgvPackQueue[currentColumnIndex, currentRowIndex]; //Keep current cell
 
-                        this.toolStripButtonMessageCount.Text = "[" + this.scannerController.MatchingPackCount.ToString("N0") + "]";
+                        this.buttonPackQueueCount.Text = "[" + this.scannerController.PackQueueCount.ToString("N0") + "]";
                     }
 
                     if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); }
 
-                    if (e.PropertyName == "CartonQueue") { this.dgvCartonQueue.DataSource = this.scannerController.GetCartonQueue(); if (this.dgvCartonQueue.Rows.Count > 1) this.dgvCartonQueue.CurrentCell = this.dgvCartonQueue.Rows[0].Cells[0]; }
+                    if (e.PropertyName == "CartonQueue") 
+                    { 
+                        this.dgvCartonQueue.DataSource = this.scannerController.GetCartonQueue(); 
+                        if (this.dgvCartonQueue.Rows.Count > 1) this.dgvCartonQueue.CurrentCell = this.dgvCartonQueue.Rows[0].Cells[0];
+
+                        this.buttonCartonQueueCount.Text = "[" + this.scannerController.CartonQueueCount.ToString("N0") + "]";
+                    }
+
                     if (e.PropertyName == "CartonsetQueue") { this.dgvCartonsetQueue.DataSource = this.scannerController.GetCartonsetQueue(); }
 
-                    if (e.PropertyName == "PalletQueue") { this.dgvPalletQueue.DataSource = this.scannerController.GetPalletQueue(); }
+                    if (e.PropertyName == "PalletQueue") { 
+                        this.dgvPalletQueue.DataSource = this.scannerController.GetPalletQueue();
+                        this.buttonPalletQueueCount.Text = "[" + this.scannerController.PalletQueueCount.ToString("N0") + "]";
+                    }
                 }
 
             }
@@ -784,7 +782,7 @@ namespace TotalSmartCoding.Views.Productions
 
         #endregion Test only
 
-        private void toolStripButtonMessageCount_Click(object sender, EventArgs e)
+        private void buttonPackQueueCount_Click(object sender, EventArgs e)
         {
             try
             {

@@ -38,7 +38,8 @@ namespace TotalSmartCoding.Controllers.Productions
 
         #region Contructor
 
-        public PrinterController(GlobalVariables.PrinterName printerName, FillingData fillingData, bool isLaser)
+        public PrinterController(FillingData fillingData, GlobalVariables.PrinterName printerName) : this(fillingData, printerName, false) { }
+        public PrinterController(FillingData fillingData, GlobalVariables.PrinterName printerName, bool isLaser)
         {
 
             try
@@ -49,7 +50,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.printerName = printerName;
                 this.isLaser = isLaser;
 
-                this.ionetSocket = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(this.printerName)), 7000, -1, this.isLaser);
+                this.ionetSocket = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(this.printerName)), 7000, this.isLaser);
                 this.ioserialPort = new IOSerialPort(GlobalVariables.PortName, 9600, Parity.None, 8, StopBits.One, false, "Zebra");
 
 
@@ -351,15 +352,6 @@ namespace TotalSmartCoding.Controllers.Productions
 
         }
 
-        private void setLED() { this.setLED(false, false, false); }
-        private void setLED(bool ledGreenOn, bool ledAmberOn, bool ledRedOn)
-        {
-            this.LedGreenOn = ledGreenOn;
-            this.LedAmberOn = ledAmberOn;
-            this.LedRedOn = ledRedOn;
-            this.NotifyPropertyChanged("LedStatus");
-        }
-
         /// <summary>
         /// NEVER waiforACK WHEN This.IsLaser
         /// </summary>
@@ -407,8 +399,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message; // ToString();
-                return false;
+                this.MainStatus = exception.Message; return false;
             }
 
         }
@@ -461,7 +452,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 if (this.ioserialPort.ReadoutSerial(true, ref stringReadFrom))
                 {
                     this.feedbackNextNo(this.FillingData.CartonsetQueueZebraStatus >= GlobalVariables.ZebraStatus.Printing1 ? (int.Parse(this.getNextNo()) + 1).ToString("0000000").Substring(1) : this.getNextNo());
-                    this.FillingData.CartonsetQueueZebraStatus = GlobalVariables.ZebraStatus.Successfully;
+                    this.FillingData.CartonsetQueueZebraStatus = GlobalVariables.ZebraStatus.Printed;
                 }
                 else
                 {
@@ -498,8 +489,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message; // ToString();
-                return false;
+                this.MainStatus = exception.Message; return false;
             }
 
         }
@@ -519,8 +509,7 @@ namespace TotalSmartCoding.Controllers.Productions
             }
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message; // ToString();
-                return false;
+                this.MainStatus = exception.Message; return false;
             }
         }
 
@@ -897,6 +886,6 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
         #endregion Public Thread
-    
+
     }
 }

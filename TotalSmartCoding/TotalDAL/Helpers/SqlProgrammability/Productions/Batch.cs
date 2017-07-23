@@ -30,7 +30,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString;
 
-            queryString = " @AspUserID nvarchar(128), @FromDate DateTime, @ToDate DateTime " + "\r\n";
+            queryString = " @AspUserID nvarchar(128), @FromDate DateTime, @ToDate DateTime, @FillingLineID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
@@ -38,7 +38,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       SELECT      Batches.BatchID, CAST(Batches.EntryDate AS DATE) AS EntryDate, Batches.Reference, Batches.Code AS BatchCode, Batches.FillingLineID, Batches.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.NoExpiryDate, Commodities.IsPailLabel, " + "\r\n";
             queryString = queryString + "                   Batches.NextPackNo, Batches.NextCartonNo, Batches.NextPalletNo, Batches.Description, Batches.Remarks, Batches.CreatedDate, Batches.EditedDate, Batches.IsDefault " + "\r\n";
             queryString = queryString + "       FROM        Batches INNER JOIN " + "\r\n";
-            queryString = queryString + "                   Commodities ON Batches.FillingLineID = 1 AND ((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   Commodities ON Batches.FillingLineID = @FillingLineID AND ((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 

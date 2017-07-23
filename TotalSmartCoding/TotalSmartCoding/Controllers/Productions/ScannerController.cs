@@ -28,20 +28,21 @@ namespace TotalSmartCoding.Controllers.Productions
 {
     public class ScannerController : CodingController //this is CommonThreadProperty
     {
-        private GlobalVariables.BarcodeScannerName barcodeScannerName;
-        private IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
-        private int portNumber = 2112;
+        #region Storage
+        private FillingPackController fillingPackController;
+        private FillingCartonController fillingCartonController;
+        private FillingPalletController fillingPalletController;
 
-        private IONetSocket ionetSocket;
 
+        private IONetSocket ionetSocketPack;
+        private IONetSocket ionetSocketCarton;
+        private IONetSocket ionetSocketPallet;
 
 
         private BarcodeQueue<FillingPackDTO> packQueue;
         private BarcodeQueue<FillingPackDTO> packsetQueue;
 
-
         private BarcodeQueue<FillingCartonDTO> cartonQueue;
-
         private BarcodeQueue<FillingCartonDTO> localcartonsetQueue;
         private BarcodeQueue<FillingCartonDTO> cartonsetQueue
         {
@@ -49,35 +50,15 @@ namespace TotalSmartCoding.Controllers.Productions
             set { this.localcartonsetQueue = value; this.FillingData.CartonsetQueueCount = this.localcartonsetQueue.Count; this.FillingData.CartonsetQueueZebraStatus = GlobalVariables.ZebraStatus.Freshnew; }
         }
 
-
         private BarcodeQueue<FillingPalletDTO> palletQueue;
 
 
-
-
-
-
-
-
-        private bool onScanning;
-        private bool resetMessage;
-        private bool bufferReset;
-
-        private string lastStringBarcode;
-
-        //barcodeScannerNameID
         private BarcodeScannerStatus[] barcodeScannerStatus;
 
+        #endregion Storage
+
+
         #region Contructor
-
-        //Initialize
-        //READ, WRITE Registry
-        //Servernme + database name
-        //Toolbar enable
-
-        private FillingPackController fillingPackController;
-        private FillingCartonController fillingCartonController;
-        private FillingPalletController fillingPalletController;
 
         public ScannerController(FillingData fillingData)
         {
@@ -85,31 +66,15 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 base.FillingData = fillingData;
 
-                this.barcodeScannerName = GlobalVariables.BarcodeScannerName.MatchingScanner;
-
-                this.ionetSocket = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(this.BarcodeScannerName)), 2112, 120); //2112: DATA LOGIC
-
-                this.barcodeScannerStatus = new BarcodeScannerStatus[3];
-                this.barcodeScannerStatus[(int)GlobalVariables.BarcodeScannerName.QualityScanner - 1] = new BarcodeScannerStatus(GlobalVariables.BarcodeScannerName.QualityScanner);
-                this.barcodeScannerStatus[(int)GlobalVariables.BarcodeScannerName.MatchingScanner - 1] = new BarcodeScannerStatus(GlobalVariables.BarcodeScannerName.MatchingScanner);
-                this.barcodeScannerStatus[(int)GlobalVariables.BarcodeScannerName.CartonScanner - 1] = new BarcodeScannerStatus(GlobalVariables.BarcodeScannerName.CartonScanner);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 this.fillingPackController = new FillingPackController(CommonNinject.Kernel.Get<IFillingPackService>(), CommonNinject.Kernel.Get<IFillingPackViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPackViewModel>());
                 this.fillingCartonController = new FillingCartonController(CommonNinject.Kernel.Get<IFillingCartonService>(), CommonNinject.Kernel.Get<IFillingCartonViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingCartonViewModel>());
                 this.fillingPalletController = new FillingPalletController(CommonNinject.Kernel.Get<IFillingPalletService>(), CommonNinject.Kernel.Get<IFillingPalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPalletViewModel>());
+
+
+                this.ionetSocketPack = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PackScanner)), 2112, 120); //PORT 2112: DATA LOGIC
+                this.ionetSocketCarton = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.CartonScanner)), 2112, 120);
+                this.ionetSocketPallet = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PalletScanner)), 2112, 120);
 
 
                 this.packQueue = new BarcodeQueue<FillingPackDTO>(this.FillingData.NoSubQueue, this.FillingData.ItemPerSubQueue, this.FillingData.RepeatSubQueueIndex) { ItemPerSet = this.FillingData.PackPerCarton };
@@ -122,15 +87,19 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
                 base.FillingData.PropertyChanged += new PropertyChangedEventHandler(fillingData_PropertyChanged);
+
+                this.barcodeScannerStatus = new BarcodeScannerStatus[3];
+                this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.QualityScanner - 1] = new BarcodeScannerStatus(GlobalVariables.ScannerName.QualityScanner);
+                this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.PackScanner - 1] = new BarcodeScannerStatus(GlobalVariables.ScannerName.PackScanner);
+                this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.CartonScanner - 1] = new BarcodeScannerStatus(GlobalVariables.ScannerName.CartonScanner);
+
+                this.Initialize();
             }
             catch (Exception exception)
             {
                 this.MainStatus = exception.Message;
             }
         }
-
-
-
 
         public void Initialize()
         {
@@ -174,10 +143,6 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-        #endregion Contructor
-
-
-
         private void fillingData_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             try
@@ -191,70 +156,41 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
+        #endregion Contructor
+
 
         #region Public Properties
 
+        public bool OnScanning { get; private set; }
 
-        public GlobalVariables.BarcodeScannerName BarcodeScannerName
-        {
-            get
-            {
-                return this.barcodeScannerName;
-            }
-        }
-
-
-        public IPAddress IpAddress
-        {
-            get
-            {
-                return this.ipAddress;
-            }
-        }
-
-
-        public int PortNumber
-        {
-            get
-            {
-                return this.portNumber;
-            }
-        }
-
-
-
-
-        public bool OnScanning
-        {
-            get { return this.onScanning; }
-            private set { this.onScanning = value; this.resetMessage = true; }
-        }
-
-
-        public void StartScanner() { this.lastStringBarcode = ""; GlobalVariables.DuplicateCartonBarcodeFound = false; this.bufferReset = true; this.OnScanning = true; } //ONLY bufferReset WHEN StartPrint
+        public void StartScanner() { this.OnScanning = true; }
         public void StopScanner() { this.OnScanning = false; }
 
+        public int PackQueueCount { get { return this.packQueue.Count; } }
+        public int CartonQueueCount { get { return this.cartonQueue.Count; } }
+        public int PalletQueueCount { get { return this.palletQueue.Count; } }
+
+        #endregion Public Properties
 
 
-
-
+        #region LedMCU
 
         public bool LedMCUQualityOn
         {
-            get { return !this.barcodeScannerStatus[(int)GlobalVariables.BarcodeScannerName.QualityScanner - 1].MCUReady; }
+            get { return !this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.QualityScanner - 1].MCUReady; }
         }
 
         public bool LedMCUMatchingOn
         {
-            get { return !this.barcodeScannerStatus[(int)GlobalVariables.BarcodeScannerName.MatchingScanner - 1].MCUReady; }
+            get { return !this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.PackScanner - 1].MCUReady; }
         }
 
         public bool LedMCUCartonOn
         {
-            get { return !this.barcodeScannerStatus[(int)GlobalVariables.BarcodeScannerName.CartonScanner - 1].MCUReady; }
+            get { return !this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.CartonScanner - 1].MCUReady; }
         }
 
-        public void SetBarcodeScannerStatus(GlobalVariables.BarcodeScannerName barcodeScannerNameID, bool mcuReady)
+        public void SetBarcodeScannerStatus(GlobalVariables.ScannerName barcodeScannerNameID, bool mcuReady)
         {
             if (this.barcodeScannerStatus[(int)barcodeScannerNameID - 1].MCUReady != mcuReady)
             {
@@ -263,7 +199,7 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-        public void SetBarcodeScannerStatus(GlobalVariables.BarcodeScannerName barcodeScannerNameID, string mcuStatus)
+        public void SetBarcodeScannerStatus(GlobalVariables.ScannerName barcodeScannerNameID, string mcuStatus)
         {
             if (this.barcodeScannerStatus[(int)barcodeScannerNameID - 1].MCUStatus != mcuStatus)
             {
@@ -273,12 +209,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             this.SetBarcodeScannerStatus(barcodeScannerNameID, false);
         }
-
-
-        public int MatchingPackCount { get { return this.packQueue.Count; } }
-        public int PackInOneCartonCount { get { return this.packsetQueue.Count; } }
-
-        #endregion Public Properties
+        #endregion
 
         #region Public Method
 
@@ -330,7 +261,6 @@ namespace TotalSmartCoding.Controllers.Productions
             else return null;
         }
 
-
         public DataTable GetPalletQueue()
         {
             if (this.palletQueue != null)
@@ -343,7 +273,8 @@ namespace TotalSmartCoding.Controllers.Productions
             else return null;
         }
 
-        private bool Connect(bool connectMatchingScanner)
+
+        private bool Connect()
         {
             try
             {
@@ -351,180 +282,49 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.StartScanner();
                 else
                 {
-                    this.MainStatus = "Try to connect....";
+                    this.MainStatus = "Đang kết nối máy đọc mã vạch ...";
 
-                    if (connectMatchingScanner)
-                        this.ionetSocket.Connect();
+                    if (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Smallpack)
+                        this.ionetSocketPack.Connect();
+
+                    if (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Smallpack || this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail)
+                        this.ionetSocketCarton.Connect();
+
+                    this.ionetSocketPallet.Connect();
                 }
 
-                this.LedGreenOn = true;
-                this.LedAmberOn = false;
-                this.LedRedOn = false;
-                this.NotifyPropertyChanged("LedStatus");
-
+                this.setLED(true, false, false);
 
                 return true;
             }
 
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message; // ToString();
-                return false;
+                this.MainStatus = exception.Message; return false;
             }
-
         }
 
         private bool Disconnect()
         {
             try
             {
-                this.MainStatus = "Disconnect....";
+                this.MainStatus = "Ngắt kết nối ...";
 
-                this.ionetSocket.Disconnect();
+                this.ionetSocketPack.Disconnect();
+                this.ionetSocketCarton.Disconnect();
+                this.ionetSocketPallet.Disconnect();
 
-                this.LedGreenOn = false;
-                this.LedAmberOn = false;
-                this.LedRedOn = false;
-                this.NotifyPropertyChanged("LedStatus");
-
-                this.SetBarcodeScannerStatus(GlobalVariables.BarcodeScannerName.QualityScanner, true);
-                this.SetBarcodeScannerStatus(GlobalVariables.BarcodeScannerName.MatchingScanner, true);
-                this.SetBarcodeScannerStatus(GlobalVariables.BarcodeScannerName.CartonScanner, true);
-
-
+                this.setLED();
 
                 return true;
             }
 
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message; // ToString();
-                return false;
+                this.MainStatus = exception.Message; return false;
             }
 
         }
-
-        private bool waitforPack(ref string stringReceived)
-        {
-            if (GlobalEnums.OnTestOnly)
-                if ((DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
-            else
-            {
-                stringReceived = this.ionetSocket.ReadoutStream().Trim();
-
-                if (stringReceived != "") this.MainStatus = stringReceived;
-
-
-            }
-            return stringReceived != "";
-        }
-
-
-        private bool waitforCarton(ref string stringReceived)
-        {
-            if (GlobalEnums.OnTestOnly)
-                if ((DateTime.Now.Second % 6) == 0 && this.packsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
-            else
-            {
-                //*****MODIFY HERE: this.barcodeNetworkStream.ReadTimeout = 120; //Default = -1; 
-
-                //*****MODIFY HERE: stringReceived = GlobalNetSockets.ReadFromStream(barcodeTcpClient, barcodeNetworkStream).Trim();
-
-                //*****MODIFY HERE: this.barcodeNetworkStream.ReadTimeout = -1; //Default = -1
-
-                //*****MODIFY HERE: if (stringReceived != "") this.MainStatus = stringReceived;
-            }
-            return stringReceived != "";
-        }
-
-
-
-        private bool waitforPallet(ref string stringReceived)
-        {
-            if (GlobalEnums.OnTestOnly)
-                if ((DateTime.Now.Second % 30) == 0 && this.cartonsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
-            else
-            {
-
-            }
-            return stringReceived != "";
-        }
-
-
-        private FillingPackDTO addPack(string packCode, int queueID)
-        {
-            try
-            {
-                FillingPackDTO fillingPackDTO = new FillingPackDTO(this.FillingData) { Code = packCode, QueueID = queueID };
-
-                if (this.fillingPackController.fillingPackService.Save(fillingPackDTO))
-                    return fillingPackDTO;
-                else
-                {
-                    this.MainStatus = "Insufficient save pack: " + packCode;
-                    return null;
-                }
-            }
-            catch (System.Exception exception)
-            {
-                throw new Exception("Insufficient save pack: " + exception.Message + " [" + packCode + "]");
-            }
-        }
-
-
-        private void matchPacktoCarton(string cartonCode)
-        {
-            lock (this.cartonQueue)
-            {
-                lock (this.packsetQueue)
-                {
-                    if (!GlobalVariables.IgnoreEmptyCarton || this.packsetQueue.Count > 0) //BY NOW: GlobalVariables.IgnoreEmptyCarton = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED
-                    {//IF this.packsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY CARTON. this.packsetQueue.EntityIDs WILL BE BLANK => NO PACK BE UPDATED FOR THIS CARTON
-
-                        FillingCartonDTO fillingCartonDTO = new FillingCartonDTO(this.FillingData) { Code = cartonCode };
-
-                        this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
-                        if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
-                            this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
-                        else
-                            throw new Exception("Insufficient save carton: " + fillingCartonDTO.Code);
-
-
-                        this.cartonQueue.Enqueue(fillingCartonDTO);
-                    }
-                }
-            }
-        }
-
-
-
-        private bool matchCartontoPallet(string palletCode)
-        {
-            lock (this.palletQueue)
-            {
-                lock (this.cartonsetQueue)
-                {
-                    if (!GlobalVariables.IgnoreEmptyPallet || (this.cartonsetQueue.Count > 0 && this.FillingData.CartonsetQueueZebraStatus != 0)) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
-                    {//IF this.cartonsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY PALLET: this.cartonsetQueue.EntityIDs WILL BE BLANK => NO CARTON BE UPDATED FOR THIS PALLET
-
-                        FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode };
-
-                        this.fillingPalletController.fillingPalletService.ServiceBag["FillingCartonIDs"] = this.cartonsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingCartonIDs TO NEW FillingPalletDTO
-                        if (this.fillingPalletController.fillingPalletService.Save(fillingPalletDTO))
-                            this.cartonsetQueue = new BarcodeQueue<FillingCartonDTO>(); //CLEAR AFTER ADD TO FillingPalletDTO
-                        else
-                            throw new Exception("Insufficient save pallet: " + fillingPalletDTO.Code);
-
-
-                        this.palletQueue.Enqueue(fillingPalletDTO);
-                        return true;
-                    }
-                    else
-                        return false;
-                }
-            }
-        }
-
 
         #endregion Public Method
 
@@ -549,7 +349,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             try
             {
-                if (!this.Connect(this.FillingData.FillingLineID != GlobalVariables.FillingLine.Pail)) throw new System.InvalidOperationException("Can not connect to scanner");
+                if (!this.Connect()) throw new System.InvalidOperationException("Can not connect to scanner");
 
                 while (this.LoopRoutine)    //MAIN LOOP. STOP WHEN PRESS DISCONNECT
                 {
@@ -607,6 +407,22 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
+
+
+
+
+
+
+        private bool waitforPack(ref string stringReceived)
+        {
+            if (GlobalEnums.OnTestOnly)
+                if ((DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+            else
+                stringReceived = this.ionetSocketPack.ReadoutStream().Trim();
+
+            return stringReceived != "";
+        }
+
         private bool ReceivePack(string stringReceived)
         {
             bool barcodeReceived = false;
@@ -616,7 +432,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 string receivedBarcode = stringBarcode.Replace("NoRead", "").Trim();
 
-                if (receivedBarcode != "") //Add to MatchingPackList
+                if (receivedBarcode != "")
                 {
                     lock (this.packQueue)
                     {
@@ -633,9 +449,26 @@ namespace TotalSmartCoding.Controllers.Productions
             return barcodeReceived;
         }
 
+        private FillingPackDTO addPack(string packCode, int queueID)
+        {
+            try
+            {
+                FillingPackDTO fillingPackDTO = new FillingPackDTO(this.FillingData) { Code = packCode, QueueID = queueID };
+
+                if (this.fillingPackController.fillingPackService.Save(fillingPackDTO))
+                    return fillingPackDTO;
+                else
+                    throw new Exception();
+            }
+            catch (System.Exception exception)
+            {
+                throw new Exception("Lỗi lưu mã vạch chai [" + packCode + "] " + exception.Message);
+            }
+        }
+
         private bool MakePackset()
         {
-            bool packsetSuccessfully = false;
+            bool isSuccessfully = false;
             if (this.OnScanning)
             {
                 lock (this.packsetQueue)
@@ -649,13 +482,31 @@ namespace TotalSmartCoding.Controllers.Productions
 
                         if (this.packsetQueue.Count > 0)
                         {
-                            packsetSuccessfully = true;
-                            if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(this.packsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update pack status: " + this.fillingPackController.fillingPackService.ServiceTag;
+                            isSuccessfully = true;
+                            if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(this.packsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Lỗi lưu trạng thái chai: " + this.fillingPackController.fillingPackService.ServiceTag;
                         }
                     }
                 }
             }
-            return packsetSuccessfully;
+            return isSuccessfully;
+        }
+
+
+
+
+
+
+
+
+
+        private bool waitforCarton(ref string stringReceived)
+        {
+            if (GlobalEnums.OnTestOnly)
+                if ((DateTime.Now.Second % 6) == 0 && this.packsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+            else
+                stringReceived = this.ionetSocketCarton.ReadoutStream().Trim();
+
+            return stringReceived != "";
         }
 
         /// <summary>
@@ -674,17 +525,42 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 //stringBarcode = stringBarcode.Replace("NoRead", ""); //FOR CARTON: NoRead: MEANS: CAN NOT READ => SHOULD HANDLE LATER FOR NoRead. SHOULD NOT IGNORE NoRead
                 if (stringBarcode.Trim() != "")
-                {
-                    this.matchPacktoCarton(stringBarcode);
-                    barcodeReceived = true;
-                }
+                    if (this.matchPacktoCarton(stringBarcode))
+                        barcodeReceived = true;
             }
             return barcodeReceived;
         }
 
+        private bool matchPacktoCarton(string cartonCode)
+        {
+            lock (this.cartonQueue)
+            {
+                lock (this.packsetQueue)
+                {
+                    if (!GlobalVariables.IgnoreEmptyCarton || this.packsetQueue.Count > 0) //BY NOW: GlobalVariables.IgnoreEmptyCarton = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED
+                    {//IF this.packsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY CARTON. this.packsetQueue.EntityIDs WILL BE BLANK => NO PACK BE UPDATED FOR THIS CARTON
+
+                        FillingCartonDTO fillingCartonDTO = new FillingCartonDTO(this.FillingData) { Code = cartonCode };
+
+                        this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
+                        if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
+                            this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
+                        else
+                            throw new Exception("Lỗi lưu mã vạch carton: " + fillingCartonDTO.Code);
+
+
+                        this.cartonQueue.Enqueue(fillingCartonDTO);
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            }
+        }
+
         private bool MakeCartonset()
         {
-            bool cartonsetSuccessfully = false;
+            bool isSuccessfully = false;
             if (this.OnScanning)
             {
                 lock (this.cartonsetQueue)
@@ -698,13 +574,30 @@ namespace TotalSmartCoding.Controllers.Productions
 
                         if (this.cartonsetQueue.Count > 0)
                         {
-                            cartonsetSuccessfully = true;
-                            if (!this.fillingCartonController.fillingCartonService.UpdateEntryStatus(this.cartonsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Insufficient update carton status: " + this.fillingCartonController.fillingCartonService.ServiceTag;
+                            isSuccessfully = true;
+                            if (!this.fillingCartonController.fillingCartonService.UpdateEntryStatus(this.cartonsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Lỗi lưu trạng thái carton: " + this.fillingCartonController.fillingCartonService.ServiceTag;
                         }
                     }
                 }
             }
-            return cartonsetSuccessfully;
+            return isSuccessfully;
+        }
+
+
+
+
+
+
+
+
+        private bool waitforPallet(ref string stringReceived)
+        {
+            if (GlobalEnums.OnTestOnly)
+                if ((DateTime.Now.Second % 30) == 0 && this.cartonsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+            else
+                stringReceived = this.ionetSocketPallet.ReadoutStream().Trim();
+
+            return stringReceived != "";
         }
 
         /// <summary>
@@ -722,7 +615,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             foreach (string stringBarcode in arrayBarcode)
             {
-                string receivedBarcode = stringBarcode.Replace("NoRead", "").Trim();//FOR PALLET: IGNORE FOR NoRead => USER MUST TRY TO READ AGAIN, OR EVENT PRESS TO RE-PRINT MANUALLY
+                string receivedBarcode = stringBarcode.Replace("NoRead", "").Trim();//FOR PALLET: IGNORE FOR NoRead => USER MUST TRY TO READ AGAIN,     OR: EVENT PRESS BUTTON TO RE-PRINT MANUALLY IN ORDER TO READ AGAIN
                 if (receivedBarcode != "" && lastPalletCode != receivedBarcode)
                     if (this.matchCartontoPallet(receivedBarcode))
                     {
@@ -733,10 +626,38 @@ namespace TotalSmartCoding.Controllers.Productions
             return barcodeReceived;
         }
 
+        private bool matchCartontoPallet(string palletCode)
+        {
+            lock (this.palletQueue)
+            {
+                lock (this.cartonsetQueue)
+                {
+                    if (!GlobalVariables.IgnoreEmptyPallet || (this.cartonsetQueue.Count > 0 && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestOnly) )) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
+                    {//IF this.cartonsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY PALLET: this.cartonsetQueue.EntityIDs WILL BE BLANK => NO CARTON BE UPDATED FOR THIS PALLET
+
+                        FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode };
+
+                        this.fillingPalletController.fillingPalletService.ServiceBag["FillingCartonIDs"] = this.cartonsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingCartonIDs TO NEW FillingPalletDTO
+                        if (this.fillingPalletController.fillingPalletService.Save(fillingPalletDTO))
+                            this.cartonsetQueue = new BarcodeQueue<FillingCartonDTO>(); //CLEAR AFTER ADD TO FillingPalletDTO
+                        else
+                            throw new Exception("Lỗi lưu pallet: " + fillingPalletDTO.Code);
+
+
+                        this.palletQueue.Enqueue(fillingPalletDTO);
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            }
+        }
+
+
         #endregion Public Thread
 
 
-        //#region Handle Exception
+        #region Handle Exception
 
 
         /// <summary>
@@ -935,20 +856,9 @@ namespace TotalSmartCoding.Controllers.Productions
 
         }
 
-        //#endregion Handle Exception
+        #endregion Handle Exception
 
-
-
-
-
-
-
-
-
-
-
-
-        //#region NmvnBackup
+        #region NmvnBackup
 
 
 
@@ -1015,22 +925,17 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        //#endregion NmvnBackup
-
-
-
-
-
+        #endregion NmvnBackup
 
     }
 
     public class BarcodeScannerStatus
     {
-        public GlobalVariables.BarcodeScannerName BarcodeScannerNameID { get; set; }
+        public GlobalVariables.ScannerName BarcodeScannerNameID { get; set; }
         public bool MCUReady { get; set; }
         public string MCUStatus { get; set; }
 
-        public BarcodeScannerStatus(GlobalVariables.BarcodeScannerName barcodeScannerNameID)
+        public BarcodeScannerStatus(GlobalVariables.ScannerName barcodeScannerNameID)
         {
             this.BarcodeScannerNameID = barcodeScannerNameID;
             this.MCUReady = true;

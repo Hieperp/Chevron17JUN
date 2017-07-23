@@ -48,11 +48,9 @@ namespace TotalBase
 
         public enum FillingLine
         {
-            Ocme = 1,
-            Smallpack = 2,
-            Drum = 3,
-            CM = 4,
-            Pail = 5
+            Smallpack = 1,
+            Pail = 2,
+            Drum = 3
         }
 
 
@@ -65,11 +63,12 @@ namespace TotalBase
         }
 
 
-        public enum BarcodeScannerName
+        public enum ScannerName
         {
             QualityScanner = 1,
-            MatchingScanner = 2,
-            CartonScanner = 3
+            PackScanner = 2,
+            CartonScanner = 3,
+            PalletScanner = 6
         }
 
 
@@ -90,7 +89,7 @@ namespace TotalBase
             Reprint = -1,
 
 
-            Successfully = 1,
+            Printed = 1,
             
             
             //WAIT FOR 3 TIMES TO ENSURE RECEIVE ACK/ NACK FROM ZEBRA PRINTER
@@ -115,9 +114,9 @@ namespace TotalBase
 
 
 
-        public static FillingLine FillingLineID = FillingLine.Ocme;
-        public static string FillingLineCode = "0";
-        public static string FillingLineName = FillingLine.Ocme.ToString();
+        public static FillingLine FillingLineID = FillingLine.Pail;
+        public static string FillingLineCode = "PA";
+        public static string FillingLineName = FillingLine.Pail.ToString();
 
         public static int noItemPerCartonSetByProductID = 0;
 
@@ -132,18 +131,6 @@ namespace TotalBase
         {
             switch (GlobalVariables.FillingLineID)
             {
-                case FillingLine.Ocme:
-                    switch (dominoPrinterNameID)
-                    {
-                        case PrinterName.DegitInkjet:
-                            return "192.168.1.101";
-                        case PrinterName.PackInkjet:
-                            return "192.168.1.102";
-                        case PrinterName.CartonInkjet:
-                            return "192.168.1.163";
-                        default:
-                            return "127.0.0.1";
-                    }
                 case FillingLine.Smallpack:
                     switch (dominoPrinterNameID)
                     {
@@ -153,32 +140,6 @@ namespace TotalBase
                             return "192.168.1.105";
                         case PrinterName.CartonInkjet:
                             return "192.168.1.106";
-                        default:
-                            return "127.0.0.1";
-                    }
-
-                case FillingLine.CM:
-                    switch (dominoPrinterNameID)
-                    {
-                        case PrinterName.DegitInkjet:
-                            return "192.168.1.107";
-                        case PrinterName.PackInkjet:
-                            return "192.168.1.108";
-                        case PrinterName.CartonInkjet:
-                            return "192.168.1.109";
-                        default:
-                            return "127.0.0.1";
-                    }
-
-                case FillingLine.Drum:
-                    switch (dominoPrinterNameID)
-                    {
-                        case PrinterName.DegitInkjet:
-                            return "192.168.1.110";
-                        case PrinterName.PackInkjet:
-                            return "192.168.1.111";
-                        case PrinterName.CartonInkjet:
-                            return "192.168.1.112";
                         default:
                             return "127.0.0.1";
                     }
@@ -195,6 +156,20 @@ namespace TotalBase
                         default:
                             return "127.0.0.1";
                     }
+                case FillingLine.Drum:
+                    switch (dominoPrinterNameID)
+                    {
+                        case PrinterName.DegitInkjet:
+                            return "192.168.1.110";
+                        case PrinterName.PackInkjet:
+                            return "192.168.1.111";
+                        case PrinterName.CartonInkjet:
+                            return "192.168.1.112";
+                        default:
+                            return "127.0.0.1";
+                    }
+
+                
                 default:
                     return "127.0.0.1";
             }
@@ -204,73 +179,49 @@ namespace TotalBase
 
 
 
-        public static string IpAddress(BarcodeScannerName barcodeScannerName)
+        public static string IpAddress(ScannerName barcodeScannerName)
         {
             switch (GlobalVariables.FillingLineID)
             {
-                case FillingLine.Ocme:
-                    switch (barcodeScannerName)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return "127.0.0.1";
-                        case BarcodeScannerName.MatchingScanner:
-                            return "192.168.1.51";
-                        case BarcodeScannerName.CartonScanner:
-                            return "127.0.0.1";
-                        default:
-                            return "127.0.0.1";
-                    }
                 case FillingLine.Smallpack:
                     switch (barcodeScannerName)
                     {
-                        case BarcodeScannerName.QualityScanner:
+                        case ScannerName.QualityScanner:
                             return "127.0.0.1";
-                        case BarcodeScannerName.MatchingScanner:
+                        case ScannerName.PackScanner:
                             return "192.168.1.55"; //192.168.1.52
-                        case BarcodeScannerName.CartonScanner:
+                        case ScannerName.CartonScanner:
                             return "127.0.0.1";
                         default:
                             return "127.0.0.1";
                     }
-
-                case FillingLine.CM:
-                    switch (barcodeScannerName)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return "127.0.0.1";
-                        case BarcodeScannerName.MatchingScanner:
-                            return "192.168.1.53";
-                        case BarcodeScannerName.CartonScanner:
-                            return "127.0.0.1";
-                        default:
-                            return "127.0.0.1";
-                    }
-
-                case FillingLine.Drum:
-                    switch (barcodeScannerName)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return "127.0.0.1";
-                        case BarcodeScannerName.MatchingScanner:
-                            return "192.168.1.54";
-                        case BarcodeScannerName.CartonScanner:
-                            return "127.0.0.1";
-                        default:
-                            return "127.0.0.1";
-                    }
-
                 case FillingLine.Pail:
                     switch (barcodeScannerName)
                     {
-                        case BarcodeScannerName.QualityScanner:
+                        case ScannerName.QualityScanner:
                             return "127.0.0.1";
-                        case BarcodeScannerName.MatchingScanner:
+                        case ScannerName.PackScanner:
                             return "192.168.1.55";
-                        case BarcodeScannerName.CartonScanner:
+                        case ScannerName.CartonScanner:
                             return "127.0.0.1";
                         default:
                             return "127.0.0.1";
                     }
+                
+                case FillingLine.Drum:
+                    switch (barcodeScannerName)
+                    {
+                        case ScannerName.QualityScanner:
+                            return "127.0.0.1";
+                        case ScannerName.PackScanner:
+                            return "192.168.1.54";
+                        case ScannerName.CartonScanner:
+                            return "127.0.0.1";
+                        default:
+                            return "127.0.0.1";
+                    }
+
+                
                 default:
                     return "127.0.0.1";
             }
@@ -285,15 +236,11 @@ namespace TotalBase
         {
             switch (GlobalVariables.FillingLineID)
             {
-                case FillingLine.Ocme:
-                    return 8;
                 case FillingLine.Smallpack:
                     return 6;
-                case FillingLine.Drum:
-                    return 1;
-                case FillingLine.CM:
-                    return 1;
                 case FillingLine.Pail:
+                    return 1;
+                case FillingLine.Drum:
                     return 1;
                 default:
                     return 1;
@@ -309,15 +256,11 @@ namespace TotalBase
 
             switch (GlobalVariables.FillingLineID)
             {
-                case FillingLine.Ocme:
-                    return 2;
                 case FillingLine.Smallpack:
                     return 6;
-                case FillingLine.Drum:
-                    return 1;
-                case FillingLine.CM:
-                    return 1;
                 case FillingLine.Pail:
+                    return 1;
+                case FillingLine.Drum:
                     return 1;
                 default:
                     return 1;
@@ -339,16 +282,12 @@ namespace TotalBase
 
             switch (GlobalVariables.FillingLineID)
             {
-                case FillingLine.Ocme:
-                    return 12;
                 case FillingLine.Smallpack:
                     return 24;
-                case FillingLine.Drum:
-                    return GlobalVariables.noItemPerCartonSetByProductID;
-                case FillingLine.CM:
-                    return GlobalVariables.noItemPerCartonSetByProductID;
                 case FillingLine.Pail:
                     return 1;
+                case FillingLine.Drum:
+                    return GlobalVariables.noItemPerCartonSetByProductID;
                 default:
                     return 1;
             }
@@ -359,97 +298,16 @@ namespace TotalBase
         {
             switch (GlobalVariables.FillingLineID)
             {
-                case FillingLine.Ocme:
-                    return false;
                 case FillingLine.Smallpack:
                     return true;
-                case FillingLine.Drum:
-                    return false;
-                case FillingLine.CM:
-                    return false;
                 case FillingLine.Pail:
+                    return false;
+                case FillingLine.Drum:
                     return false;
                 default:
                     return false;
             }
         }
-
-
-
-        public static string MCUAddress(BarcodeScannerName barcodeScannerNameID)
-        {
-            switch (GlobalVariables.FillingLineID)
-            {
-                case FillingLine.Ocme:
-                    switch (barcodeScannerNameID)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("30", 16));
-                        case BarcodeScannerName.MatchingScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("31", 16));
-                        case BarcodeScannerName.CartonScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("32", 16));
-                        default:
-                            return char.ConvertFromUtf32(Convert.ToInt32("3F", 16)); //3FH
-                    }
-                case FillingLine.Smallpack:
-                    switch (barcodeScannerNameID)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("30", 16));
-                        case BarcodeScannerName.MatchingScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("31", 16));
-                        case BarcodeScannerName.CartonScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("32", 16));
-                        default:
-                            return char.ConvertFromUtf32(Convert.ToInt32("3F", 16));
-                    }
-                case FillingLine.Drum:
-                    switch (barcodeScannerNameID)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("30", 16));
-                        case BarcodeScannerName.MatchingScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("31", 16));
-                        case BarcodeScannerName.CartonScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("32", 16));
-                        default:
-                            return char.ConvertFromUtf32(Convert.ToInt32("3F", 16));
-                    }
-                case FillingLine.CM:
-                    switch (barcodeScannerNameID)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("30", 16));
-                        case BarcodeScannerName.MatchingScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("31", 16));
-                        case BarcodeScannerName.CartonScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("32", 16));
-                        default:
-                            return char.ConvertFromUtf32(Convert.ToInt32("3F", 16));
-                    }
-                case FillingLine.Pail:
-                    switch (barcodeScannerNameID)
-                    {
-                        case BarcodeScannerName.QualityScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("30", 16));
-                        case BarcodeScannerName.MatchingScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("31", 16));
-                        case BarcodeScannerName.CartonScanner:
-                            return char.ConvertFromUtf32(Convert.ToInt32("32", 16));
-                        default:
-                            return char.ConvertFromUtf32(Convert.ToInt32("3F", 16));
-                    }
-                default:
-                    return char.ConvertFromUtf32(Convert.ToInt32("3F", 16));
-            }
-
-        }
-
-
-
-
-
 
     }
 

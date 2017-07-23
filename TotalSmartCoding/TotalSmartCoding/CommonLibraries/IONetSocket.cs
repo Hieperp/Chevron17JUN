@@ -18,7 +18,10 @@ namespace TotalSmartCoding.CommonLibraries
 
         private readonly bool isLaser;
 
-        
+        public IONetSocket(IPAddress ipAddress, int portNumber, bool isLaser)
+            : this(ipAddress, portNumber, -1, isLaser)
+        { }
+
         public IONetSocket(IPAddress ipAddress, int portNumber, int readTimeout)
             : this(ipAddress, portNumber, readTimeout, false)
         { }

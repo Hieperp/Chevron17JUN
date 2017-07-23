@@ -112,6 +112,17 @@ namespace TotalSmartCoding.Controllers.Productions
 
         }
 
+
+        protected void setLED() { this.setLED(false, false, false); }
+        protected void setLED(bool ledGreenOn, bool ledAmberOn, bool ledRedOn)
+        {
+            this.LedGreenOn = ledGreenOn;
+            this.LedAmberOn = ledAmberOn;
+            this.LedRedOn = ledRedOn;
+            this.NotifyPropertyChanged("LedStatus");
+        }
+
+
         #endregion Puclic Properties
 
     }
