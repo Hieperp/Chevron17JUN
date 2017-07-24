@@ -86,14 +86,11 @@
     <Compile Include="Builders\Sales\DeliveryAdviceViewModelSelectListBuilder.cs" />
     <Compile Include="CommonLibraries\AutoMapperConfig.cs" />
     <Compile Include="CommonLibraries\BP\ADODatabase.cs" />
-    <Compile Include="CommonLibraries\BP\CommonThreadProperty.cs" />
     <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />
     <Compile Include="CommonLibraries\Crc16Ccitt.cs" />
     <Compile Include="CommonLibraries\IOCommon.cs" />
     <Compile Include="CommonLibraries\IONetSocket.cs" />
     <Compile Include="CommonLibraries\BP\GlobalRegistry.cs" />
-    <Compile Include="CommonLibraries\BP\MessageData.cs" />
-    <Compile Include="CommonLibraries\BP\MessageQueue.cs" />
     <Compile Include="CommonLibraries\BP\SQLDatabase.cs" />
     <Compile Include="CommonLibraries\CommonFormAction.cs" />
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
