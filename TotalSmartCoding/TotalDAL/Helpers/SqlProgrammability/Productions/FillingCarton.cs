@@ -31,6 +31,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = " @EntityID int, @SaveRelativeOption int, @FillingPackIDs varchar(3999) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "   IF (@FillingPackIDs <> '') " + "\r\n";
             queryString = queryString + "       BEGIN " + "\r\n";
 
             queryString = queryString + "           IF (@SaveRelativeOption = 1) " + "\r\n";

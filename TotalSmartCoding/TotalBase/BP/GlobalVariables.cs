@@ -114,9 +114,9 @@ namespace TotalBase
 
 
 
-        public static FillingLine FillingLineID = FillingLine.Pail;
-        public static string FillingLineCode = "PA";
-        public static string FillingLineName = FillingLine.Pail.ToString();
+        public static FillingLine FillingLineID = FillingLine.Drum;
+        public static string FillingLineCode = "Drum";
+        public static string FillingLineName = FillingLine.Drum.ToString();
 
         public static int noItemPerCartonSetByProductID = 0;
 

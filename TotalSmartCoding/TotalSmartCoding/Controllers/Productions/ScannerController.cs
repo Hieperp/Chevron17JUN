@@ -1,28 +1,22 @@
-﻿using Ninject;
-
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.IO.Ports;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using System.ComponentModel;
+
+using Ninject;
+
 using TotalBase;
+using TotalBase.Enums;
 using TotalCore.Services.Productions;
 using TotalDTO.Productions;
 using TotalService.Productions;
-using TotalSmartCoding.CommonLibraries.BP;
-
-using TotalBase.Enums;
+using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.ViewModels.Productions;
 using TotalSmartCoding.Builders.Productions;
-using TotalSmartCoding.CommonLibraries;
-
 using TotalSmartCoding.Controllers.Productions;
-using System.ComponentModel;
+
 
 namespace TotalSmartCoding.Controllers.Productions
 {
@@ -284,13 +278,14 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     this.MainStatus = "Đang kết nối máy đọc mã vạch ...";
 
-                    if (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Smallpack)
+                    if (this.FillingData.HasPack)
                         this.ionetSocketPack.Connect();
 
-                    if (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Smallpack || this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail)
+                    if (this.FillingData.HasCarton)
                         this.ionetSocketCarton.Connect();
 
-                    this.ionetSocketPallet.Connect();
+                    if (this.FillingData.HasPallet)
+                        this.ionetSocketPallet.Connect();
                 }
 
                 this.setLED(true, false, false);
@@ -349,33 +344,38 @@ namespace TotalSmartCoding.Controllers.Productions
 
             try
             {
-                if (!this.Connect()) throw new System.InvalidOperationException("Can not connect to scanner");
+                if (!this.Connect()) throw new System.InvalidOperationException("Lỗi kết nối đầu đọc mã vạch");
 
                 while (this.LoopRoutine)    //MAIN LOOP. STOP WHEN PRESS DISCONNECT
                 {
-                    this.MainStatus = this.OnScanning ? "Scanning..." : "Ready to scan";
+                    this.MainStatus = this.OnScanning ? "Đang đọc mã vạch ..." : "Sẳn sàng đọc mã vạch";
 
-
-                    if (this.OnScanning && this.waitforPack(ref stringReceived))
-                        packQueueChanged = this.ReceivePack(stringReceived) || packQueueChanged;
-
-                    packsetQueueChanged = this.MakePackset(); packQueueChanged = packQueueChanged || packsetQueueChanged;
-
-
-                    if (this.OnScanning && this.waitforCarton(ref stringReceived))
+                    if (this.OnScanning && this.FillingData.HasPack)
                     {
-                        cartonQueueChanged = this.ReceiveCarton(stringReceived) || cartonQueueChanged;
-                        packsetQueueChanged = packsetQueueChanged || cartonQueueChanged;
-                    }
-                    cartonsetQueueChanged = this.MakeCartonset(); cartonQueueChanged = cartonQueueChanged || cartonsetQueueChanged;
+                        if (this.waitforPack(ref stringReceived))
+                            packQueueChanged = this.ReceivePack(stringReceived) || packQueueChanged;
 
-
-                    if (this.OnScanning && this.waitforPallet(ref stringReceived))
-                    {
-                        palletQueueChanged = this.ReceivePallet(stringReceived) || palletQueueChanged;
-                        cartonsetQueueChanged = cartonsetQueueChanged || palletQueueChanged;
+                        packsetQueueChanged = this.MakePackset(); packQueueChanged = packQueueChanged || packsetQueueChanged;
                     }
 
+                    if (this.OnScanning && this.FillingData.HasCarton)
+                    {
+                        if (this.waitforCarton(ref stringReceived))
+                        {
+                            cartonQueueChanged = this.ReceiveCarton(stringReceived) || cartonQueueChanged;
+                            packsetQueueChanged = packsetQueueChanged || cartonQueueChanged;
+                        }
+                        cartonsetQueueChanged = this.MakeCartonset(); cartonQueueChanged = cartonQueueChanged || cartonsetQueueChanged;
+                    }
+
+                    if (this.OnScanning && this.FillingData.HasPallet)
+                    {
+                        if (this.waitforPallet(ref stringReceived))
+                        {
+                            palletQueueChanged = this.ReceivePallet(stringReceived) || palletQueueChanged;
+                            cartonsetQueueChanged = cartonsetQueueChanged || palletQueueChanged;
+                        }
+                    }
 
 
                     if (packQueueChanged) { this.NotifyPropertyChanged("PackQueue"); packQueueChanged = false; }
@@ -396,8 +396,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.LoopRoutine = false;
                 this.MainStatus = exception.Message;
 
-                this.LedRedOn = true;
-                this.NotifyPropertyChanged("LedStatus");
+                this.setLED(this.LedGreenOn, this.LedAmberOn, true);
             }
             finally
             {
@@ -502,7 +501,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool waitforCarton(ref string stringReceived)
         {
             if (GlobalEnums.OnTestOnly)
-                if ((DateTime.Now.Second % 6) == 0 && this.packsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+                if ((DateTime.Now.Second % 6) == 0 && (this.packsetQueue.Count > 0 || !this.FillingData.HasPack)) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketCarton.ReadoutStream().Trim();
 
@@ -510,12 +509,17 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
         /// <summary>
-        /// NOW: WHEN RECEIVE NoRead: IT WILL ADD NEW CARTON, WHICH CODE WILL BE 'NoRead'
-        /// AND THEN: USER MUST UPDATE ACTUAL BARCODE BY MANUALLY
+        /// FillingData.HasPack:        CARTON: WHEN RECEIVE NoRead => ACCEPT: IT WILL ADD NEW CARTON, WHICH CODE WILL BE 'NoRead' 
+        ///                             AND THEN: => USER MUST UPDATE ACTUAL BARCODE BY MANUALL LATER/ OR: REMOVE CARTON WRAPPER => TO WRAP CARTON AGAIN (PRINT + SCAN AGAIN) FROM THE PRODUCTION LINE
+        /// 
+        /// NOT FillingData.HasPack:    CARTON: NO READ => IGNORE. MEANS: USER MUST TRY TO SCAN UNTIL READ SUCCESSFULLY/ OR USER MUST REMOVE THIS PAIL OUT OF PRODUCTION LINE (DELETE) (JUST ONLY SUCCESSFULLY READ => TO ADD TO CartonQueue)
+        ///                             IF REPEATED READ => THE SOFTWARE JUST ACCEPT THE FIRST ONE ONLY (ONLY FOR: NOT FillingData.HasPack)
+        /// 
         /// WHEN this.packsetQueue.Count = 0: EMPTY CARTON WILL BE IGNORE. SEE MatchingAndAddCarton FOR MORE INFORMATION
         /// </summary>
         /// <param name="stringReceived"></param>
         /// <returns></returns>
+        private string lastCartonCode = "";
         private bool ReceiveCarton(string stringReceived)
         {
             bool barcodeReceived = false;
@@ -523,10 +527,15 @@ namespace TotalSmartCoding.Controllers.Productions
 
             foreach (string stringBarcode in arrayBarcode)
             {
-                //stringBarcode = stringBarcode.Replace("NoRead", ""); //FOR CARTON: NoRead: MEANS: CAN NOT READ => SHOULD HANDLE LATER FOR NoRead. SHOULD NOT IGNORE NoRead
-                if (stringBarcode.Trim() != "")
-                    if (this.matchPacktoCarton(stringBarcode))
+                string receivedBarcode = stringBarcode.Trim();
+                if (!this.FillingData.HasPack) receivedBarcode = receivedBarcode.Replace("NoRead", "").Trim();
+
+                if (receivedBarcode != "" && (lastCartonCode != receivedBarcode || receivedBarcode == "NoRead"))
+                    if (this.matchPacktoCarton(receivedBarcode))
+                    {
+                        lastCartonCode = receivedBarcode;
                         barcodeReceived = true;
+                    }
             }
             return barcodeReceived;
         }
@@ -536,8 +545,8 @@ namespace TotalSmartCoding.Controllers.Productions
             lock (this.cartonQueue)
             {
                 lock (this.packsetQueue)
-                {
-                    if (!GlobalVariables.IgnoreEmptyCarton || this.packsetQueue.Count > 0) //BY NOW: GlobalVariables.IgnoreEmptyCarton = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED
+                {//BY NOW: GlobalVariables.IgnoreEmptyCarton = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED
+                    if (!GlobalVariables.IgnoreEmptyCarton || this.packsetQueue.Count > 0 || !this.FillingData.HasPack) //BY NOT this.FillingData.HasPack: this.packsetQueue.Count WILL ALWAYS BE: 0 (NO PACK RECEIVED)
                     {//IF this.packsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY CARTON. this.packsetQueue.EntityIDs WILL BE BLANK => NO PACK BE UPDATED FOR THIS CARTON
 
                         FillingCartonDTO fillingCartonDTO = new FillingCartonDTO(this.FillingData) { Code = cartonCode };
@@ -593,7 +602,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool waitforPallet(ref string stringReceived)
         {
             if (GlobalEnums.OnTestOnly)
-                if ((DateTime.Now.Second % 30) == 0 && this.cartonsetQueue.Count > 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+                if ((DateTime.Now.Second % 10) == 0 && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketPallet.ReadoutStream().Trim();
 
@@ -632,7 +641,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 lock (this.cartonsetQueue)
                 {
-                    if (!GlobalVariables.IgnoreEmptyPallet || (this.cartonsetQueue.Count > 0 && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestOnly) )) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
+                    if (!GlobalVariables.IgnoreEmptyPallet || ((this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton) && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestOnly))) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
                     {//IF this.cartonsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY PALLET: this.cartonsetQueue.EntityIDs WILL BE BLANK => NO CARTON BE UPDATED FOR THIS PALLET
 
                         FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode };

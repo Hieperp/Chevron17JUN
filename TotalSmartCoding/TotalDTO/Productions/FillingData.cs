@@ -92,6 +92,11 @@ namespace TotalDTO.Productions
 
         }
 
+        //***************THESE SHOULD GET FROM FillingLines TABLE
+        public bool HasPack { get { return false; } }
+        public bool HasCarton { get { return false; } }
+        public bool HasPallet { get { return true; } }
+
         public string FillingLineCode
         {
             get { return GlobalVariables.FillingLineCode; }

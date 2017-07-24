@@ -62,6 +62,23 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
+
+        private void ioserialPort_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            try
+            {
+                PropertyInfo prop = this.GetType().GetProperty(e.PropertyName, BindingFlags.Public | BindingFlags.Instance);
+                if (null != prop && prop.CanWrite)
+                    prop.SetValue(this, sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null), null);
+                else
+                    this.MainStatus = e.PropertyName + ": " + sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null).ToString();
+            }
+            catch (Exception exception)
+            {
+                this.MainStatus = exception.Message;
+            }
+        }
+
         #endregion Contructor
 
 
@@ -121,13 +138,13 @@ namespace TotalSmartCoding.Controllers.Productions
         private string getNextNo()
         {
             if (this.printerName == GlobalVariables.PrinterName.PackInkjet)
-                return this.privateFillingData.NextPackNo;
+                return this.NextPackNo;
             else
                 if (this.printerName == GlobalVariables.PrinterName.CartonInkjet)
-                    return this.privateFillingData.NextCartonNo;
+                    return this.NextCartonNo;
                 else
                     if (this.printerName == GlobalVariables.PrinterName.PalletLabel)
-                        return this.privateFillingData.NextPalletNo;
+                        return this.NextPalletNo;
                     else
                         return "XXXXXX"; //THIS return value WILL RAISE ERROR TO THE CALLER FUNCTION, BUCAUSE IT DON'T HAVE A CORRECT FORMAT
 
@@ -323,8 +340,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message;
-                return false;
+                this.MainStatus = exception.Message; return false;
             }
 
         }
@@ -335,10 +351,10 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 if (!GlobalEnums.OnTestOnly)
                 {
-                    this.ioserialPort.Disconnect();
                     this.ionetSocket.Disconnect();
+                    this.ioserialPort.Disconnect();
 
-                    this.MainStatus = "Disconnect....";
+                    this.MainStatus = "Đã ngắt kết nối ...";
                     this.setLED();
                 }
                 return true;
@@ -346,11 +362,25 @@ namespace TotalSmartCoding.Controllers.Productions
 
             catch (Exception exception)
             {
-                this.MainStatus = exception.Message;
-                return false;
+                this.MainStatus = exception.Message; return false;
             }
 
         }
+
+
+        private void storeMessage(string stringMessage)
+        {
+            string receivedFeedback = "";
+
+            //S: Message Storage
+            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/S/001/" + stringMessage + "/" + GlobalVariables.charEOT);
+            if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(750); else throw new System.InvalidOperationException("Lỗi cài đặt bản tin 001: " + receivedFeedback);
+
+            //P: Message To Head Assignment '//CHU Y QUAN TRONG: DUA MSG SO 1 LEN DAU IN (SAN SANG KHI IN, BOI VI KHI IN TA STORAGE MSG VAO VI TRI SO 1 MA KHONG QUAN TAM DEN VI TRI SO 2, 3,...)
+            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/P/1/001/" + GlobalVariables.charEOT); //FOR AX SERIES: MUST CALL P: Message To Head Assignment FOR EVERY CALL S: Message Storage
+            if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi sẳn sàng in phun, bản tin 001: " + receivedFeedback);
+        }
+
 
         /// <summary>
         /// NEVER waiforACK WHEN This.IsLaser
@@ -406,18 +436,6 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        private void storeMessage(string stringMessage)
-        {
-            string receivedFeedback = "";
-
-            //S: Message Storage
-            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/S/001/" + stringMessage + "/" + GlobalVariables.charEOT);
-            if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(750); else throw new System.InvalidOperationException("Lỗi cài đặt bản tin 001: " + receivedFeedback);
-
-            //P: Message To Head Assignment '//CHU Y QUAN TRONG: DUA MSG SO 1 LEN DAU IN (SAN SANG KHI IN, BOI VI KHI IN TA STORAGE MSG VAO VI TRI SO 1 MA KHONG QUAN TAM DEN VI TRI SO 2, 3,...)
-            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/P/1/001/" + GlobalVariables.charEOT); //FOR AX SERIES: MUST CALL P: Message To Head Assignment FOR EVERY CALL S: Message Storage
-            if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi sẳn sàng in phun, bản tin 001: " + receivedFeedback);
-        }
 
 
         /// <summary>
@@ -553,23 +571,6 @@ namespace TotalSmartCoding.Controllers.Productions
         #endregion STASTUS
 
 
-
-
-        private void ioserialPort_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            try
-            {
-                PropertyInfo prop = this.GetType().GetProperty(e.PropertyName, BindingFlags.Public | BindingFlags.Instance);
-                if (null != prop && prop.CanWrite)
-                    prop.SetValue(this, sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null), null);
-                else
-                    this.MainStatus = e.PropertyName + ": " + sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null).ToString();
-            }
-            catch (Exception exception)
-            {
-                this.MainStatus = exception.Message;
-            }
-        }
 
 
 
@@ -795,7 +796,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/2/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
                                 if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
                             }
-                            #endregion Reset Message
+                            #endregion SETUP MESSAGE
 
                             this.MainStatus = "Đang in ...";
                             this.resetMessage = false; //Setup first message: Only one times                            
@@ -820,7 +821,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             this.sendtoZebra();
                             this.waitforZebra();
                         }
-                        #endregion setup for every message: this.printerName == GlobalVariables.PrinterName.PalletLabel
+                        #endregion setup for every message: printerName == PalletLabel
                     }
 
 

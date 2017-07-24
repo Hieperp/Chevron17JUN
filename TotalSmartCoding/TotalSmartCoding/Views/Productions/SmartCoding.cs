@@ -128,9 +128,9 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-                this.splitContainerQuality.SplitterDistance = this.SplitterDistanceQuality();
-                this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
-                this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
+                //this.splitContainerQuality.SplitterDistance = this.SplitterDistanceQuality();
+                //this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
+                //this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
             }
             catch (Exception exception)
             {
