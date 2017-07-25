@@ -121,7 +121,7 @@ namespace TotalBase
         public static int noItemPerCartonSetByProductID = 0;
 
         public static int PortNumber = 7000;
-        public static string PortName = "COM 4";
+        public static string PortName = "COM6";
 
 
         public const int ServerLineID = 99;

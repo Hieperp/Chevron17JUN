@@ -272,8 +272,10 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                if (GlobalEnums.OnTestOnly)
-                    this.StartScanner();
+                if (GlobalEnums.OnTestScanner)
+                {
+                    //this.StartScanner();
+                }
                 else
                 {
                     this.MainStatus = "Đang kết nối máy đọc mã vạch ...";
@@ -414,7 +416,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private bool waitforPack(ref string stringReceived)
         {
-            if (GlobalEnums.OnTestOnly)
+            if (GlobalEnums.OnTestScanner)
                 if ((DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketPack.ReadoutStream().Trim();
@@ -500,7 +502,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private bool waitforCarton(ref string stringReceived)
         {
-            if (GlobalEnums.OnTestOnly)
+            if (GlobalEnums.OnTestScanner)
                 if ((DateTime.Now.Second % 6) == 0 && (this.packsetQueue.Count > 0 || !this.FillingData.HasPack)) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketCarton.ReadoutStream().Trim();
@@ -601,8 +603,8 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private bool waitforPallet(ref string stringReceived)
         {
-            if (GlobalEnums.OnTestOnly)
-                if ((DateTime.Now.Second % 10) == 0 && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+            if (GlobalEnums.OnTestScanner)
+                if (GlobalEnums.OnTestPrinter && (DateTime.Now.Second % 10) == 0 && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketPallet.ReadoutStream().Trim();
 
@@ -641,7 +643,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 lock (this.cartonsetQueue)
                 {
-                    if (!GlobalVariables.IgnoreEmptyPallet || ((this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton) && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestOnly))) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
+                    if (!GlobalVariables.IgnoreEmptyPallet || ((this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton) && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestScanner))) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
                     {//IF this.cartonsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY PALLET: this.cartonsetQueue.EntityIDs WILL BE BLANK => NO CARTON BE UPDATED FOR THIS PALLET
 
                         FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode };

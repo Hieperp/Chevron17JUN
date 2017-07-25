@@ -3,7 +3,8 @@
     public static class GlobalEnums
     {
 
-        public static bool OnTestOnly = true;
+        public static bool OnTestScanner = true;
+        public static bool OnTestPrinter = false;
 
         public static OptionSetting GlobalOptionSetting = new OptionSetting();
         public static string stringFieldRequired = "Input not correct. Please make sure all required fields are filled out correctly";

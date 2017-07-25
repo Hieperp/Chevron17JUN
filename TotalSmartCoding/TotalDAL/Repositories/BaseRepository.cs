@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using TotalBase.Enums;
 using TotalModel.Models;
 using TotalCore.Repositories;
+using TotalBase;
 
 
 namespace TotalDAL.Repositories
@@ -21,7 +22,10 @@ namespace TotalDAL.Repositories
         {
             this.totalSmartCodingEntities = totalSmartCodingEntities;
 
-            return;
+
+            if (!GlobalVariables.shouldRestoreProcedure) return;
+
+            //return;
 
             Helpers.SqlProgrammability.Productions.FillingPallet fillingPallet = new Helpers.SqlProgrammability.Productions.FillingPallet(totalSmartCodingEntities);
             fillingPallet.RestoreProcedure();

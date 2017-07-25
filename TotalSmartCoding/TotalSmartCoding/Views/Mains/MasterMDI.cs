@@ -462,7 +462,7 @@ namespace TotalSmartCoding.Views.Mains
                 if (this.nmvnTaskID != GlobalEnums.NmvnTaskID.UnKnown && this.nmvnTaskID != GlobalEnums.NmvnTaskID.Batch)
                 {
                     childForm.MdiParent = this;
-                    childForm.WindowState = FormWindowState.Maximized;
+                    //childForm.WindowState = FormWindowState.Maximized;
                     childForm.Show();
                 }
             }

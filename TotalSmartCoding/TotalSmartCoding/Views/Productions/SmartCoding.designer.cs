@@ -29,30 +29,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SmartCoding));
-            this.textBoxDigitStatus = new System.Windows.Forms.TextBox();
+            this.digitStatusbox = new System.Windows.Forms.TextBox();
             this.dgvPackQueue = new System.Windows.Forms.DataGridView();
             this.dgvPacksetQueue = new System.Windows.Forms.DataGridView();
             this.dgvCartonQueue = new System.Windows.Forms.DataGridView();
-            this.textBoxCartonStatus = new System.Windows.Forms.TextBox();
+            this.cartonStatusbox = new System.Windows.Forms.TextBox();
             this.timerEverySecond = new System.Windows.Forms.Timer(this.components);
             this.splitContainerQuality = new System.Windows.Forms.SplitContainer();
             this.splitContainerMatching = new System.Windows.Forms.SplitContainer();
@@ -75,35 +75,47 @@
             this.dgvPalletsetQueue = new System.Windows.Forms.DataGridView();
             this.toolStrip6 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.splitContainerDigitInkJetPrinter = new System.Windows.Forms.SplitContainer();
+            this.splitDigit = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDigitLEDGreen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDigitOnPrinting = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDigitLEDAmber = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDigitLEDRed = new System.Windows.Forms.ToolStripButton();
-            this.splitContainerBarcodeInkJetPrinter = new System.Windows.Forms.SplitContainer();
-            this.textBoxBarcodeStatus = new System.Windows.Forms.TextBox();
+            this.digitLEDGreen = new System.Windows.Forms.ToolStripButton();
+            this.digitLEDPrinting = new System.Windows.Forms.ToolStripButton();
+            this.digitLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.digitLEDAmber = new System.Windows.Forms.ToolStripButton();
+            this.splitPack = new System.Windows.Forms.SplitContainer();
+            this.packStatusbox = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBarcodeLEDGreen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBarcodeOnPrinting = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBarcodeLEDAmber = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBarcodeLEDRed = new System.Windows.Forms.ToolStripButton();
-            this.splitContainerCartonInkJetPrinter = new System.Windows.Forms.SplitContainer();
+            this.packLEDGreen = new System.Windows.Forms.ToolStripButton();
+            this.packLEDPrinting = new System.Windows.Forms.ToolStripButton();
+            this.packLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.packLEDAmber = new System.Windows.Forms.ToolStripButton();
+            this.splitCarton = new System.Windows.Forms.SplitContainer();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripCartonLEDGreen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripCartonOnPrinting = new System.Windows.Forms.ToolStripButton();
-            this.toolStripCartonLEDAmber = new System.Windows.Forms.ToolStripButton();
-            this.toolStripCartonLEDRed = new System.Windows.Forms.ToolStripButton();
-            this.textBoxScannerStatus = new System.Windows.Forms.TextBox();
+            this.cartonLEDGreen = new System.Windows.Forms.ToolStripButton();
+            this.cartonLEDPrinting = new System.Windows.Forms.ToolStripButton();
+            this.cartonLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.cartonLEDAmber = new System.Windows.Forms.ToolStripButton();
+            this.splitPallet = new System.Windows.Forms.SplitContainer();
+            this.palletStatusbox = new System.Windows.Forms.TextBox();
+            this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.palletLEDGreen = new System.Windows.Forms.ToolStripButton();
+            this.palletLEDPrinting = new System.Windows.Forms.ToolStripButton();
+            this.palletLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.palletLEDAmber = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
+            this.scannerStatusbox = new System.Windows.Forms.TextBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripScannerLEDGreen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripScannerOnPrinting = new System.Windows.Forms.ToolStripButton();
-            this.toolStripScannerLEDAmber = new System.Windows.Forms.ToolStripButton();
-            this.toolStripScannerLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.scannerLEDGreen = new System.Windows.Forms.ToolStripButton();
+            this.scannerLEDScanning = new System.Windows.Forms.ToolStripButton();
+            this.scannerLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.scannerLEDAmber = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripMCUQuanlity = new System.Windows.Forms.ToolStripButton();
             this.toolStripMCUMatching = new System.Windows.Forms.ToolStripButton();
@@ -167,37 +179,42 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalletQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalletsetQueue)).BeginInit();
             this.toolStrip6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDigitInkJetPrinter)).BeginInit();
-            this.splitContainerDigitInkJetPrinter.Panel1.SuspendLayout();
-            this.splitContainerDigitInkJetPrinter.Panel2.SuspendLayout();
-            this.splitContainerDigitInkJetPrinter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitDigit)).BeginInit();
+            this.splitDigit.Panel1.SuspendLayout();
+            this.splitDigit.Panel2.SuspendLayout();
+            this.splitDigit.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerBarcodeInkJetPrinter)).BeginInit();
-            this.splitContainerBarcodeInkJetPrinter.Panel1.SuspendLayout();
-            this.splitContainerBarcodeInkJetPrinter.Panel2.SuspendLayout();
-            this.splitContainerBarcodeInkJetPrinter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitPack)).BeginInit();
+            this.splitPack.Panel1.SuspendLayout();
+            this.splitPack.Panel2.SuspendLayout();
+            this.splitPack.SuspendLayout();
             this.toolStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCartonInkJetPrinter)).BeginInit();
-            this.splitContainerCartonInkJetPrinter.Panel1.SuspendLayout();
-            this.splitContainerCartonInkJetPrinter.Panel2.SuspendLayout();
-            this.splitContainerCartonInkJetPrinter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitCarton)).BeginInit();
+            this.splitCarton.Panel1.SuspendLayout();
+            this.splitCarton.Panel2.SuspendLayout();
+            this.splitCarton.SuspendLayout();
             this.toolStrip3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitPallet)).BeginInit();
+            this.splitPallet.Panel1.SuspendLayout();
+            this.splitPallet.Panel2.SuspendLayout();
+            this.splitPallet.SuspendLayout();
+            this.toolStrip7.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.toolStripChildForm.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBoxDigitStatus
+            // digitStatusbox
             // 
-            this.textBoxDigitStatus.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBoxDigitStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDigitStatus.Location = new System.Drawing.Point(0, 55);
-            this.textBoxDigitStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxDigitStatus.Multiline = true;
-            this.textBoxDigitStatus.Name = "textBoxDigitStatus";
-            this.textBoxDigitStatus.ReadOnly = true;
-            this.textBoxDigitStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDigitStatus.Size = new System.Drawing.Size(160, 169);
-            this.textBoxDigitStatus.TabIndex = 3;
+            this.digitStatusbox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.digitStatusbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.digitStatusbox.Location = new System.Drawing.Point(0, 55);
+            this.digitStatusbox.Margin = new System.Windows.Forms.Padding(4);
+            this.digitStatusbox.Multiline = true;
+            this.digitStatusbox.Name = "digitStatusbox";
+            this.digitStatusbox.ReadOnly = true;
+            this.digitStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.digitStatusbox.Size = new System.Drawing.Size(320, 169);
+            this.digitStatusbox.TabIndex = 3;
             // 
             // dgvPackQueue
             // 
@@ -209,23 +226,23 @@
             this.dgvPackQueue.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvPackQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPackQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPackQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPackQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPackQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPackQueue.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPackQueue.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPackQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPackQueue.EnableHeadersVisualStyles = false;
             this.dgvPackQueue.Location = new System.Drawing.Point(0, 0);
@@ -235,9 +252,9 @@
             this.dgvPackQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvPackQueue.RowHeadersVisible = false;
             this.dgvPackQueue.RowHeadersWidth = 40;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvPackQueue.RowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPackQueue.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPackQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvPackQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvPackQueue.RowTemplate.Height = 47;
@@ -263,23 +280,23 @@
             this.dgvPacksetQueue.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvPacksetQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPacksetQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPacksetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPacksetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvPacksetQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPacksetQueue.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPacksetQueue.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvPacksetQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPacksetQueue.EnableHeadersVisualStyles = false;
             this.dgvPacksetQueue.Location = new System.Drawing.Point(0, 0);
@@ -289,9 +306,9 @@
             this.dgvPacksetQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvPacksetQueue.RowHeadersVisible = false;
             this.dgvPacksetQueue.RowHeadersWidth = 40;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvPacksetQueue.RowsDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPacksetQueue.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvPacksetQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvPacksetQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvPacksetQueue.RowTemplate.Height = 47;
@@ -314,23 +331,23 @@
             this.dgvCartonQueue.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvCartonQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvCartonQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCartonQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCartonQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvCartonQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCartonQueue.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCartonQueue.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvCartonQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCartonQueue.EnableHeadersVisualStyles = false;
             this.dgvCartonQueue.Location = new System.Drawing.Point(0, 0);
@@ -340,9 +357,9 @@
             this.dgvCartonQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvCartonQueue.RowHeadersVisible = false;
             this.dgvCartonQueue.RowHeadersWidth = 40;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCartonQueue.RowsDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCartonQueue.RowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvCartonQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvCartonQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvCartonQueue.RowTemplate.Height = 47;
@@ -356,17 +373,17 @@
             this.dgvCartonQueue.DoubleClick += new System.EventHandler(this.dgvPackQueue_DoubleClick);
             this.dgvCartonQueue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewCartonList_KeyDown);
             // 
-            // textBoxCartonStatus
+            // cartonStatusbox
             // 
-            this.textBoxCartonStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxCartonStatus.Location = new System.Drawing.Point(0, 55);
-            this.textBoxCartonStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxCartonStatus.Multiline = true;
-            this.textBoxCartonStatus.Name = "textBoxCartonStatus";
-            this.textBoxCartonStatus.ReadOnly = true;
-            this.textBoxCartonStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxCartonStatus.Size = new System.Drawing.Size(197, 169);
-            this.textBoxCartonStatus.TabIndex = 11;
+            this.cartonStatusbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cartonStatusbox.Location = new System.Drawing.Point(0, 55);
+            this.cartonStatusbox.Margin = new System.Windows.Forms.Padding(4);
+            this.cartonStatusbox.Multiline = true;
+            this.cartonStatusbox.Name = "cartonStatusbox";
+            this.cartonStatusbox.ReadOnly = true;
+            this.cartonStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.cartonStatusbox.Size = new System.Drawing.Size(290, 169);
+            this.cartonStatusbox.TabIndex = 11;
             // 
             // timerEverySecond
             // 
@@ -432,7 +449,7 @@
             // 
             // splitContainerCarton.Panel2
             // 
-            this.splitContainerCarton.Panel2.Controls.Add(this.splitContainerDigitInkJetPrinter);
+            this.splitContainerCarton.Panel2.Controls.Add(this.splitDigit);
             this.splitContainerCarton.Panel2MinSize = 39;
             this.splitContainerCarton.Size = new System.Drawing.Size(1769, 504);
             this.splitContainerCarton.SplitterDistance = 279;
@@ -486,23 +503,23 @@
             this.dgvCartonsetQueue.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvCartonsetQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvCartonsetQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCartonsetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCartonsetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvCartonsetQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCartonsetQueue.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCartonsetQueue.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvCartonsetQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCartonsetQueue.EnableHeadersVisualStyles = false;
             this.dgvCartonsetQueue.Location = new System.Drawing.Point(0, 0);
@@ -512,9 +529,9 @@
             this.dgvCartonsetQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvCartonsetQueue.RowHeadersVisible = false;
             this.dgvCartonsetQueue.RowHeadersWidth = 40;
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCartonsetQueue.RowsDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCartonsetQueue.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvCartonsetQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvCartonsetQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvCartonsetQueue.RowTemplate.Height = 47;
@@ -594,7 +611,7 @@
             this.buttonCartonQueueCount.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonCartonQueueCount.Name = "buttonCartonQueueCount";
             this.buttonCartonQueueCount.Size = new System.Drawing.Size(76, 40);
-            this.buttonCartonQueueCount.Text = "[10]";
+            this.buttonCartonQueueCount.Text = "[0]";
             // 
             // buttonPalletQueueCount
             // 
@@ -605,7 +622,7 @@
             this.buttonPalletQueueCount.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonPalletQueueCount.Name = "buttonPalletQueueCount";
             this.buttonPalletQueueCount.Size = new System.Drawing.Size(76, 40);
-            this.buttonPalletQueueCount.Text = "[20]";
+            this.buttonPalletQueueCount.Text = "[0]";
             // 
             // toolStripLabel9
             // 
@@ -659,23 +676,23 @@
             this.dgvPalletQueue.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvPalletQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPalletQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPalletQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPalletQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvPalletQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPalletQueue.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPalletQueue.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvPalletQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPalletQueue.EnableHeadersVisualStyles = false;
             this.dgvPalletQueue.Location = new System.Drawing.Point(0, 0);
@@ -685,9 +702,9 @@
             this.dgvPalletQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvPalletQueue.RowHeadersVisible = false;
             this.dgvPalletQueue.RowHeadersWidth = 40;
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvPalletQueue.RowsDefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPalletQueue.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvPalletQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvPalletQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvPalletQueue.RowTemplate.Height = 47;
@@ -709,23 +726,23 @@
             this.dgvPalletsetQueue.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvPalletsetQueue.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPalletsetQueue.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPalletsetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPalletsetQueue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvPalletsetQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPalletsetQueue.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPalletsetQueue.DefaultCellStyle = dataGridViewCellStyle17;
             this.dgvPalletsetQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPalletsetQueue.EnableHeadersVisualStyles = false;
             this.dgvPalletsetQueue.Location = new System.Drawing.Point(0, 0);
@@ -735,9 +752,9 @@
             this.dgvPalletsetQueue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvPalletsetQueue.RowHeadersVisible = false;
             this.dgvPalletsetQueue.RowHeadersWidth = 40;
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvPalletsetQueue.RowsDefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvPalletsetQueue.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvPalletsetQueue.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvPalletsetQueue.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvPalletsetQueue.RowTemplate.Height = 47;
@@ -773,27 +790,27 @@
             this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
             this.toolStripButton1.Text = "toolStripButton3";
             // 
-            // splitContainerDigitInkJetPrinter
+            // splitDigit
             // 
-            this.splitContainerDigitInkJetPrinter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerDigitInkJetPrinter.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerDigitInkJetPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.splitContainerDigitInkJetPrinter.Name = "splitContainerDigitInkJetPrinter";
+            this.splitDigit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitDigit.Location = new System.Drawing.Point(0, 0);
+            this.splitDigit.Margin = new System.Windows.Forms.Padding(4);
+            this.splitDigit.Name = "splitDigit";
             // 
-            // splitContainerDigitInkJetPrinter.Panel1
+            // splitDigit.Panel1
             // 
-            this.splitContainerDigitInkJetPrinter.Panel1.Controls.Add(this.textBoxDigitStatus);
-            this.splitContainerDigitInkJetPrinter.Panel1.Controls.Add(this.toolStrip1);
-            this.splitContainerDigitInkJetPrinter.Panel1MinSize = 39;
+            this.splitDigit.Panel1.Controls.Add(this.digitStatusbox);
+            this.splitDigit.Panel1.Controls.Add(this.toolStrip1);
+            this.splitDigit.Panel1MinSize = 39;
             // 
-            // splitContainerDigitInkJetPrinter.Panel2
+            // splitDigit.Panel2
             // 
-            this.splitContainerDigitInkJetPrinter.Panel2.Controls.Add(this.splitContainerBarcodeInkJetPrinter);
-            this.splitContainerDigitInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerDigitInkJetPrinter.Size = new System.Drawing.Size(1769, 224);
-            this.splitContainerDigitInkJetPrinter.SplitterDistance = 160;
-            this.splitContainerDigitInkJetPrinter.SplitterWidth = 1;
-            this.splitContainerDigitInkJetPrinter.TabIndex = 25;
+            this.splitDigit.Panel2.Controls.Add(this.splitPack);
+            this.splitDigit.Panel2MinSize = 39;
+            this.splitDigit.Size = new System.Drawing.Size(1769, 224);
+            this.splitDigit.SplitterDistance = 320;
+            this.splitDigit.SplitterWidth = 1;
+            this.splitDigit.TabIndex = 25;
             // 
             // toolStrip1
             // 
@@ -803,106 +820,106 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton5,
-            this.toolStripDigitLEDGreen,
-            this.toolStripDigitOnPrinting,
-            this.toolStripDigitLEDAmber,
-            this.toolStripDigitLEDRed});
+            this.digitLEDGreen,
+            this.digitLEDPrinting,
+            this.digitLEDRed,
+            this.digitLEDAmber});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(160, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(320, 55);
             this.toolStrip1.TabIndex = 14;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.Image = global::TotalSmartCoding.Properties.Resources.Numbers_1;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(24, 52);
             this.toolStripButton5.Text = "toolStripButton5";
             // 
-            // toolStripDigitLEDGreen
+            // digitLEDGreen
             // 
-            this.toolStripDigitLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDigitLEDGreen.Enabled = false;
-            this.toolStripDigitLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
-            this.toolStripDigitLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDigitLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDigitLEDGreen.Name = "toolStripDigitLEDGreen";
-            this.toolStripDigitLEDGreen.Size = new System.Drawing.Size(52, 52);
-            this.toolStripDigitLEDGreen.Text = "Ready to print";
-            this.toolStripDigitLEDGreen.ToolTipText = "Ready to print";
+            this.digitLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDGreen.Enabled = false;
+            this.digitLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
+            this.digitLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDGreen.Name = "digitLEDGreen";
+            this.digitLEDGreen.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDGreen.Text = "Ready to print";
+            this.digitLEDGreen.ToolTipText = "Ready to print";
             // 
-            // toolStripDigitOnPrinting
+            // digitLEDPrinting
             // 
-            this.toolStripDigitOnPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDigitOnPrinting.Enabled = false;
-            this.toolStripDigitOnPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
-            this.toolStripDigitOnPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDigitOnPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDigitOnPrinting.Name = "toolStripDigitOnPrinting";
-            this.toolStripDigitOnPrinting.Size = new System.Drawing.Size(52, 52);
-            this.toolStripDigitOnPrinting.Text = "Printing";
+            this.digitLEDPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDPrinting.Enabled = false;
+            this.digitLEDPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
+            this.digitLEDPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDPrinting.Name = "digitLEDPrinting";
+            this.digitLEDPrinting.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDPrinting.Text = "Printing";
             // 
-            // toolStripDigitLEDAmber
+            // digitLEDRed
             // 
-            this.toolStripDigitLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDigitLEDAmber.Enabled = false;
-            this.toolStripDigitLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
-            this.toolStripDigitLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDigitLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDigitLEDAmber.Name = "toolStripDigitLEDAmber";
-            this.toolStripDigitLEDAmber.Size = new System.Drawing.Size(52, 52);
-            this.toolStripDigitLEDAmber.Text = "toolStripButton4";
-            this.toolStripDigitLEDAmber.ToolTipText = "Amber LED";
-            this.toolStripDigitLEDAmber.Visible = false;
+            this.digitLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDRed.Enabled = false;
+            this.digitLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
+            this.digitLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDRed.Name = "digitLEDRed";
+            this.digitLEDRed.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDRed.Text = "Error";
+            this.digitLEDRed.ToolTipText = "Error";
             // 
-            // toolStripDigitLEDRed
+            // digitLEDAmber
             // 
-            this.toolStripDigitLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDigitLEDRed.Enabled = false;
-            this.toolStripDigitLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
-            this.toolStripDigitLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDigitLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDigitLEDRed.Name = "toolStripDigitLEDRed";
-            this.toolStripDigitLEDRed.Size = new System.Drawing.Size(52, 52);
-            this.toolStripDigitLEDRed.Text = "Error";
-            this.toolStripDigitLEDRed.ToolTipText = "Error";
+            this.digitLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDAmber.Enabled = false;
+            this.digitLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
+            this.digitLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDAmber.Name = "digitLEDAmber";
+            this.digitLEDAmber.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDAmber.Text = "toolStripButton4";
+            this.digitLEDAmber.ToolTipText = "Amber LED";
+            this.digitLEDAmber.Visible = false;
             // 
-            // splitContainerBarcodeInkJetPrinter
+            // splitPack
             // 
-            this.splitContainerBarcodeInkJetPrinter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerBarcodeInkJetPrinter.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerBarcodeInkJetPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.splitContainerBarcodeInkJetPrinter.Name = "splitContainerBarcodeInkJetPrinter";
+            this.splitPack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitPack.Location = new System.Drawing.Point(0, 0);
+            this.splitPack.Margin = new System.Windows.Forms.Padding(4);
+            this.splitPack.Name = "splitPack";
             // 
-            // splitContainerBarcodeInkJetPrinter.Panel1
+            // splitPack.Panel1
             // 
-            this.splitContainerBarcodeInkJetPrinter.Panel1.Controls.Add(this.textBoxBarcodeStatus);
-            this.splitContainerBarcodeInkJetPrinter.Panel1.Controls.Add(this.toolStrip2);
-            this.splitContainerBarcodeInkJetPrinter.Panel1MinSize = 39;
+            this.splitPack.Panel1.Controls.Add(this.packStatusbox);
+            this.splitPack.Panel1.Controls.Add(this.toolStrip2);
+            this.splitPack.Panel1MinSize = 39;
             // 
-            // splitContainerBarcodeInkJetPrinter.Panel2
+            // splitPack.Panel2
             // 
-            this.splitContainerBarcodeInkJetPrinter.Panel2.Controls.Add(this.splitContainerCartonInkJetPrinter);
-            this.splitContainerBarcodeInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerBarcodeInkJetPrinter.Size = new System.Drawing.Size(1608, 224);
-            this.splitContainerBarcodeInkJetPrinter.SplitterDistance = 263;
-            this.splitContainerBarcodeInkJetPrinter.SplitterWidth = 1;
-            this.splitContainerBarcodeInkJetPrinter.TabIndex = 0;
+            this.splitPack.Panel2.Controls.Add(this.splitCarton);
+            this.splitPack.Panel2MinSize = 39;
+            this.splitPack.Size = new System.Drawing.Size(1448, 224);
+            this.splitPack.SplitterDistance = 320;
+            this.splitPack.SplitterWidth = 1;
+            this.splitPack.TabIndex = 0;
             // 
-            // textBoxBarcodeStatus
+            // packStatusbox
             // 
-            this.textBoxBarcodeStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxBarcodeStatus.Location = new System.Drawing.Point(0, 55);
-            this.textBoxBarcodeStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxBarcodeStatus.Multiline = true;
-            this.textBoxBarcodeStatus.Name = "textBoxBarcodeStatus";
-            this.textBoxBarcodeStatus.ReadOnly = true;
-            this.textBoxBarcodeStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxBarcodeStatus.Size = new System.Drawing.Size(263, 169);
-            this.textBoxBarcodeStatus.TabIndex = 20;
+            this.packStatusbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.packStatusbox.Location = new System.Drawing.Point(0, 55);
+            this.packStatusbox.Margin = new System.Windows.Forms.Padding(4);
+            this.packStatusbox.Multiline = true;
+            this.packStatusbox.Name = "packStatusbox";
+            this.packStatusbox.ReadOnly = true;
+            this.packStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.packStatusbox.Size = new System.Drawing.Size(320, 169);
+            this.packStatusbox.TabIndex = 20;
             // 
             // toolStrip2
             // 
@@ -912,96 +929,94 @@
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton6,
-            this.toolStripBarcodeLEDGreen,
-            this.toolStripBarcodeOnPrinting,
-            this.toolStripBarcodeLEDAmber,
-            this.toolStripBarcodeLEDRed});
+            this.packLEDGreen,
+            this.packLEDPrinting,
+            this.packLEDRed,
+            this.packLEDAmber});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(263, 55);
+            this.toolStrip2.Size = new System.Drawing.Size(320, 55);
             this.toolStrip2.TabIndex = 19;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripButton6
             // 
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.Image = global::TotalSmartCoding.Properties.Resources.Numbers_2;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(24, 52);
             this.toolStripButton6.Text = "toolStripButton6";
             // 
-            // toolStripBarcodeLEDGreen
+            // packLEDGreen
             // 
-            this.toolStripBarcodeLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripBarcodeLEDGreen.Enabled = false;
-            this.toolStripBarcodeLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
-            this.toolStripBarcodeLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripBarcodeLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBarcodeLEDGreen.Name = "toolStripBarcodeLEDGreen";
-            this.toolStripBarcodeLEDGreen.Size = new System.Drawing.Size(52, 52);
-            this.toolStripBarcodeLEDGreen.Text = "Ready to print";
-            this.toolStripBarcodeLEDGreen.ToolTipText = "Ready to print";
+            this.packLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.packLEDGreen.Enabled = false;
+            this.packLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
+            this.packLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.packLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.packLEDGreen.Name = "packLEDGreen";
+            this.packLEDGreen.Size = new System.Drawing.Size(52, 52);
+            this.packLEDGreen.Text = "Ready to print";
+            this.packLEDGreen.ToolTipText = "Ready to print";
             // 
-            // toolStripBarcodeOnPrinting
+            // packLEDPrinting
             // 
-            this.toolStripBarcodeOnPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripBarcodeOnPrinting.Enabled = false;
-            this.toolStripBarcodeOnPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
-            this.toolStripBarcodeOnPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripBarcodeOnPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBarcodeOnPrinting.Name = "toolStripBarcodeOnPrinting";
-            this.toolStripBarcodeOnPrinting.Size = new System.Drawing.Size(52, 52);
-            this.toolStripBarcodeOnPrinting.Text = "Printing";
+            this.packLEDPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.packLEDPrinting.Enabled = false;
+            this.packLEDPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
+            this.packLEDPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.packLEDPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.packLEDPrinting.Name = "packLEDPrinting";
+            this.packLEDPrinting.Size = new System.Drawing.Size(52, 52);
+            this.packLEDPrinting.Text = "Printing";
             // 
-            // toolStripBarcodeLEDAmber
+            // packLEDRed
             // 
-            this.toolStripBarcodeLEDAmber.AutoSize = false;
-            this.toolStripBarcodeLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripBarcodeLEDAmber.Enabled = false;
-            this.toolStripBarcodeLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
-            this.toolStripBarcodeLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripBarcodeLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBarcodeLEDAmber.Name = "toolStripBarcodeLEDAmber";
-            this.toolStripBarcodeLEDAmber.Size = new System.Drawing.Size(36, 36);
-            this.toolStripBarcodeLEDAmber.Text = "toolStripButton4";
-            this.toolStripBarcodeLEDAmber.ToolTipText = "Amber LED";
-            this.toolStripBarcodeLEDAmber.Visible = false;
+            this.packLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.packLEDRed.Enabled = false;
+            this.packLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
+            this.packLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.packLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.packLEDRed.Name = "packLEDRed";
+            this.packLEDRed.Size = new System.Drawing.Size(52, 52);
+            this.packLEDRed.Text = "Error";
+            this.packLEDRed.ToolTipText = "Error";
             // 
-            // toolStripBarcodeLEDRed
+            // packLEDAmber
             // 
-            this.toolStripBarcodeLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripBarcodeLEDRed.Enabled = false;
-            this.toolStripBarcodeLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
-            this.toolStripBarcodeLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripBarcodeLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBarcodeLEDRed.Name = "toolStripBarcodeLEDRed";
-            this.toolStripBarcodeLEDRed.Size = new System.Drawing.Size(52, 52);
-            this.toolStripBarcodeLEDRed.Text = "Error";
-            this.toolStripBarcodeLEDRed.ToolTipText = "Error";
+            this.packLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.packLEDAmber.Enabled = false;
+            this.packLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
+            this.packLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.packLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.packLEDAmber.Name = "packLEDAmber";
+            this.packLEDAmber.Size = new System.Drawing.Size(52, 52);
+            this.packLEDAmber.Text = "toolStripButton4";
+            this.packLEDAmber.ToolTipText = "Amber LED";
+            this.packLEDAmber.Visible = false;
             // 
-            // splitContainerCartonInkJetPrinter
+            // splitCarton
             // 
-            this.splitContainerCartonInkJetPrinter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerCartonInkJetPrinter.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerCartonInkJetPrinter.Margin = new System.Windows.Forms.Padding(4);
-            this.splitContainerCartonInkJetPrinter.Name = "splitContainerCartonInkJetPrinter";
+            this.splitCarton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitCarton.Location = new System.Drawing.Point(0, 0);
+            this.splitCarton.Margin = new System.Windows.Forms.Padding(4);
+            this.splitCarton.Name = "splitCarton";
             // 
-            // splitContainerCartonInkJetPrinter.Panel1
+            // splitCarton.Panel1
             // 
-            this.splitContainerCartonInkJetPrinter.Panel1.Controls.Add(this.textBoxCartonStatus);
-            this.splitContainerCartonInkJetPrinter.Panel1.Controls.Add(this.toolStrip3);
-            this.splitContainerCartonInkJetPrinter.Panel1MinSize = 39;
+            this.splitCarton.Panel1.Controls.Add(this.cartonStatusbox);
+            this.splitCarton.Panel1.Controls.Add(this.toolStrip3);
+            this.splitCarton.Panel1MinSize = 39;
             // 
-            // splitContainerCartonInkJetPrinter.Panel2
+            // splitCarton.Panel2
             // 
-            this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.textBoxScannerStatus);
-            this.splitContainerCartonInkJetPrinter.Panel2.Controls.Add(this.toolStrip4);
-            this.splitContainerCartonInkJetPrinter.Panel2MinSize = 39;
-            this.splitContainerCartonInkJetPrinter.Size = new System.Drawing.Size(1344, 224);
-            this.splitContainerCartonInkJetPrinter.SplitterDistance = 197;
-            this.splitContainerCartonInkJetPrinter.SplitterWidth = 1;
-            this.splitContainerCartonInkJetPrinter.TabIndex = 0;
+            this.splitCarton.Panel2.Controls.Add(this.splitPallet);
+            this.splitCarton.Panel2MinSize = 39;
+            this.splitCarton.Size = new System.Drawing.Size(1127, 224);
+            this.splitCarton.SplitterDistance = 290;
+            this.splitCarton.SplitterWidth = 1;
+            this.splitCarton.TabIndex = 0;
             // 
             // toolStrip3
             // 
@@ -1011,85 +1026,239 @@
             this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton7,
-            this.toolStripCartonLEDGreen,
-            this.toolStripCartonOnPrinting,
-            this.toolStripCartonLEDAmber,
-            this.toolStripCartonLEDRed});
+            this.cartonLEDGreen,
+            this.cartonLEDPrinting,
+            this.cartonLEDRed,
+            this.cartonLEDAmber});
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(197, 55);
+            this.toolStrip3.Size = new System.Drawing.Size(290, 55);
             this.toolStrip3.TabIndex = 20;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // toolStripButton7
             // 
             this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
+            this.toolStripButton7.Image = global::TotalSmartCoding.Properties.Resources.Numbers_3;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(24, 52);
             this.toolStripButton7.Text = "toolStripButton7";
             // 
-            // toolStripCartonLEDGreen
+            // cartonLEDGreen
             // 
-            this.toolStripCartonLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripCartonLEDGreen.Enabled = false;
-            this.toolStripCartonLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
-            this.toolStripCartonLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripCartonLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripCartonLEDGreen.Name = "toolStripCartonLEDGreen";
-            this.toolStripCartonLEDGreen.Size = new System.Drawing.Size(52, 52);
-            this.toolStripCartonLEDGreen.Text = "Ready to print";
-            this.toolStripCartonLEDGreen.ToolTipText = "Ready to print";
+            this.cartonLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cartonLEDGreen.Enabled = false;
+            this.cartonLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
+            this.cartonLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cartonLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cartonLEDGreen.Name = "cartonLEDGreen";
+            this.cartonLEDGreen.Size = new System.Drawing.Size(52, 52);
+            this.cartonLEDGreen.Text = "Ready to print";
+            this.cartonLEDGreen.ToolTipText = "Ready to print";
             // 
-            // toolStripCartonOnPrinting
+            // cartonLEDPrinting
             // 
-            this.toolStripCartonOnPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripCartonOnPrinting.Enabled = false;
-            this.toolStripCartonOnPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
-            this.toolStripCartonOnPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripCartonOnPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripCartonOnPrinting.Name = "toolStripCartonOnPrinting";
-            this.toolStripCartonOnPrinting.Size = new System.Drawing.Size(52, 52);
-            this.toolStripCartonOnPrinting.Text = "Printing";
+            this.cartonLEDPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cartonLEDPrinting.Enabled = false;
+            this.cartonLEDPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
+            this.cartonLEDPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cartonLEDPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cartonLEDPrinting.Name = "cartonLEDPrinting";
+            this.cartonLEDPrinting.Size = new System.Drawing.Size(52, 52);
+            this.cartonLEDPrinting.Text = "Printing";
             // 
-            // toolStripCartonLEDAmber
+            // cartonLEDRed
             // 
-            this.toolStripCartonLEDAmber.AutoSize = false;
-            this.toolStripCartonLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripCartonLEDAmber.Enabled = false;
-            this.toolStripCartonLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
-            this.toolStripCartonLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripCartonLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripCartonLEDAmber.Name = "toolStripCartonLEDAmber";
-            this.toolStripCartonLEDAmber.Size = new System.Drawing.Size(36, 36);
-            this.toolStripCartonLEDAmber.Text = "toolStripButton4";
-            this.toolStripCartonLEDAmber.ToolTipText = "Amber LED";
-            this.toolStripCartonLEDAmber.Visible = false;
+            this.cartonLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cartonLEDRed.Enabled = false;
+            this.cartonLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
+            this.cartonLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cartonLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cartonLEDRed.Name = "cartonLEDRed";
+            this.cartonLEDRed.Size = new System.Drawing.Size(52, 52);
+            this.cartonLEDRed.Text = "Error";
+            this.cartonLEDRed.ToolTipText = "Error";
             // 
-            // toolStripCartonLEDRed
+            // cartonLEDAmber
             // 
-            this.toolStripCartonLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripCartonLEDRed.Enabled = false;
-            this.toolStripCartonLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
-            this.toolStripCartonLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripCartonLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripCartonLEDRed.Name = "toolStripCartonLEDRed";
-            this.toolStripCartonLEDRed.Size = new System.Drawing.Size(52, 52);
-            this.toolStripCartonLEDRed.Text = "Error";
-            this.toolStripCartonLEDRed.ToolTipText = "Error";
+            this.cartonLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cartonLEDAmber.Enabled = false;
+            this.cartonLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
+            this.cartonLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.cartonLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cartonLEDAmber.Name = "cartonLEDAmber";
+            this.cartonLEDAmber.Size = new System.Drawing.Size(52, 52);
+            this.cartonLEDAmber.Text = "toolStripButton4";
+            this.cartonLEDAmber.ToolTipText = "Amber LED";
+            this.cartonLEDAmber.Visible = false;
             // 
-            // textBoxScannerStatus
+            // splitPallet
             // 
-            this.textBoxScannerStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxScannerStatus.Location = new System.Drawing.Point(0, 55);
-            this.textBoxScannerStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxScannerStatus.Multiline = true;
-            this.textBoxScannerStatus.Name = "textBoxScannerStatus";
-            this.textBoxScannerStatus.ReadOnly = true;
-            this.textBoxScannerStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxScannerStatus.Size = new System.Drawing.Size(1146, 169);
-            this.textBoxScannerStatus.TabIndex = 22;
+            this.splitPallet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitPallet.Location = new System.Drawing.Point(0, 0);
+            this.splitPallet.Name = "splitPallet";
+            // 
+            // splitPallet.Panel1
+            // 
+            this.splitPallet.Panel1.Controls.Add(this.palletStatusbox);
+            this.splitPallet.Panel1.Controls.Add(this.toolStrip7);
+            this.splitPallet.Panel1MinSize = 39;
+            // 
+            // splitPallet.Panel2
+            // 
+            this.splitPallet.Panel2.Controls.Add(this.scannerStatusbox);
+            this.splitPallet.Panel2.Controls.Add(this.toolStrip4);
+            this.splitPallet.Panel2MinSize = 39;
+            this.splitPallet.Size = new System.Drawing.Size(836, 224);
+            this.splitPallet.SplitterDistance = 320;
+            this.splitPallet.TabIndex = 23;
+            this.splitPallet.Resize += new System.EventHandler(this.splitPallet_Resize);
+            // 
+            // palletStatusbox
+            // 
+            this.palletStatusbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.palletStatusbox.Location = new System.Drawing.Point(0, 55);
+            this.palletStatusbox.Margin = new System.Windows.Forms.Padding(4);
+            this.palletStatusbox.Multiline = true;
+            this.palletStatusbox.Name = "palletStatusbox";
+            this.palletStatusbox.ReadOnly = true;
+            this.palletStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.palletStatusbox.Size = new System.Drawing.Size(320, 169);
+            this.palletStatusbox.TabIndex = 23;
+            // 
+            // toolStrip7
+            // 
+            this.toolStrip7.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.toolStrip7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("toolStrip7.BackgroundImage")));
+            this.toolStrip7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton2,
+            this.palletLEDGreen,
+            this.palletLEDPrinting,
+            this.palletLEDRed,
+            this.palletLEDAmber,
+            this.toolStripLabel3,
+            this.toolStripButton11,
+            this.toolStripButton12,
+            this.toolStripButton13});
+            this.toolStrip7.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip7.Name = "toolStrip7";
+            this.toolStrip7.Size = new System.Drawing.Size(320, 55);
+            this.toolStrip7.TabIndex = 22;
+            this.toolStrip7.Text = "toolStrip7";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources.Numbers_4;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(24, 52);
+            this.toolStripButton2.Text = "toolStripButton8";
+            // 
+            // palletLEDGreen
+            // 
+            this.palletLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.palletLEDGreen.Enabled = false;
+            this.palletLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
+            this.palletLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.palletLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.palletLEDGreen.Name = "palletLEDGreen";
+            this.palletLEDGreen.Size = new System.Drawing.Size(52, 52);
+            this.palletLEDGreen.Text = "Ready to print";
+            this.palletLEDGreen.ToolTipText = "Ready to print";
+            // 
+            // palletLEDPrinting
+            // 
+            this.palletLEDPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.palletLEDPrinting.Enabled = false;
+            this.palletLEDPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
+            this.palletLEDPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.palletLEDPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.palletLEDPrinting.Name = "palletLEDPrinting";
+            this.palletLEDPrinting.Size = new System.Drawing.Size(52, 52);
+            this.palletLEDPrinting.Text = "Printing";
+            // 
+            // palletLEDRed
+            // 
+            this.palletLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.palletLEDRed.Enabled = false;
+            this.palletLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
+            this.palletLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.palletLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.palletLEDRed.Name = "palletLEDRed";
+            this.palletLEDRed.Size = new System.Drawing.Size(52, 52);
+            this.palletLEDRed.Text = "Error";
+            this.palletLEDRed.ToolTipText = "Error";
+            // 
+            // palletLEDAmber
+            // 
+            this.palletLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.palletLEDAmber.Enabled = false;
+            this.palletLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
+            this.palletLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.palletLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.palletLEDAmber.Name = "palletLEDAmber";
+            this.palletLEDAmber.Size = new System.Drawing.Size(52, 52);
+            this.palletLEDAmber.Text = "toolStripButton4";
+            this.palletLEDAmber.ToolTipText = "Amber LED";
+            this.palletLEDAmber.Visible = false;
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(21, 52);
+            this.toolStripLabel3.Text = "   ";
+            // 
+            // toolStripButton11
+            // 
+            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton11.Enabled = false;
+            this.toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton11.Image")));
+            this.toolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton11.Name = "toolStripButton11";
+            this.toolStripButton11.Size = new System.Drawing.Size(23, 52);
+            this.toolStripButton11.Text = "Quality scanner";
+            this.toolStripButton11.Visible = false;
+            // 
+            // toolStripButton12
+            // 
+            this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton12.Enabled = false;
+            this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
+            this.toolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton12.Name = "toolStripButton12";
+            this.toolStripButton12.Size = new System.Drawing.Size(23, 52);
+            this.toolStripButton12.Text = "Matching scanner";
+            this.toolStripButton12.Visible = false;
+            // 
+            // toolStripButton13
+            // 
+            this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton13.Enabled = false;
+            this.toolStripButton13.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton13.Image")));
+            this.toolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton13.Name = "toolStripButton13";
+            this.toolStripButton13.Size = new System.Drawing.Size(23, 52);
+            this.toolStripButton13.Text = "Carton scanner";
+            this.toolStripButton13.Visible = false;
+            // 
+            // scannerStatusbox
+            // 
+            this.scannerStatusbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scannerStatusbox.Location = new System.Drawing.Point(0, 55);
+            this.scannerStatusbox.Margin = new System.Windows.Forms.Padding(4);
+            this.scannerStatusbox.Multiline = true;
+            this.scannerStatusbox.Name = "scannerStatusbox";
+            this.scannerStatusbox.ReadOnly = true;
+            this.scannerStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.scannerStatusbox.Size = new System.Drawing.Size(512, 169);
+            this.scannerStatusbox.TabIndex = 22;
             // 
             // toolStrip4
             // 
@@ -1099,77 +1268,76 @@
             this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton8,
-            this.toolStripScannerLEDGreen,
-            this.toolStripScannerOnPrinting,
-            this.toolStripScannerLEDAmber,
-            this.toolStripScannerLEDRed,
+            this.scannerLEDGreen,
+            this.scannerLEDScanning,
+            this.scannerLEDRed,
+            this.scannerLEDAmber,
             this.toolStripLabel1,
             this.toolStripMCUQuanlity,
             this.toolStripMCUMatching,
             this.toolStripMCUCarton});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(1146, 55);
+            this.toolStrip4.Size = new System.Drawing.Size(512, 55);
             this.toolStrip4.TabIndex = 21;
             this.toolStrip4.Text = "toolStrip4";
             // 
             // toolStripButton8
             // 
             this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
+            this.toolStripButton8.Image = global::TotalSmartCoding.Properties.Resources.Numbers_5;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton8.Name = "toolStripButton8";
             this.toolStripButton8.Size = new System.Drawing.Size(24, 52);
             this.toolStripButton8.Text = "toolStripButton8";
             // 
-            // toolStripScannerLEDGreen
+            // scannerLEDGreen
             // 
-            this.toolStripScannerLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripScannerLEDGreen.Enabled = false;
-            this.toolStripScannerLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
-            this.toolStripScannerLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripScannerLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripScannerLEDGreen.Name = "toolStripScannerLEDGreen";
-            this.toolStripScannerLEDGreen.Size = new System.Drawing.Size(52, 52);
-            this.toolStripScannerLEDGreen.Text = "Ready to print";
-            this.toolStripScannerLEDGreen.ToolTipText = "Ready to print";
+            this.scannerLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.scannerLEDGreen.Enabled = false;
+            this.scannerLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
+            this.scannerLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.scannerLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.scannerLEDGreen.Name = "scannerLEDGreen";
+            this.scannerLEDGreen.Size = new System.Drawing.Size(52, 52);
+            this.scannerLEDGreen.Text = "Ready to print";
+            this.scannerLEDGreen.ToolTipText = "Ready to print";
             // 
-            // toolStripScannerOnPrinting
+            // scannerLEDScanning
             // 
-            this.toolStripScannerOnPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripScannerOnPrinting.Enabled = false;
-            this.toolStripScannerOnPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
-            this.toolStripScannerOnPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripScannerOnPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripScannerOnPrinting.Name = "toolStripScannerOnPrinting";
-            this.toolStripScannerOnPrinting.Size = new System.Drawing.Size(52, 52);
-            this.toolStripScannerOnPrinting.Text = "Printing";
+            this.scannerLEDScanning.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.scannerLEDScanning.Enabled = false;
+            this.scannerLEDScanning.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
+            this.scannerLEDScanning.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.scannerLEDScanning.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.scannerLEDScanning.Name = "scannerLEDScanning";
+            this.scannerLEDScanning.Size = new System.Drawing.Size(52, 52);
+            this.scannerLEDScanning.Text = "Printing";
             // 
-            // toolStripScannerLEDAmber
+            // scannerLEDRed
             // 
-            this.toolStripScannerLEDAmber.AutoSize = false;
-            this.toolStripScannerLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripScannerLEDAmber.Enabled = false;
-            this.toolStripScannerLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
-            this.toolStripScannerLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripScannerLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripScannerLEDAmber.Name = "toolStripScannerLEDAmber";
-            this.toolStripScannerLEDAmber.Size = new System.Drawing.Size(36, 36);
-            this.toolStripScannerLEDAmber.Text = "toolStripButton4";
-            this.toolStripScannerLEDAmber.ToolTipText = "Amber LED";
-            this.toolStripScannerLEDAmber.Visible = false;
+            this.scannerLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.scannerLEDRed.Enabled = false;
+            this.scannerLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
+            this.scannerLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.scannerLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.scannerLEDRed.Name = "scannerLEDRed";
+            this.scannerLEDRed.Size = new System.Drawing.Size(52, 52);
+            this.scannerLEDRed.Text = "Error";
+            this.scannerLEDRed.ToolTipText = "Error";
             // 
-            // toolStripScannerLEDRed
+            // scannerLEDAmber
             // 
-            this.toolStripScannerLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripScannerLEDRed.Enabled = false;
-            this.toolStripScannerLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
-            this.toolStripScannerLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripScannerLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripScannerLEDRed.Name = "toolStripScannerLEDRed";
-            this.toolStripScannerLEDRed.Size = new System.Drawing.Size(52, 52);
-            this.toolStripScannerLEDRed.Text = "Error";
-            this.toolStripScannerLEDRed.ToolTipText = "Error";
+            this.scannerLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.scannerLEDAmber.Enabled = false;
+            this.scannerLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
+            this.scannerLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.scannerLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.scannerLEDAmber.Name = "scannerLEDAmber";
+            this.scannerLEDAmber.Size = new System.Drawing.Size(52, 52);
+            this.scannerLEDAmber.Text = "toolStripButton4";
+            this.scannerLEDAmber.ToolTipText = "Amber LED";
+            this.scannerLEDAmber.Visible = false;
             // 
             // toolStripLabel1
             // 
@@ -1462,7 +1630,8 @@
             this.Controls.Add(this.toolStripChildForm);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SmartCoding";
-            this.Text = "Monitoring";
+            this.Text = "Printing & Scanning";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Activated += new System.EventHandler(this.SmartCoding_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SmartCoding_FormClosing);
             this.Load += new System.EventHandler(this.SmartCoding_Load);
@@ -1502,28 +1671,35 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPalletsetQueue)).EndInit();
             this.toolStrip6.ResumeLayout(false);
             this.toolStrip6.PerformLayout();
-            this.splitContainerDigitInkJetPrinter.Panel1.ResumeLayout(false);
-            this.splitContainerDigitInkJetPrinter.Panel1.PerformLayout();
-            this.splitContainerDigitInkJetPrinter.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDigitInkJetPrinter)).EndInit();
-            this.splitContainerDigitInkJetPrinter.ResumeLayout(false);
+            this.splitDigit.Panel1.ResumeLayout(false);
+            this.splitDigit.Panel1.PerformLayout();
+            this.splitDigit.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitDigit)).EndInit();
+            this.splitDigit.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.splitContainerBarcodeInkJetPrinter.Panel1.ResumeLayout(false);
-            this.splitContainerBarcodeInkJetPrinter.Panel1.PerformLayout();
-            this.splitContainerBarcodeInkJetPrinter.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerBarcodeInkJetPrinter)).EndInit();
-            this.splitContainerBarcodeInkJetPrinter.ResumeLayout(false);
+            this.splitPack.Panel1.ResumeLayout(false);
+            this.splitPack.Panel1.PerformLayout();
+            this.splitPack.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitPack)).EndInit();
+            this.splitPack.ResumeLayout(false);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.splitContainerCartonInkJetPrinter.Panel1.ResumeLayout(false);
-            this.splitContainerCartonInkJetPrinter.Panel1.PerformLayout();
-            this.splitContainerCartonInkJetPrinter.Panel2.ResumeLayout(false);
-            this.splitContainerCartonInkJetPrinter.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCartonInkJetPrinter)).EndInit();
-            this.splitContainerCartonInkJetPrinter.ResumeLayout(false);
+            this.splitCarton.Panel1.ResumeLayout(false);
+            this.splitCarton.Panel1.PerformLayout();
+            this.splitCarton.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitCarton)).EndInit();
+            this.splitCarton.ResumeLayout(false);
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
+            this.splitPallet.Panel1.ResumeLayout(false);
+            this.splitPallet.Panel1.PerformLayout();
+            this.splitPallet.Panel2.ResumeLayout(false);
+            this.splitPallet.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitPallet)).EndInit();
+            this.splitPallet.ResumeLayout(false);
+            this.toolStrip7.ResumeLayout(false);
+            this.toolStrip7.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.toolStripChildForm.ResumeLayout(false);
@@ -1537,7 +1713,7 @@
 
         private System.Windows.Forms.ToolStrip toolStripChildForm;
         private System.Windows.Forms.ToolStripButton buttonStart;
-        private System.Windows.Forms.TextBox textBoxDigitStatus;
+        private System.Windows.Forms.TextBox digitStatusbox;
         private System.Windows.Forms.ToolStripButton buttonStop;
         private System.Windows.Forms.ToolStripButton buttonConnect;
         private System.Windows.Forms.ToolStripButton buttonDisconnect;
@@ -1550,25 +1726,25 @@
         private System.Windows.Forms.ToolStripTextBox textBoxNextPackNo;
         private System.Windows.Forms.DataGridView dgvPacksetQueue;
         private System.Windows.Forms.DataGridView dgvCartonQueue;
-        private System.Windows.Forms.TextBox textBoxCartonStatus;
+        private System.Windows.Forms.TextBox cartonStatusbox;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripDigitLEDGreen;
-        private System.Windows.Forms.ToolStripButton toolStripDigitLEDAmber;
-        private System.Windows.Forms.ToolStripButton toolStripDigitLEDRed;
+        private System.Windows.Forms.ToolStripButton digitLEDGreen;
+        private System.Windows.Forms.ToolStripButton digitLEDAmber;
+        private System.Windows.Forms.ToolStripButton digitLEDRed;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.ToolStripButton toolStripButton15;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripBarcodeLEDGreen;
-        private System.Windows.Forms.ToolStripButton toolStripBarcodeLEDAmber;
-        private System.Windows.Forms.ToolStripButton toolStripBarcodeLEDRed;
+        private System.Windows.Forms.ToolStripButton packLEDGreen;
+        private System.Windows.Forms.ToolStripButton packLEDAmber;
+        private System.Windows.Forms.ToolStripButton packLEDRed;
         private System.Windows.Forms.ToolStrip toolStrip3;
-        private System.Windows.Forms.ToolStripButton toolStripCartonLEDGreen;
-        private System.Windows.Forms.ToolStripButton toolStripCartonLEDAmber;
-        private System.Windows.Forms.ToolStripButton toolStripCartonLEDRed;
+        private System.Windows.Forms.ToolStripButton cartonLEDGreen;
+        private System.Windows.Forms.ToolStripButton cartonLEDAmber;
+        private System.Windows.Forms.ToolStripButton cartonLEDRed;
         private System.Windows.Forms.ToolStrip toolStrip4;
-        private System.Windows.Forms.ToolStripButton toolStripScannerLEDGreen;
-        private System.Windows.Forms.ToolStripButton toolStripScannerLEDAmber;
-        private System.Windows.Forms.ToolStripButton toolStripScannerLEDRed;
+        private System.Windows.Forms.ToolStripButton scannerLEDGreen;
+        private System.Windows.Forms.ToolStripButton scannerLEDAmber;
+        private System.Windows.Forms.ToolStripButton scannerLEDRed;
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private System.Windows.Forms.ToolStripTextBox textBoxBatchCode;
         private System.Windows.Forms.ToolStripLabel toolStripLabel7;
@@ -1586,18 +1762,18 @@
         private System.Windows.Forms.SplitContainer splitContainerQuality;
         private System.Windows.Forms.SplitContainer splitContainerMatching;
         private System.Windows.Forms.SplitContainer splitContainerCarton;
-        private System.Windows.Forms.SplitContainer splitContainerDigitInkJetPrinter;
-        private System.Windows.Forms.SplitContainer splitContainerBarcodeInkJetPrinter;
-        private System.Windows.Forms.SplitContainer splitContainerCartonInkJetPrinter;
-        private System.Windows.Forms.TextBox textBoxScannerStatus;
-        private System.Windows.Forms.TextBox textBoxBarcodeStatus;
+        private System.Windows.Forms.SplitContainer splitDigit;
+        private System.Windows.Forms.SplitContainer splitPack;
+        private System.Windows.Forms.SplitContainer splitCarton;
+        private System.Windows.Forms.TextBox scannerStatusbox;
+        private System.Windows.Forms.TextBox packStatusbox;
         private System.Windows.Forms.ToolStripButton toolStripButtonWarningNewMonth;
         private System.Windows.Forms.ToolStripLabel toolStripLabelWarningNewMonth;
         private System.Windows.Forms.ToolStripLabel toolStripLabel8;
-        private System.Windows.Forms.ToolStripButton toolStripDigitOnPrinting;
-        private System.Windows.Forms.ToolStripButton toolStripBarcodeOnPrinting;
-        private System.Windows.Forms.ToolStripButton toolStripCartonOnPrinting;
-        private System.Windows.Forms.ToolStripButton toolStripScannerOnPrinting;
+        private System.Windows.Forms.ToolStripButton digitLEDPrinting;
+        private System.Windows.Forms.ToolStripButton packLEDPrinting;
+        private System.Windows.Forms.ToolStripButton cartonLEDPrinting;
+        private System.Windows.Forms.ToolStripButton scannerLEDScanning;
         private System.Windows.Forms.ToolStripComboBox comboBoxEmptyCarton;
         private System.Windows.Forms.ToolStripTextBox textBoxCommodityOfficialCode;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
@@ -1622,5 +1798,17 @@
         private System.Windows.Forms.ToolStripButton buttonPalletQueueCount;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolStripButton buttonCartonQueueCount;
+        private System.Windows.Forms.SplitContainer splitPallet;
+        private System.Windows.Forms.TextBox palletStatusbox;
+        private System.Windows.Forms.ToolStrip toolStrip7;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton palletLEDGreen;
+        private System.Windows.Forms.ToolStripButton palletLEDPrinting;
+        private System.Windows.Forms.ToolStripButton palletLEDAmber;
+        private System.Windows.Forms.ToolStripButton palletLEDRed;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripButton toolStripButton11;
+        private System.Windows.Forms.ToolStripButton toolStripButton12;
+        private System.Windows.Forms.ToolStripButton toolStripButton13;
     }
 }

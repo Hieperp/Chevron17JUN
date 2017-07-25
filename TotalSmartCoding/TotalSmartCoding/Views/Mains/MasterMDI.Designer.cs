@@ -162,7 +162,7 @@
             this.statusStrip.Location = new System.Drawing.Point(0, 886);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1841, 25);
+            this.statusStrip.Size = new System.Drawing.Size(1382, 25);
             this.statusStrip.TabIndex = 6;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -188,6 +188,7 @@
             this.naviBarModuleMaster.Size = new System.Drawing.Size(291, 776);
             this.naviBarModuleMaster.TabIndex = 14;
             this.naviBarModuleMaster.Text = "naviBar1";
+            this.naviBarModuleMaster.Visible = false;
             this.naviBarModuleMaster.VisibleLargeButtons = 3;
             this.naviBarModuleMaster.ActiveBandChanged += new System.EventHandler(this.naviBarModuleMaster_ActiveBandChanged);
             this.naviBarModuleMaster.CollapsedChanged += new System.EventHandler(this.naviBarModuleMaster_CollapsedChanged);
@@ -219,7 +220,7 @@
             this.buttonNaviBarHeader.Location = new System.Drawing.Point(0, 2);
             this.buttonNaviBarHeader.Margin = new System.Windows.Forms.Padding(4);
             this.buttonNaviBarHeader.Name = "buttonNaviBarHeader";
-            this.buttonNaviBarHeader.Size = new System.Drawing.Size(289, 34);
+            this.buttonNaviBarHeader.Size = new System.Drawing.Size(31, 34);
             this.buttonNaviBarHeader.TabIndex = 20;
             this.buttonNaviBarHeader.Text = "Home Navigation Panel";
             this.buttonNaviBarHeader.UseVisualStyleBackColor = true;
@@ -250,7 +251,7 @@
             this.toolStripMDIMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMDIMain.Location = new System.Drawing.Point(0, 55);
             this.toolStripMDIMain.Name = "toolStripMDIMain";
-            this.toolStripMDIMain.Size = new System.Drawing.Size(1841, 55);
+            this.toolStripMDIMain.Size = new System.Drawing.Size(1382, 55);
             this.toolStripMDIMain.TabIndex = 10;
             this.toolStripMDIMain.Text = "ToolStrip";
             // 
@@ -418,7 +419,7 @@
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1841, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1382, 55);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -513,7 +514,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1841, 911);
+            this.ClientSize = new System.Drawing.Size(1382, 911);
             this.Controls.Add(this.naviBarModuleMaster);
             this.Controls.Add(this.toolStripMDIMain);
             this.Controls.Add(this.statusStrip);

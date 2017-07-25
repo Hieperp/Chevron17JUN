@@ -325,7 +325,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                if (!GlobalEnums.OnTestOnly)
+                if (!GlobalEnums.OnTestPrinter)
                 {
                     this.MainStatus = "Bắt đầu kết nối ....";
 
@@ -349,7 +349,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                if (!GlobalEnums.OnTestOnly)
+                if (!GlobalEnums.OnTestPrinter)
                 {
                     this.ionetSocket.Disconnect();
                     this.ioserialPort.Disconnect();
@@ -447,9 +447,54 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             if (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew || this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Reprint)
             {//ONLY PRINT WHEN: PrintStatus.Freshnew: AUTO PRINT FOR EACH NEW CartonsetQueue, AND: WHEN = PrintStatus.Reprint: USER PRESS RE-PRINT BUTTON
-                string stringMessage = "";
 
-                this.ioserialPort.WritetoSerial(GlobalVariables.charESC + "/P/1/001/" + GlobalVariables.charEOT);
+                string stringMessage = "";
+                //TEST OK BY HERCULA: ^XA ^LH30,30 ^FO20,10^AD^FDZEBRA^FS ^FO20,60^B3^FDAAA001^FS ^XZ
+                ////STANDARD - OK
+                ////stringMessage = "^XA ^LH30,30 ^FO20,10^AD^FDX            Y           DAT MY OK ^FS ^FO20,60^B3^FDAAA001^FS ^XZ";
+                ////this.ioserialPort.WritetoSerial(stringMessage);
+
+                //////////////STORE - RECALL MESSAGE OK
+                //////////////stringMessage = "^XA ^DFFORMAT^FS  ^LH30,30 ^FO20,10^AD^FDZ---------------EBRA^FS ^FO20,60^B3^FDAAA001^FS ^XZ";
+                //////////////this.ioserialPort.WritetoSerial(stringMessage);
+
+                //////////////stringMessage = "^XA ^XFFORMAT ^XZ";
+                //////////////this.ioserialPort.WritetoSerial(stringMessage);
+
+
+                //Crc16 crc16 = new Crc16(Crc16Mode.CcittKermit);
+
+                //string stringMessage = "";
+                //stringMessage = stringMessage + "000" + "000" + "P" + "0";
+
+                //stringMessage = stringMessage + (char)2;
+                //stringMessage = stringMessage + "^XA ^LH30,30 ^FO20,10^AD^FDLE MINH HIEP OK - GOODS LUCK^FS ^FO20,60^B3^FDAAA001^FS ^XZ";
+                //stringMessage = stringMessage + (char)3;
+
+
+                //Byte[] arrayBytesWriteTo;
+                //arrayBytesWriteTo = System.Text.Encoding.ASCII.GetBytes(stringMessage);
+                //Byte[] arrayCrc = crc16.ComputeChecksumBytes(arrayBytesWriteTo);
+
+                //stringMessage = (char)1 + System.Text.Encoding.ASCII.GetString(arrayBytesWriteTo) + System.Text.Encoding.ASCII.GetString(arrayCrc) + (char)4;
+
+                //this.ioserialPort.WritetoSerial(stringMessage);
+
+
+
+
+
+
+                stringMessage = "";
+                stringMessage = stringMessage + "^XA"; //[^XA - Indicates start of label format.]
+                stringMessage = stringMessage + "^LH30,30"; //[^LH - Sets label home position 30 dots to the right and 30 dots down from top edge of label.]
+                //stringMessage = stringMessage + "^FO20,10^AD^FDZEBRA^FS"; //[^FO20,10 - Set field origin 20 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^AD - Select font “D.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                stringMessage = stringMessage + "^AE ^FO10,10  BC,300,N,,,A  ^FD MSPMSPMSPBATCHESDDMMYYXXZ000001 ^FS";// [^FO20,60 - Set field origin 20 dots to the right and 60 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
+                stringMessage = stringMessage + "^XZ"; //[^XZ - Indicates end of label format.]
+                this.ioserialPort.WritetoSerial(stringMessage);
+
+                //
+
 
                 this.FillingData.CartonsetQueueZebraStatus = this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? GlobalVariables.ZebraStatus.Printing1 : GlobalVariables.ZebraStatus.Reprinting1; Thread.Sleep(88);
             }
@@ -467,7 +512,7 @@ namespace TotalSmartCoding.Controllers.Productions
             if (this.FillingData.CartonsetQueueZebraStatus >= GlobalVariables.ZebraStatus.Printing1 || this.FillingData.CartonsetQueueZebraStatus <= GlobalVariables.ZebraStatus.Reprinting1)
             {
                 string stringReadFrom = "";
-                if (this.ioserialPort.ReadoutSerial(true, ref stringReadFrom))
+                if (true || this.ioserialPort.ReadoutSerial(true, ref stringReadFrom)) //NOW: THE ZEBRA USING IN THIS CHEVRON PROJECT DOES NOT SUPPORT: "Error Detection Protocol" => WE CAN NOT USING TRANSACTION TO GET RESPOND FROM ZEBRA PRINTER
                 {
                     this.feedbackNextNo(this.FillingData.CartonsetQueueZebraStatus >= GlobalVariables.ZebraStatus.Printing1 ? (int.Parse(this.getNextNo()) + 1).ToString("0000000").Substring(1) : this.getNextNo());
                     this.FillingData.CartonsetQueueZebraStatus = GlobalVariables.ZebraStatus.Printed;
@@ -590,14 +635,18 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
             //This command line is specific to: PalletLabel ON FillingLine.Drum || CartonInkjet ON FillingLine.Pail (Just here only for this specific)
-            if (GlobalEnums.OnTestOnly || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Drum && this.printerName != GlobalVariables.PrinterName.PalletLabel) || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail && this.printerName == GlobalVariables.PrinterName.CartonInkjet)) { this.LedGreenOn = true; return; } //DO NOTHING
+            if (GlobalEnums.OnTestPrinter || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Drum && this.printerName != GlobalVariables.PrinterName.PalletLabel) || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail && this.printerName == GlobalVariables.PrinterName.CartonInkjet)) { this.LedGreenOn = true; return; } //DO NOTHING
 
 
             try
             {
                 if (!this.Connect()) throw new System.InvalidOperationException("Lỗi kết nối máy in");
 
-                if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
+                if (this.printerName == GlobalVariables.PrinterName.PalletLabel)
+                { //SHOULD HAVE COMMAND TO CHECK ZEBRA PRINTER EXISTING AND WORKING WELL
+                    this.setLED(true, this.LedAmberOn, this.LedRedOn);
+                }
+                else
                 {//USING DOMINO PRINTER
                     #region INITIALISATION PRINTER
                     do  //INITIALISATION COMMAND
@@ -816,7 +865,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
                         #region Setup for every message: printerName == PalletLabel
-                        if (this.printerName == GlobalVariables.PrinterName.PalletLabel && this.FillingData.CartonsetQueueCount > 0)
+                        if (this.printerName == GlobalVariables.PrinterName.PalletLabel && (this.FillingData.CartonsetQueueCount > 0 || this.FillingData.FillingLineID == GlobalVariables.FillingLine.Drum))
                         {
                             this.sendtoZebra();
                             this.waitforZebra();

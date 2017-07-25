@@ -87,10 +87,11 @@
     <Compile Include="CommonLibraries\AutoMapperConfig.cs" />
     <Compile Include="CommonLibraries\BP\ADODatabase.cs" />
     <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />
-    <Compile Include="CommonLibraries\Crc16Ccitt.cs" />
+    <Compile Include="CommonLibraries\CommonRegistries.cs" />
+    <Compile Include="CommonLibraries\Crc16CCITT.cs" />
+    <Compile Include="CommonLibraries\Crc16CcittBACKUP.cs" />
     <Compile Include="CommonLibraries\IOCommon.cs" />
     <Compile Include="CommonLibraries\IONetSocket.cs" />
-    <Compile Include="CommonLibraries\BP\GlobalRegistry.cs" />
     <Compile Include="CommonLibraries\BP\SQLDatabase.cs" />
     <Compile Include="CommonLibraries\CommonFormAction.cs" />
     <Compile Include="CommonLibraries\CommonInterfaces.cs" />
@@ -684,6 +685,11 @@
     <None Include="Resources\if_oil_64502-26.png" />
     <None Include="Resources\palet-01-png-34.png" />
     <None Include="Resources\palet-01-png-36.png" />
+    <None Include="Resources\Numbers-5.ico" />
+    <None Include="Resources\Numbers-1.ico" />
+    <None Include="Resources\Numbers-2.ico" />
+    <None Include="Resources\Numbers-3.ico" />
+    <None Include="Resources\Numbers-4.ico" />
     <Content Include="Resources\Toolbar Image1.png" />
     <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />

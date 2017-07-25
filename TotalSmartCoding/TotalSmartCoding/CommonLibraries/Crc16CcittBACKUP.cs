@@ -18,7 +18,7 @@ namespace TotalSmartCoding.CommonLibraries
 {
     public enum InitialCrcValue { Zeros, NonZero1 = 0xffff, NonZero2 = 0x1D0F } //ZEBRA  the magic number 0x1021 ??? RIGHT??
 
-    public class Crc16Ccitt
+    public class Crc16CcittBACKUP
     {
         const ushort poly = 4129;
         ushort[] table = new ushort[256];
@@ -40,7 +40,7 @@ namespace TotalSmartCoding.CommonLibraries
             return BitConverter.GetBytes(crc);
         }
 
-        public Crc16Ccitt(InitialCrcValue initialValue)
+        public Crc16CcittBACKUP(InitialCrcValue initialValue)
         {
             this.initialValue = (ushort)initialValue;
             ushort temp, a;

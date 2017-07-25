@@ -101,8 +101,8 @@ namespace TotalSmartCoding.CommonLibraries
                     if (!this.serialPort.IsOpen) throw new System.InvalidOperationException("NMVN: Can not connect to COMPORT: " + this.serialPort.PortName);
 
                     Thread.Sleep(88);//NOTES: 06-SEP-2016: USE THIS PIN FOR 'Cách Ly điện OPTO BOARD' AT HOASEN GROUP
-                    this.serialPort.RtsEnable = true;//NEU SU DUNG DTR OK ROI, THI REMOVE CAU LENH NAY, DA GIANH RTS CHO MUC DICH ALARM
-                    this.serialPort.DtrEnable = true;
+                    //this.serialPort.RtsEnable = true;//NEU SU DUNG DTR OK ROI, THI REMOVE CAU LENH NAY, DA GIANH RTS CHO MUC DICH ALARM
+                    //this.serialPort.DtrEnable = true;
                 }
                 return true;
             }
@@ -142,7 +142,7 @@ namespace TotalSmartCoding.CommonLibraries
                 //stringToWrite = stringToWrite.Replace(" ", "");
 
                 stringToWrite = stringToWrite.Replace("/", "");
-                stringToWrite = stringToWrite.Replace(",", "");
+                //stringToWrite = stringToWrite.Replace(",", ""); //ZEBRA: DON'T REMOVE ','
                 //stringToWrite = stringToWrite.Replace("-", "");
                 stringToWrite = stringToWrite.Replace("##", "/");//TO SEND '/' TO PRINTER
                 stringToWrite = stringToWrite.Replace("#~$", "/");//TO SEND '/' TO PRINTER

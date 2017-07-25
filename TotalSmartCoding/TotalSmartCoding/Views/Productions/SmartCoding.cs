@@ -1,104 +1,86 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
-using System.IO;
+using System.ComponentModel;
 using System.Threading;
 
 using Ninject;
+using AutoMapper;
 
-//using Global.Class.Library;
-//using BusinessLogicLayer;
-//using BusinessLogicLayer.InkjetDominoPrinter;
-//using BusinessLogicLayer.BarcodeScanner;
-//using DataTransferObject;
-
-//using DataAccessLayer;
-
-using TotalSmartCoding.CommonLibraries;
 using TotalBase;
-using TotalSmartCoding.CommonLibraries.BP;
+using TotalBase.Enums;
+using TotalCore.Repositories.Productions;
+using TotalModel.Models;
 using TotalDTO.Productions;
 
 using TotalSmartCoding.Controllers.Productions;
-using TotalCore.Services.Productions;
-using TotalCore.Repositories.Productions;
 using TotalSmartCoding.Controllers.APIs.Productions;
-using TotalModel.Models;
+using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Views.Commons;
-
 using TotalSmartCoding.Views.Mains;
-using TotalBase.Enums;
-using AutoMapper;
 
 namespace TotalSmartCoding.Views.Productions
 {
-    /// <summary>
-    /// "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\Ssms.exe"
-    /// </summary>
     public partial class SmartCoding : Form, IMergeToolStrip
     {
-
         #region Declaration
 
-        delegate void SetTextCallback(string text);
+        private readonly FillingData fillingData;
 
-        delegate void propertyChangedThread(object sender, PropertyChangedEventArgs e);
 
-        private PrinterController digitPrinterController;
-        private PrinterController barcodePrinterController;
-        private PrinterController cartonPrinterController;
+        private PrinterController digitController;
+        private PrinterController packController;
+        private PrinterController cartonController;
+        private PrinterController palletController;
 
         private ScannerController scannerController;
 
 
-        private Thread digitPrinterThread;
-        private Thread barcodePrinterThread;
-        private Thread cartonPrinterThread;
+
+        private Thread digitThread;
+        private Thread packThread;
+        private Thread cartonThread;
+        private Thread palletThread;
 
         private Thread scannerThread;
 
         private Thread backupDataThread;
 
 
-        private FillingData fillingData;
 
+        delegate void SetTextCallback(string text);
+        delegate void propertyChangedThread(object sender, PropertyChangedEventArgs e);
 
         #endregion Declaration
-
-
 
         #region Contructor & Implement Interface
 
         public SmartCoding()
         {
-            if (GlobalVariables.shouldRestoreProcedure)
-            {
-                SQLRestore sqlRestore = new SQLRestore();
-                sqlRestore.RestoreProcedure();
-                sqlRestore.RestoreBackupData();
-            }
-
             InitializeComponent();
 
             try
             {
                 this.fillingData = new FillingData();
 
-                BatchAPIController batchAPIController = new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>());
-                BatchIndex batchIndex = batchAPIController.GetActiveBatchIndex();
+
+                BatchIndex batchIndex = (new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
                 if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
 
 
+                digitController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.DegitInkjet);
+                packController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PackInkjet);
+                cartonController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
+                palletController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PalletLabel);
 
+                this.scannerController = new ScannerController(this.fillingData);
 
+                digitController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
+                packController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
+                cartonController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
+                palletController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
 
+                scannerController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
 
 
                 this.textBoxFillingLineName.TextBox.DataBindings.Add("Text", this.fillingData, "FillingLineName");
@@ -109,28 +91,14 @@ namespace TotalSmartCoding.Views.Productions
                 this.textBoxNextCartonNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextCartonNo");
                 this.textBoxNextPalletNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextPalletNo");
 
+                this.comboBoxEmptyCarton.ComboBox.Items.AddRange(new string[] { "Ignore empty carton", "Keep empty carton" });
+                this.comboBoxEmptyCarton.ComboBox.SelectedIndex = GlobalVariables.IgnoreEmptyCarton ? 0 : 1;
+                this.comboBoxEmptyCarton.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
 
+                this.splitContainerQuality.SplitterDistance = this.SplitterDistanceQuality();
+                this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
+                this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
 
-
-
-
-                digitPrinterController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.DegitInkjet);
-                barcodePrinterController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PackInkjet);
-                cartonPrinterController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
-
-                this.scannerController = new ScannerController(this.fillingData);
-
-                digitPrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
-                barcodePrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
-                cartonPrinterController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
-
-                scannerController.PropertyChanged += new PropertyChangedEventHandler(controller_PropertyChanged);
-
-
-
-                //this.splitContainerQuality.SplitterDistance = this.SplitterDistanceQuality();
-                //this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
-                //this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
             }
             catch (Exception exception)
             {
@@ -143,11 +111,6 @@ namespace TotalSmartCoding.Views.Productions
             try
             {
                 scannerController.Initialize();
-
-                this.comboBoxEmptyCarton.ComboBox.Items.AddRange(new string[] { "Ignore Empty Carton", "Keep Empty Carton" });
-                this.comboBoxEmptyCarton.ComboBox.SelectedIndex = (this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail || !GlobalVariables.IgnoreEmptyCarton) ? 1 : 0;
-                this.comboBoxEmptyCarton.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
-
             }
             catch (Exception exception)
             {
@@ -160,17 +123,50 @@ namespace TotalSmartCoding.Views.Productions
             if (this.dgvCartonQueue.CanSelect) this.dgvCartonQueue.Select();
         }
 
-        public ToolStrip ChildToolStrip
+        private void SmartCoding_FormClosing(object sender, FormClosingEventArgs e)
         {
-            get
+            try
             {
-                return this.toolStripChildForm;
+                if (digitThread != null && digitThread.IsAlive) { e.Cancel = true; return; }
+                if (packThread != null && packThread.IsAlive) { e.Cancel = true; return; }
+                if (cartonThread != null && cartonThread.IsAlive) { e.Cancel = true; return; }
+                if (palletThread != null && palletThread.IsAlive) { e.Cancel = true; return; }
+
+                if (scannerThread != null && scannerThread.IsAlive) { e.Cancel = true; return; }
+
+                if (backupDataThread != null && backupDataThread.IsAlive) { e.Cancel = true; return; }
             }
-            set
+            catch (Exception exception)
             {
-                this.toolStripChildForm = value;
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
         }
+
+        private void splitPallet_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                this.splitDigit.SplitterDistance = this.Width / 5;
+                this.splitPack.SplitterDistance = this.Width / 5;
+                this.splitCarton.SplitterDistance = this.Width / 5;
+                this.splitPallet.SplitterDistance = this.Width / 5;
+            }
+            catch { }
+        }
+
+        private void comboBoxEmptyCarton_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                GlobalVariables.IgnoreEmptyCarton = this.comboBoxEmptyCarton.ComboBox.SelectedIndex == 0;
+                GlobalRegistry.Write("IgnoreEmptyCarton", GlobalVariables.IgnoreEmptyCarton ? "1" : "0");
+            }
+            catch
+            { }
+        }
+
+
+        public ToolStrip ChildToolStrip { get { return this.toolStripChildForm; } }
 
         private int SplitterDistanceQuality()
         {
@@ -231,29 +227,32 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                this.CutTextBox(true);
+                this.cutStatusBox(true);
 
                 if (backupDataThread == null || !backupDataThread.IsAlive)
                 {
-                    if (digitPrinterThread != null && digitPrinterThread.IsAlive) digitPrinterThread.Abort();
-                    digitPrinterThread = new Thread(new ThreadStart(digitPrinterController.ThreadRoutine));
+                    if (digitThread != null && digitThread.IsAlive) digitThread.Abort();
+                    digitThread = new Thread(new ThreadStart(digitController.ThreadRoutine));
 
-                    if (barcodePrinterThread != null && barcodePrinterThread.IsAlive) barcodePrinterThread.Abort();
-                    barcodePrinterThread = new Thread(new ThreadStart(barcodePrinterController.ThreadRoutine));
+                    if (packThread != null && packThread.IsAlive) packThread.Abort();
+                    packThread = new Thread(new ThreadStart(packController.ThreadRoutine));
 
-                    if (cartonPrinterThread != null && cartonPrinterThread.IsAlive) cartonPrinterThread.Abort();
-                    cartonPrinterThread = new Thread(new ThreadStart(cartonPrinterController.ThreadRoutine));
+                    if (cartonThread != null && cartonThread.IsAlive) cartonThread.Abort();
+                    cartonThread = new Thread(new ThreadStart(cartonController.ThreadRoutine));
+
+                    if (palletThread != null && palletThread.IsAlive) palletThread.Abort();
+                    palletThread = new Thread(new ThreadStart(palletController.ThreadRoutine));
 
                     if (scannerThread != null && scannerThread.IsAlive) scannerThread.Abort();
                     scannerThread = new Thread(new ThreadStart(scannerController.ThreadRoutine));
 
 
-                    digitPrinterThread.Start();
-                    barcodePrinterThread.Start();
-                    cartonPrinterThread.Start();
+                    digitThread.Start();
+                    packThread.Start();
+                    cartonThread.Start();
+                    palletThread.Start();
                     scannerThread.Start();
                 }
-
             }
             catch (Exception exception)
             {
@@ -266,13 +265,13 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                digitPrinterController.LoopRoutine = false;
-                barcodePrinterController.LoopRoutine = false;
-                cartonPrinterController.LoopRoutine = false;
-
+                digitController.LoopRoutine = false;
+                packController.LoopRoutine = false;
+                cartonController.LoopRoutine = false;
+                palletController.LoopRoutine = false;
                 scannerController.LoopRoutine = false;
 
-                this.SetToolStripActive();
+                this.setToolStripActive();
             }
             catch (Exception exception)
             {
@@ -285,12 +284,12 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                this.CutTextBox(true);
+                this.cutStatusBox(true);
 
-                this.digitPrinterController.StartPrint();
-                this.barcodePrinterController.StartPrint();
-                this.cartonPrinterController.StartPrint();
-
+                this.digitController.StartPrint();
+                this.packController.StartPrint();
+                this.cartonController.StartPrint();
+                this.palletController.StartPrint();
                 this.scannerController.StartScanner();
             }
             catch (Exception exception)
@@ -304,8 +303,8 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (MessageBox.Show("The software will not monitor the scanners affter stopped." + (char)13 + (char)13 + "Are you sure you want to stop?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                    if (MessageBox.Show("Do you really want to stop?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                if (MessageBox.Show("Phần mềm đang kết nối hệ thống máy in và đầu đọc mã vạch." + (char)13 + (char)13 + "Bạn có muốn dừng phần mềm không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                    if (MessageBox.Show("Bạn thật sự muốn dừng phần mềm?" + (char)13 + (char)13 + "Vui lòng nhấn Yes để dừng phần mềm ngay lập tức.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                     {
                         this.StopPrint();
                         this.scannerController.StopScanner();
@@ -319,18 +318,63 @@ namespace TotalSmartCoding.Views.Productions
 
         private void StopPrint()
         {
-            this.StopPrint(true, true, true);
+            this.StopPrint(true, true, true, true);
         }
 
-        private void StopPrint(bool stopDigit, bool stopBarcode, bool stopCarton)
+        private void StopPrint(bool stopDigit, bool stopBarcode, bool stopCarton, bool stopPallet)
         {
-            if (stopDigit) this.digitPrinterController.StopPrint();
-            if (stopBarcode) this.barcodePrinterController.StopPrint();
-            if (stopCarton) this.cartonPrinterController.StopPrint();
+            if (stopDigit) this.digitController.StopPrint();
+            if (stopBarcode) this.packController.StopPrint();
+            if (stopCarton) this.cartonController.StopPrint();
+            if (stopPallet) this.palletController.StopPrint();
+        }
+
+
+        private void toolStripButtonSetting_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this.fillingData, true));
+
+                masterMDI.ShowDialog();
+
+                masterMDI.Dispose();
+
+                //this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+
+        private void timerEverySecond_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.textBoxCurrentDate.TextBox.Text = DateTime.Now.ToString("dd/MM/yy");
+                if (this.fillingData != null)
+                {
+                    //if (this.fillingData.SettingMonthID != 1) //GlobalStaticFunction.DateToContinuosMonth()
+                    //{
+                    //    this.toolStripButtonWarningNewMonth.Visible = !this.toolStripButtonWarningNewMonth.Visible; this.toolStripLabelWarningNewMonth.Visible = !this.toolStripLabelWarningNewMonth.Visible;
+                    //}
+                    //else
+                    //{
+                    //    this.toolStripButtonWarningNewMonth.Visible = false; this.toolStripLabelWarningNewMonth.Visible = false;
+                    //}
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
         }
 
         #endregion Toolstrip bar
 
+        #region Handler
 
         private void controller_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -350,32 +394,40 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                this.SetToolStripActive();
+                this.setToolStripActive();
 
-                if (sender.Equals(this.digitPrinterController))
+                if (sender.Equals(this.digitController))
                 {
-                    if (e.PropertyName == "MainStatus") { this.textBoxDigitStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.digitPrinterController.MainStatus + "\r\n" + this.textBoxDigitStatus.Text; this.CutTextBox(false); return; }
-                    if (e.PropertyName == "LedStatus") { this.toolStripDigitLEDGreen.Enabled = this.digitPrinterController.LedGreenOn; this.toolStripDigitLEDAmber.Enabled = this.digitPrinterController.LedAmberOn; this.toolStripDigitLEDRed.Enabled = this.digitPrinterController.LedRedOn; if (this.digitPrinterController.LedRedOn) this.StopPrint(true, true, false); return; }
+                    if (e.PropertyName == "MainStatus") { this.digitStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.digitController.MainStatus + "\r\n" + this.digitStatusbox.Text; this.cutStatusBox(false); return; }
+                    if (e.PropertyName == "LedStatus") { this.digitLEDGreen.Enabled = this.digitController.LedGreenOn; this.digitLEDAmber.Enabled = this.digitController.LedAmberOn; this.digitLEDRed.Enabled = this.digitController.LedRedOn; if (this.digitController.LedRedOn) this.StopPrint(true, true, false, false); return; }
                 }
-                else if (sender.Equals(this.barcodePrinterController))
+                else if (sender.Equals(this.packController))
                 {
-                    if (e.PropertyName == "MainStatus") { this.textBoxBarcodeStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.barcodePrinterController.MainStatus + "\r\n" + this.textBoxBarcodeStatus.Text; this.CutTextBox(false); return; }
-                    if (e.PropertyName == "LedStatus") { this.toolStripBarcodeLEDGreen.Enabled = this.barcodePrinterController.LedGreenOn; this.toolStripBarcodeLEDAmber.Enabled = this.barcodePrinterController.LedAmberOn; this.toolStripBarcodeLEDRed.Enabled = this.barcodePrinterController.LedRedOn; if (this.barcodePrinterController.LedRedOn) this.StopPrint(true, true, false); return; }
+                    if (e.PropertyName == "MainStatus") { this.packStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.packController.MainStatus + "\r\n" + this.packStatusbox.Text; this.cutStatusBox(false); return; }
+                    if (e.PropertyName == "LedStatus") { this.packLEDGreen.Enabled = this.packController.LedGreenOn; this.packLEDAmber.Enabled = this.packController.LedAmberOn; this.packLEDRed.Enabled = this.packController.LedRedOn; if (this.packController.LedRedOn) this.StopPrint(true, true, false, false); return; }
 
-                    if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.barcodePrinterController.NextPackNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.packController.NextPackNo; this.fillingData.Update(); return; }
                 }
-                else if (sender.Equals(this.cartonPrinterController))
+                else if (sender.Equals(this.cartonController))
                 {
-                    if (e.PropertyName == "MainStatus") { this.textBoxCartonStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.cartonPrinterController.MainStatus + "\r\n" + this.textBoxCartonStatus.Text; this.CutTextBox(false); return; }
-                    if (e.PropertyName == "LedStatus") { this.toolStripCartonLEDGreen.Enabled = this.cartonPrinterController.LedGreenOn; this.toolStripCartonLEDAmber.Enabled = this.cartonPrinterController.LedAmberOn; this.toolStripCartonLEDRed.Enabled = this.cartonPrinterController.LedRedOn; return; }//if (this.cartonInkjetDominoPrinter.LedRedOn) this.StopPrint(); 
+                    if (e.PropertyName == "MainStatus") { this.cartonStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.cartonController.MainStatus + "\r\n" + this.cartonStatusbox.Text; this.cutStatusBox(false); return; }
+                    if (e.PropertyName == "LedStatus") { this.cartonLEDGreen.Enabled = this.cartonController.LedGreenOn; this.cartonLEDAmber.Enabled = this.cartonController.LedAmberOn; this.cartonLEDRed.Enabled = this.cartonController.LedRedOn; return; }
 
-                    if (e.PropertyName == "NextCartonNo") { this.fillingData.NextCartonNo = this.cartonPrinterController.NextCartonNo; this.fillingData.NextPalletNo = this.cartonPrinterController.NextPalletNo; this.fillingData.Update(); return; }
-                    if (e.PropertyName == "MonthCartonNumber") { this.fillingData.NextCartonNo = this.cartonPrinterController.NextCartonNo; this.fillingData.NextPalletNo = this.cartonPrinterController.NextPalletNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "NextCartonNo") { this.fillingData.NextCartonNo = this.cartonController.NextCartonNo; this.fillingData.NextPalletNo = this.cartonController.NextPalletNo; this.fillingData.Update(); return; }
                 }
+
+                else if (sender.Equals(this.palletController))
+                {
+                    if (e.PropertyName == "MainStatus") { this.palletStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.palletController.MainStatus + "\r\n" + this.palletStatusbox.Text; this.cutStatusBox(false); return; }
+                    if (e.PropertyName == "LedStatus") { this.palletLEDGreen.Enabled = this.palletController.LedGreenOn; this.palletLEDAmber.Enabled = this.palletController.LedAmberOn; this.palletLEDRed.Enabled = this.palletController.LedRedOn; return; }
+
+                    if (e.PropertyName == "NextPalletNo") { this.fillingData.NextPalletNo = this.palletController.NextPalletNo; this.fillingData.Update(); return; }
+                }
+
                 else if (sender.Equals(this.scannerController))
                 {
-                    if (e.PropertyName == "MainStatus") { this.textBoxScannerStatus.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.scannerController.MainStatus + "\r\n" + this.textBoxScannerStatus.Text; this.CutTextBox(false); return; }
-                    if (e.PropertyName == "LedStatus") { this.toolStripScannerLEDGreen.Enabled = this.scannerController.LedGreenOn; this.toolStripScannerLEDAmber.Enabled = this.scannerController.LedAmberOn; this.toolStripScannerLEDRed.Enabled = this.scannerController.LedRedOn; if (this.scannerController.LedRedOn) this.StopPrint(); return; }
+                    if (e.PropertyName == "MainStatus") { this.scannerStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.scannerController.MainStatus + "\r\n" + this.scannerStatusbox.Text; this.cutStatusBox(false); return; }
+                    if (e.PropertyName == "LedStatus") { this.scannerLEDGreen.Enabled = this.scannerController.LedGreenOn; this.scannerLEDAmber.Enabled = this.scannerController.LedAmberOn; this.scannerLEDRed.Enabled = this.scannerController.LedRedOn; if (this.scannerController.LedRedOn) this.StopPrint(); return; }
 
                     if (e.PropertyName == "LedMCU") { this.toolStripMCUQuanlity.Enabled = this.scannerController.LedMCUQualityOn; this.toolStripMCUMatching.Enabled = this.scannerController.LedMCUMatchingOn; this.toolStripMCUCarton.Enabled = this.scannerController.LedMCUCartonOn; return; }
 
@@ -395,9 +447,9 @@ namespace TotalSmartCoding.Views.Productions
 
                     if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); }
 
-                    if (e.PropertyName == "CartonQueue") 
-                    { 
-                        this.dgvCartonQueue.DataSource = this.scannerController.GetCartonQueue(); 
+                    if (e.PropertyName == "CartonQueue")
+                    {
+                        this.dgvCartonQueue.DataSource = this.scannerController.GetCartonQueue();
                         if (this.dgvCartonQueue.Rows.Count > 1) this.dgvCartonQueue.CurrentCell = this.dgvCartonQueue.Rows[0].Cells[0];
 
                         this.buttonCartonQueueCount.Text = "[" + this.scannerController.CartonQueueCount.ToString("N0") + "]";
@@ -405,7 +457,8 @@ namespace TotalSmartCoding.Views.Productions
 
                     if (e.PropertyName == "CartonsetQueue") { this.dgvCartonsetQueue.DataSource = this.scannerController.GetCartonsetQueue(); }
 
-                    if (e.PropertyName == "PalletQueue") { 
+                    if (e.PropertyName == "PalletQueue")
+                    {
                         this.dgvPalletQueue.DataSource = this.scannerController.GetPalletQueue();
                         this.buttonPalletQueueCount.Text = "[" + this.scannerController.PalletQueueCount.ToString("N0") + "]";
                     }
@@ -418,15 +471,58 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        private void comboBoxEmptyCarton_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void setToolStripActive()
         {
-            try
+            bool anyLoopRoutine = digitController.LoopRoutine | packController.LoopRoutine | cartonController.LoopRoutine | palletController.LoopRoutine | scannerController.LoopRoutine;
+            bool allLoopRoutine = digitController.LoopRoutine && packController.LoopRoutine && cartonController.LoopRoutine && palletController.LoopRoutine && scannerController.LoopRoutine;
+
+            bool anyOnPrinting = digitController.OnPrinting | packController.OnPrinting | cartonController.OnPrinting | palletController.OnPrinting | scannerController.OnScanning;
+            //bool allOnPrinting = digitInkjetDominoPrinter.OnPrinting && barcodeInkjetDominoPrinter.OnPrinting && cartonInkjetDominoPrinter.OnPrinting  && palletInkjetDominoPrinter.OnPrinting && barcodeScannerMCU.OnPrinting;
+
+            bool allLedGreenOn = digitController.LedGreenOn && packController.LedGreenOn && cartonController.LedGreenOn && palletController.LedGreenOn && scannerController.LedGreenOn;
+
+            this.buttonConnect.Enabled = !anyLoopRoutine;
+            this.buttonDisconnect.Enabled = anyLoopRoutine && !anyOnPrinting;
+            this.buttonStart.Enabled = allLoopRoutine && !anyOnPrinting && allLedGreenOn;
+            this.buttonStop.Enabled = anyOnPrinting;
+
+            this.buttonBatches.Enabled = !anyLoopRoutine;
+
+
+
+            this.digitLEDGreen.Enabled = digitController.LoopRoutine && this.digitController.LedGreenOn;
+            this.packLEDGreen.Enabled = packController.LoopRoutine && this.packController.LedGreenOn;
+            this.cartonLEDGreen.Enabled = cartonController.LoopRoutine && this.cartonController.LedGreenOn;
+            this.palletLEDGreen.Enabled = palletController.LoopRoutine && this.palletController.LedGreenOn;
+            this.scannerLEDGreen.Enabled = scannerController.LoopRoutine && this.scannerController.LedGreenOn;
+
+
+            this.digitLEDPrinting.Enabled = digitController.OnPrinting && this.digitController.LedGreenOn;
+            this.packLEDPrinting.Enabled = packController.OnPrinting && this.packController.LedGreenOn;
+            this.cartonLEDPrinting.Enabled = cartonController.OnPrinting && this.cartonController.LedGreenOn;
+            this.palletLEDPrinting.Enabled = palletController.OnPrinting && this.palletController.LedGreenOn;
+            this.scannerLEDScanning.Enabled = scannerController.OnScanning && this.scannerController.LedGreenOn;
+        }
+
+        private void cutStatusBox(bool clearStatusBox)
+        {
+            if (clearStatusBox)
             {
-                GlobalVariables.IgnoreEmptyCarton = this.comboBoxEmptyCarton.ComboBox.SelectedIndex == 0;
-                GlobalRegistry.Write("IgnoreEmptyCarton", GlobalVariables.IgnoreEmptyCarton ? "1" : "0");
+                this.digitStatusbox.Text = "";
+                this.packStatusbox.Text = "";
+                this.cartonStatusbox.Text = "";
+                this.palletStatusbox.Text = "";
+                this.scannerStatusbox.Text = "";
             }
-            catch
-            { }
+            else
+            {
+                if (this.digitStatusbox.TextLength > 1000) this.digitStatusbox.Text = this.digitStatusbox.Text.Substring(0, 1000);
+                if (this.packStatusbox.TextLength > 1000) this.packStatusbox.Text = this.packStatusbox.Text.Substring(0, 1000);
+                if (this.cartonStatusbox.TextLength > 1000) this.cartonStatusbox.Text = this.cartonStatusbox.Text.Substring(0, 1000);
+                if (this.palletStatusbox.TextLength > 1000) this.palletStatusbox.Text = this.palletStatusbox.Text.Substring(0, 1000);
+                if (this.scannerStatusbox.TextLength > 1000) this.scannerStatusbox.Text = this.scannerStatusbox.Text.Substring(0, 1000);
+            }
         }
 
 
@@ -468,12 +564,26 @@ namespace TotalSmartCoding.Views.Productions
             this.dgvPackQueue.ScrollBars = ScrollBars.Horizontal;
         }
 
-
         private void dataGridView_Leave(object sender, EventArgs e)
         {
             this.dgvPackQueue.ScrollBars = ScrollBars.None;
         }
 
+        private string GetSerialNumber(string printedBarcode)
+        {
+            if (printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString()) == 0) printedBarcode = "";
+            //else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
+            else
+                if (printedBarcode.Length >= 29) printedBarcode = printedBarcode.Substring(23, 6); //Char[3][4][5]...[9]: Serial Number
+                else if (printedBarcode.Length >= 12) printedBarcode = printedBarcode.Substring(6, 5);
+
+            return printedBarcode;
+        }
+
+        #endregion Handler
+
+
+        #region Exception Handler
 
         /// <summary>
         /// Find a specific pack number in matching queue
@@ -621,166 +731,6 @@ namespace TotalSmartCoding.Views.Productions
             return -1;
         }
 
-        private string GetSerialNumber(string printedBarcode)
-        {
-            if (printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString()) == 0) printedBarcode = "";
-            //else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
-            else
-                if (printedBarcode.Length >= 29) printedBarcode = printedBarcode.Substring(23, 6); //Char[3][4][5]...[9]: Serial Number
-                else if (printedBarcode.Length >= 12) printedBarcode = printedBarcode.Substring(6, 5);
-
-            return printedBarcode;
-        }
-
-
-        private void timerEverySecond_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                this.textBoxCurrentDate.TextBox.Text = DateTime.Now.ToString("dd/MM/yy");
-                if (this.fillingData != null)
-                {
-                    //if (this.fillingData.SettingMonthID != 1) //GlobalStaticFunction.DateToContinuosMonth()
-                    //{
-                    //    this.toolStripButtonWarningNewMonth.Visible = !this.toolStripButtonWarningNewMonth.Visible; this.toolStripLabelWarningNewMonth.Visible = !this.toolStripLabelWarningNewMonth.Visible;
-                    //}
-                    //else
-                    //{
-                    //    this.toolStripButtonWarningNewMonth.Visible = false; this.toolStripLabelWarningNewMonth.Visible = false;
-                    //}
-                }
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-        }
-
-        private void SmartCoding_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                if (digitPrinterThread != null && digitPrinterThread.IsAlive) { e.Cancel = true; return; }
-                if (barcodePrinterThread != null && barcodePrinterThread.IsAlive) { e.Cancel = true; return; }
-                if (cartonPrinterThread != null && cartonPrinterThread.IsAlive) { e.Cancel = true; return; }
-
-                if (scannerThread != null && scannerThread.IsAlive) { e.Cancel = true; return; }
-
-                if (backupDataThread != null && backupDataThread.IsAlive) { e.Cancel = true; return; }
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-        }
-
-        private void toolStripButtonSetting_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this.fillingData, true));
-
-                masterMDI.ShowDialog();
-
-                masterMDI.Dispose();
-
-                //this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-
-
-        }
-
-
-        private void SetToolStripActive()
-        {
-            bool anyLoopRoutine = digitPrinterController.LoopRoutine | barcodePrinterController.LoopRoutine | cartonPrinterController.LoopRoutine | scannerController.LoopRoutine;
-            bool allLoopRoutine = digitPrinterController.LoopRoutine && barcodePrinterController.LoopRoutine && cartonPrinterController.LoopRoutine && scannerController.LoopRoutine;
-
-            bool anyOnPrinting = digitPrinterController.OnPrinting | barcodePrinterController.OnPrinting | cartonPrinterController.OnPrinting | scannerController.OnScanning;
-            //bool allOnPrinting = digitInkjetDominoPrinter.OnPrinting && barcodeInkjetDominoPrinter.OnPrinting && cartonInkjetDominoPrinter.OnPrinting && barcodeScannerMCU.OnPrinting;
-
-            bool allLedGreenOn = digitPrinterController.LedGreenOn && barcodePrinterController.LedGreenOn && cartonPrinterController.LedGreenOn && scannerController.LedGreenOn;
-
-            this.buttonConnect.Enabled = !anyLoopRoutine;
-            this.buttonDisconnect.Enabled = anyLoopRoutine && !anyOnPrinting;
-            this.buttonStart.Enabled = allLoopRoutine && !anyOnPrinting && allLedGreenOn;
-            this.buttonStop.Enabled = anyOnPrinting;
-
-            this.buttonBatches.Enabled = !anyLoopRoutine;
-
-
-
-            this.toolStripDigitLEDGreen.Enabled = digitPrinterController.LoopRoutine && this.digitPrinterController.LedGreenOn;
-            this.toolStripBarcodeLEDGreen.Enabled = barcodePrinterController.LoopRoutine && this.barcodePrinterController.LedGreenOn;
-            this.toolStripCartonLEDGreen.Enabled = cartonPrinterController.LoopRoutine && this.cartonPrinterController.LedGreenOn;
-            this.toolStripScannerLEDGreen.Enabled = scannerController.LoopRoutine && this.scannerController.LedGreenOn;
-
-
-            this.toolStripDigitOnPrinting.Enabled = digitPrinterController.OnPrinting && this.digitPrinterController.LedGreenOn;
-            this.toolStripBarcodeOnPrinting.Enabled = barcodePrinterController.OnPrinting && this.barcodePrinterController.LedGreenOn;
-            this.toolStripCartonOnPrinting.Enabled = cartonPrinterController.OnPrinting && this.cartonPrinterController.LedGreenOn;
-            this.toolStripScannerOnPrinting.Enabled = scannerController.OnScanning && this.scannerController.LedGreenOn;
-        }
-
-        private void CutTextBox(bool clearTextBox)
-        {
-            if (clearTextBox)
-            {
-                this.textBoxBarcodeStatus.Text = "";
-                this.textBoxCartonStatus.Text = "";
-                this.textBoxDigitStatus.Text = "";
-                this.textBoxScannerStatus.Text = "";
-            }
-            else
-            {
-                if (this.textBoxBarcodeStatus.TextLength > 1000) this.textBoxBarcodeStatus.Text = this.textBoxBarcodeStatus.Text.Substring(0, 1000);
-                if (this.textBoxCartonStatus.TextLength > 1000) this.textBoxCartonStatus.Text = this.textBoxCartonStatus.Text.Substring(0, 1000);
-                if (this.textBoxDigitStatus.TextLength > 1000) this.textBoxDigitStatus.Text = this.textBoxDigitStatus.Text.Substring(0, 1000);
-                if (this.textBoxScannerStatus.TextLength > 1000) this.textBoxScannerStatus.Text = this.textBoxScannerStatus.Text.Substring(0, 1000);
-            }
-        }
-
-
-        #region Test only
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            this.splitContainerQuality.SplitterDistance = this.SplitterDistanceQuality();
-            this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
-            this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
-
-            ////barcodeScannerMCU.MyTest = true;
-
-            ////if (barcodeScannerMCUThread != null && barcodeScannerMCUThread.IsAlive) barcodeScannerMCUThread.Abort();
-            ////barcodeScannerMCUThread = new Thread(new ThreadStart(barcodeScannerMCU.ThreadRoutine));
-            ////barcodeScannerMCUThread.Start();
-
-            ////Thread.Sleep(1000); //Delay 1s, then Start print
-            ////barcodeScannerMCU.StartPrint();
-        }
-
-        private void toolStripButton4_Click(object sender, EventArgs e)
-        {
-            if (scannerController.OnScanning)
-                scannerController.StopScanner();
-            else
-                scannerController.StartScanner();
-        }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            scannerController.LoopRoutine = false;
-        }
-
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            //scannerController.MyHold = !scannerController.MyHold;
-        }
-
-        #endregion Test only
 
         private void buttonPackQueueCount_Click(object sender, EventArgs e)
         {
@@ -795,25 +745,12 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        #endregion Exception Handler
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #region Backup
 
         private void timerNmvnBackup_Tick(object sender, EventArgs e)
         {
@@ -827,24 +764,25 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-
-
         private void BackupDataHandler()
         {
             try
             {
-                if (digitPrinterThread == null || !digitPrinterThread.IsAlive)
+                if (digitThread == null || !digitThread.IsAlive)
                 {
-                    if (barcodePrinterThread == null || !barcodePrinterThread.IsAlive)
+                    if (packThread == null || !packThread.IsAlive)
                     {
-                        if (cartonPrinterThread == null || !cartonPrinterThread.IsAlive)
+                        if (cartonThread == null || !cartonThread.IsAlive)
                         {
-                            if (scannerThread == null || !scannerThread.IsAlive)
+                            if (palletThread == null || !palletThread.IsAlive)
                             {
-                                if (backupDataThread == null || !backupDataThread.IsAlive)
+                                if (scannerThread == null || !scannerThread.IsAlive)
                                 {
-                                    backupDataThread = new Thread(new ThreadStart(this.scannerController.BackupData));
-                                    backupDataThread.Start();
+                                    if (backupDataThread == null || !backupDataThread.IsAlive)
+                                    {
+                                        backupDataThread = new Thread(new ThreadStart(this.scannerController.BackupData));
+                                        backupDataThread.Start();
+                                    }
                                 }
                             }
                         }
@@ -857,6 +795,7 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        #endregion Backup
 
     }
 }
