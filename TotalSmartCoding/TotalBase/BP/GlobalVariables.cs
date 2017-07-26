@@ -56,7 +56,7 @@ namespace TotalBase
 
         public enum PrinterName
         {
-            DegitInkjet = 1,
+            DigitInkjet = 1,
             PackInkjet = 2,
             CartonInkjet = 3,
             PalletLabel = 6
@@ -114,9 +114,9 @@ namespace TotalBase
 
 
 
-        public static FillingLine FillingLineID = FillingLine.Drum;
-        public static string FillingLineCode = "Drum";
-        public static string FillingLineName = FillingLine.Drum.ToString();
+        public static FillingLine FillingLineID = FillingLine.Smallpack;
+        public static string FillingLineCode = "SP";
+        public static string FillingLineName = FillingLine.Smallpack.ToString();
 
         public static int noItemPerCartonSetByProductID = 0;
 
@@ -134,12 +134,12 @@ namespace TotalBase
                 case FillingLine.Smallpack:
                     switch (dominoPrinterNameID)
                     {
-                        case PrinterName.DegitInkjet:
-                            return "192.168.1.104";
+                        case PrinterName.DigitInkjet:
+                            return "192.168.1.101";
                         case PrinterName.PackInkjet:
-                            return "192.168.1.105";
+                            return "192.168.1.102";
                         case PrinterName.CartonInkjet:
-                            return "192.168.1.106";
+                            return "192.168.1.103";
                         default:
                             return "127.0.0.1";
                     }
@@ -147,7 +147,7 @@ namespace TotalBase
                 case FillingLine.Pail:
                     switch (dominoPrinterNameID)
                     {
-                        case PrinterName.DegitInkjet:
+                        case PrinterName.DigitInkjet:
                             return "192.168.1.113";
                         case PrinterName.PackInkjet:
                             return "192.168.1.114";
@@ -159,7 +159,7 @@ namespace TotalBase
                 case FillingLine.Drum:
                     switch (dominoPrinterNameID)
                     {
-                        case PrinterName.DegitInkjet:
+                        case PrinterName.DigitInkjet:
                             return "192.168.1.110";
                         case PrinterName.PackInkjet:
                             return "192.168.1.111";

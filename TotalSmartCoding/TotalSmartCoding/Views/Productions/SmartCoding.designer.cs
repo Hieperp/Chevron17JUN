@@ -104,6 +104,7 @@
             this.palletLEDGreen = new System.Windows.Forms.ToolStripButton();
             this.palletLEDPrinting = new System.Windows.Forms.ToolStripButton();
             this.palletLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.buttonReprint = new System.Windows.Forms.ToolStripButton();
             this.palletLEDAmber = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
@@ -1111,7 +1112,7 @@
             this.splitPallet.Panel2.Controls.Add(this.toolStrip4);
             this.splitPallet.Panel2MinSize = 39;
             this.splitPallet.Size = new System.Drawing.Size(836, 224);
-            this.splitPallet.SplitterDistance = 320;
+            this.splitPallet.SplitterDistance = 359;
             this.splitPallet.TabIndex = 23;
             this.splitPallet.Resize += new System.EventHandler(this.splitPallet_Resize);
             // 
@@ -1124,7 +1125,7 @@
             this.palletStatusbox.Name = "palletStatusbox";
             this.palletStatusbox.ReadOnly = true;
             this.palletStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.palletStatusbox.Size = new System.Drawing.Size(320, 169);
+            this.palletStatusbox.Size = new System.Drawing.Size(359, 169);
             this.palletStatusbox.TabIndex = 23;
             // 
             // toolStrip7
@@ -1138,6 +1139,7 @@
             this.palletLEDGreen,
             this.palletLEDPrinting,
             this.palletLEDRed,
+            this.buttonReprint,
             this.palletLEDAmber,
             this.toolStripLabel3,
             this.toolStripButton11,
@@ -1145,7 +1147,7 @@
             this.toolStripButton13});
             this.toolStrip7.Location = new System.Drawing.Point(0, 0);
             this.toolStrip7.Name = "toolStrip7";
-            this.toolStrip7.Size = new System.Drawing.Size(320, 55);
+            this.toolStrip7.Size = new System.Drawing.Size(359, 55);
             this.toolStrip7.TabIndex = 22;
             this.toolStrip7.Text = "toolStrip7";
             // 
@@ -1193,6 +1195,17 @@
             this.palletLEDRed.Text = "Error";
             this.palletLEDRed.ToolTipText = "Error";
             // 
+            // buttonReprint
+            // 
+            this.buttonReprint.Enabled = false;
+            this.buttonReprint.Image = global::TotalSmartCoding.Properties.Resources.Avosoft_Toolbar_Printer;
+            this.buttonReprint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonReprint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonReprint.Name = "buttonReprint";
+            this.buttonReprint.Size = new System.Drawing.Size(115, 52);
+            this.buttonReprint.Text = "Re-print";
+            this.buttonReprint.Click += new System.EventHandler(this.buttonReprint_Click);
+            // 
             // palletLEDAmber
             // 
             this.palletLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1220,7 +1233,7 @@
             this.toolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.Size = new System.Drawing.Size(23, 52);
+            this.toolStripButton11.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton11.Text = "Quality scanner";
             this.toolStripButton11.Visible = false;
             // 
@@ -1232,7 +1245,7 @@
             this.toolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton12.Name = "toolStripButton12";
-            this.toolStripButton12.Size = new System.Drawing.Size(23, 52);
+            this.toolStripButton12.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton12.Text = "Matching scanner";
             this.toolStripButton12.Visible = false;
             // 
@@ -1257,7 +1270,7 @@
             this.scannerStatusbox.Name = "scannerStatusbox";
             this.scannerStatusbox.ReadOnly = true;
             this.scannerStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.scannerStatusbox.Size = new System.Drawing.Size(512, 169);
+            this.scannerStatusbox.Size = new System.Drawing.Size(473, 169);
             this.scannerStatusbox.TabIndex = 22;
             // 
             // toolStrip4
@@ -1278,7 +1291,7 @@
             this.toolStripMCUCarton});
             this.toolStrip4.Location = new System.Drawing.Point(0, 0);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(512, 55);
+            this.toolStrip4.Size = new System.Drawing.Size(473, 55);
             this.toolStrip4.TabIndex = 21;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -1810,5 +1823,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton11;
         private System.Windows.Forms.ToolStripButton toolStripButton12;
         private System.Windows.Forms.ToolStripButton toolStripButton13;
+        private System.Windows.Forms.ToolStripButton buttonReprint;
     }
 }

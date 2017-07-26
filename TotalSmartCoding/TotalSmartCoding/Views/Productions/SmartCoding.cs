@@ -68,7 +68,7 @@ namespace TotalSmartCoding.Views.Productions
                 if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
 
 
-                digitController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.DegitInkjet);
+                digitController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.DigitInkjet);
                 packController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PackInkjet);
                 cartonController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
                 palletController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PalletLabel);
@@ -349,6 +349,11 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
+        private void buttonReprint_Click(object sender, EventArgs e)
+        {
+            this.scannerController.Reprint();
+        }
+
         private void timerEverySecond_Tick(object sender, EventArgs e)
         {
             try
@@ -486,6 +491,8 @@ namespace TotalSmartCoding.Views.Productions
             this.buttonDisconnect.Enabled = anyLoopRoutine && !anyOnPrinting;
             this.buttonStart.Enabled = allLoopRoutine && !anyOnPrinting && allLedGreenOn;
             this.buttonStop.Enabled = anyOnPrinting;
+
+            this.buttonReprint.Enabled = this.palletController.LedGreenOn && palletController.OnPrinting;
 
             this.buttonBatches.Enabled = !anyLoopRoutine;
 
@@ -796,6 +803,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+
 
     }
 }

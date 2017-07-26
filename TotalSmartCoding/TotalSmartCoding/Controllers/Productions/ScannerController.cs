@@ -286,7 +286,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     if (this.FillingData.HasCarton)
                         this.ionetSocketCarton.Connect();
 
-                    if (this.FillingData.HasPallet)
+                    if (this.FillingData.HasPallet && !GlobalEnums.OnTestPalletScanner)
                         this.ionetSocketPallet.Connect();
                 }
 
@@ -305,7 +305,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                this.MainStatus = "Ngắt kết nối ...";
+                this.MainStatus = "Đã ngắt kết nối ...";
 
                 this.ionetSocketPack.Disconnect();
                 this.ionetSocketCarton.Disconnect();
@@ -603,7 +603,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private bool waitforPallet(ref string stringReceived)
         {
-            if (GlobalEnums.OnTestScanner)
+            if (GlobalEnums.OnTestScanner || (GlobalEnums.OnTestPalletScanner && GlobalEnums.OnTestPalletReceivedNow))
                 if (GlobalEnums.OnTestPrinter && (DateTime.Now.Second % 10) == 0 && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketPallet.ReadoutStream().Trim();
@@ -664,6 +664,24 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
+        public void Reprint()
+        {
+            try
+            {
+                if (this.OnScanning)
+                {
+                    lock (this.cartonsetQueue)
+                    {
+                        if (this.cartonsetQueue.Count > 0 && this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed)
+                            this.FillingData.CartonsetQueueZebraStatus = GlobalVariables.ZebraStatus.Reprint;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                this.MainStatus = exception.Message;
+            }
+        }
 
         #endregion Public Thread
 

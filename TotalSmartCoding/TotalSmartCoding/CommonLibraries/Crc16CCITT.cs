@@ -4,7 +4,7 @@ namespace TotalSmartCoding.CommonLibraries
 {
     public enum Crc16Mode : ushort { Standard = 0xA001, CcittKermit = 0x8408 }
 
-    public class Crc16
+    public class Crc16CCITT
     {
         readonly ushort[] table = new ushort[256];
 
@@ -25,7 +25,7 @@ namespace TotalSmartCoding.CommonLibraries
             return BitConverter.GetBytes(crc);
         }
 
-        public Crc16(Crc16Mode mode)
+        public Crc16CCITT(Crc16Mode mode)
         {
             ushort polynomial = (ushort)mode;
             ushort value;

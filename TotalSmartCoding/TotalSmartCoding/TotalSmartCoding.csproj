@@ -667,6 +667,8 @@
     <None Include="Resources\Emey87-Trainee-Box-double-tape.ico" />
     <None Include="Resources\Fuel-icon-32.png" />
     <None Include="Resources\Fuel-icon-24.png" />
+    <None Include="Resources\gk420t.png" />
+    <None Include="Resources\Avosoft-Toolbar-Printer.ico" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
     <None Include="Resources\palet031.ico" />

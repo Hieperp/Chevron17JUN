@@ -93,8 +93,8 @@ namespace TotalDTO.Productions
         }
 
         //***************THESE SHOULD GET FROM FillingLines TABLE
-        public bool HasPack { get { return false; } }
-        public bool HasCarton { get { return false; } }
+        public bool HasPack { get { return true; } }
+        public bool HasCarton { get { return true; } }
         public bool HasPallet { get { return true; } }
 
         public string FillingLineCode
@@ -164,7 +164,7 @@ namespace TotalDTO.Productions
             {
                 if (this.batchCode != value)
                 {
-                    if (value.Length == 8)
+                    if (value.Length == 6)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.batchCode, o => o.BatchCode, value);
 

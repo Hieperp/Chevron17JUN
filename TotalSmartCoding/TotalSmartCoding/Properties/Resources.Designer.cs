@@ -323,6 +323,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Avosoft_Toolbar_Printer {
+            get {
+                object obj = ResourceManager.GetObject("Avosoft-Toolbar-Printer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Background {
             get {
                 object obj = ResourceManager.GetObject("Background", resourceCulture);
@@ -956,6 +966,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Get_Info_B {
             get {
                 object obj = ResourceManager.GetObject("Get-Info-B", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gk420t {
+            get {
+                object obj = ResourceManager.GetObject("gk420t", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
