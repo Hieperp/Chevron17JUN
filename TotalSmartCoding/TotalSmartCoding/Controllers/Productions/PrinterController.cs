@@ -134,6 +134,10 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
+        public string getPreviousNo()
+        {
+            return (int.Parse(this.getNextNo()) - 1).ToString("0000000").Substring(1);
+        }
 
         private string getNextNo()
         {
@@ -161,7 +165,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 int serialNumber = 0;
                 if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber))
-                    nextNo = serialNumber.ToString("0000000").Substring(1);//SHOULD OR NOT: Increase serialNumber by 1 (BECAUSE: nextNo MUST GO AHEAD BY 1??)
+                    nextNo = serialNumber.ToString("0000000").Substring(1);//SHOULD OR NOT: Increase serialNumber by 1 (BECAUSE: nextNo MUST GO AHEAD BY 1??): TEST AT DATMY: FOR AX350: NO NEED, BUCAUSE: AX350 RETURN THE NEXT VALUE. BUT FOR A200+: RETURN THE PRINTED VALUE
             }
 
             if (nextNo != "")
@@ -210,7 +214,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private string secondMessageLine(bool isReadableText)
         {
-            return this.secondMessageLineA1(isReadableText) + (isReadableText ? " " : "") + this.secondMessageLineA2(isReadableText);
+            return this.secondMessageLineA1(isReadableText) + this.secondMessageLineA2(isReadableText);
         }
 
         private string secondMessageLineA1(bool isReadableText)
@@ -225,7 +229,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private string thirdMessageLine(bool isReadableText, int serialIndentity)
         {
-            return this.privateFillingData.FillingLineCode + (this.printerName == GlobalVariables.PrinterName.PackInkjet ? "B" : (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "C" : (this.printerName == GlobalVariables.PrinterName.PalletLabel ? "P" : ""))) + (isReadableText ? " " : "") + (serialIndentity == 1 || serialIndentity == 2 ? this.dominoSerialNumber(serialIndentity) : this.getNextNo());
+            return this.privateFillingData.FillingLineCode + (this.printerName == GlobalVariables.PrinterName.PackInkjet ? "B" : (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "C" : (this.printerName == GlobalVariables.PrinterName.PalletLabel ? "P" : ""))) + (isReadableText ? " " : "") + (serialIndentity == 1 || serialIndentity == 2 ? this.dominoSerialNumber(serialIndentity) : (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? this.getNextNo() : this.getPreviousNo()));
         }
 
         private string EANInitialize(string twelveDigitCode)
@@ -307,15 +311,10 @@ namespace TotalSmartCoding.Controllers.Productions
                 return GlobalVariables.charESC + "u/1/ " + GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.thirdMessageLine(true, 1);
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
-                //return GlobalVariables.charESC + "u/1/ " + this.firstMessageLine(true);
-
-                return GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstMessageLine(false) + "/" + GlobalVariables.charESC + "/z/0";
-
-
-                return GlobalVariables.charESC + "u/1/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstMessageLine(false) + " " + this.secondMessageLine(false) + " " + this.thirdMessageLine(false, 2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
-                       GlobalVariables.charESC + "u/1/" + this.firstMessageLine(true) + "/" +
-                       GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.secondMessageLine(true) +
-                       GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.thirdMessageLine(true, 1);
+                return GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstMessageLine(false) + " " + this.secondMessageLine(false) + " " + this.thirdMessageLine(false, 2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
+                       GlobalVariables.charESC + "u/1/" + "   " + this.firstMessageLine(true) + "/" +
+                       GlobalVariables.charESC + "/r/" + "   " + GlobalVariables.charESC + "u/1/" + this.secondMessageLine(true) +
+                       GlobalVariables.charESC + "/r/" + "   " + GlobalVariables.charESC + "u/1/" + this.thirdMessageLine(true, 1);
             }
             else //this.printerName == GlobalVariables.PrinterName.PalletLabel
             {
@@ -333,12 +332,12 @@ namespace TotalSmartCoding.Controllers.Productions
                     //////stringMessage = stringMessage + "^FO0,10  ^BC,200,N,,,A  ^FD" + this.firstMessageLine(false) + this.secondMessageLine(false) + this.thirdMessageLine(false, 0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
 
                     //AUTO: stringMessage = stringMessage + "^FO0,10  ^BC,360,N,,,A  ^FD" + this.firstMessageLine(false) + this.secondMessageLine(false) + this.thirdMessageLine(false, 0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
-                    stringMessage = stringMessage + "^FO0,10  ^BC,360,N,,,D  ^FD" + this.firstMessageLine(false) + this.secondMessageLine(false) + this.thirdMessageLine(false, 0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
+                    stringMessage = stringMessage + "^FO0,10  ^BC,360,N  ^FD" + this.firstMessageLine(false) + this.secondMessageLine(false) + this.thirdMessageLine(false, 0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
 
-                    stringMessage = stringMessage + "^FO630,10 ^AG ^FD" + this.secondMessageLineA1(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                    stringMessage = stringMessage + "^FO630,100 ^AG ^FD" + this.secondMessageLineA2(true) + "^FS";
-                    stringMessage = stringMessage + "^FO630,200 ^AG ^FD" + this.firstMessageLine(true) + "^FS";
-                    stringMessage = stringMessage + "^FO630,305 ^AG ^FD" + this.thirdMessageLine(true, 0) + "^FS";
+                    stringMessage = stringMessage + "^FO760,10 ^AV ^FD" + this.secondMessageLineA1(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                    stringMessage = stringMessage + "^FO760,100 ^AV ^FD" + this.secondMessageLineA2(true) + "^FS";
+                    stringMessage = stringMessage + "^FO760,200 ^AV ^FD" + this.firstMessageLine(true) + "^FS";
+                    stringMessage = stringMessage + "^FO760,306 ^AV ^FD" + this.thirdMessageLine(true, 0) + "^FS";
 
                     stringMessage = stringMessage + "^XZ"; //[^XZ - Indicates end of label format.]
                 }
@@ -347,13 +346,13 @@ namespace TotalSmartCoding.Controllers.Productions
                     stringMessage = stringMessage + "^XA"; //[^XA - Indicates start of label format.]
                     stringMessage = stringMessage + "^LH80,20"; //[^LH - Sets label home position 30 dots to the right and 30 dots down from top edge of label.]
 
-                    stringMessage = stringMessage + "^FO0,30 ^AB ^FD" + "If you can read this, your printer is ready" + "^FS";
-                    stringMessage = stringMessage + "^FO0,80 ^AB ^FD" + "**PLEASE PRESS THE START BUTTON TO BEGIN**" + "^FS";
+                    stringMessage = stringMessage + "^FO0,30 ^AS ^FD" + "If you can read this, your printer is ready" + "^FS";
+                    stringMessage = stringMessage + "^FO0,80 ^AS ^FD" + "**PLEASE PRESS THE START BUTTON TO BEGIN**" + "^FS";
 
-                    stringMessage = stringMessage + "^FO630,10 ^AG ^FD" + this.secondMessageLineA1(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                    stringMessage = stringMessage + "^FO630,100 ^AG ^FD" + this.secondMessageLineA2(true) + "^FS";
-                    stringMessage = stringMessage + "^FO630,200 ^AG ^FD" + this.firstMessageLine(true) + "^FS";
-                    stringMessage = stringMessage + "^FO630,305 ^AG ^FD" + this.thirdMessageLine(true, 0) + "^FS";
+                    stringMessage = stringMessage + "^FO760,10 ^AV ^FD" + this.secondMessageLineA1(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                    stringMessage = stringMessage + "^FO760,100 ^AV ^FD" + this.secondMessageLineA2(true) + "^FS";
+                    stringMessage = stringMessage + "^FO760,200 ^AV ^FD" + this.firstMessageLine(true) + "^FS";
+                    stringMessage = stringMessage + "^FO760,306 ^AV ^FD" + this.thirdMessageLine(true, 0) + "^FS";
 
                     stringMessage = stringMessage + "^XZ"; //[^XZ - Indicates end of label format.]
                 }
@@ -547,8 +546,8 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.LedRedOn = receivedFeedback.ElementAt(17).ToString() == "3" || receivedFeedback.ElementAt(17).ToString() == "4";
                 }
                 else
-                {
-                    this.LedGreenOn = ((int)receivedFeedback.ElementAt(7) & int.Parse("1")) == 1;
+                { //DATE 26-JUL-2017: LedGreenOn = LedGreenOn (ORIGINAL LedGreenOn) || LedAmberOn. THIS MEANS: LedGreenOn OR LedAmberOn: THE PRINTER IS READY FOR PRINTING!!!
+                    this.LedGreenOn = ((int)receivedFeedback.ElementAt(7) & int.Parse("1")) == 1 || ((int)receivedFeedback.ElementAt(7) & int.Parse("2")) == 2;
                     this.LedAmberOn = ((int)receivedFeedback.ElementAt(7) & int.Parse("2")) == 2;
                     this.LedRedOn = ((int)receivedFeedback.ElementAt(7) & int.Parse("3")) == 3;
                 }
@@ -807,7 +806,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             if ((this.isLaser && this.waitforDomino(ref receivedFeedback, false, "OK", "OK".Length)) || (!this.isLaser && this.waitforDomino(ref receivedFeedback, true))) Thread.Sleep(250); else throw new System.InvalidOperationException("Can not set off printing acknowledge/ Load Demo project: " + receivedFeedback);
 
                             this.resetMessage = false; //Setup first message: Only one times      
-                            this.MainStatus = "Đang kết nối với máy in." + "\r\n" + "Vui lòng nhất Start để bắt đầu in.";
+                            this.MainStatus = "Đang kết nối với máy in.";
                         }
                         #endregion Reset Message: Clear message: this.printerName != GlobalVariables.PrinterName.PalletLabel
                     }

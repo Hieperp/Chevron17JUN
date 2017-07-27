@@ -48,6 +48,7 @@ namespace TotalDTO.Productions
         public FillingData()
         {
 
+            this.settingDate = DateTime.Now;
             //DataTable defaultFillingLineData = ADODatabase.GetDataTable("SELECT FillingLineData.ProductID, ListProductName.ProductCode, ListProductName.ProductCodeOriginal, ListProductName.NoItemPerCarton, ListProductName.NoExpiryDate, ListProductName.IsPailLabel, FillingLineData.BatchNo, FillingLineData.SettingDate, FillingLineData.SettingMonthID, FillingLineData.LastPackNo, FillingLineData.LastPackNo, FillingLineData.LastCartonNo, FillingLineData.MonthCartonNumber FROM FillingLineData INNER JOIN ListProductName ON FillingLineData.ProductID = ListProductName.ProductID WHERE FillingLineData.FillingLineID = " + (int)this.FillingLineID + " AND FillingLineData.IsDefault = 1");
 
             //if (defaultFillingLineData.Rows.Count > 0)

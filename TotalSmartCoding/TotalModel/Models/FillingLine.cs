@@ -32,6 +32,9 @@ namespace TotalModel.Models
         public string ServerName { get; set; }
         public string DatabaseName { get; set; }
         public bool InActive { get; set; }
+        public bool HasPack { get; set; }
+        public bool HasCarton { get; set; }
+        public bool HasPallet { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons { get; set; }

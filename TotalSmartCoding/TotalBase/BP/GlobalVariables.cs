@@ -114,9 +114,9 @@ namespace TotalBase
 
 
 
-        public static FillingLine FillingLineID = FillingLine.Smallpack;
-        public static string FillingLineCode = "SP";
-        public static string FillingLineName = FillingLine.Smallpack.ToString();
+        public static FillingLine FillingLineID = FillingLine.Pail;
+        public static string FillingLineCode = "PL";
+        public static string FillingLineName = FillingLine.Pail.ToString();
 
         public static int noItemPerCartonSetByProductID = 0;
 
@@ -139,7 +139,7 @@ namespace TotalBase
                         case PrinterName.PackInkjet:
                             return "192.168.1.102";
                         case PrinterName.CartonInkjet:
-                            return "192.168.1.103";
+                            return "192.168.1.105";
                         default:
                             return "127.0.0.1";
                     }
@@ -148,11 +148,11 @@ namespace TotalBase
                     switch (dominoPrinterNameID)
                     {
                         case PrinterName.DigitInkjet:
-                            return "192.168.1.113";
+                            return "192.168.1.101";
                         case PrinterName.PackInkjet:
-                            return "192.168.1.114";
+                            return "192.168.1.102";
                         case PrinterName.CartonInkjet:
-                            return "127.0.0.1";
+                            return "192.168.1.105";
                         default:
                             return "127.0.0.1";
                     }
@@ -189,9 +189,9 @@ namespace TotalBase
                         case ScannerName.QualityScanner:
                             return "127.0.0.1";
                         case ScannerName.PackScanner:
-                            return "192.168.1.55"; //192.168.1.52
+                            return "192.168.1.28"; //192.168.1.52
                         case ScannerName.CartonScanner:
-                            return "127.0.0.1";
+                            return "192.168.1.55";
                         default:
                             return "127.0.0.1";
                     }
@@ -201,9 +201,9 @@ namespace TotalBase
                         case ScannerName.QualityScanner:
                             return "127.0.0.1";
                         case ScannerName.PackScanner:
-                            return "192.168.1.55";
+                            return "192.168.1.28"; //192.168.1.52
                         case ScannerName.CartonScanner:
-                            return "127.0.0.1";
+                            return "192.168.1.55";
                         default:
                             return "127.0.0.1";
                     }

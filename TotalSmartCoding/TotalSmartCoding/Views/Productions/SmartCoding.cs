@@ -354,6 +354,12 @@ namespace TotalSmartCoding.Views.Productions
             this.scannerController.Reprint();
         }
 
+
+        private void buttonPalletReceivedNow_Click(object sender, EventArgs e)
+        {
+            GlobalEnums.OnTestPalletReceivedNow = true;
+        }
+
         private void timerEverySecond_Tick(object sender, EventArgs e)
         {
             try
@@ -803,6 +809,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+
 
 
     }

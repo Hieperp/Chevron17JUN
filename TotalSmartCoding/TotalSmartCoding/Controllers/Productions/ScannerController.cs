@@ -66,7 +66,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.fillingPalletController = new FillingPalletController(CommonNinject.Kernel.Get<IFillingPalletService>(), CommonNinject.Kernel.Get<IFillingPalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPalletViewModel>());
 
 
-                this.ionetSocketPack = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PackScanner)), 2112, 120); //PORT 2112: DATA LOGIC
+                this.ionetSocketPack = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PackScanner)), 23, 120); //PORT 2112: DATA LOGIC
                 this.ionetSocketCarton = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.CartonScanner)), 2112, 120);
                 this.ionetSocketPallet = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PalletScanner)), 2112, 120);
 
@@ -531,8 +531,8 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 string receivedBarcode = stringBarcode.Trim();
                 if (!this.FillingData.HasPack) receivedBarcode = receivedBarcode.Replace("NoRead", "").Trim();
-
-                if (receivedBarcode != "" && (lastCartonCode != receivedBarcode || receivedBarcode == "NoRead"))
+                //NOTES: this.FillingData.HasPack && lastCartonCode == receivedBarcode: KHI HasPack: TRÙNG CARTON  || HOẶC LÀ "NoRead": THI CẦN PHẢI ĐƯA SANG 1 QUEUE KHÁC. XỬ LÝ CUỐI CA
+                if (receivedBarcode != "" && (this.FillingData.HasPack || lastCartonCode != receivedBarcode || receivedBarcode == "NoRead"))
                     if (this.matchPacktoCarton(receivedBarcode))
                     {
                         lastCartonCode = receivedBarcode;
@@ -603,8 +603,8 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private bool waitforPallet(ref string stringReceived)
         {
-            if (GlobalEnums.OnTestScanner || (GlobalEnums.OnTestPalletScanner && GlobalEnums.OnTestPalletReceivedNow))
-                if (GlobalEnums.OnTestPrinter && (DateTime.Now.Second % 10) == 0 && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+            if (GlobalEnums.OnTestScanner || GlobalEnums.OnTestPalletScanner)
+                if ((GlobalEnums.OnTestPrinter || GlobalEnums.OnTestPalletReceivedNow) && ((DateTime.Now.Second % 10) == 0 || GlobalEnums.OnTestPalletReceivedNow) && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) { stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; GlobalEnums.OnTestPalletReceivedNow = false; } else stringReceived = "";
             else
                 stringReceived = this.ionetSocketPallet.ReadoutStream().Trim();
 
@@ -672,7 +672,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     lock (this.cartonsetQueue)
                     {
-                        if (this.cartonsetQueue.Count > 0 && this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed)
+                        if ((this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton) && this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed)
                             this.FillingData.CartonsetQueueZebraStatus = GlobalVariables.ZebraStatus.Reprint;
                     }
                 }

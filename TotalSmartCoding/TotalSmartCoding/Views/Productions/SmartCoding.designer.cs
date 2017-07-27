@@ -148,6 +148,7 @@
             this.textBoxNextCartonNo = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
             this.textBoxNextPalletNo = new System.Windows.Forms.ToolStripTextBox();
+            this.buttonPalletReceivedNow = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPacksetQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonQueue)).BeginInit();
@@ -1284,6 +1285,7 @@
             this.scannerLEDGreen,
             this.scannerLEDScanning,
             this.scannerLEDRed,
+            this.buttonPalletReceivedNow,
             this.scannerLEDAmber,
             this.toolStripLabel1,
             this.toolStripMCUQuanlity,
@@ -1634,6 +1636,16 @@
             this.textBoxNextPalletNo.Text = "888888";
             this.textBoxNextPalletNo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // buttonPalletReceivedNow
+            // 
+            this.buttonPalletReceivedNow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonPalletReceivedNow.Image = ((System.Drawing.Image)(resources.GetObject("buttonPalletReceivedNow.Image")));
+            this.buttonPalletReceivedNow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonPalletReceivedNow.Name = "buttonPalletReceivedNow";
+            this.buttonPalletReceivedNow.Size = new System.Drawing.Size(24, 52);
+            this.buttonPalletReceivedNow.Text = "toolStripButton3";
+            this.buttonPalletReceivedNow.Click += new System.EventHandler(this.buttonPalletReceivedNow_Click);
+            // 
             // SmartCoding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1824,5 +1836,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton12;
         private System.Windows.Forms.ToolStripButton toolStripButton13;
         private System.Windows.Forms.ToolStripButton buttonReprint;
+        private System.Windows.Forms.ToolStripButton buttonPalletReceivedNow;
     }
 }

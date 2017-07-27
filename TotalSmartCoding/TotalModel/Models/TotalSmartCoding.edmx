@@ -264,6 +264,9 @@
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="HasPack" Type="bit" Nullable="false" />
+          <Property Name="HasCarton" Type="bit" Nullable="false" />
+          <Property Name="HasPallet" Type="bit" Nullable="false" />
           <Property Name="LastLogonFillingLineID" Type="int" />
           <Property Name="PortName" Type="nvarchar" MaxLength="20" />
           <Property Name="ServerID" Type="int" />
@@ -2119,6 +2122,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="FillingLine" ToRole="Carton" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="FillingLine" ToRole="Pack" />
           <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="FillingLine" ToRole="Batch" />
+          <Property Name="HasPack" Type="Boolean" Nullable="false" />
+          <Property Name="HasCarton" Type="Boolean" Nullable="false" />
+          <Property Name="HasPallet" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -3279,6 +3285,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="FillingLines">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.FillingLine">
               <MappingFragment StoreEntitySet="FillingLines">
+                <ScalarProperty Name="HasPallet" ColumnName="HasPallet" />
+                <ScalarProperty Name="HasCarton" ColumnName="HasCarton" />
+                <ScalarProperty Name="HasPack" ColumnName="HasPack" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="DatabaseName" ColumnName="DatabaseName" />
                 <ScalarProperty Name="ServerName" ColumnName="ServerName" />
