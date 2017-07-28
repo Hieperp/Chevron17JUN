@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading;
-
 using TotalBase;
 using TotalBase.Enums;
+using TotalCore.Services.Productions;
 using TotalDTO.Productions;
 using TotalSmartCoding.CommonLibraries;
 
@@ -16,6 +16,8 @@ namespace TotalSmartCoding.Controllers.Productions
     public class PrinterController : CodingController
     {
         #region Storage
+
+        private IBatchService batchService;
 
         private FillingData privateFillingData;
 
@@ -38,12 +40,14 @@ namespace TotalSmartCoding.Controllers.Productions
 
         #region Contructor
 
-        public PrinterController(FillingData fillingData, GlobalVariables.PrinterName printerName) : this(fillingData, printerName, false) { }
-        public PrinterController(FillingData fillingData, GlobalVariables.PrinterName printerName, bool isLaser)
+        public PrinterController(IBatchService batchService, FillingData fillingData, GlobalVariables.PrinterName printerName) : this(batchService, fillingData, printerName, false) { }
+        public PrinterController(IBatchService batchService, FillingData fillingData, GlobalVariables.PrinterName printerName, bool isLaser)
         {
 
             try
             {
+                this.batchService = batchService;
+
                 this.FillingData = fillingData;
                 this.privateFillingData = this.FillingData.ShallowClone();
 
@@ -178,6 +182,12 @@ namespace TotalSmartCoding.Controllers.Productions
                     else
                         if (this.printerName == GlobalVariables.PrinterName.PalletLabel)
                             this.NextPalletNo = nextNo;
+
+                lock (this.batchService) //ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService
+                {
+                    if (!this.batchService.CommonUpdate(this.FillingData.BatchID, this.printerName == GlobalVariables.PrinterName.PackInkjet ? nextNo : "", this.printerName == GlobalVariables.PrinterName.CartonInkjet ? nextNo : "", this.printerName == GlobalVariables.PrinterName.PalletLabel ? nextNo : ""))
+                        this.MainStatus = this.batchService.ServiceTag;
+                }
             }
         }
 
@@ -207,7 +217,7 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        
+
 
         private string thirdLine(bool isReadableText, int serialIndentity)
         {
@@ -613,6 +623,8 @@ namespace TotalSmartCoding.Controllers.Productions
 
             this.LoopRoutine = true; this.StopPrint();
 
+
+            if (GlobalEnums.OnTestPrinter && this.printerName != GlobalVariables.PrinterName.DigitInkjet) this.feedbackNextNo((int.Parse(this.getNextNo()) + 1).ToString("0000000").Substring(1));
 
             //This command line is specific to: PalletLabel ON FillingLine.Drum || CartonInkjet ON FillingLine.Pail (Just here only for this specific)
             if (GlobalEnums.OnTestPrinter || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Drum && this.printerName != GlobalVariables.PrinterName.PalletLabel) || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail && this.printerName == GlobalVariables.PrinterName.CartonInkjet) || (this.printerName == GlobalVariables.PrinterName.DigitInkjet && GlobalEnums.OnTestDigit)) { this.LedGreenOn = true; return; } //DO NOTHING

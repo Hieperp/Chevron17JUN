@@ -496,7 +496,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingPalletUpdateEntryStatus", fillingPalletIDsParameter, entryStatusIDParameter);
         }
     
-        public virtual int BatchUpdate(Nullable<int> batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
+        public virtual int BatchCommonUpdate(Nullable<int> batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
         {
             var batchIDParameter = batchID.HasValue ?
                 new ObjectParameter("BatchID", batchID) :
@@ -514,7 +514,20 @@ namespace TotalModel.Models
                 new ObjectParameter("NextPalletNo", nextPalletNo) :
                 new ObjectParameter("NextPalletNo", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchUpdate", batchIDParameter, nextPackNoParameter, nextCartonNoParameter, nextPalletNoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchCommonUpdate", batchIDParameter, nextPackNoParameter, nextCartonNoParameter, nextPalletNoParameter);
+        }
+    
+        public virtual int FillingPackUpdateQueueID(string fillingPackIDs, Nullable<int> queueID)
+        {
+            var fillingPackIDsParameter = fillingPackIDs != null ?
+                new ObjectParameter("FillingPackIDs", fillingPackIDs) :
+                new ObjectParameter("FillingPackIDs", typeof(string));
+    
+            var queueIDParameter = queueID.HasValue ?
+                new ObjectParameter("QueueID", queueID) :
+                new ObjectParameter("QueueID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingPackUpdateQueueID", fillingPackIDsParameter, queueIDParameter);
         }
     }
 }

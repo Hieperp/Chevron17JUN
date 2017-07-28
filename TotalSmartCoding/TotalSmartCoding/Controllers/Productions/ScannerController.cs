@@ -717,7 +717,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
         /// <summary>
-        /// If this.Count = noItemPerCarton then Reallocation an equal amount of messageData to every subQueue. Each subQueue will have the same NoItemPerSubQueue.
+        /// If this.Count = ItemPerSet then Reallocation an equal amount of messageData to every subQueue. Each subQueue will have the same NoSubQueue.
         /// </summary>
         /// <returns></returns>
         public bool ReAllocation()
@@ -736,17 +736,17 @@ namespace TotalSmartCoding.Controllers.Productions
                             {
                                 if (this.packQueue.GetSubQueueCount(i) > (this.packQueue.ItemPerSet / this.packQueue.NoSubQueue))
                                 {
-                                    FillingPackDTO messageData = this.packQueue.ElementAt(i, this.packQueue.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
-                                    messageData.QueueID = subQueueID; //Set new QueueID
+                                    FillingPackDTO fillingPackDTO = this.packQueue.ElementAt(i, this.packQueue.GetSubQueueCount(i) - 1).ShallowClone(); //Get the last pack of SubQueue(i)
+                                    fillingPackDTO.QueueID = subQueueID; //Set new QueueID
 
                                     lock (this.fillingPackController)
                                     {
-                                        if (this.fillingPackController.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID))
+                                        if (this.fillingPackController.fillingPackService.UpdateQueueID(fillingPackDTO.FillingPackID.ToString(), fillingPackDTO.QueueID))
                                         {
-                                            this.packQueue.Dequeue(messageData.PackID); //First: Remove from old subQueue
-                                            this.packQueue.AddPack(messageData);//Next: Add to new subQueue
+                                            this.packQueue.Dequeue(fillingPackDTO.FillingPackID); //First: Remove from old subQueue
+                                            this.packQueue.Enqueue(fillingPackDTO, false); //Next: Add to new subQueue
                                         }
-                                        else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue: " + messageData.Code);
+                                        else throw new System.ArgumentException("Unknown error: Fail to handle this pack", "Can not change new queue ID: " + this.fillingPackController.fillingPackService.ServiceTag);
                                     }
                                 }
                             }
@@ -759,13 +759,12 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.NotifyPropertyChanged("PackQueue");
                 return true;
             }
-            else return false;
+            else
+            {
+                this.MainStatus = "Số lượng chai tồn không đủ đóng carton";
+                return false;
+            }
         }
-
-
-
-
-
 
         public bool RemoveItemInMatchingPackList(int packID)
         {
@@ -816,7 +815,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             {
                                 this.fillingPalletController.Delete(packID);//if ( !) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
 
-                                if (!this.fillingPackController.fillingPackService.UpdateListOfPackSubQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
+                                if (!this.fillingPackController.fillingPackService.UpdateQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
 
                                 if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(messageData.PackID.ToString(), GlobalVariables.BarcodeStatus.ReadyToCarton)) return true;
                                 else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack status");

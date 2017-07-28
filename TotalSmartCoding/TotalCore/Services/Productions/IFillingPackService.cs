@@ -9,6 +9,6 @@ namespace TotalCore.Services.Productions
     {
         bool UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus);
 
-        bool UpdateListOfPackSubQueueID(string fillingPackIDs, int QueueID);
+        bool UpdateQueueID(string fillingPackIDs, int queueID);
     }
 }

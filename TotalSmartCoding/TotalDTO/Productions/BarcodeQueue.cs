@@ -34,14 +34,14 @@ namespace TotalDTO.Productions
         /// At the initialize of cartonsetQueue, this property will be zero. The software will automatical print for the first time. Then, user may manual re-print if needed
         /// </summary>
         public int SendtoPrintCount { get; set; }
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
         private int itemPerSubQueue { get; set; }
         private bool repeatSubQueueIndex { get; set; }
         private bool invertSubQueueIndex { get; set; }
@@ -155,39 +155,51 @@ namespace TotalDTO.Productions
                 this.list2DBarcode[messageData.QueueID].Add(messageData);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="messageData"></param>
+
         public void Enqueue(TBarcodeDTO messageData)
         {
-            this.list2DBarcode[this.NextQueueID].Add(messageData);
-            this.noItemAdded++; //Note: Always increase noItemAdded by 1 after Enqueue
+            this.Enqueue(messageData, true);
+        }
+        /// <summary>
+        /// autoEnqueue = true when Enqueue by Scanner (ThreadRoutine)
+        /// </summary>
+        /// <param name="barcodeDTO"></param>
+        /// <param name="autoEnqueue"></param>
+        public void Enqueue(TBarcodeDTO barcodeDTO, bool autoEnqueue)
+        {
+            if (barcodeDTO.QueueID >= 0 && barcodeDTO.QueueID < this.list2DBarcode.Count)
+            {
+                this.list2DBarcode[barcodeDTO.QueueID].Add(barcodeDTO);
 
-            if (this.repeatSubQueueIndex && this.noItemAdded > 0 && (this.noItemAdded % (this.NoSubQueue * this.itemPerSubQueue) == 0)) this.invertSubQueueIndex = !this.invertSubQueueIndex;
-
+                if (autoEnqueue)
+                {
+                    this.noItemAdded++; //Note: Always increase noItemAdded by 1 after autoEnqueue
+                    if (this.repeatSubQueueIndex && this.noItemAdded > 0 && (this.noItemAdded % (this.NoSubQueue * this.itemPerSubQueue) == 0)) this.invertSubQueueIndex = !this.invertSubQueueIndex;
+                }
+            }
+            else
+                throw new Exception("Unknow error: Invalid sub queue ID.");
         }
 
 
 
 
-        public TBarcodeDTO Dequeue(int packID)
+        public TBarcodeDTO Dequeue(int barcodeID)
         {
-            //CẦN PHẢI XEM XÉT
             foreach (List<TBarcodeDTO> subQueue in this.list2DBarcode)
             {
-                foreach (TBarcodeDTO packData in subQueue)
+                foreach (TBarcodeDTO eachBarcodeDTO in subQueue)
                 {
-                    if (packData.GetID() == packID)
+                    if (eachBarcodeDTO.GetID() == barcodeID)
                     {
-                        TBarcodeDTO messageData = packData.ShallowClone();
-                        subQueue.Remove(packData);
+                        TBarcodeDTO barcodeDTO = eachBarcodeDTO.ShallowClone();
+                        subQueue.Remove(eachBarcodeDTO);
 
-                        return messageData;
+                        return barcodeDTO;
                     }
                 }
             }
-            return null; //Return null if can not find any PackID
+            return null; //Return null if can not find any barcodeID. In this case: should raise error?!
         }
 
 

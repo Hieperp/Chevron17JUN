@@ -11,7 +11,7 @@ namespace TotalService.Productions
 {
     public class FillingPackService : GenericService<FillingPack, FillingPackDTO, FillingPackPrimitiveDTO>, IFillingPackService
     {
-        IFillingPackRepository fillingPackRepository;
+        private IFillingPackRepository fillingPackRepository;
         public FillingPackService(IFillingPackRepository fillingPackRepository)
             : base(fillingPackRepository)
         {
@@ -31,12 +31,11 @@ namespace TotalService.Productions
                 return false;
             }
         }
-        //CAI NAY TAM TOI VAY THOI, CHUA CO CODE DAY DU!!! CAN PHAI XEM LAI
-        public bool UpdateListOfPackSubQueueID(string fillingPackIDs, int QueueID)
+        public bool UpdateQueueID(string fillingPackIDs, int queueID)
         {
             try
             {
-                //this.goodsReceiptRepository.UpdateEntryStatus(fillingPackIDs, barcodeStatus);
+                this.fillingPackRepository.UpdateQueueID(fillingPackIDs, queueID);
                 return true;
             }
             catch (Exception ex)

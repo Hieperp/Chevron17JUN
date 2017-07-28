@@ -1033,14 +1033,14 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="BatchEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="EntityID" Type="int" Mode="In" />
-        </Function>
-        <Function Name="BatchUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="BatchCommonUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchID" Type="int" Mode="In" />
           <Parameter Name="NextPackNo" Type="nvarchar" Mode="In" />
           <Parameter Name="NextCartonNo" Type="nvarchar" Mode="In" />
           <Parameter Name="NextPalletNo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="BatchEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
         <Function Name="DeliveryAdviceApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
@@ -1077,6 +1077,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="FillingPackUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FillingPackIDs" Type="varchar" Mode="In" />
           <Parameter Name="EntryStatusID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FillingPackUpdateQueueID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FillingPackIDs" Type="varchar" Mode="In" />
+          <Parameter Name="QueueID" Type="int" Mode="In" />
         </Function>
         <Function Name="FillingPalletEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
@@ -1873,11 +1877,15 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="FillingLine" EntitySet="FillingLines" />
             <End Role="Batch" EntitySet="Batches" />
           </AssociationSet>
-          <FunctionImport Name="BatchUpdate">
+          <FunctionImport Name="BatchCommonUpdate">
             <Parameter Name="BatchID" Mode="In" Type="Int32" />
             <Parameter Name="NextPackNo" Mode="In" Type="String" />
             <Parameter Name="NextCartonNo" Mode="In" Type="String" />
             <Parameter Name="NextPalletNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FillingPackUpdateQueueID">
+            <Parameter Name="FillingPackIDs" Mode="In" Type="String" />
+            <Parameter Name="QueueID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
@@ -3707,7 +3715,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="BatchUpdate" FunctionName="TotalSmartCodingModel.Store.BatchUpdate" />
+          <FunctionImportMapping FunctionImportName="BatchCommonUpdate" FunctionName="TotalSmartCodingModel.Store.BatchCommonUpdate" />
+          <FunctionImportMapping FunctionImportName="FillingPackUpdateQueueID" FunctionName="TotalSmartCodingModel.Store.FillingPackUpdateQueueID" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -5,6 +5,7 @@ namespace TotalCore.Repositories.Productions
 {
     public interface IFillingPackRepository : IGenericRepository<FillingPack>
     {
-        void UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus);
+        void UpdateQueueID(string fillingPackIDs, int queueID);
+        void UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus);        
     }
 }

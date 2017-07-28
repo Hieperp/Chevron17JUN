@@ -17,6 +17,11 @@ namespace TotalDAL.Repositories.Productions
             : base(totalSmartCodingEntities, "BatchEditable")
         {
         }
+        
+        public void CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
+        {
+            this.TotalSmartCodingEntities.BatchCommonUpdate(batchID, nextPackNo, nextCartonNo, nextPalletNo);
+        }
     }
 
 

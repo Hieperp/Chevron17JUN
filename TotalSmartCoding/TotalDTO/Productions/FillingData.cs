@@ -156,7 +156,12 @@ namespace TotalDTO.Productions
 
 
         //-------------------------
-
+        private int batchID;
+        public int BatchID
+        {
+            get { return this.batchID; }
+            set { ApplyPropertyChange<FillingData, int>(ref this.batchID, o => o.BatchID, value); }
+        }
 
         public string BatchCode   //ResetSerialNumber
         {
@@ -292,14 +297,14 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<FillingData, int>(ref this.packPerCarton, o => o.PackPerCarton, value); }
         }
 
-        
+
         private int cartonPerPallet;
         public int CartonPerPallet
         {
             get { return this.cartonPerPallet; }
             set { ApplyPropertyChange<FillingData, int>(ref this.cartonPerPallet, o => o.CartonPerPallet, value); }
         }
-    
+
 
 
 
@@ -328,28 +333,6 @@ namespace TotalDTO.Productions
             return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" & this.NextPackNo != "" & this.NextCartonNo != "" & this.NextPalletNo != "";
         }
 
-        public bool Update()
-        {
-            return true;
-            try
-            {
-                //int rowsAffected = ADODatabase.ExecuteTransaction("UPDATE FillingLineData SET IsDefault = 0 WHERE FillingLineID = " + (int)this.FillingLineID + "; " +
-                //                                                  "UPDATE FillingLineData SET BatchNo = N'" + this.BatchNo.ToString() + "', " +
-                //                                                                            " SettingDate = CONVERT(smalldatetime, '" + this.SettingDate.ToString("dd/MM/yyyy") + "', 103), " +
-                //                                                                            " SettingMonthID = " + this.SettingMonthID.ToString() + ", " +
-                //                                                                            " LastPackNo = N'" + this.LastPackNo.ToString() + "', " +
-                //                                                                            " LastPackNo = N'" + this.LastPackNo.ToString() + "', " +
-                //                                                                            " LastCartonNo = N'" + this.LastCartonNo.ToString() + "', " +
-                //                                                                            " MonthCartonNumber = N'" + this.MonthCartonNumber.ToString() + "', " +
-                //                                                                            " LastSerialDate = GetDate(), IsDefault = 1 " +
-                //                                                  "WHERE FillingLineID   =  " + (int)this.FillingLineID + " AND ProductID = " + this.ProductID);
-                //return rowsAffected > 0;
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
 
         public bool Save()
         {

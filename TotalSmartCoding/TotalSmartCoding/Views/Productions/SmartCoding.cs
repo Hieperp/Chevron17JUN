@@ -10,6 +10,7 @@ using AutoMapper;
 using TotalBase;
 using TotalBase.Enums;
 using TotalCore.Repositories.Productions;
+using TotalCore.Services.Productions;
 using TotalModel.Models;
 using TotalDTO.Productions;
 
@@ -18,6 +19,7 @@ using TotalSmartCoding.Controllers.APIs.Productions;
 using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Views.Commons;
 using TotalSmartCoding.Views.Mains;
+
 
 namespace TotalSmartCoding.Views.Productions
 {
@@ -67,11 +69,12 @@ namespace TotalSmartCoding.Views.Productions
                 BatchIndex batchIndex = (new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
                 if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
 
+                IBatchService batchService = CommonNinject.Kernel.Get<IBatchService>();//ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService
 
-                digitController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.DigitInkjet);
-                packController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PackInkjet);
-                cartonController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
-                palletController = new PrinterController(this.fillingData, GlobalVariables.PrinterName.PalletLabel);
+                digitController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.DigitInkjet);
+                packController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.PackInkjet);
+                cartonController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
+                palletController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.PalletLabel);
 
                 this.scannerController = new ScannerController(this.fillingData);
 
@@ -423,14 +426,14 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "MainStatus") { this.packStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.packController.MainStatus + "\r\n" + this.packStatusbox.Text; this.cutStatusBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.packLEDGreen.Enabled = this.packController.LedGreenOn; this.packLEDAmber.Enabled = this.packController.LedAmberOn; this.packLEDRed.Enabled = this.packController.LedRedOn; if (this.packController.LedRedOn) this.StopPrint(true, true, false, false); return; }
 
-                    if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.packController.NextPackNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.packController.NextPackNo; return; }
                 }
                 else if (sender.Equals(this.cartonController))
                 {
                     if (e.PropertyName == "MainStatus") { this.cartonStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.cartonController.MainStatus + "\r\n" + this.cartonStatusbox.Text; this.cutStatusBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.cartonLEDGreen.Enabled = this.cartonController.LedGreenOn; this.cartonLEDAmber.Enabled = this.cartonController.LedAmberOn; this.cartonLEDRed.Enabled = this.cartonController.LedRedOn; return; }
 
-                    if (e.PropertyName == "NextCartonNo") { this.fillingData.NextCartonNo = this.cartonController.NextCartonNo; this.fillingData.NextPalletNo = this.cartonController.NextPalletNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "NextCartonNo") { this.fillingData.NextCartonNo = this.cartonController.NextCartonNo; return; }
                 }
 
                 else if (sender.Equals(this.palletController))
@@ -438,7 +441,7 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "MainStatus") { this.palletStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.palletController.MainStatus + "\r\n" + this.palletStatusbox.Text; this.cutStatusBox(false); return; }
                     if (e.PropertyName == "LedStatus") { this.palletLEDGreen.Enabled = this.palletController.LedGreenOn; this.palletLEDAmber.Enabled = this.palletController.LedAmberOn; this.palletLEDRed.Enabled = this.palletController.LedRedOn; return; }
 
-                    if (e.PropertyName == "NextPalletNo") { this.fillingData.NextPalletNo = this.palletController.NextPalletNo; this.fillingData.Update(); return; }
+                    if (e.PropertyName == "NextPalletNo") { this.fillingData.NextPalletNo = this.palletController.NextPalletNo; return; }
                 }
 
                 else if (sender.Equals(this.scannerController))
@@ -763,7 +766,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to reallocate the matching pack queue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                if (this.buttonConnect.Enabled && MessageBox.Show("Bạn có muốn chia đều chai đang tồn vào carton không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                     this.scannerController.ReAllocation();
             }
             catch (Exception exception)
