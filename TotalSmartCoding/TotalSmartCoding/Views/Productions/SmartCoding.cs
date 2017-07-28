@@ -96,7 +96,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.comboBoxEmptyCarton.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
 
                 this.splitContainerQuality.SplitterDistance = this.SplitterDistanceQuality();
-                this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
+                this.splitPackQueue.SplitterDistance = this.SplitterDistanceMatching();
                 this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
 
             }
@@ -360,6 +360,12 @@ namespace TotalSmartCoding.Views.Productions
             GlobalEnums.OnTestPalletReceivedNow = true;
         }
 
+
+        private void buttonCartonNoreadNow_Click(object sender, EventArgs e)
+        {
+            GlobalEnums.OnTestCartonNoreadNow = true;
+        }
+
         private void timerEverySecond_Tick(object sender, EventArgs e)
         {
             try
@@ -457,6 +463,14 @@ namespace TotalSmartCoding.Views.Productions
                     }
 
                     if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); }
+
+                    if (e.PropertyName == "CartonPendingQueue")
+                    {
+                        this.dgvCartonPendingQueue.DataSource = this.scannerController.GetCartonPendingQueue();
+                        if (this.dgvCartonPendingQueue.Rows.Count > 1) this.dgvCartonPendingQueue.CurrentCell = this.dgvCartonPendingQueue.Rows[0].Cells[0];
+
+                        this.buttonCartonPendingQueueCount.Text = "[" + this.scannerController.CartonPendingQueueCount.ToString("N0") + "]";
+                    }
 
                     if (e.PropertyName == "CartonQueue")
                     {
@@ -809,6 +823,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+
 
 
 

@@ -34,8 +34,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void FillingPackUpdateEntryStatus()
         {
-            //BE CAREFULL WHEN SAVE: NEED TO SET @FillingPackIDs (FOR BOTH WHEN SAVE - Update AND DELETE - Undo
-            string queryString = " @FillingPackIDs varchar(3999), @EntryStatusID int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            string queryString = " @FillingPackIDs varchar(3999), @EntryStatusID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "       UPDATE      FillingPacks" + "\r\n";

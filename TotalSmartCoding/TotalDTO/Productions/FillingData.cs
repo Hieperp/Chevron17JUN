@@ -380,5 +380,45 @@ namespace TotalDTO.Productions
         }
 
         #endregion Method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public string FirstLine(bool isReadableText)
+        {
+            return this.CommodityCode;
+        }
+
+
+        public string SecondLine(bool isReadableText)
+        {
+            return this.SecondLineA1(isReadableText) + this.SecondLineA2(isReadableText);
+        }
+
+        public string SecondLineA1(bool isReadableText)
+        {
+            return this.BatchCode;
+        }
+
+        public string SecondLineA2(bool isReadableText)
+        {
+            return this.SettingDate.ToString("ddMMyy");
+        }
+
+        public string ThirdLine(bool isReadableText)
+        {
+            return this.FillingLineCode;
+        }
+
     }
 }

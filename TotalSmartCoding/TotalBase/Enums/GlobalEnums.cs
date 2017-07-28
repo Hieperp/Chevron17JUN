@@ -3,13 +3,17 @@
     public static class GlobalEnums
     {
 
-        public static bool OnTestScanner = false;
-        public static bool OnTestPalletScanner = true;
-        public static bool OnTestPalletReceivedNow = true;
+        public static bool OnTestScanner = true;
+        public static bool OnTestPalletScanner = true; //WHEN REAL TEST WITHOUT PalletScanner
 
-        public static bool OnTestPrinter = false;
-        public static bool OnTestDigit = true;
-        public static bool OnTestZebra = true;
+        public static bool OnTestPrinter = true;
+        public static bool OnTestDigit = true; //WHEN REAL TEST WITHOUT DIGIT PRINTER
+        public static bool OnTestZebra = true; //SEND TEST PRINT WHEN CONNECTED
+
+
+        public static bool OnTestCartonNoreadNow = false;
+        public static bool OnTestPalletReceivedNow = false;
+        
 
         public static OptionSetting GlobalOptionSetting = new OptionSetting();
         public static string stringFieldRequired = "Input not correct. Please make sure all required fields are filled out correctly";

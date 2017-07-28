@@ -20,6 +20,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             this.GetBatchIndexes();
 
+            this.BatchCommonUpdate();
+
             this.BatchEditable();
 
             this.BatchInitReference();
@@ -44,6 +46,20 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchIndexes", queryString);
         }
+
+
+        private void BatchCommonUpdate()
+        {
+            string queryString = " @BatchID int, @NextPackNo nvarchar(10), @NextCartonNo nvarchar(10), @NextPalletNo nvarchar(10) " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "       UPDATE      Batches" + "\r\n";
+            queryString = queryString + "       SET         NextPackNo = CASE WHEN @NextPackNo != '' THEN @NextPackNo ELSE NextPackNo END, NextCartonNo = CASE WHEN @NextCartonNo != '' THEN @NextCartonNo ELSE NextCartonNo END, NextPalletNo = CASE WHEN @NextPalletNo != '' THEN @NextPalletNo ELSE NextPalletNo END " + "\r\n";
+            queryString = queryString + "       WHERE       BatchID = @BatchID " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchCommonUpdate", queryString);
+        }
+
 
         private void BatchEditable()
         {

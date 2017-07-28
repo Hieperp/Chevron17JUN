@@ -1036,6 +1036,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="BatchEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+          <Parameter Name="NextPackNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="NextCartonNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="NextPalletNo" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="DeliveryAdviceApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -1867,6 +1873,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="FillingLine" EntitySet="FillingLines" />
             <End Role="Batch" EntitySet="Batches" />
           </AssociationSet>
+          <FunctionImport Name="BatchUpdate">
+            <Parameter Name="BatchID" Mode="In" Type="Int32" />
+            <Parameter Name="NextPackNo" Mode="In" Type="String" />
+            <Parameter Name="NextCartonNo" Mode="In" Type="String" />
+            <Parameter Name="NextPalletNo" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
           <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
@@ -3695,6 +3707,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BatchUpdate" FunctionName="TotalSmartCodingModel.Store.BatchUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
