@@ -20,6 +20,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             this.FillingPackEditable();
 
+
+            this.GetFillingPacks();
+
             this.FillingPackUpdateQueueID();
             this.FillingPackUpdateEntryStatus();
         }
@@ -31,6 +34,21 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryArray[0] = " SELECT TOP 1 @FoundEntity = FillingPackID FROM FillingPacks WHERE FillingPackID = @EntityID AND NOT FillingCartonID IS NULL";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("FillingPackEditable", queryArray);
+        }
+
+
+
+
+
+        private void GetFillingPacks()
+        {
+            string queryString = " @FillingLineID int, @EntryStatusIDs varchar(3999) " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       SELECT * FROM FillingPacks WHERE FillingLineID = @FillingLineID AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs))  " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetFillingPacks", queryString);
         }
 
         private void FillingPackUpdateQueueID()

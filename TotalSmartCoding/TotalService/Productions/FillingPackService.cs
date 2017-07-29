@@ -6,6 +6,7 @@ using TotalDTO.Productions;
 using TotalCore.Repositories.Productions;
 using TotalCore.Services.Productions;
 using System;
+using System.Collections.Generic;
 
 namespace TotalService.Productions
 {
@@ -16,6 +17,11 @@ namespace TotalService.Productions
             : base(fillingPackRepository)
         {
             this.fillingPackRepository = fillingPackRepository;
+        }
+
+        public IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        {
+            return this.fillingPackRepository.GetFillingPacks(fillingLineID, entryStatusIDs);
         }
 
         public bool UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus)

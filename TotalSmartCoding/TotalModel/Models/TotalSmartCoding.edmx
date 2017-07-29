@@ -1118,6 +1118,18 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="GetDeliveryAdviceViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DeliveryAdviceID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetFillingCartons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FillingLineID" Type="int" Mode="In" />
+          <Parameter Name="EntryStatusIDs" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetFillingPacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FillingLineID" Type="int" Mode="In" />
+          <Parameter Name="EntryStatusIDs" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetFillingPallets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FillingLineID" Type="int" Mode="In" />
+          <Parameter Name="EntryStatusIDs" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetGoodsReceiptIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
@@ -1886,6 +1898,18 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <FunctionImport Name="FillingPackUpdateQueueID">
             <Parameter Name="FillingPackIDs" Mode="In" Type="String" />
             <Parameter Name="QueueID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFillingPacks" EntitySet="FillingPacks" ReturnType="Collection(TotalSmartCodingModel.FillingPack)">
+          <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
+            <Parameter Name="EntryStatusIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetFillingCartons" EntitySet="FillingCartons" ReturnType="Collection(TotalSmartCodingModel.FillingCarton)">
+            <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
+            <Parameter Name="EntryStatusIDs" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetFillingPallets" EntitySet="FillingPallets" ReturnType="Collection(TotalSmartCodingModel.FillingPallet)">
+            <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
+            <Parameter Name="EntryStatusIDs" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
@@ -3717,6 +3741,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="BatchCommonUpdate" FunctionName="TotalSmartCodingModel.Store.BatchCommonUpdate" />
           <FunctionImportMapping FunctionImportName="FillingPackUpdateQueueID" FunctionName="TotalSmartCodingModel.Store.FillingPackUpdateQueueID" />
+          <FunctionImportMapping FunctionImportName="GetFillingPacks" FunctionName="TotalSmartCodingModel.Store.GetFillingPacks">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFillingCartons" FunctionName="TotalSmartCodingModel.Store.GetFillingCartons">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFillingPallets" FunctionName="TotalSmartCodingModel.Store.GetFillingPallets">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

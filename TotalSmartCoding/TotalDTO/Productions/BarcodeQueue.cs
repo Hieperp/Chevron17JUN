@@ -183,14 +183,19 @@ namespace TotalDTO.Productions
 
 
 
-
+        /// <summary>
+        /// Default barcodeID = 0: Dequeue the first item.
+        /// This will return null if no barcodeID is found.
+        /// </summary>
+        /// <returns></returns>
+        public TBarcodeDTO Dequeue() { return this.Dequeue(0); }
         public TBarcodeDTO Dequeue(int barcodeID)
         {
             foreach (List<TBarcodeDTO> subQueue in this.list2DBarcode)
             {
                 foreach (TBarcodeDTO eachBarcodeDTO in subQueue)
                 {
-                    if (eachBarcodeDTO.GetID() == barcodeID)
+                    if (barcodeID == 0 || eachBarcodeDTO.GetID() == barcodeID)
                     {
                         TBarcodeDTO barcodeDTO = eachBarcodeDTO.ShallowClone();
                         subQueue.Remove(eachBarcodeDTO);
@@ -199,7 +204,7 @@ namespace TotalDTO.Productions
                     }
                 }
             }
-            return null; //Return null if can not find any barcodeID. In this case: should raise error?!
+            return null;
         }
 
 

@@ -4,11 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 using Ninject;
 
 using TotalBase;
 using TotalBase.Enums;
+using TotalModel.Models;
+
 using TotalCore.Services.Productions;
 using TotalDTO.Productions;
 using TotalService.Productions;
@@ -16,6 +19,7 @@ using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.ViewModels.Productions;
 using TotalSmartCoding.Builders.Productions;
 using TotalSmartCoding.Controllers.Productions;
+using AutoMapper;
 
 
 namespace TotalSmartCoding.Controllers.Productions
@@ -88,8 +92,6 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.QualityScanner - 1] = new BarcodeScannerStatus(GlobalVariables.ScannerName.QualityScanner);
                 this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.PackScanner - 1] = new BarcodeScannerStatus(GlobalVariables.ScannerName.PackScanner);
                 this.barcodeScannerStatus[(int)GlobalVariables.ScannerName.CartonScanner - 1] = new BarcodeScannerStatus(GlobalVariables.ScannerName.CartonScanner);
-
-                this.Initialize();
             }
             catch (Exception exception)
             {
@@ -101,37 +103,50 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                //return;
+                IList<FillingPack> fillingPacks = this.fillingPackController.fillingPackService.GetFillingPacks(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset);
+                if (fillingPacks.Count > 0)
+                {
+                    fillingPacks.Each(fillingPack =>
+                    {
+                        FillingPackDTO fillingPackDTO = Mapper.Map<FillingPack, FillingPackDTO>(fillingPack);
+                        if (fillingPackDTO.EntryStatusID == (int)GlobalVariables.BarcodeStatus.Freshnew)
+                            this.packQueue.Enqueue(fillingPackDTO, false);
+                        else
+                            this.packsetQueue.Enqueue(fillingPackDTO, false);
+                    });
+                    this.NotifyPropertyChanged("PackQueue");
+                    this.NotifyPropertyChanged("PacksetQueue");
+                }
 
-                //HIEP*******************************22-MAY-2017.BEGIN
-                ////////////--------------DON'T LOAD. THIS IS VERY OK, AND READY TO LOAD PACK IF NEEDED.
-                //////////////Initialize MatchingPackList and PackInOneCarton (of the this.FillingData.FillingLineID ONLY)
-                //////this.PackDataTable = this.PackTableAdapter.GetData();
-                //////foreach (DataDetail.DataDetailPackRow packRow in this.PackDataTable)
-                //////{
-                //////    if (packRow.FillingLineID == (int)this.FillingData.FillingLineID)
-                //////    {
-                //////        FillingPackDTO messageData = new FillingPackDTO(packRow.PackBarcode);
-                //////        messageData.PackID = packRow.PackID;
-                //////        messageData.QueueID = packRow.QueueID;
+                IList<FillingCarton> fillingCartons = this.fillingCartonController.fillingCartonService.GetFillingCartons(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Pending + "," + (int)GlobalVariables.BarcodeStatus.BlankBarcode);
+                if (fillingCartons.Count > 0)
+                {
+                    fillingCartons.Each(fillingCarton =>
+                    {
+                        FillingCartonDTO fillingCartonDTO = Mapper.Map<FillingCarton, FillingCartonDTO>(fillingCarton);
+                        if (fillingCartonDTO.EntryStatusID == (int)GlobalVariables.BarcodeStatus.Freshnew)
+                            this.cartonQueue.Enqueue(fillingCartonDTO, false);
+                        else
+                            if (fillingCartonDTO.EntryStatusID == (int)GlobalVariables.BarcodeStatus.Readytoset)
+                                this.cartonsetQueue.Enqueue(fillingCartonDTO, false);
+                            else //BarcodeStatus.Pending, BarcodeStatus.BlankBarcode
+                                this.cartonPendingQueue.Enqueue(fillingCartonDTO, false);
+                    });
+                    this.NotifyPropertyChanged("CartonQueue");
+                    this.NotifyPropertyChanged("CartonsetQueue");
+                    this.NotifyPropertyChanged("CartonPendingQueue");
+                }
 
-                //////        if (packRow.PackStatus == (byte)GlobalVariables.BarcodeStatus.Freshnew)
-                //////            this.matchingPackList.AddPack(messageData);
-                //////        else if (packRow.PackStatus == (byte)GlobalVariables.BarcodeStatus.Readytoset)
-                //////            this.packInOneCarton.AddPack(messageData);
-                //////    }
-                //////}
-                //////this.PackDataTable = null;
-
-                //////this.NotifyPropertyChanged("PackQueue");
-                //////this.NotifyPropertyChanged("PacksetQueue");
-                ////////////--------------
-                //HIEP*******************************22-MAY-2017.BEGIN
-
-                ////////Initialize CartonList
-                //////this.cartonDataTable = this.CartonTableAdapter.GetDataByCartonStatus((byte)GlobalVariables.BarcodeStatus.BlankBarcode);
-                //////this.NotifyPropertyChanged("CartonQueue");
-
+                IList<FillingPallet> fillingPallets = this.fillingPalletController.fillingPalletService.GetFillingPallets(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset);
+                if (fillingPallets.Count > 0)
+                {
+                    fillingPallets.Each(fillingPallet =>
+                    {
+                        FillingPalletDTO fillingPalletDTO = Mapper.Map<FillingPallet, FillingPalletDTO>(fillingPallet);
+                        this.palletQueue.Enqueue(fillingPalletDTO, false);
+                    });
+                    this.NotifyPropertyChanged("PalletQueue");
+                }
             }
             catch (Exception exception)
             {
@@ -433,7 +448,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool waitforPack(ref string stringReceived)
         {
             if (GlobalEnums.OnTestScanner)
-                if ((DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+                if (false && (DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketPack.ReadoutStream().Trim();
 
@@ -687,7 +702,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private string interpretBarcode(string barcode)
         {
             if (barcode == "NoRead")
-                barcode = this.FillingData.FirstLine(false) + this.FillingData.SecondLine(false) + new String('X', 3) + DateTime.Now.ToString("hhmmss");
+                barcode = this.FillingData.FirstLine(false) + this.FillingData.SecondLine(false) + new String('X', 5) + DateTime.Now.ToString("hhmm");
             return barcode;
         }
 
@@ -831,34 +846,59 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-        public bool MoveCartonToPendingQueue(int fillingCartonID)
+        public bool MoveCartonToPendingQueue(int fillingCartonID, bool fromCartonsetQueue)
         {
             if (fillingCartonID <= 0) return false;
 
+            BarcodeQueue<FillingCartonDTO> movedCartonQueue = fromCartonsetQueue ? this.cartonsetQueue : this.cartonQueue;
+
             lock (this.cartonQueue)
             {
-                if (this.cartonQueue.Count > 0)
+                lock (this.cartonsetQueue)
                 {
-                    FillingCartonDTO fillingCartonDTO = this.cartonQueue.Dequeue(fillingCartonID);
-                    if (fillingCartonDTO != null)
+                    if (movedCartonQueue.Count > 0 && (!fromCartonsetQueue || this.cartonQueue.Count > 0))
                     {
-                        lock (cartonPendingQueue)
+                        FillingCartonDTO fillingCartonDTO = movedCartonQueue.Dequeue(fillingCartonID);
+                        if (fillingCartonDTO != null)
                         {
-                            this.cartonPendingQueue.Enqueue(fillingCartonDTO);
-
-                            this.NotifyPropertyChanged("CartonQueue");
-                            this.NotifyPropertyChanged("CartonPendingQueue");
-
-                            lock (this.fillingCartonController)
+                            lock (this.cartonPendingQueue)
                             {
-                                if (this.fillingCartonController.fillingCartonService.UpdateEntryStatus(fillingCartonDTO.FillingCartonID.ToString(), GlobalVariables.BarcodeStatus.Pending)) return true;
-                                else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                                this.cartonPendingQueue.Enqueue(fillingCartonDTO);
+
+                                this.NotifyPropertyChanged("CartonPendingQueue");
+                                if (fromCartonsetQueue) this.NotifyPropertyChanged("CartonsetQueue"); else this.NotifyPropertyChanged("CartonQueue");
+
+                                lock (this.fillingCartonController)
+                                {
+
+                                    if (this.fillingCartonController.fillingCartonService.UpdateEntryStatus(fillingCartonDTO.FillingCartonID.ToString(), GlobalVariables.BarcodeStatus.Pending))
+                                    {
+                                        if (fromCartonsetQueue)
+                                        {
+                                            fillingCartonDTO = this.cartonQueue.Dequeue();
+                                            if (fillingCartonDTO != null)
+                                            {
+                                                this.cartonsetQueue.Enqueue(fillingCartonDTO);
+
+                                                this.NotifyPropertyChanged("CartonQueue");
+                                                this.NotifyPropertyChanged("CartonsetQueue");
+
+                                                if (this.fillingCartonController.fillingCartonService.UpdateEntryStatus(fillingCartonDTO.FillingCartonID.ToString(), GlobalVariables.BarcodeStatus.Readytoset)) return true;
+                                                else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                                            }
+                                            else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
+                                        }
+                                        else
+                                            return true;
+                                    }
+                                    else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                                }
                             }
                         }
+                        else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
                     }
-                    else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
+                    else throw new System.ArgumentException("Fail to handle this carton", "No carton found on the line");
                 }
-                else throw new System.ArgumentException("Fail to handle this carton", "No carton found on the line");
             }
         }
 

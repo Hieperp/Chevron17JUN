@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 
 using TotalBase;
@@ -24,6 +25,11 @@ namespace TotalService.Productions
             return new ObjectParameter[] { baseParameters[0], baseParameters[1], new ObjectParameter("FillingCartonIDs", this.ServiceBag["FillingCartonIDs"] != null ? this.ServiceBag["FillingCartonIDs"] : "") };
         }
 
+
+        public IList<FillingPallet> GetFillingPallets(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        {
+            return this.fillingPalletRepository.GetFillingPallets(fillingLineID, entryStatusIDs);
+        }
 
         public bool UpdateEntryStatus(string fillingPalletIDs, GlobalVariables.BarcodeStatus barcodeStatus)
         {

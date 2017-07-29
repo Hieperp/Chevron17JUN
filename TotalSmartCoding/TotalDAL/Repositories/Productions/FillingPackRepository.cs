@@ -1,4 +1,7 @@
-﻿using TotalBase;
+﻿using System.Linq;
+using System.Collections.Generic;
+
+using TotalBase;
 using TotalModel.Models;
 using TotalCore.Repositories.Productions;
 
@@ -9,6 +12,11 @@ namespace TotalDAL.Repositories.Productions
         public FillingPackRepository(TotalSmartCodingEntities totalSmartCodingEntities)
             : base(totalSmartCodingEntities)
         {
+        }
+
+        public IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        {
+            return this.TotalSmartCodingEntities.GetFillingPacks((int) fillingLineID, entryStatusIDs).ToList();
         }
 
         public void UpdateQueueID(string fillingPackIDs, int queueID)

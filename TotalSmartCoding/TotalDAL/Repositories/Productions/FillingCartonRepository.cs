@@ -1,4 +1,7 @@
-﻿using TotalBase;
+﻿using System.Linq;
+using System.Collections.Generic;
+
+using TotalBase;
 using TotalModel.Models;
 using TotalCore.Repositories.Productions;
 
@@ -11,6 +14,11 @@ namespace TotalDAL.Repositories.Productions
         {
         }
 
+
+        public IList<FillingCarton> GetFillingCartons(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        {
+            return this.TotalSmartCodingEntities.GetFillingCartons((int)fillingLineID, entryStatusIDs).ToList();
+        }
 
         public void UpdateEntryStatus(string fillingCartonIDs, GlobalVariables.BarcodeStatus barcodeStatus)
         {

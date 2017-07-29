@@ -109,21 +109,17 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+
         private void SmartCoding_Load(object sender, EventArgs e)
         {
             try
             {
-                scannerController.Initialize();
+                this.scannerController.Initialize();
             }
             catch (Exception exception)
             {
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
-        }
-
-        private void SmartCoding_Activated(object sender, EventArgs e)
-        {
-            if (this.dgvCartonQueue.CanSelect) this.dgvCartonQueue.Select();
         }
 
         private void SmartCoding_FormClosing(object sender, FormClosingEventArgs e)
@@ -661,7 +657,7 @@ namespace TotalSmartCoding.Views.Productions
                 try
                 {                //Handle exception for PackInOneCarton
                     string selectedBarcode = "";
-                    int packID = this.GetPackID(this.dgvPackQueue.CurrentCell, out selectedBarcode);
+                    int packID = this.getBarcodeID(this.dgvPackQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                         if (this.scannerController.RemovePackInPackQueue(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -673,18 +669,18 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         /// <summary>
-        /// Remove a specific pack in PackInOneCarton
+        /// Remove a specific pack in dgvPacksetQueue
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewPackInOneCarton_KeyDown(object sender, KeyEventArgs e)
+        private void dgvPacksetQueue_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete && this.dgvPacksetQueue.CurrentCell != null)
             {
                 try
                 {                //Handle exception for PackInOneCarton
                     string selectedBarcode = "";
-                    int packID = this.GetPackID(this.dgvPacksetQueue.CurrentCell, out selectedBarcode);
+                    int packID = this.getBarcodeID(this.dgvPacksetQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                         if (this.scannerController.ReplacePackInPacksetQueue(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -695,12 +691,32 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+
+        private void dgvCarton_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                DataGridView dataGridView = sender as DataGridView;
+                if (e.KeyCode == Keys.Delete && dataGridView != null && dataGridView.CurrentCell != null)
+                {
+                    string selectedBarcode = "";
+                    int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
+                    if (barcodeID > 0 && MessageBox.Show("Are you sure you want to remove this carton:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                        if (this.scannerController.MoveCartonToPendingQueue(barcodeID, sender.Equals(this.dgvCartonsetQueue))) MessageBox.Show("Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
         /// <summary>
         /// Unpacking a specific carton
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewCartonList_KeyDown(object sender, KeyEventArgs e)
+        private void dgvCartonPendingQueue_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.KeyCode == Keys.Space || e.KeyCode == Keys.Delete) && this.dgvCartonQueue.CurrentRow != null)
             {
@@ -741,19 +757,20 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-        private int GetPackID(DataGridViewCell dataGridViewCell, out string selectedBarcode)
+
+        private int getBarcodeID(DataGridViewCell dataGridViewCell, out string selectedBarcode)
         {
-            int packID;
+            int barcodeID;
             if (dataGridViewCell != null)
             {
                 selectedBarcode = dataGridViewCell.Value as string;
                 if (selectedBarcode != null)
                 {
                     int startIndexOfPackID = selectedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString() + GlobalVariables.doubleTabChar.ToString());
-                    if (startIndexOfPackID >= 0 && int.TryParse(selectedBarcode.Substring(startIndexOfPackID + 2), out packID))
+                    if (startIndexOfPackID >= 0 && int.TryParse(selectedBarcode.Substring(startIndexOfPackID + 2), out barcodeID))
                     {
                         selectedBarcode = this.GetSerialNumber(selectedBarcode) + ": " + selectedBarcode.Substring(0, startIndexOfPackID);
-                        return packID;
+                        return barcodeID;
                     }
                 }
             }
@@ -826,6 +843,8 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+
+
 
 
 

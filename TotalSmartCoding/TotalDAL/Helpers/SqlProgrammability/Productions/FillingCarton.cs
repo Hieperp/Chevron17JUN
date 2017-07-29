@@ -22,6 +22,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.FillingCartonEditable();
 
+            this.GetFillingCartons();
             this.FillingCartonUpdateEntryStatus();
         }
 
@@ -68,6 +69,19 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         }
 
 
+
+
+
+        private void GetFillingCartons()
+        {
+            string queryString = " @FillingLineID int, @EntryStatusIDs varchar(3999) " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       SELECT * FROM FillingCartons WHERE FillingLineID = @FillingLineID AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs))  " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetFillingCartons", queryString);
+        }
 
         private void FillingCartonUpdateEntryStatus()
         {

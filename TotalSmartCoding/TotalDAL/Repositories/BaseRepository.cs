@@ -23,7 +23,7 @@ namespace TotalDAL.Repositories
             this.totalSmartCodingEntities = totalSmartCodingEntities;
 
 
-            if (!GlobalVariables.shouldRestoreProcedure) return;
+            //if (!GlobalVariables.shouldRestoreProcedure) return;
 
             //return;
 
