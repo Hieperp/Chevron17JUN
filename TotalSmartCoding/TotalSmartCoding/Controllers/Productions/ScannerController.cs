@@ -115,9 +115,9 @@ namespace TotalSmartCoding.Controllers.Productions
                 //////        messageData.PackID = packRow.PackID;
                 //////        messageData.QueueID = packRow.QueueID;
 
-                //////        if (packRow.PackStatus == (byte)GlobalVariables.BarcodeStatus.Normal)
+                //////        if (packRow.PackStatus == (byte)GlobalVariables.BarcodeStatus.Freshnew)
                 //////            this.matchingPackList.AddPack(messageData);
-                //////        else if (packRow.PackStatus == (byte)GlobalVariables.BarcodeStatus.ReadyToCarton)
+                //////        else if (packRow.PackStatus == (byte)GlobalVariables.BarcodeStatus.Readytoset)
                 //////            this.packInOneCarton.AddPack(messageData);
                 //////    }
                 //////}
@@ -500,7 +500,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         if (this.packsetQueue.Count > 0)
                         {
                             isSuccessfully = true;
-                            if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(this.packsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Lỗi lưu trạng thái chai: " + this.fillingPackController.fillingPackService.ServiceTag;
+                            if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(this.packsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.Readytoset)) throw new Exception("Lỗi lưu trạng thái chai: " + this.fillingPackController.fillingPackService.ServiceTag);
                         }
                     }
                 }
@@ -606,7 +606,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         if (this.cartonsetQueue.Count > 0)
                         {
                             isSuccessfully = true;
-                            if (!this.fillingCartonController.fillingCartonService.UpdateEntryStatus(this.cartonsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.ReadyToCarton)) this.MainStatus = "Lỗi lưu trạng thái carton: " + this.fillingCartonController.fillingCartonService.ServiceTag;
+                            if (!this.fillingCartonController.fillingCartonService.UpdateEntryStatus(this.cartonsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.Readytoset)) throw new Exception("Lỗi lưu trạng thái carton: " + this.fillingCartonController.fillingCartonService.ServiceTag);
                         }
                     }
                 }
@@ -687,7 +687,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private string interpretBarcode(string barcode)
         {
             if (barcode == "NoRead")
-                barcode = this.FillingData.FirstLine(false) + this.FillingData.SecondLine(false) +  new String('X', 3) + DateTime.Now.ToString("hhmmss");
+                barcode = this.FillingData.FirstLine(false) + this.FillingData.SecondLine(false) + new String('X', 3) + DateTime.Now.ToString("hhmmss");
             return barcode;
         }
 
@@ -713,6 +713,10 @@ namespace TotalSmartCoding.Controllers.Productions
         #endregion Public Thread
 
 
+        ///WE CAN NOT IMPLEMENT TRANSACTION FOR THESE Handle Exception METHOD (BECAUSE WE CAN NOT UNDO THE BarcodeQueue)
+        ///LATER: WE CAN ADD CODE TO ENFORE THE SOFTWARE EXIT IMMEDIATELY, RIGT TIME THE ERROR OCCUR
+        ///AFTER EXXIT AND RESTART THE SOFTWARE WILL LOAD PENDING DATA AGAIN
+        ///IMPORTANT: SHOULD IMPLEMENT LATER: TO PREVENT UN-PREDICTABLE FOR UN PROPER EXITING SOFTWARE WHEN HANDLE EXCEPTION (EXIT IMMEDIATELY), WE ONLY ALLOW HANDLE EXCEPYION WHEN THE SYSTEM PAUSE (NO ITEM WAS ADDED AT THE TIME WE EXIT THE SYSTEM)
         #region Handle Exception
 
 
@@ -720,7 +724,7 @@ namespace TotalSmartCoding.Controllers.Productions
         /// If this.Count = ItemPerSet then Reallocation an equal amount of messageData to every subQueue. Each subQueue will have the same NoSubQueue.
         /// </summary>
         /// <returns></returns>
-        public bool ReAllocation()
+        public bool ReAllocationPack()
         {
             if (this.packQueue.Count >= this.packQueue.ItemPerSet)
             {
@@ -766,23 +770,23 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-        public bool RemoveItemInMatchingPackList(int packID)
+        public bool RemovePackInPackQueue(int fillingPackID)
         {
-            if (packID <= 0) return false;
+            if (fillingPackID <= 0) return false;
 
             lock (this.packQueue)
             {
                 if (this.packQueue.Count > 0)
                 {
-                    FillingPackDTO messageData = this.packQueue.Dequeue(packID);
+                    FillingPackDTO messageData = this.packQueue.Dequeue(fillingPackID);
                     if (messageData != null)
                     {
                         this.NotifyPropertyChanged("PackQueue");
 
                         lock (this.fillingPackController)
                         {
-                            this.fillingPackController.DeleteConfirmed(messageData.PackID); return true; //if (!this.fillingPackService.DeleteConfirmed(messageData.PackID)) return true; //Delete successfully
-                            //else throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
+                            if (this.fillingPackController.fillingPackService.Delete(messageData.FillingPackID)) return true; //Delete successfully
+                            else throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
                         }
                     }
                     else throw new System.ArgumentException("Fail to handle this pack", "Can not remove pack from the line");
@@ -791,10 +795,9 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-
-        public bool RemoveItemInPackInOneCarton(int packID)
+        public bool ReplacePackInPacksetQueue(int fillingPackID)
         {
-            if (packID <= 0) return false;
+            if (fillingPackID <= 0) return false;
 
             lock (this.packQueue)
             {
@@ -804,20 +807,20 @@ namespace TotalSmartCoding.Controllers.Productions
                     {
                         FillingPackDTO messageData = this.packQueue.ElementAt(0).ShallowClone(); //Get the first pack
 
-                        if (this.packsetQueue.Replace(packID, messageData)) //messageData.QueueID: Will change to new value (new position) after replace
+                        if (this.packsetQueue.Replace(fillingPackID, messageData)) //messageData.QueueID: Will change to new value (new position) after replace
                         {
-                            this.packQueue.Dequeue(messageData.PackID); //Dequeue the first pack
+                            this.packQueue.Dequeue(messageData.FillingPackID); //Dequeue the first pack
 
                             this.NotifyPropertyChanged("PacksetQueue");
                             this.NotifyPropertyChanged("PackQueue");
 
-                            lock (this.fillingPalletController)
+                            lock (this.fillingPackController)
                             {
-                                this.fillingPalletController.Delete(packID);//if ( !) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
+                                if (!this.fillingPackController.fillingPackService.Delete(fillingPackID)) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
 
-                                if (!this.fillingPackController.fillingPackService.UpdateQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
+                                if (!this.fillingPackController.fillingPackService.UpdateQueueID(messageData.FillingPackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
 
-                                if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(messageData.PackID.ToString(), GlobalVariables.BarcodeStatus.ReadyToCarton)) return true;
+                                if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(messageData.FillingPackID.ToString(), GlobalVariables.BarcodeStatus.Readytoset)) return true;
                                 else throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack status");
                             }
                         }
@@ -827,6 +830,39 @@ namespace TotalSmartCoding.Controllers.Productions
                 }
             }
         }
+
+        public bool MoveCartonToPendingQueue(int fillingCartonID)
+        {
+            if (fillingCartonID <= 0) return false;
+
+            lock (this.cartonQueue)
+            {
+                if (this.cartonQueue.Count > 0)
+                {
+                    FillingCartonDTO fillingCartonDTO = this.cartonQueue.Dequeue(fillingCartonID);
+                    if (fillingCartonDTO != null)
+                    {
+                        lock (cartonPendingQueue)
+                        {
+                            this.cartonPendingQueue.Enqueue(fillingCartonDTO);
+
+                            this.NotifyPropertyChanged("CartonQueue");
+                            this.NotifyPropertyChanged("CartonPendingQueue");
+
+                            lock (this.fillingCartonController)
+                            {
+                                if (this.fillingCartonController.fillingCartonService.UpdateEntryStatus(fillingCartonDTO.FillingCartonID.ToString(), GlobalVariables.BarcodeStatus.Pending)) return true;
+                                else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                            }
+                        }
+                    }
+                    else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
+                }
+                else throw new System.ArgumentException("Fail to handle this carton", "No carton found on the line");
+            }
+        }
+
+
 
 
         public Boolean UndoCartonToPack(int cartonID)
@@ -857,7 +893,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         //        if (messageData != null) this.packInOneCarton.Enqueue(messageData);
                         //    }
 
-                        //    if (this.packInOneCarton.Count > 0) UpdateDataDetailPack(GlobalVariables.BarcodeStatus.ReadyToCarton);
+                        //    if (this.packInOneCarton.Count > 0) UpdateDataDetailPack(GlobalVariables.BarcodeStatus.Readytoset);
 
                         //    this.NotifyPropertyChanged("PacksetQueue");
 
@@ -893,10 +929,10 @@ namespace TotalSmartCoding.Controllers.Productions
                 //{
                 //    lock (this.CartonTableAdapter)
                 //    {
-                //        int rowsAffected = this.CartonTableAdapter.UpdateCartonBarcode((byte)GlobalVariables.BarcodeStatus.Normal, cartonBarcode, dataDetailCartonRow.CartonID);
+                //        int rowsAffected = this.CartonTableAdapter.UpdateCartonBarcode((byte)GlobalVariables.BarcodeStatus.Freshnew, cartonBarcode, dataDetailCartonRow.CartonID);
                 //        if (rowsAffected == 1)
                 //        {
-                //            dataDetailCartonRow.CartonStatus = (byte)GlobalVariables.BarcodeStatus.Normal;
+                //            dataDetailCartonRow.CartonStatus = (byte)GlobalVariables.BarcodeStatus.Freshnew;
                 //            dataDetailCartonRow.CartonBarcode = cartonBarcode;
                 //        }
                 //        else throw new System.ArgumentException("Fail to handle this carton", "Insufficient update carton");

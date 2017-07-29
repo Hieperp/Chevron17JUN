@@ -38,14 +38,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "           IF (@SaveRelativeOption = 1) " + "\r\n";
 
             queryString = queryString + "               UPDATE      FillingPacks" + "\r\n";
-            queryString = queryString + "               SET         FillingCartonID = @EntityID " + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingPackID PASS BY VARIBLE: FillingPackIDs
-            queryString = queryString + "               WHERE       FillingCartonID IS NULL AND FillingPackID IN (SELECT Id FROM dbo.SplitToIntList (@FillingPackIDs)) " + "\r\n";
+            queryString = queryString + "               SET         FillingCartonID = @EntityID, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingPackID PASS BY VARIBLE: FillingPackIDs
+            queryString = queryString + "               WHERE       FillingCartonID IS NULL AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + " AND FillingPackID IN (SELECT Id FROM dbo.SplitToIntList (@FillingPackIDs)) " + "\r\n";
 
             queryString = queryString + "           ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 
 
             queryString = queryString + "               UPDATE      FillingPacks" + "\r\n";
-            queryString = queryString + "               SET         FillingCartonID = NULL " + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingPackID PASS BY VARIBLE: FillingPackIDs
-            queryString = queryString + "               WHERE       FillingCartonID = @EntityID AND FillingPackID IN (SELECT Id FROM dbo.SplitToIntList (@FillingPackIDs)) " + "\r\n";
+            queryString = queryString + "               SET         FillingCartonID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingPackID PASS BY VARIBLE: FillingPackIDs
+            queryString = queryString + "               WHERE       FillingCartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + " AND FillingPackID IN (SELECT Id FROM dbo.SplitToIntList (@FillingPackIDs)) " + "\r\n";
 
             queryString = queryString + "           IF @@ROWCOUNT <> ((SELECT (LEN(@FillingPackIDs) - LEN(REPLACE(@FillingPackIDs, ',', '')))) + 1) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
@@ -78,6 +78,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       UPDATE      FillingCartons" + "\r\n";
             queryString = queryString + "       SET         EntryStatusID = @EntryStatusID " + "\r\n";
             queryString = queryString + "       WHERE       FillingCartonID IN (SELECT Id FROM dbo.SplitToIntList (@FillingCartonIDs)) " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> ((SELECT (LEN(@FillingCartonIDs) - LEN(REPLACE(@FillingCartonIDs, ',', '')))) + 1) " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'System Error: Some carton does not exist!' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
 
             this.totalSmartCodingEntities.CreateStoredProcedure("FillingCartonUpdateEntryStatus", queryString);
         }

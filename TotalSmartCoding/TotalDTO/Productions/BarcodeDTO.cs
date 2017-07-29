@@ -13,7 +13,7 @@ namespace TotalDTO.Productions
                 this.FillingLineID = (int)fillingData.FillingLineID;
                 this.CommodityID = fillingData.CommodityID;
                 this.PCID = fillingData.PCID;
-                this.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Normal;
+                this.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Freshnew;
             }
         }
 

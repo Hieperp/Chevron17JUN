@@ -42,6 +42,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       SET         QueueID = @QueueID " + "\r\n";
             queryString = queryString + "       WHERE       FillingPackID IN (SELECT Id FROM dbo.SplitToIntList (@FillingPackIDs)) " + "\r\n";
 
+            queryString = queryString + "       IF @@ROWCOUNT <> ((SELECT (LEN(@FillingPackIDs) - LEN(REPLACE(@FillingPackIDs, ',', '')))) + 1) " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'System Error: Some pack does not exist!' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
             this.totalSmartCodingEntities.CreateStoredProcedure("FillingPackUpdateQueueID", queryString);
         }
 
@@ -53,6 +59,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       UPDATE      FillingPacks" + "\r\n";
             queryString = queryString + "       SET         EntryStatusID = @EntryStatusID " + "\r\n";
             queryString = queryString + "       WHERE       FillingPackID IN (SELECT Id FROM dbo.SplitToIntList (@FillingPackIDs)) " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> ((SELECT (LEN(@FillingPackIDs) - LEN(REPLACE(@FillingPackIDs, ',', '')))) + 1) " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'System Error: Some pack does not exist!' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("FillingPackUpdateEntryStatus", queryString);
         }

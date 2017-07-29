@@ -75,10 +75,16 @@ namespace TotalBase
 
         public enum BarcodeStatus
         {
-            Normal = 0,
-            ReadyToCarton = 2,
+            Freshnew = 0,
+            Readytoset = 2,
+            Wrapped = 6,
+
+            Pending = 8,
+            
             BlankBarcode = 9,
+            
             EmptyCarton = 10,
+            
             HasSent = 99,
             Deleted = 199
         }

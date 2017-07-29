@@ -663,7 +663,7 @@ namespace TotalSmartCoding.Views.Productions
                     string selectedBarcode = "";
                     int packID = this.GetPackID(this.dgvPackQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.RemoveItemInMatchingPackList(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (this.scannerController.RemovePackInPackQueue(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
@@ -686,7 +686,7 @@ namespace TotalSmartCoding.Views.Productions
                     string selectedBarcode = "";
                     int packID = this.GetPackID(this.dgvPacksetQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && MessageBox.Show("Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.RemoveItemInPackInOneCarton(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (this.scannerController.ReplacePackInPacksetQueue(packID)) MessageBox.Show("Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
@@ -767,7 +767,7 @@ namespace TotalSmartCoding.Views.Productions
             try
             {
                 if (this.buttonConnect.Enabled && MessageBox.Show("Bạn có muốn chia đều chai đang tồn vào carton không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                    this.scannerController.ReAllocation();
+                    this.scannerController.ReAllocationPack();
             }
             catch (Exception exception)
             {
