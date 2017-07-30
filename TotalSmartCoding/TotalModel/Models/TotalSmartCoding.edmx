@@ -251,6 +251,7 @@
           <Property Name="FillingCartonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="BatchID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="FillingPalletID" Type="int" />
           <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
@@ -282,9 +283,10 @@
           <Property Name="FillingPackID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="BatchID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
-          <Property Name="QueueID" Type="int" Nullable="false" />
           <Property Name="FillingCartonID" Type="int" />
+          <Property Name="QueueID" Type="int" Nullable="false" />
           <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
@@ -296,6 +298,7 @@
           <Property Name="FillingPalletID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="BatchID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
@@ -2717,6 +2720,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="PCID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
+          <Property Name="BatchID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="FillingPack">
           <Key>
@@ -2731,6 +2735,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="PCID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
+          <Property Name="BatchID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="FillingPallet">
           <Key>
@@ -2743,6 +2748,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="PCID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
+          <Property Name="BatchID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Pack">
           <Key>
@@ -3645,6 +3651,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="FillingCartons">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.FillingCarton">
               <MappingFragment StoreEntitySet="FillingCartons">
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PCID" ColumnName="PCID" />
@@ -3659,6 +3666,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="FillingPacks">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.FillingPack">
               <MappingFragment StoreEntitySet="FillingPacks">
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PCID" ColumnName="PCID" />
@@ -3674,6 +3682,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="FillingPallets">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.FillingPallet">
               <MappingFragment StoreEntitySet="FillingPallets">
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PCID" ColumnName="PCID" />

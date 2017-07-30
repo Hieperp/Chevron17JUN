@@ -448,7 +448,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool waitforPack(ref string stringReceived)
         {
             if (GlobalEnums.OnTestScanner)
-                if (false && (DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
+                if ((DateTime.Now.Second % 4) == 0) stringReceived = "22677531 087 030117 443" + DateTime.Now.Millisecond.ToString("000000") + " 000003"; else stringReceived = "";
             else
                 stringReceived = this.ionetSocketPack.ReadoutStream().Trim();
 
@@ -593,7 +593,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                         lock (this.fillingCartonController)
                         {
-                            this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Freshnew;
+                            this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = fillingCartonDTO.EntryStatusID;
                             this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
                             if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
                                 this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
@@ -934,7 +934,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         {
                             fillingPacks.Each(fillingPack =>
                             { //(***)
-                                if (fillingPack.CommodityID == this.FillingData.CommodityID) //fillingPack.BatchID == this.FillingData.BatchID && 
+                                if (fillingPack.BatchID == this.FillingData.BatchID && fillingPack.CommodityID == this.FillingData.CommodityID)
                                 {
                                     FillingPackDTO fillingPackDTO = Mapper.Map<FillingPack, FillingPackDTO>(fillingPack);
                                     fillingPackDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Readytoset;

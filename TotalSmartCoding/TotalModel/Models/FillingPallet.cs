@@ -21,5 +21,6 @@ namespace TotalModel.Models
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
+        public int BatchID { get; set; }
     }
 }
