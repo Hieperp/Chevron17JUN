@@ -9,7 +9,7 @@ namespace TotalCore.Services.Productions
 {
     public interface IFillingPackService : IGenericService<FillingPack, FillingPackDTO, FillingPackPrimitiveDTO>
     {
-        IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs);
+        IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? fillingCartonID);
 
         bool UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus);
 

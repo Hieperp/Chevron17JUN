@@ -712,40 +712,28 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         /// <summary>
-        /// Unpacking a specific carton
+        /// Unwrap a Noread || Pending carton
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void dgvCartonPendingQueue_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyCode == Keys.Space || e.KeyCode == Keys.Delete) && this.dgvCartonQueue.CurrentRow != null)
+            if ((e.KeyCode == Keys.Space || e.KeyCode == Keys.Delete) && this.dgvCartonPendingQueue.CurrentCell != null)
             {
                 try
-                {                //Handle exception for carton
-                    DataGridViewRow dataGridViewRow = this.dgvCartonQueue.CurrentRow;
-                    if (dataGridViewRow != null)
-                    {
-                        //DataRowView dataRowView = dataGridViewRow.DataBoundItem as DataRowView;
-                        //DataDetail.DataDetailCartonRow selectedCarton = dataRowView.Row as DataDetail.DataDetailCartonRow;
+                {
+                    string selectedBarcode = "";
+                    int cartonID = this.getBarcodeID(this.dgvCartonPendingQueue.CurrentCell, out selectedBarcode);
+                    if (cartonID > 0 && MessageBox.Show("Bạn có muốn xã thùng carton này ra và đóng lại không:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                        if (this.scannerController.UnwrapCartontoPack(cartonID)) MessageBox.Show("Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        //if (selectedCarton != null && selectedCarton.CartonStatus == (byte)GlobalVariables.BarcodeStatus.BlankBarcode)
-                        //{
-                        //    string selectedCartonDescription = this.GetSerialNumber(selectedCarton.Pack00Barcode) + ": " + selectedCarton.Pack00Barcode + (char)13 + "   " + this.GetSerialNumber(selectedCarton.Pack01Barcode) + ": " + selectedCarton.Pack01Barcode + (char)13 + "   " + this.GetSerialNumber(selectedCarton.Pack02Barcode) + ": " + selectedCarton.Pack02Barcode + (char)13 + "   " + this.GetSerialNumber(selectedCarton.Pack03Barcode) + ": " + selectedCarton.Pack03Barcode + (char)13 + "   " + "[...]";
+                    //    if (e.KeyCode == Keys.Space) //Update barcode
+                    //    {
+                    //        string cartonBarcode = "";
+                    //        if (CustomInputBox.Show("BP Filling System", "Please input barcode for this carton:" + (char)13 + (char)13 + selectedCarton.CartonBarcode + (char)13 + "   " + selectedCartonDescription, ref cartonBarcode) == System.Windows.Forms.DialogResult.OK)
+                    //            if (this.barcodeScannerMCU.UpdateCartonBarcode(selectedCarton.CartonID, cartonBarcode)) MessageBox.Show("Carton: " + (char)13 + cartonBarcode + (char)13 + "   " + selectedCartonDescription + "\r\nHas been updated successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //    }
 
-                        //    if (e.KeyCode == Keys.Space) //Update barcode
-                        //    {
-                        //        string cartonBarcode = "";
-                        //        if (CustomInputBox.Show("BP Filling System", "Please input barcode for this carton:" + (char)13 + (char)13 + selectedCarton.CartonBarcode + (char)13 + "   " + selectedCartonDescription, ref cartonBarcode) == System.Windows.Forms.DialogResult.OK)
-                        //            if (this.barcodeScannerMCU.UpdateCartonBarcode(selectedCarton.CartonID, cartonBarcode)) MessageBox.Show("Carton: " + (char)13 + cartonBarcode + (char)13 + "   " + selectedCartonDescription + "\r\nHas been updated successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //    }
-
-                        //    if (e.KeyCode == Keys.Delete)
-                        //    {
-                        //        if (MessageBox.Show("Are you sure you want to remove this carton:" + (char)13 + (char)13 + selectedCarton.CartonBarcode + (char)13 + "   " + selectedCartonDescription, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        //            if (this.barcodeScannerMCU.UndoCartonToPack(selectedCarton.CartonID)) MessageBox.Show("Carton: " + (char)13 + selectedCarton.CartonBarcode + (char)13 + "   " + selectedCartonDescription + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //    }
-                        //}
-                    }
                 }
                 catch (Exception exception)
                 {

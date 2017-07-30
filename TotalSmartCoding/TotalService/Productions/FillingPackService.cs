@@ -19,9 +19,9 @@ namespace TotalService.Productions
             this.fillingPackRepository = fillingPackRepository;
         }
 
-        public IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        public IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? fillingCartonID)
         {
-            return this.fillingPackRepository.GetFillingPacks(fillingLineID, entryStatusIDs);
+            return this.fillingPackRepository.GetFillingPacks(fillingLineID, entryStatusIDs, fillingCartonID);
         }
 
         public bool UpdateEntryStatus(string fillingPackIDs, GlobalVariables.BarcodeStatus barcodeStatus)

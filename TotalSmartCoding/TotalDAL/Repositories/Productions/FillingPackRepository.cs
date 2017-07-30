@@ -14,9 +14,9 @@ namespace TotalDAL.Repositories.Productions
         {
         }
 
-        public IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        public IList<FillingPack> GetFillingPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? fillingCartonID)
         {
-            return this.TotalSmartCodingEntities.GetFillingPacks((int) fillingLineID, entryStatusIDs).ToList();
+            return this.TotalSmartCodingEntities.GetFillingPacks((int)fillingLineID, entryStatusIDs, fillingCartonID).ToList();
         }
 
         public void UpdateQueueID(string fillingPackIDs, int queueID)

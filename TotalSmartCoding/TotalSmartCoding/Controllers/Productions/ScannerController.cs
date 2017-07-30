@@ -103,7 +103,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                IList<FillingPack> fillingPacks = this.fillingPackController.fillingPackService.GetFillingPacks(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset);
+                IList<FillingPack> fillingPacks = this.fillingPackController.fillingPackService.GetFillingPacks(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset, null);
                 if (fillingPacks.Count > 0)
                 {
                     fillingPacks.Each(fillingPack =>
@@ -118,7 +118,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.NotifyPropertyChanged("PacksetQueue");
                 }
 
-                IList<FillingCarton> fillingCartons = this.fillingCartonController.fillingCartonService.GetFillingCartons(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Pending + "," + (int)GlobalVariables.BarcodeStatus.BlankBarcode);
+                IList<FillingCarton> fillingCartons = this.fillingCartonController.fillingCartonService.GetFillingCartons(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Pending + "," + (int)GlobalVariables.BarcodeStatus.Noread);
                 if (fillingCartons.Count > 0)
                 {
                     fillingCartons.Each(fillingCarton =>
@@ -129,7 +129,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         else
                             if (fillingCartonDTO.EntryStatusID == (int)GlobalVariables.BarcodeStatus.Readytoset)
                                 this.cartonsetQueue.Enqueue(fillingCartonDTO, false);
-                            else //BarcodeStatus.Pending, BarcodeStatus.BlankBarcode
+                            else //BarcodeStatus.Pending, BarcodeStatus.Noread
                                 this.cartonPendingQueue.Enqueue(fillingCartonDTO, false);
                     });
                     this.NotifyPropertyChanged("CartonQueue");
@@ -487,10 +487,13 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 FillingPackDTO fillingPackDTO = new FillingPackDTO(this.FillingData) { Code = packCode, QueueID = queueID };
 
-                if (this.fillingPackController.fillingPackService.Save(fillingPackDTO))
-                    return fillingPackDTO;
-                else
-                    throw new Exception();
+                lock (this.fillingPackController)
+                {
+                    if (this.fillingPackController.fillingPackService.Save(fillingPackDTO))
+                        return fillingPackDTO;
+                    else
+                        throw new Exception();
+                }
             }
             catch (System.Exception exception)
             {
@@ -515,7 +518,10 @@ namespace TotalSmartCoding.Controllers.Productions
                         if (this.packsetQueue.Count > 0)
                         {
                             isSuccessfully = true;
-                            if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(this.packsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.Readytoset)) throw new Exception("Lỗi lưu trạng thái chai: " + this.fillingPackController.fillingPackService.ServiceTag);
+                            lock (this.fillingPackController)
+                            {
+                                if (!this.fillingPackController.fillingPackService.UpdateEntryStatus(this.packsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.Readytoset)) throw new Exception("Lỗi lưu trạng thái chai: " + this.fillingPackController.fillingPackService.ServiceTag);
+                            }
                         }
                     }
                 }
@@ -583,14 +589,17 @@ namespace TotalSmartCoding.Controllers.Productions
                     {//IF this.packsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY CARTON. this.packsetQueue.EntityIDs WILL BE BLANK => NO PACK BE UPDATED FOR THIS CARTON
 
                         FillingCartonDTO fillingCartonDTO = new FillingCartonDTO(this.FillingData) { Code = this.interpretBarcode(cartonCode) };
-                        if (isPending) fillingCartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.BlankBarcode;
+                        if (isPending) fillingCartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Noread;
 
-                        this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
-                        if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
-                            this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
-                        else
-                            throw new Exception("Lỗi lưu mã vạch carton: " + fillingCartonDTO.Code);
-
+                        lock (this.fillingCartonController)
+                        {
+                            this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Freshnew;
+                            this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
+                            if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
+                                this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
+                            else
+                                throw new Exception("Lỗi lưu mã vạch carton: " + fillingCartonDTO.Code);
+                        }
 
                         if (isPending)
                             this.cartonPendingQueue.Enqueue(fillingCartonDTO);
@@ -621,7 +630,10 @@ namespace TotalSmartCoding.Controllers.Productions
                         if (this.cartonsetQueue.Count > 0)
                         {
                             isSuccessfully = true;
-                            if (!this.fillingCartonController.fillingCartonService.UpdateEntryStatus(this.cartonsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.Readytoset)) throw new Exception("Lỗi lưu trạng thái carton: " + this.fillingCartonController.fillingCartonService.ServiceTag);
+                            lock (this.fillingCartonController)
+                            {
+                                if (!this.fillingCartonController.fillingCartonService.UpdateEntryStatus(this.cartonsetQueue.EntityIDs, GlobalVariables.BarcodeStatus.Readytoset)) throw new Exception("Lỗi lưu trạng thái carton: " + this.fillingCartonController.fillingCartonService.ServiceTag);
+                            }
                         }
                     }
                 }
@@ -683,12 +695,14 @@ namespace TotalSmartCoding.Controllers.Productions
 
                         FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode };
 
-                        this.fillingPalletController.fillingPalletService.ServiceBag["FillingCartonIDs"] = this.cartonsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingCartonIDs TO NEW FillingPalletDTO
-                        if (this.fillingPalletController.fillingPalletService.Save(fillingPalletDTO))
-                            this.cartonsetQueue = new BarcodeQueue<FillingCartonDTO>(); //CLEAR AFTER ADD TO FillingPalletDTO
-                        else
-                            throw new Exception("Lỗi lưu pallet: " + fillingPalletDTO.Code);
-
+                        lock (this.fillingPalletController)
+                        {
+                            this.fillingPalletController.fillingPalletService.ServiceBag["FillingCartonIDs"] = this.cartonsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingCartonIDs TO NEW FillingPalletDTO
+                            if (this.fillingPalletController.fillingPalletService.Save(fillingPalletDTO))
+                                this.cartonsetQueue = new BarcodeQueue<FillingCartonDTO>(); //CLEAR AFTER ADD TO FillingPalletDTO
+                            else
+                                throw new Exception("Lỗi lưu pallet: " + fillingPalletDTO.Code);
+                        }
 
                         this.palletQueue.Enqueue(fillingPalletDTO);
                         return true;
@@ -905,50 +919,47 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        public Boolean UndoCartonToPack(int cartonID)
+        public Boolean UnwrapCartontoPack(int fillingCartonID)
         {
-            if (cartonID <= 0) return false;
+            if (fillingCartonID <= 0) return false;
 
             lock (this.packsetQueue)
             {
                 if (this.packsetQueue.Count <= 0)
                 {
-                    lock (this.cartonQueue)
+                    lock (this.cartonPendingQueue)
                     {
+                        IList<FillingPack> fillingPacks = this.fillingPackController.fillingPackService.GetFillingPacks(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Wrapped + "", fillingCartonID);
+                        if (fillingPacks.Count == this.FillingData.PackPerCarton)
+                        {
+                            fillingPacks.Each(fillingPack =>
+                            { //(***)
+                                if (fillingPack.CommodityID == this.FillingData.CommodityID) //fillingPack.BatchID == this.FillingData.BatchID && 
+                                {
+                                    FillingPackDTO fillingPackDTO = Mapper.Map<FillingPack, FillingPackDTO>(fillingPack);
+                                    fillingPackDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Readytoset;
+                                    this.packsetQueue.Enqueue(fillingPackDTO, false);
+                                }
+                                else
+                                    throw new Exception("Lỗi: Mã sản phẩm, số batch của carton không đúng mã sản phẩm, số batch của chuyền");
+                            });
+                            this.cartonPendingQueue.Dequeue(fillingCartonID);
+
+                            this.NotifyPropertyChanged("PacksetQueue");
+                            this.NotifyPropertyChanged("CartonPendingQueue");
+
+                            lock (this.fillingCartonController)
+                            {
+                                this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Noread + "," + (int)GlobalVariables.BarcodeStatus.Pending; //THIS CARTON MUST BE Noread || Pending IN ORDER TO UNWRAP TO PACK
+                                this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //SEE (***): WE HAVE ADDED ALL PACK OF THIS CARTON TO packsetQueue ALREADY. SO, NOW WE CAN USE this.packsetQueue.EntityIDs FOR ServiceBag["FillingPackIDs"]
+                                if (!this.fillingCartonController.fillingCartonService.Delete(fillingCartonID)) throw new System.ArgumentException("Lỗi", "Không thể xóa carton trên CSDL");
+                            }
+                        }
+                        else
+                            this.MainStatus = "Không thể đóng lại carton, do số lượng chai của carton và trên chuyền không phù hợp.";
+
+
                         return true;
-
-                        //CAN PHAI XEM XET LAI DOAN CODE NAY, CODE LAI CHO THICH HOP
-                        //CO THE LAM NHU SAU
-                        //1) XEM LAI SAVE CARTON: SAU KHI SAVE -> NGOAI VIEC UPDATE FillingCartonID TO FillingPacks => can phai update them EntryStatus to 3: carton already
-                        //2) tai cho nay: hien tai da lock(packInOneCarton) => sau do: can kiem tra xem o table FillingPack: xem co phai con dung 1 pack list where Status = 2 hay kg? (cung san pham, so luong pack: bang chinh xac so luong Pack per caton: cua chuyen hien tai), neu ok: thi cho phep xoa carton
-                        //3) sau khi xoa carton: thi add pack to packInOneCarton: nen: lam cung 1 cach giong nhu load packInOneCarton tai thoi diem mo phan mem
-                        //TOM LAI: tai day, chung ta quan tam den viec: dam bao du lieu sach se, thong nhat voi cai gi hien thi tren giao dien (hien tai, BP: du lieu sau khi tat phan mem mo lai khong con chinh xac nua
-                        //DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.FindByCartonID(cartonID);
-                        //if (dataDetailCartonRow != null && dataDetailCartonRow.CartonStatus == (byte)GlobalVariables.BarcodeStatus.BlankBarcode)
-                        //{
-                        //    //COPY Data FROM cartonDataTable TO packInOneCarton
-                        //    for (int i = 0; i < this.packInOneCarton.NoItemPerCarton; i++)
-                        //    {                               //This use NON TYPED DATASET  -- Not so good, bescause the compiler can not detect error at compile time, but it is ok (I know exactly what in every row)
-                        //        FillingPackDTO messageData = this.AddDataDetailPack(dataDetailCartonRow["Pack" + i.ToString("00") + "Barcode"].ToString(), packInOneCarton.NextQueueID);
-                        //        if (messageData != null) this.packInOneCarton.Enqueue(messageData);
-                        //    }
-
-                        //    if (this.packInOneCarton.Count > 0) UpdateDataDetailPack(GlobalVariables.BarcodeStatus.Readytoset);
-
-                        //    this.NotifyPropertyChanged("PacksetQueue");
-
-                        //    lock (this.CartonTableAdapter)
-                        //    {
-                        //        //REMOVE data IN cartonDataTable
-                        //        int rowsAffected = this.CartonTableAdapter.Delete(dataDetailCartonRow.CartonID);//Delete
-                        //        if (rowsAffected == 1) this.cartonDataTable.Rows.Remove(dataDetailCartonRow); else throw new System.ArgumentException("Fail to handle this carton", "Insufficient remove carton");
-                        //    }
-
-                        //    this.NotifyPropertyChanged("CartonQueue");
-
-                        //    return true;
-                        //}
-                        //else return false;
                     }
                 }
                 else throw new System.ArgumentException("Fail to handle this carton", "Another carton is on the line");
@@ -965,7 +976,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 return true;
                 // can phai xem lai doan code sau;
                 //DataDetail.DataDetailCartonRow dataDetailCartonRow = this.cartonDataTable.FindByCartonID(cartonID);
-                //if (dataDetailCartonRow != null && dataDetailCartonRow.CartonStatus == (byte)GlobalVariables.BarcodeStatus.BlankBarcode)
+                //if (dataDetailCartonRow != null && dataDetailCartonRow.CartonStatus == (byte)GlobalVariables.BarcodeStatus.Noread)
                 //{
                 //    lock (this.CartonTableAdapter)
                 //    {

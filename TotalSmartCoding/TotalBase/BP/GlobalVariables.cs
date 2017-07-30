@@ -81,7 +81,7 @@ namespace TotalBase
 
             Pending = 8,
             
-            BlankBarcode = 9,
+            Noread = 9,
             
             EmptyCarton = 10,
             
@@ -107,9 +107,6 @@ namespace TotalBase
             Reprinting2 = -91,
             Reprinting3 = -92
         }
-
-
-        public const string BlankBarcode = "[Blank]";
 
         public static bool IgnoreEmptyCarton = true;
         public static bool IgnoreEmptyPallet = true;

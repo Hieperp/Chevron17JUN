@@ -46,7 +46,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "               UPDATE      FillingPacks" + "\r\n";
             queryString = queryString + "               SET         FillingCartonID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingPackID PASS BY VARIBLE: FillingPackIDs
-            queryString = queryString + "               WHERE       FillingCartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + " AND FillingPackID IN (SELECT Id FROM dbo.SplitToIntList (@FillingPackIDs)) " + "\r\n";
+            queryString = queryString + "               WHERE       FillingCartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n";
 
             queryString = queryString + "           IF @@ROWCOUNT <> ((SELECT (LEN(@FillingPackIDs) - LEN(REPLACE(@FillingPackIDs, ',', '')))) + 1) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";

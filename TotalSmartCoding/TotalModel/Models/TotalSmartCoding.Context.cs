@@ -530,7 +530,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingPackUpdateQueueID", fillingPackIDsParameter, queueIDParameter);
         }
     
-        public virtual ObjectResult<FillingPack> GetFillingPacks(Nullable<int> fillingLineID, string entryStatusIDs)
+        public virtual ObjectResult<FillingPack> GetFillingPacks(Nullable<int> fillingLineID, string entryStatusIDs, Nullable<int> fillingCartonID)
         {
             var fillingLineIDParameter = fillingLineID.HasValue ?
                 new ObjectParameter("FillingLineID", fillingLineID) :
@@ -540,10 +540,14 @@ namespace TotalModel.Models
                 new ObjectParameter("EntryStatusIDs", entryStatusIDs) :
                 new ObjectParameter("EntryStatusIDs", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingPack>("GetFillingPacks", fillingLineIDParameter, entryStatusIDsParameter);
+            var fillingCartonIDParameter = fillingCartonID.HasValue ?
+                new ObjectParameter("FillingCartonID", fillingCartonID) :
+                new ObjectParameter("FillingCartonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingPack>("GetFillingPacks", fillingLineIDParameter, entryStatusIDsParameter, fillingCartonIDParameter);
         }
     
-        public virtual ObjectResult<FillingPack> GetFillingPacks(Nullable<int> fillingLineID, string entryStatusIDs, MergeOption mergeOption)
+        public virtual ObjectResult<FillingPack> GetFillingPacks(Nullable<int> fillingLineID, string entryStatusIDs, Nullable<int> fillingCartonID, MergeOption mergeOption)
         {
             var fillingLineIDParameter = fillingLineID.HasValue ?
                 new ObjectParameter("FillingLineID", fillingLineID) :
@@ -553,7 +557,11 @@ namespace TotalModel.Models
                 new ObjectParameter("EntryStatusIDs", entryStatusIDs) :
                 new ObjectParameter("EntryStatusIDs", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingPack>("GetFillingPacks", mergeOption, fillingLineIDParameter, entryStatusIDsParameter);
+            var fillingCartonIDParameter = fillingCartonID.HasValue ?
+                new ObjectParameter("FillingCartonID", fillingCartonID) :
+                new ObjectParameter("FillingCartonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingPack>("GetFillingPacks", mergeOption, fillingLineIDParameter, entryStatusIDsParameter, fillingCartonIDParameter);
         }
     
         public virtual ObjectResult<FillingCarton> GetFillingCartons(Nullable<int> fillingLineID, string entryStatusIDs)

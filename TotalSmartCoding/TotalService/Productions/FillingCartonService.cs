@@ -25,6 +25,14 @@ namespace TotalService.Productions
             return new ObjectParameter[] { baseParameters[0], baseParameters[1], new ObjectParameter("FillingPackIDs", this.ServiceBag["FillingPackIDs"] != null ? this.ServiceBag["FillingPackIDs"] : "") };
         }
 
+        protected override bool TryValidateModel(FillingCartonDTO dto, ref System.Text.StringBuilder invalidMessage)
+        {
+            if (!base.TryValidateModel(dto, ref invalidMessage)) return false;
+
+            if (this.ServiceBag.ContainsKey("EntryStatusIDs") && this.ServiceBag["EntryStatusIDs"] != null && (this.ServiceBag["EntryStatusIDs"]).ToString().IndexOf(dto.EntryStatusID.ToString()) < 0) { invalidMessage.Append("Trạng thái carton không phù hợp [" + dto.EntryStatusID + "]"); return false; }
+
+            return true;
+        }
 
         public IList<FillingCarton> GetFillingCartons(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
         {

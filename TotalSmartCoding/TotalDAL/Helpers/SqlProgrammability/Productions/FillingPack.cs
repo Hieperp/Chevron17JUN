@@ -42,11 +42,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void GetFillingPacks()
         {
-            string queryString = " @FillingLineID int, @EntryStatusIDs varchar(3999) " + "\r\n";
+            string queryString = " @FillingLineID int, @EntryStatusIDs varchar(3999), @FillingCartonID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT * FROM FillingPacks WHERE FillingLineID = @FillingLineID AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs))  " + "\r\n";
+            queryString = queryString + "   IF (@FillingCartonID IS NULL) " + "\r\n";
+            queryString = queryString + "       SELECT * FROM FillingPacks WHERE FillingLineID = @FillingLineID AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs)) " + "\r\n";
+            queryString = queryString + "   ELSE " + "\r\n";
+            queryString = queryString + "       SELECT * FROM FillingPacks WHERE FillingLineID = @FillingLineID AND FillingCartonID = @FillingCartonID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetFillingPacks", queryString);
         }
