@@ -526,6 +526,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Total 2D Coding Solution";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MasterMDI_FormClosing);
             this.Load += new System.EventHandler(this.MasterMdi_Load);
             this.MdiChildActivate += new System.EventHandler(this.MasterMdi_MdiChildActivate);
             this.statusStrip.ResumeLayout(false);

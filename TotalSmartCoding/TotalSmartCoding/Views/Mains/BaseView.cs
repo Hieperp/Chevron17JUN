@@ -46,6 +46,7 @@ namespace TotalSmartCoding.Views.Mains
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
         }
+        
 
         public BaseController baseController { get; protected set; }
 

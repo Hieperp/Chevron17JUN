@@ -80,7 +80,7 @@ namespace TotalSmartCoding.Views.Mains
 
                 if (childForm != null)
                 {
-                    
+
                     childForm.MdiParent = this;
                     //childForm.Owner = this;
                     childForm.WindowState = FormWindowState.Maximized;
@@ -471,6 +471,23 @@ namespace TotalSmartCoding.Views.Mains
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
 
+        }
+
+        private void MasterMDI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                for (int i = 0; i < this.MdiChildren.Length; i++)
+                {
+                    ICallToolStrip mdiChildCallToolStrip = this.MdiChildren[i] as ICallToolStrip;
+                    if (mdiChildCallToolStrip != null && mdiChildCallToolStrip.EditableMode)
+                    { e.Cancel = true; return; }
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
         }
 
 
