@@ -11,7 +11,7 @@ namespace TotalService.Productions
     {
         private IBatchRepository batchRepository;
         public BatchService(IBatchRepository batchRepository)
-            : base(batchRepository)
+            : base(batchRepository, "BatchPostSaveValidate")
         {
             this.batchRepository = batchRepository;
         }

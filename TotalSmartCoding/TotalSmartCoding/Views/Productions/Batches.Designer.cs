@@ -35,7 +35,7 @@
             this.tableLayoutPanelMaster = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxMarketingPaymentTypeID = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBoxMarketingProgramID = new System.Windows.Forms.ComboBox();
+            this.comboCommodityID = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxRemarks = new System.Windows.Forms.TextBox();
             this.datePickerEntryDate = new System.Windows.Forms.DateTimePicker();
@@ -44,7 +44,7 @@
             this.textBoxReference = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxPaymentMachanics = new System.Windows.Forms.TextBox();
+            this.textCommodityName = new System.Windows.Forms.TextBox();
             this.toolStripNaviGroupDetails = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonShowDetailsExtend = new System.Windows.Forms.ToolStripButton();
             this.label11 = new System.Windows.Forms.Label();
@@ -69,9 +69,9 @@
             this.numericUpDownSizingDetail = new System.Windows.Forms.NumericUpDown();
             this.naviGroupDetailsExtend = new Guifreaks.Navisuite.NaviGroup(this.components);
             this.tableLayoutPanelExtend = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBoxApprovedEmployeeID = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxRequestedEmployeeID = new System.Windows.Forms.ComboBox();
+            this.comboBoxApprovedEmployeeID = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanelMaster.SuspendLayout();
             this.toolStripNaviGroupDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewIndex)).BeginInit();
@@ -92,10 +92,10 @@
             this.comboBoxNotedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxNotedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNotedEmployeeID.FormattingEnabled = true;
-            this.comboBoxNotedEmployeeID.Location = new System.Drawing.Point(495, 3);
+            this.comboBoxNotedEmployeeID.Location = new System.Drawing.Point(487, 3);
             this.comboBoxNotedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxNotedEmployeeID.Name = "comboBoxNotedEmployeeID";
-            this.comboBoxNotedEmployeeID.Size = new System.Drawing.Size(258, 24);
+            this.comboBoxNotedEmployeeID.Size = new System.Drawing.Size(254, 24);
             this.comboBoxNotedEmployeeID.TabIndex = 53;
             // 
             // tableLayoutPanelMaster
@@ -111,10 +111,10 @@
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0191F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32023F));
-            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
             this.tableLayoutPanelMaster.Controls.Add(this.comboBoxMarketingPaymentTypeID, 4, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanelMaster.Controls.Add(this.comboBoxMarketingProgramID, 1, 1);
+            this.tableLayoutPanelMaster.Controls.Add(this.comboCommodityID, 1, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.textBoxRemarks, 7, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.datePickerEntryDate, 1, 0);
@@ -123,7 +123,7 @@
             this.tableLayoutPanelMaster.Controls.Add(this.textBoxReference, 4, 0);
             this.tableLayoutPanelMaster.Controls.Add(this.label14, 6, 0);
             this.tableLayoutPanelMaster.Controls.Add(this.label2, 3, 1);
-            this.tableLayoutPanelMaster.Controls.Add(this.textBoxPaymentMachanics, 7, 0);
+            this.tableLayoutPanelMaster.Controls.Add(this.textCommodityName, 7, 0);
             this.tableLayoutPanelMaster.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanelMaster.Location = new System.Drawing.Point(0, 22);
             this.tableLayoutPanelMaster.Margin = new System.Windows.Forms.Padding(0);
@@ -142,10 +142,10 @@
             this.comboBoxMarketingPaymentTypeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxMarketingPaymentTypeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMarketingPaymentTypeID.FormattingEnabled = true;
-            this.comboBoxMarketingPaymentTypeID.Location = new System.Drawing.Point(495, 39);
+            this.comboBoxMarketingPaymentTypeID.Location = new System.Drawing.Point(487, 39);
             this.comboBoxMarketingPaymentTypeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxMarketingPaymentTypeID.Name = "comboBoxMarketingPaymentTypeID";
-            this.comboBoxMarketingPaymentTypeID.Size = new System.Drawing.Size(258, 24);
+            this.comboBoxMarketingPaymentTypeID.Size = new System.Drawing.Size(254, 24);
             this.comboBoxMarketingPaymentTypeID.TabIndex = 47;
             // 
             // label6
@@ -155,23 +155,22 @@
             this.label6.Location = new System.Drawing.Point(1, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(1);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(110, 34);
+            this.label6.Size = new System.Drawing.Size(108, 34);
             this.label6.TabIndex = 30;
             this.label6.Text = "Date";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // comboBoxMarketingProgramID
+            // comboCommodityID
             // 
-            this.comboBoxMarketingProgramID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxMarketingProgramID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxMarketingProgramID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxMarketingProgramID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMarketingProgramID.FormattingEnabled = true;
-            this.comboBoxMarketingProgramID.Location = new System.Drawing.Point(113, 39);
-            this.comboBoxMarketingProgramID.Margin = new System.Windows.Forms.Padding(1);
-            this.comboBoxMarketingProgramID.Name = "comboBoxMarketingProgramID";
-            this.comboBoxMarketingProgramID.Size = new System.Drawing.Size(258, 24);
-            this.comboBoxMarketingProgramID.TabIndex = 48;
+            this.comboCommodityID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboCommodityID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboCommodityID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboCommodityID.FormattingEnabled = true;
+            this.comboCommodityID.Location = new System.Drawing.Point(111, 39);
+            this.comboCommodityID.Margin = new System.Windows.Forms.Padding(1);
+            this.comboCommodityID.Name = "comboCommodityID";
+            this.comboCommodityID.Size = new System.Drawing.Size(254, 24);
+            this.comboCommodityID.TabIndex = 48;
             // 
             // label7
             // 
@@ -180,7 +179,7 @@
             this.label7.Location = new System.Drawing.Point(3, 41);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 14);
+            this.label7.Size = new System.Drawing.Size(104, 14);
             this.label7.TabIndex = 31;
             this.label7.Text = "Marketing Program";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -188,29 +187,29 @@
             // textBoxRemarks
             // 
             this.textBoxRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxRemarks.Location = new System.Drawing.Point(877, 39);
+            this.textBoxRemarks.Location = new System.Drawing.Point(863, 39);
             this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxRemarks.Name = "textBoxRemarks";
-            this.textBoxRemarks.Size = new System.Drawing.Size(258, 22);
+            this.textBoxRemarks.Size = new System.Drawing.Size(254, 22);
             this.textBoxRemarks.TabIndex = 14;
             // 
             // datePickerEntryDate
             // 
             this.datePickerEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.datePickerEntryDate.Location = new System.Drawing.Point(113, 3);
+            this.datePickerEntryDate.Location = new System.Drawing.Point(111, 3);
             this.datePickerEntryDate.Margin = new System.Windows.Forms.Padding(1);
             this.datePickerEntryDate.Name = "datePickerEntryDate";
-            this.datePickerEntryDate.Size = new System.Drawing.Size(258, 22);
+            this.datePickerEntryDate.Size = new System.Drawing.Size(254, 22);
             this.datePickerEntryDate.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(767, 41);
+            this.label1.Location = new System.Drawing.Point(755, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 14);
+            this.label1.Size = new System.Drawing.Size(104, 14);
             this.label1.TabIndex = 57;
             this.label1.Text = "Remarks";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -219,10 +218,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(383, 3);
+            this.label4.Location = new System.Drawing.Point(377, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(1);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 34);
+            this.label4.Size = new System.Drawing.Size(108, 34);
             this.label4.TabIndex = 28;
             this.label4.Text = "Payment Period";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -230,20 +229,20 @@
             // textBoxReference
             // 
             this.textBoxReference.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxReference.Location = new System.Drawing.Point(495, 3);
+            this.textBoxReference.Location = new System.Drawing.Point(487, 3);
             this.textBoxReference.Margin = new System.Windows.Forms.Padding(1);
             this.textBoxReference.Name = "textBoxReference";
-            this.textBoxReference.Size = new System.Drawing.Size(258, 22);
+            this.textBoxReference.Size = new System.Drawing.Size(254, 22);
             this.textBoxReference.TabIndex = 21;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(765, 3);
+            this.label14.Location = new System.Drawing.Point(753, 3);
             this.label14.Margin = new System.Windows.Forms.Padding(1);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(110, 34);
+            this.label14.Size = new System.Drawing.Size(108, 34);
             this.label14.TabIndex = 51;
             this.label14.Text = "Payment Machanic";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -252,22 +251,22 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(385, 41);
+            this.label2.Location = new System.Drawing.Point(379, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 14);
+            this.label2.Size = new System.Drawing.Size(104, 14);
             this.label2.TabIndex = 56;
             this.label2.Text = "Payment Type";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBoxPaymentMachanics
+            // textCommodityName
             // 
-            this.textBoxPaymentMachanics.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxPaymentMachanics.Location = new System.Drawing.Point(877, 3);
-            this.textBoxPaymentMachanics.Margin = new System.Windows.Forms.Padding(1);
-            this.textBoxPaymentMachanics.Name = "textBoxPaymentMachanics";
-            this.textBoxPaymentMachanics.Size = new System.Drawing.Size(258, 22);
-            this.textBoxPaymentMachanics.TabIndex = 20;
+            this.textCommodityName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textCommodityName.Location = new System.Drawing.Point(863, 3);
+            this.textCommodityName.Margin = new System.Windows.Forms.Padding(1);
+            this.textCommodityName.Name = "textCommodityName";
+            this.textCommodityName.Size = new System.Drawing.Size(254, 22);
+            this.textCommodityName.TabIndex = 20;
             // 
             // toolStripNaviGroupDetails
             // 
@@ -298,10 +297,10 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(385, 5);
+            this.label11.Location = new System.Drawing.Point(379, 5);
             this.label11.Margin = new System.Windows.Forms.Padding(3);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(106, 20);
+            this.label11.Size = new System.Drawing.Size(104, 20);
             this.label11.TabIndex = 45;
             this.label11.Text = "Noted By";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -310,10 +309,10 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(767, 5);
+            this.label12.Location = new System.Drawing.Point(755, 5);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(106, 20);
+            this.label12.Size = new System.Drawing.Size(104, 20);
             this.label12.TabIndex = 47;
             this.label12.Text = "Approved By";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -344,7 +343,7 @@
             this.fastObjectListViewIndex.EmptyListMsg = "This fast list is empty";
             this.fastObjectListViewIndex.FullRowSelect = true;
             this.fastObjectListViewIndex.HideSelection = false;
-            this.fastObjectListViewIndex.Location = new System.Drawing.Point(0, 39);
+            this.fastObjectListViewIndex.Location = new System.Drawing.Point(0, 0);
             this.fastObjectListViewIndex.Margin = new System.Windows.Forms.Padding(4);
             this.fastObjectListViewIndex.Name = "fastObjectListViewIndex";
             this.fastObjectListViewIndex.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -354,7 +353,7 @@
             this.fastObjectListViewIndex.ShowGroups = false;
             this.fastObjectListViewIndex.ShowImagesOnSubItems = true;
             this.fastObjectListViewIndex.ShowItemToolTips = true;
-            this.fastObjectListViewIndex.Size = new System.Drawing.Size(1309, 150);
+            this.fastObjectListViewIndex.Size = new System.Drawing.Size(1309, 189);
             this.fastObjectListViewIndex.SpaceBetweenGroups = 20;
             this.fastObjectListViewIndex.TabIndex = 28;
             this.fastObjectListViewIndex.TintSortColumn = true;
@@ -596,13 +595,13 @@
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.019F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32099F));
-            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
             this.tableLayoutPanelExtend.Controls.Add(this.comboBoxNotedEmployeeID, 4, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label11, 3, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label12, 6, 0);
-            this.tableLayoutPanelExtend.Controls.Add(this.comboBoxApprovedEmployeeID, 7, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.comboBoxRequestedEmployeeID, 1, 0);
+            this.tableLayoutPanelExtend.Controls.Add(this.comboBoxApprovedEmployeeID, 7, 0);
             this.tableLayoutPanelExtend.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelExtend.Location = new System.Drawing.Point(0, 2);
             this.tableLayoutPanelExtend.Margin = new System.Windows.Forms.Padding(0);
@@ -613,19 +612,6 @@
             this.tableLayoutPanelExtend.Size = new System.Drawing.Size(1309, 28);
             this.tableLayoutPanelExtend.TabIndex = 8;
             // 
-            // comboBoxApprovedEmployeeID
-            // 
-            this.comboBoxApprovedEmployeeID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxApprovedEmployeeID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxApprovedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxApprovedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxApprovedEmployeeID.FormattingEnabled = true;
-            this.comboBoxApprovedEmployeeID.Location = new System.Drawing.Point(877, 3);
-            this.comboBoxApprovedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
-            this.comboBoxApprovedEmployeeID.Name = "comboBoxApprovedEmployeeID";
-            this.comboBoxApprovedEmployeeID.Size = new System.Drawing.Size(258, 24);
-            this.comboBoxApprovedEmployeeID.TabIndex = 46;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -633,7 +619,7 @@
             this.label10.Location = new System.Drawing.Point(3, 5);
             this.label10.Margin = new System.Windows.Forms.Padding(3);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 20);
+            this.label10.Size = new System.Drawing.Size(104, 20);
             this.label10.TabIndex = 35;
             this.label10.Text = "Requested By";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -645,11 +631,24 @@
             this.comboBoxRequestedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxRequestedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRequestedEmployeeID.FormattingEnabled = true;
-            this.comboBoxRequestedEmployeeID.Location = new System.Drawing.Point(113, 3);
+            this.comboBoxRequestedEmployeeID.Location = new System.Drawing.Point(111, 3);
             this.comboBoxRequestedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
             this.comboBoxRequestedEmployeeID.Name = "comboBoxRequestedEmployeeID";
-            this.comboBoxRequestedEmployeeID.Size = new System.Drawing.Size(258, 24);
+            this.comboBoxRequestedEmployeeID.Size = new System.Drawing.Size(254, 24);
             this.comboBoxRequestedEmployeeID.TabIndex = 52;
+            // 
+            // comboBoxApprovedEmployeeID
+            // 
+            this.comboBoxApprovedEmployeeID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxApprovedEmployeeID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxApprovedEmployeeID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxApprovedEmployeeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxApprovedEmployeeID.FormattingEnabled = true;
+            this.comboBoxApprovedEmployeeID.Location = new System.Drawing.Point(863, 3);
+            this.comboBoxApprovedEmployeeID.Margin = new System.Windows.Forms.Padding(1);
+            this.comboBoxApprovedEmployeeID.Name = "comboBoxApprovedEmployeeID";
+            this.comboBoxApprovedEmployeeID.Size = new System.Drawing.Size(254, 24);
+            this.comboBoxApprovedEmployeeID.TabIndex = 46;
             // 
             // Batches
             // 
@@ -694,7 +693,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMaster;
         private System.Windows.Forms.ComboBox comboBoxMarketingPaymentTypeID;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBoxMarketingProgramID;
+        private System.Windows.Forms.ComboBox comboCommodityID;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxRemarks;
         private System.Windows.Forms.DateTimePicker datePickerEntryDate;
@@ -703,7 +702,7 @@
         private System.Windows.Forms.TextBox textBoxReference;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxPaymentMachanics;
+        private System.Windows.Forms.TextBox textCommodityName;
         private System.Windows.Forms.ToolStrip toolStripNaviGroupDetails;
         private System.Windows.Forms.Label label11;
         private BrightIdeasSoftware.FastObjectListView fastObjectListViewIndex;

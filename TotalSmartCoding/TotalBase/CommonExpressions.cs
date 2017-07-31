@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 using TotalBase.Enums;
 
@@ -6,6 +8,18 @@ namespace TotalBase
 {    
     public class CommonExpressions
     {
+        public static string PropertyName<T>(Expression<Func<T, object>> expression)
+        {
+            var body = expression.Body as MemberExpression;
+
+            if (body == null)
+            {
+                body = ((UnaryExpression)expression.Body).Operand as MemberExpression;
+            }
+
+            return body.Member.Name;
+        }
+
         public static string AlphaNumericString(string normalString)
         {
             return Regex.Replace(normalString, @"[^0-9a-zA-Z\*\+\(\)]+", "");

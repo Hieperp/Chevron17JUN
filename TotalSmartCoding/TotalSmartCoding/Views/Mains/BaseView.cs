@@ -340,7 +340,7 @@ namespace TotalSmartCoding.Views.Mains
         }
 
 
-        protected void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
+        protected virtual void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
             if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
         }

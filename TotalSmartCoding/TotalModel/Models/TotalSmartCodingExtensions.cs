@@ -326,6 +326,25 @@ namespace TotalModel.Models
     //    public System.DateTime EditedDate { get; set; }
     //}
 
+    public partial class CommodityIndex : IBaseIndex
+    {
+        public int Id { get { return this.CommodityID; } }
+    }
+
+    public partial class Commodity : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.CommodityID; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+
+        public int LocationID { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
+
+    }
 
     public partial class BatchIndex : IBaseIndex
     {

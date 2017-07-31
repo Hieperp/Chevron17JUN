@@ -84,7 +84,7 @@ namespace TotalSmartCoding.Views.Inventories
 
             this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.Controller.GoodsReceiptViewModel, "Reference", true);
 
-            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.GoodsReceiptViewModel, "EntryDate", true);
+            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.GoodsReceiptViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);

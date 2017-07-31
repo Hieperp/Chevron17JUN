@@ -99,6 +99,7 @@
     <Compile Include="CommonLibraries\CommonNinject.cs" />
     <Compile Include="CommonLibraries\IOSerialPort.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
+    <Compile Include="Controllers\APIs\Commons\CommodityAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIController.cs" />
     <Compile Include="Controllers\APIs\Productions\BatchAPIController.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />

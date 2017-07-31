@@ -17,8 +17,16 @@ namespace TotalDTO.Productions
 
         public string Code { get; set; }
 
-        public int FillingLineID { get { return (int)GlobalVariables.FillingLineID; } }
-        public int CommodityID { get; set; }
+        public int FillingLineID { get; set; }
+
+
+        private int commodityID;
+        public int CommodityID
+        {
+            get { return this.commodityID; }
+            set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.commodityID, o => o.CommodityID, value); }
+        }
+        
 
         public string NextPackNo { get; set; }
         public string NextCartonNo { get; set; }
@@ -29,5 +37,18 @@ namespace TotalDTO.Productions
 
     public class BatchDTO : BatchPrimitiveDTO
     {
+        public BatchDTO()
+        {
+            this.FillingLineID = (int)GlobalVariables.FillingLineID;
+            this.LocationID = GlobalVariables.LocationID;
+        }
+        
+        private string commodityName;
+        public string CommodityName
+        {
+            get { return this.commodityName; }
+            set { ApplyPropertyChange<BatchDTO, string>(ref this.commodityName, o => o.CommodityName, value); }
+        }
+
     }
 }

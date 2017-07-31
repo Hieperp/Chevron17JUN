@@ -27,6 +27,12 @@ namespace TotalDAL.Repositories
 
             //return;
 
+            Helpers.SqlProgrammability.Commons.Commodity commodity = new Helpers.SqlProgrammability.Commons.Commodity(totalSmartCodingEntities);
+            commodity.RestoreProcedure();
+
+
+            //return;
+
             Helpers.SqlProgrammability.Productions.FillingPallet fillingPallet = new Helpers.SqlProgrammability.Productions.FillingPallet(totalSmartCodingEntities);
             fillingPallet.RestoreProcedure();
 
