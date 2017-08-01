@@ -38,7 +38,7 @@ namespace TotalSmartCoding.Views.Productions
 {
     public partial class Batches : BaseView
     {
-        private BatchController Controller { get; set; }
+        private BatchControllers batchControllers { get; set; }
         private FillingData fillingData;
         private bool isAllQueuesEmpty;
 
@@ -51,16 +51,16 @@ namespace TotalSmartCoding.Views.Productions
             this.isAllQueuesEmpty = isAllQueuesEmpty;
 
             this.ChildToolStrip = this.toolStripChildForm;
-            this.FastObjectListView = this.fastObjectListViewIndex;
+            this.fastObjectListView = this.fastObjectListViewIndex;
 
-            BatchAPIController batchAPIController = new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+            BatchAPIs batchAPIController = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
             this.fastObjectListViewIndex.SetObjects(batchAPIController.GetBatchIndexes());
 
-            this.Controller = new BatchController(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<IBatchViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<BatchViewModel>());
-            this.Controller.PropertyChanged += new PropertyChangedEventHandler(batchController_PropertyChanged);
+            this.batchControllers = new BatchControllers(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<IBatchViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<BatchViewModel>());
+            this.batchControllers.PropertyChanged += new PropertyChangedEventHandler(batchController_PropertyChanged);
 
-            this.baseController = this.Controller;
+            this.baseController = this.batchControllers;
         }
 
         private void Batches_Load(object sender, EventArgs e)
@@ -94,17 +94,17 @@ namespace TotalSmartCoding.Views.Productions
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.Controller.BatchViewModel, "Reference", true);
-            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.BatchViewModel, "EntryDate", true);
+            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.batchControllers.BatchViewModel, "Reference", true);
+            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.batchControllers.BatchViewModel, "EntryDate", true);
 
-            this.textCommodityName.DataBindings.Add("Text", this.Controller.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
+            this.textCommodityName.DataBindings.Add("Text", this.batchControllers.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
 
             CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
 
             this.comboCommodityID.DataSource = commodityAPIs.GetCommodityBases();
             this.comboCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.Code);
             this.comboCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
-            this.bindingCommodityID = this.comboCommodityID.DataBindings.Add("SelectedValue", this.Controller.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingCommodityID = this.comboCommodityID.DataBindings.Add("SelectedValue", this.batchControllers.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 
 
 
@@ -134,7 +134,7 @@ namespace TotalSmartCoding.Views.Productions
                 if (this.comboCommodityID.SelectedItem != null)
                 {
                     CommodityBase a = (CommodityBase)this.comboCommodityID.SelectedItem;
-                    this.Controller.BatchViewModel.CommodityName = a.Name;
+                    this.batchControllers.BatchViewModel.CommodityName = a.Name;
                 }
 
                 ////    int addressAreaID;
@@ -146,8 +146,10 @@ namespace TotalSmartCoding.Views.Productions
                 ////            this.lShowMapping();
                 ////    else
                 ////        this.lShowMapping();
-                
 
+                //this.textCommodityName.ReadOnly = true;
+                //this.comboCommodityID.Enabled = true;
+                //this.datePickerEntryDate.Enabled = true;
 
 
 

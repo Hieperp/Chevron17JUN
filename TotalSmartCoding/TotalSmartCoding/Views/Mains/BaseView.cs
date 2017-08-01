@@ -24,7 +24,7 @@ namespace TotalSmartCoding.Views.Mains
         public BaseView()
         {
             InitializeComponent();
-            this.FastObjectListView = new FastObjectListView();
+            this.fastObjectListView = new FastObjectListView();
             this.baseController = new BaseController();
         }
 
@@ -33,8 +33,8 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                this.FastObjectListView.CheckBoxes = false;
-                this.FastObjectListView.SelectedIndexChanged += new System.EventHandler(this.dataListViewMaster_SelectedIndexChanged);
+                this.fastObjectListView.CheckBoxes = false;
+                this.fastObjectListView.SelectedIndexChanged += new System.EventHandler(this.fastObjectListView_SelectedIndexChanged);
 
                 this.baseController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
@@ -73,7 +73,7 @@ namespace TotalSmartCoding.Views.Mains
         }
 
         public virtual ToolStrip ChildToolStrip { get; set; }
-        public virtual BrightIdeasSoftware.FastObjectListView FastObjectListView { get; set; }
+        protected virtual BrightIdeasSoftware.FastObjectListView fastObjectListView { get; set; }
         //{
         //    get
         //    {
@@ -103,8 +103,7 @@ namespace TotalSmartCoding.Views.Mains
         public virtual bool Loadable { get { return true; } }
 
         public virtual bool Newable { get { return this.baseController.BaseDTO.Editable; } }
-        public virtual bool Editable { 
-            get { return this.baseController.BaseDTO.Editable; } 
+        public virtual bool Editable { get { return this.baseController.BaseDTO.Editable; } 
         }
         public virtual bool Deletable { get { return this.baseController.BaseDTO.Deletable; } }
 
@@ -293,7 +292,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public void SearchText(string searchText)
         {
-            CommonFormAction.OLVFilter(this.FastObjectListView, searchText);
+            CommonFormAction.OLVFilter(this.fastObjectListView, searchText);
         }
 
         #endregion
@@ -337,7 +336,7 @@ namespace TotalSmartCoding.Views.Mains
                 }
             }
 
-            this.FastObjectListView.DataBindings.Add("Enabled", this, "ReadonlyMode");
+            this.fastObjectListView.DataBindings.Add("Enabled", this, "ReadonlyMode");
         }
 
 
@@ -346,7 +345,7 @@ namespace TotalSmartCoding.Views.Mains
             if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
         }
 
-        private void dataListViewMaster_SelectedIndexChanged(object sender, EventArgs e)
+        private void fastObjectListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {

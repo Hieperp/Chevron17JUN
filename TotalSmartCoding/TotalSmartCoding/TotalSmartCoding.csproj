@@ -101,7 +101,7 @@
     <Compile Include="Configuration\SettingsManager.cs" />
     <Compile Include="Controllers\APIs\Commons\CommodityAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIController.cs" />
-    <Compile Include="Controllers\APIs\Productions\BatchAPIController.cs" />
+    <Compile Include="Controllers\APIs\Productions\BatchAPIs.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ControllersExtensions.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="Controllers\GenericSimpleController.cs" />
     <Compile Include="Controllers\GenericViewDetailController.cs" />
     <Compile Include="Controllers\Inventories\GoodsReceiptController.cs" />
-    <Compile Include="Controllers\Productions\BatchController.cs" />
+    <Compile Include="Controllers\Productions\BatchControllers.cs" />
     <Compile Include="Controllers\Productions\CodingController.cs" />
     <Compile Include="Controllers\Productions\FillingCartonController.cs" />
     <Compile Include="Controllers\Productions\FillingPackController.cs" />

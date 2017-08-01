@@ -17,10 +17,10 @@ using TotalSmartCoding.Builders.Productions;
 
 namespace TotalSmartCoding.Controllers.Productions
 {
-    public class BatchController : GenericSimpleController<Batch, BatchDTO, BatchPrimitiveDTO, BatchViewModel>
+    public class BatchControllers : GenericSimpleController<Batch, BatchDTO, BatchPrimitiveDTO, BatchViewModel>
     {
         public BatchViewModel BatchViewModel { get; private set; }
-        public BatchController(IBatchService batchService, IBatchViewModelSelectListBuilder batchSelectListBuilder, BatchViewModel batchViewModel)
+        public BatchControllers(IBatchService batchService, IBatchViewModelSelectListBuilder batchSelectListBuilder, BatchViewModel batchViewModel)
             : base(batchService, batchSelectListBuilder, batchViewModel)
         {
             this.BatchViewModel = batchViewModel;

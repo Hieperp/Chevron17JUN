@@ -15,11 +15,11 @@ using TotalBase;
 
 namespace TotalSmartCoding.Controllers.APIs.Productions
 {
-    public class BatchAPIController
+    public class BatchAPIs
     {
         private readonly IBatchAPIRepository goodsReceiptAPIRepository;
 
-        public BatchAPIController(IBatchAPIRepository goodsReceiptAPIRepository)
+        public BatchAPIs(IBatchAPIRepository goodsReceiptAPIRepository)
         {
             this.goodsReceiptAPIRepository = goodsReceiptAPIRepository;
         }
@@ -34,7 +34,7 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
 
         public BatchIndex GetActiveBatchIndex()
         {
-            BatchIndex goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate).Where(w => w.FillingLineID == (int)GlobalVariables.FillingLineID && w.IsDefault).FirstOrDefault();
+            BatchIndex goodsReceiptIndexes = this.GetBatchIndexes().Where(w => w.FillingLineID == (int)GlobalVariables.FillingLineID && w.IsDefault).FirstOrDefault();
 
             return goodsReceiptIndexes;
         }

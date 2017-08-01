@@ -66,7 +66,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.fillingData = new FillingData();
 
 
-                BatchIndex batchIndex = (new BatchAPIController(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
+                BatchIndex batchIndex = (new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
                 if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
 
                 IBatchService batchService = CommonNinject.Kernel.Get<IBatchService>();//ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService

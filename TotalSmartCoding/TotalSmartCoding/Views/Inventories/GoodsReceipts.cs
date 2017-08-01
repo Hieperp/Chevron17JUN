@@ -39,7 +39,7 @@ namespace TotalSmartCoding.Views.Inventories
 
 
             this.ChildToolStrip = this.toolStripChildForm;
-            this.FastObjectListView = this.fastObjectListViewIndex;
+            this.fastObjectListView = this.fastObjectListViewIndex;
 
             var goodsReceiptAPIRepository = CommonNinject.Kernel.Get<IGoodsReceiptAPIRepository>();
             GoodsReceiptAPIController goodsReceiptAPIsController = new GoodsReceiptAPIController(goodsReceiptAPIRepository);
