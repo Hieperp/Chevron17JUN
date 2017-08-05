@@ -681,6 +681,11 @@
     <None Include="Resources\Esc1.ico" />
     <None Include="Resources\DataLock.ico" />
     <None Include="Resources\DataLock-24.png" />
+    <None Include="Resources\DataNew.ico" />
+    <None Include="Resources\DataEdit.ico" />
+    <None Include="Resources\DataEdit-1.ico" />
+    <None Include="Resources\DataSave.ico" />
+    <None Include="Resources\DataEsc.ico" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
     <None Include="Resources\palet031.ico" />

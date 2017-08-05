@@ -763,6 +763,36 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DataEdit {
+            get {
+                object obj = ResourceManager.GetObject("DataEdit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DataEdit_1 {
+            get {
+                object obj = ResourceManager.GetObject("DataEdit-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DataEsc {
+            get {
+                object obj = ResourceManager.GetObject("DataEsc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DataLock {
             get {
                 object obj = ResourceManager.GetObject("DataLock", resourceCulture);
@@ -776,6 +806,26 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap DataLock_24 {
             get {
                 object obj = ResourceManager.GetObject("DataLock-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DataNew {
+            get {
+                object obj = ResourceManager.GetObject("DataNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DataSave {
+            get {
+                object obj = ResourceManager.GetObject("DataSave", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

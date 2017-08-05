@@ -269,7 +269,7 @@
             // toolStripButtonEscape
             // 
             this.toolStripButtonEscape.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonEscape.Image = global::TotalSmartCoding.Properties.Resources.Chromatix_Keyboard_Keys_Esc;
+            this.toolStripButtonEscape.Image = global::TotalSmartCoding.Properties.Resources.DataEsc;
             this.toolStripButtonEscape.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonEscape.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEscape.Name = "toolStripButtonEscape";
@@ -285,7 +285,7 @@
             // toolStripButtonNew
             // 
             this.toolStripButtonNew.Enabled = false;
-            this.toolStripButtonNew.Image = global::TotalSmartCoding.Properties.Resources.Bookmark_add;
+            this.toolStripButtonNew.Image = global::TotalSmartCoding.Properties.Resources.DataNew;
             this.toolStripButtonNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Black;
             this.toolStripButtonNew.Name = "toolStripButtonNew";
@@ -296,7 +296,7 @@
             // toolStripButtonEdit
             // 
             this.toolStripButtonEdit.Enabled = false;
-            this.toolStripButtonEdit.Image = global::TotalSmartCoding.Properties.Resources.sign_up;
+            this.toolStripButtonEdit.Image = global::TotalSmartCoding.Properties.Resources.DataEdit;
             this.toolStripButtonEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
@@ -307,7 +307,7 @@
             // toolStripButtonSave
             // 
             this.toolStripButtonSave.Enabled = false;
-            this.toolStripButtonSave.Image = global::TotalSmartCoding.Properties.Resources.Status_wallet_open;
+            this.toolStripButtonSave.Image = global::TotalSmartCoding.Properties.Resources.DataSave;
             this.toolStripButtonSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Black;
             this.toolStripButtonSave.Name = "toolStripButtonSave";
