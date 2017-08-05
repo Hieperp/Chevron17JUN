@@ -37,7 +37,7 @@ namespace TotalSmartCoding.Controllers
         public BaseDTO BaseDTO { get { return this.baseDTO; } }
 
 
-        protected void baseDTO_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected virtual void baseDTO_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.SetDirty();  //SHOULD USE this.SetDirty(); INSTEAD OF FORWARD EVENT BY USING: this.NotifyPropertyChanged(e.PropertyName); BECAUSE: IF e.PropertyName NOT FOUND IN THE RECEIVED OBJECT (HERE IS BaseController OBJECT): IT WILL NOT ADD TO Changes Dictionary => SO THE OBJECT IS NOT Dirty
         }

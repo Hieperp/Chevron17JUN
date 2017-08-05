@@ -51,11 +51,11 @@ namespace TotalSmartCoding.Views.Productions
             this.isAllQueuesEmpty = isAllQueuesEmpty;
 
             this.ChildToolStrip = this.toolStripChildForm;
-            this.fastObjectListView = this.fastObjectListViewIndex;
+            this.fastListIndex = this.fastListBatchIndex;
 
             BatchAPIs batchAPIController = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
-            this.fastObjectListViewIndex.SetObjects(batchAPIController.GetBatchIndexes());
+            this.fastListBatchIndex.SetObjects(batchAPIController.GetBatchIndexes());
 
             this.batchControllers = new BatchControllers(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<IBatchViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<BatchViewModel>());
             this.batchControllers.PropertyChanged += new PropertyChangedEventHandler(batchController_PropertyChanged);
@@ -114,22 +114,41 @@ namespace TotalSmartCoding.Views.Productions
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingCommodityID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-
-
-
-
-            this.naviGroupDetails.DataBindings.Add("ExpandedHeight", this.numericUpDownSizingDetail, "Value", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.numericUpDownSizingDetail.Minimum = this.naviGroupDetails.HeaderHeight * 2;
-            this.numericUpDownSizingDetail.Maximum = this.naviGroupDetails.Height + this.fastObjectListViewIndex.Height;
-
-            this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].Width = 10;
-            this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
         }
 
+
+        protected override void InitializeTabControl()
+        {
+            try
+            {
+                CustomTabControl customTabControlCustomerChannel = new CustomTabControl();
+                //customTabControlCustomerChannel.ImageList = this.imageListTabControl;
+
+
+                customTabControlCustomerChannel.TabPages.Add("CustomerChannel", "Batch Information    ");
+                customTabControlCustomerChannel.TabPages[0].Controls.Add(this.layoutMaster);
+                customTabControlCustomerChannel.Font = this.label1.Font;
+
+                this.layoutMaster.Dock = DockStyle.Fill;
+
+                customTabControlCustomerChannel.DisplayStyle = TabStyle.VisualStudio;
+                customTabControlCustomerChannel.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
+                this.naviBarMaster.Bands[0].ClientArea.Controls.Add(customTabControlCustomerChannel);
+                customTabControlCustomerChannel.Dock = DockStyle.Fill;
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+
+
+        
         protected override void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
             base.CommonControl_BindingComplete(sender, e);
-            if (sender.Equals(this.bindingCommodityID) )
+            if (sender.Equals(this.bindingCommodityID))
             {
                 if (this.comboCommodityID.SelectedItem != null)
                 {
@@ -213,9 +232,9 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (this.isAllQueuesEmpty && this.fastObjectListViewIndex.SelectedObject != null)
+                if (this.isAllQueuesEmpty && this.fastListBatchIndex.SelectedObject != null)
                 {
-                    BatchIndex batchIndex = (BatchIndex)fastObjectListViewIndex.SelectedObject;
+                    BatchIndex batchIndex = (BatchIndex)fastListBatchIndex.SelectedObject;
                     if (batchIndex != null) { Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData); this.MdiParent.DialogResult = System.Windows.Forms.DialogResult.OK; }
                 }
             }
@@ -225,7 +244,23 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            GlobalExceptionHandler.ShowExceptionMessageBox(this, this.ReadonlyMode.ToString());
+            //if (this.comboBox1.AutoCompleteSource == AutoCompleteSource.None)
+            //    this.comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //else
+            //    this.comboBox1.AutoCompleteSource = AutoCompleteSource.None;
+
+            //if (this.comboBox1.AutoCompleteMode == AutoCompleteMode.None)
+            //    this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //else
+            //    this.comboBox1.AutoCompleteMode = AutoCompleteMode.None;
+        }
+
         
+
+
 
 
 

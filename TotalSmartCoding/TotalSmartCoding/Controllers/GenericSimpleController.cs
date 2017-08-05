@@ -177,12 +177,12 @@ namespace TotalSmartCoding.Controllers
         public override void Edit(int? id)
         {
             if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
-            
+
             this.StopTracking();
 
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
             if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            
+
             this.StartTracking();
             this.Reset();
 

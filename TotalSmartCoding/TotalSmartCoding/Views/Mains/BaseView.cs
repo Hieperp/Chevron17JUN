@@ -14,8 +14,10 @@ using TotalModel.Models;
 using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Controllers;
 
+
 using TotalDAL.Repositories;
 using TotalService;
+using CustomControls;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -24,7 +26,8 @@ namespace TotalSmartCoding.Views.Mains
         public BaseView()
         {
             InitializeComponent();
-            this.fastObjectListView = new FastObjectListView();
+
+            this.fastListIndex = new FastObjectListView();
             this.baseController = new BaseController();
         }
 
@@ -33,8 +36,10 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                this.fastObjectListView.CheckBoxes = false;
-                this.fastObjectListView.SelectedIndexChanged += new System.EventHandler(this.fastObjectListView_SelectedIndexChanged);
+                InitializeTabControl();
+
+                this.fastListIndex.CheckBoxes = false;
+                this.fastListIndex.SelectedIndexChanged += new System.EventHandler(this.fastListIndex_SelectedIndexChanged);
 
                 this.baseController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
@@ -73,7 +78,7 @@ namespace TotalSmartCoding.Views.Mains
         }
 
         public virtual ToolStrip ChildToolStrip { get; set; }
-        protected virtual BrightIdeasSoftware.FastObjectListView fastObjectListView { get; set; }
+        protected virtual FastObjectListView fastListIndex { get; set; }
         //{
         //    get
         //    {
@@ -292,7 +297,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public void SearchText(string searchText)
         {
-            CommonFormAction.OLVFilter(this.fastObjectListView, searchText);
+            CommonFormAction.OLVFilter(this.fastListIndex, searchText);
         }
 
         #endregion
@@ -301,6 +306,7 @@ namespace TotalSmartCoding.Views.Mains
         #endregion <Implement Interface>
 
 
+        protected virtual void InitializeTabControl() { }
 
         Binding bindingIsDirty;
         Binding bindingIsDirtyBLL;
@@ -325,9 +331,9 @@ namespace TotalSmartCoding.Views.Mains
 
             foreach (Control control in controlList)
             {
-                //if (control is TextBox) control.DataBindings.Add("Readonly", this, "ReadonlyMode");
-                if (control is TextBox) control.DataBindings.Add("Enabled", this, "EditableMode");
-                else if (control is ComboBox || control is DateTimePicker) control.DataBindings.Add("Enabled", this, "EditableMode");
+                if (control is TextBox || control is CustomBox) control.DataBindings.Add("Readonly", this, "ReadonlyMode");
+                //if (control is TextBox) control.DataBindings.Add("Enabled", this, "EditableMode");
+                else if (control is DateTimePicker) control.DataBindings.Add("Enabled", this, "EditableMode");
                 else if (control is DataGridView)
                 {
                     control.DataBindings.Add("Readonly", this, "ReadonlyMode");
@@ -336,7 +342,7 @@ namespace TotalSmartCoding.Views.Mains
                 }
             }
 
-            this.fastObjectListView.DataBindings.Add("Enabled", this, "ReadonlyMode");
+            this.fastListIndex.DataBindings.Add("Enabled", this, "ReadonlyMode");
         }
 
 
@@ -345,7 +351,7 @@ namespace TotalSmartCoding.Views.Mains
             if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
         }
 
-        private void fastObjectListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void fastListIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
