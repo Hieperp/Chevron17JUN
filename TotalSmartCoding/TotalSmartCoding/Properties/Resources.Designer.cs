@@ -773,6 +773,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DataLock_24 {
+            get {
+                object obj = ResourceManager.GetObject("DataLock-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Delacro_Id_Recent_Documents {
             get {
                 object obj = ResourceManager.GetObject("Delacro-Id-Recent-Documents", resourceCulture);

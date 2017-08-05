@@ -36,6 +36,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.naviBarModuleMaster = new Guifreaks.Navisuite.NaviBar(this.components);
+            this.InvisibleMainMenuStripOfMDI = new System.Windows.Forms.MenuStrip();
             this.listViewTaskMaster = new System.Windows.Forms.ListView();
             this.buttonNaviBarHeader = new System.Windows.Forms.Button();
             this.toolStripMDIMain = new System.Windows.Forms.ToolStrip();
@@ -66,7 +67,6 @@
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxSearchText = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButtonSearch = new System.Windows.Forms.ToolStripButton();
-            this.InvisibleMainMenuStripOfMDI = new System.Windows.Forms.MenuStrip();
             this.statusStrip.SuspendLayout();
             this.naviBarModuleMaster.SuspendLayout();
             this.toolStripMDIMain.SuspendLayout();
@@ -192,6 +192,17 @@
             this.naviBarModuleMaster.VisibleLargeButtons = 3;
             this.naviBarModuleMaster.ActiveBandChanged += new System.EventHandler(this.naviBarModuleMaster_ActiveBandChanged);
             this.naviBarModuleMaster.CollapsedChanged += new System.EventHandler(this.naviBarModuleMaster_CollapsedChanged);
+            // 
+            // InvisibleMainMenuStripOfMDI
+            // 
+            this.InvisibleMainMenuStripOfMDI.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.InvisibleMainMenuStripOfMDI.Location = new System.Drawing.Point(0, 0);
+            this.InvisibleMainMenuStripOfMDI.Name = "InvisibleMainMenuStripOfMDI";
+            this.InvisibleMainMenuStripOfMDI.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.InvisibleMainMenuStripOfMDI.Size = new System.Drawing.Size(1841, 28);
+            this.InvisibleMainMenuStripOfMDI.TabIndex = 16;
+            this.InvisibleMainMenuStripOfMDI.Text = "MenuStrip";
+            this.InvisibleMainMenuStripOfMDI.Visible = false;
             // 
             // listViewTaskMaster
             // 
@@ -426,16 +437,17 @@
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources.key__1_;
+            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources.DataLock_24;
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(52, 52);
+            this.toolStripButton2.Size = new System.Drawing.Size(28, 52);
             this.toolStripButton2.Text = "toolStripButton2";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStripTextBox3
             // 
+            this.toolStripTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.toolStripTextBox3.Name = "toolStripTextBox3";
             this.toolStripTextBox3.Size = new System.Drawing.Size(99, 55);
             this.toolStripTextBox3.Text = "10/10/2013";
@@ -454,6 +466,7 @@
             // 
             // textBoxLowerFillterDate
             // 
+            this.textBoxLowerFillterDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxLowerFillterDate.Name = "textBoxLowerFillterDate";
             this.textBoxLowerFillterDate.Size = new System.Drawing.Size(99, 55);
             this.textBoxLowerFillterDate.Text = "31/12/2013";
@@ -461,6 +474,7 @@
             // 
             // textBoxUpperFillterDate
             // 
+            this.textBoxUpperFillterDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxUpperFillterDate.Name = "textBoxUpperFillterDate";
             this.textBoxUpperFillterDate.Size = new System.Drawing.Size(99, 55);
             this.textBoxUpperFillterDate.Text = "01/01/2013";
@@ -485,8 +499,9 @@
             // 
             this.toolStripComboBoxSearchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.toolStripComboBoxSearchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
+            this.toolStripComboBoxSearchText.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.toolStripComboBoxSearchText.Name = "toolStripComboBoxSearchText";
-            this.toolStripComboBoxSearchText.Size = new System.Drawing.Size(799, 55);
+            this.toolStripComboBoxSearchText.Size = new System.Drawing.Size(500, 55);
             // 
             // toolStripButtonSearch
             // 
@@ -498,17 +513,6 @@
             this.toolStripButtonSearch.Size = new System.Drawing.Size(52, 52);
             this.toolStripButtonSearch.Text = "Find";
             this.toolStripButtonSearch.Click += new System.EventHandler(this.toolStripButtonSearch_Click);
-            // 
-            // InvisibleMainMenuStripOfMDI
-            // 
-            this.InvisibleMainMenuStripOfMDI.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.InvisibleMainMenuStripOfMDI.Location = new System.Drawing.Point(0, 0);
-            this.InvisibleMainMenuStripOfMDI.Name = "InvisibleMainMenuStripOfMDI";
-            this.InvisibleMainMenuStripOfMDI.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.InvisibleMainMenuStripOfMDI.Size = new System.Drawing.Size(1841, 28);
-            this.InvisibleMainMenuStripOfMDI.TabIndex = 16;
-            this.InvisibleMainMenuStripOfMDI.Text = "MenuStrip";
-            this.InvisibleMainMenuStripOfMDI.Visible = false;
             // 
             // MasterMDI
             // 
