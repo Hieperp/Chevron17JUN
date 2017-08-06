@@ -85,9 +85,21 @@ namespace TotalDAL.Repositories
             return this.modelDbSet;
         }
 
+        /// <summary>
+        /// SEE Find(id) FROM MICROSOFT HELP (MSDN) FOR MORE INFORMATION
+        /// Finds an entity with the given primary key values. 
+        /// If an entity with the given primary key values exists in the context, then it is returned immediately without making a request to the store. 
+        /// Otherwise, a request is made to the store for an entity with the given primary key values and this entity, if found, is attached to the context and returned. If no entity is found in the context or the store, then null is returned.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public TEntity GetByID(int id)
         {
-            return this.modelDbSet.Find(id);
+            TEntity entity = this.modelDbSet.Find(id);//STEP 1) FOR THIS WINFORM PROJECT => AT FIRST WE NEED TO FIND BY PRIMARYKEY
+            if (entity != null) this.TotalSmartCodingEntities.Entry(entity).Reload(); // STEP 2) => NEXT: WE RELOAD FROM DATABASE. IF THE Entity HAS BEEN DELETE BY SOMEONE ELSE => THE this.modelDbSet WILL REMOVE Entity FROM ENTITIES CACHE
+            return this.modelDbSet.Find(id); //STEP 3) FINALLY => WE FIND BY PRIMARYKEY AGAIN. THIS WILL FIND FROM THE CACHE
+
+            //IMPORTANT NOTES: WITH MVC, WE DON'T NEED TO DO 3 STEP, BECAUSE: IN MMVC:  THE DbContext TotalSmartCodingEntities WILL BE LOAD FOR EVERY THREAT, SO Find(id) ALWAYS SEARCH FROM DATABASE
         }
 
 

@@ -497,7 +497,7 @@ namespace TotalSmartCoding.Controllers
                     if (this.GenericService.Save(dto))
                     {
                         simpleViewModel.SetID(dto.GetID());
-                        this.Edit(simpleViewModel.GetID()); //WIN: RELOAD AFTER SAVE
+                        this.Edit(simpleViewModel.GetID()); //WINFORM: RELOAD AFTER SAVE (IN MVC: WE REDIRECT TO NEW ACTION/ OR RELOAD CURRENT VIEW AGIAN => THIS WILL RELOAD AUTOMATICALLY AFTER SAVE SUCCESSFULY)
 
                         this.BackupViewModelToSession(simpleViewModel);
 
