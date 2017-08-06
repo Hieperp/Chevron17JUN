@@ -189,9 +189,18 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        public virtual void Loading() { }
-
-
+        public virtual void Loading() 
+        {
+            if (this.baseController.BaseDTO.GetID() > 0)
+            {
+                IBaseIndex baseIndex = this.fastListIndex.Objects.Cast<IBaseIndex>().FirstOrDefault(w => w.Id == this.baseController.BaseDTO.GetID());
+                if (baseIndex != null)
+                {
+                    this.fastListIndex.SelectObject(baseIndex);
+                    this.fastListIndex.EnsureModelVisible(baseIndex);
+                }
+            }
+        }
 
 
 
@@ -310,7 +319,9 @@ namespace TotalSmartCoding.Views.Mains
                 }
             }
 
-            this.fastListIndex.DataBindings.Add("Enabled", this, "ReadonlyMode");
+            //this.fastListIndex.DataBindings.Add("Enabled", this, "ReadonlyMode");
+
+            //this.fastListIndex.DataBindings.Add("Frozen", this, "ReadonlyMode");
         }
 
 
@@ -323,11 +334,14 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                FastObjectListView fastlistIndex = (FastObjectListView)sender;
-                if (fastlistIndex.SelectedObject != null)
+                if (this.ReadonlyMode)
                 {
-                    IBaseIndex baseIndex = (IBaseIndex)fastlistIndex.SelectedObject;
-                    if (baseIndex != null && baseIndex.Id != this.baseController.BaseDTO.GetID()) this.baseController.Edit(baseIndex.Id);
+                    FastObjectListView fastlistIndex = (FastObjectListView)sender;
+                    if (fastlistIndex.SelectedObject != null)
+                    {
+                        IBaseIndex baseIndex = (IBaseIndex)fastlistIndex.SelectedObject;
+                        if (baseIndex != null && baseIndex.Id != this.baseController.BaseDTO.GetID()) this.baseController.Edit(baseIndex.Id);
+                    }
                 }
             }
             catch (Exception exception)
@@ -353,7 +367,6 @@ namespace TotalSmartCoding.Views.Mains
 
             this.baseController.Create();
             this.EditableMode = true;
-
         }
 
         public void Edit()

@@ -57,6 +57,7 @@
             this.buttonApply = new System.Windows.Forms.ToolStripButton();
             this.naviBarMaster = new Guifreaks.Navisuite.NaviBar(this.components);
             this.naviBand1 = new Guifreaks.Navisuite.NaviBand(this.components);
+            this.textReference = new System.Windows.Forms.TextBox();
             this.layoutMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastListBatchIndex)).BeginInit();
             this.toolStripChildForm.SuspendLayout();
@@ -89,13 +90,14 @@
             this.layoutMaster.Controls.Add(this.label7, 1, 8);
             this.layoutMaster.Controls.Add(this.comboCommodityID, 1, 5);
             this.layoutMaster.Controls.Add(this.label8, 1, 6);
+            this.layoutMaster.Controls.Add(this.textReference, 1, 16);
             this.layoutMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutMaster.Location = new System.Drawing.Point(0, 0);
             this.layoutMaster.Margin = new System.Windows.Forms.Padding(0);
             this.layoutMaster.Name = "layoutMaster";
             this.layoutMaster.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.layoutMaster.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.layoutMaster.RowCount = 16;
+            this.layoutMaster.RowCount = 17;
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -112,6 +114,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.layoutMaster.Size = new System.Drawing.Size(475, 566);
             this.layoutMaster.TabIndex = 62;
             // 
@@ -352,6 +355,7 @@
             this.fastListBatchIndex.UseHyperlinks = true;
             this.fastListBatchIndex.View = System.Windows.Forms.View.Details;
             this.fastListBatchIndex.VirtualMode = true;
+            this.fastListBatchIndex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.fastListBatchIndex_MouseClick);
             // 
             // olvColumn18
             // 
@@ -461,6 +465,16 @@
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
+            // textReference
+            // 
+            this.textReference.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textReference.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textReference.Location = new System.Drawing.Point(34, 481);
+            this.textReference.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
+            this.textReference.Name = "textReference";
+            this.textReference.Size = new System.Drawing.Size(415, 27);
+            this.textReference.TabIndex = 69;
+            // 
             // Batches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -519,6 +533,7 @@
         private Guifreaks.Navisuite.NaviBar naviBarMaster;
         private System.Windows.Forms.Label label8;
         private Guifreaks.Navisuite.NaviBand naviBand1;
+        private System.Windows.Forms.TextBox textReference;
 
     }
 }

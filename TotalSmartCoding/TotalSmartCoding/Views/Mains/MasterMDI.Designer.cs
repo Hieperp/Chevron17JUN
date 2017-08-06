@@ -491,6 +491,7 @@
             this.toolStripButtonLoad.Name = "toolStripButtonLoad";
             this.toolStripButtonLoad.Size = new System.Drawing.Size(52, 52);
             this.toolStripButtonLoad.Text = "Refresh";
+            this.toolStripButtonLoad.Click += new System.EventHandler(this.toolStripButtonLoad_Click);
             // 
             // toolStripSeparator13
             // 

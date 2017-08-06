@@ -29,7 +29,7 @@ namespace TotalSmartCoding.Controllers
         private readonly IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder;
         private readonly TSimpleViewModel simpleViewModel;
 
-        private int lastID;
+        public int lastID;
 
         private bool isSimpleCreate;
         private bool isCreateWizard;
