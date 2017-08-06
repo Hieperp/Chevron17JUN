@@ -38,7 +38,8 @@ namespace TotalSmartCoding.Views.Productions
 {
     public partial class Batches : BaseView
     {
-        private BatchController batchController { get; set; }
+        private BatchController batchController;
+        private BatchAPIs batchAPIs;
         private FillingData fillingData;
         private bool isAllQueuesEmpty;
 
@@ -53,9 +54,8 @@ namespace TotalSmartCoding.Views.Productions
             this.ChildToolStrip = this.toolStripChildForm;
             this.fastListIndex = this.fastListBatchIndex;
 
-            BatchAPIs batchAPIController = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
-            this.fastListBatchIndex.SetObjects(batchAPIController.GetBatchIndexes());
+            this.batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
             this.batchController = new BatchController(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<IBatchViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<BatchViewModel>());
             this.batchController.PropertyChanged += new PropertyChangedEventHandler(batchController_PropertyChanged);
@@ -86,20 +86,24 @@ namespace TotalSmartCoding.Views.Productions
 
 
         Binding bindingEntryDate;
-        Binding bindingReference;
+        Binding bindingCode;
 
         Binding bindingCommodityID;
 
         Binding bindingNextPackNo;
+        Binding bindingNextCartonNo;
+        Binding bindingNextPalletNo;
 
         protected override void InitializeCommonControlBinding()
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.batchController.BatchViewModel, "Reference", true);
-            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.batchController.BatchViewModel, "EntryDate", true);
+            this.bindingCode = this.textBoxCode.DataBindings.Add("Text", this.batchController.BatchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.batchController.BatchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.bindingNextPackNo = this.textNextPackNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPackNo", true);
+            this.bindingNextPackNo = this.textNextPackNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextCartonNo = this.textNextCartonNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextPalletNo = this.textNextPalletNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPalletNo", true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.textCommodityName.DataBindings.Add("Text", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
 
@@ -113,13 +117,13 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-            this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-
+            this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-
             this.bindingCommodityID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingNextPackNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingNextCartonNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingNextPalletNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
         }
 
 
@@ -150,17 +154,18 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-        
+
         protected override void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
             base.CommonControl_BindingComplete(sender, e);
             if (sender.Equals(this.bindingCommodityID))
             {
-                if (this.comboCommodityID.SelectedItem != null)
+                if (this.comboCommodityID.SelectedItem != null && this.batchController.BatchViewModel.TrackChanges)
                 {
-                    CommodityBase a = (CommodityBase)this.comboCommodityID.SelectedItem;
-                    this.batchController.BatchViewModel.CommodityName = a.Name;
+                    CommodityBase commodityBase = (CommodityBase)this.comboCommodityID.SelectedItem;
+                    this.batchController.BatchViewModel.CommodityName = commodityBase.Name;
                 }
+
 
                 ////    int addressAreaID;
                 ////    DataRow selectedDataRow = ((DataRowView)this.comboCommodityID.SelectedItem).Row;
@@ -234,6 +239,12 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        public override void Loading()
+        {
+            base.Loading();
+            this.fastListBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes());
+        }
+
         private void buttonApply_Click(object sender, EventArgs e)
         {
             try
@@ -252,7 +263,7 @@ namespace TotalSmartCoding.Views.Productions
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            GlobalExceptionHandler.ShowExceptionMessageBox(this, this.ReadonlyMode.ToString());
+            GlobalExceptionHandler.ShowExceptionMessageBox(this, this.batchController.BatchViewModel.BatchID.ToString());
             //if (this.comboBox1.AutoCompleteSource == AutoCompleteSource.None)
             //    this.comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
             //else
@@ -264,7 +275,7 @@ namespace TotalSmartCoding.Views.Productions
             //    this.comboBox1.AutoCompleteMode = AutoCompleteMode.None;
         }
 
-        
+
 
 
 

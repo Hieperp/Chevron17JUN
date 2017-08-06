@@ -16,7 +16,7 @@ namespace TotalDTO.Inventories
     {
         public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.GoodsReceipt; } }
 
-        public int GetID() { return this.GoodsReceiptID; }
+        public override int GetID() { return this.GoodsReceiptID; }
         public void SetID(int id) { this.GoodsReceiptID = id; }
 
         public int GoodsReceiptID { get; set; }

@@ -92,12 +92,14 @@ namespace TotalSmartCoding.Controllers
         {
         }
 
-        public virtual void Create()
-        {
-        }
 
-        public virtual void Edit(int? id)
-        {
-        }
+
+
+
+        public virtual void Create() { }
+        public virtual void Edit(int? id) { }
+        public virtual void CancelDirty(bool withRestore) { }
+
+        public virtual bool Save() { return true; }
     }
 }

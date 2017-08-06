@@ -101,7 +101,7 @@ namespace TotalDTO.Commons
     {
         public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Customer; } }
 
-        public int GetID() { return this.CustomerID; }
+        public override int GetID() { return this.CustomerID; }
         public void SetID(int id) { this.CustomerID = id; }
 
         //public int CustomerID { get; set; }

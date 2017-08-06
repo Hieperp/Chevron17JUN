@@ -28,7 +28,7 @@ namespace TotalDTO.Commons
     {
         public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Employee; } }
 
-        public int GetID() { return this.EmployeeID; }
+        public override int GetID() { return this.EmployeeID; }
         public void SetID(int id) { this.EmployeeID = id; }
 
         [Display(Name = "Mã nhân viên")]

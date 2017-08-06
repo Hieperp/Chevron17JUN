@@ -8,7 +8,7 @@ using TotalBase.Enums;
 
 namespace TotalDTO
 {
-    public class BaseDTO : BaseModel, IAccessControlAttribute 
+    public class BaseDTO : BaseModel, IAccessControlAttribute
     {
         public BaseDTO()
         {
@@ -25,10 +25,12 @@ namespace TotalDTO
             }
         }
 
-        
-        
+
+        public virtual int GetID() { return 0; }
+
         private string reference;
         [Display(Name = "Số phiếu")]
+        [DefaultValue(null)]
         public string Reference
         {
             get { return this.reference; }
@@ -50,19 +52,21 @@ namespace TotalDTO
 
         [Display(Name = "Diễn giải")]
         public string Description { get; set; }
-        
+
 
         public bool GlobalLocked { get; set; }
 
-        //public bool Editable { get; set; }
 
-        private bool editable;
-        [Display(Name = "Số phiếu")]
-        public bool Editable
-        {
-            get { return this.editable; }
-            set { ApplyPropertyChange<BaseDTO, bool>(ref this.editable, o => o.Editable, value); }
-        }
+        public bool Newable { get; set; }
+        public bool Editable { get; set; }
+
+        //private bool editable;
+        //[Display(Name = "Số phiếu")]
+        //public bool Editable
+        //{
+        //    get { return this.editable; }
+        //    set { ApplyPropertyChange<BaseDTO, bool>(ref this.editable, o => o.Editable, value); }
+        //}
 
 
 
@@ -83,7 +87,7 @@ namespace TotalDTO
         public virtual int PrintOptionID { get; set; }
 
 
-        
+
         public virtual void PerformPresaveRule() { }
 
         public virtual void PrepareVoidDetail(int? detailID) { }

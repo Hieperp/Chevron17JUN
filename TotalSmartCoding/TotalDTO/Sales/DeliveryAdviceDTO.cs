@@ -18,7 +18,7 @@ namespace TotalDTO.Sales
     {
         public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.DeliveryAdvice; } }
 
-        public int GetID() { return this.DeliveryAdviceID; }
+        public override int GetID() { return this.DeliveryAdviceID; }
         public void SetID(int id) { this.DeliveryAdviceID = id; }
 
         public int DeliveryAdviceID { get; set; }

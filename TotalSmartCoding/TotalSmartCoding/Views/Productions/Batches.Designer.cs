@@ -34,13 +34,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datePickerEntryDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBoxReference = new System.Windows.Forms.TextBox();
+            this.textBoxCode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textCommodityName = new System.Windows.Forms.TextBox();
             this.textNextPackNo = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textNextCartonNo = new System.Windows.Forms.TextBox();
+            this.textNextPalletNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -77,13 +77,13 @@
             this.layoutMaster.Controls.Add(this.label1, 1, 14);
             this.layoutMaster.Controls.Add(this.datePickerEntryDate, 1, 1);
             this.layoutMaster.Controls.Add(this.label6, 1, 0);
-            this.layoutMaster.Controls.Add(this.textBoxReference, 1, 3);
+            this.layoutMaster.Controls.Add(this.textBoxCode, 1, 3);
             this.layoutMaster.Controls.Add(this.label2, 1, 2);
             this.layoutMaster.Controls.Add(this.label14, 1, 4);
             this.layoutMaster.Controls.Add(this.textCommodityName, 1, 7);
             this.layoutMaster.Controls.Add(this.textNextPackNo, 1, 9);
-            this.layoutMaster.Controls.Add(this.textBox2, 1, 11);
-            this.layoutMaster.Controls.Add(this.textBox3, 1, 13);
+            this.layoutMaster.Controls.Add(this.textNextCartonNo, 1, 11);
+            this.layoutMaster.Controls.Add(this.textNextPalletNo, 1, 13);
             this.layoutMaster.Controls.Add(this.label4, 1, 12);
             this.layoutMaster.Controls.Add(this.label5, 1, 10);
             this.layoutMaster.Controls.Add(this.label7, 1, 8);
@@ -161,15 +161,15 @@
             this.label6.Text = "Date";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // textBoxReference
+            // textBoxCode
             // 
-            this.textBoxReference.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxReference.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxReference.Location = new System.Drawing.Point(34, 97);
-            this.textBoxReference.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
-            this.textBoxReference.Name = "textBoxReference";
-            this.textBoxReference.Size = new System.Drawing.Size(415, 27);
-            this.textBoxReference.TabIndex = 21;
+            this.textBoxCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxCode.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCode.Location = new System.Drawing.Point(34, 97);
+            this.textBoxCode.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
+            this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.Size = new System.Drawing.Size(415, 27);
+            this.textBoxCode.TabIndex = 21;
             // 
             // label2
             // 
@@ -217,25 +217,25 @@
             this.textNextPackNo.Size = new System.Drawing.Size(415, 27);
             this.textNextPackNo.TabIndex = 60;
             // 
-            // textBox2
+            // textNextCartonNo
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(34, 334);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(415, 27);
-            this.textBox2.TabIndex = 61;
+            this.textNextCartonNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textNextCartonNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textNextCartonNo.Location = new System.Drawing.Point(34, 334);
+            this.textNextCartonNo.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
+            this.textNextCartonNo.Name = "textNextCartonNo";
+            this.textNextCartonNo.Size = new System.Drawing.Size(415, 27);
+            this.textNextCartonNo.TabIndex = 61;
             // 
-            // textBox3
+            // textNextPalletNo
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(34, 393);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(415, 27);
-            this.textBox3.TabIndex = 62;
+            this.textNextPalletNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textNextPalletNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textNextPalletNo.Location = new System.Drawing.Point(34, 393);
+            this.textNextPalletNo.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
+            this.textNextPalletNo.Name = "textNextPalletNo";
+            this.textNextPalletNo.Size = new System.Drawing.Size(415, 27);
+            this.textNextPalletNo.TabIndex = 62;
             // 
             // label4
             // 
@@ -496,7 +496,7 @@
         private System.Windows.Forms.TextBox textBoxRemarks;
         private System.Windows.Forms.DateTimePicker datePickerEntryDate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxReference;
+        private System.Windows.Forms.TextBox textBoxCode;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textCommodityName;
         private BrightIdeasSoftware.FastObjectListView fastListBatchIndex;
@@ -511,8 +511,8 @@
         private System.Windows.Forms.Label label2;
         private CustomControls.CustomBox comboCommodityID;
         private System.Windows.Forms.TextBox textNextPackNo;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textNextCartonNo;
+        private System.Windows.Forms.TextBox textNextPalletNo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;

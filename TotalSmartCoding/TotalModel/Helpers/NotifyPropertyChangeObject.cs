@@ -50,7 +50,7 @@ namespace TotalModel.Helpers
         /// Track changes or not.
         /// If we're working with DTOs and we fill up the DTO in the DAL we should not be tracking changes.
         /// </summary>
-        private bool trackChanges = false;
+        public bool TrackChanges { get; private set; }
 
         /// <summary>
         /// Changes to the object
@@ -77,7 +77,7 @@ namespace TotalModel.Helpers
         public NotifyPropertyChangeObject()
         {
             // Change tracking default
-            trackChanges = true;
+            TrackChanges = true;
 
             // New change tracking dictionary
             Changes = new Dictionary<string, object>();
@@ -96,7 +96,7 @@ namespace TotalModel.Helpers
         //LE MINH HIEP: ONLY BLL OBJECT NEED TO CALL THIS METHOD to set it IsDirty itself. DTO has never needed this method
         protected void SetDirty()
         {
-            if (trackChanges)
+            if (TrackChanges)
             {
                 // Change tracking
                 Changes["IsDirty"] = true;
@@ -111,7 +111,7 @@ namespace TotalModel.Helpers
         /// </summary>
         public void StartTracking()
         {
-            trackChanges = true;
+            TrackChanges = true;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace TotalModel.Helpers
         /// </summary>
         public void StopTracking()
         {
-            trackChanges = false;
+            TrackChanges = false;
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace TotalModel.Helpers
             {
                 field = value; // Set the value
 
-                if (trackChanges)   // If change tracking is enabled, we can track the changes...
+                if (TrackChanges)   // If change tracking is enabled, we can track the changes...
                 {
                     var propertyExpression = GetMemberExpression(property); // Get the property
                     if (propertyExpression == null) throw new InvalidOperationException("You must specify a property");

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace TotalBase
+namespace TotalCore.Extensions
 {
     public static class ObjectExtension
     {

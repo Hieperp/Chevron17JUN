@@ -5,7 +5,7 @@ using System.Linq;
 
 using AutoMapper;
 
-using TotalBase;
+using TotalCore.Extensions;
 using TotalBase.Enums;
 using TotalModel;
 using TotalDTO;
@@ -28,6 +28,8 @@ namespace TotalSmartCoding.Controllers
         protected readonly IGenericService<TEntity, TDto, TPrimitiveDto> GenericService;
         private readonly IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder;
         private readonly TSimpleViewModel simpleViewModel;
+
+        private int lastID;
 
         private bool isSimpleCreate;
         private bool isCreateWizard;
@@ -52,6 +54,8 @@ namespace TotalSmartCoding.Controllers
             this.viewModelSelectListBuilder = viewModelSelectListBuilder;
 
             this.simpleViewModel = simpleViewModel; //New object vs MVC
+            //--NGAY SAU KHI INIT simpleViewModel => SHOULD CHECK FOR Newable???? => to bind to toolstrip (because: many time: the index list is empty => not select the first row in index list)
+
 
             this.isCreateWizard = isCreateWizard;
             this.isSimpleCreate = isSimpleCreate;
@@ -72,8 +76,8 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        
-        
+
+
         public override void Open(int? id)
         {
             if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
@@ -111,8 +115,9 @@ namespace TotalSmartCoding.Controllers
 
 
 
-            this.StopTracking();
-            
+            this.simpleViewModel.StopTracking();
+
+            this.lastID = this.simpleViewModel.GetID();
             this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() AS MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
             //this.Call int of base object
             //Check default
@@ -120,24 +125,24 @@ namespace TotalSmartCoding.Controllers
 
 
             this.TailorViewModel(this.InitViewModelByPrior(this.InitViewModelByDefault(this.simpleViewModel))); //IN MVC: SIMPLE: Need to call new TSimpleViewModel() to ensure construct TSimpleViewModel object using Constructor!
-            
-            this.StartTracking();
-            this.Reset();
+
+            this.simpleViewModel.StartTracking();
+            this.simpleViewModel.Reset();
 
 
             //return View();
         }
 
-        
-        
-        
+
+
+
         public virtual void Create(TSimpleViewModel simpleViewModel)
         {
             if (!this.isSimpleCreate) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             base.AddRequireJsOptions();
 
-            if ((simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Closed || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Create) && this.Save(simpleViewModel))
+            if ((simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Closed || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Create) && this.Save())
                 RedirectAfterSave(simpleViewModel);
             else
             {
@@ -155,9 +160,9 @@ namespace TotalSmartCoding.Controllers
         /// Create NEW by show a CreateWizard dialog, where user HAVE TO SELECT A RELATIVE OBJECT to INITIALIZE ViewModel, then SUBMIT the ViewModel
         /// </summary>
         /// <returns></returns>
-        
-        
-        
+
+
+
         public virtual void CreateWizard()
         {
             if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
@@ -174,9 +179,9 @@ namespace TotalSmartCoding.Controllers
         /// </summary>
         /// <param name="simpleViewModel"></param>
         /// <returns></returns>
-        
-        
-        
+
+
+
         public virtual void CreateWizard(TSimpleViewModel simpleViewModel)
         {
             if (!this.isCreateWizard) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -199,10 +204,13 @@ namespace TotalSmartCoding.Controllers
 
         public override void Edit(int? id)
         {
+            base.Edit(id);
+
             if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
             this.StopTracking();
 
+            this.lastID = this.simpleViewModel.GetID();
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
             if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -222,14 +230,14 @@ namespace TotalSmartCoding.Controllers
         /// </summary>
         /// <param name="simpleViewModel"></param>
         /// <returns></returns>
-        
-        
-        
+
+
+
         public virtual void Edit(TSimpleViewModel simpleViewModel)
         {
             base.AddRequireJsOptions();
 
-            if ((simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Closed || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Create) && this.Save(simpleViewModel))
+            if ((simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Save || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Closed || simpleViewModel.SubmitTypeOption == GlobalEnums.SubmitTypeOption.Create) && this.Save())
                 RedirectAfterSave(simpleViewModel);
             else
             {
@@ -262,6 +270,15 @@ namespace TotalSmartCoding.Controllers
 
 
 
+        public override void CancelDirty(bool withRestore)
+        {
+            base.CancelDirty(withRestore);
+            if (withRestore || this.simpleViewModel.GetID() <= 0)
+                this.Edit(this.lastID);
+        }
+
+
+
         #region Approve/ UnApprove
         public virtual void Approve(int? id)
         {
@@ -286,7 +303,7 @@ namespace TotalSmartCoding.Controllers
             //-----return View(simpleViewModel);
         }
 
-        
+
         public virtual void ApproveConfirmed(TSimpleViewModel simpleViewModel)
         {
             try
@@ -310,8 +327,8 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        
-        
+
+
         public virtual void Delete(int? id)
         {
             if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
@@ -325,7 +342,7 @@ namespace TotalSmartCoding.Controllers
         }
 
 
-        
+
         public virtual void DeleteConfirmed(int id)
         {
             try
@@ -349,8 +366,8 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        
-        
+
+
         public virtual void Alter(int? id)
         {
             if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
@@ -364,8 +381,8 @@ namespace TotalSmartCoding.Controllers
         }
 
 
-        
-        
+
+
         public virtual void AlterConfirmed(TSimpleViewModel simpleViewModel)
         {
             try
@@ -396,8 +413,8 @@ namespace TotalSmartCoding.Controllers
 
         #region Void/ UnVoid
 
-        
-        
+
+
         public virtual void Void(int? id)
         {
             if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
@@ -425,7 +442,7 @@ namespace TotalSmartCoding.Controllers
             //-----return View(simpleViewModel);
         }
 
-        
+
         public virtual void VoidConfirmed(TSimpleViewModel simpleViewModel)
         {
             try
@@ -465,11 +482,12 @@ namespace TotalSmartCoding.Controllers
         }
 
 
-
-        protected virtual bool Save(TSimpleViewModel simpleViewModel)
+        public override bool Save()
         {
             try
             {
+                if (!base.Save()) return false;
+
                 if (!ModelState.IsValid) return false;//Check Viewmodel IsValid
 
                 TDto dto = simpleViewModel;// Mapper.Map<TSimpleViewModel, TDto>(simpleViewModel);//Convert from Viewmodel to DTO
@@ -479,6 +497,8 @@ namespace TotalSmartCoding.Controllers
                     if (this.GenericService.Save(dto))
                     {
                         simpleViewModel.SetID(dto.GetID());
+                        this.Edit(simpleViewModel.GetID()); //WIN: RELOAD AFTER SAVE
+
                         this.BackupViewModelToSession(simpleViewModel);
 
                         return true;
@@ -489,8 +509,7 @@ namespace TotalSmartCoding.Controllers
             }
             catch (Exception exception)
             {
-                //***********ModelState.AddValidationErrors(exception);
-                return false;
+                throw exception;
             }
         }
 
@@ -584,13 +603,15 @@ namespace TotalSmartCoding.Controllers
 
         protected virtual TSimpleViewModel TailorViewModel(TSimpleViewModel simpleViewModel, bool forDelete, bool forAlter, bool forOpen)
         {
+            simpleViewModel.Newable = this.AccessLevelAuthorize();
+
             if (!forOpen)
             {
                 if (!forDelete)//Be caution: the value of simpleViewModel.Editable should be SET EVERY TIME THE simpleViewModel LOADED! This means: if it HAVEN'T SET YET, the default value of simpleViewModel.Editable is FALSE               (THE CONDITIONAL CLAUSE: if (!forDelete) MEAN: WHEN SHOW VIEW FOR DELETE, NO NEED TO CHECK Editable => Editable SHOULD BE FALSE)
                     simpleViewModel.Editable = this.GenericService.Editable(simpleViewModel);
 
-                if (forDelete) // || simpleViewModel is ServiceContractViewModel                    //WHEN forDelete, IT SHOULD BE CHECK FOR Deletable ATTRIBUTE, SURELY.          BUT, WHEN OPEN VIEW FOR EDIT, NOW: ONLY VIEW ServiceContract NEED TO USE Deletable ATTRIBUTE ONLY. SO, THIS CODE IS CORRECT FOR NOW, BUT LATER, IF THERE IS MORE VIEWS NEED THIS Deletable ATTRIBUTE, THIS CODE SHOULD MODIFY MORE GENERIC!!!
-                    simpleViewModel.Deletable = this.GenericService.Deletable(simpleViewModel);
+                //if (forDelete) --- WINFORM: NEED TO BIND Deletable TO TOOLSTRIP => ALWAYS CHECK FOR Deletable // || simpleViewModel is ServiceContractViewModel                    //WHEN forDelete, IT SHOULD BE CHECK FOR Deletable ATTRIBUTE, SURELY.          BUT, WHEN OPEN VIEW FOR EDIT, NOW: ONLY VIEW ServiceContract NEED TO USE Deletable ATTRIBUTE ONLY. SO, THIS CODE IS CORRECT FOR NOW, BUT LATER, IF THERE IS MORE VIEWS NEED THIS Deletable ATTRIBUTE, THIS CODE SHOULD MODIFY MORE GENERIC!!!
+                simpleViewModel.Deletable = this.GenericService.Deletable(simpleViewModel);
 
                 if (forAlter)//NOW THIS GlobalLocked attribute ONLY be considered WHEN ALTER ACTION to USE IN ALTER VIEW: to ALLOW or NOT ALTER.
                     simpleViewModel.GlobalLocked = this.GenericService.GlobalLocked(simpleViewModel);
@@ -652,7 +673,7 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        
+
         public void Print(int? id)
         {
             base.AddRequireJsOptions();

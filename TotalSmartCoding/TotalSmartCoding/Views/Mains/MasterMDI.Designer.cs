@@ -36,9 +36,9 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.naviBarModuleMaster = new Guifreaks.Navisuite.NaviBar(this.components);
-            this.InvisibleMainMenuStripOfMDI = new System.Windows.Forms.MenuStrip();
             this.listViewTaskMaster = new System.Windows.Forms.ListView();
             this.buttonNaviBarHeader = new System.Windows.Forms.Button();
+            this.InvisibleMainMenuStripOfMDI = new System.Windows.Forms.MenuStrip();
             this.toolStripMDIMain = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonEscape = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -193,17 +193,6 @@
             this.naviBarModuleMaster.ActiveBandChanged += new System.EventHandler(this.naviBarModuleMaster_ActiveBandChanged);
             this.naviBarModuleMaster.CollapsedChanged += new System.EventHandler(this.naviBarModuleMaster_CollapsedChanged);
             // 
-            // InvisibleMainMenuStripOfMDI
-            // 
-            this.InvisibleMainMenuStripOfMDI.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.InvisibleMainMenuStripOfMDI.Location = new System.Drawing.Point(0, 0);
-            this.InvisibleMainMenuStripOfMDI.Name = "InvisibleMainMenuStripOfMDI";
-            this.InvisibleMainMenuStripOfMDI.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.InvisibleMainMenuStripOfMDI.Size = new System.Drawing.Size(1841, 28);
-            this.InvisibleMainMenuStripOfMDI.TabIndex = 16;
-            this.InvisibleMainMenuStripOfMDI.Text = "MenuStrip";
-            this.InvisibleMainMenuStripOfMDI.Visible = false;
-            // 
             // listViewTaskMaster
             // 
             this.listViewTaskMaster.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Blue2010Large;
@@ -236,6 +225,17 @@
             this.buttonNaviBarHeader.Text = "Home Navigation Panel";
             this.buttonNaviBarHeader.UseVisualStyleBackColor = true;
             this.buttonNaviBarHeader.Click += new System.EventHandler(this.buttonNaviBarHeader_Click);
+            // 
+            // InvisibleMainMenuStripOfMDI
+            // 
+            this.InvisibleMainMenuStripOfMDI.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.InvisibleMainMenuStripOfMDI.Location = new System.Drawing.Point(0, 0);
+            this.InvisibleMainMenuStripOfMDI.Name = "InvisibleMainMenuStripOfMDI";
+            this.InvisibleMainMenuStripOfMDI.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.InvisibleMainMenuStripOfMDI.Size = new System.Drawing.Size(1841, 28);
+            this.InvisibleMainMenuStripOfMDI.TabIndex = 16;
+            this.InvisibleMainMenuStripOfMDI.Text = "MenuStrip";
+            this.InvisibleMainMenuStripOfMDI.Visible = false;
             // 
             // toolStripMDIMain
             // 
@@ -313,6 +313,7 @@
             this.toolStripButtonSave.Name = "toolStripButtonSave";
             this.toolStripButtonSave.Size = new System.Drawing.Size(92, 52);
             this.toolStripButtonSave.Text = "Save";
+            this.toolStripButtonSave.Click += new System.EventHandler(this.toolStripButtonSave_Click);
             // 
             // toolStripButtonDelete
             // 
@@ -323,6 +324,7 @@
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
             this.toolStripButtonDelete.Size = new System.Drawing.Size(105, 52);
             this.toolStripButtonDelete.Text = "Delete";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // toolStripSeparatorImport
             // 

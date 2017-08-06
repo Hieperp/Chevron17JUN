@@ -10,7 +10,7 @@ using TotalSmartCoding.Configuration;
 
 namespace TotalSmartCoding.Controllers
 {
-    public class CoreController: NotifyPropertyChangeObject //: Controller
+    public class CoreController : NotifyPropertyChangeObject //: Controller
     {
         public Dictionary<string, object> TempData { get; private set; }
         public Dictionary<string, object> ViewData { get; private set; }
@@ -35,8 +35,8 @@ namespace TotalSmartCoding.Controllers
         //    return JavaScript(stringBuilder.ToString());
         //}
 
-        public void RedirectToAction (string actionName)
-        {}
+        public void RedirectToAction(string actionName)
+        { }
         public void RedirectToAction(string actionName, object id)
         { }
         public void RedirectToAction(string actionName, object id, object myObject)
@@ -45,7 +45,7 @@ namespace TotalSmartCoding.Controllers
 
     public class ModelState
     {
-        public bool IsValid { get; set; }
+        public bool IsValid { get { return true; } set { ;} }
         public void Clear() { }
     }
 

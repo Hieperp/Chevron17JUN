@@ -13,7 +13,7 @@ namespace TotalDTO.Commons
     {
         public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Commodity; } }
 
-        public int GetID() { return this.CommodityID; }
+        public override int GetID() { return this.CommodityID; }
         public void SetID(int id) { this.CommodityID = id; }
 
         public int CommodityID { get; set; }

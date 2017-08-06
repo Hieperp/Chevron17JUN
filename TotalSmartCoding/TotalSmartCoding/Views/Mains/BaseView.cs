@@ -45,13 +45,16 @@ namespace TotalSmartCoding.Views.Mains
 
                 InitializeCommonControlBinding();
                 InitializeReadOnlyModeBinding();
+
+                this.Loading();
             }
             catch (Exception exception)
             {
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
         }
-        
+
+
 
         public BaseController baseController { get; protected set; }
 
@@ -101,19 +104,18 @@ namespace TotalSmartCoding.Views.Mains
 
         public bool IsValid
         {
-            get { return this.baseController.IsValid; }
+            get { return this.baseController.BaseDTO.IsValid; }
         }
 
         public virtual bool Closable { get { return true; } }
         public virtual bool Loadable { get { return true; } }
 
-        public virtual bool Newable { get { return this.baseController.BaseDTO.Editable; } }
-        public virtual bool Editable { get { return this.baseController.BaseDTO.Editable; } 
-        }
+        public virtual bool Newable { get { return this.baseController.BaseDTO.Newable; } }
+        public virtual bool Editable { get { return this.baseController.BaseDTO.Editable; } }
         public virtual bool Deletable { get { return this.baseController.BaseDTO.Deletable; } }
 
-        public virtual bool Importable { get { return true; } }
-        public virtual bool Exportable { get { return true; } }
+        public virtual bool Importable { get { return false; } }
+        public virtual bool Exportable { get { return false; } }
 
         public virtual bool Verifiable { get { return false; } }
         public virtual bool Unverifiable { get { return false; } }
@@ -124,49 +126,24 @@ namespace TotalSmartCoding.Views.Mains
 
 
 
-        /// <summary>
-        /// Edit Mode: True, Read Mode: False
-        /// </summary>
         private bool editableMode;
-        private CheckBox checkBox1;
-        private int lastMarketingProgramID;
-        public bool EditableMode { get { return this.editableMode; } }
-        /// <summary>
-        /// This reverse of the EditableMode
-        /// </summary>
+        public bool EditableMode
+        {
+            get { return this.editableMode; }
+            set
+            {
+                if (this.editableMode != value)
+                {
+                    this.editableMode = value && this.Editable;
+                    this.NotifyPropertyChanged("EditableMode");
+                }
+            }
+        }
         public bool ReadonlyMode { get { return !this.editableMode; } }
 
-        /// <summary>
-        /// Set the editableMode
-        /// </summary>
-        /// <param name="editableMode"></param>
-        private void SetEditableMode(bool editableMode)
-        {
-            if (this.editableMode != editableMode)
-            {
-                //this.lastMarketingProgramID = this.marketingProgramBLL.MarketingProgramID;
-                this.editableMode = editableMode;
-                this.NotifyPropertyChanged("EditableMode");
-
-                //this.toolStripMenuCustomerImport.Enabled = this.editableMode;
-            }
-        }
 
 
-        private void CancelDirty(bool restoreSavedData)
-        {
-            try
-            {
-                //if (restoreSavedData || this.marketingProgramBLL.MarketingProgramID <= 0)
-                //    this.marketingProgramBLL.Fill(this.lastMarketingProgramID);
 
-                this.SetEditableMode(false);
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
 
 
 
@@ -181,16 +158,14 @@ namespace TotalSmartCoding.Views.Mains
             {
                 if (this.IsDirty)
                 {
-                    DialogResult dialogResult = MessageBox.Show(this, "Do you want to save your change?", "Warning", MessageBoxButtons.YesNoCancel);
+                    DialogResult dialogResult = MessageBox.Show(this, "Dữ liệu chưa lưu. Bạn có muốn lưu lại không?", "Warning", MessageBoxButtons.YesNoCancel);
                     if (dialogResult == DialogResult.Yes)
                     {
                         this.Save();
                         if (!this.IsDirty) this.CancelDirty(false);
                     }
                     else if (dialogResult == DialogResult.No)
-                    {
                         this.CancelDirty(true);
-                    }
                     else
                         return;
                 }
@@ -201,24 +176,36 @@ namespace TotalSmartCoding.Views.Mains
                 this.Close(); //Unload this module
         }
 
-        //Can phai xem lai trong VB de xem lai this.SetEditableMode () khi can thiet
-
-        public void Loading()
+        private void CancelDirty(bool withRestore)
         {
-            //this.GetMasterList();
+            try
+            {
+                this.baseController.CancelDirty(withRestore);
+                this.EditableMode = false;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
-        
+        public virtual void Loading() { }
 
-        public void Edit()
-        {
-            this.SetEditableMode(true);
-        }
+
+
+
 
         public void Save()
         {
-            //this.marketingProgramBLL.Save();
-            //this.GetMasterList();
+            try
+            {
+                if (this.baseController.Save())
+                    this.Loading();
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
         }
 
         public void Delete()
@@ -340,7 +327,7 @@ namespace TotalSmartCoding.Views.Mains
                 if (fastlistIndex.SelectedObject != null)
                 {
                     IBaseIndex baseIndex = (IBaseIndex)fastlistIndex.SelectedObject;
-                    if (baseIndex != null) this.baseController.Edit(baseIndex.Id);
+                    if (baseIndex != null && baseIndex.Id != this.baseController.BaseDTO.GetID()) this.baseController.Edit(baseIndex.Id);
                 }
             }
             catch (Exception exception)
@@ -365,8 +352,14 @@ namespace TotalSmartCoding.Views.Mains
             //MessageBox.Show(hash);
 
             this.baseController.Create();
-            this.SetEditableMode(true);
+            this.EditableMode = true;
 
+        }
+
+        public void Edit()
+        {
+            this.baseController.Edit(this.baseController.BaseDTO.GetID());
+            this.EditableMode = true;
         }
 
     }

@@ -17,7 +17,7 @@ namespace TotalDTO.Productions
 
         public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Pallet; } }
 
-        public virtual int GetID() { return this.PalletID; }
+        public override int GetID() { return this.PalletID; }
         public virtual void SetID(int id) { this.PalletID = id; }
 
         public int PalletID { get; set; }
