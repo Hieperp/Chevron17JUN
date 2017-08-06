@@ -5,6 +5,7 @@ using System.Linq;
 
 using AutoMapper;
 
+using TotalBase;
 using TotalBase.Enums;
 using TotalModel;
 using TotalDTO;
@@ -92,17 +93,39 @@ namespace TotalSmartCoding.Controllers
         /// Create NEW from an empty ViewModel object
         /// </summary>
         /// <returns></returns>
-        
-        
-        
-        public virtual void Create()
+
+
+
+        public override void Create()
         {
-            if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
+            if (!this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
             if (!this.isSimpleCreate) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             base.AddRequireJsOptions();
-            //-----return View(this.TailorViewModel(this.InitViewModelByPrior(this.InitViewModelByDefault(new TSimpleViewModel())))); //Need to call new TSimpleViewModel() to ensure construct TSimpleViewModel object using Constructor!
+
+
+
+
+
+
+
+
+            this.StopTracking();
+            
+            this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() AS MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
+            //this.Call int of base object
+            //Check default
+            //Implement all property for property change
+
+
+            this.TailorViewModel(this.InitViewModelByPrior(this.InitViewModelByDefault(this.simpleViewModel))); //IN MVC: SIMPLE: Need to call new TSimpleViewModel() to ensure construct TSimpleViewModel object using Constructor!
+            
+            this.StartTracking();
+            this.Reset();
+
+
+            //return View();
         }
 
         

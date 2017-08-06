@@ -54,7 +54,7 @@ namespace TotalSmartCoding.Views.Mains
             try
             {
                 this.nmvnTaskID = nmvnTaskID;
-                if (this.nmvnTaskID == GlobalEnums.NmvnTaskID.Batch) { this.Size = new Size(1250, 653); this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog; this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal; }
+                if (this.nmvnTaskID == GlobalEnums.NmvnTaskID.Batch) { this.Size = new Size(1120, 630); this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog; this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal; }
 
 
                 this.beginingDateBinding = this.textBoxLowerFillterDate.TextBox.DataBindings.Add("Text", GlobalEnums.GlobalOptionSetting, "LowerFillterDate", true);

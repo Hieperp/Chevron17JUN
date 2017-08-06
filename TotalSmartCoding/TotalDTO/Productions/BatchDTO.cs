@@ -3,6 +3,7 @@
 using TotalBase;
 using TotalModel;
 using TotalBase.Enums;
+using System.ComponentModel;
 
 namespace TotalDTO.Productions
 {
@@ -21,13 +22,15 @@ namespace TotalDTO.Productions
 
 
         private int commodityID;
+        [DefaultValue(-1)]
         public int CommodityID
         {
             get { return this.commodityID; }
             set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.commodityID, o => o.CommodityID, value); }
         }
-        
 
+
+        [DefaultValue("000001")]
         public string NextPackNo { get; set; }
         public string NextCartonNo { get; set; }
         public string NextPalletNo { get; set; }

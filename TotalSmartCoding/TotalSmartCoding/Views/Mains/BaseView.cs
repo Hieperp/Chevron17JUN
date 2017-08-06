@@ -208,26 +208,7 @@ namespace TotalSmartCoding.Views.Mains
             //this.GetMasterList();
         }
 
-        public void New()
-        {
-            this.ControlBox = false;
-            //MessageBox.Show("New");
-
-            string plainText = "nguyễnđạtphú";
-            // Convert the plain string pwd into bytes
-            //byte[] plainTextBytes = UnicodeEncoding.Unicode.GetBytes(plainText);
-            //System.Security.Cryptography.HashAlgorithm hashAlgo = new System.Security.Cryptography.SHA256Managed();
-            //byte[] hash = hashAlgo.ComputeHash(plainTextBytes);
-
-            byte[] data = UnicodeEncoding.Unicode.GetBytes(plainText);
-            data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-            String hash = UnicodeEncoding.Unicode.GetString(data);
-            MessageBox.Show(hash);
-
-            //this.marketingProgramBLL.New();
-            //this.SetEditableMode(true);
-
-        }
+        
 
         public void Edit()
         {
@@ -355,13 +336,12 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                FastObjectListView fastObjectListView = (FastObjectListView)sender;
-                if (fastObjectListView.SelectedObject != null)
+                FastObjectListView fastlistIndex = (FastObjectListView)sender;
+                if (fastlistIndex.SelectedObject != null)
                 {
-                    IBaseIndex baseIndex = (IBaseIndex)fastObjectListView.SelectedObject;
+                    IBaseIndex baseIndex = (IBaseIndex)fastlistIndex.SelectedObject;
                     if (baseIndex != null) this.baseController.Edit(baseIndex.Id);
                 }
-                //else this.BaseController.Open(0);
             }
             catch (Exception exception)
             {
@@ -369,6 +349,25 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
+        public void New()
+        {
+            //this.ControlBox = false;
+
+            //string plainText = "nguyễnđạtphú";
+            //////////// Convert the plain string pwd into bytes
+            ////////////byte[] plainTextBytes = UnicodeEncoding.Unicode.GetBytes(plainText);
+            ////////////System.Security.Cryptography.HashAlgorithm hashAlgo = new System.Security.Cryptography.SHA256Managed();
+            ////////////byte[] hash = hashAlgo.ComputeHash(plainTextBytes);
+
+            //byte[] data = UnicodeEncoding.Unicode.GetBytes(plainText);
+            //data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+            //String hash = UnicodeEncoding.Unicode.GetString(data);
+            //MessageBox.Show(hash);
+
+            this.baseController.Create();
+            this.SetEditableMode(true);
+
+        }
 
     }
 }

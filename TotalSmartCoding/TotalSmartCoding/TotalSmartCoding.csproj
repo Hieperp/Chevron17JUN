@@ -116,7 +116,7 @@
     <Compile Include="Controllers\GenericSimpleController.cs" />
     <Compile Include="Controllers\GenericViewDetailController.cs" />
     <Compile Include="Controllers\Inventories\GoodsReceiptController.cs" />
-    <Compile Include="Controllers\Productions\BatchControllers.cs" />
+    <Compile Include="Controllers\Productions\BatchController.cs" />
     <Compile Include="Controllers\Productions\CodingController.cs" />
     <Compile Include="Controllers\Productions\FillingCartonController.cs" />
     <Compile Include="Controllers\Productions\FillingPackController.cs" />

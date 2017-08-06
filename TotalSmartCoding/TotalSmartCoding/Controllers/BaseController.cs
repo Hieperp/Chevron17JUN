@@ -91,6 +91,11 @@ namespace TotalSmartCoding.Controllers
         public virtual void Open(int? id)
         {
         }
+
+        public virtual void Create()
+        {
+        }
+
         public virtual void Edit(int? id)
         {
         }

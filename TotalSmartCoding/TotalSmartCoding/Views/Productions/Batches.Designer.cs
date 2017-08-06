@@ -38,7 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textCommodityName = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textNextPackNo = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -81,7 +81,7 @@
             this.layoutMaster.Controls.Add(this.label2, 1, 2);
             this.layoutMaster.Controls.Add(this.label14, 1, 4);
             this.layoutMaster.Controls.Add(this.textCommodityName, 1, 7);
-            this.layoutMaster.Controls.Add(this.textBox1, 1, 9);
+            this.layoutMaster.Controls.Add(this.textNextPackNo, 1, 9);
             this.layoutMaster.Controls.Add(this.textBox2, 1, 11);
             this.layoutMaster.Controls.Add(this.textBox3, 1, 13);
             this.layoutMaster.Controls.Add(this.label4, 1, 12);
@@ -207,15 +207,15 @@
             this.textCommodityName.Size = new System.Drawing.Size(415, 27);
             this.textCommodityName.TabIndex = 20;
             // 
-            // textBox1
+            // textNextPackNo
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(34, 275);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(415, 27);
-            this.textBox1.TabIndex = 60;
+            this.textNextPackNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textNextPackNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textNextPackNo.Location = new System.Drawing.Point(34, 275);
+            this.textNextPackNo.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
+            this.textNextPackNo.Name = "textNextPackNo";
+            this.textNextPackNo.Size = new System.Drawing.Size(415, 27);
+            this.textNextPackNo.TabIndex = 60;
             // 
             // textBox2
             // 
@@ -510,7 +510,7 @@
         private System.Windows.Forms.ToolStripButton buttonApply;
         private System.Windows.Forms.Label label2;
         private CustomControls.CustomBox comboCommodityID;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textNextPackNo;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label4;
