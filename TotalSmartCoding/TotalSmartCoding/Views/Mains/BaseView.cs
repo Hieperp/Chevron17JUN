@@ -39,7 +39,9 @@ namespace TotalSmartCoding.Views.Mains
                 InitializeTabControl();
 
                 this.fastListIndex.CheckBoxes = false;
-                this.fastListIndex.SelectedIndexChanged += new System.EventHandler(this.fastListIndex_SelectedIndexChanged);
+                this.fastListIndex.SelectedIndexChanged += new EventHandler(this.fastListIndex_SelectedIndexChanged);
+                this.fastListIndex.MouseClick += new MouseEventHandler(fastListIndex_MouseClick);
+                this.fastListIndex.KeyDown += new KeyEventHandler(fastListIndex_KeyDown);
 
                 this.baseController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
@@ -53,6 +55,8 @@ namespace TotalSmartCoding.Views.Mains
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
         }
+
+
 
 
 
@@ -189,88 +193,14 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        public virtual void Loading() 
-        {
-            if (this.baseController.BaseDTO.GetID() > 0)
-            {
-                IBaseIndex baseIndex = this.fastListIndex.Objects.Cast<IBaseIndex>().FirstOrDefault(w => w.Id == this.baseController.BaseDTO.GetID());
-                if (baseIndex != null)
-                {
-                    this.fastListIndex.SelectObject(baseIndex);
-                    this.fastListIndex.EnsureModelVisible(baseIndex);
-                }
-            }
-        }
 
 
 
-        public void Save()
-        {
-            try
-            {
-                if (this.baseController.Save())
-                    this.Loading();
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-        }
 
-        public void Delete()
-        {
-            //DialogResult dialogResult = MessageBox.Show(this, "Are you sure you want to delete " + this.marketingProgramBLL.MarketingProgramMaster.Reference + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
-            //if (dialogResult == DialogResult.Yes)
-            //{
-            //    try
-            //    {
-            //        this.marketingProgramBLL.Delete();
-            //        this.GetMasterList();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            //    }
-            //}
-        }
 
-        public void Import()
-        {
-            //this.ImportExcel(OleDbDatabase.MappingTaskID.MarketingProgram);
-        }
 
-        public void Export()
-        {
-            //try
-            //{
-            //    if (this.ActiveControl.Equals(this.dataListViewMaster))
-            //    {
-            //        DataTable dataTableExport;
-            //        dataTableExport = this.dataListViewMaster.DataSource as DataTable;
-            //        if (dataTableExport != null) CommonFormAction.Export(dataTableExport);
-            //    }
-            //    else
-            //    {
-            //        List<MarketingProgramCustomerName> listExport;
-            //        listExport = this.marketingProgramBLL.CustomerNameList.ToList();
-            //        if (listExport != null) CommonFormAction.Export(listExport);
-            //    }
-            //}
-            //catch (Exception exception)
-            //{
-            //    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            //}
-        }
 
-        public void Verify()
-        {
-            MessageBox.Show("Verify");
-        }
 
-        public void Print(GlobalEnums.PrintDestination printDestination)
-        {
-            MessageBox.Show("Print");
-        }
 
         public void SearchText(string searchText)
         {
@@ -336,18 +266,69 @@ namespace TotalSmartCoding.Views.Mains
             {
                 if (this.ReadonlyMode)
                 {
-                    FastObjectListView fastlistIndex = (FastObjectListView)sender;
-                    if (fastlistIndex.SelectedObject != null)
-                    {
-                        IBaseIndex baseIndex = (IBaseIndex)fastlistIndex.SelectedObject;
-                        if (baseIndex != null && baseIndex.Id != this.baseController.BaseDTO.GetID()) this.baseController.Edit(baseIndex.Id);
-                    }
+                    int? selectedIndexID = this.getSelectedIndexID();
+                    if (selectedIndexID != null && selectedIndexID != this.baseController.BaseDTO.GetID()) this.baseController.Edit(selectedIndexID);
                 }
             }
             catch (Exception exception)
             {
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
+        }
+
+        private void fastListIndex_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (this.EditableMode)
+            {
+                int? selectedIndexID = this.getSelectedIndexID();
+                if (selectedIndexID != null && selectedIndexID != this.baseController.LastID)
+                    this.setSelectedIndexID(this.baseController.LastID);
+            }
+        }
+
+
+        private void fastListIndex_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.EditableMode) e.Handled = true;
+        }
+
+        private int? getSelectedIndexID()
+        {
+            if (this.fastListIndex.SelectedObject != null)
+            {
+                IBaseIndex baseIndex = (IBaseIndex)this.fastListIndex.SelectedObject;
+                if (baseIndex != null) return baseIndex.Id; else return null;
+            }
+            else return null;
+        }
+
+        private void setSelectedIndexID(int? baseIndexID)
+        {
+            if (baseIndexID != null && baseIndexID > 0)
+            {
+                IBaseIndex baseIndex = this.fastListIndex.Objects.Cast<IBaseIndex>().FirstOrDefault(w => w.Id == baseIndexID);
+                if (baseIndex == null && (IBaseIndex)this.fastListIndex.SelectedObject != null)
+                    fastListIndex_SelectedIndexChanged(this.fastListIndex, new EventArgs());
+                else
+                {
+                    if (baseIndex == null) baseIndex = this.fastListIndex.Objects.Cast<IBaseIndex>().FirstOrDefault();
+                    if (baseIndex != null)
+                    {
+                        this.fastListIndex.SelectObject(baseIndex);
+                        this.fastListIndex.EnsureModelVisible(baseIndex);
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+        public virtual void Loading()
+        {
+            this.setSelectedIndexID(this.baseController.BaseDTO.GetID());
         }
 
         public void New()
@@ -373,6 +354,74 @@ namespace TotalSmartCoding.Views.Mains
         {
             this.baseController.Edit(this.baseController.BaseDTO.GetID());
             this.EditableMode = true;
+        }
+
+        public void Save()
+        {
+            try
+            {
+                if (this.baseController.Save())
+                {
+                    this.Escape();
+                    this.Loading();
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        public void Delete()
+        {
+            try
+            {
+                if (MessageBox.Show(this, "Are you sure you want to delete " + this.baseController.BaseDTO.Reference + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                    if (this.baseController.Delete(this.baseController.BaseDTO.GetID()))
+                        this.Loading();
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        public void Import()
+        {
+            //this.ImportExcel(OleDbDatabase.MappingTaskID.MarketingProgram);
+        }
+
+        public void Export()
+        {
+            //try
+            //{
+            //    if (this.ActiveControl.Equals(this.dataListViewMaster))
+            //    {
+            //        DataTable dataTableExport;
+            //        dataTableExport = this.dataListViewMaster.DataSource as DataTable;
+            //        if (dataTableExport != null) CommonFormAction.Export(dataTableExport);
+            //    }
+            //    else
+            //    {
+            //        List<MarketingProgramCustomerName> listExport;
+            //        listExport = this.marketingProgramBLL.CustomerNameList.ToList();
+            //        if (listExport != null) CommonFormAction.Export(listExport);
+            //    }
+            //}
+            //catch (Exception exception)
+            //{
+            //    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            //}
+        }
+
+        public void Verify()
+        {
+            MessageBox.Show("Verify");
+        }
+
+        public void Print(GlobalEnums.PrintDestination printDestination)
+        {
+            MessageBox.Show("Print");
         }
 
     }

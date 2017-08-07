@@ -29,7 +29,7 @@ namespace TotalSmartCoding.Controllers
         private readonly IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder;
         private readonly TSimpleViewModel simpleViewModel;
 
-        public int lastID;
+        
 
         private bool isSimpleCreate;
         private bool isCreateWizard;
@@ -117,7 +117,7 @@ namespace TotalSmartCoding.Controllers
 
             this.simpleViewModel.StopTracking();
 
-            this.lastID = this.simpleViewModel.GetID();
+            this.LastID = this.simpleViewModel.GetID();
             this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() AS MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
             //this.Call int of base object
             //Check default
@@ -128,7 +128,7 @@ namespace TotalSmartCoding.Controllers
 
             this.simpleViewModel.StartTracking();
             this.simpleViewModel.Reset();
-
+            this.Reset();
 
             //return View();
         }
@@ -210,7 +210,7 @@ namespace TotalSmartCoding.Controllers
 
             this.StopTracking();
 
-            this.lastID = this.simpleViewModel.GetID();
+            this.LastID = this.simpleViewModel.GetID();
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
             if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -274,7 +274,7 @@ namespace TotalSmartCoding.Controllers
         {
             base.CancelDirty(withRestore);
             if (withRestore || this.simpleViewModel.GetID() <= 0)
-                this.Edit(this.lastID);
+                this.Edit(this.LastID);
         }
 
 
@@ -329,14 +329,17 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        public virtual void Delete(int? id)
+        public override bool Delete(int id)
         {
-            if (this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
+            if (!this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
+            return this.GenericService.Delete(id);
 
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Editable, true);
-            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            base.AddRequireJsOptions();
+
+            //TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Editable, true);
+            //if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            //base.AddRequireJsOptions();
 
             //-----return View(simpleViewModel);
         }

@@ -99,10 +99,6 @@ namespace TotalSmartCoding.Views.Productions
         {
             base.InitializeCommonControlBinding();
 
-            this.textReference.DataBindings.Add("Text", this.batchController.BatchViewModel, "Reference", true, DataSourceUpdateMode.OnPropertyChanged);
-
-
-
             this.bindingCode = this.textBoxCode.DataBindings.Add("Text", this.batchController.BatchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.batchController.BatchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -278,19 +274,6 @@ namespace TotalSmartCoding.Views.Productions
             //    this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //else
             //    this.comboBox1.AutoCompleteMode = AutoCompleteMode.None;
-        }
-
-        private void fastListBatchIndex_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (this.EditableMode)
-            {
-                IBaseIndex baseIndex = this.fastListIndex.Objects.Cast<IBaseIndex>().FirstOrDefault(w => w.Id == this.batchController.lastID);
-                if (baseIndex != null)
-                {
-                    this.fastListIndex.SelectObject(baseIndex);
-                    this.fastListIndex.EnsureModelVisible(baseIndex);
-                }
-            }
         }
 
 
