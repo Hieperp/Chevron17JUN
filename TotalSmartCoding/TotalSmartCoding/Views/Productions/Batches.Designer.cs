@@ -46,23 +46,21 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboCommodityID = new CustomControls.CustomBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.fastListBatchIndex = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColumn18 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn28 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonApply = new System.Windows.Forms.ToolStripButton();
             this.naviBarMaster = new Guifreaks.Navisuite.NaviBar(this.components);
             this.naviBand1 = new Guifreaks.Navisuite.NaviBand(this.components);
+            this.fastListBatchIndex = new BrightIdeasSoftware.FastObjectListView();
+            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.layoutMaster.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastListBatchIndex)).BeginInit();
             this.toolStripChildForm.SuspendLayout();
             this.naviBarMaster.SuspendLayout();
             this.naviBand1.ClientArea.SuspendLayout();
             this.naviBand1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fastListBatchIndex)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutMaster
@@ -302,89 +300,6 @@
             this.label8.Text = "Product Name";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // fastListBatchIndex
-            // 
-            this.fastListBatchIndex.AllColumns.Add(this.olvColumn18);
-            this.fastListBatchIndex.AllColumns.Add(this.olvColumn28);
-            this.fastListBatchIndex.AllColumns.Add(this.olvColumn1);
-            this.fastListBatchIndex.AllColumns.Add(this.olvColumn2);
-            this.fastListBatchIndex.AllowColumnReorder = true;
-            this.fastListBatchIndex.AllowDrop = true;
-            this.fastListBatchIndex.AlternateRowBackColor = System.Drawing.Color.White;
-            this.fastListBatchIndex.BackgroundImageTiled = true;
-            this.fastListBatchIndex.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
-            this.fastListBatchIndex.CellEditEnterChangesRows = true;
-            this.fastListBatchIndex.CellEditTabChangesRows = true;
-            this.fastListBatchIndex.CellEditUseWholeCell = false;
-            this.fastListBatchIndex.CheckBoxes = true;
-            this.fastListBatchIndex.CheckedAspectName = "";
-            this.fastListBatchIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn18,
-            this.olvColumn28,
-            this.olvColumn1,
-            this.olvColumn2});
-            this.fastListBatchIndex.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastListBatchIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastListBatchIndex.EmptyListMsg = "Empty batch list";
-            this.fastListBatchIndex.EmptyListMsgFont = new System.Drawing.Font("Vladimir Script", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastListBatchIndex.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastListBatchIndex.FullRowSelect = true;
-            this.fastListBatchIndex.HideSelection = false;
-            this.fastListBatchIndex.Location = new System.Drawing.Point(0, 0);
-            this.fastListBatchIndex.Margin = new System.Windows.Forms.Padding(4);
-            this.fastListBatchIndex.Name = "fastListBatchIndex";
-            this.fastListBatchIndex.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.fastListBatchIndex.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.Submenu;
-            this.fastListBatchIndex.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.fastListBatchIndex.ShowCommandMenuOnRightClick = true;
-            this.fastListBatchIndex.ShowGroups = false;
-            this.fastListBatchIndex.ShowImagesOnSubItems = true;
-            this.fastListBatchIndex.ShowItemToolTips = true;
-            this.fastListBatchIndex.Size = new System.Drawing.Size(832, 614);
-            this.fastListBatchIndex.SpaceBetweenGroups = 20;
-            this.fastListBatchIndex.TabIndex = 28;
-            this.fastListBatchIndex.TintSortColumn = true;
-            this.fastListBatchIndex.TriStateCheckBoxes = true;
-            this.fastListBatchIndex.UnfocusedSelectedBackColor = System.Drawing.SystemColors.Highlight;
-            this.fastListBatchIndex.UseAlternatingBackColors = true;
-            this.fastListBatchIndex.UseCompatibleStateImageBehavior = false;
-            this.fastListBatchIndex.UseFiltering = true;
-            this.fastListBatchIndex.UseHyperlinks = true;
-            this.fastListBatchIndex.View = System.Windows.Forms.View.Details;
-            this.fastListBatchIndex.VirtualMode = true;
-            // 
-            // olvColumn18
-            // 
-            this.olvColumn18.AspectName = "Reference";
-            this.olvColumn18.ButtonPadding = new System.Drawing.Size(10, 10);
-            this.olvColumn18.Text = "Reference";
-            this.olvColumn18.UseInitialLetterForGroup = true;
-            this.olvColumn18.Width = 132;
-            // 
-            // olvColumn28
-            // 
-            this.olvColumn28.AspectName = "EntryDate";
-            this.olvColumn28.AspectToStringFormat = "{0:D}";
-            this.olvColumn28.ButtonPadding = new System.Drawing.Size(10, 10);
-            this.olvColumn28.GroupWithItemCountFormat = "{0} has {1} birthdays";
-            this.olvColumn28.GroupWithItemCountSingularFormat = "{0} has only {1} birthday";
-            this.olvColumn28.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn28.IsTileViewColumn = true;
-            this.olvColumn28.Text = "EntryDate";
-            this.olvColumn28.Width = 111;
-            // 
-            // olvColumn1
-            // 
-            this.olvColumn1.AspectName = "CommodityID";
-            this.olvColumn1.Text = "ID";
-            this.olvColumn1.Width = 100;
-            // 
-            // olvColumn2
-            // 
-            this.olvColumn2.AspectName = "CommodityCode";
-            this.olvColumn2.Text = "Code";
-            this.olvColumn2.Width = 120;
-            // 
             // toolStripChildForm
             // 
             this.toolStripChildForm.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -461,6 +376,41 @@
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
+            // fastListBatchIndex
+            // 
+            this.fastListBatchIndex.AllColumns.Add(this.olvColumn1);
+            this.fastListBatchIndex.AllColumns.Add(this.olvColumn2);
+            this.fastListBatchIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn1,
+            this.olvColumn2});
+            this.fastListBatchIndex.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastListBatchIndex.FullRowSelect = true;
+            this.fastListBatchIndex.HideSelection = false;
+            this.fastListBatchIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastListBatchIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastListBatchIndex.Name = "fastListBatchIndex";
+            this.fastListBatchIndex.OwnerDraw = true;
+            this.fastListBatchIndex.ShowGroups = false;
+            this.fastListBatchIndex.Size = new System.Drawing.Size(832, 614);
+            this.fastListBatchIndex.TabIndex = 67;
+            this.fastListBatchIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastListBatchIndex.UseCompatibleStateImageBehavior = false;
+            this.fastListBatchIndex.UseFilterIndicator = true;
+            this.fastListBatchIndex.UseFiltering = true;
+            this.fastListBatchIndex.UseHotItem = true;
+            this.fastListBatchIndex.View = System.Windows.Forms.View.Details;
+            this.fastListBatchIndex.VirtualMode = true;
+            // 
+            // olvColumn1
+            // 
+            this.olvColumn1.AspectName = "Reference";
+            this.olvColumn1.Width = 120;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "CommodityCode";
+            this.olvColumn2.Width = 150;
+            // 
             // Batches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -477,13 +427,13 @@
             this.Controls.SetChildIndex(this.fastListBatchIndex, 0);
             this.layoutMaster.ResumeLayout(false);
             this.layoutMaster.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastListBatchIndex)).EndInit();
             this.toolStripChildForm.ResumeLayout(false);
             this.toolStripChildForm.PerformLayout();
             this.naviBarMaster.ResumeLayout(false);
             this.naviBand1.ClientArea.ResumeLayout(false);
             this.naviBand1.ClientArea.PerformLayout();
             this.naviBand1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fastListBatchIndex)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -499,14 +449,9 @@
         private System.Windows.Forms.TextBox textBoxCode;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textCommodityName;
-        private BrightIdeasSoftware.FastObjectListView fastListBatchIndex;
-        private BrightIdeasSoftware.OLVColumn olvColumn18;
-        private BrightIdeasSoftware.OLVColumn olvColumn28;
         private System.Windows.Forms.ToolStrip toolStripChildForm;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
         private System.Windows.Forms.ToolStripButton buttonApply;
         private System.Windows.Forms.Label label2;
         private CustomControls.CustomBox comboCommodityID;
@@ -519,6 +464,9 @@
         private Guifreaks.Navisuite.NaviBar naviBarMaster;
         private System.Windows.Forms.Label label8;
         private Guifreaks.Navisuite.NaviBand naviBand1;
+        private BrightIdeasSoftware.FastObjectListView fastListBatchIndex;
+        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvColumn2;
 
     }
 }
