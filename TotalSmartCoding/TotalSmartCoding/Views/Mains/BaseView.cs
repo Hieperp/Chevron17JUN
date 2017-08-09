@@ -1,37 +1,32 @@
-﻿using BrightIdeasSoftware;
-using System;
+﻿using System;
+using System.Linq;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
+using CustomControls;
+using BrightIdeasSoftware;
+
 using TotalBase.Enums;
 using TotalModel.Interfaces;
-using TotalModel.Models;
 using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.Controllers;
 
-
-using TotalDAL.Repositories;
-using TotalService;
-using CustomControls;
-
 namespace TotalSmartCoding.Views.Mains
 {
-    public partial class BaseView : Form, IMergeToolStrip, ICallToolStrip
+    public partial class BaseView : Form, IToolstripMerge, IToolstripChild
     {
+        #region CONTRUCTOR
+        protected BaseController baseController { get; set; }
+
         public BaseView()
         {
             InitializeComponent();
 
-            this.fastListIndex = new FastObjectListView();
             this.baseController = new BaseController();
+            this.fastListIndex = new FastObjectListView();
         }
-
-
+        
         private void BaseView_Load(object sender, EventArgs e)
         {
             try
@@ -56,167 +51,10 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-
-
-
-
-        public BaseController baseController { get; protected set; }
-
-
-        #region <Implement Interface>
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected void baseController_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            this.NotifyPropertyChanged(e.PropertyName);
-        }
-
-
-        public GlobalEnums.TaskID TaskID
-        {
-            get { return GlobalEnums.TaskID.MarketingProgram; }
-            //get { return this.marketingProgramBLL.TaskID; }
-        }
-
-        public virtual ToolStrip ChildToolStrip { get; set; }
-        protected virtual FastObjectListView fastListIndex { get; set; }
-        //{
-        //    get
-        //    {
-        //        return this.toolStripChildForm;
-        //    }
-        //    set
-        //    {
-        //        this.toolStripChildForm = value;
-        //    }
-        //}
-
-
-
-        #region Context toolbar
-
-        public bool IsDirty
-        {
-            get { return this.baseController.IsDirty; }
-        }
-
-        public bool IsValid
-        {
-            get { return this.baseController.BaseDTO.IsValid; }
-        }
-
-        public virtual bool Closable { get { return true; } }
-        public virtual bool Loadable { get { return true; } }
-
-        public virtual bool Newable { get { return this.baseController.BaseDTO.Newable; } }
-        public virtual bool Editable { get { return this.baseController.BaseDTO.Editable; } }
-        public virtual bool Deletable { get { return this.baseController.BaseDTO.Deletable; } }
-
-        public virtual bool Importable { get { return false; } }
-        public virtual bool Exportable { get { return false; } }
-
-        public virtual bool Verifiable { get { return false; } }
-        public virtual bool Unverifiable { get { return false; } }
-
-        public virtual bool Printable { get { return false; } }
-        public virtual bool Searchable { get { return true; } }
-
-
-
-
-        private bool editableMode;
-        public bool EditableMode
-        {
-            get { return this.editableMode; }
-            set
-            {
-                if (this.editableMode != value)
-                {
-                    this.editableMode = value && this.Editable;
-                    this.NotifyPropertyChanged("EditableMode");
-                }
-            }
-        }
-        public bool ReadonlyMode { get { return !this.editableMode; } }
-
-
-
-
-
-
-
-        #endregion Context toolbar
-
-
-        #region ICallToolStrip
-
-        public void Escape()
-        {
-            if (this.EditableMode)
-            {
-                if (this.IsDirty)
-                {
-                    DialogResult dialogResult = MessageBox.Show(this, "Dữ liệu chưa lưu. Bạn có muốn lưu lại không?", "Warning", MessageBoxButtons.YesNoCancel);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        this.Save();
-                        if (!this.IsDirty) this.CancelDirty(false);
-                    }
-                    else if (dialogResult == DialogResult.No)
-                        this.CancelDirty(true);
-                    else
-                        return;
-                }
-                else
-                    this.CancelDirty(false);
-            }
-            else
-                this.Close(); //Unload this module
-        }
-
-        private void CancelDirty(bool withRestore)
-        {
-            try
-            {
-                this.baseController.CancelDirty(withRestore);
-                this.EditableMode = false;
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-        public void SearchText(string searchText)
-        {
-            CommonFormAction.OLVFilter(this.fastListIndex, searchText);
-        }
-
-        #endregion
-
-
-        #endregion <Implement Interface>
-
-
-        protected virtual void InitializeTabControl() { }
-
         Binding bindingIsDirty;
         Binding bindingIsDirtyBLL;
+
+        protected virtual void InitializeTabControl() { }
 
         protected virtual void InitializeCommonControlBinding()
         {
@@ -227,9 +65,13 @@ namespace TotalSmartCoding.Views.Mains
             this.bindingIsDirty.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingIsDirtyBLL.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
-            //SHOULD MOVE errorProviderMaster TO EVERY VIEW
-            this.errorProviderMaster.DataSource = this.baseController.BaseDTO;
+            this.errorProviderMaster.DataSource = this.baseController.BaseDTO; //JUST SET this.errorProviderMaster.DataSource HERE, IT WILL PROVIDE ERROR BINDING TO EVERY VIEW
+        }
 
+
+        protected virtual void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
+        {
+            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
         }
 
         protected virtual void InitializeReadOnlyModeBinding()
@@ -239,7 +81,6 @@ namespace TotalSmartCoding.Views.Mains
             foreach (Control control in controlList)
             {
                 if (control is TextBox || control is CustomBox) control.DataBindings.Add("Readonly", this, "ReadonlyMode");
-                //if (control is TextBox) control.DataBindings.Add("Enabled", this, "EditableMode");
                 else if (control is DateTimePicker) control.DataBindings.Add("Enabled", this, "EditableMode");
                 else if (control is DataGridView)
                 {
@@ -248,18 +89,11 @@ namespace TotalSmartCoding.Views.Mains
                     control.DataBindings.Add("AllowUserToDeleteRows", this, "EditableMode");
                 }
             }
-
-            //this.fastListIndex.DataBindings.Add("Enabled", this, "ReadonlyMode");
-
-            //this.fastListIndex.DataBindings.Add("Frozen", this, "ReadonlyMode");
+            //this.fastListIndex.DataBindings.Add("Enabled", this, "ReadonlyMode"); //HERE: WE DON'T LOCK fastListIndex.Enabled TO ReadonlyMode, INSTEAD: WE HANDLE fastListIndex.MouseClick AND fastListIndex.KeyDown TO KEEP THE CURRENT ROW OF fastListIndex WHEN EditableMode
         }
+        #endregion CONTRUCTOR
 
-
-        protected virtual void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
-        {
-            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
-        }
-
+        #region EventHandlers
         private void fastListIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -285,7 +119,6 @@ namespace TotalSmartCoding.Views.Mains
                     this.setSelectedIndexID(this.baseController.LastID);
             }
         }
-
 
         private void fastListIndex_KeyDown(object sender, KeyEventArgs e)
         {
@@ -319,16 +152,122 @@ namespace TotalSmartCoding.Views.Mains
                     }
                 }
             }
+            else
+                if (this.ReadonlyMode && this.fastListIndex.GetItemCount() > 0) this.fastListIndex.SelectedIndex = 0;
+        }
+
+        #endregion EventHandlers
+
+        #region <Implement Interface>
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected void baseController_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.NotifyPropertyChanged(e.PropertyName);
         }
 
 
+        public GlobalEnums.NmvnTaskID NMVNTaskID
+        {
+            get { return this.baseController.BaseDTO.NMVNTaskID; }
+        }
+
+        public virtual ToolStrip toolstripChild { get; protected set; }
+        protected virtual FastObjectListView fastListIndex { get; set; }
+
+        #region Context toolbar
+
+        public bool IsDirty
+        {
+            get { return this.baseController.IsDirty; }
+        }
+
+        public bool IsValid
+        {
+            get { return this.baseController.BaseDTO.IsValid; }
+        }
+
+        public virtual bool Closable { get { return true; } }
+        public virtual bool Loadable { get { return true; } }
+
+        public virtual bool Newable { get { return this.baseController.BaseDTO.Newable; } }
+        public virtual bool Editable { get { return this.baseController.BaseDTO.Editable; } }
+        public virtual bool Deletable { get { return this.baseController.BaseDTO.Deletable; } }
+
+        public virtual bool Importable { get { return false; } }
+        public virtual bool Exportable { get { return false; } }
+
+        public virtual bool Verifiable { get { return false; } }
+        public virtual bool Unverifiable { get { return false; } }
+
+        public virtual bool Printable { get { return false; } }
+        public virtual bool Filterable { get { return true; } }
 
 
+        private bool editableMode;
+        public bool EditableMode
+        {
+            get { return this.editableMode; }
+            set
+            {
+                if (this.editableMode != value)
+                {
+                    this.editableMode = value && this.Editable;
+                    this.NotifyPropertyChanged("EditableMode");
+                }
+            }
+        }
+        public bool ReadonlyMode { get { return !this.editableMode; } }
 
+        #endregion Context toolbar
+
+
+        #region IToolstripChild
 
         public virtual void Loading()
         {
             this.setSelectedIndexID(this.baseController.BaseDTO.GetID());
+        }
+
+        public void ApplyFilter(string filterTexts)
+        {
+            OLVHelpers.ApplyFilters(this.fastListIndex, filterTexts.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+        }
+
+        public void Escape()
+        {
+            if (this.EditableMode)
+            {
+                if (this.IsDirty)
+                {
+                    DialogResult dialogResult = MessageBox.Show(this, "Dữ liệu chưa lưu. Bạn có muốn lưu lại không?", "Warning", MessageBoxButtons.YesNoCancel);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        this.Save();
+                        if (!this.IsDirty) this.CancelDirty(false);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                        this.CancelDirty(true);
+                    else
+                        return;
+                }
+                else
+                    this.CancelDirty(false);
+            }
+            else
+                this.Close(); //Unload this module
+        }
+
+        private void CancelDirty(bool withRestore)
+        {
+            this.baseController.CancelDirty(withRestore);
+            this.EditableMode = false;
         }
 
         public void New()
@@ -386,6 +325,17 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
+
+        public void Verify()
+        {
+            MessageBox.Show("Verify");
+        }
+
+        public void Print(GlobalEnums.PrintDestination printDestination)
+        {
+            MessageBox.Show("Print");
+        }
+
         public void Import()
         {
             //this.ImportExcel(OleDbDatabase.MappingTaskID.MarketingProgram);
@@ -414,15 +364,9 @@ namespace TotalSmartCoding.Views.Mains
             //}
         }
 
-        public void Verify()
-        {
-            MessageBox.Show("Verify");
-        }
+        #endregion
 
-        public void Print(GlobalEnums.PrintDestination printDestination)
-        {
-            MessageBox.Show("Print");
-        }
 
+        #endregion <Implement Interface>
     }
 }

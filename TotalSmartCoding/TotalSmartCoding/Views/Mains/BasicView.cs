@@ -15,10 +15,10 @@ using TotalSmartCoding.Controllers;
 
 namespace TotalSmartCoding.Views.Mains
 {
-    public class BasicView : Form, IMergeToolStrip, ICallToolStrip
+    public class BasicView : Form, IToolstripMerge, IToolstripChild
     {
 
-        public BaseController BaseController { get; private set; }
+        protected BaseController baseController { get; private set; }
 
         #region <Implement Interface>
 
@@ -29,13 +29,13 @@ namespace TotalSmartCoding.Views.Mains
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public GlobalEnums.TaskID TaskID
+        public GlobalEnums.NmvnTaskID NMVNTaskID
         {
-            get { return GlobalEnums.TaskID.MarketingProgram; }
+            get { return this.baseController.BaseDTO.NMVNTaskID; }
             //get { return this.marketingProgramBLL.TaskID; }
         }
 
-        public virtual ToolStrip ChildToolStrip { get; set; }
+        public virtual ToolStrip toolstripChild { get; set; }
         //public virtual BrightIdeasSoftware.FastObjectListView FastObjectListView { get; set; }
         //{
         //    get
@@ -81,7 +81,7 @@ namespace TotalSmartCoding.Views.Mains
         public virtual bool Unverifiable { get { return false; } }
 
         public virtual bool Printable { get { return false; } }
-        public virtual bool Searchable { get { return true; } }
+        public virtual bool Filterable { get { return true; } }
 
 
 
@@ -259,7 +259,7 @@ namespace TotalSmartCoding.Views.Mains
             MessageBox.Show("Print");
         }
 
-        public void SearchText(string searchText)
+        public void ApplyFilter(string searchText)
         {
             //CommonFormAction.OLVFilter(this.FastObjectListView, searchText);
         }

@@ -903,6 +903,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Edit_clear {
+            get {
+                object obj = ResourceManager.GetObject("Edit-clear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Edit_Text {
             get {
                 object obj = ResourceManager.GetObject("Edit-Text", resourceCulture);
@@ -966,6 +976,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Fatcow_Farm_Fresh_Key_escape {
             get {
                 object obj = ResourceManager.GetObject("Fatcow-Farm-Fresh-Key-escape", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Filter_Delete_32 {
+            get {
+                object obj = ResourceManager.GetObject("Filter-Delete-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1533,6 +1553,26 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Play_Normal_16 {
+            get {
+                object obj = ResourceManager.GetObject("Play-Normal-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Play_Normal_Red_16 {
+            get {
+                object obj = ResourceManager.GetObject("Play_Normal_Red_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap printer {
             get {
                 object obj = ResourceManager.GetObject("printer", resourceCulture);
@@ -1706,6 +1746,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Status_wallet_open {
             get {
                 object obj = ResourceManager.GetObject("Status-wallet-open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Stop_Disabled {
+            get {
+                object obj = ResourceManager.GetObject("Stop_Disabled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,20 +1,19 @@
-﻿using System.ComponentModel;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using System.ComponentModel;
 
 using TotalBase.Enums;
 
 namespace TotalSmartCoding.CommonLibraries
 {
-
-    public interface IMergeToolStrip
+    public interface IToolstripMerge
     {
-        ToolStrip ChildToolStrip { get; }// set; }
+        ToolStrip toolstripChild { get; }
     }
 
 
-    public interface ICallToolStrip : INotifyPropertyChanged
+    public interface IToolstripChild : INotifyPropertyChanged
     {
-        GlobalEnums.TaskID TaskID { get; }
+        GlobalEnums.NmvnTaskID NMVNTaskID { get; }
 
         void Escape();
         void Loading();
@@ -31,7 +30,7 @@ namespace TotalSmartCoding.CommonLibraries
 
         void Print(GlobalEnums.PrintDestination printDestination);
 
-        void SearchText(string searchText);
+        void ApplyFilter(string filterTexts);
 
 
         bool Closable { get; }
@@ -52,11 +51,10 @@ namespace TotalSmartCoding.CommonLibraries
         bool Exportable { get; }
 
 
-        bool Searchable { get; }
+        bool Filterable { get; }
 
 
         bool ReadonlyMode { get; }
         bool EditableMode { get; }
     }
-
 }

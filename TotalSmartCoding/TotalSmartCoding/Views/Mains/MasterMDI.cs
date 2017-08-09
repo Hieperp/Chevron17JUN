@@ -57,8 +57,8 @@ namespace TotalSmartCoding.Views.Mains
                 if (this.nmvnTaskID == GlobalEnums.NmvnTaskID.Batch) { this.Size = new Size(1120, 630); this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog; this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal; }
 
 
-                this.beginingDateBinding = this.textBoxLowerFillterDate.TextBox.DataBindings.Add("Text", GlobalEnums.GlobalOptionSetting, "LowerFillterDate", true);
-                this.endingDateBinding = this.textBoxUpperFillterDate.TextBox.DataBindings.Add("Text", GlobalEnums.GlobalOptionSetting, "UpperFillterDate", true);
+                this.beginingDateBinding = this.textFillterLowerDate.TextBox.DataBindings.Add("Text", GlobalEnums.GlobalOptionSetting, "LowerFillterDate", true);
+                this.endingDateBinding = this.textFillterUpperDate.TextBox.DataBindings.Add("Text", GlobalEnums.GlobalOptionSetting, "UpperFillterDate", true);
 
 
                 this.beginingDateBinding.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -147,20 +147,20 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                ToolStripManager.RevertMerge(this.toolStripMDIMain);
-                IMergeToolStrip mdiChildMergeToolStrip = ActiveMdiChild as IMergeToolStrip;
-                if (mdiChildMergeToolStrip != null)
+                ToolStripManager.RevertMerge(this.toolstripMain);
+                IToolstripMerge mergeToolstrip = ActiveMdiChild as IToolstripMerge;
+                if (mergeToolstrip != null)
                 {
-                    ToolStripManager.Merge(mdiChildMergeToolStrip.ChildToolStrip, toolStripMDIMain);
+                    ToolStripManager.Merge(mergeToolstrip.toolstripChild, toolstripMain);
                 }
 
-                ICallToolStrip mdiChildCallToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (mdiChildCallToolStrip != null)
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null)
                 {
-                    mdiChildCallToolStrip.PropertyChanged -= new PropertyChangedEventHandler(mdiChildCallToolStrip_PropertyChanged);
-                    mdiChildCallToolStrip.PropertyChanged += new PropertyChangedEventHandler(mdiChildCallToolStrip_PropertyChanged);
+                    toolstripChild.PropertyChanged -= new PropertyChangedEventHandler(toolstripChild_PropertyChanged);
+                    toolstripChild.PropertyChanged += new PropertyChangedEventHandler(toolstripChild_PropertyChanged);
 
-                    mdiChildCallToolStrip_PropertyChanged(mdiChildCallToolStrip, new PropertyChangedEventArgs("IsDirty"));
+                    toolstripChild_PropertyChanged(toolstripChild, new PropertyChangedEventArgs("IsDirty"));
                 }
             }
             catch (Exception exception)
@@ -169,58 +169,54 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        void mdiChildCallToolStrip_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void toolstripChild_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             try
             {
-                ICallToolStrip mdiChildCallToolStrip = sender as ICallToolStrip;
-                if (mdiChildCallToolStrip != null)
+                IToolstripChild toolstripChild = sender as IToolstripChild;
+                if (toolstripChild != null)
                 {
 
-                    bool closable = mdiChildCallToolStrip.Closable;
-                    bool loadable = mdiChildCallToolStrip.Loadable;
-                    bool newable = mdiChildCallToolStrip.Newable;
-                    bool editable = mdiChildCallToolStrip.Editable;
-                    bool isDirty = mdiChildCallToolStrip.IsDirty;
-                    bool deletable = mdiChildCallToolStrip.Deletable;
-                    bool importable = mdiChildCallToolStrip.Importable;
-                    bool exportable = mdiChildCallToolStrip.Exportable;
-                    bool verifiable = mdiChildCallToolStrip.Verifiable;
-                    bool unverifiable = mdiChildCallToolStrip.Unverifiable;
-                    bool printable = mdiChildCallToolStrip.Printable;
-                    bool readonlyMode = mdiChildCallToolStrip.ReadonlyMode;
-                    bool editableMode = mdiChildCallToolStrip.EditableMode;
-                    bool isValid = mdiChildCallToolStrip.IsValid;
+                    bool closable = toolstripChild.Closable;
+                    bool loadable = toolstripChild.Loadable;
+                    bool newable = toolstripChild.Newable;
+                    bool editable = toolstripChild.Editable;
+                    bool isDirty = toolstripChild.IsDirty;
+                    bool deletable = toolstripChild.Deletable;
+                    bool importable = toolstripChild.Importable;
+                    bool exportable = toolstripChild.Exportable;
+                    bool verifiable = toolstripChild.Verifiable;
+                    bool unverifiable = toolstripChild.Unverifiable;
+                    bool printable = toolstripChild.Printable;
+                    bool readonlyMode = toolstripChild.ReadonlyMode;
+                    bool editableMode = toolstripChild.EditableMode;
+                    bool isValid = toolstripChild.IsValid;
 
 
-                    this.toolStripButtonEscape.Enabled = closable;
-                    this.toolStripButtonLoad.Enabled = loadable && readonlyMode;
+                    this.buttonEscape.Enabled = closable;
+                    this.buttonLoading.Enabled = loadable && readonlyMode;
 
-                    this.toolStripButtonNew.Enabled = newable && readonlyMode;
-                    this.toolStripButtonEdit.Enabled = editable && readonlyMode;
-                    this.toolStripButtonSave.Enabled = isDirty && isValid && editableMode;
-                    this.toolStripButtonDelete.Enabled = deletable && readonlyMode;
+                    this.buttonNew.Enabled = newable && readonlyMode;
+                    this.buttonEdit.Enabled = editable && readonlyMode;
+                    this.buttonSave.Enabled = isDirty && isValid && editableMode;
+                    this.buttonDelete.Enabled = deletable && readonlyMode;
 
-                    this.toolStripButtonImport.Visible = importable;
-                    this.toolStripButtonImport.Enabled = importable && newable && readonlyMode;
-                    this.toolStripButtonExport.Visible = exportable;
-                    this.toolStripButtonExport.Enabled = exportable;//&& !isDirty && readonlyMode;
+                    this.buttonImport.Visible = importable;
+                    this.buttonImport.Enabled = importable && newable && readonlyMode;
+                    this.buttonExport.Visible = exportable;
+                    this.buttonExport.Enabled = exportable;//&& !isDirty && readonlyMode;
                     this.toolStripSeparatorImport.Visible = importable || exportable;
 
-                    this.toolStripButtonVerify.Visible = verifiable || unverifiable;
-                    this.toolStripButtonVerify.Enabled = verifiable || unverifiable;
-                    this.toolStripButtonVerify.Text = verifiable ? "Verify" : "Unverify";
+                    this.buttonVerify.Visible = verifiable || unverifiable;
+                    this.buttonVerify.Enabled = verifiable || unverifiable;
+                    this.buttonVerify.Text = verifiable ? "Verify" : "Unverify";
                     this.toolStripSeparatorVerify.Visible = verifiable || unverifiable;
 
-                    this.toolStripButtonPrint.Visible = printable;
-                    this.toolStripButtonPrint.Enabled = printable;
-                    this.toolStripButtonPrintPreview.Visible = printable;
-                    this.toolStripButtonPrintPreview.Enabled = printable;
+                    this.buttonPrint.Visible = printable;
+                    this.buttonPrint.Enabled = printable;
+                    this.buttonPrintPreview.Visible = printable;
+                    this.buttonPrintPreview.Enabled = printable;
                     this.toolStripSeparatorPrint.Visible = printable;
-
-
-
-
                 }
             }
             catch (Exception exception)
@@ -233,12 +229,12 @@ namespace TotalSmartCoding.Views.Mains
 
 
         #region <Call Tool Strip>
-        private void toolStripButtonEscape_Click(object sender, EventArgs e)
+        private void buttonEscape_Click(object sender, EventArgs e)
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Escape();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Escape();
             }
             catch (Exception exception)
             {
@@ -246,25 +242,12 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void toolStripButtonLoad_Click(object sender, EventArgs e)
+        private void buttonLoading_Click(object sender, EventArgs e)
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Loading();
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-        }
-
-        private void toolStripButtonSearch_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.SearchText(this.toolStripComboBoxSearchText.Text);
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Loading();
             }
             catch (Exception exception)
             {
@@ -273,12 +256,31 @@ namespace TotalSmartCoding.Views.Mains
         }
 
 
-        private void toolStripButtonNew_Click(object sender, EventArgs e)
+        private void comboFilterTexts_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.New();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.ApplyFilter(this.comboFilterTexts.Text);
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        private void buttonClearFilters_Click(object sender, EventArgs e)
+        {
+            this.comboFilterTexts.Text = "";
+        }
+
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.New();
             }
             catch (Exception exception)
             {
@@ -287,12 +289,12 @@ namespace TotalSmartCoding.Views.Mains
         }
 
 
-        private void toolStripButtonEdit_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Edit();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Edit();
             }
             catch (Exception exception)
             {
@@ -300,12 +302,12 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void toolStripButtonSave_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Save();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Save();
             }
             catch (Exception exception)
             {
@@ -313,12 +315,12 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        private void buttonDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Delete();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Delete();
             }
             catch (Exception exception)
             {
@@ -331,8 +333,8 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Import();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Import();
             }
             catch (Exception exception)
             {
@@ -344,8 +346,8 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Export();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Export();
             }
             catch (Exception exception)
             {
@@ -357,8 +359,8 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Verify();
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Verify();
             }
             catch (Exception exception)
             {
@@ -371,8 +373,8 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Print(GlobalEnums.PrintDestination.Print);
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Print(GlobalEnums.PrintDestination.Print);
             }
             catch (Exception exception)
             {
@@ -384,8 +386,8 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                ICallToolStrip callToolStrip = ActiveMdiChild as ICallToolStrip;
-                if (callToolStrip != null) callToolStrip.Print(GlobalEnums.PrintDestination.PrintPreview);
+                IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
+                if (toolstripChild != null) toolstripChild.Print(GlobalEnums.PrintDestination.PrintPreview);
             }
             catch (Exception exception)
             {
@@ -421,6 +423,17 @@ namespace TotalSmartCoding.Views.Mains
             OpenTestView();
         }
 
+
+
+
+
+
+
+
+
+
+
+
         private void MasterMdi_Load(object sender, EventArgs e)
         {
             //this.toolStripMDIMain.Visible = false;
@@ -434,21 +447,22 @@ namespace TotalSmartCoding.Views.Mains
 
                     case GlobalEnums.NmvnTaskID.SmartCoding:
 
-                        this.toolStripButtonEscape.Visible = false;
-                        this.toolStripButtonLoad.Visible = false;
-                        this.toolStripButtonNew.Visible = false;
-                        this.toolStripButtonEdit.Visible = false;
-                        this.toolStripButtonSave.Visible = false;
-                        this.toolStripButtonDelete.Visible = false;
-                        this.toolStripButtonImport.Visible = false;
-                        this.toolStripButtonExport.Visible = false;
+                        this.buttonEscape.Visible = false;
+                        this.buttonLoading.Visible = false;
+                        this.buttonNew.Visible = false;
+                        this.buttonEdit.Visible = false;
+                        this.buttonSave.Visible = false;
+                        this.buttonDelete.Visible = false;
+                        this.buttonImport.Visible = false;
+                        this.buttonExport.Visible = false;
                         this.toolStripSeparatorImport.Visible = false;
-                        this.toolStripButtonVerify.Visible = false;
+                        this.buttonVerify.Visible = false;
                         this.toolStripSeparatorVerify.Visible = false;
-                        this.toolStripButtonPrint.Visible = false;
-                        this.toolStripButtonPrintPreview.Visible = false;
+                        this.buttonPrint.Visible = false;
+                        this.buttonPrintPreview.Visible = false;
                         this.toolStripSeparatorPrint.Visible = false;
 
+                        this.separatorESC.Visible = false;
                         this.toolStrip1.Visible = false;
                         this.naviBarModuleMaster.Visible = false;
 
@@ -479,16 +493,24 @@ namespace TotalSmartCoding.Views.Mains
             {
                 for (int i = 0; i < this.MdiChildren.Length; i++)
                 {
-                    ICallToolStrip mdiChildCallToolStrip = this.MdiChildren[i] as ICallToolStrip;
-                    if (mdiChildCallToolStrip != null && mdiChildCallToolStrip.EditableMode)
-                    { e.Cancel = true; return; }
+                    IToolstripChild mdiChildCallToolStrip = this.MdiChildren[i] as IToolstripChild;
+                    if (mdiChildCallToolStrip != null)
+                    {
+                        if (mdiChildCallToolStrip.ReadonlyMode) ((Form)mdiChildCallToolStrip).Close();
+                    }
+                    else
+                        this.MdiChildren[i].Close();
                 }
+
+                if (this.MdiChildren.Length > 0)
+                    e.Cancel = true;
             }
             catch (Exception exception)
             {
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
         }
+
 
 
     }

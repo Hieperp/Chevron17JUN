@@ -16,37 +16,34 @@ namespace TotalSmartCoding.CommonLibraries
 {
     public static class CommonFormAction
     {
-        public static void OLVFilter(ObjectListView olv, string txt)
+        public static void OLVFilter(ObjectListView olv, string[] filterTexts)
         {
-            CommonFormAction.OLVFilter(olv, txt, 0);
+            CommonFormAction.OLVFilter(olv, filterTexts, 0);
         }
 
-        public static void OLVFilter(ObjectListView olv, string txt, int matchKind)
+        public static void OLVFilter(ObjectListView olv, string[] filterTexts, int matchKind)
         {
-            TextMatchFilter filter = null;
-            if (!String.IsNullOrEmpty(txt))
-            {
-                switch (matchKind)
-                {
-                    case 0:
-                    default:
-                        filter = TextMatchFilter.Contains(olv, txt);
-                        break;
-                    case 1:
-                        filter = TextMatchFilter.Prefix(olv, txt);
-                        break;
-                    case 2:
-                        filter = TextMatchFilter.Regex(olv, txt);
-                        break;
-                }
-            }
-            // Setup a default renderer to draw the filter matches
+            TextMatchFilter textMatchFilter = null; //Using this textMatchFilter for hightlight purpose
+            List<IModelFilter> modelFilters = null;
 
-            if (filter == null)
+            if (filterTexts != null && filterTexts.Length > 0)
+            {
+                textMatchFilter = CommonFormAction.CreateTextMatchFilter(olv, filterTexts, matchKind);
+
+                modelFilters = new List<IModelFilter>();
+                foreach (string s in filterTexts)
+                {
+                    modelFilters.Add(CommonFormAction.CreateTextMatchFilter(olv, new string[] { s }, matchKind));
+                }
+
+            }
+
+            // Setup a default renderer to draw the filter matches
+            if (textMatchFilter == null)
                 olv.DefaultRenderer = null;
             else
             {
-                olv.DefaultRenderer = new HighlightTextRenderer(filter);
+                olv.DefaultRenderer = new HighlightTextRenderer(textMatchFilter);
 
                 // Uncomment this line to see how the GDI+ rendering looks
                 //olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
@@ -55,14 +52,31 @@ namespace TotalSmartCoding.CommonLibraries
             // Some lists have renderers already installed
             HighlightTextRenderer highlightingRenderer = olv.GetColumn(0).Renderer as HighlightTextRenderer;
             if (highlightingRenderer != null)
-                highlightingRenderer.Filter = filter;
+                highlightingRenderer.Filter = textMatchFilter;
 
 
-            olv.AdditionalFilter = filter;
+            olv.ModelFilter = modelFilters == null ? null : new CompositeAllFilter(modelFilters); //WHEN USING CompositeAllFilter, this textMatchFilter for HIGHTLIGHT PURPOSE ONLY
+            //olv.AdditionalFilter = textMatchFilter; //WHEN USING AdditionalFilter: In addition to use this textMatchFilter for hightlight purpose, this textMatchFilter CAN BE USE FOR AdditionalFilter TO FILLER
+            //NOTE:     AdditionalFilter: TO FILTER rows where any cell match any of the given strings array (string[]) --- MEANING: USING 'OR' CLAUSE
+            //          ModelFilter with CompositeAllFilter: CREATE SEPARATE textMatchFilter FOR EVERY item IN strings array (string[]), THEN COMBINE ALL FILTER TOGETHER --- MEANING: USING 'AND' CLAUSE
+            //ONLY USING AdditionalFilter OR CompositeAllFilter AT ONE TIME
+
             //olv.Invalidate();
-
         }
 
+        private static TextMatchFilter CreateTextMatchFilter(ObjectListView olv, string[] filterTexts, int matchKind)
+        {
+            switch (matchKind)
+            {
+                case 0:
+                default:
+                    return TextMatchFilter.Contains(olv, filterTexts);
+                case 1:
+                    return TextMatchFilter.Prefix(olv, filterTexts);
+                case 2:
+                    return TextMatchFilter.Regex(olv, filterTexts);
+            }
+        }
 
         public static List<Control> GetAllControls(Control controlContainer, List<Control> controlList)
         {

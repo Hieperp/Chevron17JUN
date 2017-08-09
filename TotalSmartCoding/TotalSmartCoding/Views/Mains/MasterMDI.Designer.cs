@@ -39,37 +39,35 @@
             this.listViewTaskMaster = new System.Windows.Forms.ListView();
             this.buttonNaviBarHeader = new System.Windows.Forms.Button();
             this.InvisibleMainMenuStripOfMDI = new System.Windows.Forms.MenuStrip();
-            this.toolStripMDIMain = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonEscape = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolstripMain = new System.Windows.Forms.ToolStrip();
+            this.buttonEscape = new System.Windows.Forms.ToolStripButton();
+            this.separatorESC = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonNew = new System.Windows.Forms.ToolStripButton();
+            this.buttonEdit = new System.Windows.Forms.ToolStripButton();
+            this.buttonSave = new System.Windows.Forms.ToolStripButton();
+            this.buttonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparatorImport = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonImport = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonExport = new System.Windows.Forms.ToolStripButton();
+            this.buttonImport = new System.Windows.Forms.ToolStripButton();
+            this.buttonExport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparatorVerify = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonVerify = new System.Windows.Forms.ToolStripButton();
+            this.buttonVerify = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparatorPrint = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonPrintPreview = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonPrint = new System.Windows.Forms.ToolStripButton();
-            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.buttonPrintPreview = new System.Windows.Forms.ToolStripButton();
+            this.buttonPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripTextBox3 = new System.Windows.Forms.ToolStripTextBox();
+            this.buttonLockedDate = new System.Windows.Forms.ToolStripButton();
+            this.txtLockedDate = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.textBoxLowerFillterDate = new System.Windows.Forms.ToolStripTextBox();
-            this.textBoxUpperFillterDate = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButtonLoad = new System.Windows.Forms.ToolStripButton();
+            this.textFillterLowerDate = new System.Windows.Forms.ToolStripTextBox();
+            this.textFillterUpperDate = new System.Windows.Forms.ToolStripTextBox();
+            this.buttonLoading = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripComboBoxSearchText = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripButtonSearch = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.comboFilterTexts = new System.Windows.Forms.ToolStripComboBox();
+            this.buttonClearFilters = new System.Windows.Forms.ToolStripButton();
             this.statusStrip.SuspendLayout();
             this.naviBarModuleMaster.SuspendLayout();
-            this.toolStripMDIMain.SuspendLayout();
+            this.toolstripMain.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -237,181 +235,159 @@
             this.InvisibleMainMenuStripOfMDI.Text = "MenuStrip";
             this.InvisibleMainMenuStripOfMDI.Visible = false;
             // 
-            // toolStripMDIMain
+            // toolstripMain
             // 
-            this.toolStripMDIMain.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripMDIMain.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
-            this.toolStripMDIMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripMDIMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonEscape,
-            this.toolStripSeparator10,
-            this.toolStripButtonNew,
-            this.toolStripButtonEdit,
-            this.toolStripButtonSave,
-            this.toolStripButtonDelete,
+            this.toolstripMain.BackColor = System.Drawing.SystemColors.Control;
+            this.toolstripMain.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
+            this.toolstripMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolstripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonEscape,
+            this.separatorESC,
+            this.buttonNew,
+            this.buttonEdit,
+            this.buttonSave,
+            this.buttonDelete,
             this.toolStripSeparatorImport,
-            this.toolStripButtonImport,
-            this.toolStripButtonExport,
+            this.buttonImport,
+            this.buttonExport,
             this.toolStripSeparatorVerify,
-            this.toolStripButtonVerify,
+            this.buttonVerify,
             this.toolStripSeparatorPrint,
-            this.toolStripButtonPrintPreview,
-            this.toolStripButtonPrint,
-            this.openToolStripButton,
-            this.helpToolStripButton});
-            this.toolStripMDIMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripMDIMain.Location = new System.Drawing.Point(0, 55);
-            this.toolStripMDIMain.Name = "toolStripMDIMain";
-            this.toolStripMDIMain.Size = new System.Drawing.Size(1382, 55);
-            this.toolStripMDIMain.TabIndex = 10;
-            this.toolStripMDIMain.Text = "ToolStrip";
+            this.buttonPrintPreview,
+            this.buttonPrint});
+            this.toolstripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolstripMain.Location = new System.Drawing.Point(0, 55);
+            this.toolstripMain.Name = "toolstripMain";
+            this.toolstripMain.Size = new System.Drawing.Size(1382, 55);
+            this.toolstripMain.TabIndex = 10;
+            this.toolstripMain.Text = "ToolStrip";
             // 
-            // toolStripButtonEscape
+            // buttonEscape
             // 
-            this.toolStripButtonEscape.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonEscape.Image = global::TotalSmartCoding.Properties.Resources.DataEsc;
-            this.toolStripButtonEscape.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonEscape.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEscape.Name = "toolStripButtonEscape";
-            this.toolStripButtonEscape.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButtonEscape.Text = "ESC";
-            this.toolStripButtonEscape.Click += new System.EventHandler(this.toolStripButtonEscape_Click);
+            this.buttonEscape.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonEscape.Image = global::TotalSmartCoding.Properties.Resources.DataEsc;
+            this.buttonEscape.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEscape.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEscape.Name = "buttonEscape";
+            this.buttonEscape.Size = new System.Drawing.Size(52, 52);
+            this.buttonEscape.Text = "ESC";
+            this.buttonEscape.Click += new System.EventHandler(this.buttonEscape_Click);
             // 
-            // toolStripSeparator10
+            // separatorESC
             // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 55);
+            this.separatorESC.Name = "separatorESC";
+            this.separatorESC.Size = new System.Drawing.Size(6, 55);
             // 
-            // toolStripButtonNew
+            // buttonNew
             // 
-            this.toolStripButtonNew.Enabled = false;
-            this.toolStripButtonNew.Image = global::TotalSmartCoding.Properties.Resources.DataNew;
-            this.toolStripButtonNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Black;
-            this.toolStripButtonNew.Name = "toolStripButtonNew";
-            this.toolStripButtonNew.Size = new System.Drawing.Size(91, 52);
-            this.toolStripButtonNew.Text = "New";
-            this.toolStripButtonNew.Click += new System.EventHandler(this.toolStripButtonNew_Click);
+            this.buttonNew.Enabled = false;
+            this.buttonNew.Image = global::TotalSmartCoding.Properties.Resources.DataNew;
+            this.buttonNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonNew.ImageTransparentColor = System.Drawing.Color.Black;
+            this.buttonNew.Name = "buttonNew";
+            this.buttonNew.Size = new System.Drawing.Size(91, 52);
+            this.buttonNew.Text = "New";
+            this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
-            // toolStripButtonEdit
+            // buttonEdit
             // 
-            this.toolStripButtonEdit.Enabled = false;
-            this.toolStripButtonEdit.Image = global::TotalSmartCoding.Properties.Resources.DataEdit;
-            this.toolStripButtonEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
-            this.toolStripButtonEdit.Size = new System.Drawing.Size(87, 52);
-            this.toolStripButtonEdit.Text = "Edit";
-            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
+            this.buttonEdit.Enabled = false;
+            this.buttonEdit.Image = global::TotalSmartCoding.Properties.Resources.DataEdit;
+            this.buttonEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(87, 52);
+            this.buttonEdit.Text = "Edit";
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
-            // toolStripButtonSave
+            // buttonSave
             // 
-            this.toolStripButtonSave.Enabled = false;
-            this.toolStripButtonSave.Image = global::TotalSmartCoding.Properties.Resources.DataSave;
-            this.toolStripButtonSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Black;
-            this.toolStripButtonSave.Name = "toolStripButtonSave";
-            this.toolStripButtonSave.Size = new System.Drawing.Size(92, 52);
-            this.toolStripButtonSave.Text = "Save";
-            this.toolStripButtonSave.Click += new System.EventHandler(this.toolStripButtonSave_Click);
+            this.buttonSave.Enabled = false;
+            this.buttonSave.Image = global::TotalSmartCoding.Properties.Resources.DataSave;
+            this.buttonSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonSave.ImageTransparentColor = System.Drawing.Color.Black;
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(92, 52);
+            this.buttonSave.Text = "Save";
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // toolStripButtonDelete
+            // buttonDelete
             // 
-            this.toolStripButtonDelete.Enabled = false;
-            this.toolStripButtonDelete.Image = global::TotalSmartCoding.Properties.Resources.Recycle_Bin_full;
-            this.toolStripButtonDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(105, 52);
-            this.toolStripButtonDelete.Text = "Delete";
-            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            this.buttonDelete.Enabled = false;
+            this.buttonDelete.Image = global::TotalSmartCoding.Properties.Resources.Recycle_Bin_full;
+            this.buttonDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(105, 52);
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // toolStripSeparatorImport
             // 
             this.toolStripSeparatorImport.Name = "toolStripSeparatorImport";
             this.toolStripSeparatorImport.Size = new System.Drawing.Size(6, 55);
             // 
-            // toolStripButtonImport
+            // buttonImport
             // 
-            this.toolStripButtonImport.Enabled = false;
-            this.toolStripButtonImport.Image = global::TotalSmartCoding.Properties.Resources.Benjigarner_Softdimension_Excel;
-            this.toolStripButtonImport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonImport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonImport.Name = "toolStripButtonImport";
-            this.toolStripButtonImport.Size = new System.Drawing.Size(90, 52);
-            this.toolStripButtonImport.Text = "Import";
+            this.buttonImport.Enabled = false;
+            this.buttonImport.Image = global::TotalSmartCoding.Properties.Resources.Benjigarner_Softdimension_Excel;
+            this.buttonImport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(90, 52);
+            this.buttonImport.Text = "Import";
             // 
-            // toolStripButtonExport
+            // buttonExport
             // 
-            this.toolStripButtonExport.Enabled = false;
-            this.toolStripButtonExport.Image = global::TotalSmartCoding.Properties.Resources.Custom_Icon_Design_Pretty_Office_6_Import_export;
-            this.toolStripButtonExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonExport.Name = "toolStripButtonExport";
-            this.toolStripButtonExport.Size = new System.Drawing.Size(104, 52);
-            this.toolStripButtonExport.Text = "Export";
+            this.buttonExport.Enabled = false;
+            this.buttonExport.Image = global::TotalSmartCoding.Properties.Resources.Custom_Icon_Design_Pretty_Office_6_Import_export;
+            this.buttonExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(104, 52);
+            this.buttonExport.Text = "Export";
             // 
             // toolStripSeparatorVerify
             // 
             this.toolStripSeparatorVerify.Name = "toolStripSeparatorVerify";
             this.toolStripSeparatorVerify.Size = new System.Drawing.Size(6, 55);
             // 
-            // toolStripButtonVerify
+            // buttonVerify
             // 
-            this.toolStripButtonVerify.Enabled = false;
-            this.toolStripButtonVerify.Image = global::TotalSmartCoding.Properties.Resources.Check;
-            this.toolStripButtonVerify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonVerify.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonVerify.Name = "toolStripButtonVerify";
-            this.toolStripButtonVerify.Size = new System.Drawing.Size(99, 52);
-            this.toolStripButtonVerify.Text = "Verify";
+            this.buttonVerify.Enabled = false;
+            this.buttonVerify.Image = global::TotalSmartCoding.Properties.Resources.Check;
+            this.buttonVerify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonVerify.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonVerify.Name = "buttonVerify";
+            this.buttonVerify.Size = new System.Drawing.Size(99, 52);
+            this.buttonVerify.Text = "Verify";
             // 
             // toolStripSeparatorPrint
             // 
             this.toolStripSeparatorPrint.Name = "toolStripSeparatorPrint";
             this.toolStripSeparatorPrint.Size = new System.Drawing.Size(6, 55);
             // 
-            // toolStripButtonPrintPreview
+            // buttonPrintPreview
             // 
-            this.toolStripButtonPrintPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonPrintPreview.Enabled = false;
-            this.toolStripButtonPrintPreview.Image = global::TotalSmartCoding.Properties.Resources.Actions_document_print_preview;
-            this.toolStripButtonPrintPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonPrintPreview.ImageTransparentColor = System.Drawing.Color.Black;
-            this.toolStripButtonPrintPreview.Name = "toolStripButtonPrintPreview";
-            this.toolStripButtonPrintPreview.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButtonPrintPreview.Text = "Print Preview";
+            this.buttonPrintPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonPrintPreview.Enabled = false;
+            this.buttonPrintPreview.Image = global::TotalSmartCoding.Properties.Resources.Actions_document_print_preview;
+            this.buttonPrintPreview.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonPrintPreview.ImageTransparentColor = System.Drawing.Color.Black;
+            this.buttonPrintPreview.Name = "buttonPrintPreview";
+            this.buttonPrintPreview.Size = new System.Drawing.Size(52, 52);
+            this.buttonPrintPreview.Text = "Print Preview";
             // 
-            // toolStripButtonPrint
+            // buttonPrint
             // 
-            this.toolStripButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonPrint.Enabled = false;
-            this.toolStripButtonPrint.Image = global::TotalSmartCoding.Properties.Resources.Actions_document_print;
-            this.toolStripButtonPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonPrint.ImageTransparentColor = System.Drawing.Color.Black;
-            this.toolStripButtonPrint.Name = "toolStripButtonPrint";
-            this.toolStripButtonPrint.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButtonPrint.Text = "Print";
-            // 
-            // openToolStripButton
-            // 
-            this.openToolStripButton.Enabled = false;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
-            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(69, 52);
-            this.openToolStripButton.Text = "Open";
-            this.openToolStripButton.Visible = false;
-            // 
-            // helpToolStripButton
-            // 
-            this.helpToolStripButton.Enabled = false;
-            this.helpToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripButton.Image")));
-            this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
-            this.helpToolStripButton.Name = "helpToolStripButton";
-            this.helpToolStripButton.Size = new System.Drawing.Size(65, 52);
-            this.helpToolStripButton.Text = "Help";
-            this.helpToolStripButton.Visible = false;
+            this.buttonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonPrint.Enabled = false;
+            this.buttonPrint.Image = global::TotalSmartCoding.Properties.Resources.Actions_document_print;
+            this.buttonPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonPrint.ImageTransparentColor = System.Drawing.Color.Black;
+            this.buttonPrint.Name = "buttonPrint";
+            this.buttonPrint.Size = new System.Drawing.Size(52, 52);
+            this.buttonPrint.Text = "Print";
             // 
             // toolStrip1
             // 
@@ -419,16 +395,16 @@
             this.toolStrip1.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripTextBox3,
+            this.buttonLockedDate,
+            this.txtLockedDate,
             this.toolStripSeparator12,
             this.toolStripLabel1,
-            this.textBoxLowerFillterDate,
-            this.textBoxUpperFillterDate,
-            this.toolStripButtonLoad,
+            this.textFillterLowerDate,
+            this.textFillterUpperDate,
+            this.buttonLoading,
             this.toolStripSeparator13,
-            this.toolStripComboBoxSearchText,
-            this.toolStripButtonSearch});
+            this.comboFilterTexts,
+            this.buttonClearFilters});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -436,13 +412,23 @@
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripTextBox3
+            // buttonLockedDate
             // 
-            this.toolStripTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toolStripTextBox3.Name = "toolStripTextBox3";
-            this.toolStripTextBox3.Size = new System.Drawing.Size(99, 55);
-            this.toolStripTextBox3.Text = "10/10/2013";
-            this.toolStripTextBox3.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.buttonLockedDate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonLockedDate.Image = global::TotalSmartCoding.Properties.Resources.Data_Lock_24;
+            this.buttonLockedDate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonLockedDate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonLockedDate.Name = "buttonLockedDate";
+            this.buttonLockedDate.Size = new System.Drawing.Size(28, 52);
+            this.buttonLockedDate.Text = "toolStripButton1";
+            // 
+            // txtLockedDate
+            // 
+            this.txtLockedDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtLockedDate.Name = "txtLockedDate";
+            this.txtLockedDate.Size = new System.Drawing.Size(99, 55);
+            this.txtLockedDate.Text = "10/10/2013";
+            this.txtLockedDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // toolStripSeparator12
             // 
@@ -455,66 +441,57 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(45, 52);
             this.toolStripLabel1.Text = "Filter:";
             // 
-            // textBoxLowerFillterDate
+            // textFillterLowerDate
             // 
-            this.textBoxLowerFillterDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxLowerFillterDate.Name = "textBoxLowerFillterDate";
-            this.textBoxLowerFillterDate.Size = new System.Drawing.Size(99, 55);
-            this.textBoxLowerFillterDate.Text = "31/12/2013";
-            this.textBoxLowerFillterDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textFillterLowerDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textFillterLowerDate.Name = "textFillterLowerDate";
+            this.textFillterLowerDate.Size = new System.Drawing.Size(99, 55);
+            this.textFillterLowerDate.Text = "31/12/2013";
+            this.textFillterLowerDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBoxUpperFillterDate
+            // textFillterUpperDate
             // 
-            this.textBoxUpperFillterDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxUpperFillterDate.Name = "textBoxUpperFillterDate";
-            this.textBoxUpperFillterDate.Size = new System.Drawing.Size(99, 55);
-            this.textBoxUpperFillterDate.Text = "01/01/2013";
-            this.textBoxUpperFillterDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textFillterUpperDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textFillterUpperDate.Name = "textFillterUpperDate";
+            this.textFillterUpperDate.Size = new System.Drawing.Size(99, 55);
+            this.textFillterUpperDate.Text = "01/01/2013";
+            this.textFillterUpperDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // toolStripButtonLoad
+            // buttonLoading
             // 
-            this.toolStripButtonLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonLoad.Image = global::TotalSmartCoding.Properties.Resources.refresh;
-            this.toolStripButtonLoad.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonLoad.Name = "toolStripButtonLoad";
-            this.toolStripButtonLoad.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButtonLoad.Text = "Refresh";
-            this.toolStripButtonLoad.Click += new System.EventHandler(this.toolStripButtonLoad_Click);
+            this.buttonLoading.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonLoading.Image = global::TotalSmartCoding.Properties.Resources.refresh;
+            this.buttonLoading.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonLoading.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonLoading.Name = "buttonLoading";
+            this.buttonLoading.Size = new System.Drawing.Size(52, 52);
+            this.buttonLoading.Text = "Refresh";
+            this.buttonLoading.Click += new System.EventHandler(this.buttonLoading_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             this.toolStripSeparator13.Size = new System.Drawing.Size(6, 55);
             // 
-            // toolStripComboBoxSearchText
+            // comboFilterTexts
             // 
-            this.toolStripComboBoxSearchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.toolStripComboBoxSearchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
-            this.toolStripComboBoxSearchText.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.toolStripComboBoxSearchText.Name = "toolStripComboBoxSearchText";
-            this.toolStripComboBoxSearchText.Size = new System.Drawing.Size(500, 55);
+            this.comboFilterTexts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboFilterTexts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
+            this.comboFilterTexts.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.comboFilterTexts.Name = "comboFilterTexts";
+            this.comboFilterTexts.Size = new System.Drawing.Size(500, 55);
+            this.comboFilterTexts.TextChanged += new System.EventHandler(this.comboFilterTexts_TextChanged);
             // 
-            // toolStripButtonSearch
+            // buttonClearFilters
             // 
-            this.toolStripButtonSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSearch.Image = global::TotalSmartCoding.Properties.Resources.Actions_edit_find;
-            this.toolStripButtonSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSearch.Name = "toolStripButtonSearch";
-            this.toolStripButtonSearch.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButtonSearch.Text = "Find";
-            this.toolStripButtonSearch.Click += new System.EventHandler(this.toolStripButtonSearch_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::TotalSmartCoding.Properties.Resources.Data_Lock_24;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(28, 52);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.buttonClearFilters.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonClearFilters.Image = global::TotalSmartCoding.Properties.Resources.Edit_clear;
+            this.buttonClearFilters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonClearFilters.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonClearFilters.Name = "buttonClearFilters";
+            this.buttonClearFilters.Size = new System.Drawing.Size(52, 52);
+            this.buttonClearFilters.Text = "Find";
+            this.buttonClearFilters.Click += new System.EventHandler(this.buttonClearFilters_Click);
             // 
             // MasterMDI
             // 
@@ -522,7 +499,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1382, 911);
             this.Controls.Add(this.naviBarModuleMaster);
-            this.Controls.Add(this.toolStripMDIMain);
+            this.Controls.Add(this.toolstripMain);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.InvisibleMainMenuStripOfMDI);
@@ -538,8 +515,8 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.naviBarModuleMaster.ResumeLayout(false);
-            this.toolStripMDIMain.ResumeLayout(false);
-            this.toolStripMDIMain.PerformLayout();
+            this.toolstripMain.ResumeLayout(false);
+            this.toolstripMain.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -553,39 +530,37 @@
         private System.Windows.Forms.ImageList imageListModuleMasterLarge;
         private System.Windows.Forms.ImageList imageListTaskMaster;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox3;
+        private System.Windows.Forms.ToolStripTextBox txtLockedDate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripTextBox textBoxLowerFillterDate;
-        private System.Windows.Forms.ToolStripTextBox textBoxUpperFillterDate;
-        private System.Windows.Forms.ToolStripButton toolStripButtonLoad;
+        private System.Windows.Forms.ToolStripTextBox textFillterLowerDate;
+        private System.Windows.Forms.ToolStripTextBox textFillterUpperDate;
+        private System.Windows.Forms.ToolStripButton buttonLoading;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxSearchText;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSearch;
+        private System.Windows.Forms.ToolStripComboBox comboFilterTexts;
+        private System.Windows.Forms.ToolStripButton buttonClearFilters;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
-        private System.Windows.Forms.ToolStrip toolStripMDIMain;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEscape;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripButton toolStripButtonNew;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
-        private System.Windows.Forms.ToolStripButton toolStripButtonSave;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        private System.Windows.Forms.ToolStrip toolstripMain;
+        private System.Windows.Forms.ToolStripButton buttonEscape;
+        private System.Windows.Forms.ToolStripSeparator separatorESC;
+        private System.Windows.Forms.ToolStripButton buttonNew;
+        private System.Windows.Forms.ToolStripButton buttonEdit;
+        private System.Windows.Forms.ToolStripButton buttonSave;
+        private System.Windows.Forms.ToolStripButton buttonDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorImport;
-        private System.Windows.Forms.ToolStripButton toolStripButtonImport;
-        private System.Windows.Forms.ToolStripButton toolStripButtonExport;
+        private System.Windows.Forms.ToolStripButton buttonImport;
+        private System.Windows.Forms.ToolStripButton buttonExport;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorVerify;
-        private System.Windows.Forms.ToolStripButton toolStripButtonVerify;
+        private System.Windows.Forms.ToolStripButton buttonVerify;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorPrint;
-        private System.Windows.Forms.ToolStripButton toolStripButtonPrintPreview;
-        private System.Windows.Forms.ToolStripButton toolStripButtonPrint;
-        private System.Windows.Forms.ToolStripButton openToolStripButton;
-        private System.Windows.Forms.ToolStripButton helpToolStripButton;
+        private System.Windows.Forms.ToolStripButton buttonPrintPreview;
+        private System.Windows.Forms.ToolStripButton buttonPrint;
         private Guifreaks.Navisuite.NaviBar naviBarModuleMaster;
         private System.Windows.Forms.ListView listViewTaskMaster;
         private System.Windows.Forms.Button buttonNaviBarHeader;
         private System.Windows.Forms.MenuStrip InvisibleMainMenuStripOfMDI;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton buttonLockedDate;
 
     }
 }

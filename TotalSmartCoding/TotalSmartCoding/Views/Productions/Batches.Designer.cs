@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutMaster = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxRemarks = new System.Windows.Forms.TextBox();
+            this.textRemarks = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.datePickerEntryDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
@@ -47,20 +47,30 @@
             this.comboCommodityID = new CustomControls.CustomBox();
             this.label8 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonApply = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.comboDiscontinued = new System.Windows.Forms.ToolStripComboBox();
             this.naviBarMaster = new Guifreaks.Navisuite.NaviBar(this.components);
             this.naviBand1 = new Guifreaks.Navisuite.NaviBand(this.components);
-            this.fastListBatchIndex = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.fastBatchIndex = new BrightIdeasSoftware.FastObjectListView();
+            this.olvID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvBatchCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNextPackNo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNextCartonNo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNextPalletNo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvIsDefault = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.layoutMaster.SuspendLayout();
             this.toolStripChildForm.SuspendLayout();
             this.naviBarMaster.SuspendLayout();
             this.naviBand1.ClientArea.SuspendLayout();
             this.naviBand1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastListBatchIndex)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastBatchIndex)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutMaster
@@ -71,7 +81,7 @@
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.layoutMaster.Controls.Add(this.textBoxRemarks, 1, 15);
+            this.layoutMaster.Controls.Add(this.textRemarks, 1, 15);
             this.layoutMaster.Controls.Add(this.label1, 1, 14);
             this.layoutMaster.Controls.Add(this.datePickerEntryDate, 1, 1);
             this.layoutMaster.Controls.Add(this.label6, 1, 0);
@@ -113,15 +123,15 @@
             this.layoutMaster.Size = new System.Drawing.Size(475, 566);
             this.layoutMaster.TabIndex = 62;
             // 
-            // textBoxRemarks
+            // textRemarks
             // 
-            this.textBoxRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxRemarks.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxRemarks.Location = new System.Drawing.Point(34, 452);
-            this.textBoxRemarks.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
-            this.textBoxRemarks.Name = "textBoxRemarks";
-            this.textBoxRemarks.Size = new System.Drawing.Size(415, 27);
-            this.textBoxRemarks.TabIndex = 14;
+            this.textRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textRemarks.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textRemarks.Location = new System.Drawing.Point(34, 452);
+            this.textRemarks.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
+            this.textRemarks.Name = "textRemarks";
+            this.textRemarks.Size = new System.Drawing.Size(415, 27);
+            this.textRemarks.TabIndex = 14;
             // 
             // label1
             // 
@@ -192,7 +202,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(419, 28);
             this.label14.TabIndex = 51;
-            this.label14.Text = "Product Code";
+            this.label14.Text = "Item Code";
             this.label14.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // textCommodityName
@@ -278,6 +288,7 @@
             // 
             this.comboCommodityID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboCommodityID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboCommodityID.Editable = true;
             this.comboCommodityID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboCommodityID.FormattingEnabled = true;
             this.comboCommodityID.Location = new System.Drawing.Point(34, 156);
@@ -297,7 +308,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(419, 28);
             this.label8.TabIndex = 68;
-            this.label8.Text = "Product Name";
+            this.label8.Text = "Item Name";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // toolStripChildForm
@@ -305,30 +316,23 @@
             this.toolStripChildForm.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton2,
             this.toolStripSeparator1,
-            this.buttonApply});
+            this.buttonApply,
+            this.toolStripSeparator2,
+            this.toolStripButton2,
+            this.toolStripLabel1,
+            this.comboDiscontinued});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
             this.toolStripChildForm.Name = "toolStripChildForm";
-            this.toolStripChildForm.Size = new System.Drawing.Size(1309, 39);
+            this.toolStripChildForm.Size = new System.Drawing.Size(1309, 55);
             this.toolStripChildForm.TabIndex = 29;
             this.toolStripChildForm.Text = "toolStrip1";
             this.toolStripChildForm.Visible = false;
             // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources._20130106011449193_easyicon_cn_32;
-            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(118, 36);
-            this.toolStripButton2.Text = "Disconnect";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
             // 
             // buttonApply
             // 
@@ -336,9 +340,39 @@
             this.buttonApply.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonApply.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(204, 36);
+            this.buttonApply.Size = new System.Drawing.Size(204, 52);
             this.buttonApply.Text = "Applying for Production";
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources.Stop_Disabled;
+            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(148, 52);
+            this.toolStripButton2.Text = "Discontinued";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(33, 52);
+            this.toolStripLabel1.Text = "      ";
+            // 
+            // comboDiscontinued
+            // 
+            this.comboDiscontinued.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDiscontinued.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.comboDiscontinued.Items.AddRange(new object[] {
+            "Don\'t show discontinued batches",
+            "Show discontinued batches"});
+            this.comboDiscontinued.Name = "comboDiscontinued";
+            this.comboDiscontinued.Size = new System.Drawing.Size(270, 55);
             // 
             // naviBarMaster
             // 
@@ -376,55 +410,126 @@
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
-            // fastListBatchIndex
+            // fastBatchIndex
             // 
-            this.fastListBatchIndex.AllColumns.Add(this.olvColumn1);
-            this.fastListBatchIndex.AllColumns.Add(this.olvColumn2);
-            this.fastListBatchIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
-            this.olvColumn2});
-            this.fastListBatchIndex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastListBatchIndex.FullRowSelect = true;
-            this.fastListBatchIndex.HideSelection = false;
-            this.fastListBatchIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastListBatchIndex.Location = new System.Drawing.Point(0, 0);
-            this.fastListBatchIndex.Name = "fastListBatchIndex";
-            this.fastListBatchIndex.OwnerDraw = true;
-            this.fastListBatchIndex.ShowGroups = false;
-            this.fastListBatchIndex.Size = new System.Drawing.Size(832, 614);
-            this.fastListBatchIndex.TabIndex = 67;
-            this.fastListBatchIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastListBatchIndex.UseCompatibleStateImageBehavior = false;
-            this.fastListBatchIndex.UseFilterIndicator = true;
-            this.fastListBatchIndex.UseFiltering = true;
-            this.fastListBatchIndex.UseHotItem = true;
-            this.fastListBatchIndex.View = System.Windows.Forms.View.Details;
-            this.fastListBatchIndex.VirtualMode = true;
+            this.fastBatchIndex.AllColumns.Add(this.olvID);
+            this.fastBatchIndex.AllColumns.Add(this.olvEntryDate);
+            this.fastBatchIndex.AllColumns.Add(this.olvBatchCode);
+            this.fastBatchIndex.AllColumns.Add(this.olvCommodityCode);
+            this.fastBatchIndex.AllColumns.Add(this.olvCommodityName);
+            this.fastBatchIndex.AllColumns.Add(this.olvNextPackNo);
+            this.fastBatchIndex.AllColumns.Add(this.olvNextCartonNo);
+            this.fastBatchIndex.AllColumns.Add(this.olvNextPalletNo);
+            this.fastBatchIndex.AllColumns.Add(this.olvIsDefault);
+            this.fastBatchIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvID,
+            this.olvEntryDate,
+            this.olvBatchCode,
+            this.olvCommodityCode,
+            this.olvCommodityName,
+            this.olvNextPackNo,
+            this.olvNextCartonNo,
+            this.olvNextPalletNo,
+            this.olvIsDefault});
+            this.fastBatchIndex.Cursor = System.Windows.Forms.Cursors.Default;
+            this.fastBatchIndex.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastBatchIndex.FullRowSelect = true;
+            this.fastBatchIndex.HideSelection = false;
+            this.fastBatchIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastBatchIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastBatchIndex.Name = "fastBatchIndex";
+            this.fastBatchIndex.OwnerDraw = true;
+            this.fastBatchIndex.ShowGroups = false;
+            this.fastBatchIndex.Size = new System.Drawing.Size(832, 614);
+            this.fastBatchIndex.TabIndex = 67;
+            this.fastBatchIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastBatchIndex.UseCompatibleStateImageBehavior = false;
+            this.fastBatchIndex.UseFilterIndicator = true;
+            this.fastBatchIndex.UseFiltering = true;
+            this.fastBatchIndex.UseHotItem = true;
+            this.fastBatchIndex.View = System.Windows.Forms.View.Details;
+            this.fastBatchIndex.VirtualMode = true;
             // 
-            // olvColumn1
+            // olvID
             // 
-            this.olvColumn1.AspectName = "Reference";
-            this.olvColumn1.Width = 120;
+            this.olvID.Text = "";
+            this.olvID.Width = 0;
             // 
-            // olvColumn2
+            // olvEntryDate
             // 
-            this.olvColumn2.AspectName = "CommodityCode";
-            this.olvColumn2.Width = 150;
+            this.olvEntryDate.AspectName = "EntryDate";
+            this.olvEntryDate.AspectToStringFormat = "{0:d}";
+            this.olvEntryDate.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvEntryDate.Text = "Date";
+            this.olvEntryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvEntryDate.Width = 90;
+            // 
+            // olvBatchCode
+            // 
+            this.olvBatchCode.AspectName = "BatchCode";
+            this.olvBatchCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvBatchCode.Text = "Batch #";
+            this.olvBatchCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvBatchCode.Width = 70;
+            // 
+            // olvCommodityCode
+            // 
+            this.olvCommodityCode.AspectName = "CommodityCode";
+            this.olvCommodityCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityCode.Text = "Item Code";
+            this.olvCommodityCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityCode.Width = 90;
+            // 
+            // olvCommodityName
+            // 
+            this.olvCommodityName.AspectName = "CommodityName";
+            this.olvCommodityName.Text = "Item Name";
+            this.olvCommodityName.Width = 230;
+            // 
+            // olvNextPackNo
+            // 
+            this.olvNextPackNo.AspectName = "NextPackNo";
+            this.olvNextPackNo.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvNextPackNo.Text = "Next Pack";
+            this.olvNextPackNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvNextPackNo.Width = 70;
+            // 
+            // olvNextCartonNo
+            // 
+            this.olvNextCartonNo.AspectName = "NextCartonNo";
+            this.olvNextCartonNo.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvNextCartonNo.Text = "Next Carton";
+            this.olvNextCartonNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvNextCartonNo.Width = 70;
+            // 
+            // olvNextPalletNo
+            // 
+            this.olvNextPalletNo.AspectName = "NextPalletNo";
+            this.olvNextPalletNo.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvNextPalletNo.Text = "Next Pallet";
+            this.olvNextPalletNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvNextPalletNo.Width = 70;
+            // 
+            // olvIsDefault
+            // 
+            this.olvIsDefault.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvIsDefault.Text = "";
+            this.olvIsDefault.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvIsDefault.Width = 30;
             // 
             // Batches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 614);
-            this.Controls.Add(this.fastListBatchIndex);
+            this.Controls.Add(this.fastBatchIndex);
             this.Controls.Add(this.naviBarMaster);
             this.Controls.Add(this.toolStripChildForm);
             this.Name = "Batches";
             this.Text = "Batches";
-            this.Load += new System.EventHandler(this.Batches_Load);
             this.Controls.SetChildIndex(this.toolStripChildForm, 0);
             this.Controls.SetChildIndex(this.naviBarMaster, 0);
-            this.Controls.SetChildIndex(this.fastListBatchIndex, 0);
+            this.Controls.SetChildIndex(this.fastBatchIndex, 0);
             this.layoutMaster.ResumeLayout(false);
             this.layoutMaster.PerformLayout();
             this.toolStripChildForm.ResumeLayout(false);
@@ -433,7 +538,7 @@
             this.naviBand1.ClientArea.ResumeLayout(false);
             this.naviBand1.ClientArea.PerformLayout();
             this.naviBand1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fastListBatchIndex)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastBatchIndex)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,7 +548,7 @@
 
         private System.Windows.Forms.TableLayoutPanel layoutMaster;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxRemarks;
+        private System.Windows.Forms.TextBox textRemarks;
         private System.Windows.Forms.DateTimePicker datePickerEntryDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxCode;
@@ -464,9 +569,19 @@
         private Guifreaks.Navisuite.NaviBar naviBarMaster;
         private System.Windows.Forms.Label label8;
         private Guifreaks.Navisuite.NaviBand naviBand1;
-        private BrightIdeasSoftware.FastObjectListView fastListBatchIndex;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private BrightIdeasSoftware.FastObjectListView fastBatchIndex;
+        private BrightIdeasSoftware.OLVColumn olvBatchCode;
+        private BrightIdeasSoftware.OLVColumn olvCommodityCode;
+        private BrightIdeasSoftware.OLVColumn olvCommodityName;
+        private BrightIdeasSoftware.OLVColumn olvNextPackNo;
+        private BrightIdeasSoftware.OLVColumn olvNextCartonNo;
+        private BrightIdeasSoftware.OLVColumn olvNextPalletNo;
+        private BrightIdeasSoftware.OLVColumn olvID;
+        private BrightIdeasSoftware.OLVColumn olvEntryDate;
+        private BrightIdeasSoftware.OLVColumn olvIsDefault;
+        private System.Windows.Forms.ToolStripComboBox comboDiscontinued;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
 
     }
 }

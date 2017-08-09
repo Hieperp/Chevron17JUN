@@ -23,7 +23,7 @@ using TotalSmartCoding.Views.Mains;
 
 namespace TotalSmartCoding.Views.Productions
 {
-    public partial class SmartCoding : Form, IMergeToolStrip
+    public partial class SmartCoding : Form, IToolstripMerge
     {
         #region Declaration
 
@@ -102,6 +102,8 @@ namespace TotalSmartCoding.Views.Productions
                 this.splitPackQueue.SplitterDistance = this.SplitterDistanceMatching();
                 this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
 
+                this.buttonCartonNoreadNow.Visible = GlobalEnums.OnTestScanner;
+                this.buttonPalletReceivedNow.Visible = GlobalEnums.OnTestScanner;
             }
             catch (Exception exception)
             {
@@ -165,7 +167,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
-        public ToolStrip ChildToolStrip { get { return this.toolStripChildForm; } }
+        public ToolStrip toolstripChild { get { return this.toolStripChildForm; } }
 
         private int SplitterDistanceQuality()
         {

@@ -25,6 +25,7 @@ namespace TotalDTO
             }
         }
 
+        public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.UnKnown; } }
 
         public virtual int GetID() { return 0; }
 

@@ -38,7 +38,7 @@ namespace TotalSmartCoding.Views.Sales
         {
             InitializeComponent();
 
-            this.ChildToolStrip = this.toolStripChildForm;
+            this.toolstripChild = this.toolStripChildForm;
             //this.FastObjectListView = this.fastObjectListViewIndex;
 
             var deliveryAdviceAPIRepository = CommonNinject.Kernel.Get<IDeliveryAdviceAPIRepository>();

@@ -32,6 +32,8 @@ using TotalModel.Models;
 using TotalSmartCoding.Controllers.APIs.Commons;
 using TotalCore.Repositories.Commons;
 using TotalModel.Interfaces;
+using BrightIdeasSoftware;
+using TotalSmartCoding.Properties;
 
 
 
@@ -39,21 +41,32 @@ namespace TotalSmartCoding.Views.Productions
 {
     public partial class Batches : BaseView
     {
-        private BatchController batchController;
-        private BatchAPIs batchAPIs;
         private FillingData fillingData;
-        private bool isAllQueuesEmpty;
+        private bool allQueueEmpty;
 
-        public Batches(FillingData fillingData, bool isAllQueuesEmpty)
+        private BatchAPIs batchAPIs;
+        private BatchController batchController;
+
+        public Batches(FillingData fillingData, bool allQueueEmpty)
             : base()
         {
             InitializeComponent();
+            this.comboDiscontinued.SelectedIndex = 0;
 
             this.fillingData = fillingData;
-            this.isAllQueuesEmpty = isAllQueuesEmpty;
+            this.allQueueEmpty = allQueueEmpty;
 
-            this.ChildToolStrip = this.toolStripChildForm;
-            this.fastListIndex = this.fastListBatchIndex;
+            this.toolstripChild = this.toolStripChildForm;
+            this.fastListIndex = this.fastBatchIndex;
+            
+
+            this.olvIsDefault.AspectGetter = delegate(object row)
+            {// IsDefault indicator column
+                if (((BatchIndex)row).IsDefault)
+                    return "IsDefault";
+                return "";
+            };
+            this.olvIsDefault.Renderer = new MappedImageRenderer(new Object[] { "IsDefault", Resources.Play_Normal_16 });
 
 
             this.batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
@@ -63,15 +76,31 @@ namespace TotalSmartCoding.Views.Productions
 
             this.baseController = this.batchController;
         }
+        
+        private void batchController_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.NotifyPropertyChanged(e.PropertyName);
+        }
 
-        private void Batches_Load(object sender, EventArgs e)
+
+        protected override void InitializeTabControl()
         {
             try
             {
-                //InitializeCommonControlBinding();
+                CustomTabControl customTabBatch = new CustomTabControl();
+                //customTabControlCustomerChannel.ImageList = this.imageListTabControl;
 
+                customTabBatch.Font = this.textBoxCode.Font;
+                customTabBatch.DisplayStyle = TabStyle.VisualStudio;
+                customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
-                //InitializeReadOnlyModeBinding();
+                customTabBatch.TabPages.Add("Batch", "Batch Information    ");
+                customTabBatch.TabPages[0].Controls.Add(this.layoutMaster);
+                
+                this.naviBarMaster.Bands[0].ClientArea.Controls.Add(customTabBatch);
+
+                customTabBatch.Dock = DockStyle.Fill;
+                this.layoutMaster.Dock = DockStyle.Fill;
             }
             catch (Exception exception)
             {
@@ -79,32 +108,29 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-
-        private void batchController_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            this.NotifyPropertyChanged(e.PropertyName);
-        }
-
-
         Binding bindingEntryDate;
         Binding bindingCode;
-
-        Binding bindingCommodityID;
 
         Binding bindingNextPackNo;
         Binding bindingNextCartonNo;
         Binding bindingNextPalletNo;
 
+        Binding bindingRemarks;
+
+        Binding bindingCommodityID;
+
         protected override void InitializeCommonControlBinding()
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingCode = this.textBoxCode.DataBindings.Add("Text", this.batchController.BatchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.batchController.BatchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingCode = this.textBoxCode.DataBindings.Add("Text", this.batchController.BatchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.bindingNextPackNo = this.textNextPackNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingNextCartonNo = this.textNextCartonNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingNextPalletNo = this.textNextPalletNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPalletNo", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            this.bindingRemarks = this.textRemarks.DataBindings.Add("Text", this.batchController.BatchViewModel, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.textCommodityName.DataBindings.Add("Text", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
 
@@ -115,46 +141,17 @@ namespace TotalSmartCoding.Views.Productions
             this.comboCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
             this.bindingCommodityID = this.comboCommodityID.DataBindings.Add("SelectedValue", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 
-
-
-
-            this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-            this.bindingCommodityID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingNextPackNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingNextCartonNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingNextPalletNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+            this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+            this.bindingCommodityID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
         }
-
-
-        protected override void InitializeTabControl()
-        {
-            try
-            {
-                CustomTabControl customTabControlCustomerChannel = new CustomTabControl();
-                //customTabControlCustomerChannel.ImageList = this.imageListTabControl;
-
-
-                customTabControlCustomerChannel.TabPages.Add("CustomerChannel", "Batch Information    ");
-                customTabControlCustomerChannel.TabPages[0].Controls.Add(this.layoutMaster);
-                customTabControlCustomerChannel.Font = this.label1.Font;
-
-                this.layoutMaster.Dock = DockStyle.Fill;
-
-                customTabControlCustomerChannel.DisplayStyle = TabStyle.VisualStudio;
-                customTabControlCustomerChannel.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
-                this.naviBarMaster.Bands[0].ClientArea.Controls.Add(customTabControlCustomerChannel);
-                customTabControlCustomerChannel.Dock = DockStyle.Fill;
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-        }
-
-
-
 
         protected override void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
@@ -166,83 +163,13 @@ namespace TotalSmartCoding.Views.Productions
                     CommodityBase commodityBase = (CommodityBase)this.comboCommodityID.SelectedItem;
                     this.batchController.BatchViewModel.CommodityName = commodityBase.Name;
                 }
-
-
-                ////    int addressAreaID;
-                ////    DataRow selectedDataRow = ((DataRowView)this.comboCommodityID.SelectedItem).Row;
-                ////    if (selectedDataRow != null && int.TryParse(this.lfGetColumnValueMapFieldID(GlobalEnum.EIColumnID.EIAddressAreaID, (string)selectedDataRow["ColumnFilterValueOriginal"]), out addressAreaID))
-                ////        if (this.AddressAreaID != addressAreaID && addressAreaID > 0)//DIEU KIEN addressAreaID > 0 NHAM MUC DICH: => KHONG LOAD [All Territory]: TUC this.AddressAreaID = 0: NHAM KHONG LAM CHAM QUA TRINH NAY
-                ////            this.AddressAreaID = addressAreaID;
-                ////        else
-                ////            this.lShowMapping();
-                ////    else
-                ////        this.lShowMapping();
-
-                //this.textCommodityName.ReadOnly = true;
-                //this.comboCommodityID.Enabled = true;
-                //this.datePickerEntryDate.Enabled = true;
-
-
-
-                ////KeyValuePair<int, string> keyValuePair = (KeyValuePair<int, string>)this.toolStripComboBoxListingOptions.ComboBox.SelectedItem;
-
-                ////this.toolStripComboBoxAddressAreaID.Visible = (ListingOptions)keyValuePair.Key == ListingOptions.AddressArea;
-                ////this.toolStripComboBoxCustomerCategoryID.Visible = (ListingOptions)keyValuePair.Key == ListingOptions.CustomerCategory;
-                ////this.toolStripComboBoxCustomerChannelID.Visible = (ListingOptions)keyValuePair.Key == ListingOptions.CustomerChannel;
-                ////this.toolStripComboBoxCustomerTypeID.Visible = (ListingOptions)keyValuePair.Key == ListingOptions.CustomerType;
-
-                ////this.toolStripLabelFilter.Visible = (ListingOptions)keyValuePair.Key == ListingOptions.AddressArea || (ListingOptions)keyValuePair.Key == ListingOptions.CustomerCategory || (ListingOptions)keyValuePair.Key == ListingOptions.CustomerChannel || (ListingOptions)keyValuePair.Key == ListingOptions.CustomerType;
-
-
-
-
-
-
-                ////KeyValuePair<int, string> keyValuePair = (KeyValuePair<int, string>)this.toolStripComboBoxListingOptions.ComboBox.SelectedItem;
-
-                ////switch ((ListingOptions)keyValuePair.Key)
-                ////{
-                ////    case ListingOptions.AddressArea:
-                ////        if (this.FilterAddressAreaID < 0)
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameEmptyListing();
-                ////        else
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameAddressAreaListing(this.FilterAddressAreaID, this.FilterSalesmenID);
-                ////        break;
-                ////    case ListingOptions.CustomerCategory:
-                ////        if (this.FilterCustomerCategoryID < 0)
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameEmptyListing();
-                ////        else
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameCustomerCategoryListing(this.FilterCustomerCategoryID, this.FilterSalesmenID);
-                ////        break;
-                ////    case ListingOptions.CustomerChannel:
-                ////        if (this.FilterCustomerChannelID < 0)
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameEmptyListing();
-                ////        else
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameCustomerChannelListing(this.FilterCustomerChannelID, this.FilterSalesmenID);
-                ////        break;
-                ////    case ListingOptions.CustomerType:
-                ////        if (this.FilterCustomerTypeID < 0)
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameEmptyListing();
-                ////        else
-                ////            listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameCustomerTypeListing(this.FilterCustomerTypeID, this.FilterSalesmenID);
-                ////        break;
-                ////    case ListingOptions.MasterCustomer:
-                ////        listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameMasterCustomerListing(this.FilterSalesmenID);
-                ////        break;
-                ////    case ListingOptions.TenderCustomer:
-                ////        listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameTenderCustomerListing(this.FilterSalesmenID);
-                ////        break;
-                ////    default:
-                ////        listCustomerNameListingDataTable = this.listCustomerNameBLL.CustomerNameEmptyListing();
-                ////        break;
-                ////}
-
             }
         }
 
+
         public override void Loading()
-        {
-            this.fastListBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes());
+        {            
+            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes());
             base.Loading();
         }
 
@@ -250,9 +177,9 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (this.isAllQueuesEmpty && this.fastListBatchIndex.SelectedObject != null)
+                if (this.allQueueEmpty && this.fastBatchIndex.SelectedObject != null)
                 {
-                    BatchIndex batchIndex = (BatchIndex)fastListBatchIndex.SelectedObject;
+                    BatchIndex batchIndex = (BatchIndex)fastBatchIndex.SelectedObject;
                     if (batchIndex != null) { Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData); this.MdiParent.DialogResult = System.Windows.Forms.DialogResult.OK; }
                 }
             }
@@ -261,39 +188,5 @@ namespace TotalSmartCoding.Views.Productions
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
         }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            GlobalExceptionHandler.ShowExceptionMessageBox(this, this.batchController.BatchViewModel.BatchID.ToString());
-            //if (this.comboBox1.AutoCompleteSource == AutoCompleteSource.None)
-            //    this.comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            //else
-            //    this.comboBox1.AutoCompleteSource = AutoCompleteSource.None;
-
-            //if (this.comboBox1.AutoCompleteMode == AutoCompleteMode.None)
-            //    this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //else
-            //    this.comboBox1.AutoCompleteMode = AutoCompleteMode.None;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

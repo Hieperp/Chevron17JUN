@@ -104,6 +104,7 @@
     <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
     <Compile Include="CommonLibraries\CommonNinject.cs" />
     <Compile Include="CommonLibraries\IOSerialPort.cs" />
+    <Compile Include="CommonLibraries\OLVHelpers.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
     <Compile Include="Controllers\APIs\Commons\CommodityAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIController.cs" />
@@ -687,6 +688,8 @@
     <None Include="Resources\DataSave.ico" />
     <None Include="Resources\DataEsc.ico" />
     <None Include="Resources\Data-Lock-24.png" />
+    <None Include="Resources\Filter-Delete-32.png" />
+    <None Include="Resources\Edit-clear.ico" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
     <None Include="Resources\palet031.ico" />
@@ -718,6 +721,9 @@
     <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-bookmark-new.ico" />
     <None Include="Resources\New.ico" />
     <None Include="Resources\Save.ico" />
+    <None Include="Resources\Play-Normal-16.png" />
+    <None Include="Resources\Play_Normal_Red_16.png" />
+    <None Include="Resources\Stop_Disabled.ico" />
     <Content Include="Resources\Toolbar Image1.png" />
     <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />

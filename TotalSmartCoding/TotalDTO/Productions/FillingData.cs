@@ -170,7 +170,7 @@ namespace TotalDTO.Productions
             {
                 if (this.batchCode != value)
                 {
-                    if (value.Length == 6)
+                    if (value.Length == 8)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.batchCode, o => o.BatchCode, value);
 
