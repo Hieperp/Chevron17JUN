@@ -67,7 +67,7 @@ namespace TotalSmartCoding.Views.Productions
                 return "";
             };
             this.olvIsDefault.Renderer = new MappedImageRenderer(new Object[] { "IsDefault", Resources.Play_Normal_16 });
-
+            this.buttonApply.Enabled = allQueueEmpty;
 
             this.batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
@@ -76,7 +76,18 @@ namespace TotalSmartCoding.Views.Productions
 
             this.baseController = this.batchController;
         }
-        
+
+        protected override void NotifyPropertyChanged(string propertyName)
+        {
+            base.NotifyPropertyChanged(propertyName);
+
+            if (propertyName == "ReadonlyMode")
+            {
+                this.buttonApply.Enabled = this.allQueueEmpty && this.ReadonlyMode;
+                this.buttonDiscontinued.Enabled = this.Newable && this.ReadonlyMode;
+            }
+        }
+
         private void batchController_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.NotifyPropertyChanged(e.PropertyName);
@@ -179,6 +190,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 if (this.allQueueEmpty && this.fastBatchIndex.SelectedObject != null)
                 {
+                    if (MessageBox.Show(this, "Are you sure you want to delete " + this.baseController.BaseDTO.Reference + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                        if (this.baseController.Delete(this.baseController.BaseDTO.GetID()))
+                            this.Loading();
                     BatchIndex batchIndex = (BatchIndex)fastBatchIndex.SelectedObject;
                     if (batchIndex != null) { Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData); this.MdiParent.DialogResult = System.Windows.Forms.DialogResult.OK; }
                 }
@@ -187,6 +201,11 @@ namespace TotalSmartCoding.Views.Productions
             {
                 GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             }
+        }
+
+        private void buttonDiscontinued_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

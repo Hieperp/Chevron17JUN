@@ -23,6 +23,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.BatchEditable();
             this.BatchPostSaveValidate();
 
+            this.BatchToggleIsDefault();
+            this.BatchToggleInActive();
             this.BatchInitReference();
 
 
@@ -71,6 +73,42 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchPostSaveValidate", queryArray);
         }
+
+        private void BatchToggleIsDefault()
+        {
+            string queryString = " @EntityID int, @IsDefault bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       UPDATE      Batches  SET IsDefault = ~@IsDefault WHERE BatchID <> @EntityID AND IsDefault =  @IsDefault" + "\r\n";
+            queryString = queryString + "       UPDATE      Batches  SET IsDefault =  @IsDefault WHERE BatchID  = @EntityID AND IsDefault = ~@IsDefault" + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Không thể cài đặt batch này cho sản xuất' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleIsDefault", queryString);
+        }
+
+        private void BatchToggleInActive()
+        {
+            string queryString = " @EntityID int, @InActive bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       UPDATE      Batches  SET InActive = @InActive, InActiveDate = GetDate() WHERE BatchID = @EntityID AND InActive = ~@InActive" + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Batch không tồn tại hoặc ' + iif(@InActive = 0, 'đang', 'dừng')  + ' sản xuất' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleInActive", queryString);
+        }
+
 
         private void BatchInitReference()
         {

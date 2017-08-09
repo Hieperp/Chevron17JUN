@@ -335,7 +335,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this.fillingData, true));
+                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this.fillingData, true)); //this.scannerController.AllQueueEmpty
 
                 masterMDI.ShowDialog();
 

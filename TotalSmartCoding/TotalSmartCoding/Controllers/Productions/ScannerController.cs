@@ -182,6 +182,8 @@ namespace TotalSmartCoding.Controllers.Productions
         public int CartonQueueCount { get { return this.cartonQueue.Count; } }
         public int PalletQueueCount { get { return this.palletQueue.Count; } }
 
+        public bool AllQueueEmpty { get { return this.PackQueueCount == 0 && this.packsetQueue.Count == 0 && this.CartonPendingQueueCount == 0 && this.CartonQueueCount == 0 && this.cartonsetQueue.Count == 0 && this.PalletQueueCount == 0; } }
+
         #endregion Public Properties
 
 

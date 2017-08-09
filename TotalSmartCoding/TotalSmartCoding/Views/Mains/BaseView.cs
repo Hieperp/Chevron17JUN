@@ -80,15 +80,24 @@ namespace TotalSmartCoding.Views.Mains
 
             foreach (Control control in controlList)
             {
-                if (control is TextBox || control is CustomBox) control.DataBindings.Add("Readonly", this, "ReadonlyMode");
-                else if (control is DateTimePicker) control.DataBindings.Add("Enabled", this, "EditableMode");
-                else if (control is DataGridView)
+                IControlExtension controlExtension = control as IControlExtension;
+                if (controlExtension != null)
                 {
-                    control.DataBindings.Add("Readonly", this, "ReadonlyMode");
-                    control.DataBindings.Add("AllowUserToAddRows", this, "EditableMode");
-                    control.DataBindings.Add("AllowUserToDeleteRows", this, "EditableMode");
+                    if (controlExtension.Editable)
+                    {
+                        if (control is DataGridView)
+                        {
+                            control.DataBindings.Add("AllowUserToAddRows", this, "EditableMode");
+                            control.DataBindings.Add("AllowUserToDeleteRows", this, "EditableMode");
+                        }
+
+                        control.DataBindings.Add("ReadOnly", this, "ReadonlyMode");
+                    }
+                    else
+                        controlExtension.ReadOnly = true;
                 }
             }
+
             //this.fastListIndex.DataBindings.Add("Enabled", this, "ReadonlyMode"); //HERE: WE DON'T LOCK fastListIndex.Enabled TO ReadonlyMode, INSTEAD: WE HANDLE fastListIndex.MouseClick AND fastListIndex.KeyDown TO KEEP THE CURRENT ROW OF fastListIndex WHEN EditableMode
         }
         #endregion CONTRUCTOR
@@ -162,7 +171,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void NotifyPropertyChanged(string propertyName)
+        protected virtual void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -220,6 +229,7 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     this.editableMode = value && this.Editable;
                     this.NotifyPropertyChanged("EditableMode");
+                    this.NotifyPropertyChanged("ReadonlyMode");
                 }
             }
         }

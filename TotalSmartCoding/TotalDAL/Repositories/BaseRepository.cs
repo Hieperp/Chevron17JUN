@@ -25,7 +25,7 @@ namespace TotalDAL.Repositories
 
             //if (!GlobalVariables.shouldRestoreProcedure) return;
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Commons.Commodity commodity = new Helpers.SqlProgrammability.Commons.Commodity(totalSmartCodingEntities);
             commodity.RestoreProcedure();
