@@ -44,6 +44,8 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="EditedDate" Type="datetime" Nullable="false" />
           <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="InActiveDate" Type="datetime" />
         </EntityType>
         <EntityType Name="BinLocations">
           <Key>
@@ -1048,6 +1050,15 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="BatchPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="Approved" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="BatchToggleVoid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="InActive" Type="bit" Mode="In" />
+          <Parameter Name="VoidTypeID" Type="int" Mode="In" />
+        </Function>
         <Function Name="DeliveryAdviceApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -1935,6 +1946,15 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </FunctionImport>
           <FunctionImport Name="GetCommodityBases" ReturnType="Collection(TotalSmartCodingModel.CommodityBase)">
             </FunctionImport>
+          <FunctionImport Name="BatchToggleApproved">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="Approved" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="BatchToggleVoid">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="InActive" Mode="In" Type="Boolean" />
+            <Parameter Name="VoidTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
           <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
@@ -2993,6 +3013,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="IsDefault" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Batches_Commodities">
           <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -3761,6 +3783,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -3806,7 +3830,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="BatchToggleApproved" FunctionName="TotalSmartCodingModel.Store.BatchToggleApproved" />
+          <FunctionImportMapping FunctionImportName="BatchToggleVoid" FunctionName="TotalSmartCodingModel.Store.BatchToggleVoid" />
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

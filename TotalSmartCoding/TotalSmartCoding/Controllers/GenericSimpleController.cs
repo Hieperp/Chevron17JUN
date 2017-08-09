@@ -280,32 +280,38 @@ namespace TotalSmartCoding.Controllers
 
 
         #region Approve/ UnApprove
-        public virtual void Approve(int? id)
+        public virtual TSimpleViewModel Approve(int? id)
         {
-            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
-
+            if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
             base.AddRequireJsOptions();
+            
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, true);
-            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (simpleViewModel == null) throw new System.ArgumentException("Lỗi", "Dữ liệu không tồn tại hoặc không có quyền truy cập.");
 
             if (!simpleViewModel.Approved)
                 if (this.GenericService.GetApprovalPermitted(simpleViewModel.OrganizationalUnitID))
                     simpleViewModel.Approvable = this.GenericService.Approvable(simpleViewModel);
                 else //USER DON'T HAVE PERMISSION TO DO
-                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
 
             if (simpleViewModel.Approved)
                 if (this.GenericService.GetUnApprovalPermitted(simpleViewModel.OrganizationalUnitID))
                     simpleViewModel.UnApprovable = this.GenericService.UnApprovable(simpleViewModel);
                 else //USER DON'T HAVE PERMISSION TO DO
-                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
 
-            //-----return View(simpleViewModel);
+            return simpleViewModel;
         }
 
 
-        public virtual void ApproveConfirmed(TSimpleViewModel simpleViewModel)
+        public virtual bool ApproveConfirmed(TSimpleViewModel simpleViewModel)
         {
+            return this.GenericService.ToggleApproved(simpleViewModel);
+
+
+
+
+
             try
             {
                 if (this.GenericService.ToggleApproved(simpleViewModel))

@@ -646,5 +646,35 @@ namespace TotalModel.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityBase>("GetCommodityBases");
         }
+    
+        public virtual int BatchToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchToggleApproved", entityIDParameter, approvedParameter);
+        }
+    
+        public virtual int BatchToggleVoid(Nullable<int> entityID, Nullable<bool> inActive, Nullable<int> voidTypeID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var inActiveParameter = inActive.HasValue ?
+                new ObjectParameter("InActive", inActive) :
+                new ObjectParameter("InActive", typeof(bool));
+    
+            var voidTypeIDParameter = voidTypeID.HasValue ?
+                new ObjectParameter("VoidTypeID", voidTypeID) :
+                new ObjectParameter("VoidTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchToggleVoid", entityIDParameter, inActiveParameter, voidTypeIDParameter);
+        }
     }
 }

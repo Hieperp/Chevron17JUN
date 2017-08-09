@@ -23,8 +23,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.BatchEditable();
             this.BatchPostSaveValidate();
 
-            this.BatchToggleIsDefault();
-            this.BatchToggleInActive();
+            this.BatchToggleApproved();
+            this.BatchToggleVoid();
             this.BatchInitReference();
 
 
@@ -74,14 +74,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchPostSaveValidate", queryArray);
         }
 
-        private void BatchToggleIsDefault()
+        private void BatchToggleApproved()
         {
-            string queryString = " @EntityID int, @IsDefault bit " + "\r\n";
+            string queryString = " @EntityID int, @Approved bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       UPDATE      Batches  SET IsDefault = ~@IsDefault WHERE BatchID <> @EntityID AND IsDefault =  @IsDefault" + "\r\n";
-            queryString = queryString + "       UPDATE      Batches  SET IsDefault =  @IsDefault WHERE BatchID  = @EntityID AND IsDefault = ~@IsDefault" + "\r\n";
+            queryString = queryString + "       UPDATE      Batchs  SET IsDefault = ~@Approved WHERE BatchID <> @EntityID AND IsDefault =  @Approved" + "\r\n";
+            queryString = queryString + "       UPDATE      Batchs  SET IsDefault =  @Approved WHERE BatchID =  @EntityID AND IsDefault = ~@Approved" + "\r\n";
 
             queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
@@ -89,16 +89,16 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
             queryString = queryString + "           END " + "\r\n";
 
-            this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleIsDefault", queryString);
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleApproved", queryString);
         }
 
-        private void BatchToggleInActive()
+        private void BatchToggleVoid()
         {
-            string queryString = " @EntityID int, @InActive bit " + "\r\n";
+            string queryString = " @EntityID int, @InActive bit, @VoidTypeID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       UPDATE      Batches  SET InActive = @InActive, InActiveDate = GetDate() WHERE BatchID = @EntityID AND InActive = ~@InActive" + "\r\n";
+            queryString = queryString + "       UPDATE      Batchs  SET InActive = @InActive, InActiveDate = GetDate() WHERE BatchID = @EntityID AND InActive = ~@InActive" + "\r\n";
 
             queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
@@ -106,9 +106,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
             queryString = queryString + "           END " + "\r\n";
 
-            this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleInActive", queryString);
-        }
 
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleVoid", queryString);
+        }
 
         private void BatchInitReference()
         {

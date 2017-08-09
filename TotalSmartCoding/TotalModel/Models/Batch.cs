@@ -29,6 +29,8 @@ namespace TotalModel.Models
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime EditedDate { get; set; }
         public bool IsDefault { get; set; }
+        public bool InActive { get; set; }
+        public Nullable<System.DateTime> InActiveDate { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FillingLine FillingLine { get; set; }
