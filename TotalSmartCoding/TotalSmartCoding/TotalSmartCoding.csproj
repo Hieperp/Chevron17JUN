@@ -677,9 +677,6 @@
     <None Include="Resources\Fuel-icon-24.png" />
     <None Include="Resources\gk420t.png" />
     <None Include="Resources\Avosoft-Toolbar-Printer.ico" />
-    <None Include="Resources\Dryicons-Aesthetica-2-Lock-disabled.ico" />
-    <None Include="Resources\Edit.ico" />
-    <None Include="Resources\Esc1.ico" />
     <None Include="Resources\DataLock.ico" />
     <None Include="Resources\DataLock-24.png" />
     <None Include="Resources\DataNew.ico" />
@@ -713,14 +710,7 @@
     <None Include="Resources\Numbers-2.ico" />
     <None Include="Resources\Numbers-3.ico" />
     <None Include="Resources\Numbers-4.ico" />
-    <None Include="Resources\Shlyapnikova-Toolbar-Lock.ico" />
-    <None Include="Resources\lock-disabled-icon.png" />
     <None Include="Resources\lock-disabled-icon-24.png" />
-    <None Include="Resources\Janik-Baumgartner-Woocons-Lock-Closed%281%29.ico" />
-    <None Include="Resources\save-icon.png" />
-    <None Include="Resources\Oxygen-Icons.org-Oxygen-Actions-bookmark-new.ico" />
-    <None Include="Resources\New.ico" />
-    <None Include="Resources\Save.ico" />
     <None Include="Resources\Play-Normal-16.png" />
     <None Include="Resources\Play_Normal_Red_16.png" />
     <None Include="Resources\Stop_Disabled.ico" />
