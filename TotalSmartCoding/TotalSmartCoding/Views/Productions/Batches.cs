@@ -90,7 +90,7 @@ namespace TotalSmartCoding.Views.Productions
                 CustomTabControl customTabBatch = new CustomTabControl();
                 //customTabControlCustomerChannel.ImageList = this.imageListTabControl;
 
-                customTabBatch.Font = this.textBoxCode.Font;
+                customTabBatch.Font = this.textexCode.Font;
                 customTabBatch.DisplayStyle = TabStyle.VisualStudio;
                 customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
@@ -123,23 +123,23 @@ namespace TotalSmartCoding.Views.Productions
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.batchController.BatchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingCode = this.textBoxCode.DataBindings.Add("Text", this.batchController.BatchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.batchController.BatchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingCode = this.textexCode.DataBindings.Add("Text", this.batchController.BatchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.bindingNextPackNo = this.textNextPackNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingNextCartonNo = this.textNextCartonNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingNextPalletNo = this.textNextPalletNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPalletNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextPackNo = this.textexNextPackNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextCartonNo = this.textexNextCartonNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextPalletNo = this.textexNextPalletNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPalletNo", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.bindingRemarks = this.textRemarks.DataBindings.Add("Text", this.batchController.BatchViewModel, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.batchController.BatchViewModel, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.textCommodityName.DataBindings.Add("Text", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
+            this.textexCommodityName.DataBindings.Add("Text", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
 
             CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
 
-            this.comboCommodityID.DataSource = commodityAPIs.GetCommodityBases();
-            this.comboCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.Code);
-            this.comboCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
-            this.bindingCommodityID = this.comboCommodityID.DataBindings.Add("SelectedValue", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.combexCommodityID.DataSource = commodityAPIs.GetCommodityBases();
+            this.combexCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.Code);
+            this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
+            this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -158,9 +158,9 @@ namespace TotalSmartCoding.Views.Productions
             base.CommonControl_BindingComplete(sender, e);
             if (sender.Equals(this.bindingCommodityID))
             {
-                if (this.comboCommodityID.SelectedItem != null && this.batchController.BatchViewModel.TrackChanges)
+                if (this.combexCommodityID.SelectedItem != null && this.batchController.BatchViewModel.TrackChanges)
                 {
-                    CommodityBase commodityBase = (CommodityBase)this.comboCommodityID.SelectedItem;
+                    CommodityBase commodityBase = (CommodityBase)this.combexCommodityID.SelectedItem;
                     this.batchController.BatchViewModel.CommodityName = commodityBase.Name;
                 }
             }
