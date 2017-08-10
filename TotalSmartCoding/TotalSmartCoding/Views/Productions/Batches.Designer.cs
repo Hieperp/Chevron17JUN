@@ -337,11 +337,11 @@
             // 
             // buttonApply
             // 
-            this.buttonApply.Image = global::TotalSmartCoding.Properties.Resources._20130106011449193_easyicon_cn_32;
+            this.buttonApply.Image = global::TotalSmartCoding.Properties.Resources.Play_Normal;
             this.buttonApply.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonApply.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(204, 52);
+            this.buttonApply.Size = new System.Drawing.Size(220, 52);
             this.buttonApply.Text = "Applying for Production";
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 

@@ -599,11 +599,17 @@ namespace TotalSmartCoding.Views.Productions
 
         private string GetSerialNumber(string printedBarcode)
         {
-            if (printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString()) == 0) printedBarcode = "";
+            if (printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString()) == 0) printedBarcode = ""; //10-AUG-2017: WHAT IS GlobalVariables.doubleTabChar.ToString()???
             //else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
             else
-                if (printedBarcode.Length >= 29) printedBarcode = printedBarcode.Substring(23, 6); //Char[3][4][5]...[9]: Serial Number
-                else if (printedBarcode.Length >= 12) printedBarcode = printedBarcode.Substring(6, 5);
+                if (printedBarcode.Length >= 29) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 6 - 1, 6);
+
+            //////--BP CASTROL
+            ////if (printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString()) == 0) printedBarcode = "";
+            //////else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
+            ////else
+            ////    if (printedBarcode.Length >= 29) printedBarcode = printedBarcode.Substring(23, 6); //Char[3][4][5]...[9]: Serial Number
+            ////    else if (printedBarcode.Length >= 12) printedBarcode = printedBarcode.Substring(6, 5);
 
             return printedBarcode;
         }

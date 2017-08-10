@@ -3,7 +3,7 @@
     public static class GlobalEnums
     {
 
-        public static bool OnTestScanner = false;
+        public static bool OnTestScanner = true;
         public static bool OnTestPalletScanner = true; //WHEN REAL TEST WITHOUT PalletScanner
 
         public static bool OnTestPrinter = true;

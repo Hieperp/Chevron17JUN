@@ -390,7 +390,7 @@ namespace TotalDTO.Productions
 
         public string SecondLineA1(bool isReadableText)
         {
-            return this.BatchCode;
+            return this.BatchCode.Substring(0, 6);
         }
 
         public string SecondLineA2(bool isReadableText)
