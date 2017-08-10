@@ -652,11 +652,11 @@
             // toolStripButton15
             // 
             this.toolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton15.Image = global::TotalSmartCoding.Properties.Resources.Barcode_green_32;
+            this.toolStripButton15.Image = global::TotalSmartCoding.Properties.Resources.Barcode2D;
             this.toolStripButton15.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton15.Name = "toolStripButton15";
-            this.toolStripButton15.Size = new System.Drawing.Size(36, 52);
+            this.toolStripButton15.Size = new System.Drawing.Size(52, 52);
             this.toolStripButton15.Text = "toolStripButton3";
             this.toolStripButton15.Click += new System.EventHandler(this.timerNmvnBackup_Tick);
             // 

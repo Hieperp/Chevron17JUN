@@ -93,6 +93,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _2D_Barcode {
+            get {
+                object obj = ResourceManager.GetObject("2D-Barcode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _3floppy_mount {
             get {
                 object obj = ResourceManager.GetObject("3floppy-mount", resourceCulture);
@@ -426,6 +436,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap barcode_reader {
             get {
                 object obj = ResourceManager.GetObject("barcode-reader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Barcode2D {
+            get {
+                object obj = ResourceManager.GetObject("Barcode2D", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
