@@ -12,91 +12,16 @@ using BrightIdeasSoftware;
 using OfficeExcel = Microsoft.Office.Interop.Excel;
 using System.Globalization;
 
-namespace TotalSmartCoding.CommonLibraries
+
+namespace TotalSmartCoding.Libraries.Helpers
 {
-    public static class CommonFormAction
+    public class DataHelpers
     {
-        public static void OLVFilter(ObjectListView olv, string[] filterTexts)
-        {
-            CommonFormAction.OLVFilter(olv, filterTexts, 0);
-        }
-
-        public static void OLVFilter(ObjectListView olv, string[] filterTexts, int matchKind)
-        {
-            TextMatchFilter textMatchFilter = null; //Using this textMatchFilter for hightlight purpose
-            List<IModelFilter> modelFilters = null;
-
-            if (filterTexts != null && filterTexts.Length > 0)
-            {
-                textMatchFilter = CommonFormAction.CreateTextMatchFilter(olv, filterTexts, matchKind);
-
-                modelFilters = new List<IModelFilter>();
-                foreach (string s in filterTexts)
-                {
-                    modelFilters.Add(CommonFormAction.CreateTextMatchFilter(olv, new string[] { s }, matchKind));
-                }
-
-            }
-
-            // Setup a default renderer to draw the filter matches
-            if (textMatchFilter == null)
-                olv.DefaultRenderer = null;
-            else
-            {
-                olv.DefaultRenderer = new HighlightTextRenderer(textMatchFilter);
-
-                // Uncomment this line to see how the GDI+ rendering looks
-                //olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
-            }
-
-            // Some lists have renderers already installed
-            HighlightTextRenderer highlightingRenderer = olv.GetColumn(0).Renderer as HighlightTextRenderer;
-            if (highlightingRenderer != null)
-                highlightingRenderer.Filter = textMatchFilter;
-
-
-            olv.ModelFilter = modelFilters == null ? null : new CompositeAllFilter(modelFilters); //WHEN USING CompositeAllFilter, this textMatchFilter for HIGHTLIGHT PURPOSE ONLY
-            //olv.AdditionalFilter = textMatchFilter; //WHEN USING AdditionalFilter: In addition to use this textMatchFilter for hightlight purpose, this textMatchFilter CAN BE USE FOR AdditionalFilter TO FILLER
-            //NOTE:     AdditionalFilter: TO FILTER rows where any cell match any of the given strings array (string[]) --- MEANING: USING 'OR' CLAUSE
-            //          ModelFilter with CompositeAllFilter: CREATE SEPARATE textMatchFilter FOR EVERY item IN strings array (string[]), THEN COMBINE ALL FILTER TOGETHER --- MEANING: USING 'AND' CLAUSE
-            //ONLY USING AdditionalFilter OR CompositeAllFilter AT ONE TIME
-
-            //olv.Invalidate();
-        }
-
-        private static TextMatchFilter CreateTextMatchFilter(ObjectListView olv, string[] filterTexts, int matchKind)
-        {
-            switch (matchKind)
-            {
-                case 0:
-                default:
-                    return TextMatchFilter.Contains(olv, filterTexts);
-                case 1:
-                    return TextMatchFilter.Prefix(olv, filterTexts);
-                case 2:
-                    return TextMatchFilter.Regex(olv, filterTexts);
-            }
-        }
-
-        public static List<Control> GetAllControls(Control controlContainer, List<Control> controlList)
-        {
-            foreach (Control control in controlContainer.Controls)
-            {
-                controlList.Add(control);
-                if (control.Controls.Count > 0) controlList = GetAllControls(control, controlList);
-            }
-
-            return controlList;
-        }
-        public static List<Control> GetAllControls(Control controlContainer)
-        {
-            return GetAllControls(controlContainer, new List<Control>());
-        }
 
         public static void Export<T>(List<T> list)
         {
             DataTable dataTable = ListToDataTable(list);
-            CommonFormAction.Export(dataTable);
+            DataHelpers.Export(dataTable);
         }
 
         public static void Export(DataTable dataTableExport)
@@ -115,7 +40,7 @@ namespace TotalSmartCoding.CommonLibraries
                 ////RKLib.ExportData.Export objExport = new RKLib.ExportData.Export("Win");
                 ////objExport.ExportDetails(dataTableExport, RKLib.ExportData.Export.ExportFormat.Excel, saveFileDialogMain.FileName);
 
-                CommonFormAction.ExportToExcel(dataTableExport, "ExportData");
+                DataHelpers.ExportToExcel(dataTableExport, "ExportData");
                 //}
             }
         }
@@ -265,7 +190,7 @@ namespace TotalSmartCoding.CommonLibraries
 
                 for (int columnIndex = 0; columnIndex < dataTableExport.Columns.Count; columnIndex++)
                 {
-                    CommonFormAction.SetCellValue(targetSheet, CommonFormAction.GetExcelColumnName(columnIndex + 1) + "1", "'" + dataTableExport.Columns[columnIndex].ColumnName);
+                    DataHelpers.SetCellValue(targetSheet, DataHelpers.GetExcelColumnName(columnIndex + 1) + "1", "'" + dataTableExport.Columns[columnIndex].ColumnName);
                 }
 
                 var startCell = (OfficeExcel.Range)targetSheet.Cells[2, 1];
@@ -281,9 +206,9 @@ namespace TotalSmartCoding.CommonLibraries
                         ((OfficeExcel.Range)targetSheet.Cells[2, columnIndex + 1]).EntireColumn.NumberFormat = dataTableExport.Columns[columnIndex].DataType == typeof(System.DateTime) ? shortDatePattern : "#,###";
                 }
 
-                targetSheet.get_Range("A1", CommonFormAction.GetExcelColumnName(dataTableExport.Columns.Count) + (dataTableExport.Rows.Count + 1).ToString()).Columns.AutoFit();
-                targetSheet.get_Range("A1", CommonFormAction.GetExcelColumnName(dataTableExport.Columns.Count) + "1").RowHeight = targetSheet.get_Range("A1", CommonFormAction.GetExcelColumnName(dataTableExport.Columns.Count) + "1").RowHeight + 8;
-                targetSheet.get_Range("A1", CommonFormAction.GetExcelColumnName(dataTableExport.Columns.Count) + "1").VerticalAlignment = OfficeExcel.XlVAlign.xlVAlignCenter;
+                targetSheet.get_Range("A1", DataHelpers.GetExcelColumnName(dataTableExport.Columns.Count) + (dataTableExport.Rows.Count + 1).ToString()).Columns.AutoFit();
+                targetSheet.get_Range("A1", DataHelpers.GetExcelColumnName(dataTableExport.Columns.Count) + "1").RowHeight = targetSheet.get_Range("A1", DataHelpers.GetExcelColumnName(dataTableExport.Columns.Count) + "1").RowHeight + 8;
+                targetSheet.get_Range("A1", DataHelpers.GetExcelColumnName(dataTableExport.Columns.Count) + "1").VerticalAlignment = OfficeExcel.XlVAlign.xlVAlignCenter;
 
                 excelApplication.Visible = true;
             }
@@ -338,4 +263,3 @@ namespace TotalSmartCoding.CommonLibraries
 
     }
 }
-

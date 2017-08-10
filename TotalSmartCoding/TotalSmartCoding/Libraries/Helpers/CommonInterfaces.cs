@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 using TotalBase.Enums;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Helpers
 {
     public interface IToolstripMerge
     {

@@ -34,7 +34,7 @@ using TotalSmartCoding.ViewModels.Productions;
 //using TotalService.Inventories;
 
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries
 {
     public static class CommonNinject
     {

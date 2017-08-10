@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TotalBase.Enums;
-using TotalSmartCoding.CommonLibraries;
+using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.Views.Commons;
 
 using TotalSmartCoding.Views.Sales;

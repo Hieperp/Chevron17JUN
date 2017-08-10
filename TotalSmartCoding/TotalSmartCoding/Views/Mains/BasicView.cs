@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TotalBase.Enums;
-using TotalSmartCoding.CommonLibraries;
+using TotalSmartCoding.Libraries.Helpers;
 
 
 using TotalSmartCoding.Controllers;
@@ -340,7 +340,7 @@ namespace TotalSmartCoding.Views.Mains
 
         protected virtual void InitializeReadOnlyModeBinding()
         {
-            List<Control> controlList = CommonFormAction.GetAllControls(this);
+            List<Control> controlList = ViewHelpers.GetAllControls(this);
 
             foreach (Control control in controlList)
             {

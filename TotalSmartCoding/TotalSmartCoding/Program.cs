@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using TotalBase;
 using TotalSmartCoding.Views.Mains;
 
-using TotalSmartCoding.CommonLibraries;
+using TotalSmartCoding.Libraries;
 using TotalBase.Enums;
 
 namespace TotalSmartCoding

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using TotalBase;
 using TotalSmartCoding.Controllers.Productions;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Communications
 {
     public class IOSerialPort : CodingController
     {

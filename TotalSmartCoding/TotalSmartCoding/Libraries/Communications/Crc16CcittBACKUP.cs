@@ -14,7 +14,7 @@
 //If you need for this code to be CLS compliant, you can change the method signature's return type from ushort to int and it will operate the same (the ushort crc value will be implicitly converted from ushort to int)
 
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Communications
 {
     public enum InitialCrcValue { Zeros, NonZero1 = 0xffff, NonZero2 = 0x1D0F } //ZEBRA  the magic number 0x1021 ??? RIGHT??
 

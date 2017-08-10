@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using BrightIdeasSoftware;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Helpers
 {
     public static class OLVHelpers
     {

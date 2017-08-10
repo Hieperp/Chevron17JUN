@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.IO;
 using TotalBase;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Communications
 {
     public class IONetSocket
     {

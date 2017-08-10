@@ -15,7 +15,7 @@ using TotalSmartCoding.ViewModels.Inventories;
 using TotalDTO.Productions;
 using TotalSmartCoding.ViewModels.Productions;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries
 {
     public static class AutoMapperConfig
     {

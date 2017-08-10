@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using TotalSmartCoding.Views.Commons;
 using TotalModel.Helpers;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Helpers
 {
     class GlobalExceptionHandler
     {

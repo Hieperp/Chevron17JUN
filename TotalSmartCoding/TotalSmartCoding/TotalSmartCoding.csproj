@@ -81,22 +81,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonLibraries\AutoMapperConfig.cs" />
-    <Compile Include="CommonLibraries\BP\ADODatabase.cs" />
-    <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />
-    <Compile Include="CommonLibraries\CommonRegistries.cs" />
-    <Compile Include="CommonLibraries\Crc16CCITT.cs" />
-    <Compile Include="CommonLibraries\Crc16CcittBACKUP.cs" />
-    <Compile Include="CommonLibraries\IOCommon.cs" />
-    <Compile Include="CommonLibraries\IONetSocket.cs" />
-    <Compile Include="CommonLibraries\BP\SQLDatabase.cs" />
-    <Compile Include="CommonLibraries\CommonFormAction.cs" />
-    <Compile Include="CommonLibraries\CommonInterfaces.cs" />
-    <Compile Include="CommonLibraries\GlobalExceptionHandler.cs" />
-    <Compile Include="CommonLibraries\CommonNinject.cs" />
-    <Compile Include="CommonLibraries\IOSerialPort.cs" />
-    <Compile Include="CommonLibraries\OLVHelpers.cs" />
-    <Compile Include="Configuration\SettingsManager.cs" />
+    <Compile Include="Libraries\AutoMapperConfig.cs" />
+    <Compile Include="Libraries\CommonRegistries.cs" />
+    <Compile Include="Libraries\Communications\Crc16CCITT.cs" />
+    <Compile Include="Libraries\Communications\Crc16CcittBACKUP.cs" />
+    <Compile Include="Libraries\Communications\IOCommon.cs" />
+    <Compile Include="Libraries\Communications\IONetSocket.cs" />
+    <Compile Include="Libraries\Helpers\CommonInterfaces.cs" />
+    <Compile Include="Libraries\Helpers\DataHelpers.cs" />
+    <Compile Include="Libraries\Helpers\GlobalExceptionHandler.cs" />
+    <Compile Include="Libraries\CommonNinject.cs" />
+    <Compile Include="Libraries\Communications\IOSerialPort.cs" />
+    <Compile Include="Libraries\Helpers\OLVHelpers.cs" />
+    <Compile Include="Configurations\SettingsManager.cs" />
     <Compile Include="Controllers\APIs\Commons\CommodityAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIController.cs" />
     <Compile Include="Controllers\APIs\Productions\BatchAPIs.cs" />
@@ -116,6 +113,7 @@
     <Compile Include="Controllers\Productions\PrinterController.cs" />
     <Compile Include="Controllers\Productions\ScannerController.cs" />
     <Compile Include="Controllers\Sales\DeliveryAdvicesController.cs" />
+    <Compile Include="Libraries\Helpers\ViewHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

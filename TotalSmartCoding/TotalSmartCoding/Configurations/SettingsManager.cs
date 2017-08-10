@@ -2,7 +2,7 @@
 using System.Globalization;
 using TotalBase.Enums;
 
-namespace TotalSmartCoding.Configuration
+namespace TotalSmartCoding.Configurations
 {
     public static class SettingsManager
     {

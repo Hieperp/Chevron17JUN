@@ -18,7 +18,7 @@ using Microsoft.Win32;
 // and for the MessageBox function:
 using System.Windows.Forms;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries
 {
     /// <summary>
     /// An useful class to read/write/delete/count registry keys

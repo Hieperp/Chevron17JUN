@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Communications
 {
     public class IOCommon
     {

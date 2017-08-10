@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TotalSmartCoding.CommonLibraries
+namespace TotalSmartCoding.Libraries.Communications
 {
     public enum Crc16Mode : ushort { Standard = 0xA001, CcittKermit = 0x8408 }
 

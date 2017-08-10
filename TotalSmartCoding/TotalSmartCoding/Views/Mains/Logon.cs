@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using TotalDAL;
 using TotalBase;
-using TotalSmartCoding.CommonLibraries;
+using TotalSmartCoding.Libraries.Helpers;
 
 namespace TotalSmartCoding.Views.Mains
 {

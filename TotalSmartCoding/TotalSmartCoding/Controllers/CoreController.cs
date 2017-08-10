@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TotalModel.Helpers;
 using TotalDTO.Commons;
 using TotalBase.Enums;
-using TotalSmartCoding.Configuration;
+using TotalSmartCoding.Configurations;
 
 
 namespace TotalSmartCoding.Controllers
