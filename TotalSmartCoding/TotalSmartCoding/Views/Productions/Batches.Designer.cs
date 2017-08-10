@@ -120,7 +120,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(475, 566);
+            this.layoutMaster.Size = new System.Drawing.Size(475, 511);
             this.layoutMaster.TabIndex = 62;
             // 
             // label1
@@ -128,7 +128,7 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 450);
+            this.label1.Location = new System.Drawing.Point(30, 422);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(419, 28);
@@ -154,7 +154,7 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(30, 71);
+            this.label2.Location = new System.Drawing.Point(30, 67);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(419, 28);
@@ -167,7 +167,7 @@
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(30, 134);
+            this.label14.Location = new System.Drawing.Point(30, 126);
             this.label14.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(419, 28);
@@ -180,7 +180,7 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(30, 387);
+            this.label4.Location = new System.Drawing.Point(30, 363);
             this.label4.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(419, 28);
@@ -193,7 +193,7 @@
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(30, 324);
+            this.label5.Location = new System.Drawing.Point(30, 304);
             this.label5.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(419, 28);
@@ -206,7 +206,7 @@
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(30, 261);
+            this.label7.Location = new System.Drawing.Point(30, 245);
             this.label7.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(419, 28);
@@ -219,7 +219,7 @@
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(30, 198);
+            this.label8.Location = new System.Drawing.Point(30, 186);
             this.label8.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(419, 28);
@@ -231,19 +231,21 @@
             // 
             this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimexEntryDate.Editable = true;
-            this.dateTimexEntryDate.Location = new System.Drawing.Point(33, 40);
+            this.dateTimexEntryDate.Location = new System.Drawing.Point(33, 38);
+            this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.dateTimexEntryDate.Name = "dateTimexEntryDate";
             this.dateTimexEntryDate.ReadOnly = false;
-            this.dateTimexEntryDate.Size = new System.Drawing.Size(414, 27);
+            this.dateTimexEntryDate.Size = new System.Drawing.Size(416, 27);
             this.dateTimexEntryDate.TabIndex = 69;
             // 
             // textexCode
             // 
             this.textexCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCode.Editable = true;
-            this.textexCode.Location = new System.Drawing.Point(33, 103);
+            this.textexCode.Location = new System.Drawing.Point(33, 97);
+            this.textexCode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexCode.Name = "textexCode";
-            this.textexCode.Size = new System.Drawing.Size(414, 27);
+            this.textexCode.Size = new System.Drawing.Size(416, 27);
             this.textexCode.TabIndex = 70;
             // 
             // combexCommodityID
@@ -253,55 +255,61 @@
             this.combexCommodityID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexCommodityID.Editable = true;
             this.combexCommodityID.FormattingEnabled = true;
-            this.combexCommodityID.Location = new System.Drawing.Point(33, 166);
+            this.combexCommodityID.Location = new System.Drawing.Point(33, 156);
+            this.combexCommodityID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.combexCommodityID.Name = "combexCommodityID";
             this.combexCommodityID.ReadOnly = false;
-            this.combexCommodityID.Size = new System.Drawing.Size(414, 28);
+            this.combexCommodityID.Size = new System.Drawing.Size(416, 28);
             this.combexCommodityID.TabIndex = 71;
             // 
             // textexCommodityName
             // 
             this.textexCommodityName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCommodityName.Editable = false;
-            this.textexCommodityName.Location = new System.Drawing.Point(33, 230);
+            this.textexCommodityName.Location = new System.Drawing.Point(33, 216);
+            this.textexCommodityName.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexCommodityName.Name = "textexCommodityName";
-            this.textexCommodityName.Size = new System.Drawing.Size(414, 27);
+            this.textexCommodityName.Size = new System.Drawing.Size(416, 27);
             this.textexCommodityName.TabIndex = 72;
             // 
             // textexNextPackNo
             // 
             this.textexNextPackNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexNextPackNo.Editable = true;
-            this.textexNextPackNo.Location = new System.Drawing.Point(33, 293);
+            this.textexNextPackNo.Location = new System.Drawing.Point(33, 275);
+            this.textexNextPackNo.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexNextPackNo.Name = "textexNextPackNo";
-            this.textexNextPackNo.Size = new System.Drawing.Size(414, 27);
+            this.textexNextPackNo.Size = new System.Drawing.Size(416, 27);
             this.textexNextPackNo.TabIndex = 73;
             // 
             // textexNextCartonNo
             // 
             this.textexNextCartonNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexNextCartonNo.Editable = true;
-            this.textexNextCartonNo.Location = new System.Drawing.Point(33, 356);
+            this.textexNextCartonNo.Location = new System.Drawing.Point(33, 334);
+            this.textexNextCartonNo.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexNextCartonNo.Name = "textexNextCartonNo";
-            this.textexNextCartonNo.Size = new System.Drawing.Size(414, 27);
+            this.textexNextCartonNo.Size = new System.Drawing.Size(416, 27);
             this.textexNextCartonNo.TabIndex = 74;
             // 
             // textexNextPalletNo
             // 
             this.textexNextPalletNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexNextPalletNo.Editable = true;
-            this.textexNextPalletNo.Location = new System.Drawing.Point(33, 419);
+            this.textexNextPalletNo.Location = new System.Drawing.Point(33, 393);
+            this.textexNextPalletNo.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexNextPalletNo.Name = "textexNextPalletNo";
-            this.textexNextPalletNo.Size = new System.Drawing.Size(414, 27);
+            this.textexNextPalletNo.Size = new System.Drawing.Size(416, 27);
             this.textexNextPalletNo.TabIndex = 75;
             // 
             // textexRemarks
             // 
             this.textexRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexRemarks.Editable = true;
-            this.textexRemarks.Location = new System.Drawing.Point(33, 482);
+            this.textexRemarks.Location = new System.Drawing.Point(33, 452);
+            this.textexRemarks.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexRemarks.Name = "textexRemarks";
-            this.textexRemarks.Size = new System.Drawing.Size(414, 27);
+            this.textexRemarks.Size = new System.Drawing.Size(416, 27);
             this.textexRemarks.TabIndex = 76;
             // 
             // toolStripChildForm
@@ -367,6 +375,7 @@
             "Show discontinued batches"});
             this.comboDiscontinued.Name = "comboDiscontinued";
             this.comboDiscontinued.Size = new System.Drawing.Size(270, 55);
+            this.comboDiscontinued.SelectedIndexChanged += new System.EventHandler(this.comboDiscontinued_SelectedIndexChanged);
             // 
             // naviBarMaster
             // 
@@ -376,13 +385,13 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(832, 0);
+            this.naviBarMaster.Location = new System.Drawing.Point(832, 55);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(477, 614);
+            this.naviBarMaster.Size = new System.Drawing.Size(477, 559);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -394,13 +403,13 @@
             this.naviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(475, 566);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(475, 511);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(475, 566);
+            this.naviBand1.Size = new System.Drawing.Size(475, 511);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -430,11 +439,11 @@
             this.fastBatchIndex.FullRowSelect = true;
             this.fastBatchIndex.HideSelection = false;
             this.fastBatchIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastBatchIndex.Location = new System.Drawing.Point(0, 55);
             this.fastBatchIndex.Name = "fastBatchIndex";
             this.fastBatchIndex.OwnerDraw = true;
             this.fastBatchIndex.ShowGroups = false;
-            this.fastBatchIndex.Size = new System.Drawing.Size(832, 614);
+            this.fastBatchIndex.Size = new System.Drawing.Size(832, 559);
             this.fastBatchIndex.TabIndex = 67;
             this.fastBatchIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchIndex.UseCompatibleStateImageBehavior = false;
@@ -443,6 +452,7 @@
             this.fastBatchIndex.UseHotItem = true;
             this.fastBatchIndex.View = System.Windows.Forms.View.Details;
             this.fastBatchIndex.VirtualMode = true;
+            this.fastBatchIndex.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.fastBatchIndex_FormatRow);
             // 
             // olvID
             // 
@@ -456,7 +466,7 @@
             this.olvEntryDate.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvEntryDate.Text = "Date";
             this.olvEntryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvEntryDate.Width = 90;
+            this.olvEntryDate.Width = 86;
             // 
             // olvBatchCode
             // 
@@ -509,7 +519,7 @@
             this.olvIsDefault.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvIsDefault.Text = "";
             this.olvIsDefault.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvIsDefault.Width = 30;
+            this.olvIsDefault.Width = 24;
             // 
             // Batches
             // 

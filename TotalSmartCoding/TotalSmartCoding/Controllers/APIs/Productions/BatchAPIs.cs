@@ -17,24 +17,25 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
 {
     public class BatchAPIs
     {
-        private readonly IBatchAPIRepository goodsReceiptAPIRepository;
+        private readonly IBatchAPIRepository batchAPIRepository;
 
-        public BatchAPIs(IBatchAPIRepository goodsReceiptAPIRepository)
+        public BatchAPIs(IBatchAPIRepository batchAPIRepository)
         {
-            this.goodsReceiptAPIRepository = goodsReceiptAPIRepository;
+            this.batchAPIRepository = batchAPIRepository;
         }
 
 
-        public ICollection<BatchIndex> GetBatchIndexes()
+        public ICollection<BatchIndex> GetBatchIndexes(GlobalEnums.ActiveOption activeOption)
         {
-            ICollection<BatchIndex> goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate).Where(w => w.FillingLineID == (int)GlobalVariables.FillingLineID).ToList();
+            this.batchAPIRepository.RepositoryBag["ActiveOption"] = (int)activeOption;
+            ICollection<BatchIndex> goodsReceiptIndexes = this.batchAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
 
             return goodsReceiptIndexes;
         }
 
         public BatchIndex GetActiveBatchIndex()
         {
-            BatchIndex goodsReceiptIndexes = this.GetBatchIndexes().Where(w => w.FillingLineID == (int)GlobalVariables.FillingLineID && w.IsDefault).FirstOrDefault();
+            BatchIndex goodsReceiptIndexes = this.GetBatchIndexes(GlobalEnums.ActiveOption.Active).Where(w => w.IsDefault).FirstOrDefault();
 
             return goodsReceiptIndexes;
         }

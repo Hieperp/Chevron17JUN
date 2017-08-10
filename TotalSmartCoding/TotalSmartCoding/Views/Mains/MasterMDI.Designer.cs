@@ -49,8 +49,8 @@
             this.toolStripSeparatorImport = new System.Windows.Forms.ToolStripSeparator();
             this.buttonImport = new System.Windows.Forms.ToolStripButton();
             this.buttonExport = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparatorVerify = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonVerify = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparatorApprove = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonApprove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparatorPrint = new System.Windows.Forms.ToolStripSeparator();
             this.buttonPrintPreview = new System.Windows.Forms.ToolStripButton();
             this.buttonPrint = new System.Windows.Forms.ToolStripButton();
@@ -250,8 +250,8 @@
             this.toolStripSeparatorImport,
             this.buttonImport,
             this.buttonExport,
-            this.toolStripSeparatorVerify,
-            this.buttonVerify,
+            this.toolStripSeparatorApprove,
+            this.buttonApprove,
             this.toolStripSeparatorPrint,
             this.buttonPrintPreview,
             this.buttonPrint});
@@ -347,20 +347,20 @@
             this.buttonExport.Size = new System.Drawing.Size(104, 52);
             this.buttonExport.Text = "Export";
             // 
-            // toolStripSeparatorVerify
+            // toolStripSeparatorApprove
             // 
-            this.toolStripSeparatorVerify.Name = "toolStripSeparatorVerify";
-            this.toolStripSeparatorVerify.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparatorApprove.Name = "toolStripSeparatorApprove";
+            this.toolStripSeparatorApprove.Size = new System.Drawing.Size(6, 55);
             // 
-            // buttonVerify
+            // buttonApprove
             // 
-            this.buttonVerify.Enabled = false;
-            this.buttonVerify.Image = global::TotalSmartCoding.Properties.Resources.Check;
-            this.buttonVerify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonVerify.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonVerify.Name = "buttonVerify";
-            this.buttonVerify.Size = new System.Drawing.Size(99, 52);
-            this.buttonVerify.Text = "Verify";
+            this.buttonApprove.Enabled = false;
+            this.buttonApprove.Image = global::TotalSmartCoding.Properties.Resources.Check;
+            this.buttonApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonApprove.Name = "buttonApprove";
+            this.buttonApprove.Size = new System.Drawing.Size(99, 52);
+            this.buttonApprove.Text = "Verify";
             // 
             // toolStripSeparatorPrint
             // 
@@ -551,8 +551,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorImport;
         private System.Windows.Forms.ToolStripButton buttonImport;
         private System.Windows.Forms.ToolStripButton buttonExport;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorVerify;
-        private System.Windows.Forms.ToolStripButton buttonVerify;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorApprove;
+        private System.Windows.Forms.ToolStripButton buttonApprove;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorPrint;
         private System.Windows.Forms.ToolStripButton buttonPrintPreview;
         private System.Windows.Forms.ToolStripButton buttonPrint;

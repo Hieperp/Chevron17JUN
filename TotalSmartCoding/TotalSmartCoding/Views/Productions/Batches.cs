@@ -53,12 +53,13 @@ namespace TotalSmartCoding.Views.Productions
             InitializeComponent();
             this.comboDiscontinued.SelectedIndex = 0;
 
+
             this.fillingData = fillingData;
             this.allQueueEmpty = allQueueEmpty;
 
             this.toolstripChild = this.toolStripChildForm;
             this.fastListIndex = this.fastBatchIndex;
-            
+
 
             this.olvIsDefault.AspectGetter = delegate(object row)
             {// IsDefault indicator column
@@ -74,7 +75,7 @@ namespace TotalSmartCoding.Views.Productions
             this.batchController = new BatchController(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<IBatchViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<BatchViewModel>());
             this.batchController.PropertyChanged += new PropertyChangedEventHandler(batchController_PropertyChanged);
 
-            this.baseController = this.batchController;
+            this.baseController = this.batchController;            
         }
 
         protected override void NotifyPropertyChanged(string propertyName)
@@ -107,7 +108,7 @@ namespace TotalSmartCoding.Views.Productions
 
                 customTabBatch.TabPages.Add("Batch", "Batch Information    ");
                 customTabBatch.TabPages[0].Controls.Add(this.layoutMaster);
-                
+
                 this.naviBarMaster.Bands[0].ClientArea.Controls.Add(customTabBatch);
 
                 customTabBatch.Dock = DockStyle.Fill;
@@ -179,33 +180,54 @@ namespace TotalSmartCoding.Views.Productions
 
 
         public override void Loading()
-        {            
-            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes());
+        {
+            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both));
             base.Loading();
+        }
+
+        private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.batchAPIs != null) this.Loading();
+        }
+
+        private void fastBatchIndex_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            BatchIndex batchIndex = (BatchIndex)e.Model;
+            if (batchIndex.InActive) e.Item.ForeColor = Color.Gray;
         }
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            try
+            if (this.allQueueEmpty) this.Approve();
+        }
+
+        protected override bool ApproveCheck(int id)
+        {
+            return !this.batchController.BatchViewModel.IsDefault && !this.batchController.BatchViewModel.InActive;
+        }
+
+        protected override void ApproveMore(int id)
+        {
+            base.ApproveMore(id);
+
+            if (this.fastBatchIndex.SelectedObject != null && ((BatchIndex)fastBatchIndex.SelectedObject).BatchID == id)
             {
-                if (this.allQueueEmpty && this.fastBatchIndex.SelectedObject != null)
-                {
-                    if (MessageBox.Show(this, "Are you sure you want to delete " + this.baseController.BaseDTO.Reference + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
-                        if (this.baseController.Delete(this.baseController.BaseDTO.GetID()))
-                            this.Loading();
-                    BatchIndex batchIndex = (BatchIndex)fastBatchIndex.SelectedObject;
-                    if (batchIndex != null) { Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData); this.MdiParent.DialogResult = System.Windows.Forms.DialogResult.OK; }
-                }
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                BatchIndex batchIndex = (BatchIndex)fastBatchIndex.SelectedObject;
+                if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
             }
         }
 
         private void buttonDiscontinued_Click(object sender, EventArgs e)
         {
-
+            this.Void();
         }
+
+        protected override bool VoidCheck(int id)
+        {
+            this.batchController.BatchViewModel.VoidTypeID = 1;
+            return !this.batchController.BatchViewModel.IsDefault;
+        }
+
+        
     }
 }

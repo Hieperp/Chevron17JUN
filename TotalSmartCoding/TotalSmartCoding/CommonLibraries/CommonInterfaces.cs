@@ -23,7 +23,7 @@ namespace TotalSmartCoding.CommonLibraries
         void Save();
         void Delete();
 
-        void Verify();
+        void Approve();
 
         void Import();
         void Export();
@@ -42,8 +42,8 @@ namespace TotalSmartCoding.CommonLibraries
         bool IsValid { get; }
         bool Deletable { get; }
 
-        bool Verifiable { get; }
-        bool Unverifiable { get; }
+        bool Approvable { get; }
+        bool Unapprovable { get; }
 
         bool Printable { get; }
 

@@ -34,6 +34,14 @@
 
         public static int rndWeight = 2;
 
+        public enum ActiveOption
+        {
+            Active = 0,
+            InActive = 1,
+            Both = -1
+        }
+
+
         public enum SubmitTypeOption
         {
             Save = 0, //Save and return (keep) current view

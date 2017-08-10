@@ -7,6 +7,7 @@ using System.ComponentModel;
 using CustomControls;
 using BrightIdeasSoftware;
 
+using TotalDTO;
 using TotalBase.Enums;
 using TotalModel.Interfaces;
 using TotalSmartCoding.CommonLibraries;
@@ -26,7 +27,7 @@ namespace TotalSmartCoding.Views.Mains
             this.baseController = new BaseController();
             this.fastListIndex = new FastObjectListView();
         }
-        
+
         private void BaseView_Load(object sender, EventArgs e)
         {
             try
@@ -165,6 +166,18 @@ namespace TotalSmartCoding.Views.Mains
                 if (this.ReadonlyMode && this.fastListIndex.GetItemCount() > 0) this.fastListIndex.SelectedIndex = 0;
         }
 
+        protected virtual bool checkSelectedIndexID()
+        {
+            if (this.baseController.BaseDTO.GetID() > 0)
+            {
+                this.setSelectedIndexID(this.baseController.BaseDTO.GetID());
+                if (this.baseController.BaseDTO.GetID() == this.getSelectedIndexID())
+                    return true;
+            }
+
+            throw new System.ArgumentException("Lỗi", "Vui lòng chọn dữ liệu.");
+        }
+
         #endregion EventHandlers
 
         #region <Implement Interface>
@@ -212,8 +225,8 @@ namespace TotalSmartCoding.Views.Mains
         public virtual bool Importable { get { return false; } }
         public virtual bool Exportable { get { return false; } }
 
-        public virtual bool Verifiable { get { return false; } }
-        public virtual bool Unverifiable { get { return false; } }
+        public virtual bool Approvable { get { return false; } }
+        public virtual bool Unapprovable { get { return false; } }
 
         public virtual bool Printable { get { return false; } }
         public virtual bool Filterable { get { return true; } }
@@ -243,6 +256,8 @@ namespace TotalSmartCoding.Views.Mains
         public virtual void Loading()
         {
             this.setSelectedIndexID(this.baseController.BaseDTO.GetID());
+
+            if (this.ReadonlyMode) this.baseController.Edit(this.baseController.BaseDTO.GetID()); //THIS LINE IS FOR REFRESH THE STATE OF THE CURRENT ENTITY (Editable/ Deletable/ ...)=> THIS MAY BE NOT NECCESSARY IN SOME CASE => LATER: WE SHOULD TRY TO REFRESH BY A BETTER WAY: TO REFRESH WHEN NECCESSARY ONLY
         }
 
         public void ApplyFilter(string filterTexts)
@@ -301,8 +316,11 @@ namespace TotalSmartCoding.Views.Mains
 
         public void Edit()
         {
-            this.baseController.Edit(this.baseController.BaseDTO.GetID());
-            this.EditableMode = true;
+            if (this.checkSelectedIndexID())
+            {
+                this.baseController.Edit(this.baseController.BaseDTO.GetID());
+                this.EditableMode = true;
+            }
         }
 
         public void Save()
@@ -325,9 +343,12 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                if (MessageBox.Show(this, "Are you sure you want to delete " + this.baseController.BaseDTO.Reference + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
-                    if (this.baseController.Delete(this.baseController.BaseDTO.GetID()))
-                        this.Loading();
+                if (this.checkSelectedIndexID())
+                {
+                    if (MessageBox.Show(this, "Are you sure you want to delete " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                        if (this.baseController.Delete(this.baseController.BaseDTO.GetID()))
+                            this.Loading();
+                }
             }
             catch (Exception exception)
             {
@@ -336,10 +357,56 @@ namespace TotalSmartCoding.Views.Mains
         }
 
 
-        public void Verify()
+        public void Approve()
         {
-            MessageBox.Show("Verify");
+            try
+            {
+                if (this.checkSelectedIndexID())
+                {                    
+                    this.baseController.Approve(this.baseController.BaseDTO.GetID());
+
+                    if (this.ApproveCheck(this.baseController.BaseDTO.GetID()) && MessageBox.Show(this, "Cài đặt batch này cho sản xuất " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                        if (this.baseController.ApproveConfirmed())
+                        {
+                            this.ApproveMore(this.baseController.BaseDTO.GetID());
+                            this.Loading();
+                        }
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
         }
+
+        protected virtual bool ApproveCheck(int id) { return true; }
+        protected virtual void ApproveMore(int id) { }
+
+        public void Void()
+        {
+            try
+            {
+                if (this.checkSelectedIndexID())
+                {                    
+                    this.baseController.Void(this.baseController.BaseDTO.GetID());
+
+                    if (this.VoidCheck(this.baseController.BaseDTO.GetID()) && MessageBox.Show(this, "Dừng sản xuất batch này" + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                        if (this.baseController.VoidConfirmed())
+                        {
+                            this.VoidMore(this.baseController.BaseDTO.GetID());
+                            this.Loading();
+                        }
+                }
+            }
+            catch (Exception exception)
+            {
+                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        protected virtual bool VoidCheck(int id) { return true; }
+        protected virtual void VoidMore(int id) { }
+
 
         public void Print(GlobalEnums.PrintDestination printDestination)
         {
@@ -373,6 +440,8 @@ namespace TotalSmartCoding.Views.Mains
             //    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             //}
         }
+
+       
 
         #endregion
 

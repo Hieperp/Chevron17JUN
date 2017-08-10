@@ -29,7 +29,7 @@ namespace TotalSmartCoding.Controllers
         private readonly IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder;
         private readonly TSimpleViewModel simpleViewModel;
 
-        
+
 
         private bool isSimpleCreate;
         private bool isCreateWizard;
@@ -212,7 +212,7 @@ namespace TotalSmartCoding.Controllers
 
             this.LastID = this.simpleViewModel.GetID();
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
-            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (simpleViewModel == null) throw new System.ArgumentException("Lỗi", "Dữ liệu không tồn tại hoặc không có quyền truy cập.");
 
             this.StartTracking();
             this.Reset();
@@ -280,33 +280,35 @@ namespace TotalSmartCoding.Controllers
 
 
         #region Approve/ UnApprove
-        public virtual TSimpleViewModel Approve(int? id)
+        public override void Approve(int? id)
         {
-            if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
-            base.AddRequireJsOptions();
-            
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, true);
-            if (simpleViewModel == null) throw new System.ArgumentException("Lỗi", "Dữ liệu không tồn tại hoặc không có quyền truy cập.");
+            this.Edit(id);
 
             if (!simpleViewModel.Approved)
                 if (this.GenericService.GetApprovalPermitted(simpleViewModel.OrganizationalUnitID))
+                {
                     simpleViewModel.Approvable = this.GenericService.Approvable(simpleViewModel);
+                    if (!simpleViewModel.Approvable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
+                }
                 else //USER DON'T HAVE PERMISSION TO DO
                     throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
 
             if (simpleViewModel.Approved)
                 if (this.GenericService.GetUnApprovalPermitted(simpleViewModel.OrganizationalUnitID))
+                {
                     simpleViewModel.UnApprovable = this.GenericService.UnApprovable(simpleViewModel);
+                    if (!simpleViewModel.UnApprovable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
+                }
                 else //USER DON'T HAVE PERMISSION TO DO
                     throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
 
-            return simpleViewModel;
+            //-----return View(simpleViewModel);
         }
 
 
-        public virtual bool ApproveConfirmed(TSimpleViewModel simpleViewModel)
+        public override bool ApproveConfirmed()
         {
-            return this.GenericService.ToggleApproved(simpleViewModel);
+            return this.GenericService.ToggleApproved(this.simpleViewModel);
 
 
 
@@ -424,36 +426,39 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        public virtual void Void(int? id)
+        public override void Void(int? id)
         {
-            if (this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
-
-            base.AddRequireJsOptions();
-
-            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, true);
-            if (simpleViewModel == null) new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            this.Edit(id);
 
             if (!simpleViewModel.InActive)
                 if (this.GenericService.GetVoidablePermitted(simpleViewModel.OrganizationalUnitID))
                 {
                     simpleViewModel.Voidable = this.GenericService.Voidable(simpleViewModel);
-                    //********RequireJsOptions.Add("Voidable", simpleViewModel.Voidable, RequireJsOptionsScope.Page);
+                    if (!simpleViewModel.Voidable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
                 }
                 else //USER DON'T HAVE PERMISSION TO DO
-                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
 
             if (simpleViewModel.InActive)
                 if (this.GenericService.GetUnVoidablePermitted(simpleViewModel.OrganizationalUnitID))
+                {
                     simpleViewModel.UnVoidable = this.GenericService.UnVoidable(simpleViewModel);
+                    if (!simpleViewModel.UnVoidable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
+                }
                 else //USER DON'T HAVE PERMISSION TO DO
-                    new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
 
             //-----return View(simpleViewModel);
         }
 
 
-        public virtual void VoidConfirmed(TSimpleViewModel simpleViewModel)
+        public override bool VoidConfirmed()
         {
+            if (this.simpleViewModel.VoidTypeID == null || this.simpleViewModel.VoidTypeID <= 0) throw new System.ArgumentException("Lỗi hủy dữ liệu", "Vui lòng nhập lý do hủy.");
+            return this.GenericService.ToggleVoid(this.simpleViewModel);
+
+
+
             try
             {
                 if (simpleViewModel.VoidTypeID == null || simpleViewModel.VoidTypeID <= 0) throw new System.ArgumentException("Lỗi hủy dữ liệu", "Vui lòng nhập lý do hủy đơn hàng.");

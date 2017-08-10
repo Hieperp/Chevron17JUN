@@ -77,8 +77,8 @@ namespace TotalSmartCoding.Views.Mains
         public virtual bool Importable { get { return true; } }
         public virtual bool Exportable { get { return true; } }
 
-        public virtual bool Verifiable { get { return false; } }
-        public virtual bool Unverifiable { get { return false; } }
+        public virtual bool Approvable { get { return false; } }
+        public virtual bool Unapprovable { get { return false; } }
 
         public virtual bool Printable { get { return false; } }
         public virtual bool Filterable { get { return true; } }
@@ -249,7 +249,7 @@ namespace TotalSmartCoding.Views.Mains
             //}
         }
 
-        public void Verify()
+        public void Approve()
         {
             MessageBox.Show("Verify");
         }

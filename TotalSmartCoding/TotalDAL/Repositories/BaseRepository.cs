@@ -20,8 +20,8 @@ namespace TotalDAL.Repositories
 
         public BaseRepository(TotalSmartCodingEntities totalSmartCodingEntities)
         {
-            this.totalSmartCodingEntities = totalSmartCodingEntities;
-
+            this.RepositoryBag = new Dictionary<string, object>();
+            this.totalSmartCodingEntities = totalSmartCodingEntities;            
 
             //if (!GlobalVariables.shouldRestoreProcedure) return;
 
@@ -208,6 +208,9 @@ namespace TotalDAL.Repositories
             return this.GetEntities<T>(null, includes);
         }
 
+
+        public string RepositoryTag { get; set; }
+        public Dictionary<string, object> RepositoryBag { get; set; }
 
     }
 }

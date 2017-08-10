@@ -103,5 +103,10 @@ namespace TotalSmartCoding.Controllers
         public virtual bool Save() { return true; }
         public virtual bool Delete(int id) { return true; }
 
+        public virtual void Approve(int? id) { }
+        public virtual bool ApproveConfirmed() { return true; }
+
+        public virtual void Void(int? id) { }
+        public virtual bool VoidConfirmed() { return true; }
     }
 }

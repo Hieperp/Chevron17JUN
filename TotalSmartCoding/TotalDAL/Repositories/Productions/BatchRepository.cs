@@ -17,7 +17,7 @@ namespace TotalDAL.Repositories.Productions
             : base(totalSmartCodingEntities, "BatchEditable")
         {
         }
-        
+
         public void CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
         {
             this.TotalSmartCodingEntities.BatchCommonUpdate(batchID, nextPackNo, nextCartonNo, nextPalletNo);
@@ -42,7 +42,7 @@ namespace TotalDAL.Repositories.Productions
         {
             ObjectParameter[] baseParameters = base.GetEntityIndexParameters(aspUserID, fromDate, toDate);
 
-            return new ObjectParameter[] { baseParameters[0], baseParameters[1], baseParameters[2], new ObjectParameter("FillingLineID", (int)GlobalVariables.FillingLineID) };
+            return new ObjectParameter[] { baseParameters[0], baseParameters[1], baseParameters[2], new ObjectParameter("FillingLineID", (int)GlobalVariables.FillingLineID), new ObjectParameter("ActiveOption", (int)(this.RepositoryBag["ActiveOption"] != null ? this.RepositoryBag["ActiveOption"] : GlobalEnums.ActiveOption.Both)) };
         }
     }
 

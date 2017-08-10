@@ -30,6 +30,7 @@ namespace TotalCore.Repositories
         ICollection<T> GetEntities<T>(bool proxyCreationEnabled, Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes) where T : class;
 
 
-
+        string RepositoryTag { get; set; }
+        Dictionary<string, object> RepositoryBag { get; set; }
     }
 }

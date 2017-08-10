@@ -34,5 +34,6 @@ namespace TotalModel.Models
         public string NextCartonNo { get; set; }
         public string NextPalletNo { get; set; }
         public string BatchCode { get; set; }
+        public bool InActive { get; set; }
     }
 }

@@ -185,8 +185,8 @@ namespace TotalSmartCoding.Views.Mains
                     bool deletable = toolstripChild.Deletable;
                     bool importable = toolstripChild.Importable;
                     bool exportable = toolstripChild.Exportable;
-                    bool verifiable = toolstripChild.Verifiable;
-                    bool unverifiable = toolstripChild.Unverifiable;
+                    bool approvable = toolstripChild.Approvable;
+                    bool unapprovable = toolstripChild.Unapprovable;
                     bool printable = toolstripChild.Printable;
                     bool readonlyMode = toolstripChild.ReadonlyMode;
                     bool editableMode = toolstripChild.EditableMode;
@@ -207,10 +207,10 @@ namespace TotalSmartCoding.Views.Mains
                     this.buttonExport.Enabled = exportable;//&& !isDirty && readonlyMode;
                     this.toolStripSeparatorImport.Visible = importable || exportable;
 
-                    this.buttonVerify.Visible = verifiable || unverifiable;
-                    this.buttonVerify.Enabled = verifiable || unverifiable;
-                    this.buttonVerify.Text = verifiable ? "Verify" : "Unverify";
-                    this.toolStripSeparatorVerify.Visible = verifiable || unverifiable;
+                    this.buttonApprove.Visible = approvable || unapprovable;
+                    this.buttonApprove.Enabled = approvable || unapprovable;
+                    this.buttonApprove.Text = approvable ? "Verify" : "Unverify";
+                    this.toolStripSeparatorApprove.Visible = approvable || unapprovable;
 
                     this.buttonPrint.Visible = printable;
                     this.buttonPrint.Enabled = printable;
@@ -355,12 +355,12 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void toolStripButtonVerify_Click(object sender, EventArgs e)
+        private void buttonApprove_Click(object sender, EventArgs e)
         {
             try
-            {
+            {                
                 IToolstripChild toolstripChild = ActiveMdiChild as IToolstripChild;
-                if (toolstripChild != null) toolstripChild.Verify();
+                if (toolstripChild != null) toolstripChild.Approve();
             }
             catch (Exception exception)
             {
@@ -456,8 +456,8 @@ namespace TotalSmartCoding.Views.Mains
                         this.buttonImport.Visible = false;
                         this.buttonExport.Visible = false;
                         this.toolStripSeparatorImport.Visible = false;
-                        this.buttonVerify.Visible = false;
-                        this.toolStripSeparatorVerify.Visible = false;
+                        this.buttonApprove.Visible = false;
+                        this.toolStripSeparatorApprove.Visible = false;
                         this.buttonPrint.Visible = false;
                         this.buttonPrintPreview.Visible = false;
                         this.toolStripSeparatorPrint.Visible = false;
