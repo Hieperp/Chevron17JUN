@@ -16,7 +16,7 @@ namespace TotalDTO.Productions
 
 
 
-        public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Pack; } }
+        public override GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Pack; } }
 
         public override int GetID() { return this.PackID; }
         public virtual void SetID(int id) { this.PackID = id; }
@@ -36,7 +36,7 @@ namespace TotalDTO.Productions
         { }
 
 
-        public new GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.FillingPack; } }
+        public override GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.FillingPack; } }
 
         public override int GetID() { return this.FillingPackID; }
         public override void SetID(int id) { this.FillingPackID = id; }

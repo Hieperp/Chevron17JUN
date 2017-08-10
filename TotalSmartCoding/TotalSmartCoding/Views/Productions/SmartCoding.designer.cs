@@ -675,7 +675,7 @@
             // buttonCartonPendingQueueCount
             // 
             this.buttonCartonPendingQueueCount.AutoSize = false;
-            this.buttonCartonPendingQueueCount.Image = global::TotalSmartCoding.Properties.Resources.Umar123_Carton;
+            this.buttonCartonPendingQueueCount.Image = global::TotalSmartCoding.Properties.Resources.Emey87_Trainee_Box_double_tape;
             this.buttonCartonPendingQueueCount.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonCartonPendingQueueCount.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonCartonPendingQueueCount.Name = "buttonCartonPendingQueueCount";
@@ -1633,7 +1633,7 @@
             this.textBoxCommodityOfficialCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxCommodityOfficialCode.Name = "textBoxCommodityOfficialCode";
             this.textBoxCommodityOfficialCode.ReadOnly = true;
-            this.textBoxCommodityOfficialCode.Size = new System.Drawing.Size(79, 75);
+            this.textBoxCommodityOfficialCode.Size = new System.Drawing.Size(79, 27);
             this.textBoxCommodityOfficialCode.Text = "8984568";
             this.textBoxCommodityOfficialCode.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxCommodityOfficialCode.Visible = false;
@@ -1742,7 +1742,7 @@
             this.comboBoxEmptyCarton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEmptyCarton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.comboBoxEmptyCarton.Name = "comboBoxEmptyCarton";
-            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(260, 75);
+            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(260, 28);
             this.comboBoxEmptyCarton.Visible = false;
             // 
             // SmartCoding
