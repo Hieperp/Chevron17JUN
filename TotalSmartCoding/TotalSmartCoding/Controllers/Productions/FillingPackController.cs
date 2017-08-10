@@ -12,7 +12,6 @@ using TotalCore.Services.Productions;
 using TotalSmartCoding.Controllers;
 using TotalDTO.Productions;
 using TotalSmartCoding.ViewModels.Productions;
-using TotalSmartCoding.Builders.Productions;
 
 
 namespace TotalSmartCoding.Controllers.Productions
@@ -21,8 +20,8 @@ namespace TotalSmartCoding.Controllers.Productions
     {
         public IFillingPackService fillingPackService;
 
-        public FillingPackController(IFillingPackService fillingPackService, IFillingPackViewModelSelectListBuilder fillingPackSelectListBuilder, FillingPackViewModel fillingPackViewModel)
-            : base(fillingPackService, fillingPackSelectListBuilder, fillingPackViewModel)
+        public FillingPackController(IFillingPackService fillingPackService, FillingPackViewModel fillingPackViewModel)
+            : base(fillingPackService, fillingPackViewModel)
         {
             this.fillingPackService = fillingPackService;
         }

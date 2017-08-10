@@ -23,7 +23,6 @@ using TotalSmartCoding.Controllers.Inventories;
 using TotalCore.Repositories.Inventories;
 using TotalSmartCoding.Controllers.APIs.Inventories;
 using TotalCore.Services.Inventories;
-using TotalSmartCoding.Builders.Inventories;
 using TotalSmartCoding.ViewModels.Inventories;
 
 namespace TotalSmartCoding.Views.Inventories
@@ -46,7 +45,7 @@ namespace TotalSmartCoding.Views.Inventories
 
             this.fastObjectListViewIndex.SetObjects(goodsReceiptAPIsController.GetGoodsReceiptIndexes());
 
-            this.Controller = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<IGoodsReceiptViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<GoodsReceiptViewModel>());
+            this.Controller = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<GoodsReceiptViewModel>());
             this.Controller.PropertyChanged += new PropertyChangedEventHandler(goodsReceiptsController_PropertyChanged);
 
             this.baseController = this.Controller;

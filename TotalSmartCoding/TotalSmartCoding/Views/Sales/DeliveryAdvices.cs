@@ -19,7 +19,6 @@ using TotalCore.Repositories;
 
 using Ninject;
 using TotalCore.Services.Sales;
-using TotalSmartCoding.Builders.Sales;
 using TotalSmartCoding.ViewModels.Sales; 
 
 namespace TotalSmartCoding.Views.Sales
@@ -48,7 +47,7 @@ namespace TotalSmartCoding.Views.Sales
 
             this.fastObjectListViewIndex.CheckBoxes = false;
 
-            this.deliveryAdvicesController = new DeliveryAdvicesController(CommonNinject.Kernel.Get<IDeliveryAdviceService>(), CommonNinject.Kernel.Get<IDeliveryAdviceViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<DeliveryAdviceViewModel>());
+            this.deliveryAdvicesController = new DeliveryAdvicesController(CommonNinject.Kernel.Get<IDeliveryAdviceService>(), CommonNinject.Kernel.Get<DeliveryAdviceViewModel>());
             //******************this.deliveryAdvicesController.PropertyChanged += new PropertyChangedEventHandler(deliveryAdvicesController_PropertyChanged);
         }
 

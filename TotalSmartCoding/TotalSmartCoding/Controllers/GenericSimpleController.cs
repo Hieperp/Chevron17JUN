@@ -11,7 +11,6 @@ using TotalModel;
 using TotalDTO;
 using TotalCore.Services;
 
-using TotalSmartCoding.Builders;
 using TotalSmartCoding.ViewModels.Helpers;
 using TotalDTO.Commons;
 
@@ -26,7 +25,6 @@ namespace TotalSmartCoding.Controllers
         where TSimpleViewModel : TDto, ISimpleViewModel, new() //Note: constraints [TSimpleViewModel : TDto] and also [TViewDetailViewModel : TDto  -> in GenericViewDetailController]: is required for this.genericService.Editable(TDto) only!!! If there is any reason need to remove this constraints, just consider for this.genericService.Editable(TDto) only [should change this.genericService.Editable(TDto) only if needed -- means after remove this constraints]
     {
         protected readonly IGenericService<TEntity, TDto, TPrimitiveDto> GenericService;
-        private readonly IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder;
         private readonly TSimpleViewModel simpleViewModel;
 
 
@@ -37,21 +35,20 @@ namespace TotalSmartCoding.Controllers
 
 
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel)
-            : this(genericService, viewModelSelectListBuilder, simpleViewModel, false, true)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, TSimpleViewModel simpleViewModel)
+            : this(genericService, simpleViewModel, false, true)
         {
         }
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel, bool isCreateWizard)
-            : this(genericService, viewModelSelectListBuilder, simpleViewModel, isCreateWizard, false)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, TSimpleViewModel simpleViewModel, bool isCreateWizard)
+            : this(genericService, simpleViewModel, isCreateWizard, false)
         {
         }
 
-        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, IViewModelSelectListBuilder<TSimpleViewModel> viewModelSelectListBuilder, TSimpleViewModel simpleViewModel, bool isCreateWizard, bool isSimpleCreate)
+        public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, TSimpleViewModel simpleViewModel, bool isCreateWizard, bool isSimpleCreate)
             : base(genericService, simpleViewModel)
         {
             this.GenericService = genericService;
-            this.viewModelSelectListBuilder = viewModelSelectListBuilder;
 
             this.simpleViewModel = simpleViewModel; //New object vs MVC
             //--NGAY SAU KHI INIT simpleViewModel => SHOULD CHECK FOR Newable???? => to bind to toolstrip (because: many time: the index list is empty => not select the first row in index list)
@@ -639,7 +636,6 @@ namespace TotalSmartCoding.Controllers
 
             simpleViewModel.UserID = this.GenericService.UserID; //CAU LENH NAY TAM THOI DUOC SU DUNG DE SORT USER DROPDWONLIST. SAU NAY NEN LAM CACH KHAC, CACH NAY KHONG HAY
 
-            this.viewModelSelectListBuilder.BuildSelectLists(simpleViewModel); //Buil select list for dropdown box using IEnumerable<SelectListItem> (using for short data list only). For the long list, it should use Kendo automplete instead.
 
             return simpleViewModel;
         }

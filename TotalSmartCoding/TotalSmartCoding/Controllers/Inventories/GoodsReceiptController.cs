@@ -7,7 +7,6 @@ using TotalCore.Services.Inventories;
 using TotalDTO.Inventories;
 
 using TotalSmartCoding.Controllers;
-using TotalSmartCoding.Builders.Inventories;
 using TotalSmartCoding.ViewModels.Inventories;
 
 
@@ -18,8 +17,8 @@ namespace TotalSmartCoding.Controllers.Inventories
     public class GoodsReceiptController : GenericViewDetailController<GoodsReceipt, GoodsReceiptDetail, GoodsReceiptViewDetail, GoodsReceiptDTO, GoodsReceiptPrimitiveDTO, GoodsReceiptDetailDTO, GoodsReceiptViewModel>
     {
         public GoodsReceiptViewModel GoodsReceiptViewModel { get; private set; }
-        public GoodsReceiptController(IGoodsReceiptService goodsReceiptService, IGoodsReceiptViewModelSelectListBuilder goodsReceiptViewModelSelectListBuilder, GoodsReceiptViewModel goodsReceiptViewModel)
-            : base(goodsReceiptService, goodsReceiptViewModelSelectListBuilder, goodsReceiptViewModel)
+        public GoodsReceiptController(IGoodsReceiptService goodsReceiptService, GoodsReceiptViewModel goodsReceiptViewModel)
+            : base(goodsReceiptService, goodsReceiptViewModel)
         {
             this.GoodsReceiptViewModel = goodsReceiptViewModel;
 

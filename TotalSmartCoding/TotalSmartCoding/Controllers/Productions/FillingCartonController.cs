@@ -12,7 +12,6 @@ using TotalCore.Services.Productions;
 using TotalSmartCoding.Controllers;
 using TotalDTO.Productions;
 using TotalSmartCoding.ViewModels.Productions;
-using TotalSmartCoding.Builders.Productions;
 
 
 namespace TotalSmartCoding.Controllers.Productions
@@ -21,8 +20,8 @@ namespace TotalSmartCoding.Controllers.Productions
     {
         public IFillingCartonService fillingCartonService;
 
-        public FillingCartonController(IFillingCartonService fillingCartonService, IFillingCartonViewModelSelectListBuilder fillingCartonSelectListBuilder, FillingCartonViewModel fillingCartonViewModel)
-            : base(fillingCartonService, fillingCartonSelectListBuilder, fillingCartonViewModel)
+        public FillingCartonController(IFillingCartonService fillingCartonService, FillingCartonViewModel fillingCartonViewModel)
+            : base(fillingCartonService, fillingCartonViewModel)
         {
             this.fillingCartonService = fillingCartonService;
         }

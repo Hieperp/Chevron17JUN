@@ -22,7 +22,6 @@ using TotalSmartCoding.CommonLibraries;
 using TotalCore.Repositories.Productions;
 using TotalSmartCoding.Controllers.APIs.Productions;
 using TotalCore.Services.Productions;
-using TotalSmartCoding.Builders.Productions;
 using TotalSmartCoding.ViewModels.Productions;
 using TotalSmartCoding.Controllers.Productions;
 using TotalDTO.Productions;
@@ -72,7 +71,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
-            this.batchController = new BatchController(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<IBatchViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<BatchViewModel>());
+            this.batchController = new BatchController(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<BatchViewModel>());
             this.batchController.PropertyChanged += new PropertyChangedEventHandler(batchController_PropertyChanged);
 
             this.baseController = this.batchController;            

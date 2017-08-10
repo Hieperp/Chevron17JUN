@@ -81,15 +81,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\Commons\IAspNetUserSelectListBuilder.cs" />
-    <Compile Include="Builders\Commons\IPaymentTermSelectListBuilder.cs" />
-    <Compile Include="Builders\Inventories\GoodsReceiptViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\IViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Productions\BatchViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Productions\FillingCartonViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Productions\FillingPackViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Productions\FillingPalletViewModelSelectListBuilder.cs" />
-    <Compile Include="Builders\Sales\DeliveryAdviceViewModelSelectListBuilder.cs" />
     <Compile Include="CommonLibraries\AutoMapperConfig.cs" />
     <Compile Include="CommonLibraries\BP\ADODatabase.cs" />
     <Compile Include="CommonLibraries\BP\GlobalMsADO.cs" />

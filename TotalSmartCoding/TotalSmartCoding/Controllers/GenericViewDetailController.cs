@@ -9,7 +9,6 @@ using TotalModel;
 using TotalDTO;
 using TotalCore.Services;
 
-using TotalSmartCoding.Builders;
 using TotalSmartCoding.ViewModels.Helpers;
 using System.ComponentModel;
 
@@ -29,16 +28,16 @@ namespace TotalSmartCoding.Controllers
         private readonly IGenericWithViewDetailService<TEntity, TEntityDetail, TEntityViewDetail, TDto, TPrimitiveDto, TDtoDetail> genericWithViewDetailService;
         private readonly TViewDetailViewModel viewDetailViewModel;
 
-        public GenericViewDetailController(IGenericWithViewDetailService<TEntity, TEntityDetail, TEntityViewDetail, TDto, TPrimitiveDto, TDtoDetail> genericWithViewDetailService, IViewModelSelectListBuilder<TViewDetailViewModel> viewModelSelectListBuilder, TViewDetailViewModel viewDetailViewModel)
-            : this(genericWithViewDetailService, viewModelSelectListBuilder, viewDetailViewModel, false, true)
+        public GenericViewDetailController(IGenericWithViewDetailService<TEntity, TEntityDetail, TEntityViewDetail, TDto, TPrimitiveDto, TDtoDetail> genericWithViewDetailService, TViewDetailViewModel viewDetailViewModel)
+            : this(genericWithViewDetailService, viewDetailViewModel, false, true)
         { }
 
-        public GenericViewDetailController(IGenericWithViewDetailService<TEntity, TEntityDetail, TEntityViewDetail, TDto, TPrimitiveDto, TDtoDetail> genericWithViewDetailService, IViewModelSelectListBuilder<TViewDetailViewModel> viewModelSelectListBuilder, TViewDetailViewModel viewDetailViewModel, bool isCreateWizard)
-            : this(genericWithViewDetailService, viewModelSelectListBuilder, viewDetailViewModel, isCreateWizard, false)
+        public GenericViewDetailController(IGenericWithViewDetailService<TEntity, TEntityDetail, TEntityViewDetail, TDto, TPrimitiveDto, TDtoDetail> genericWithViewDetailService, TViewDetailViewModel viewDetailViewModel, bool isCreateWizard)
+            : this(genericWithViewDetailService, viewDetailViewModel, isCreateWizard, false)
         { }
 
-        public GenericViewDetailController(IGenericWithViewDetailService<TEntity, TEntityDetail, TEntityViewDetail, TDto, TPrimitiveDto, TDtoDetail> genericWithViewDetailService, IViewModelSelectListBuilder<TViewDetailViewModel> viewModelSelectListBuilder, TViewDetailViewModel viewDetailViewModel, bool isCreateWizard, bool isSimpleCreate)
-            : base(genericWithViewDetailService, viewModelSelectListBuilder, viewDetailViewModel, isCreateWizard, isSimpleCreate)
+        public GenericViewDetailController(IGenericWithViewDetailService<TEntity, TEntityDetail, TEntityViewDetail, TDto, TPrimitiveDto, TDtoDetail> genericWithViewDetailService, TViewDetailViewModel viewDetailViewModel, bool isCreateWizard, bool isSimpleCreate)
+            : base(genericWithViewDetailService, viewDetailViewModel, isCreateWizard, isSimpleCreate)
         {
             this.genericWithViewDetailService = genericWithViewDetailService;
 

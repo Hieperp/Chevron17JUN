@@ -17,7 +17,6 @@ using TotalDTO.Productions;
 using TotalService.Productions;
 using TotalSmartCoding.CommonLibraries;
 using TotalSmartCoding.ViewModels.Productions;
-using TotalSmartCoding.Builders.Productions;
 using TotalSmartCoding.Controllers.Productions;
 using AutoMapper;
 
@@ -66,9 +65,9 @@ namespace TotalSmartCoding.Controllers.Productions
                 base.FillingData = fillingData;
 
 
-                this.fillingPackController = new FillingPackController(CommonNinject.Kernel.Get<IFillingPackService>(), CommonNinject.Kernel.Get<IFillingPackViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPackViewModel>());
-                this.fillingCartonController = new FillingCartonController(CommonNinject.Kernel.Get<IFillingCartonService>(), CommonNinject.Kernel.Get<IFillingCartonViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingCartonViewModel>());
-                this.fillingPalletController = new FillingPalletController(CommonNinject.Kernel.Get<IFillingPalletService>(), CommonNinject.Kernel.Get<IFillingPalletViewModelSelectListBuilder>(), CommonNinject.Kernel.Get<FillingPalletViewModel>());
+                this.fillingPackController = new FillingPackController(CommonNinject.Kernel.Get<IFillingPackService>(), CommonNinject.Kernel.Get<FillingPackViewModel>());
+                this.fillingCartonController = new FillingCartonController(CommonNinject.Kernel.Get<IFillingCartonService>(), CommonNinject.Kernel.Get<FillingCartonViewModel>());
+                this.fillingPalletController = new FillingPalletController(CommonNinject.Kernel.Get<IFillingPalletService>(), CommonNinject.Kernel.Get<FillingPalletViewModel>());
 
 
                 this.ionetSocketPack = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PackScanner)), 23, 120); //PORT 2112: DATA LOGIC
