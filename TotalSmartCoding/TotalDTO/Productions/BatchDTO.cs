@@ -71,6 +71,7 @@ namespace TotalDTO.Productions
 
         public override int PreparedPersonID { get { return 1; } }
 
+        [DefaultValue(false)]
         public bool IsDefault { get; set; }
     }
 

@@ -28,7 +28,7 @@ namespace TotalModel
     public abstract class BaseModel : NotifyPropertyChangeObject, IBaseModel
     {
         protected BaseModel() { this.EntryDate = DateTime.Now; }
-
+        public virtual void Init() { this.EntryDate = DateTime.Now; }
 
         private DateTime? entryDate;
         [UIHint("DateTimeReadonly")]

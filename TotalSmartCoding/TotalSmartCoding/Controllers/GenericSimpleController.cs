@@ -118,7 +118,8 @@ namespace TotalSmartCoding.Controllers
             this.simpleViewModel.StopTracking();
 
             this.LastID = this.simpleViewModel.GetID();
-            this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() AS MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
+            this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() LIKE IN MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
+            this.simpleViewModel.Init(); //INITIALIZE DEFAULT
             //this.Call int of base object
             //Check default
             //Implement all property for property change
