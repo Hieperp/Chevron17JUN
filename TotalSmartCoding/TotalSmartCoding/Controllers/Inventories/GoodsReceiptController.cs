@@ -1,16 +1,8 @@
-﻿using TotalBase.Enums;
-
-using TotalModel.Models;
-
-using TotalCore.Services.Inventories;
-
+﻿using TotalModel.Models;
 using TotalDTO.Inventories;
 
-using TotalSmartCoding.Controllers;
+using TotalCore.Services.Inventories;
 using TotalSmartCoding.ViewModels.Inventories;
-
-
-using System.ComponentModel;
 
 namespace TotalSmartCoding.Controllers.Inventories
 {
@@ -21,19 +13,6 @@ namespace TotalSmartCoding.Controllers.Inventories
             : base(goodsReceiptService, goodsReceiptViewModel)
         {
             this.GoodsReceiptViewModel = goodsReceiptViewModel;
-
-            //this.DtoViewModel.PropertyChanged += new PropertyChangedEventHandler(MarketingIncentiveMaster_PropertyChanged);
-            this.GoodsReceiptViewModel.Reference = "123456";
-            this.GoodsReceiptViewModel.EntryDate = new System.DateTime(2018, 1, 1);
-            
         }
-
-
-        private void MarketingIncentiveMaster_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            int i = 0;
-            i = i + 1;
-        }
-
     }
 }

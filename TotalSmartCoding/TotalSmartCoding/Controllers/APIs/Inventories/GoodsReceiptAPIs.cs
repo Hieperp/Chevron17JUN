@@ -1,25 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Data.Entity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-
-
-using TotalBase.Enums;
-using TotalModel.Models;
-
-using TotalDTO.Inventories;
-
-using TotalCore.Repositories.Inventories;
 using TotalBase;
+using TotalModel.Models;
+using TotalCore.Repositories.Inventories;
 
 namespace TotalSmartCoding.Controllers.APIs.Inventories
 {
-    public class GoodsReceiptAPIController
+    public class GoodsReceiptAPIs
     {
         private readonly IGoodsReceiptAPIRepository goodsReceiptAPIRepository;
 
-        public GoodsReceiptAPIController(IGoodsReceiptAPIRepository goodsReceiptAPIRepository)
+        public GoodsReceiptAPIs(IGoodsReceiptAPIRepository goodsReceiptAPIRepository)
         {
             this.goodsReceiptAPIRepository = goodsReceiptAPIRepository;
         }

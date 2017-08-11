@@ -98,7 +98,7 @@
     <Compile Include="Libraries\Helpers\OLVHelpers.cs" />
     <Compile Include="Configurations\SettingsManager.cs" />
     <Compile Include="Controllers\APIs\Commons\CommodityAPIs.cs" />
-    <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIController.cs" />
+    <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIs.cs" />
     <Compile Include="Controllers\APIs\Productions\BatchAPIs.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />

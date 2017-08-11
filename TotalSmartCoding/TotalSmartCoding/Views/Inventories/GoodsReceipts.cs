@@ -42,7 +42,7 @@ namespace TotalSmartCoding.Views.Inventories
             this.fastListIndex = this.fastObjectListViewIndex;
 
             var goodsReceiptAPIRepository = CommonNinject.Kernel.Get<IGoodsReceiptAPIRepository>();
-            GoodsReceiptAPIController goodsReceiptAPIsController = new GoodsReceiptAPIController(goodsReceiptAPIRepository);
+            GoodsReceiptAPIs goodsReceiptAPIsController = new GoodsReceiptAPIs(goodsReceiptAPIRepository);
 
             this.fastObjectListViewIndex.SetObjects(goodsReceiptAPIsController.GetGoodsReceiptIndexes());
 
@@ -84,7 +84,7 @@ namespace TotalSmartCoding.Views.Inventories
 
             this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.Controller.GoodsReceiptViewModel, "Reference", true);
 
-            this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.GoodsReceiptViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
+            //this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.GoodsReceiptViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
