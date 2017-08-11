@@ -86,6 +86,8 @@ namespace TotalSmartCoding.Views.Mains
                     childForm.WindowState = FormWindowState.Maximized;
                     childForm.Show();
                 }
+                else
+                    OpenTestView();
 
             }
             catch (Exception exception)
@@ -401,19 +403,20 @@ namespace TotalSmartCoding.Views.Mains
 
         private void OpenTestView()
         {
+            //return;
 
             //Open new form
-            Form childForm;
+            GoodsReceipts grForm;
             //childForm = new Batches();
             //childForm = new DeliveryAdvices();
-            childForm = new GoodsReceipts();
+            grForm = new GoodsReceipts();
 
-            if (childForm != null)
+            if (grForm != null)
             {
-                childForm.MdiParent = this;
-                childForm.WindowState = FormWindowState.Maximized;
-                childForm.ControlBox = false;
-                childForm.Show();
+                grForm.MdiParent = this;
+                grForm.WindowState = FormWindowState.Maximized;
+                //childForm.ControlBox = false;
+                grForm.Show();
             }
 
         }

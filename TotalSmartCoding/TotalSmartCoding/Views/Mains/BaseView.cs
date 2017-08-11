@@ -41,8 +41,9 @@ namespace TotalSmartCoding.Views.Mains
 
                 this.baseController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
-                InitializeCommonControlBinding();
-                InitializeReadOnlyModeBinding();
+                this.InitializeCommonControlBinding();
+                this.InitializeDataGridBinding();
+                this.InitializeReadOnlyModeBinding();
 
                 this.Loading();
             }
@@ -55,7 +56,7 @@ namespace TotalSmartCoding.Views.Mains
         Binding bindingIsDirty;
         Binding bindingIsDirtyBLL;
 
-        protected virtual void InitializeTabControl() { }
+        protected virtual void InitializeTabControl() { }        
 
         protected virtual void InitializeCommonControlBinding()
         {
@@ -69,6 +70,7 @@ namespace TotalSmartCoding.Views.Mains
             this.errorProviderMaster.DataSource = this.baseController.BaseDTO; //JUST SET this.errorProviderMaster.DataSource HERE, IT WILL PROVIDE ERROR BINDING TO EVERY VIEW
         }
 
+        protected virtual void InitializeDataGridBinding() { }
 
         protected virtual void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {

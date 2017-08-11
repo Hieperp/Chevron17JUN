@@ -30,7 +30,8 @@ namespace TotalSmartCoding.Views.Inventories
 {
     public partial class GoodsReceipts : BaseView
     {
-        private GoodsReceiptController Controller { get; set; }
+        private GoodsReceiptAPIs goodsReceiptAPIs;
+        private GoodsReceiptController goodsReceiptController;
 
         public GoodsReceipts()
             : base()
@@ -39,42 +40,16 @@ namespace TotalSmartCoding.Views.Inventories
 
 
             this.toolstripChild = this.toolStripChildForm;
-            this.fastListIndex = this.fastObjectListViewIndex;
+            this.fastListIndex = this.fastGoodsReceiptIndex;
 
-            var goodsReceiptAPIRepository = CommonNinject.Kernel.Get<IGoodsReceiptAPIRepository>();
-            GoodsReceiptAPIs goodsReceiptAPIsController = new GoodsReceiptAPIs(goodsReceiptAPIRepository);
+            this.goodsReceiptAPIs = new GoodsReceiptAPIs(CommonNinject.Kernel.Get<IGoodsReceiptAPIRepository>());
 
-            this.fastObjectListViewIndex.SetObjects(goodsReceiptAPIsController.GetGoodsReceiptIndexes());
+            this.goodsReceiptController = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<GoodsReceiptViewModel>());
+            this.goodsReceiptController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
-            this.Controller = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<GoodsReceiptViewModel>());
-            this.Controller.PropertyChanged += new PropertyChangedEventHandler(goodsReceiptsController_PropertyChanged);
-
-            this.baseController = this.Controller;
+            this.baseController = this.goodsReceiptController;
         }
-
-        private void GoodsReceipts_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                //InitializeCommonControlBinding();
-
-                InitializeDataGridBinding();
-
-                //InitializeReadOnlyModeBinding();
-            }
-            catch (Exception exception)
-            {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
-            }
-        }
-
-
-        private void goodsReceiptsController_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            this.NotifyPropertyChanged(e.PropertyName);
-        }
-
-
+       
         Binding bindingEntryDate;
         Binding bindingReference;
 
@@ -82,20 +57,21 @@ namespace TotalSmartCoding.Views.Inventories
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingReference = this.textBoxReference.DataBindings.Add("Text", this.Controller.GoodsReceiptViewModel, "Reference", true);
-
-            //this.bindingEntryDate = this.datePickerEntryDate.DataBindings.Add("Value", this.Controller.GoodsReceiptViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingReference = this.textexReference.DataBindings.Add("Text", this.goodsReceiptController.GoodsReceiptViewModel, "Reference", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.goodsReceiptController.GoodsReceiptViewModel, "EntryDate", true);
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+
+
 
 
 
             this.naviGroupDetails.DataBindings.Add("ExpandedHeight", this.numericUpDownSizingDetail, "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             this.numericUpDownSizingDetail.Minimum = this.naviGroupDetails.HeaderHeight * 2;
-            this.numericUpDownSizingDetail.Maximum = this.naviGroupDetails.Height + this.fastObjectListViewIndex.Height;
+            this.numericUpDownSizingDetail.Maximum = this.naviGroupDetails.Height + this.fastGoodsReceiptIndex.Height;
 
             this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].Width = 10;
             this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
@@ -113,20 +89,20 @@ namespace TotalSmartCoding.Views.Inventories
         //}
 
 
-        ///lấy cái này!!!
-
-        private void InitializeDataGridBinding()
+        protected override void InitializeDataGridBinding()
         {
-            this.dataGridViewDetails.AutoGenerateColumns = false;
-            //marketingIncentiveDetailListView = new BindingListView<DeliveryAdviceDetailDTO>(this.deliveryAdvicesController.ViewDetailViewModel.DeliveryAdviceViewDetails);
-            this.dataGridViewDetails.DataSource = this.Controller.GoodsReceiptViewModel.ViewDetails;
+            this.gridexViewDetails.AutoGenerateColumns = false;
+            this.gridexViewDetails.DataSource = this.goodsReceiptController.GoodsReceiptViewModel.ViewDetails;
+            this.dataGridexView1.DataSource = this.goodsReceiptController.GoodsReceiptViewModel.PalletDetails;
 
             //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
         }
 
-
-
-
+        public override void Loading()
+        {
+            this.fastGoodsReceiptIndex.SetObjects(this.goodsReceiptAPIs.GetGoodsReceiptIndexes());
+            base.Loading();
+        }
 
 
 

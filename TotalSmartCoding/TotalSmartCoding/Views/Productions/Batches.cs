@@ -73,7 +73,7 @@ namespace TotalSmartCoding.Views.Productions
             this.batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
             this.batchController = new BatchController(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<BatchViewModel>());
-            this.batchController.PropertyChanged += new PropertyChangedEventHandler(batchController_PropertyChanged);
+            this.batchController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
             this.baseController = this.batchController;            
         }
@@ -88,12 +88,6 @@ namespace TotalSmartCoding.Views.Productions
                 this.buttonDiscontinued.Enabled = this.Newable && this.ReadonlyMode;
             }
         }
-
-        private void batchController_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            this.NotifyPropertyChanged(e.PropertyName);
-        }
-
 
         protected override void InitializeTabControl()
         {

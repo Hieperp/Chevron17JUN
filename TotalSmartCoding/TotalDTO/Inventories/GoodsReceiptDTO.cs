@@ -20,7 +20,7 @@ namespace TotalDTO.Inventories
         public void SetID(int id) { this.GoodsReceiptID = id; }
 
         public int GoodsReceiptID { get; set; }
-        
+
         private int goodsReceiptTypeID;
         [DefaultValue(-1)]
         public int GoodsReceiptTypeID
@@ -34,7 +34,7 @@ namespace TotalDTO.Inventories
         public bool HasPickup { get; set; }
 
         public int WarehouseID { get; set; }
-        
+
 
         private int storekeeperID;
         [DefaultValue(-1)]
@@ -75,6 +75,11 @@ namespace TotalDTO.Inventories
         public ICollection<GoodsReceiptDetailDTO> GetDetails() { return this.GoodsReceiptViewDetails; }
 
         protected override IEnumerable<GoodsReceiptDetailDTO> DtoDetails() { return this.GoodsReceiptViewDetails; }
+
+
+        public BindingList<GoodsReceiptDetailDTO> PalletDetails { get { return this.GoodsReceiptViewDetails; } }
+
+        //public BindingList<GoodsReceiptDetailDTO> PalletDetails { get { return new BindingList<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails.Where(w => w.PalletID == null).ToList()); } }
     }
 
 }
