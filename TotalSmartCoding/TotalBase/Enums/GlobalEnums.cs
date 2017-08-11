@@ -29,9 +29,11 @@
         public static decimal VATPercent = 10; 
 
         public static int rndQuantity = 0;
+        public static int rndVolume = 2;
         public static int rndAmount = 0;
         public static int rndDiscountPercent = 1;
 
+        
         public static int rndWeight = 2;
 
         public enum ActiveOption

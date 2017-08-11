@@ -14,25 +14,35 @@ namespace TotalDTO.Inventories
 {
     public class GoodsReceiptPrimitiveDTO : QuantityDTO<GoodsReceiptDetailDTO>, IPrimitiveEntity, IPrimitiveDTO
     {
-        public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.GoodsReceipt; } }
+        public override GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.GoodsReceipt; } }
 
         public override int GetID() { return this.GoodsReceiptID; }
         public void SetID(int id) { this.GoodsReceiptID = id; }
 
         public int GoodsReceiptID { get; set; }
-        public int GoodsReceiptTypeID { get; set; }
+        
+        private int goodsReceiptTypeID;
+        [DefaultValue(-1)]
+        public int GoodsReceiptTypeID
+        {
+            get { return this.goodsReceiptTypeID; }
+            set { ApplyPropertyChange<GoodsReceiptPrimitiveDTO, int>(ref this.goodsReceiptTypeID, o => o.GoodsReceiptTypeID, value); }
+        }
 
         public virtual Nullable<int> PickupID { get; set; }
-        public string PickupReferences { get; set; }
 
         public bool HasPickup { get; set; }
 
         public int WarehouseID { get; set; }
-        public int ForkliftDriverID { get; set; }
-        public int StorekeeperID { get; set; }
         
-        public override decimal TotalQuantity { get { return this.DtoDetails().Select(o => o.Quantity).Sum(); } }
-        public decimal TotalQuantitySKU { get { return this.DtoDetails().Select(o => o.QuantitySKU).Sum(); } }
+
+        private int storekeeperID;
+        [DefaultValue(-1)]
+        public int StorekeeperID
+        {
+            get { return this.storekeeperID; }
+            set { ApplyPropertyChange<GoodsReceiptPrimitiveDTO, int>(ref this.storekeeperID, o => o.StorekeeperID, value); }
+        }
     }
 
     public class GoodsReceiptDTO : GoodsReceiptPrimitiveDTO, IBaseDetailEntity<GoodsReceiptDetailDTO>
@@ -42,9 +52,22 @@ namespace TotalDTO.Inventories
             this.GoodsReceiptViewDetails = new BindingList<GoodsReceiptDetailDTO>();
         }
 
-        public override Nullable<int> PickupID { get { return (this.Pickup != null ? (this.Pickup.PickupID > 0 ? (Nullable<int>)this.Pickup.PickupID : null) : null); } }
-        [UIHint("Commons/PickupBox")]
-        public PickupBoxDTO Pickup { get; set; }
+        private string pickupReferences;
+        [DefaultValue("")]
+        public string PickupReferences
+        {
+            get { return this.pickupReferences; }
+            set { ApplyPropertyChange<GoodsReceiptDTO, string>(ref this.pickupReferences, o => o.PickupReferences, value); }
+        }
+
+        private string warehouseName;
+        [DefaultValue("")]
+        public string WarehouseName
+        {
+            get { return this.warehouseName; }
+            set { ApplyPropertyChange<GoodsReceiptDTO, string>(ref this.warehouseName, o => o.WarehouseName, value); }
+        }
+
 
         public BindingList<GoodsReceiptDetailDTO> GoodsReceiptViewDetails { get; set; }
         public BindingList<GoodsReceiptDetailDTO> ViewDetails { get { return this.GoodsReceiptViewDetails; } set { this.GoodsReceiptViewDetails = value; } }

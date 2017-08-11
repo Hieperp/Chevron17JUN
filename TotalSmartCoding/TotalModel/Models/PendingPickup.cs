@@ -14,12 +14,12 @@ namespace TotalModel.Models
     public partial class PendingPickup
     {
         public int PickupID { get; set; }
-        public System.DateTime EntryDate { get; set; }
-        public string Reference { get; set; }
         public int WarehouseID { get; set; }
         public string WarehouseCode { get; set; }
-        public string ForkliftDriverName { get; set; }
-        public decimal TotalQuantity { get; set; }
         public string Description { get; set; }
+        public string PickupReference { get; set; }
+        public System.DateTime PickupEntryDate { get; set; }
+        public string WarehouseName { get; set; }
+        public string Remarks { get; set; }
     }
 }

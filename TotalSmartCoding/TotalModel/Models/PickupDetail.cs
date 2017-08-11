@@ -35,19 +35,19 @@ namespace TotalModel.Models
         public int EntryStatusID { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityReceipt { get; set; }
-        public decimal QuantitySKU { get; set; }
-        public decimal QuantitySKUReceipt { get; set; }
+        public decimal Volume { get; set; }
+        public decimal VolumeReceipt { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
     
         public virtual BinLocation BinLocation { get; set; }
+        public virtual Carton Carton { get; set; }
+        public virtual Commodity Commodity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        public virtual Pickup Pickup { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
-        public virtual Commodity Commodity { get; set; }
-        public virtual Carton Carton { get; set; }
         public virtual Pack Pack { get; set; }
         public virtual Pallet Pallet { get; set; }
+        public virtual Pickup Pickup { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
     }
 }

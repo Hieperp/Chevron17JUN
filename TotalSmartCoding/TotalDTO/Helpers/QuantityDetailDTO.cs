@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using TotalBase.Enums;
 using TotalModel;
 
 namespace TotalDTO.Helpers
@@ -12,39 +14,53 @@ namespace TotalDTO.Helpers
         int CommodityTypeID { get; set; }
 
         decimal Quantity { get; set; }
+        decimal Volume { get; set; }
     }
 
     public abstract class QuantityDetailDTO : BaseModel, IQuantityDetailDTO, IBaseModel
     {
-        public virtual int CommodityID { get; set; }
-        
-        //[UIHint("StringReadonly")]  Note: Must set later for any derived class, event for readonly attribute. Don't know why can not override this attribute when needed only
-        [Display(Name = "Mặt hàng")]
-        [Required(ErrorMessage = "Vui lòng chọn mặt hàng")]        
-        public virtual string CommodityCode { get; set; }
+        public virtual int CommodityTypeID { get { return 1; } set { } } //NOT USED NOW. KEEP HERE FOR USE LATER
 
-        [Display(Name = "Mã hàng")]
-        [UIHint("StringReadonly")]
-        public virtual string CommodityName { get; set; }
+        private int commodityID;
+        [DefaultValue(-1)]
+        public int CommodityID
+        {
+            get { return this.commodityID; }
+            set { ApplyPropertyChange<QuantityDetailDTO, int>(ref this.commodityID, o => o.CommodityID, value); }
+        }
 
-        [Range(1, 99999999999, ErrorMessage = "Lỗi bắt buộc phải có id loại hàng hóa")]
-        [Required(ErrorMessage = "Lỗi bắt buộc phải có loại hàng hóa")]
-        public virtual int CommodityTypeID { get; set; }
+        private string commodityCode;
+        [DefaultValue("")]
+        public virtual string CommodityCode
+        {
+            get { return this.commodityCode; }
+            set { ApplyPropertyChange<QuantityDetailDTO, string>(ref this.commodityCode, o => o.CommodityCode, value); }
+        }
 
-
-        //[Display(Name = "SL")]        
-        //[Range(0, 99999999999, ErrorMessage = "Số lượng không hợp lệ")]
-        //[Required(ErrorMessage = "Vui lòng nhập số lượng")]
-        //public virtual decimal Quantity { get; set; }
-
+        private string commodityName;
+        [DefaultValue("")]
+        public virtual string CommodityName
+        {
+            get { return this.commodityName; }
+            set { ApplyPropertyChange<QuantityDetailDTO, string>(ref this.commodityName, o => o.CommodityName, value); }
+        }
 
         private decimal quantity;
+        [DefaultValue(0)]
+        [Range(0, 99999999999, ErrorMessage = "Số lượng không hợp lệ")]
         public virtual decimal Quantity
         {
             get { return this.quantity; }
-            set { ApplyPropertyChange<QuantityDetailDTO, decimal>(ref this.quantity, o => o.Quantity, Math.Round(value, 0)); } //GlobalVariables.Round0Amount
+            set { ApplyPropertyChange<QuantityDetailDTO, decimal>(ref this.quantity, o => o.Quantity, Math.Round(value, (int)GlobalEnums.rndQuantity)); }
         }
 
-
+        private decimal volume;
+        [DefaultValue(0)]
+        [Range(0, 99999999999, ErrorMessage = "Volume không hợp lệ")]
+        public virtual decimal Volume
+        {
+            get { return this.volume; }
+            set { ApplyPropertyChange<QuantityDetailDTO, decimal>(ref this.volume, o => o.Volume, Math.Round(value, (int)GlobalEnums.rndVolume)); }
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace TotalModel.Models
         public int OrganizationalUnitID { get; set; }
         public int LocationID { get; set; }
         public decimal TotalQuantity { get; set; }
-        public decimal TotalQuantitySKU { get; set; }
+        public decimal TotalVolume { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }

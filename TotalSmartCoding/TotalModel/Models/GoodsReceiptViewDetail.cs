@@ -25,5 +25,13 @@ namespace TotalModel.Models
         public Nullable<int> PalletID { get; set; }
         public string PalletCode { get; set; }
         public string Remarks { get; set; }
+        public int BinLocationID { get; set; }
+        public string BinLocationCode { get; set; }
+        public Nullable<int> PackID { get; set; }
+        public string PackCode { get; set; }
+        public Nullable<int> CartonID { get; set; }
+        public string CartonCode { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal Volume { get; set; }
     }
 }

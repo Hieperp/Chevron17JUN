@@ -15,19 +15,23 @@ namespace TotalModel.Models
     {
         public int PickupID { get; set; }
         public int PickupDetailID { get; set; }
-        public System.DateTime EntryDate { get; set; }
-        public string Reference { get; set; }
         public int CommodityID { get; set; }
         public string CommodityCode { get; set; }
         public string CommodityName { get; set; }
         public Nullable<int> PalletID { get; set; }
         public string PalletCode { get; set; }
-        public int CommodityID1 { get; set; }
-        public string CommodityCode1 { get; set; }
-        public string CommodityName1 { get; set; }
         public string Remarks { get; set; }
-        public decimal Quantity { get; set; }
-        public decimal QuantitySKU { get; set; }
+        public int Quantity { get; set; }
         public Nullable<bool> IsSelected { get; set; }
+        public string PickupReference { get; set; }
+        public System.DateTime PickupEntryDate { get; set; }
+        public int BinLocationID { get; set; }
+        public string BinLocationCode { get; set; }
+        public Nullable<int> PackID { get; set; }
+        public string PackCode { get; set; }
+        public Nullable<int> CartonID { get; set; }
+        public string CartonCode { get; set; }
+        public Nullable<decimal> QuantityRemains { get; set; }
+        public string Description { get; set; }
     }
 }

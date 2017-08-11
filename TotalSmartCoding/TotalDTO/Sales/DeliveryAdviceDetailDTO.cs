@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace TotalDTO.Sales
 {
-    public class StockableDetailDTO : FreeQuantityDiscountVATAmountDetailDTO, IHelperWarehouseID, IHelperCommodityID, IHelperCommodityTypeID
+    public class StockableDetailDTO : FreeQuantityDiscountVATAmountDetailDTO, IHelperWarehouseID, IHelperCommodityID
     {
         public Nullable<int> WarehouseID { get; set; }
         public int GetWarehouseID() { return (int)this.WarehouseID; } //Purpose: for IHelperWarehouseID only

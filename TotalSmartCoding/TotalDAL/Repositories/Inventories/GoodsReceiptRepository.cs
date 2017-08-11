@@ -33,30 +33,18 @@ namespace TotalDAL.Repositories.Inventories
 
         public IEnumerable<PendingPickup> GetPickups(int? locationID)
         {
-            this.TotalSmartCodingEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<PendingPickup> pendingPickups = base.TotalSmartCodingEntities.GetPendingPickups(locationID).ToList();
-            this.TotalSmartCodingEntities.Configuration.ProxyCreationEnabled = true;
-
-            return pendingPickups;
+            return base.TotalSmartCodingEntities.GetPendingPickups(locationID).ToList();
         }
 
 
         public IEnumerable<PendingPickupWarehouse> GetWarehouses(int? locationID)
         {
-            this.TotalSmartCodingEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<PendingPickupWarehouse> pendingPickupWarehouses = base.TotalSmartCodingEntities.GetPendingPickupWarehouses(locationID).ToList();
-            this.TotalSmartCodingEntities.Configuration.ProxyCreationEnabled = true;
-
-            return pendingPickupWarehouses;
+            return base.TotalSmartCodingEntities.GetPendingPickupWarehouses(locationID).ToList();
         }
 
         public IEnumerable<PendingPickupDetail> GetPendingPickupDetails(int? locationID, int? goodsReceiptID, int? pickupID, int? warehouseID, string pickupDetailIDs, bool isReadonly)
         {
-            this.TotalSmartCodingEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<PendingPickupDetail> pendingPickupDetails = base.TotalSmartCodingEntities.GetPendingPickupDetails(locationID, goodsReceiptID, pickupID, warehouseID, pickupDetailIDs, isReadonly).ToList();
-            this.TotalSmartCodingEntities.Configuration.ProxyCreationEnabled = true;
-
-            return pendingPickupDetails;
+            return base.TotalSmartCodingEntities.GetPendingPickupDetails(locationID, goodsReceiptID, pickupID, warehouseID, pickupDetailIDs, isReadonly).ToList();
         }
 
     }

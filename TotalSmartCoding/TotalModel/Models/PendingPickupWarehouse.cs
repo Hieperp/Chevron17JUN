@@ -15,6 +15,6 @@ namespace TotalModel.Models
     {
         public int WarehouseID { get; set; }
         public string WarehouseCode { get; set; }
-        public Nullable<decimal> TotalQuantity { get; set; }
+        public string WarehouseName { get; set; }
     }
 }

@@ -23,7 +23,16 @@ namespace TotalDAL.Repositories
             this.RepositoryBag = new Dictionary<string, object>();
             this.totalSmartCodingEntities = totalSmartCodingEntities;            
 
+
+
+
+
             //if (!GlobalVariables.shouldRestoreProcedure) return;
+
+            //return;
+
+            Helpers.SqlProgrammability.Inventories.GoodsReceipt goodsReceipt = new Helpers.SqlProgrammability.Inventories.GoodsReceipt(totalSmartCodingEntities);
+            goodsReceipt.RestoreProcedure();
 
             return;
 
@@ -52,10 +61,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.FillingCarton fillingCarton = new Helpers.SqlProgrammability.Productions.FillingCarton(totalSmartCodingEntities);
             fillingCarton.RestoreProcedure();
 
-            //return;
-
-            Helpers.SqlProgrammability.Inventories.GoodsReceipt goodsReceipt = new Helpers.SqlProgrammability.Inventories.GoodsReceipt(totalSmartCodingEntities);
-            goodsReceipt.RestoreProcedure();
+            
 
         }
 
