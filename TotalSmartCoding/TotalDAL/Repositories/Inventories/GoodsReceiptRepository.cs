@@ -31,18 +31,17 @@ namespace TotalDAL.Repositories.Inventories
         {
         }
 
-        public IEnumerable<PendingPickup> GetPickups(int? locationID)
+        public ICollection<PendingPickup> GetPendingPickups(int? locationID)
         {
             return base.TotalSmartCodingEntities.GetPendingPickups(locationID).ToList();
         }
 
-
-        public IEnumerable<PendingPickupWarehouse> GetWarehouses(int? locationID)
+        public ICollection<PendingPickupWarehouse> GetPendingPickupWarehouses(int? locationID)
         {
             return base.TotalSmartCodingEntities.GetPendingPickupWarehouses(locationID).ToList();
         }
 
-        public IEnumerable<PendingPickupDetail> GetPendingPickupDetails(int? locationID, int? goodsReceiptID, int? pickupID, int? warehouseID, string pickupDetailIDs, bool isReadonly)
+        public ICollection<PendingPickupDetail> GetPendingPickupDetails(int? locationID, int? goodsReceiptID, int? pickupID, int? warehouseID, string pickupDetailIDs, bool isReadonly)
         {
             return base.TotalSmartCodingEntities.GetPendingPickupDetails(locationID, goodsReceiptID, pickupID, warehouseID, pickupDetailIDs, isReadonly).ToList();
         }

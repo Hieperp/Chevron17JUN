@@ -49,14 +49,14 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
         Binding bindingIsDirty;
         Binding bindingIsDirtyBLL;
 
-        protected virtual void InitializeTabControl() { }        
+        protected virtual void InitializeTabControl() { }
 
         protected virtual void InitializeCommonControlBinding()
         {
@@ -74,7 +74,7 @@ namespace TotalSmartCoding.Views.Mains
 
         protected virtual void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
-            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+            if (e.BindingCompleteState == BindingCompleteState.Exception) { ExceptionHandlers.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
         }
 
         protected virtual void InitializeReadOnlyModeBinding()
@@ -118,7 +118,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -312,8 +312,17 @@ namespace TotalSmartCoding.Views.Mains
             //String hash = UnicodeEncoding.Unicode.GetString(data);
             //MessageBox.Show(hash);
 
+
             this.baseController.Create();
-            this.EditableMode = true;
+            if (this.NewWizard() == DialogResult.OK)
+                this.EditableMode = true;
+            else
+                this.CancelDirty(true);
+        }
+
+        protected virtual DialogResult NewWizard()
+        {
+            return DialogResult.OK;
         }
 
         public void Edit()
@@ -337,7 +346,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -354,7 +363,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -364,7 +373,7 @@ namespace TotalSmartCoding.Views.Mains
             try
             {
                 if (this.checkSelectedIndexID())
-                {                    
+                {
                     this.baseController.Approve(this.baseController.BaseDTO.GetID());
 
                     if (this.ApproveCheck(this.baseController.BaseDTO.GetID()) && MessageBox.Show(this, "Cài đặt batch này cho sản xuất " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
@@ -377,7 +386,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -389,7 +398,7 @@ namespace TotalSmartCoding.Views.Mains
             try
             {
                 if (this.checkSelectedIndexID())
-                {                    
+                {
                     this.baseController.Void(this.baseController.BaseDTO.GetID());
 
                     if (this.VoidCheck(this.baseController.BaseDTO.GetID()) && MessageBox.Show(this, "Dừng sản xuất batch này" + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
@@ -402,7 +411,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -443,7 +452,7 @@ namespace TotalSmartCoding.Views.Mains
             //}
         }
 
-       
+
 
         #endregion
 

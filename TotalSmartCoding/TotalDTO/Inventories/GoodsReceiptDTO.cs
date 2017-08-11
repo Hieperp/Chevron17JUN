@@ -20,7 +20,13 @@ namespace TotalDTO.Inventories
         public override int GetID() { return this.GoodsReceiptID; }
         public void SetID(int id) { this.GoodsReceiptID = id; }
 
-        public int GoodsReceiptID { get; set; }
+        private int goodsReceiptID;
+        [DefaultValue(0)]
+        public int GoodsReceiptID
+        {
+            get { return this.goodsReceiptID; }
+            set { ApplyPropertyChange<GoodsReceiptPrimitiveDTO, int>(ref this.goodsReceiptID, o => o.GoodsReceiptID, value); }
+        }
 
         private int goodsReceiptTypeID;
         [DefaultValue(-1)]

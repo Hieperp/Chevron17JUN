@@ -332,7 +332,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -379,7 +379,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 

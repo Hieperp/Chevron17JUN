@@ -14,7 +14,7 @@ using TotalSmartCoding.Views.Commons;
 
 using TotalSmartCoding.Views.Sales;
 using TotalSmartCoding.Views.Productions;
-using TotalSmartCoding.Views.Inventories;
+using TotalSmartCoding.Views.Inventories.GoodsReceipts;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -92,7 +92,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -133,12 +133,12 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
         private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
-            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+            if (e.BindingCompleteState == BindingCompleteState.Exception) { ExceptionHandlers.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
         }
 
         #endregion Contractor
@@ -167,7 +167,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -223,7 +223,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -240,7 +240,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -253,7 +253,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -267,7 +267,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -286,7 +286,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -300,7 +300,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -313,7 +313,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -326,7 +326,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -340,7 +340,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -353,7 +353,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -366,7 +366,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -380,7 +380,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -393,7 +393,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -485,7 +485,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
 
         }
@@ -510,7 +510,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 

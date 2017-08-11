@@ -64,7 +64,7 @@ namespace TotalSmartCoding.Views.Sales
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -147,7 +147,7 @@ namespace TotalSmartCoding.Views.Sales
 
         private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
-            if (e.BindingCompleteState == BindingCompleteState.Exception) { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+            if (e.BindingCompleteState == BindingCompleteState.Exception) { ExceptionHandlers.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
         }
 
         private void naviGroupDetails_HeaderMouseClick(object sender, MouseEventArgs e)

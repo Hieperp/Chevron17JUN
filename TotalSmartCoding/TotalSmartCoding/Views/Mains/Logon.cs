@@ -92,14 +92,14 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
         private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
             if (e.BindingCompleteState == BindingCompleteState.Exception)
-            { GlobalExceptionHandler.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+            { ExceptionHandlers.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
             else
                 this.buttonListEmployee.Visible = this.EmployeeID == 1;
         }
@@ -188,7 +188,7 @@ namespace TotalSmartCoding.Views.Mains
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
 
                 this.DialogResult = DialogResult.None;
             }

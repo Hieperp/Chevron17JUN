@@ -96,7 +96,7 @@
     <Compile Include="Libraries\Communications\IONetSocket.cs" />
     <Compile Include="Libraries\Helpers\CommonInterfaces.cs" />
     <Compile Include="Libraries\Helpers\DataHelpers.cs" />
-    <Compile Include="Libraries\Helpers\GlobalExceptionHandler.cs" />
+    <Compile Include="Libraries\Helpers\ExceptionHandlers.cs" />
     <Compile Include="Libraries\CommonNinject.cs" />
     <Compile Include="Libraries\Communications\IOSerialPort.cs" />
     <Compile Include="Libraries\Helpers\OLVHelpers.cs" />
@@ -143,11 +143,17 @@
       <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Commons\CustomInputBox.cs" />
-    <Compile Include="Views\Inventories\GoodsReceipts.cs">
+    <Compile Include="Views\Inventories\GoodsReceipts\GoodsReceipts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Inventories\GoodsReceipts.designer.cs">
+    <Compile Include="Views\Inventories\GoodsReceipts\GoodsReceipts.designer.cs">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\Wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\Wizard.Designer.cs">
+      <DependentUpon>Wizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Mains\BaseView.cs">
       <SubType>Form</SubType>
@@ -196,8 +202,11 @@
     <EmbeddedResource Include="Views\Commons\CustomExceptionMessageBox.resx">
       <DependentUpon>CustomExceptionMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Inventories\GoodsReceipts.resx">
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\GoodsReceipts.resx">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\Wizard.resx">
+      <DependentUpon>Wizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\BaseView.resx">
       <DependentUpon>BaseView.cs</DependentUpon>

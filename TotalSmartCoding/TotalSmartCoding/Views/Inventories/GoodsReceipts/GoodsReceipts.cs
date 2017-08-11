@@ -26,7 +26,7 @@ using TotalSmartCoding.Controllers.APIs.Inventories;
 using TotalCore.Services.Inventories;
 using TotalSmartCoding.ViewModels.Inventories;
 
-namespace TotalSmartCoding.Views.Inventories
+namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
 {
     public partial class GoodsReceipts : BaseView
     {
@@ -49,7 +49,7 @@ namespace TotalSmartCoding.Views.Inventories
 
             this.baseController = this.goodsReceiptController;
         }
-       
+
         Binding bindingEntryDate;
         Binding bindingReference;
 
@@ -105,7 +105,11 @@ namespace TotalSmartCoding.Views.Inventories
         }
 
 
-
+        protected override DialogResult NewWizard()
+        {
+            Wizard wizard = new Wizard(this.goodsReceiptAPIs, this.goodsReceiptController.GoodsReceiptViewModel);
+            return wizard.ShowDialog();
+        }
 
 
 

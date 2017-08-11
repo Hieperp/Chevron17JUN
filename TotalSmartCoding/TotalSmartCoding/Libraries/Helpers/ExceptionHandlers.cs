@@ -11,12 +11,12 @@ using TotalModel.Helpers;
 
 namespace TotalSmartCoding.Libraries.Helpers
 {
-    class GlobalExceptionHandler
+    class ExceptionHandlers
     {
 
         public static ExceptionMessageBoxDialogResult ShowExceptionMessageBox(IWin32Window owner, string exceptionMessage)
         {
-            return GlobalExceptionHandler.ShowExceptionMessageBox(owner, new Exception(exceptionMessage));
+            return ExceptionHandlers.ShowExceptionMessageBox(owner, new Exception(exceptionMessage));
         }
 
         public static ExceptionMessageBoxDialogResult ShowExceptionMessageBox(IWin32Window owner, Exception ex)

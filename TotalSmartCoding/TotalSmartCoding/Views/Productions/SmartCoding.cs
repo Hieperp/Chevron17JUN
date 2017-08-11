@@ -108,7 +108,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -121,7 +121,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -140,7 +140,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -258,7 +258,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -277,7 +277,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -296,7 +296,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
 
         }
@@ -314,7 +314,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -346,7 +346,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -387,7 +387,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -404,7 +404,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -494,7 +494,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -673,7 +673,7 @@ namespace TotalSmartCoding.Views.Productions
                 }
                 catch (Exception exception)
                 {
-                    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
                 }
             }
         }
@@ -696,7 +696,7 @@ namespace TotalSmartCoding.Views.Productions
                 }
                 catch (Exception exception)
                 {
-                    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
                 }
             }
         }
@@ -717,7 +717,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -747,7 +747,7 @@ namespace TotalSmartCoding.Views.Productions
                 }
                 catch (Exception exception)
                 {
-                    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
                 }
             }
         }
@@ -786,7 +786,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 
@@ -805,7 +805,7 @@ namespace TotalSmartCoding.Views.Productions
             }
             catch (Exception exception)
             {
-                GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
 

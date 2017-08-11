@@ -18,9 +18,24 @@ namespace TotalSmartCoding.Controllers.APIs.Inventories
 
         public ICollection<GoodsReceiptIndex> GetGoodsReceiptIndexes()
         {
-            ICollection<GoodsReceiptIndex> goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<GoodsReceiptIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
-
-            return goodsReceiptIndexes;
+            return this.goodsReceiptAPIRepository.GetEntityIndexes<GoodsReceiptIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
         }
+
+        public ICollection<PendingPickup> GetPendingPickups(int? locationID)
+        {
+            return this.goodsReceiptAPIRepository.GetPendingPickups(locationID);
+        }
+
+
+        public ICollection<PendingPickupWarehouse> GetPendingPickupWarehouses(int? locationID)
+        {
+            return this.goodsReceiptAPIRepository.GetPendingPickupWarehouses(locationID);
+        }
+
+
+        //public ICollection<GoodsReceiptIndex> GetGoodsReceiptIndexesa()
+        //{
+        //    return this.goodsReceiptAPIRepository.GetPickups<GoodsReceiptIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
+        //}
     }
 }
