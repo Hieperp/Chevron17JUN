@@ -158,8 +158,6 @@ namespace TotalModel.Models
     {
         public int GetID() { return this.GoodsReceiptID; }
 
-        public int PreparedPersonID { get; set; }
-
         public ICollection<GoodsReceiptDetail> GetDetails() { return this.GoodsReceiptDetails; }
     }
 
