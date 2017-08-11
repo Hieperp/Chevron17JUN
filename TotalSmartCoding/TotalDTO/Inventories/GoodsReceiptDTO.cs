@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Equin.ApplicationFramework;
 
 using TotalModel;
 using TotalBase.Enums;
@@ -50,7 +51,40 @@ namespace TotalDTO.Inventories
         public GoodsReceiptDTO()
         {
             this.GoodsReceiptViewDetails = new BindingList<GoodsReceiptDetailDTO>();
+            
+            this.PackDetails = new BindingListView<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails);
+            this.CartonDetails = new BindingListView<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails);
+            this.PalletDetails = new BindingListView<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails);
+
+            this.PalletDetails.ApplyFilter(f => f.PackID != null);
+            this.PalletDetails.ApplyFilter(f => f.CartonID != null);
+            this.PalletDetails.ApplyFilter(f => f.PalletID != null);
         }
+
+
+        public BindingList<GoodsReceiptDetailDTO> GoodsReceiptViewDetails { get; set; }
+        public BindingList<GoodsReceiptDetailDTO> ViewDetails { get { return this.GoodsReceiptViewDetails; } set { this.GoodsReceiptViewDetails = value; } }
+
+        public ICollection<GoodsReceiptDetailDTO> GetDetails() { return this.GoodsReceiptViewDetails; }
+
+        protected override IEnumerable<GoodsReceiptDetailDTO> DtoDetails() { return this.GoodsReceiptViewDetails; }
+
+
+
+
+
+
+        public BindingListView<GoodsReceiptDetailDTO> PackDetails { get; private set; }
+        public BindingListView<GoodsReceiptDetailDTO> CartonDetails { get; private set; }
+        public BindingListView<GoodsReceiptDetailDTO> PalletDetails { get; private set; }
+
+
+
+
+
+
+
+
 
         private string pickupReferences;
         [DefaultValue("")]
@@ -67,19 +101,6 @@ namespace TotalDTO.Inventories
             get { return this.warehouseName; }
             set { ApplyPropertyChange<GoodsReceiptDTO, string>(ref this.warehouseName, o => o.WarehouseName, value); }
         }
-
-
-        public BindingList<GoodsReceiptDetailDTO> GoodsReceiptViewDetails { get; set; }
-        public BindingList<GoodsReceiptDetailDTO> ViewDetails { get { return this.GoodsReceiptViewDetails; } set { this.GoodsReceiptViewDetails = value; } }
-
-        public ICollection<GoodsReceiptDetailDTO> GetDetails() { return this.GoodsReceiptViewDetails; }
-
-        protected override IEnumerable<GoodsReceiptDetailDTO> DtoDetails() { return this.GoodsReceiptViewDetails; }
-
-
-        public BindingList<GoodsReceiptDetailDTO> PalletDetails { get { return this.GoodsReceiptViewDetails; } }
-
-        //public BindingList<GoodsReceiptDetailDTO> PalletDetails { get { return new BindingList<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails.Where(w => w.PalletID == null).ToList()); } }
     }
 
 }

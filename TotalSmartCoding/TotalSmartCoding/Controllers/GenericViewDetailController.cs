@@ -51,6 +51,11 @@ namespace TotalSmartCoding.Controllers
         }
 
 
+        protected override void Init()
+        {
+            base.Init();
+            this.viewDetailViewModel.ViewDetails.Clear();
+        }
 
         protected override TViewDetailViewModel DecorateViewModel(TViewDetailViewModel viewDetailViewModel)
         {
