@@ -26,6 +26,9 @@ namespace TotalModel.Models
         public int FillingPalletID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int CommodityID { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal QuantityPickup { get; set; }
+        public decimal Volume { get; set; }
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }

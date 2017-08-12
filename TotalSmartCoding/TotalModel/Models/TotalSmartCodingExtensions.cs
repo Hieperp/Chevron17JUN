@@ -169,6 +169,27 @@ namespace TotalModel.Models
 
 
 
+
+    public partial class PickupIndex : IBaseIndex
+    {
+        public int Id { get { return this.PickupID; } }
+    }
+
+    public partial class Pickup : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<PickupDetail>
+    {
+        public int GetID() { return this.PickupID; }
+
+        public ICollection<PickupDetail> GetDetails() { return this.PickupDetails; }
+    }
+
+
+    public partial class PickupDetail : IPrimitiveEntity, IHelperEntryDate
+    {
+        public int GetID() { return this.PickupDetailID; }
+    }
+
+
+
     //public partial class PendingHandlingUnit
     //{
     //    public string ReceiverDescription { get { return (this.CustomerID == this.ReceiverID ? "" : this.ReceiverName + ", ") + this.ShippingAddress; } }

@@ -42,17 +42,17 @@ namespace TotalModel.Models
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<GoodsReceiptType> GoodsReceiptTypes { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
-        public virtual DbSet<Carton> Cartons { get; set; }
         public virtual DbSet<FillingCarton> FillingCartons { get; set; }
         public virtual DbSet<FillingPack> FillingPacks { get; set; }
         public virtual DbSet<FillingPallet> FillingPallets { get; set; }
-        public virtual DbSet<Pack> Packs { get; set; }
-        public virtual DbSet<Pallet> Pallets { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
+        public virtual DbSet<Carton> Cartons { get; set; }
+        public virtual DbSet<Pack> Packs { get; set; }
+        public virtual DbSet<Pallet> Pallets { get; set; }
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
         public virtual DbSet<Pickup> Pickups { get; set; }
-        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -679,6 +679,106 @@ namespace TotalModel.Models
                 new ObjectParameter("VoidTypeID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchToggleVoid", entityIDParameter, inActiveParameter, voidTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<PickupIndex> GetPickupIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PickupIndex>("GetPickupIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<PickupViewDetail> GetPickupViewDetails(Nullable<int> pickupID)
+        {
+            var pickupIDParameter = pickupID.HasValue ?
+                new ObjectParameter("PickupID", pickupID) :
+                new ObjectParameter("PickupID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PickupViewDetail>("GetPickupViewDetails", pickupIDParameter);
+        }
+    
+        public virtual ObjectResult<string> PickupApproved(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PickupApproved", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> PickupEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PickupEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> PickupPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PickupPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual int PickupSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PickupSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+        }
+    
+        public virtual int PickupToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PickupToggleApproved", entityIDParameter, approvedParameter);
+        }
+    
+        public virtual ObjectResult<PendingPallet> GetPendingPallets(Nullable<int> locationID, Nullable<int> pickupID, string palletIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var pickupIDParameter = pickupID.HasValue ?
+                new ObjectParameter("PickupID", pickupID) :
+                new ObjectParameter("PickupID", typeof(int));
+    
+            var palletIDsParameter = palletIDs != null ?
+                new ObjectParameter("PalletIDs", palletIDs) :
+                new ObjectParameter("PalletIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingPallet>("GetPendingPallets", locationIDParameter, pickupIDParameter, palletIDsParameter, isReadonlyParameter);
         }
     }
 }

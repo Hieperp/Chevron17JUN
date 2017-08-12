@@ -22,7 +22,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             this.GetPickupViewDetails();
 
-            this.GetPendingPalletDetails();
+            this.GetPendingPallets();
 
             this.PickupSaveRelative();
             this.PickupPostSaveValidate();
@@ -88,7 +88,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
         #region Y
 
-        private void GetPendingPalletDetails()
+        private void GetPendingPallets()
         {
             string queryString;
 
@@ -99,17 +99,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "   BEGIN " + "\r\n";
 
             queryString = queryString + "       IF  (@PalletIDs <> '') " + "\r\n";
-            queryString = queryString + "           " + this.BuildSQLPalletPalletIDs(true) + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLPalletIDs(true) + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
-            queryString = queryString + "           " + this.BuildSQLPalletPalletIDs(false) + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLPalletIDs(false) + "\r\n";
 
             
             queryString = queryString + "   END " + "\r\n";
 
-            this.totalSmartCodingEntities.CreateStoredProcedure("GetPendingPalletDetails", queryString);
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetPendingPallets", queryString);
         }
 
-        private string BuildSQLPalletPalletIDs(bool isPalletIDs)
+        private string BuildSQLPalletIDs(bool isPalletIDs)
         {
             string queryString = "";
             queryString = queryString + "   BEGIN " + "\r\n";

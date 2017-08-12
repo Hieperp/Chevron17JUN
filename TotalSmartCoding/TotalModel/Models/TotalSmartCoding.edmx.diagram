@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="TotalSmartCodingModel.AspNetUser" Width="1.5" PointX="7.375" PointY="10.75" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.PaymentTerm" Width="1.5" PointX="9.375" PointY="7" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_DeliveryAdvices_PaymentTerms" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.BinLocation" Width="1.5" PointX="39.75" PointY="1.5" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.BinLocation" Width="1.5" PointX="37.5" PointY="18.625" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.FillingLine" Width="1.5" PointX="32.25" PointY="10.625" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.Warehouse" Width="1.5" PointX="24.75" PointY="4" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_BinLocations_Warehouses" />
@@ -31,48 +31,48 @@
         <EntityTypeShape EntityType="TotalSmartCodingModel.GoodsReceiptType" Width="1.5" PointX="41.875" PointY="15.375" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.Commodity" Width="1.5" PointX="0.75" PointY="9.125" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.Carton" Width="1.5" PointX="34.5" PointY="17.5" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.FillingCarton" Width="1.5" PointX="9.375" PointY="10.75" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.FillingPack" Width="1.5" PointX="11.375" PointY="6.75" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.FillingPallet" Width="1.5" PointX="11.375" PointY="10.75" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.Pack" Width="1.5" PointX="39.75" PointY="18.625" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.Pallet" Width="1.5" PointX="3" PointY="17.125" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Batch" Width="1.5" PointX="34.5" PointY="11.5" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_FillingLines" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.GoodsReceiptDetail" Width="1.5" PointX="46.5" PointY="3.875" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_BinLocations" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.GoodsReceipt" Width="1.5" PointX="42.625" PointY="2.125" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_GoodsReceiptTypes" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_Locations" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Carton" Width="1.5" PointX="27.75" PointY="23.625" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Pack" Width="1.5" PointX="32" PointY="21.625" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Pallet" Width="1.5" PointX="23.375" PointY="22.375" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.PickupDetail" Width="1.5" PointX="47.375" PointY="22.625" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Pickup" Width="1.5" PointX="44" PointY="22.375" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_BinLocations" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Cartons_Cartons" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Cartons_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Cartons_FillingLines" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Cartons_Pallets" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Packs_Cartons" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Cartons" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Packs_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Pallets_Commodities" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Packs_FillingLines" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.Batch" Width="1.5" PointX="34.5" PointY="11.5" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_FillingLines" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.GoodsReceiptDetail" Width="1.5" PointX="47.25" PointY="8.875" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_BinLocations" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.PickupDetail" Width="1.5" PointX="42" PointY="7.875" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.Pickup" Width="1.5" PointX="39.75" PointY="8.375" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_BinLocations" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Cartons" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_PickupDetails" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_Pickups" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Pickups_Locations" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Packs" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Pallets" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Pickups" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Warehouses" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Pickups_Warehouses" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.GoodsReceipt" Width="1.5" PointX="45.125" PointY="1.125" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_GoodsReceiptTypes" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_Locations" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_Pickups" />
-        <AssociationConnector Association="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

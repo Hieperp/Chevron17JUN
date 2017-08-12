@@ -31,7 +31,6 @@ namespace TotalModel.Models
         public Nullable<int> PackID { get; set; }
         public Nullable<int> CartonID { get; set; }
         public Nullable<int> PalletID { get; set; }
-        public Nullable<int> GoodsReceiptID { get; set; }
         public int EntryStatusID { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityReceipt { get; set; }
