@@ -446,6 +446,7 @@
           <Property Name="PalletID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FillingPalletID" Type="int" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityPickup" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -499,6 +500,7 @@
           <Property Name="ForkliftDriverID" Type="int" Nullable="false" />
           <Property Name="StorekeeperID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PreparedPersonID" Type="int" Nullable="false" />
           <Property Name="OrganizationalUnitID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -2810,6 +2812,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Pallet" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" FromRole="Pallet" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pallets" FromRole="Pallet" ToRole="PickupDetail" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="PickupDetail">
           <Key>
@@ -2867,6 +2870,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_Pickups_Locations" FromRole="Pickup" ToRole="Location" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pickups" FromRole="Pickup" ToRole="PickupDetail" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_Pickups_Warehouses" FromRole="Pickup" ToRole="Warehouse" />
+          <Property Name="PreparedPersonID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_PickupDetails_BinLocations">
           <End Type="TotalSmartCodingModel.BinLocation" Role="BinLocation" Multiplicity="1" />
@@ -3913,6 +3917,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Pallets">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pallet">
               <MappingFragment StoreEntitySet="Pallets">
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PCID" ColumnName="PCID" />
@@ -3953,6 +3958,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Pickups">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pickup">
               <MappingFragment StoreEntitySet="Pickups">
+                <ScalarProperty Name="PreparedPersonID" ColumnName="PreparedPersonID" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
