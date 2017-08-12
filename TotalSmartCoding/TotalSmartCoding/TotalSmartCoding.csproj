@@ -739,6 +739,14 @@
     <None Include="Resources\sign-out-yellow.png" />
     <None Include="Resources\sign-out-option.png" />
     <None Include="Resources\sign-out-magenta.png" />
+    <None Include="Resources\sign-out-black.png" />
+    <None Include="Resources\Sign-out-01.png" />
+    <None Include="Resources\sign-out-gray.png" />
+    <None Include="Resources\sign-out-light-gray.png" />
+    <None Include="Resources\sign-out-very-light-gray.png" />
+    <None Include="Resources\sign-out-light-light-gray.png" />
+    <None Include="Resources\signout-icon.png" />
+    <None Include="Resources\signout-icon-24.png" />
     <Content Include="Resources\Toolbar Image1.png" />
     <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />

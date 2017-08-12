@@ -328,6 +328,7 @@
             // 
             // buttonESC
             // 
+            this.buttonESC.Image = global::TotalSmartCoding.Properties.Resources.sign_out_light_light_gray;
             this.buttonESC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonESC.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonESC.Name = "buttonESC";
@@ -338,6 +339,7 @@
             // 
             // buttonAddExit
             // 
+            this.buttonAddExit.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
             this.buttonAddExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonAddExit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonAddExit.Name = "buttonAddExit";
@@ -348,6 +350,7 @@
             // 
             // buttonAdd
             // 
+            this.buttonAdd.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_previous_view;
             this.buttonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonAdd.Name = "buttonAdd";

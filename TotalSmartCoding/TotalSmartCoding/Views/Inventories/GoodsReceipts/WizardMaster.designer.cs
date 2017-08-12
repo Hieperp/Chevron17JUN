@@ -28,11 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WizardMaster));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.buttonESC = new System.Windows.Forms.ToolStripButton();
-            this.buttonOK = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.fastPendingPickups = new BrightIdeasSoftware.FastObjectListView();
             this.olvPickupEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPickupReference = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -41,6 +37,8 @@
             this.olvWarehouseID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvWarehouseName1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelMaster = new System.Windows.Forms.Panel();
+            this.buttonESC = new System.Windows.Forms.ToolStripButton();
+            this.buttonOK = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickupWarehouses)).BeginInit();
@@ -54,44 +52,13 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonESC,
-            this.buttonOK,
-            this.toolStripButton1});
+            this.buttonOK});
             this.toolStrip1.Location = new System.Drawing.Point(0, 548);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip1.Size = new System.Drawing.Size(1147, 55);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // buttonESC
-            // 
-            this.buttonESC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonESC.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonESC.Name = "buttonESC";
-            this.buttonESC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonESC.Size = new System.Drawing.Size(89, 52);
-            this.buttonESC.Text = "Cancel";
-            this.buttonESC.Click += new System.EventHandler(this.buttonOKESC_Click);
-            // 
-            // buttonOK
-            // 
-            this.buttonOK.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
-            this.buttonOK.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonOK.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonOK.Size = new System.Drawing.Size(92, 52);
-            this.buttonOK.Text = "Next";
-            this.buttonOK.Click += new System.EventHandler(this.buttonOKESC_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(24, 52);
-            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // fastPendingPickups
             // 
@@ -180,6 +147,28 @@
             this.panelMaster.Size = new System.Drawing.Size(1147, 548);
             this.panelMaster.TabIndex = 71;
             // 
+            // buttonESC
+            // 
+            this.buttonESC.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
+            this.buttonESC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonESC.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonESC.Name = "buttonESC";
+            this.buttonESC.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonESC.Size = new System.Drawing.Size(81, 52);
+            this.buttonESC.Text = "Cancel";
+            this.buttonESC.Click += new System.EventHandler(this.buttonOKESC_Click);
+            // 
+            // buttonOK
+            // 
+            this.buttonOK.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
+            this.buttonOK.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonOK.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonOK.Size = new System.Drawing.Size(92, 52);
+            this.buttonOK.Text = "Next";
+            this.buttonOK.Click += new System.EventHandler(this.buttonOKESC_Click);
+            // 
             // WizardMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -217,6 +206,5 @@
         private BrightIdeasSoftware.OLVColumn olvWarehouseID;
         private BrightIdeasSoftware.OLVColumn olvWarehouseName1;
         private BrightIdeasSoftware.OLVColumn olvPickupReference;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
