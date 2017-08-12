@@ -88,10 +88,18 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     if (controlExtension.Editable)
                     {
-                        if (control is DataGridView)
+                        if (control is DataGridexView)
                         {
-                            control.DataBindings.Add("AllowUserToAddRows", this, "EditableMode");
-                            control.DataBindings.Add("AllowUserToDeleteRows", this, "EditableMode");
+                            DataGridexView dataGridexView = control as DataGridexView;
+                            if (dataGridexView != null && dataGridexView.AllowAddRow)
+                                control.DataBindings.Add("AllowUserToAddRows", this, "EditableMode");
+                            else
+                                ((DataGridView)control).AllowUserToAddRows = false;
+
+                            if (dataGridexView != null && dataGridexView.AllowDeleteRow)
+                                control.DataBindings.Add("AllowUserToDeleteRows", this, "EditableMode");
+                            else
+                                ((DataGridView)control).AllowUserToDeleteRows = false;
                         }
 
                         control.DataBindings.Add("ReadOnly", this, "ReadonlyMode");

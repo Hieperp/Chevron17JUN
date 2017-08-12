@@ -21,6 +21,23 @@ namespace TotalBase
 
 
 
+
+
+
+
+
+                case GlobalEnums.NmvnTaskID.Pickup:
+                    return "P";
+                case GlobalEnums.NmvnTaskID.GoodsReceipt:
+                    return "R";
+
+
+
+
+
+
+
+
                 case GlobalEnums.NmvnTaskID.SalesOrder:
                     return "O";
                 case GlobalEnums.NmvnTaskID.DeliveryAdvice:
@@ -54,8 +71,7 @@ namespace TotalBase
                 case GlobalEnums.NmvnTaskID.CreditNote:
                     return "CR";
 
-                case GlobalEnums.NmvnTaskID.GoodsReceipt:
-                    return "N";
+
 
                 case GlobalEnums.NmvnTaskID.ServiceContract:
                     return "H";

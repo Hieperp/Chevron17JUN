@@ -115,7 +115,11 @@
 
             StockTransfer = 8073,
             VehicleTransfer = 8075,
-            PartTransfer = 8076
+            PartTransfer = 8076,
+
+
+
+            Pickup = 8068
 
         };
 

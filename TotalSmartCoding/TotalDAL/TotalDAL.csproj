@@ -52,6 +52,7 @@
     <Compile Include="Helpers\SqlProgrammability\Commons\Commodity.cs" />
     <Compile Include="Helpers\SqlProgrammability\InitReference.cs" />
     <Compile Include="Helpers\SqlProgrammability\Inventories\GoodsReceipt.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Inventories\Pickup.cs" />
     <Compile Include="Helpers\SqlProgrammability\Productions\Batch.cs" />
     <Compile Include="Helpers\SqlProgrammability\Productions\FillingCarton.cs" />
     <Compile Include="Helpers\SqlProgrammability\Productions\FillingPack.cs" />

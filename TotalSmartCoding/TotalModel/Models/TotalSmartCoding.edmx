@@ -2304,6 +2304,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="String" Name="CartonCode" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="19" Scale="2" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="GoodsReceiptIndex">
           <Property Type="Int32" Name="GoodsReceiptID" Nullable="false" />
@@ -3467,6 +3468,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="CartonCode" ColumnName="CartonCode" />
                 <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
