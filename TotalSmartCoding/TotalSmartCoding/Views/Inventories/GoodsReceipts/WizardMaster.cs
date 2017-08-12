@@ -9,12 +9,12 @@ using TotalSmartCoding.ViewModels.Inventories;
 
 namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
 {
-    public partial class Wizard : Form
+    public partial class WizardMaster : Form
     {
         private GoodsReceiptAPIs goodsReceiptAPIs;
         private GoodsReceiptViewModel goodsReceiptViewModel;
         private CustomTabControl customTabBatch;
-        public Wizard(GoodsReceiptAPIs goodsReceiptAPIs, GoodsReceiptViewModel goodsReceiptViewModel)
+        public WizardMaster(GoodsReceiptAPIs goodsReceiptAPIs, GoodsReceiptViewModel goodsReceiptViewModel)
         {
             InitializeComponent();
 
@@ -64,11 +64,13 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
             {
                 if (sender.Equals(this.buttonOK))
                 {
+                    this.goodsReceiptViewModel.GoodsReceiptTypeID = 1; //GoodsReceiptTypeID = 1-FROM PRODUCTION/ LATER: WE SHOULD IMPLEMENT FOR EXPORT: GoodsReceiptTypeID = 2
+
                     bool nextOK = false;
                     if (this.customTabBatch.SelectedIndex == 0)
                     {
                         PendingPickup pendingPickup = (PendingPickup)this.fastPendingPickups.SelectedObject;
-                        if (pendingPickup != null) { 
+                        if (pendingPickup != null) {                            
                             this.goodsReceiptViewModel.PickupID = pendingPickup.PickupID;
                             this.goodsReceiptViewModel.PickupReferences = pendingPickup.PickupReference;
                             this.goodsReceiptViewModel.WarehouseID = pendingPickup.WarehouseID;

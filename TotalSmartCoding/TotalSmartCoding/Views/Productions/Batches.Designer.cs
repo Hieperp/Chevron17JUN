@@ -447,9 +447,7 @@
             this.fastBatchIndex.TabIndex = 67;
             this.fastBatchIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchIndex.UseCompatibleStateImageBehavior = false;
-            this.fastBatchIndex.UseFilterIndicator = true;
             this.fastBatchIndex.UseFiltering = true;
-            this.fastBatchIndex.UseHotItem = true;
             this.fastBatchIndex.View = System.Windows.Forms.View.Details;
             this.fastBatchIndex.VirtualMode = true;
             this.fastBatchIndex.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.fastBatchIndex_FormatRow);

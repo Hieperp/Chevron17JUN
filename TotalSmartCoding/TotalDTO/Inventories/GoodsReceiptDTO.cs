@@ -36,19 +36,53 @@ namespace TotalDTO.Inventories
             set { ApplyPropertyChange<GoodsReceiptPrimitiveDTO, int>(ref this.goodsReceiptTypeID, o => o.GoodsReceiptTypeID, value); }
         }
 
-        public virtual Nullable<int> PickupID { get; set; }
+
+
+        private Nullable<int> pickupID;
+        [DefaultValue(-1)]
+        public Nullable<int> PickupID
+        {
+            get { return this.pickupID; }
+            set { ApplyPropertyChange<GoodsReceiptPrimitiveDTO, Nullable<int>>(ref this.pickupID, o => o.PickupID, value); }
+        }
+        public string PickupReferences { get; set; }
+
 
         public bool HasPickup { get; set; }
 
-        public int WarehouseID { get; set; }
+        private int warehouseID;
+        [DefaultValue(-1)]
+        public int WarehouseID
+        {
+            get { return this.warehouseID; }
+            set { ApplyPropertyChange<GoodsReceiptPrimitiveDTO, int>(ref this.warehouseID, o => o.WarehouseID, value); }
+        }
+        private string warehouseName;
+        [DefaultValue("")]
+        public string WarehouseName
+        {
+            get { return this.warehouseName; }
+            set { ApplyPropertyChange<GoodsReceiptDTO, string>(ref this.warehouseName, o => o.WarehouseName, value); }
+        }
 
 
         private int storekeeperID;
-        [DefaultValue(-1)]
+        [DefaultValue(1)]
         public int StorekeeperID
         {
             get { return this.storekeeperID; }
             set { ApplyPropertyChange<GoodsReceiptPrimitiveDTO, int>(ref this.storekeeperID, o => o.StorekeeperID, value); }
+        }
+
+
+
+        public override void PerformPresaveRule()
+        {
+            base.PerformPresaveRule();
+
+            string pickupReferences = "";
+            this.DtoDetails().ToList().ForEach(e => { e.WarehouseID = this.WarehouseID; if (this.HasPickup && pickupReferences.IndexOf(e.PickupReference) < 0) pickupReferences = pickupReferences + (pickupReferences != "" ? ", " : "") + e.PickupReference; });
+            this.PickupReferences = pickupReferences;
         }
     }
 
@@ -84,29 +118,6 @@ namespace TotalDTO.Inventories
         public BindingListView<GoodsReceiptDetailDTO> CartonDetails { get; private set; }
         public BindingListView<GoodsReceiptDetailDTO> PalletDetails { get; private set; }
 
-
-
-
-
-
-
-
-
-        private string pickupReferences;
-        [DefaultValue("")]
-        public string PickupReferences
-        {
-            get { return this.pickupReferences; }
-            set { ApplyPropertyChange<GoodsReceiptDTO, string>(ref this.pickupReferences, o => o.PickupReferences, value); }
-        }
-
-        private string warehouseName;
-        [DefaultValue("")]
-        public string WarehouseName
-        {
-            get { return this.warehouseName; }
-            set { ApplyPropertyChange<GoodsReceiptDTO, string>(ref this.warehouseName, o => o.WarehouseName, value); }
-        }
     }
 
 }

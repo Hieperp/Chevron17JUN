@@ -314,16 +314,21 @@ namespace TotalSmartCoding.Views.Mains
 
 
             this.baseController.Create();
-            if (this.NewWizard() == DialogResult.OK)
+            if (this.wizardMaster() == DialogResult.OK)
+            {
                 this.EditableMode = true;
+                this.wizardDetail();
+            }
             else
                 this.CancelDirty(true);
         }
 
-        protected virtual DialogResult NewWizard()
+        protected virtual DialogResult wizardMaster()
         {
             return DialogResult.OK;
         }
+
+        protected virtual void wizardDetail() { }
 
         public void Edit()
         {

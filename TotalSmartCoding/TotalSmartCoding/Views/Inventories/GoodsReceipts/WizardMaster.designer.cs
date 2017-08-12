@@ -1,6 +1,6 @@
 ﻿namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
 {
-    partial class Wizard
+    partial class WizardMaster
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WizardMaster));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.buttonESC = new System.Windows.Forms.ToolStripButton();
             this.buttonOK = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.fastPendingPickups = new BrightIdeasSoftware.FastObjectListView();
             this.olvPickupEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvPickupReference = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvWarehouseName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.fastPendingPickupWarehouses = new BrightIdeasSoftware.FastObjectListView();
             this.olvWarehouseID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvWarehouseName1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelMaster = new System.Windows.Forms.Panel();
-            this.olvPickupReference = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickupWarehouses)).BeginInit();
@@ -52,7 +54,8 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonESC,
-            this.buttonOK});
+            this.buttonOK,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 548);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -62,12 +65,11 @@
             // 
             // buttonESC
             // 
-            this.buttonESC.Image = global::TotalSmartCoding.Properties.Resources.esc;
             this.buttonESC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonESC.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonESC.Name = "buttonESC";
             this.buttonESC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonESC.Size = new System.Drawing.Size(105, 52);
+            this.buttonESC.Size = new System.Drawing.Size(89, 52);
             this.buttonESC.Text = "Cancel";
             this.buttonESC.Click += new System.EventHandler(this.buttonOKESC_Click);
             // 
@@ -81,6 +83,15 @@
             this.buttonOK.Size = new System.Drawing.Size(92, 52);
             this.buttonOK.Text = "Next";
             this.buttonOK.Click += new System.EventHandler(this.buttonOKESC_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 52);
+            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // fastPendingPickups
             // 
@@ -104,9 +115,7 @@
             this.fastPendingPickups.TabIndex = 69;
             this.fastPendingPickups.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastPendingPickups.UseCompatibleStateImageBehavior = false;
-            this.fastPendingPickups.UseFilterIndicator = true;
             this.fastPendingPickups.UseFiltering = true;
-            this.fastPendingPickups.UseHotItem = true;
             this.fastPendingPickups.View = System.Windows.Forms.View.Details;
             this.fastPendingPickups.VirtualMode = true;
             // 
@@ -114,6 +123,11 @@
             // 
             this.olvPickupEntryDate.AspectName = "PickupEntryDate";
             this.olvPickupEntryDate.Width = 170;
+            // 
+            // olvPickupReference
+            // 
+            this.olvPickupReference.AspectName = "PickupReference";
+            this.olvPickupReference.Width = 137;
             // 
             // olvWarehouseName
             // 
@@ -141,9 +155,7 @@
             this.fastPendingPickupWarehouses.TabIndex = 70;
             this.fastPendingPickupWarehouses.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastPendingPickupWarehouses.UseCompatibleStateImageBehavior = false;
-            this.fastPendingPickupWarehouses.UseFilterIndicator = true;
             this.fastPendingPickupWarehouses.UseFiltering = true;
-            this.fastPendingPickupWarehouses.UseHotItem = true;
             this.fastPendingPickupWarehouses.View = System.Windows.Forms.View.Details;
             this.fastPendingPickupWarehouses.VirtualMode = true;
             // 
@@ -168,12 +180,7 @@
             this.panelMaster.Size = new System.Drawing.Size(1147, 548);
             this.panelMaster.TabIndex = 71;
             // 
-            // olvPickupReference
-            // 
-            this.olvPickupReference.AspectName = "PickupReference";
-            this.olvPickupReference.Width = 137;
-            // 
-            // Wizard
+            // WizardMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -183,7 +190,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Wizard";
+            this.Name = "WizardMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Wizard";
             this.Load += new System.EventHandler(this.Wizard_Load);
@@ -210,5 +217,6 @@
         private BrightIdeasSoftware.OLVColumn olvWarehouseID;
         private BrightIdeasSoftware.OLVColumn olvWarehouseName1;
         private BrightIdeasSoftware.OLVColumn olvPickupReference;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

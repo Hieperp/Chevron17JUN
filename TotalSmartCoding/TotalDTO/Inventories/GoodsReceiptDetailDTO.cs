@@ -19,6 +19,10 @@ namespace TotalDTO.Inventories
         public string PickupReference { get; set; }
         public Nullable<System.DateTime> PickupEntryDate { get; set; }
 
+        public int WarehouseID { get; set; }
+        public int BinLocationID { get; set; }
+        public string BinLocationCode { get; set; }
+
         public Nullable<int> PackID { get; set; }
         public string PackCode { get; set; }
 

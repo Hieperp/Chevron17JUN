@@ -77,18 +77,6 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
             this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
         }
 
-
-
-        //private void InitializeDataGridBinding()
-        //{
-        //    this.dataGridViewDetails.AutoGenerateColumns = false;
-        //    //marketingIncentiveDetailListView = new BindingListView<GoodsReceiptViewDetail>(this.goodsReceiptsController.ViewModel.GoodsReceiptViewDetails);
-        //    //this.dataGridViewDetails.DataSource = marketingIncentiveDetailListView;
-
-        //    //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
-        //}
-
-
         protected override void InitializeDataGridBinding()
         {
             this.gridexViewDetails.AutoGenerateColumns = false;
@@ -104,14 +92,18 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
             base.Loading();
         }
 
-
-        protected override DialogResult NewWizard()
+        protected override DialogResult wizardMaster()
         {
-            Wizard wizard = new Wizard(this.goodsReceiptAPIs, this.goodsReceiptController.GoodsReceiptViewModel);
-            return wizard.ShowDialog();
+            WizardMaster wizardMaster = new WizardMaster(this.goodsReceiptAPIs, this.goodsReceiptController.GoodsReceiptViewModel);
+            return wizardMaster.ShowDialog();
         }
 
-
+        protected override void wizardDetail()
+        {
+            base.wizardDetail();
+            WizardDetail wizardDetail = new WizardDetail(this.goodsReceiptAPIs, this.goodsReceiptController.GoodsReceiptViewModel);
+            wizardDetail.ShowDialog();
+        }
 
 
 

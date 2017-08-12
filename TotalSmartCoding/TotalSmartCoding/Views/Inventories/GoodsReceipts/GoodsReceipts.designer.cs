@@ -103,7 +103,7 @@
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0191F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32023F));
-            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
+            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
             this.tableLayoutPanelMaster.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanelMaster.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label1, 6, 1);
@@ -151,7 +151,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(745, 41);
+            this.label1.Location = new System.Drawing.Point(743, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 14);
@@ -163,7 +163,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(372, 3);
+            this.label4.Location = new System.Drawing.Point(371, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 34);
@@ -175,7 +175,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(743, 3);
+            this.label14.Location = new System.Drawing.Point(741, 3);
             this.label14.Margin = new System.Windows.Forms.Padding(1);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(106, 34);
@@ -187,7 +187,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(374, 41);
+            this.label2.Location = new System.Drawing.Point(373, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(102, 14);
@@ -203,7 +203,7 @@
             this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.dateTimexEntryDate.Name = "dateTimexEntryDate";
             this.dateTimexEntryDate.ReadOnly = false;
-            this.dateTimexEntryDate.Size = new System.Drawing.Size(249, 22);
+            this.dateTimexEntryDate.Size = new System.Drawing.Size(248, 22);
             this.dateTimexEntryDate.TabIndex = 70;
             // 
             // textexReference
@@ -213,7 +213,7 @@
             this.textexReference.Location = new System.Drawing.Point(111, 39);
             this.textexReference.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexReference.Name = "textexReference";
-            this.textexReference.Size = new System.Drawing.Size(249, 22);
+            this.textexReference.Size = new System.Drawing.Size(248, 22);
             this.textexReference.TabIndex = 71;
             // 
             // toolStripNaviGroupDetails
@@ -245,7 +245,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(373, 5);
+            this.label11.Location = new System.Drawing.Point(372, 5);
             this.label11.Margin = new System.Windows.Forms.Padding(3);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(102, 20);
@@ -257,7 +257,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(743, 5);
+            this.label12.Location = new System.Drawing.Point(741, 5);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(102, 20);
@@ -514,7 +514,7 @@
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.019F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32099F));
-            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
+            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 209F));
             this.tableLayoutPanelExtend.Controls.Add(this.combexCommodityID, 0, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label11, 3, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label12, 6, 0);
@@ -540,7 +540,7 @@
             this.combexCommodityID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.combexCommodityID.Name = "combexCommodityID";
             this.combexCommodityID.ReadOnly = false;
-            this.combexCommodityID.Size = new System.Drawing.Size(248, 24);
+            this.combexCommodityID.Size = new System.Drawing.Size(247, 24);
             this.combexCommodityID.TabIndex = 72;
             // 
             // label10
@@ -577,9 +577,7 @@
             this.fastGoodsReceiptIndex.TabIndex = 68;
             this.fastGoodsReceiptIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastGoodsReceiptIndex.UseCompatibleStateImageBehavior = false;
-            this.fastGoodsReceiptIndex.UseFilterIndicator = true;
             this.fastGoodsReceiptIndex.UseFiltering = true;
-            this.fastGoodsReceiptIndex.UseHotItem = true;
             this.fastGoodsReceiptIndex.View = System.Windows.Forms.View.Details;
             this.fastGoodsReceiptIndex.VirtualMode = true;
             // 

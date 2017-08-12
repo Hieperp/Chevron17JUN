@@ -50,9 +50,9 @@ namespace TotalModel.Models
         public virtual DbSet<Pallet> Pallets { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
         public virtual DbSet<Pickup> Pickups { get; set; }
+        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
