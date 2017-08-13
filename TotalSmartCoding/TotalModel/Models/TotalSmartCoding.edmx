@@ -69,6 +69,7 @@
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="PalletID" Type="int" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
@@ -435,6 +436,7 @@
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="CartonID" Type="int" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
@@ -448,6 +450,7 @@
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityPickup" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Volume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -2773,6 +2776,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="Carton" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_Cartons" FromRole="Carton" ToRole="Pack" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Cartons" FromRole="Carton" ToRole="PickupDetail" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Pack">
           <Key>
@@ -2792,6 +2796,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="Pack" ToRole="FillingLine" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="Pack" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Packs" FromRole="Pack" ToRole="PickupDetail" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Pallet">
           <Key>
@@ -2812,6 +2817,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" FromRole="Pallet" ToRole="GoodsReceiptDetail" />
           <Property Name="FillingLineID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pallets" FromRole="Pallet" ToRole="PickupDetail" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Pickup">
           <Key>
@@ -3884,6 +3890,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Cartons">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Carton">
               <MappingFragment StoreEntitySet="Cartons">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PCID" ColumnName="PCID" />
@@ -3900,6 +3907,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Packs">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pack">
               <MappingFragment StoreEntitySet="Packs">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PCID" ColumnName="PCID" />
@@ -3915,6 +3923,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Pallets">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pallet">
               <MappingFragment StoreEntitySet="Pallets">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />

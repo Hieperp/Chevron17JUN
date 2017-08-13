@@ -33,6 +33,7 @@ namespace TotalModel.Models
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
+        public int LocationID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons1 { get; set; }

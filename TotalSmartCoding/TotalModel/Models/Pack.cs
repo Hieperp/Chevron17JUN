@@ -30,6 +30,7 @@ namespace TotalModel.Models
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
+        public int LocationID { get; set; }
     
         public virtual Carton Carton { get; set; }
         public virtual Commodity Commodity { get; set; }
