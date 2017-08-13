@@ -72,8 +72,6 @@ namespace TotalSmartCoding.Libraries
                 //cfg.CreateMap<Employee, EmployeeBaseDTO>();
                 cfg.CreateMap<Customer, CustomerBaseDTO>();
                 cfg.CreateMap<Warehouse, WarehouseBaseDTO>();
-
-                cfg.CreateMap<Pickup, PickupBoxDTO>();
             });
         }
     }

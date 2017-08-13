@@ -21,7 +21,7 @@ namespace TotalModel.Models
         public Nullable<int> PalletID { get; set; }
         public string PalletCode { get; set; }
         public string Remarks { get; set; }
-        public int Quantity { get; set; }
+        public Nullable<decimal> Quantity { get; set; }
         public Nullable<bool> IsSelected { get; set; }
         public string PickupReference { get; set; }
         public System.DateTime PickupEntryDate { get; set; }

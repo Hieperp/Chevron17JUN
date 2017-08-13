@@ -37,7 +37,7 @@ namespace TotalDTO.Productions
 
 
         private int commodityID;
-        [DefaultValue(-1)]
+        [DefaultValue(null)]
         public int CommodityID
         {
             get { return this.commodityID; }

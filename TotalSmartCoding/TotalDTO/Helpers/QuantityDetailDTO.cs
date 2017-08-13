@@ -22,7 +22,7 @@ namespace TotalDTO.Helpers
         public virtual int CommodityTypeID { get { return 1; } set { } } //NOT USED NOW. KEEP HERE FOR USE LATER
 
         private int commodityID;
-        [DefaultValue(-1)]
+        [DefaultValue(null)]
         public int CommodityID
         {
             get { return this.commodityID; }

@@ -1003,6 +1003,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap exit_gray_32 {
+            get {
+                object obj = ResourceManager.GetObject("exit-gray-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Fatcow_Farm_Fresh_Key_escape {
             get {
                 object obj = ResourceManager.GetObject("Fatcow-Farm-Fresh-Key-escape", resourceCulture);

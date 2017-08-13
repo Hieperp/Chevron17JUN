@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+
 using Equin.ApplicationFramework;
 
 using TotalModel;
@@ -29,7 +30,7 @@ namespace TotalDTO.Inventories
         }
 
         private int goodsReceiptTypeID;
-        [DefaultValue(-1)]
+        [DefaultValue(null)]
         public int GoodsReceiptTypeID
         {
             get { return this.goodsReceiptTypeID; }
@@ -39,7 +40,7 @@ namespace TotalDTO.Inventories
 
 
         private Nullable<int> pickupID;
-        [DefaultValue(-1)]
+        [DefaultValue(null)]
         public Nullable<int> PickupID
         {
             get { return this.pickupID; }
@@ -51,7 +52,7 @@ namespace TotalDTO.Inventories
         public bool HasPickup { get; set; }
 
         private int warehouseID;
-        [DefaultValue(-1)]
+        [DefaultValue(null)]
         public int WarehouseID
         {
             get { return this.warehouseID; }
@@ -92,6 +93,11 @@ namespace TotalDTO.Inventories
         {
             this.GoodsReceiptViewDetails = new BindingList<GoodsReceiptDetailDTO>();
             
+
+
+
+
+
             this.PackDetails = new BindingListView<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails);
             this.CartonDetails = new BindingListView<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails);
             this.PalletDetails = new BindingListView<GoodsReceiptDetailDTO>(this.GoodsReceiptViewDetails);

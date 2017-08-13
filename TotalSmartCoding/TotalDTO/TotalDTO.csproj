@@ -80,6 +80,7 @@
     <Compile Include="Helpers\VATAmountDTO.cs" />
     <Compile Include="Inventories\GoodsReceiptDetailDTO.cs" />
     <Compile Include="Inventories\GoodsReceiptDTO.cs" />
+    <Compile Include="Inventories\PickupDetailDTO.cs" />
     <Compile Include="Inventories\PickupDTO.cs" />
     <Compile Include="IPrimitiveDTO.cs" />
     <Compile Include="Productions\BarcodeDTO.cs" />
