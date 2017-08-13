@@ -70,6 +70,7 @@
     <Compile Include="Services\IGenericWithDetailService.cs" />
     <Compile Include="Services\IGenericWithViewDetailService.cs" />
     <Compile Include="Services\Inventories\IGoodsReceiptService.cs" />
+    <Compile Include="Services\Inventories\IPickupService.cs" />
     <Compile Include="Services\Productions\IBatchService.cs" />
     <Compile Include="Services\Productions\IFillingCartonService.cs" />
     <Compile Include="Services\Productions\IFillingPackService.cs" />

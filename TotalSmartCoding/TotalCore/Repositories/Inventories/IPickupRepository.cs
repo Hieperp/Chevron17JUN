@@ -11,7 +11,7 @@ namespace TotalCore.Repositories.Inventories
 
     public interface IPickupAPIRepository : IGenericAPIRepository
     {
-        List<PendingPallet> GetPendingPallets(int? locationID, int? pickupID, int? warehouseID, string palletDetailIDs, bool isReadonly);
+        List<PendingPallet> GetPendingPallets(int? locationID, int? pickupID, string palletIDs, bool isReadonly);
     }
 
 }

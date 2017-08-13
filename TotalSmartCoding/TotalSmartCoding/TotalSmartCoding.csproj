@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Inventories\PickupController.cs" />
     <Compile Include="Libraries\AutoMapperConfig.cs" />
     <Compile Include="Libraries\CommonRegistries.cs" />
     <Compile Include="Libraries\Communications\Crc16CCITT.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="ViewModels\Helpers\IBaseViewModel.cs" />
     <Compile Include="ViewModels\Helpers\PrintViewModel.cs" />
     <Compile Include="ViewModels\Inventories\GoodsReceiptViewModel.cs" />
+    <Compile Include="ViewModels\Inventories\PickupViewModel.cs" />
     <Compile Include="ViewModels\Productions\BatchViewModel.cs" />
     <Compile Include="ViewModels\Productions\FillingCartonViewModel.cs" />
     <Compile Include="ViewModels\Productions\FillingPackViewModel.cs" />
@@ -149,17 +151,35 @@
     <Compile Include="Views\Inventories\GoodsReceipts\GoodsReceipts.designer.cs">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\WizardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\GoodsReceipts\WizardDetail.Designer.cs">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Inventories\GoodsReceipts\WizardMaster.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Inventories\GoodsReceipts\WizardMaster.designer.cs">
       <DependentUpon>WizardMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Inventories\GoodsReceipts\WizardDetail.cs">
+    <Compile Include="Views\Inventories\Pickups\Pickups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Inventories\GoodsReceipts\WizardDetail.Designer.cs">
+    <Compile Include="Views\Inventories\Pickups\Pickups.designer.cs">
+      <DependentUpon>Pickups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardDetail.Designer.cs">
       <DependentUpon>WizardDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Mains\BaseView.cs">
       <SubType>Form</SubType>
@@ -211,11 +231,20 @@
     <EmbeddedResource Include="Views\Inventories\GoodsReceipts\GoodsReceipts.resx">
       <DependentUpon>GoodsReceipts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\WizardDetail.resx">
+      <DependentUpon>WizardDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Inventories\GoodsReceipts\WizardMaster.resx">
       <DependentUpon>WizardMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Inventories\GoodsReceipts\WizardDetail.resx">
+    <EmbeddedResource Include="Views\Inventories\Pickups\Pickups.resx">
+      <DependentUpon>Pickups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\Pickups\WizardDetail.resx">
       <DependentUpon>WizardDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\Pickups\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\BaseView.resx">
       <DependentUpon>BaseView.cs</DependentUpon>

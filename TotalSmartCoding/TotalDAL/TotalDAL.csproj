@@ -66,6 +66,7 @@
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\GenericWithDetailRepository.cs" />
     <Compile Include="Repositories\Inventories\GoodsReceiptRepository.cs" />
+    <Compile Include="Repositories\Inventories\PickupRepository.cs" />
     <Compile Include="Repositories\Productions\BatchRepository.cs" />
     <Compile Include="Repositories\Productions\FillingCartonRepository.cs" />
     <Compile Include="Repositories\Productions\FillingPackRepository.cs" />
