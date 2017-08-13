@@ -16,10 +16,10 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 {
     public partial class WizardDetail : Form
     {
-        private GoodsReceiptAPIs goodsReceiptAPIs;
-        private GoodsReceiptViewModel goodsReceiptViewModel;
+        private PickupAPIs pickupAPIs;
+        private PickupViewModel pickupViewModel;
         private CustomTabControl customTabBatch;
-        public WizardDetail(GoodsReceiptAPIs goodsReceiptAPIs, GoodsReceiptViewModel goodsReceiptViewModel)
+        public WizardDetail(PickupAPIs pickupAPIs, PickupViewModel pickupViewModel)
         {
             InitializeComponent();
 
@@ -45,8 +45,8 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.panelMaster.Controls.Add(this.customTabBatch);
 
 
-            this.goodsReceiptAPIs = goodsReceiptAPIs;
-            this.goodsReceiptViewModel = goodsReceiptViewModel;
+            this.pickupAPIs = pickupAPIs;
+            this.pickupViewModel = pickupViewModel;
         }
 
 
@@ -54,15 +54,15 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             try
             {
-                List<PendingPickupDetail> pendingPickupDetails = this.goodsReceiptAPIs.GetPendingPickupDetails(this.goodsReceiptViewModel.LocationID, this.goodsReceiptViewModel.GoodsReceiptID, this.goodsReceiptViewModel.PickupID, this.goodsReceiptViewModel.WarehouseID, string.Join(",", this.goodsReceiptViewModel.ViewDetails.Select(d => d.PickupDetailID)), false);
+                //List<PendingPalletDetail> pendingPalletDetails = this.pickupAPIs.GetPendingPalletDetails(this.pickupViewModel.LocationID, this.pickupViewModel.PickupID, this.pickupViewModel.PalletID, this.pickupViewModel.WarehouseID, string.Join(",", this.pickupViewModel.ViewDetails.Select(d => d.PalletDetailID)), false);
 
-                this.fastPendingPallets.SetObjects(pendingPickupDetails.Where(w => w.PalletID != null));
-                this.fastPendingCartons.SetObjects(pendingPickupDetails.Where(w => w.CartonID != null));
-                this.fastPendingPacks.SetObjects(pendingPickupDetails.Where(w => w.PackID != null));
+                //this.fastPendingPallets.SetObjects(pendingPalletDetails.Where(w => w.PalletID != null));
+                //this.fastPendingCartons.SetObjects(pendingPalletDetails.Where(w => w.CartonID != null));
+                //this.fastPendingPacks.SetObjects(pendingPalletDetails.Where(w => w.PackID != null));
 
-                this.customTabBatch.TabPages[0].Text = "Pending " + this.fastPendingPallets.GetItemCount().ToString("N0") + " pallet" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
-                this.customTabBatch.TabPages[1].Text = "Pending " + this.fastPendingCartons.GetItemCount().ToString("N0") + " carton" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
-                this.customTabBatch.TabPages[2].Text = "Pending " + this.fastPendingPacks.GetItemCount().ToString("N0") + " pack" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
+                //this.customTabBatch.TabPages[0].Text = "Pending " + this.fastPendingPallets.GetItemCount().ToString("N0") + " pallet" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
+                //this.customTabBatch.TabPages[1].Text = "Pending " + this.fastPendingCartons.GetItemCount().ToString("N0") + " carton" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
+                //this.customTabBatch.TabPages[2].Text = "Pending " + this.fastPendingPacks.GetItemCount().ToString("N0") + " pack" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
             }
             catch (Exception exception)
             {
@@ -83,35 +83,35 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
                     {
                         foreach (var checkedObjects in fastPendingList.CheckedObjects)
                         {
-                            PendingPickupDetail pendingPickupDetail = (PendingPickupDetail)checkedObjects;
-                            GoodsReceiptDetailDTO goodsReceiptDetailDTO = new GoodsReceiptDetailDTO()
-                            {
-                                GoodsReceiptID = this.goodsReceiptViewModel.GoodsReceiptID,
+                            //PendingPalletDetail pendingPalletDetail = (PendingPalletDetail)checkedObjects;
+                            //PickupDetailDTO pickupDetailDTO = new PickupDetailDTO()
+                            //{
+                            //    PickupID = this.pickupViewModel.PickupID,
 
-                                PickupID = pendingPickupDetail.PickupID,
-                                PickupDetailID = pendingPickupDetail.PickupDetailID,
-                                PickupReference = pendingPickupDetail.PickupReference,
-                                PickupEntryDate = pendingPickupDetail.PickupEntryDate,
+                            //    PalletID = pendingPalletDetail.PalletID,
+                            //    PalletDetailID = pendingPalletDetail.PalletDetailID,
+                            //    PalletReference = pendingPalletDetail.PalletReference,
+                            //    PalletEntryDate = pendingPalletDetail.PalletEntryDate,
 
-                                BinLocationID = pendingPickupDetail.BinLocationID,
-                                BinLocationCode = pendingPickupDetail.BinLocationCode,
+                            //    BinLocationID = pendingPalletDetail.BinLocationID,
+                            //    BinLocationCode = pendingPalletDetail.BinLocationCode,
 
-                                CommodityID = pendingPickupDetail.CommodityID,
-                                CommodityCode = pendingPickupDetail.CommodityCode,
-                                CommodityName = pendingPickupDetail.CommodityName,
+                            //    CommodityID = pendingPalletDetail.CommodityID,
+                            //    CommodityCode = pendingPalletDetail.CommodityCode,
+                            //    CommodityName = pendingPalletDetail.CommodityName,
 
-                                Quantity = (decimal)pendingPickupDetail.QuantityRemains,
-                                Volume = pendingPickupDetail.Volume,
+                            //    Quantity = (decimal)pendingPalletDetail.QuantityRemains,
+                            //    Volume = pendingPalletDetail.Volume,
                                 
 
-                                PackID = pendingPickupDetail.PackID,
-                                PackCode = pendingPickupDetail.PackCode,
-                                CartonID = pendingPickupDetail.CartonID,
-                                CartonCode = pendingPickupDetail.CartonCode,
-                                PalletID = pendingPickupDetail.PalletID,
-                                PalletCode = pendingPickupDetail.PalletCode,
-                            };
-                            this.goodsReceiptViewModel.ViewDetails.Add(goodsReceiptDetailDTO);
+                            //    PackID = pendingPalletDetail.PackID,
+                            //    PackCode = pendingPalletDetail.PackCode,
+                            //    CartonID = pendingPalletDetail.CartonID,
+                            //    CartonCode = pendingPalletDetail.CartonCode,
+                            //    PalletID = pendingPalletDetail.PalletID,
+                            //    PalletCode = pendingPalletDetail.PalletCode,
+                            //};
+                            //this.pickupViewModel.ViewDetails.Add(pickupDetailDTO);
                         }
                     }
 

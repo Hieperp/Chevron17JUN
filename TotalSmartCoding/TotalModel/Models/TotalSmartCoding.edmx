@@ -1169,12 +1169,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="GetGoodsReceiptViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GoodsReceiptID" Type="int" Mode="In" />
         </Function>
-        <Function Name="GetPendingPallets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LocationID" Type="int" Mode="In" />
-          <Parameter Name="PickupID" Type="int" Mode="In" />
-          <Parameter Name="PalletIDs" Type="varchar" Mode="In" />
-          <Parameter Name="IsReadonly" Type="bit" Mode="In" />
-        </Function>
         <Function Name="GetPendingPickupDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
           <Parameter Name="GoodsReceiptID" Type="int" Mode="In" />
@@ -3029,8 +3023,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="Int32" Name="PickupDetailID" Nullable="false" />
           <Property Type="Int32" Name="PickupID" Nullable="false" />
           <Property Type="Int32" Name="PalletID" Nullable="true" />
-          <Property Type="DateTime" Name="EntryDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
           <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
@@ -3040,11 +3032,13 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="String" Name="PackCode" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="CartonID" Nullable="true" />
           <Property Type="String" Name="CartonCode" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="PalletID1" Nullable="true" />
           <Property Type="String" Name="PalletCode" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="PackEntryDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CartonEntryDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="PalletEntryDate" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="PendingPallet">
           <Property Type="Int32" Name="PalletID" Nullable="false" />
@@ -3983,8 +3977,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="PickupDetailID" ColumnName="PickupDetailID" />
                 <ScalarProperty Name="PickupID" ColumnName="PickupID" />
                 <ScalarProperty Name="PalletID" ColumnName="PalletID" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
                 <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
@@ -3994,11 +3986,13 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="PackCode" ColumnName="PackCode" />
                 <ScalarProperty Name="CartonID" ColumnName="CartonID" />
                 <ScalarProperty Name="CartonCode" ColumnName="CartonCode" />
-                <ScalarProperty Name="PalletID1" ColumnName="PalletID1" />
                 <ScalarProperty Name="PalletCode" ColumnName="PalletCode" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Volume" ColumnName="Volume" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="PackEntryDate" ColumnName="PackEntryDate" />
+                <ScalarProperty Name="CartonEntryDate" ColumnName="CartonEntryDate" />
+                <ScalarProperty Name="PalletEntryDate" ColumnName="PalletEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4007,21 +4001,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <FunctionImportMapping FunctionImportName="PickupPostSaveValidate" FunctionName="TotalSmartCodingModel.Store.PickupPostSaveValidate" />
           <FunctionImportMapping FunctionImportName="PickupSaveRelative" FunctionName="TotalSmartCodingModel.Store.PickupSaveRelative" />
           <FunctionImportMapping FunctionImportName="PickupToggleApproved" FunctionName="TotalSmartCodingModel.Store.PickupToggleApproved" />
-          <FunctionImportMapping FunctionImportName="GetPendingPallets" FunctionName="TotalSmartCodingModel.Store.GetPendingPallets">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalSmartCodingModel.PendingPallet">
-                <ScalarProperty Name="PalletID" ColumnName="PalletID" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
-                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
-                <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Volume" ColumnName="Volume" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="PickupDetails">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.PickupDetail">
               <MappingFragment StoreEntitySet="PickupDetails">

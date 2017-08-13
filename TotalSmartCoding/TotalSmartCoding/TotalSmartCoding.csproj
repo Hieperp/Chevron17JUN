@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
     <Compile Include="Controllers\Inventories\PickupController.cs" />
     <Compile Include="Libraries\AutoMapperConfig.cs" />
     <Compile Include="Libraries\CommonRegistries.cs" />

@@ -15,6 +15,7 @@ using TotalSmartCoding.Views.Commons;
 using TotalSmartCoding.Views.Sales;
 using TotalSmartCoding.Views.Productions;
 using TotalSmartCoding.Views.Inventories.Pickups;
+using TotalSmartCoding.Views.Inventories.GoodsReceipts;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -406,10 +407,10 @@ namespace TotalSmartCoding.Views.Mains
             //return;
 
             //Open new form
-            Pickups grForm;
+            Pickups grForm;  //GoodsReceipts grForm;
             //childForm = new Batches();
             //childForm = new DeliveryAdvices();
-            grForm = new Pickups();
+            grForm = new Pickups(); //grForm = new GoodsReceipts();
 
             if (grForm != null)
             {

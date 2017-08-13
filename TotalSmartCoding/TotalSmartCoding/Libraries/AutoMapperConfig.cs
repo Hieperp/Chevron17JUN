@@ -38,6 +38,12 @@ namespace TotalSmartCoding.Libraries
 
 
 
+                cfg.CreateMap<Pickup, PickupViewModel>();
+                cfg.CreateMap<Pickup, PickupDTO>();
+                cfg.CreateMap<PickupPrimitiveDTO, Pickup>();
+                cfg.CreateMap<PickupViewDetail, PickupDetailDTO>();
+                cfg.CreateMap<PickupDetailDTO, PickupDetail>();
+
                 cfg.CreateMap<GoodsReceipt, GoodsReceiptViewModel>();
                 cfg.CreateMap<GoodsReceipt, GoodsReceiptDTO>();
                 cfg.CreateMap<GoodsReceiptPrimitiveDTO, GoodsReceipt>();

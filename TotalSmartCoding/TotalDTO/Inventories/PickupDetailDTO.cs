@@ -24,16 +24,19 @@ namespace TotalDTO.Inventories
         public string BinLocationCode { get; set; }
 
         public Nullable<int> PackID { get; set; }
-        public Nullable<System.DateTime> PackEntryDate { get; set; }
         public string PackCode { get; set; }
+        public Nullable<System.DateTime> PackEntryDate { get; set; }
+        
 
         public Nullable<int> CartonID { get; set; }
-        public Nullable<System.DateTime> CartonEntryDate { get; set; }
         public string CartonCode { get; set; }
+        public Nullable<System.DateTime> CartonEntryDate { get; set; }
+        
 
         public Nullable<int> PalletID { get; set; }
-        public Nullable<System.DateTime> PalletEntryDate { get; set; }
         public string PalletCode { get; set; }
+        public Nullable<System.DateTime> PalletEntryDate { get; set; }
+        
     }
 
 
