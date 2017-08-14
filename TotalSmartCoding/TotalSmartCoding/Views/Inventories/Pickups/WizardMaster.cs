@@ -13,33 +13,15 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
     {
         private PickupAPIs pickupAPIs;
         private PickupViewModel pickupViewModel;
-        private CustomTabControl customTabBatch;
+        
         public WizardMaster(PickupAPIs pickupAPIs, PickupViewModel pickupViewModel)
         {
             InitializeComponent();
 
-            this.customTabBatch = new CustomTabControl();
-            //this.customTabBatch.ImageList = this.imageListTabControl;
-
-            //this.customTabBatch.Font = this.fastPendingPallets.Font;
-            //this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
-            //this.customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
-
-            //this.customTabBatch.TabPages.Add("tabPendingPallets", "Receipt by pallet                  ");
-            //this.customTabBatch.TabPages.Add("tabPendingPalletWarehouses", "Receipt by warehouse          ");
-            //this.customTabBatch.TabPages.Add("tabPendingPallets", "Transfer Receipt                    ");
-            //this.customTabBatch.TabPages[0].Controls.Add(this.fastPendingPallets);
-            //this.customTabBatch.TabPages[1].Controls.Add(this.fastPendingPalletWarehouses);
-
-
-            //this.customTabBatch.Dock = DockStyle.Fill;
-            //this.fastPendingPallets.Dock = DockStyle.Fill;
-            //this.fastPendingPalletWarehouses.Dock = DockStyle.Fill;
-            //this.panelMaster.Controls.Add(this.customTabBatch);
-
-
             this.pickupAPIs = pickupAPIs;
             this.pickupViewModel = pickupViewModel;
+            //this.Width = 542;
+            //this.Height = 249;
         }
 
 
@@ -62,6 +44,10 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             try
             {
+                //this.textexRemarks.Width = 542;
+                this.textexRemarks.Height = 39;
+               float i=  this.textexRemarks.Font.Size;
+
                 if (sender.Equals(this.buttonOK))
                 {
                     bool nextOK = false;

@@ -31,10 +31,13 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 {
     public partial class Pickups : BaseView
     {
+        private CustomTabControl customTabBatch;
+
         private PickupAPIs pickupAPIs;
         private PickupController pickupController;
 
-        private CustomTabControl customTabBatch;
+        private System.Timers.Timer timerLoadPending;
+        private delegate void timerLoadCallback();
 
         public Pickups()
             : base()
@@ -50,6 +53,10 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.pickupController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
             this.baseController = this.pickupController;
+
+            this.timerLoadPending = new System.Timers.Timer(60000);
+            this.timerLoadPending.Elapsed += new System.Timers.ElapsedEventHandler(timerLoadPending_Elapsed);
+            this.timerLoadPending.Enabled = true;                       
         }
 
         protected override void InitializeTabControl()
@@ -164,10 +171,28 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             this.fastPickupIndex.SetObjects(this.pickupAPIs.GetPickupIndexes());
             base.Loading();
+
+            this.LoadPendingItems(); //CALL AFTER LOAD
+        }
+
+        private void LoadPendingItems() //THIS MAY ALSO LOAD PENDING PALLET/ CARTON/ PACK
+        {
+            try
+            {
+                this.fastPendingPallets.SetObjects(this.pickupAPIs.GetPendingPallets(this.pickupController.PickupViewModel.LocationID, this.pickupController.PickupViewModel.PickupID, string.Join(",", this.pickupController.PickupViewModel.ViewDetails.Where(w => w.PalletID != null).Select(d => d.PalletID)), false));
+                this.naviPendingItems.Text = "Pending " + this.fastPendingPallets.GetItemCount().ToString("N0") + " pallet" + (this.fastPendingPallets.GetItemCount() > 1 ? "s      " : "      ");
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
         }
 
         protected override DialogResult wizardMaster()
         {
+            //Form1 a = new Form1(this.pickupAPIs, this.pickupController.PickupViewModel);
+            // a.ShowDialog();
+
             WizardMaster wizardMaster = new WizardMaster(this.pickupAPIs, this.pickupController.PickupViewModel);
             return wizardMaster.ShowDialog();
         }
@@ -179,12 +204,21 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             wizardDetail.ShowDialog();
         }
 
-        private void naviGroupDetails_Click(object sender, EventArgs e)
-        {
 
+        private void Pickups_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.timerLoadPending.Enabled = false;
         }
 
-
+        private void timerLoadPending_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                timerLoadCallback loadPendingItemsCallback = new timerLoadCallback(LoadPendingItems);
+                this.Invoke(loadPendingItemsCallback);
+            }
+            catch { }
+        }
 
     }
 }

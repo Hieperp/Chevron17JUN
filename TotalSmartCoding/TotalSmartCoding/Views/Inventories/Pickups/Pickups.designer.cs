@@ -46,9 +46,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.combexBox2 = new CustomControls.CombexBox();
-            this.combexBox1 = new CustomControls.CombexBox();
-            this.combexCommodityID = new CustomControls.CombexBox();
+            this.combexStorekeeperID = new CustomControls.CombexBox();
+            this.combexForkliftDriverID = new CustomControls.CombexBox();
+            this.combexWarehouseID = new CustomControls.CombexBox();
             this.textexReference = new CustomControls.TextexBox();
             this.dateTimexEntryDate = new CustomControls.DateTimexPicker();
             this.label9 = new System.Windows.Forms.Label();
@@ -84,10 +84,9 @@
             this.olvReference = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.naviPendingItems = new Guifreaks.Navisuite.NaviBar(this.components);
             this.naviPendingPallet = new Guifreaks.Navisuite.NaviBand(this.components);
-            this.fastPendingPallet = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.fastPendingPallets = new BrightIdeasSoftware.FastObjectListView();
+            this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.naviIndex = new Guifreaks.Navisuite.NaviBar(this.components);
             this.naviPickupIndex = new Guifreaks.Navisuite.NaviBand(this.components);
             this.panelMaster = new System.Windows.Forms.Panel();
@@ -110,7 +109,7 @@
             this.naviPendingItems.SuspendLayout();
             this.naviPendingPallet.ClientArea.SuspendLayout();
             this.naviPendingPallet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPallet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPallets)).BeginInit();
             this.naviIndex.SuspendLayout();
             this.naviPickupIndex.ClientArea.SuspendLayout();
             this.naviPickupIndex.SuspendLayout();
@@ -128,7 +127,7 @@
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanelMaster.Controls.Add(this.textexRemarks, 4, 5);
             this.tableLayoutPanelMaster.Controls.Add(this.textexTotalVolume, 4, 4);
             this.tableLayoutPanelMaster.Controls.Add(this.textexTotalPack, 4, 3);
@@ -139,9 +138,9 @@
             this.tableLayoutPanelMaster.Controls.Add(this.label5, 3, 3);
             this.tableLayoutPanelMaster.Controls.Add(this.label2, 3, 2);
             this.tableLayoutPanelMaster.Controls.Add(this.label4, 3, 1);
-            this.tableLayoutPanelMaster.Controls.Add(this.combexBox2, 1, 5);
-            this.tableLayoutPanelMaster.Controls.Add(this.combexBox1, 1, 4);
-            this.tableLayoutPanelMaster.Controls.Add(this.combexCommodityID, 1, 3);
+            this.tableLayoutPanelMaster.Controls.Add(this.combexStorekeeperID, 1, 5);
+            this.tableLayoutPanelMaster.Controls.Add(this.combexForkliftDriverID, 1, 4);
+            this.tableLayoutPanelMaster.Controls.Add(this.combexWarehouseID, 1, 3);
             this.tableLayoutPanelMaster.Controls.Add(this.textexReference, 1, 2);
             this.tableLayoutPanelMaster.Controls.Add(this.dateTimexEntryDate, 1, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label9, 0, 5);
@@ -279,47 +278,47 @@
             this.label4.Text = "Total Pallet";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // combexBox2
+            // combexStorekeeperID
             // 
-            this.combexBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.combexBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.combexBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexBox2.Editable = true;
-            this.combexBox2.FormattingEnabled = true;
-            this.combexBox2.Location = new System.Drawing.Point(215, 188);
-            this.combexBox2.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.combexBox2.Name = "combexBox2";
-            this.combexBox2.ReadOnly = false;
-            this.combexBox2.Size = new System.Drawing.Size(314, 40);
-            this.combexBox2.TabIndex = 74;
+            this.combexStorekeeperID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexStorekeeperID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexStorekeeperID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.combexStorekeeperID.Editable = true;
+            this.combexStorekeeperID.FormattingEnabled = true;
+            this.combexStorekeeperID.Location = new System.Drawing.Point(215, 188);
+            this.combexStorekeeperID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.combexStorekeeperID.Name = "combexStorekeeperID";
+            this.combexStorekeeperID.ReadOnly = false;
+            this.combexStorekeeperID.Size = new System.Drawing.Size(314, 40);
+            this.combexStorekeeperID.TabIndex = 74;
             // 
-            // combexBox1
+            // combexForkliftDriverID
             // 
-            this.combexBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.combexBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.combexBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexBox1.Editable = true;
-            this.combexBox1.FormattingEnabled = true;
-            this.combexBox1.Location = new System.Drawing.Point(215, 142);
-            this.combexBox1.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.combexBox1.Name = "combexBox1";
-            this.combexBox1.ReadOnly = false;
-            this.combexBox1.Size = new System.Drawing.Size(314, 40);
-            this.combexBox1.TabIndex = 73;
+            this.combexForkliftDriverID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexForkliftDriverID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexForkliftDriverID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.combexForkliftDriverID.Editable = true;
+            this.combexForkliftDriverID.FormattingEnabled = true;
+            this.combexForkliftDriverID.Location = new System.Drawing.Point(215, 142);
+            this.combexForkliftDriverID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.combexForkliftDriverID.Name = "combexForkliftDriverID";
+            this.combexForkliftDriverID.ReadOnly = false;
+            this.combexForkliftDriverID.Size = new System.Drawing.Size(314, 40);
+            this.combexForkliftDriverID.TabIndex = 73;
             // 
-            // combexCommodityID
+            // combexWarehouseID
             // 
-            this.combexCommodityID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.combexCommodityID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.combexCommodityID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexCommodityID.Editable = true;
-            this.combexCommodityID.FormattingEnabled = true;
-            this.combexCommodityID.Location = new System.Drawing.Point(215, 96);
-            this.combexCommodityID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.combexCommodityID.Name = "combexCommodityID";
-            this.combexCommodityID.ReadOnly = false;
-            this.combexCommodityID.Size = new System.Drawing.Size(314, 40);
-            this.combexCommodityID.TabIndex = 72;
+            this.combexWarehouseID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexWarehouseID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexWarehouseID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.combexWarehouseID.Editable = true;
+            this.combexWarehouseID.FormattingEnabled = true;
+            this.combexWarehouseID.Location = new System.Drawing.Point(215, 96);
+            this.combexWarehouseID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.combexWarehouseID.Name = "combexWarehouseID";
+            this.combexWarehouseID.ReadOnly = false;
+            this.combexWarehouseID.Size = new System.Drawing.Size(314, 40);
+            this.combexWarehouseID.TabIndex = 72;
             // 
             // textexReference
             // 
@@ -451,7 +450,6 @@
             this.naviDetails.Size = new System.Drawing.Size(1097, 298);
             this.naviDetails.TabIndex = 30;
             this.naviDetails.Text = "naviGroup1";
-            this.naviDetails.Click += new System.EventHandler(this.naviGroupDetails_Click);
             // 
             // gridexCartonDetails
             // 
@@ -476,7 +474,7 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
             this.gridexCartonDetails.Editable = true;
-            this.gridexCartonDetails.Location = new System.Drawing.Point(529, 9);
+            this.gridexCartonDetails.Location = new System.Drawing.Point(529, 3);
             this.gridexCartonDetails.Name = "gridexCartonDetails";
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridexCartonDetails.RowsDefaultCellStyle = dataGridViewCellStyle2;
@@ -681,7 +679,7 @@
             // 
             // naviPendingPallet.ClientArea
             // 
-            this.naviPendingPallet.ClientArea.Controls.Add(this.fastPendingPallet);
+            this.naviPendingPallet.ClientArea.Controls.Add(this.fastPendingPallets);
             this.naviPendingPallet.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviPendingPallet.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviPendingPallet.ClientArea.Name = "ClientArea";
@@ -695,56 +693,49 @@
             this.naviPendingPallet.SmallImageIndex = 0;
             this.naviPendingPallet.TabIndex = 3;
             // 
-            // fastPendingPallet
+            // fastPendingPallets
             // 
-            this.fastPendingPallet.AllColumns.Add(this.olvColumn1);
-            this.fastPendingPallet.AllColumns.Add(this.olvColumn2);
-            this.fastPendingPallet.AllColumns.Add(this.olvColumn3);
-            this.fastPendingPallet.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
-            this.olvColumn2,
-            this.olvColumn3});
-            this.fastPendingPallet.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastPendingPallet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastPendingPallet.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastPendingPallet.FullRowSelect = true;
-            this.fastPendingPallet.HideSelection = false;
-            this.fastPendingPallet.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPallet.Location = new System.Drawing.Point(0, 0);
-            this.fastPendingPallet.Name = "fastPendingPallet";
-            this.fastPendingPallet.OwnerDraw = true;
-            this.fastPendingPallet.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.fastPendingPallet.RowHeight = 45;
-            this.fastPendingPallet.ShowGroups = false;
-            this.fastPendingPallet.Size = new System.Drawing.Size(481, 705);
-            this.fastPendingPallet.TabIndex = 69;
-            this.fastPendingPallet.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPallet.UseCompatibleStateImageBehavior = false;
-            this.fastPendingPallet.UseFiltering = true;
-            this.fastPendingPallet.View = System.Windows.Forms.View.Details;
-            this.fastPendingPallet.VirtualMode = true;
+            this.fastPendingPallets.AllColumns.Add(this.olvCommodityCode);
+            this.fastPendingPallets.AllColumns.Add(this.olvCode);
+            this.fastPendingPallets.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvCommodityCode,
+            this.olvCode});
+            this.fastPendingPallets.Cursor = System.Windows.Forms.Cursors.Default;
+            this.fastPendingPallets.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fastPendingPallets.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fastPendingPallets.FullRowSelect = true;
+            this.fastPendingPallets.HideSelection = false;
+            this.fastPendingPallets.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastPendingPallets.Location = new System.Drawing.Point(0, 0);
+            this.fastPendingPallets.Name = "fastPendingPallets";
+            this.fastPendingPallets.OwnerDraw = true;
+            this.fastPendingPallets.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.fastPendingPallets.RowHeight = 45;
+            this.fastPendingPallets.ShowGroups = false;
+            this.fastPendingPallets.Size = new System.Drawing.Size(481, 705);
+            this.fastPendingPallets.TabIndex = 69;
+            this.fastPendingPallets.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastPendingPallets.UseCompatibleStateImageBehavior = false;
+            this.fastPendingPallets.UseFiltering = true;
+            this.fastPendingPallets.View = System.Windows.Forms.View.Details;
+            this.fastPendingPallets.VirtualMode = true;
             // 
-            // olvColumn1
+            // olvCommodityCode
             // 
-            this.olvColumn1.Text = "";
-            this.olvColumn1.Width = 0;
+            this.olvCommodityCode.AspectName = "CommodityCode";
+            this.olvCommodityCode.AspectToStringFormat = "";
+            this.olvCommodityCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityCode.Text = "Item";
+            this.olvCommodityCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityCode.Width = 169;
             // 
-            // olvColumn2
+            // olvCode
             // 
-            this.olvColumn2.AspectName = "EntryDate";
-            this.olvColumn2.AspectToStringFormat = "{0:d}";
-            this.olvColumn2.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn2.Text = "Date";
-            this.olvColumn2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn2.Width = 169;
-            // 
-            // olvColumn3
-            // 
-            this.olvColumn3.AspectName = "Reference";
-            this.olvColumn3.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn3.Text = "Batch #";
-            this.olvColumn3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn3.Width = 257;
+            this.olvCode.AspectName = "Code";
+            this.olvCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCode.Text = "Code";
+            this.olvCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCode.Width = 257;
             // 
             // naviIndex
             // 
@@ -813,7 +804,7 @@
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn16});
             this.gridexPackDetails.Editable = true;
-            this.gridexPackDetails.Location = new System.Drawing.Point(924, 9);
+            this.gridexPackDetails.Location = new System.Drawing.Point(914, 3);
             this.gridexPackDetails.Name = "gridexPackDetails";
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridexPackDetails.RowsDefaultCellStyle = dataGridViewCellStyle6;
@@ -881,6 +872,7 @@
             this.Controls.Add(this.toolStripChildForm);
             this.Name = "Pickups";
             this.Text = "GoodsReceipts";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pickups_FormClosing);
             this.Controls.SetChildIndex(this.toolStripChildForm, 0);
             this.Controls.SetChildIndex(this.naviPendingItems, 0);
             this.Controls.SetChildIndex(this.naviIndex, 0);
@@ -899,7 +891,7 @@
             this.naviPendingItems.ResumeLayout(false);
             this.naviPendingPallet.ClientArea.ResumeLayout(false);
             this.naviPendingPallet.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPallet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPallets)).EndInit();
             this.naviIndex.ResumeLayout(false);
             this.naviPickupIndex.ClientArea.ResumeLayout(false);
             this.naviPickupIndex.ResumeLayout(false);
@@ -921,7 +913,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private CustomControls.DateTimexPicker dateTimexEntryDate;
-        private CustomControls.CombexBox combexCommodityID;
+        private CustomControls.CombexBox combexWarehouseID;
         private BrightIdeasSoftware.FastObjectListView fastPickupIndex;
         private BrightIdeasSoftware.OLVColumn olvID;
         private BrightIdeasSoftware.OLVColumn olvEntryDate;
@@ -951,8 +943,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label2;
         private CustomControls.TextexBox textexReference;
-        private CustomControls.CombexBox combexBox1;
-        private CustomControls.CombexBox combexBox2;
+        private CustomControls.CombexBox combexForkliftDriverID;
+        private CustomControls.CombexBox combexStorekeeperID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label5;
@@ -973,10 +965,9 @@
         private CustomControls.TextexBox textexRemarks;
         private Guifreaks.Navisuite.NaviBand naviPickupIndex;
         private Guifreaks.Navisuite.NaviBand naviPendingPallet;
-        private BrightIdeasSoftware.FastObjectListView fastPendingPallet;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
+        private BrightIdeasSoftware.FastObjectListView fastPendingPallets;
+        private BrightIdeasSoftware.OLVColumn olvCommodityCode;
+        private BrightIdeasSoftware.OLVColumn olvCode;
 
     }
 }

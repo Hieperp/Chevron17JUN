@@ -148,7 +148,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                   ROUND(Pallets.Quantity - Pallets.QuantityPickup,  " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, CAST(0 AS decimal(18, 2)) AS Quantity, Pallets.Volume " + "\r\n";
 
             queryString = queryString + "       FROM        Pallets " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Commodities ON Pickups.LocationID = @LocationID AND ROUND(Pallets.Quantity - Pallets.QuantityPickup, " + (int)GlobalEnums.rndQuantity + ") > 0 AND Pallets.CommodityID = Commodities.CommodityID " + (isPalletIDs ? " AND Pallets.PalletID NOT IN (SELECT Id FROM dbo.SplitToIntList (@PalletIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON Pallets.LocationID = @LocationID AND ROUND(Pallets.Quantity - Pallets.QuantityPickup, " + (int)GlobalEnums.rndQuantity + ") > 0 AND Pallets.CommodityID = Commodities.CommodityID " + (isPalletIDs ? " AND Pallets.PalletID NOT IN (SELECT Id FROM dbo.SplitToIntList (@PalletIDs))" : "") + "\r\n";
 
             return queryString;
         }

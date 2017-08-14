@@ -1169,6 +1169,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="GetGoodsReceiptViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GoodsReceiptID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetPendingPallets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+          <Parameter Name="PickupID" Type="int" Mode="In" />
+          <Parameter Name="PalletIDs" Type="varchar" Mode="In" />
+          <Parameter Name="IsReadonly" Type="bit" Mode="In" />
+        </Function>
         <Function Name="GetPendingPickupDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
           <Parameter Name="GoodsReceiptID" Type="int" Mode="In" />
@@ -1980,12 +1986,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="Approved" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="GetPendingPallets" ReturnType="Collection(TotalSmartCodingModel.PendingPallet)">
-            <Parameter Name="LocationID" Mode="In" Type="Int32" />
-            <Parameter Name="PickupID" Mode="In" Type="Int32" />
-            <Parameter Name="PalletIDs" Mode="In" Type="String" />
-            <Parameter Name="IsReadonly" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <EntitySet Name="PickupDetails" EntityType="TotalSmartCodingModel.PickupDetail" />
           <AssociationSet Name="FK_PickupDetails_BinLocations" Association="TotalSmartCodingModel.FK_PickupDetails_BinLocations">
             <End Role="BinLocation" EntitySet="BinLocations" />
@@ -2019,6 +2019,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="PickupDetail" EntitySet="PickupDetails" />
           </AssociationSet>
+          <FunctionImport Name="GetPendingPallets" ReturnType="Collection(TotalSmartCodingModel.PendingPallet)">
+            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+            <Parameter Name="PickupID" Mode="In" Type="Int32" />
+            <Parameter Name="PalletIDs" Mode="In" Type="String" />
+            <Parameter Name="IsReadonly" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
           <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
@@ -3040,17 +3046,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="DateTime" Name="CartonEntryDate" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="PalletEntryDate" Nullable="true" Precision="23" />
         </ComplexType>
-        <ComplexType Name="PendingPallet">
-          <Property Type="Int32" Name="PalletID" Nullable="false" />
-          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="CommodityID" Nullable="false" />
-          <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
-          <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="2" />
-        </ComplexType>
         <EntityType Name="PickupDetail">
           <Key>
             <PropertyRef Name="PickupDetailID" />
@@ -3177,6 +3172,17 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="PendingPallet">
+          <Property Type="Int32" Name="PalletID" Nullable="false" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4024,6 +4030,21 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPendingPallets" FunctionName="TotalSmartCodingModel.Store.GetPendingPallets">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.PendingPallet">
+                <ScalarProperty Name="PalletID" ColumnName="PalletID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

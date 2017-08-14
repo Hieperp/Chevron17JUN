@@ -29,20 +29,17 @@
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.fastPendingPickups = new BrightIdeasSoftware.FastObjectListView();
-            this.olvPickupEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvPickupReference = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvWarehouseName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.fastPendingPickupWarehouses = new BrightIdeasSoftware.FastObjectListView();
-            this.olvWarehouseID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvWarehouseName1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.panelMaster = new System.Windows.Forms.Panel();
+            this.textexRemarks = new CustomControls.TextexBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.combexStorekeeperID = new CustomControls.CombexBox();
+            this.combexForkliftDriverID = new CustomControls.CombexBox();
+            this.combexWarehouseID = new CustomControls.CombexBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.buttonESC = new System.Windows.Forms.ToolStripButton();
             this.buttonOK = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickups)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickupWarehouses)).BeginInit();
-            this.panelMaster.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -53,99 +50,120 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonESC,
             this.buttonOK});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 548);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 215);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(1147, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(749, 55);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // fastPendingPickups
+            // textexRemarks
             // 
-            this.fastPendingPickups.AllColumns.Add(this.olvPickupEntryDate);
-            this.fastPendingPickups.AllColumns.Add(this.olvPickupReference);
-            this.fastPendingPickups.AllColumns.Add(this.olvWarehouseName);
-            this.fastPendingPickups.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvPickupEntryDate,
-            this.olvPickupReference,
-            this.olvWarehouseName});
-            this.fastPendingPickups.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastPendingPickups.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastPendingPickups.FullRowSelect = true;
-            this.fastPendingPickups.HideSelection = false;
-            this.fastPendingPickups.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPickups.Location = new System.Drawing.Point(-3, 313);
-            this.fastPendingPickups.Name = "fastPendingPickups";
-            this.fastPendingPickups.OwnerDraw = true;
-            this.fastPendingPickups.ShowGroups = false;
-            this.fastPendingPickups.Size = new System.Drawing.Size(1147, 232);
-            this.fastPendingPickups.TabIndex = 69;
-            this.fastPendingPickups.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPickups.UseCompatibleStateImageBehavior = false;
-            this.fastPendingPickups.UseFiltering = true;
-            this.fastPendingPickups.View = System.Windows.Forms.View.Details;
-            this.fastPendingPickups.VirtualMode = true;
+            this.textexRemarks.Editable = true;
+            this.textexRemarks.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textexRemarks.Location = new System.Drawing.Point(222, 155);
+            this.textexRemarks.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.textexRemarks.Name = "textexRemarks";
+            this.textexRemarks.Size = new System.Drawing.Size(509, 39);
+            this.textexRemarks.TabIndex = 84;
             // 
-            // olvPickupEntryDate
+            // label1
             // 
-            this.olvPickupEntryDate.AspectName = "PickupEntryDate";
-            this.olvPickupEntryDate.Width = 170;
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(109, 158);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 33);
+            this.label1.TabIndex = 75;
+            this.label1.Text = "Remark";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // olvPickupReference
+            // combexStorekeeperID
             // 
-            this.olvPickupReference.AspectName = "PickupReference";
-            this.olvPickupReference.Width = 137;
+            this.combexStorekeeperID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexStorekeeperID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexStorekeeperID.Editable = true;
+            this.combexStorekeeperID.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combexStorekeeperID.FormattingEnabled = true;
+            this.combexStorekeeperID.Location = new System.Drawing.Point(223, 112);
+            this.combexStorekeeperID.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.combexStorekeeperID.Name = "combexStorekeeperID";
+            this.combexStorekeeperID.ReadOnly = false;
+            this.combexStorekeeperID.Size = new System.Drawing.Size(509, 40);
+            this.combexStorekeeperID.TabIndex = 74;
             // 
-            // olvWarehouseName
+            // combexForkliftDriverID
             // 
-            this.olvWarehouseName.AspectName = "WarehouseName";
-            this.olvWarehouseName.Width = 192;
+            this.combexForkliftDriverID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexForkliftDriverID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexForkliftDriverID.Editable = true;
+            this.combexForkliftDriverID.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combexForkliftDriverID.FormattingEnabled = true;
+            this.combexForkliftDriverID.Location = new System.Drawing.Point(223, 69);
+            this.combexForkliftDriverID.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.combexForkliftDriverID.Name = "combexForkliftDriverID";
+            this.combexForkliftDriverID.ReadOnly = false;
+            this.combexForkliftDriverID.Size = new System.Drawing.Size(509, 40);
+            this.combexForkliftDriverID.TabIndex = 73;
             // 
-            // fastPendingPickupWarehouses
+            // combexWarehouseID
             // 
-            this.fastPendingPickupWarehouses.AllColumns.Add(this.olvWarehouseID);
-            this.fastPendingPickupWarehouses.AllColumns.Add(this.olvWarehouseName1);
-            this.fastPendingPickupWarehouses.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvWarehouseID,
-            this.olvWarehouseName1});
-            this.fastPendingPickupWarehouses.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastPendingPickupWarehouses.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fastPendingPickupWarehouses.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastPendingPickupWarehouses.FullRowSelect = true;
-            this.fastPendingPickupWarehouses.HideSelection = false;
-            this.fastPendingPickupWarehouses.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPickupWarehouses.Location = new System.Drawing.Point(0, 9);
-            this.fastPendingPickupWarehouses.Name = "fastPendingPickupWarehouses";
-            this.fastPendingPickupWarehouses.OwnerDraw = true;
-            this.fastPendingPickupWarehouses.ShowGroups = false;
-            this.fastPendingPickupWarehouses.Size = new System.Drawing.Size(1147, 447);
-            this.fastPendingPickupWarehouses.TabIndex = 70;
-            this.fastPendingPickupWarehouses.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPickupWarehouses.UseCompatibleStateImageBehavior = false;
-            this.fastPendingPickupWarehouses.UseFiltering = true;
-            this.fastPendingPickupWarehouses.View = System.Windows.Forms.View.Details;
-            this.fastPendingPickupWarehouses.VirtualMode = true;
+            this.combexWarehouseID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexWarehouseID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexWarehouseID.Editable = true;
+            this.combexWarehouseID.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combexWarehouseID.FormattingEnabled = true;
+            this.combexWarehouseID.Location = new System.Drawing.Point(223, 26);
+            this.combexWarehouseID.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.combexWarehouseID.Name = "combexWarehouseID";
+            this.combexWarehouseID.ReadOnly = false;
+            this.combexWarehouseID.Size = new System.Drawing.Size(509, 40);
+            this.combexWarehouseID.TabIndex = 72;
             // 
-            // olvWarehouseID
+            // label9
             // 
-            this.olvWarehouseID.AspectName = "WarehouseID";
-            this.olvWarehouseID.Width = 161;
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(47, 115);
+            this.label9.Margin = new System.Windows.Forms.Padding(1);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(172, 33);
+            this.label9.TabIndex = 79;
+            this.label9.Text = "Store Keeper";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // olvWarehouseName1
+            // label3
             // 
-            this.olvWarehouseName1.AspectName = "WarehouseName";
-            this.olvWarehouseName1.Width = 263;
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(32, 72);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(187, 33);
+            this.label3.TabIndex = 76;
+            this.label3.Text = "Forklift Driver";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panelMaster
+            // label10
             // 
-            this.panelMaster.Controls.Add(this.fastPendingPickups);
-            this.panelMaster.Controls.Add(this.fastPendingPickupWarehouses);
-            this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMaster.Location = new System.Drawing.Point(0, 0);
-            this.panelMaster.Name = "panelMaster";
-            this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
-            this.panelMaster.Size = new System.Drawing.Size(1147, 548);
-            this.panelMaster.TabIndex = 71;
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(68, 29);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(151, 33);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Warehouse";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // buttonESC
             // 
@@ -173,21 +191,25 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 603);
-            this.Controls.Add(this.panelMaster);
+            this.ClientSize = new System.Drawing.Size(749, 270);
+            this.Controls.Add(this.combexWarehouseID);
+            this.Controls.Add(this.combexForkliftDriverID);
+            this.Controls.Add(this.combexStorekeeperID);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.textexRemarks);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WizardMaster";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Wizard";
-            this.Load += new System.EventHandler(this.Wizard_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickups)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPickupWarehouses)).EndInit();
-            this.panelMaster.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,13 +220,13 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton buttonESC;
         private System.Windows.Forms.ToolStripButton buttonOK;
-        private BrightIdeasSoftware.FastObjectListView fastPendingPickups;
-        private BrightIdeasSoftware.FastObjectListView fastPendingPickupWarehouses;
-        private System.Windows.Forms.Panel panelMaster;
-        private BrightIdeasSoftware.OLVColumn olvPickupEntryDate;
-        private BrightIdeasSoftware.OLVColumn olvWarehouseName;
-        private BrightIdeasSoftware.OLVColumn olvWarehouseID;
-        private BrightIdeasSoftware.OLVColumn olvWarehouseName1;
-        private BrightIdeasSoftware.OLVColumn olvPickupReference;
+        private CustomControls.CombexBox combexStorekeeperID;
+        private CustomControls.CombexBox combexForkliftDriverID;
+        private CustomControls.CombexBox combexWarehouseID;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label1;
+        private CustomControls.TextexBox textexRemarks;
     }
 }

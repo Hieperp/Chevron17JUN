@@ -438,8 +438,8 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(45, 52);
-            this.toolStripLabel1.Text = "Filter:";
+            this.toolStripLabel1.Size = new System.Drawing.Size(42, 52);
+            this.toolStripLabel1.Text = "Filter";
             // 
             // textFillterLowerDate
             // 
