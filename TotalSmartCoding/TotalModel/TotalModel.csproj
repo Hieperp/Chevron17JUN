@@ -102,6 +102,15 @@
     <Compile Include="Models\DeliveryAdviceViewDetail.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeBase.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeIndex.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FillingCarton.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
@@ -195,6 +204,12 @@
       <DependentUpon>TotalSmartCoding.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Warehouse.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WarehouseBase.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WarehouseIndex.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

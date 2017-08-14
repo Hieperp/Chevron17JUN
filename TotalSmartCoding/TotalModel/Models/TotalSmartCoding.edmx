@@ -247,6 +247,21 @@
           <Property Name="InActivePartial" Type="bit" Nullable="false" />
           <Property Name="InActiveDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeTypeID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="Birthday" Type="nvarchar" MaxLength="60" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="60" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="FillingCartons">
           <Key>
             <PropertyRef Name="FillingCartonID" />
@@ -612,6 +627,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Customers_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="SalespersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DeliveryAdviceDetails_Commodities">
           <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
           <End Role="DeliveryAdviceDetails" Type="Self.DeliveryAdviceDetails" Multiplicity="*" />
@@ -669,6 +696,18 @@ warning 6035: The relationship 'FK_DeliveryAdvices_AspNetUsers2' has columns tha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DeliveryAdvices_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="DeliveryAdvices" Type="Self.DeliveryAdvices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvices">
+              <PropertyRef Name="SalespersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DeliveryAdvices_Locations">
           <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
           <End Role="DeliveryAdvices" Type="Self.DeliveryAdvices" Multiplicity="*" />
@@ -702,6 +741,18 @@ warning 6035: The relationship 'FK_DeliveryAdvices_AspNetUsers2' has columns tha
             </Principal>
             <Dependent Role="DeliveryAdvices">
               <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="LocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1148,6 +1199,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="GetDeliveryAdviceViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DeliveryAdviceID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetEmployeeBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetEmployeeIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="GetFillingCartons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FillingLineID" Type="int" Mode="In" />
           <Parameter Name="EntryStatusIDs" Type="varchar" Mode="In" />
@@ -1219,6 +1276,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Parameter Name="NMVNTaskID" Type="int" Mode="In" />
           <Parameter Name="OrganizationalUnitID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetWarehouseBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetWarehouseIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="GoodsReceiptApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -1262,6 +1325,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryAdviceDetails" EntityType="Self.DeliveryAdviceDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryAdvices" EntityType="Self.DeliveryAdvices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FillingCartons" EntityType="Self.FillingCartons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FillingLines" EntityType="Self.FillingLines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FillingPacks" EntityType="Self.FillingPacks" Schema="dbo" store:Type="Tables" />
@@ -1308,6 +1372,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Pallets" EntitySet="Pallets" />
             <End Role="Cartons" EntitySet="Cartons" />
           </AssociationSet>
+          <AssociationSet Name="FK_Customers_Employees" Association="Self.FK_Customers_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
           <AssociationSet Name="FK_DeliveryAdviceDetails_Commodities" Association="Self.FK_DeliveryAdviceDetails_Commodities">
             <End Role="Commodities" EntitySet="Commodities" />
             <End Role="DeliveryAdviceDetails" EntitySet="DeliveryAdviceDetails" />
@@ -1324,6 +1392,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Customers" EntitySet="Customers" />
             <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
           </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Employees" Association="Self.FK_DeliveryAdvices_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
           <AssociationSet Name="FK_DeliveryAdvices_Locations" Association="Self.FK_DeliveryAdvices_Locations">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
@@ -1335,6 +1407,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <AssociationSet Name="FK_DeliveryAdvices_Warehouses" Association="Self.FK_DeliveryAdvices_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="DeliveryAdvices" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Locations" Association="Self.FK_Employees_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceiptDetails_BinLocations" Association="Self.FK_GoodsReceiptDetails_BinLocations">
             <End Role="BinLocations" EntitySet="BinLocations" />
@@ -1485,6 +1561,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="IsSupplier" Type="Boolean" Nullable="false" />
           <Property Name="IsFemale" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DeliveryAdvices1" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Customers1" FromRole="Customer" ToRole="DeliveryAdvice" />
+          <NavigationProperty Name="Employee" Relationship="TotalSmartCodingModel.FK_Customers_Employees" FromRole="Customer" ToRole="Employee" />
         </EntityType>
         <EntityType Name="DeliveryAdviceDetail">
           <Key>
@@ -1595,6 +1672,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Locations" FromRole="DeliveryAdvice" ToRole="Location" />
           <NavigationProperty Name="PaymentTerm" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_PaymentTerms" FromRole="DeliveryAdvice" ToRole="PaymentTerm" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses" FromRole="DeliveryAdvice" ToRole="Warehouse" />
+          <NavigationProperty Name="Employee" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Employees" FromRole="DeliveryAdvice" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_DeliveryAdvices_Customers">
           <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
@@ -2025,6 +2103,31 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <Parameter Name="PalletIDs" Mode="In" Type="String" />
             <Parameter Name="IsReadonly" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="GetEmployeeBases" ReturnType="Collection(TotalSmartCodingModel.EmployeeBase)" />
+          <FunctionImport Name="GetWarehouseBases" ReturnType="Collection(TotalSmartCodingModel.WarehouseBase)" />
+          <FunctionImport Name="GetEmployeeIndexes" ReturnType="Collection(TotalSmartCodingModel.EmployeeIndex)">
+            <Parameter Name="AspUserID" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetWarehouseIndexes" ReturnType="Collection(TotalSmartCodingModel.WarehouseIndex)">
+            <Parameter Name="AspUserID" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Employees" EntityType="TotalSmartCodingModel.Employee" />
+          <AssociationSet Name="FK_Customers_Employees" Association="TotalSmartCodingModel.FK_Customers_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Employees" Association="TotalSmartCodingModel.FK_DeliveryAdvices_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="DeliveryAdvice" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Locations" Association="TotalSmartCodingModel.FK_Employees_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
           <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
@@ -2058,6 +2161,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Warehouses" Relationship="TotalSmartCodingModel.FK_Warehouses_Locations" FromRole="Location" ToRole="Warehouse" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Locations" FromRole="Location" ToRole="GoodsReceipt" />
           <NavigationProperty Name="Pickups" Relationship="TotalSmartCodingModel.FK_Pickups_Locations" FromRole="Location" ToRole="Pickup" />
+          <NavigationProperty Name="Employees" Relationship="TotalSmartCodingModel.FK_Employees_Locations" FromRole="Location" ToRole="Employee" />
         </EntityType>
         <Association Name="FK_DeliveryAdvices_Locations">
           <End Type="TotalSmartCodingModel.Location" Role="Location" Multiplicity="1" />
@@ -3183,6 +3287,80 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
+        <ComplexType Name="EmployeeBase">
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="WarehouseBase">
+          <Property Type="Int32" Name="WarehouseID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="EmployeeIndex">
+          <Property Type="Int32" Name="EmployeeID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="WarehouseIndex">
+          <Property Type="Int32" Name="WarehouseID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="TotalSmartCodingModel.FK_Customers_Employees" FromRole="Employee" ToRole="Customer" />
+          <NavigationProperty Name="DeliveryAdvices" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Employees" FromRole="Employee" ToRole="DeliveryAdvice" />
+          <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_Employees_Locations" FromRole="Employee" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK_Customers_Employees">
+          <End Type="TotalSmartCodingModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="SalespersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdvices_Employees">
+          <End Type="TotalSmartCodingModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.DeliveryAdvice" Role="DeliveryAdvice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvice">
+              <PropertyRef Name="SalespersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Locations">
+          <End Type="TotalSmartCodingModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4045,6 +4223,58 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeBases" FunctionName="TotalSmartCodingModel.Store.GetEmployeeBases">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.EmployeeBase">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetWarehouseBases" FunctionName="TotalSmartCodingModel.Store.GetWarehouseBases">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.WarehouseBase">
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeIndexes" FunctionName="TotalSmartCodingModel.Store.GetEmployeeIndexes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.EmployeeIndex">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetWarehouseIndexes" FunctionName="TotalSmartCodingModel.Store.GetWarehouseIndexes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.WarehouseIndex">
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="EmployeeTypeID" ColumnName="EmployeeTypeID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

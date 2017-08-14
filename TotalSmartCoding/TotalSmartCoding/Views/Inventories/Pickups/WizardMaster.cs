@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using TotalCore.Repositories.Inventories;
 using TotalModel.Models;
 using TotalSmartCoding.Controllers.APIs.Inventories;
+using TotalSmartCoding.Libraries;
 using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.ViewModels.Inventories;
 
@@ -13,22 +14,28 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
     {
         private PickupAPIs pickupAPIs;
         private PickupViewModel pickupViewModel;
-        
+
         public WizardMaster(PickupAPIs pickupAPIs, PickupViewModel pickupViewModel)
         {
             InitializeComponent();
 
             this.pickupAPIs = pickupAPIs;
             this.pickupViewModel = pickupViewModel;
-            //this.Width = 542;
-            //this.Height = 249;
         }
 
-
-        private void Wizard_Load(object sender, EventArgs e)
+        private void WizardMaster_Load(object sender, EventArgs e)
         {
             try
             {
+                CommodityAPIs commodityAPIs = new PickupAPIs(CommonNinject.Kernel.Get<IPickupAPIRepository>());
+
+                this.combexCommodityID.DataSource = commodityAPIs.GetCommodityBases();
+                this.combexCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.Code);
+                this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
+                this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
+
+
+
                 //this.fastPendingPallets.SetObjects(this.pickupAPIs.GetPendingPallets(this.pickupViewModel.LocationID));
                 //this.fastPendingPalletWarehouses.SetObjects(this.pickupAPIs.GetPendingPalletWarehouses(this.pickupViewModel.LocationID));
 
@@ -39,14 +46,13 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             }
         }
 
-
         private void buttonOKESC_Click(object sender, EventArgs e)
         {
             try
             {
                 //this.textexRemarks.Width = 542;
                 this.textexRemarks.Height = 39;
-               float i=  this.textexRemarks.Font.Size;
+                float i = this.textexRemarks.Font.Size;
 
                 if (sender.Equals(this.buttonOK))
                 {
@@ -76,7 +82,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
                     if (nextOK)
                         this.DialogResult = DialogResult.OK;
                     else
-                        MessageBox.Show(this, "Vui lòng chọn phiếu giao thành phẩm sau đóng gói, hoặc kho nhận hàng.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);                    
+                        MessageBox.Show(this, "Vui lòng chọn phiếu giao thành phẩm sau đóng gói, hoặc kho nhận hàng.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                 }
 
                 if (sender.Equals(this.buttonESC))
@@ -89,5 +95,8 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
+
+        
+
     }
 }

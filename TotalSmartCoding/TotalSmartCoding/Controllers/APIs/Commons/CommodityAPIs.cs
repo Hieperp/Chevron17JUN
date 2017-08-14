@@ -16,24 +16,22 @@ namespace TotalSmartCoding.Controllers.APIs.Commons
 {
     public class CommodityAPIs
     {
-        private readonly ICommodityAPIRepository goodsReceiptAPIRepository;
+        private readonly ICommodityAPIRepository commodityAPIRepository;
 
-        public CommodityAPIs(ICommodityAPIRepository goodsReceiptAPIRepository)
+        public CommodityAPIs(ICommodityAPIRepository commodityAPIRepository)
         {
-            this.goodsReceiptAPIRepository = goodsReceiptAPIRepository;
+            this.commodityAPIRepository = commodityAPIRepository;
         }
 
 
         public ICollection<CommodityIndex> GetCommodityIndexes()
         {
-            ICollection<CommodityIndex> goodsReceiptIndexes = this.goodsReceiptAPIRepository.GetEntityIndexes<CommodityIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate).ToList();
-
-            return goodsReceiptIndexes;
+            return this.commodityAPIRepository.GetEntityIndexes<CommodityIndex>(ContextAttributes.AspUserID, ContextAttributes.FromDate, ContextAttributes.ToDate).ToList();
         }
 
         public IList<CommodityBase> GetCommodityBases()
         {
-            return this.goodsReceiptAPIRepository.GetCommodityBases();
+            return this.commodityAPIRepository.GetCommodityBases();
         }
 
     }

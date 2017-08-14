@@ -22,6 +22,7 @@ namespace TotalModel.Models
             this.Warehouses = new HashSet<Warehouse>();
             this.GoodsReceipts = new HashSet<GoodsReceipt>();
             this.Pickups = new HashSet<Pickup>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int LocationID { get; set; }
@@ -46,5 +47,7 @@ namespace TotalModel.Models
         public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pickup> Pickups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

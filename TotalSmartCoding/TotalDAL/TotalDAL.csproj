@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Helpers\EntityFrameworkExtension.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\Commodity.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Employee.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\Warehouse.cs" />
     <Compile Include="Helpers\SqlProgrammability\InitReference.cs" />
     <Compile Include="Helpers\SqlProgrammability\Inventories\GoodsReceipt.cs" />
     <Compile Include="Helpers\SqlProgrammability\Inventories\Pickup.cs" />
@@ -61,7 +63,9 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\Commons\AspNetUserRepository.cs" />
     <Compile Include="Repositories\Commons\CommodityRepository.cs" />
+    <Compile Include="Repositories\Commons\EmployeeRepository.cs" />
     <Compile Include="Repositories\Commons\PaymentTermRepository.cs" />
+    <Compile Include="Repositories\Commons\WarehouseRepository.cs" />
     <Compile Include="Repositories\GenericAPIRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\GenericWithDetailRepository.cs" />

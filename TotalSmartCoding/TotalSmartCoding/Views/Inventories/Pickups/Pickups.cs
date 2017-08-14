@@ -190,8 +190,8 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
         protected override DialogResult wizardMaster()
         {
-            //Form1 a = new Form1(this.pickupAPIs, this.pickupController.PickupViewModel);
-            // a.ShowDialog();
+            WizardMaster a = new WizardMaster(this.pickupAPIs, this.pickupController.PickupViewModel);
+            a.ShowDialog();
 
             WizardMaster wizardMaster = new WizardMaster(this.pickupAPIs, this.pickupController.PickupViewModel);
             return wizardMaster.ShowDialog();

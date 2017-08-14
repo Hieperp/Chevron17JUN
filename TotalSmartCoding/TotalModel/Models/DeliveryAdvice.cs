@@ -79,5 +79,6 @@ namespace TotalModel.Models
         public virtual Location Location { get; set; }
         public virtual PaymentTerm PaymentTerm { get; set; }
         public virtual Warehouse Warehouse { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

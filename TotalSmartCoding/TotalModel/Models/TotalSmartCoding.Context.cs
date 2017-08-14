@@ -53,6 +53,7 @@ namespace TotalModel.Models
         public virtual DbSet<Pallet> Pallets { get; set; }
         public virtual DbSet<Pickup> Pickups { get; set; }
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -779,6 +780,50 @@ namespace TotalModel.Models
                 new ObjectParameter("IsReadonly", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingPallet>("GetPendingPallets", locationIDParameter, pickupIDParameter, palletIDsParameter, isReadonlyParameter);
+        }
+    
+        public virtual ObjectResult<EmployeeBase> GetEmployeeBases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeBase>("GetEmployeeBases");
+        }
+    
+        public virtual ObjectResult<WarehouseBase> GetWarehouseBases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseBase>("GetWarehouseBases");
+        }
+    
+        public virtual ObjectResult<EmployeeIndex> GetEmployeeIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeIndex>("GetEmployeeIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<WarehouseIndex> GetWarehouseIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseIndex>("GetWarehouseIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
         }
     }
 }

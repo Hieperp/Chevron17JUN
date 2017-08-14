@@ -88,6 +88,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\APIs\Commons\EmployeeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\WarehouseAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
     <Compile Include="Controllers\Inventories\PickupController.cs" />
     <Compile Include="Libraries\AutoMapperConfig.cs" />
@@ -164,6 +166,12 @@
     <Compile Include="Views\Inventories\GoodsReceipts\WizardMaster.designer.cs">
       <DependentUpon>WizardMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Inventories\Pickups\WizardMaster.designer.cs">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Inventories\Pickups\Pickups.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,12 +183,6 @@
     </Compile>
     <Compile Include="Views\Inventories\Pickups\WizardDetail.Designer.cs">
       <DependentUpon>WizardDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Inventories\Pickups\WizardMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Inventories\Pickups\WizardMaster.designer.cs">
-      <DependentUpon>WizardMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Mains\BaseView.cs">
       <SubType>Form</SubType>
@@ -238,14 +240,14 @@
     <EmbeddedResource Include="Views\Inventories\GoodsReceipts\WizardMaster.resx">
       <DependentUpon>WizardMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Inventories\Pickups\WizardMaster.resx">
+      <DependentUpon>WizardMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Inventories\Pickups\Pickups.resx">
       <DependentUpon>Pickups.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Inventories\Pickups\WizardDetail.resx">
       <DependentUpon>WizardDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Inventories\Pickups\WizardMaster.resx">
-      <DependentUpon>WizardMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\BaseView.resx">
       <DependentUpon>BaseView.cs</DependentUpon>

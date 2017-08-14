@@ -52,5 +52,6 @@ namespace TotalModel.Models
         public virtual ICollection<DeliveryAdvice> DeliveryAdvices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdvice> DeliveryAdvices1 { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

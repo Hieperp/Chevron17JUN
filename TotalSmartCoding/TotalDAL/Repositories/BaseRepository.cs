@@ -31,6 +31,16 @@ namespace TotalDAL.Repositories
 
             //return;
 
+            Helpers.SqlProgrammability.Commons.Warehouse warehouse = new Helpers.SqlProgrammability.Commons.Warehouse(totalSmartCodingEntities);
+            warehouse.RestoreProcedure();
+
+            //return;
+
+            Helpers.SqlProgrammability.Commons.Employee employee = new Helpers.SqlProgrammability.Commons.Employee(totalSmartCodingEntities);
+            employee.RestoreProcedure();
+
+            return;
+
             Helpers.SqlProgrammability.Inventories.Pickup pickup = new Helpers.SqlProgrammability.Inventories.Pickup(totalSmartCodingEntities);
             pickup.RestoreProcedure();
 

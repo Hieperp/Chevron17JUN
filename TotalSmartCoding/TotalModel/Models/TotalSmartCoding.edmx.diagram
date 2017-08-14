@@ -73,6 +73,10 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Pallets" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Pickups" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Warehouses" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Employee" Width="1.5" PointX="9.625" PointY="14.375" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Customers_Employees" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_DeliveryAdvices_Employees" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Employees_Locations" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
