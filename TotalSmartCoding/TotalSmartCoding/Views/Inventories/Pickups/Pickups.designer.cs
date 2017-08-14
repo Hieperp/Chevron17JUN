@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pickups));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -57,13 +56,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.toolStripNaviGroupDetails = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonShowDetailsExtend = new System.Windows.Forms.ToolStripButton();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.naviDetails = new Guifreaks.Navisuite.NaviGroup(this.components);
-            this.numericUpDownSizingDetail = new System.Windows.Forms.NumericUpDown();
             this.gridexCartonDetails = new CustomControls.DataGridexView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,11 +101,9 @@
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanelMaster.SuspendLayout();
-            this.toolStripNaviGroupDetails.SuspendLayout();
             this.toolStripChildForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.naviDetails)).BeginInit();
             this.naviDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSizingDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridexCartonDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridexPalletDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastPickupIndex)).BeginInit();
@@ -134,7 +128,7 @@
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 18F));
+            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanelMaster.Controls.Add(this.textexRemarks, 4, 5);
             this.tableLayoutPanelMaster.Controls.Add(this.textexTotalVolume, 4, 4);
             this.tableLayoutPanelMaster.Controls.Add(this.textexTotalPack, 4, 3);
@@ -167,57 +161,57 @@
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelMaster.Size = new System.Drawing.Size(1368, 245);
+            this.tableLayoutPanelMaster.Size = new System.Drawing.Size(1097, 245);
             this.tableLayoutPanelMaster.TabIndex = 62;
             // 
             // textexRemarks
             // 
             this.textexRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexRemarks.Editable = true;
-            this.textexRemarks.Location = new System.Drawing.Point(951, 188);
+            this.textexRemarks.Location = new System.Drawing.Point(755, 188);
             this.textexRemarks.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexRemarks.Name = "textexRemarks";
-            this.textexRemarks.Size = new System.Drawing.Size(398, 39);
+            this.textexRemarks.Size = new System.Drawing.Size(314, 39);
             this.textexRemarks.TabIndex = 84;
             // 
             // textexTotalVolume
             // 
             this.textexTotalVolume.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexTotalVolume.Editable = true;
-            this.textexTotalVolume.Location = new System.Drawing.Point(951, 142);
+            this.textexTotalVolume.Location = new System.Drawing.Point(755, 142);
             this.textexTotalVolume.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalVolume.Name = "textexTotalVolume";
-            this.textexTotalVolume.Size = new System.Drawing.Size(398, 39);
+            this.textexTotalVolume.Size = new System.Drawing.Size(314, 39);
             this.textexTotalVolume.TabIndex = 83;
             // 
             // textexTotalPack
             // 
             this.textexTotalPack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexTotalPack.Editable = true;
-            this.textexTotalPack.Location = new System.Drawing.Point(951, 96);
+            this.textexTotalPack.Location = new System.Drawing.Point(755, 96);
             this.textexTotalPack.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalPack.Name = "textexTotalPack";
-            this.textexTotalPack.Size = new System.Drawing.Size(398, 39);
+            this.textexTotalPack.Size = new System.Drawing.Size(314, 39);
             this.textexTotalPack.TabIndex = 82;
             // 
             // textexTotalCarton
             // 
             this.textexTotalCarton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexTotalCarton.Editable = true;
-            this.textexTotalCarton.Location = new System.Drawing.Point(951, 50);
+            this.textexTotalCarton.Location = new System.Drawing.Point(755, 50);
             this.textexTotalCarton.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalCarton.Name = "textexTotalCarton";
-            this.textexTotalCarton.Size = new System.Drawing.Size(398, 39);
+            this.textexTotalCarton.Size = new System.Drawing.Size(314, 39);
             this.textexTotalCarton.TabIndex = 81;
             // 
             // textexTotalPallet
             // 
             this.textexTotalPallet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexTotalPallet.Editable = true;
-            this.textexTotalPallet.Location = new System.Drawing.Point(951, 8);
+            this.textexTotalPallet.Location = new System.Drawing.Point(755, 8);
             this.textexTotalPallet.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalPallet.Name = "textexTotalPallet";
-            this.textexTotalPallet.Size = new System.Drawing.Size(398, 39);
+            this.textexTotalPallet.Size = new System.Drawing.Size(314, 39);
             this.textexTotalPallet.TabIndex = 80;
             // 
             // label1
@@ -225,10 +219,10 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(683, 190);
+            this.label1.Location = new System.Drawing.Point(543, 190);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 50);
+            this.label1.Size = new System.Drawing.Size(206, 50);
             this.label1.TabIndex = 75;
             this.label1.Text = "Remark";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -238,10 +232,10 @@
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(681, 142);
+            this.label8.Location = new System.Drawing.Point(541, 142);
             this.label8.Margin = new System.Windows.Forms.Padding(1);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(266, 44);
+            this.label8.Size = new System.Drawing.Size(210, 44);
             this.label8.TabIndex = 78;
             this.label8.Text = "Total Volume";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -251,10 +245,10 @@
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(681, 96);
+            this.label5.Location = new System.Drawing.Point(541, 96);
             this.label5.Margin = new System.Windows.Forms.Padding(1);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(266, 44);
+            this.label5.Size = new System.Drawing.Size(210, 44);
             this.label5.TabIndex = 77;
             this.label5.Text = "Total Pack";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -264,10 +258,10 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(683, 52);
+            this.label2.Location = new System.Drawing.Point(543, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(262, 40);
+            this.label2.Size = new System.Drawing.Size(206, 40);
             this.label2.TabIndex = 56;
             this.label2.Text = "Total Carton";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -277,10 +271,10 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(681, 8);
+            this.label4.Location = new System.Drawing.Point(541, 8);
             this.label4.Margin = new System.Windows.Forms.Padding(1);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(266, 40);
+            this.label4.Size = new System.Drawing.Size(210, 40);
             this.label4.TabIndex = 28;
             this.label4.Text = "Total Pallet";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -292,11 +286,11 @@
             this.combexBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexBox2.Editable = true;
             this.combexBox2.FormattingEnabled = true;
-            this.combexBox2.Location = new System.Drawing.Point(271, 188);
+            this.combexBox2.Location = new System.Drawing.Point(215, 188);
             this.combexBox2.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.combexBox2.Name = "combexBox2";
             this.combexBox2.ReadOnly = false;
-            this.combexBox2.Size = new System.Drawing.Size(398, 40);
+            this.combexBox2.Size = new System.Drawing.Size(314, 40);
             this.combexBox2.TabIndex = 74;
             // 
             // combexBox1
@@ -306,11 +300,11 @@
             this.combexBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexBox1.Editable = true;
             this.combexBox1.FormattingEnabled = true;
-            this.combexBox1.Location = new System.Drawing.Point(271, 142);
+            this.combexBox1.Location = new System.Drawing.Point(215, 142);
             this.combexBox1.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.combexBox1.Name = "combexBox1";
             this.combexBox1.ReadOnly = false;
-            this.combexBox1.Size = new System.Drawing.Size(398, 40);
+            this.combexBox1.Size = new System.Drawing.Size(314, 40);
             this.combexBox1.TabIndex = 73;
             // 
             // combexCommodityID
@@ -320,21 +314,21 @@
             this.combexCommodityID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexCommodityID.Editable = true;
             this.combexCommodityID.FormattingEnabled = true;
-            this.combexCommodityID.Location = new System.Drawing.Point(271, 96);
+            this.combexCommodityID.Location = new System.Drawing.Point(215, 96);
             this.combexCommodityID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.combexCommodityID.Name = "combexCommodityID";
             this.combexCommodityID.ReadOnly = false;
-            this.combexCommodityID.Size = new System.Drawing.Size(398, 40);
+            this.combexCommodityID.Size = new System.Drawing.Size(314, 40);
             this.combexCommodityID.TabIndex = 72;
             // 
             // textexReference
             // 
             this.textexReference.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexReference.Editable = true;
-            this.textexReference.Location = new System.Drawing.Point(271, 50);
+            this.textexReference.Location = new System.Drawing.Point(215, 50);
             this.textexReference.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexReference.Name = "textexReference";
-            this.textexReference.Size = new System.Drawing.Size(398, 39);
+            this.textexReference.Size = new System.Drawing.Size(314, 39);
             this.textexReference.TabIndex = 71;
             // 
             // dateTimexEntryDate
@@ -342,11 +336,11 @@
             this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimexEntryDate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
             this.dateTimexEntryDate.Editable = true;
-            this.dateTimexEntryDate.Location = new System.Drawing.Point(271, 8);
+            this.dateTimexEntryDate.Location = new System.Drawing.Point(215, 8);
             this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.dateTimexEntryDate.Name = "dateTimexEntryDate";
             this.dateTimexEntryDate.ReadOnly = false;
-            this.dateTimexEntryDate.Size = new System.Drawing.Size(398, 39);
+            this.dateTimexEntryDate.Size = new System.Drawing.Size(314, 39);
             this.dateTimexEntryDate.TabIndex = 70;
             // 
             // label9
@@ -357,7 +351,7 @@
             this.label9.Location = new System.Drawing.Point(1, 188);
             this.label9.Margin = new System.Windows.Forms.Padding(1);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(266, 54);
+            this.label9.Size = new System.Drawing.Size(210, 54);
             this.label9.TabIndex = 79;
             this.label9.Text = "Store Keeper";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -370,7 +364,7 @@
             this.label3.Location = new System.Drawing.Point(3, 144);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(262, 40);
+            this.label3.Size = new System.Drawing.Size(206, 40);
             this.label3.TabIndex = 76;
             this.label3.Text = "Forklift Driver";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -383,7 +377,7 @@
             this.label10.Location = new System.Drawing.Point(3, 98);
             this.label10.Margin = new System.Windows.Forms.Padding(3);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(262, 40);
+            this.label10.Size = new System.Drawing.Size(206, 40);
             this.label10.TabIndex = 35;
             this.label10.Text = "Warehouse";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -396,7 +390,7 @@
             this.label7.Location = new System.Drawing.Point(3, 52);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(262, 40);
+            this.label7.Size = new System.Drawing.Size(206, 40);
             this.label7.TabIndex = 31;
             this.label7.Text = "Reference";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -409,35 +403,10 @@
             this.label6.Location = new System.Drawing.Point(1, 8);
             this.label6.Margin = new System.Windows.Forms.Padding(1);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(266, 40);
+            this.label6.Size = new System.Drawing.Size(210, 40);
             this.label6.TabIndex = 30;
             this.label6.Text = "Date";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // toolStripNaviGroupDetails
-            // 
-            this.toolStripNaviGroupDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.toolStripNaviGroupDetails.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripNaviGroupDetails.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripNaviGroupDetails.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStripNaviGroupDetails.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripNaviGroupDetails.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonShowDetailsExtend});
-            this.toolStripNaviGroupDetails.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripNaviGroupDetails.Location = new System.Drawing.Point(1219, 9);
-            this.toolStripNaviGroupDetails.Name = "toolStripNaviGroupDetails";
-            this.toolStripNaviGroupDetails.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStripNaviGroupDetails.Size = new System.Drawing.Size(27, 27);
-            this.toolStripNaviGroupDetails.TabIndex = 64;
-            // 
-            // toolStripButtonShowDetailsExtend
-            // 
-            this.toolStripButtonShowDetailsExtend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonShowDetailsExtend.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonShowDetailsExtend.Image")));
-            this.toolStripButtonShowDetailsExtend.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonShowDetailsExtend.Name = "toolStripButtonShowDetailsExtend";
-            this.toolStripButtonShowDetailsExtend.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonShowDetailsExtend.Text = "toolStripButton1";
             // 
             // toolStripChildForm
             // 
@@ -471,8 +440,6 @@
             // 
             this.naviDetails.Caption = "   Details";
             this.naviDetails.Controls.Add(this.tableLayoutPanelMaster);
-            this.naviDetails.Controls.Add(this.numericUpDownSizingDetail);
-            this.naviDetails.Controls.Add(this.toolStripNaviGroupDetails);
             this.naviDetails.Dock = System.Windows.Forms.DockStyle.Top;
             this.naviDetails.ExpandedHeight = 298;
             this.naviDetails.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -481,40 +448,10 @@
             this.naviDetails.Location = new System.Drawing.Point(257, 0);
             this.naviDetails.Name = "naviDetails";
             this.naviDetails.Padding = new System.Windows.Forms.Padding(0, 53, 0, 0);
-            this.naviDetails.Size = new System.Drawing.Size(1368, 298);
+            this.naviDetails.Size = new System.Drawing.Size(1097, 298);
             this.naviDetails.TabIndex = 30;
             this.naviDetails.Text = "naviGroup1";
             this.naviDetails.Click += new System.EventHandler(this.naviGroupDetails_Click);
-            // 
-            // numericUpDownSizingDetail
-            // 
-            this.numericUpDownSizingDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownSizingDetail.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownSizingDetail.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownSizingDetail.Location = new System.Drawing.Point(1286, 9);
-            this.numericUpDownSizingDetail.Maximum = new decimal(new int[] {
-            788,
-            0,
-            0,
-            0});
-            this.numericUpDownSizingDetail.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownSizingDetail.Name = "numericUpDownSizingDetail";
-            this.numericUpDownSizingDetail.Size = new System.Drawing.Size(17, 26);
-            this.numericUpDownSizingDetail.TabIndex = 6;
-            this.numericUpDownSizingDetail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDownSizingDetail.Value = new decimal(new int[] {
-            425,
-            0,
-            0,
-            0});
             // 
             // gridexCartonDetails
             // 
@@ -732,10 +669,10 @@
             this.naviPendingItems.Dock = System.Windows.Forms.DockStyle.Right;
             this.naviPendingItems.Font = new System.Drawing.Font("Cambria", 31.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviPendingItems.HeaderHeight = 50;
-            this.naviPendingItems.Location = new System.Drawing.Point(1625, 0);
+            this.naviPendingItems.Location = new System.Drawing.Point(1354, 0);
             this.naviPendingItems.Name = "naviPendingItems";
             this.naviPendingItems.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.naviPendingItems.Size = new System.Drawing.Size(212, 795);
+            this.naviPendingItems.Size = new System.Drawing.Size(483, 795);
             this.naviPendingItems.TabIndex = 69;
             this.naviPendingItems.Text = "naviBar1";
             // 
@@ -748,13 +685,13 @@
             this.naviPendingPallet.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviPendingPallet.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviPendingPallet.ClientArea.Name = "ClientArea";
-            this.naviPendingPallet.ClientArea.Size = new System.Drawing.Size(210, 705);
+            this.naviPendingPallet.ClientArea.Size = new System.Drawing.Size(481, 705);
             this.naviPendingPallet.ClientArea.TabIndex = 0;
             this.naviPendingPallet.LargeImageIndex = 0;
             this.naviPendingPallet.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviPendingPallet.Location = new System.Drawing.Point(1, 50);
             this.naviPendingPallet.Name = "naviPendingPallet";
-            this.naviPendingPallet.Size = new System.Drawing.Size(210, 705);
+            this.naviPendingPallet.Size = new System.Drawing.Size(481, 705);
             this.naviPendingPallet.SmallImageIndex = 0;
             this.naviPendingPallet.TabIndex = 3;
             // 
@@ -779,7 +716,7 @@
             this.fastPendingPallet.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.fastPendingPallet.RowHeight = 45;
             this.fastPendingPallet.ShowGroups = false;
-            this.fastPendingPallet.Size = new System.Drawing.Size(210, 705);
+            this.fastPendingPallet.Size = new System.Drawing.Size(481, 705);
             this.fastPendingPallet.TabIndex = 69;
             this.fastPendingPallet.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastPendingPallet.UseCompatibleStateImageBehavior = false;
@@ -850,7 +787,7 @@
             this.panelMaster.Location = new System.Drawing.Point(257, 298);
             this.panelMaster.Name = "panelMaster";
             this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.panelMaster.Size = new System.Drawing.Size(1368, 497);
+            this.panelMaster.Size = new System.Drawing.Size(1097, 497);
             this.panelMaster.TabIndex = 72;
             // 
             // gridexPackDetails
@@ -951,14 +888,11 @@
             this.Controls.SetChildIndex(this.panelMaster, 0);
             this.tableLayoutPanelMaster.ResumeLayout(false);
             this.tableLayoutPanelMaster.PerformLayout();
-            this.toolStripNaviGroupDetails.ResumeLayout(false);
-            this.toolStripNaviGroupDetails.PerformLayout();
             this.toolStripChildForm.ResumeLayout(false);
             this.toolStripChildForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.naviDetails)).EndInit();
             this.naviDetails.ResumeLayout(false);
             this.naviDetails.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSizingDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridexCartonDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridexPalletDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastPickupIndex)).EndInit();
@@ -978,13 +912,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStripButton toolStripButtonShowDetailsExtend;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMaster;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ToolStrip toolStripNaviGroupDetails;
         private Guifreaks.Navisuite.NaviGroup naviDetails;
-        private System.Windows.Forms.NumericUpDown numericUpDownSizingDetail;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolStrip toolStripChildForm;
         private System.Windows.Forms.ToolStripButton toolStripButton2;

@@ -62,7 +62,6 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
                 this.setFont(new Font("Niagara Engraved", 16), new Font("Sitka Banner", 16), new Font("Niagara Engraved", 16));
 
                 this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
-                //this.customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
                 this.customTabBatch.TabPages.Add("tabDetailPallets", "Detail pallets          ");
                 this.customTabBatch.TabPages.Add("tabDetailCartons", "Detail cartons          ");
