@@ -51,7 +51,6 @@ namespace TotalSmartCoding.Views.Productions
             : base()
         {
             InitializeComponent();
-            this.comboDiscontinued.SelectedIndex = 0;
 
 
             this.fillingData = fillingData;
@@ -93,6 +92,9 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
+                this.comboDiscontinued.SelectedIndex = 0;
+
+
                 CustomTabControl customTabBatch = new CustomTabControl();
                 //customTabControlCustomerChannel.ImageList = this.imageListTabControl;
 
