@@ -26,6 +26,10 @@ using TotalCore.Repositories.Inventories;
 using TotalSmartCoding.Controllers.APIs.Inventories;
 using TotalCore.Services.Inventories;
 using TotalSmartCoding.ViewModels.Inventories;
+using TotalSmartCoding.Controllers.APIs.Commons;
+using TotalCore.Repositories.Commons;
+using TotalBase;
+using TotalModel.Models;
 
 namespace TotalSmartCoding.Views.Inventories.Pickups
 {
@@ -133,20 +137,44 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
         Binding bindingEntryDate;
         Binding bindingReference;
+        Binding bindingWarehouseCode;
+        Binding bindingRemarks;
+
+        Binding bindingForkliftDriverID;
+        Binding bindingStorekeeperID;
 
         protected override void InitializeCommonControlBinding()
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingReference = this.textexReference.DataBindings.Add("Text", this.pickupController.PickupViewModel, "Reference", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.pickupController.PickupViewModel, "EntryDate", true);
+            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.EntryDate), true);
+            this.bindingReference = this.textexReference.DataBindings.Add("Text", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Reference), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingWarehouseCode = this.textexWarehouseCode.DataBindings.Add("Text", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.WarehouseName), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Remarks), true, DataSourceUpdateMode.OnPropertyChanged);
+            
+
+            EmployeeAPIs employeeAPIs = new EmployeeAPIs(CommonNinject.Kernel.Get<IEmployeeAPIRepository>());
+
+            this.combexForkliftDriverID.DataSource = employeeAPIs.GetEmployeeBases();
+            this.combexForkliftDriverID.DisplayMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.Name);
+            this.combexForkliftDriverID.ValueMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.EmployeeID);
+            this.bindingForkliftDriverID = this.combexForkliftDriverID.DataBindings.Add("SelectedValue", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.ForkliftDriverID), true, DataSourceUpdateMode.OnPropertyChanged);
+
+
+            this.combexStorekeeperID.DataSource = employeeAPIs.GetEmployeeBases();
+            this.combexStorekeeperID.DisplayMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.Name);
+            this.combexStorekeeperID.ValueMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.EmployeeID);
+            this.bindingStorekeeperID = this.combexStorekeeperID.DataBindings.Add("SelectedValue", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.StorekeeperID), true, DataSourceUpdateMode.OnPropertyChanged);
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingWarehouseCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
 
-
+            this.bindingForkliftDriverID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
 
 
@@ -189,20 +217,17 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         }
 
         protected override DialogResult wizardMaster()
-        {
-            WizardMaster a = new WizardMaster(this.pickupAPIs, this.pickupController.PickupViewModel);
-            a.ShowDialog();
-
+        {            
             WizardMaster wizardMaster = new WizardMaster(this.pickupAPIs, this.pickupController.PickupViewModel);
             return wizardMaster.ShowDialog();
         }
 
-        protected override void wizardDetail()
-        {
-            base.wizardDetail();
-            WizardDetail wizardDetail = new WizardDetail(this.pickupAPIs, this.pickupController.PickupViewModel);
-            wizardDetail.ShowDialog();
-        }
+        //protected override void wizardDetail()
+        //{
+        //    base.wizardDetail();
+        //    WizardDetail wizardDetail = new WizardDetail(this.pickupAPIs, this.pickupController.PickupViewModel);
+        //    wizardDetail.ShowDialog();
+        //}
 
 
         private void Pickups_FormClosing(object sender, FormClosingEventArgs e)

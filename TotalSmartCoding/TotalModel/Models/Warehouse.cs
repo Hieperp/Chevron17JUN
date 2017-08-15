@@ -21,8 +21,8 @@ namespace TotalModel.Models
             this.DeliveryAdvices = new HashSet<DeliveryAdvice>();
             this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
             this.GoodsReceipts = new HashSet<GoodsReceipt>();
-            this.Pickups = new HashSet<Pickup>();
             this.PickupDetails = new HashSet<PickupDetail>();
+            this.Pickups = new HashSet<Pickup>();
         }
     
         public int WarehouseID { get; set; }
@@ -39,14 +39,14 @@ namespace TotalModel.Models
         public virtual ICollection<BinLocation> BinLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdvice> DeliveryAdvices { get; set; }
-        public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pickup> Pickups { get; set; }
+        public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PickupDetail> PickupDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pickup> Pickups { get; set; }
     }
 }

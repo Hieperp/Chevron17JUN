@@ -48,7 +48,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.combexStorekeeperID = new CustomControls.CombexBox();
             this.combexForkliftDriverID = new CustomControls.CombexBox();
-            this.combexWarehouseID = new CustomControls.CombexBox();
             this.textexReference = new CustomControls.TextexBox();
             this.dateTimexEntryDate = new CustomControls.DateTimexPicker();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,6 +55,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.textexWarehouseCode = new CustomControls.TextexBox();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -140,7 +140,6 @@
             this.tableLayoutPanelMaster.Controls.Add(this.label4, 3, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.combexStorekeeperID, 1, 5);
             this.tableLayoutPanelMaster.Controls.Add(this.combexForkliftDriverID, 1, 4);
-            this.tableLayoutPanelMaster.Controls.Add(this.combexWarehouseID, 1, 3);
             this.tableLayoutPanelMaster.Controls.Add(this.textexReference, 1, 2);
             this.tableLayoutPanelMaster.Controls.Add(this.dateTimexEntryDate, 1, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label9, 0, 5);
@@ -148,6 +147,7 @@
             this.tableLayoutPanelMaster.Controls.Add(this.label10, 0, 3);
             this.tableLayoutPanelMaster.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanelMaster.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanelMaster.Controls.Add(this.textexWarehouseCode, 1, 3);
             this.tableLayoutPanelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMaster.Location = new System.Drawing.Point(0, 53);
             this.tableLayoutPanelMaster.Margin = new System.Windows.Forms.Padding(0);
@@ -176,7 +176,7 @@
             // textexTotalVolume
             // 
             this.textexTotalVolume.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexTotalVolume.Editable = true;
+            this.textexTotalVolume.Editable = false;
             this.textexTotalVolume.Location = new System.Drawing.Point(755, 142);
             this.textexTotalVolume.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalVolume.Name = "textexTotalVolume";
@@ -186,7 +186,7 @@
             // textexTotalPack
             // 
             this.textexTotalPack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexTotalPack.Editable = true;
+            this.textexTotalPack.Editable = false;
             this.textexTotalPack.Location = new System.Drawing.Point(755, 96);
             this.textexTotalPack.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalPack.Name = "textexTotalPack";
@@ -196,7 +196,7 @@
             // textexTotalCarton
             // 
             this.textexTotalCarton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexTotalCarton.Editable = true;
+            this.textexTotalCarton.Editable = false;
             this.textexTotalCarton.Location = new System.Drawing.Point(755, 50);
             this.textexTotalCarton.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalCarton.Name = "textexTotalCarton";
@@ -206,7 +206,7 @@
             // textexTotalPallet
             // 
             this.textexTotalPallet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexTotalPallet.Editable = true;
+            this.textexTotalPallet.Editable = false;
             this.textexTotalPallet.Location = new System.Drawing.Point(755, 8);
             this.textexTotalPallet.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexTotalPallet.Name = "textexTotalPallet";
@@ -306,24 +306,10 @@
             this.combexForkliftDriverID.Size = new System.Drawing.Size(314, 40);
             this.combexForkliftDriverID.TabIndex = 73;
             // 
-            // combexWarehouseID
-            // 
-            this.combexWarehouseID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.combexWarehouseID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.combexWarehouseID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexWarehouseID.Editable = true;
-            this.combexWarehouseID.FormattingEnabled = true;
-            this.combexWarehouseID.Location = new System.Drawing.Point(215, 96);
-            this.combexWarehouseID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.combexWarehouseID.Name = "combexWarehouseID";
-            this.combexWarehouseID.ReadOnly = false;
-            this.combexWarehouseID.Size = new System.Drawing.Size(314, 40);
-            this.combexWarehouseID.TabIndex = 72;
-            // 
             // textexReference
             // 
             this.textexReference.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexReference.Editable = true;
+            this.textexReference.Editable = false;
             this.textexReference.Location = new System.Drawing.Point(215, 50);
             this.textexReference.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexReference.Name = "textexReference";
@@ -406,6 +392,16 @@
             this.label6.TabIndex = 30;
             this.label6.Text = "Date";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textexWarehouseCode
+            // 
+            this.textexWarehouseCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexWarehouseCode.Editable = false;
+            this.textexWarehouseCode.Location = new System.Drawing.Point(215, 96);
+            this.textexWarehouseCode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.textexWarehouseCode.Name = "textexWarehouseCode";
+            this.textexWarehouseCode.Size = new System.Drawing.Size(314, 39);
+            this.textexWarehouseCode.TabIndex = 85;
             // 
             // toolStripChildForm
             // 
@@ -913,7 +909,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private CustomControls.DateTimexPicker dateTimexEntryDate;
-        private CustomControls.CombexBox combexWarehouseID;
         private BrightIdeasSoftware.FastObjectListView fastPickupIndex;
         private BrightIdeasSoftware.OLVColumn olvID;
         private BrightIdeasSoftware.OLVColumn olvEntryDate;
@@ -968,6 +963,7 @@
         private BrightIdeasSoftware.FastObjectListView fastPendingPallets;
         private BrightIdeasSoftware.OLVColumn olvCommodityCode;
         private BrightIdeasSoftware.OLVColumn olvCode;
+        private CustomControls.TextexBox textexWarehouseCode;
 
     }
 }

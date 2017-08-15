@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 using TotalModel.Helpers;
@@ -43,8 +44,14 @@ namespace TotalModel
 
         public int LocationID { get; set; }
 
+        private string remarks;
         [Display(Name = "Ghi chú")]
-        public virtual string Remarks { get; set; }
+        [DefaultValue(null)]
+        public string Remarks
+        {
+            get { return this.remarks; }
+            set { ApplyPropertyChange<BaseModel, string>(ref this.remarks, o => o.Remarks, value); }
+        }
 
         public virtual bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }

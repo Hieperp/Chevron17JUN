@@ -1671,8 +1671,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Customer1" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Customers1" FromRole="DeliveryAdvice" ToRole="Customer" />
           <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Locations" FromRole="DeliveryAdvice" ToRole="Location" />
           <NavigationProperty Name="PaymentTerm" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_PaymentTerms" FromRole="DeliveryAdvice" ToRole="PaymentTerm" />
-          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses" FromRole="DeliveryAdvice" ToRole="Warehouse" />
           <NavigationProperty Name="Employee" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Employees" FromRole="DeliveryAdvice" ToRole="Employee" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses" FromRole="DeliveryAdvice" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_DeliveryAdvices_Customers">
           <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
@@ -1796,19 +1796,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </AssociationSet>
           <EntitySet Name="BinLocations" EntityType="TotalSmartCodingModel.BinLocation" />
           <EntitySet Name="FillingLines" EntityType="TotalSmartCodingModel.FillingLine" />
-          <EntitySet Name="Warehouses" EntityType="TotalSmartCodingModel.Warehouse" />
-          <AssociationSet Name="FK_BinLocations_Warehouses" Association="TotalSmartCodingModel.FK_BinLocations_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="BinLocation" EntitySet="BinLocations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DeliveryAdvices_Warehouses" Association="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="DeliveryAdvice" EntitySet="DeliveryAdvices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Warehouses_Locations" Association="TotalSmartCodingModel.FK_Warehouses_Locations">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="Warehouse" EntitySet="Warehouses" />
-          </AssociationSet>
           <EntitySet Name="GoodsReceiptTypes" EntityType="TotalSmartCodingModel.GoodsReceiptType" />
           <FunctionImport Name="GetPendingPickupDetails" ReturnType="Collection(TotalSmartCodingModel.PendingPickupDetail)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
@@ -1958,10 +1945,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Commodity" EntitySet="Commodities" />
             <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_GoodsReceiptDetails_Warehouses" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
-          </AssociationSet>
           <EntitySet Name="GoodsReceipts" EntityType="TotalSmartCodingModel.GoodsReceipt" />
           <AssociationSet Name="FK_GoodsReceiptDetails_GoodsReceipts" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts">
             <End Role="GoodsReceipt" EntitySet="GoodsReceipts" />
@@ -1973,10 +1956,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceipts_Locations" Association="TotalSmartCodingModel.FK_GoodsReceipts_Locations">
             <End Role="Location" EntitySet="Locations" />
-            <End Role="GoodsReceipt" EntitySet="GoodsReceipts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GoodsReceipts_Warehouses" Association="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="GoodsReceipt" EntitySet="GoodsReceipts" />
           </AssociationSet>
           <EntitySet Name="Cartons" EntityType="TotalSmartCodingModel.Carton" />
@@ -2035,10 +2014,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Location" EntitySet="Locations" />
             <End Role="Pickup" EntitySet="Pickups" />
           </AssociationSet>
-          <AssociationSet Name="FK_Pickups_Warehouses" Association="TotalSmartCodingModel.FK_Pickups_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="Pickup" EntitySet="Pickups" />
-          </AssociationSet>
           <FunctionImport Name="GetPickupIndexes" ReturnType="Collection(TotalSmartCodingModel.PickupIndex)">
             <Parameter Name="AspUserID" Mode="In" Type="String" />
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
@@ -2093,10 +2068,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Pickup" EntitySet="Pickups" />
             <End Role="PickupDetail" EntitySet="PickupDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_PickupDetails_Warehouses" Association="TotalSmartCodingModel.FK_PickupDetails_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="PickupDetail" EntitySet="PickupDetails" />
-          </AssociationSet>
           <FunctionImport Name="GetPendingPallets" ReturnType="Collection(TotalSmartCodingModel.PendingPallet)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="PickupID" Mode="In" Type="Int32" />
@@ -2128,6 +2099,35 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Location" EntitySet="Locations" />
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
+          <EntitySet Name="Warehouses" EntityType="TotalSmartCodingModel.Warehouse" />
+          <AssociationSet Name="FK_BinLocations_Warehouses" Association="TotalSmartCodingModel.FK_BinLocations_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="BinLocation" EntitySet="BinLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdvices_Warehouses" Association="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="DeliveryAdvice" EntitySet="DeliveryAdvices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceiptDetails_Warehouses" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceipts_Warehouses" Association="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="GoodsReceipt" EntitySet="GoodsReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouses_Locations" Association="TotalSmartCodingModel.FK_Warehouses_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Warehouse" EntitySet="Warehouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickupDetails_Warehouses" Association="TotalSmartCodingModel.FK_PickupDetails_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="PickupDetail" EntitySet="PickupDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pickups_Warehouses" Association="TotalSmartCodingModel.FK_Pickups_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Pickup" EntitySet="Pickups" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
           <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
@@ -2158,10 +2158,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="DeliveryAdvices" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Locations" FromRole="Location" ToRole="DeliveryAdvice" />
           <NavigationProperty Name="OrganizationalUnits" Relationship="TotalSmartCodingModel.FK_OrganizationalUnits_Locations" FromRole="Location" ToRole="OrganizationalUnit" />
-          <NavigationProperty Name="Warehouses" Relationship="TotalSmartCodingModel.FK_Warehouses_Locations" FromRole="Location" ToRole="Warehouse" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Locations" FromRole="Location" ToRole="GoodsReceipt" />
           <NavigationProperty Name="Pickups" Relationship="TotalSmartCodingModel.FK_Pickups_Locations" FromRole="Location" ToRole="Pickup" />
           <NavigationProperty Name="Employees" Relationship="TotalSmartCodingModel.FK_Employees_Locations" FromRole="Location" ToRole="Employee" />
+          <NavigationProperty Name="Warehouses" Relationship="TotalSmartCodingModel.FK_Warehouses_Locations" FromRole="Location" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_DeliveryAdvices_Locations">
           <End Type="TotalSmartCodingModel.Location" Role="Location" Multiplicity="1" />
@@ -2363,9 +2363,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="WarehouseID" Type="Int32" Nullable="false" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="InActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_BinLocations_Warehouses" FromRole="BinLocation" ToRole="Warehouse" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_BinLocations" FromRole="BinLocation" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_BinLocations" FromRole="BinLocation" ToRole="PickupDetail" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_BinLocations_Warehouses" FromRole="BinLocation" ToRole="Warehouse" />
         </EntityType>
         <EntityType Name="FillingLine">
           <Key>
@@ -2388,63 +2388,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="FillingLine" ToRole="Carton" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="FillingLine" ToRole="Pack" />
         </EntityType>
-        <EntityType Name="Warehouse">
-          <Key>
-            <PropertyRef Name="WarehouseID" />
-          </Key>
-          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="WarehouseCategoryID" Type="Int32" Nullable="false" />
-          <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <Property Name="IsBook" Type="Boolean" Nullable="false" />
-          <Property Name="IsInvoice" Type="Boolean" Nullable="false" />
-          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
-          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BinLocations" Relationship="TotalSmartCodingModel.FK_BinLocations_Warehouses" FromRole="Warehouse" ToRole="BinLocation" />
-          <NavigationProperty Name="DeliveryAdvices" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses" FromRole="Warehouse" ToRole="DeliveryAdvice" />
-          <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_Warehouses_Locations" FromRole="Warehouse" ToRole="Location" />
-          <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses" FromRole="Warehouse" ToRole="GoodsReceiptDetail" />
-          <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses" FromRole="Warehouse" ToRole="GoodsReceipt" />
-          <NavigationProperty Name="Pickups" Relationship="TotalSmartCodingModel.FK_Pickups_Warehouses" FromRole="Warehouse" ToRole="Pickup" />
-          <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Warehouses" FromRole="Warehouse" ToRole="PickupDetail" />
-        </EntityType>
-        <Association Name="FK_BinLocations_Warehouses">
-          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.BinLocation" Role="BinLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="BinLocation">
-              <PropertyRef Name="WarehouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DeliveryAdvices_Warehouses">
-          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.DeliveryAdvice" Role="DeliveryAdvice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="DeliveryAdvice">
-              <PropertyRef Name="WarehouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Warehouses_Locations">
-          <End Type="TotalSmartCodingModel.Location" Role="Location" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="Warehouse">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="GoodsReceiptType">
           <Key>
             <PropertyRef Name="GoodsReceiptTypeID" />
@@ -2736,12 +2679,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BinLocation" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_BinLocations" FromRole="GoodsReceiptDetail" ToRole="BinLocation" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="GoodsReceiptDetail" ToRole="Commodity" />
-          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses" FromRole="GoodsReceiptDetail" ToRole="Warehouse" />
           <NavigationProperty Name="GoodsReceipt" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts" FromRole="GoodsReceiptDetail" ToRole="GoodsReceipt" />
           <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="GoodsReceiptDetail" ToRole="Carton" />
           <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="GoodsReceiptDetail" ToRole="Pack" />
           <NavigationProperty Name="Pallet" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" FromRole="GoodsReceiptDetail" ToRole="Pallet" />
           <NavigationProperty Name="PickupDetail" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_PickupDetails" FromRole="GoodsReceiptDetail" ToRole="PickupDetail" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses" FromRole="GoodsReceiptDetail" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_GoodsReceiptDetails_BinLocations">
           <End Type="TotalSmartCodingModel.BinLocation" Role="BinLocation" Multiplicity="1" />
@@ -2764,18 +2707,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Principal>
             <Dependent Role="GoodsReceiptDetail">
               <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GoodsReceiptDetails_Warehouses">
-          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.GoodsReceiptDetail" Role="GoodsReceiptDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="GoodsReceiptDetail">
-              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2807,8 +2738,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts" FromRole="GoodsReceipt" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="GoodsReceiptType" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_GoodsReceiptTypes" FromRole="GoodsReceipt" ToRole="GoodsReceiptType" />
           <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Locations" FromRole="GoodsReceipt" ToRole="Location" />
-          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses" FromRole="GoodsReceipt" ToRole="Warehouse" />
           <NavigationProperty Name="Pickup" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Pickups" FromRole="GoodsReceipt" ToRole="Pickup" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses" FromRole="GoodsReceipt" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_GoodsReceiptDetails_GoodsReceipts">
           <End Type="TotalSmartCodingModel.GoodsReceipt" Role="GoodsReceipt" Multiplicity="1" />
@@ -2843,18 +2774,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Principal>
             <Dependent Role="GoodsReceipt">
               <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GoodsReceipts_Warehouses">
-          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.GoodsReceipt" Role="GoodsReceipt" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="GoodsReceipt">
-              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2946,9 +2865,9 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Pickups" FromRole="Pickup" ToRole="GoodsReceipt" />
           <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_Pickups_Locations" FromRole="Pickup" ToRole="Location" />
-          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_Pickups_Warehouses" FromRole="Pickup" ToRole="Warehouse" />
           <Property Name="PreparedPersonID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pickups" FromRole="Pickup" ToRole="PickupDetail" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_Pickups_Warehouses" FromRole="Pickup" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_Cartons_Cartons">
           <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
@@ -3106,18 +3025,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pickups_Warehouses">
-          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Pickup" Role="Pickup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="Pickup">
-              <PropertyRef Name="WarehouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="PickupIndex">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
           <Property Type="DateTime" Name="EntryDate" Nullable="true" />
@@ -3264,18 +3171,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PickupDetails_Warehouses">
-          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.PickupDetail" Role="PickupDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="PickupDetail">
-              <PropertyRef Name="WarehouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="PendingPallet">
           <Property Type="Int32" Name="PalletID" Nullable="false" />
           <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
@@ -3358,6 +3253,111 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="WarehouseID" />
+          </Key>
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="WarehouseCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="IsBook" Type="Boolean" Nullable="false" />
+          <Property Name="IsInvoice" Type="Boolean" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BinLocations" Relationship="TotalSmartCodingModel.FK_BinLocations_Warehouses" FromRole="Warehouse" ToRole="BinLocation" />
+          <NavigationProperty Name="DeliveryAdvices" Relationship="TotalSmartCodingModel.FK_DeliveryAdvices_Warehouses" FromRole="Warehouse" ToRole="DeliveryAdvice" />
+          <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Warehouses" FromRole="Warehouse" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartCodingModel.FK_GoodsReceipts_Warehouses" FromRole="Warehouse" ToRole="GoodsReceipt" />
+          <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_Warehouses_Locations" FromRole="Warehouse" ToRole="Location" />
+          <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Warehouses" FromRole="Warehouse" ToRole="PickupDetail" />
+          <NavigationProperty Name="Pickups" Relationship="TotalSmartCodingModel.FK_Pickups_Warehouses" FromRole="Warehouse" ToRole="Pickup" />
+        </EntityType>
+        <Association Name="FK_BinLocations_Warehouses">
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.BinLocation" Role="BinLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="BinLocation">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdvices_Warehouses">
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.DeliveryAdvice" Role="DeliveryAdvice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="DeliveryAdvice">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsReceiptDetails_Warehouses">
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.GoodsReceiptDetail" Role="GoodsReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="GoodsReceiptDetail">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsReceipts_Warehouses">
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.GoodsReceipt" Role="GoodsReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="GoodsReceipt">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouses_Locations">
+          <End Type="TotalSmartCodingModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickupDetails_Warehouses">
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.PickupDetail" Role="PickupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="PickupDetail">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pickups_Warehouses">
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Pickup" Role="Pickup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="Pickup">
+              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3712,21 +3712,6 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Warehouses">
-            <EntityTypeMapping TypeName="TotalSmartCodingModel.Warehouse">
-              <MappingFragment StoreEntitySet="Warehouses">
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
-                <ScalarProperty Name="IsInvoice" ColumnName="IsInvoice" />
-                <ScalarProperty Name="IsBook" ColumnName="IsBook" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="WarehouseCategoryID" ColumnName="WarehouseCategoryID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4272,6 +4257,21 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouses">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="IsInvoice" ColumnName="IsInvoice" />
+                <ScalarProperty Name="IsBook" ColumnName="IsBook" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="WarehouseCategoryID" ColumnName="WarehouseCategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

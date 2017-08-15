@@ -217,7 +217,7 @@ namespace TotalSmartCoding.Controllers
 
             this.StopTracking();
 
-            if (this.simpleViewModel.GetID() > 0)
+            if (id > 0)
             {
                 this.LastID = this.simpleViewModel.GetID();
                 TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);

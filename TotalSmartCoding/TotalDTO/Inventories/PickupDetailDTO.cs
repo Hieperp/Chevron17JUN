@@ -18,7 +18,7 @@ namespace TotalDTO.Inventories
         public int PickupDetailID { get; set; }
         public int PickupID { get; set; }
 
-        public int WarehouseID { get; set; }
+        public Nullable<int> WarehouseID { get; set; }
 
         public int BinLocationID { get; set; }
         public string BinLocationCode { get; set; }

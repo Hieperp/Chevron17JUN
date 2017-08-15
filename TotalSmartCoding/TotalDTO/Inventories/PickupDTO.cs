@@ -11,6 +11,8 @@ using TotalModel;
 using TotalBase.Enums;
 using TotalDTO.Helpers;
 using TotalDTO.Commons;
+using TotalModel.Helpers;
+using TotalBase;
 
 namespace TotalDTO.Inventories
 {
@@ -30,12 +32,12 @@ namespace TotalDTO.Inventories
         }
 
 
-        private int warehouseID;
+        private Nullable<int> warehouseID;
         [DefaultValue(null)]
-        public int WarehouseID
+        public Nullable<int> WarehouseID
         {
             get { return this.warehouseID; }
-            set { ApplyPropertyChange<PickupPrimitiveDTO, int>(ref this.warehouseID, o => o.WarehouseID, value); }
+            set { ApplyPropertyChange<PickupPrimitiveDTO, Nullable<int>>(ref this.warehouseID, o => o.WarehouseID, value); }
         }
         private string warehouseName;
         [DefaultValue("")]
@@ -47,22 +49,23 @@ namespace TotalDTO.Inventories
 
 
 
-        private int forkliftDriverID;
-        [DefaultValue(1)]
-        public int ForkliftDriverID
+        private Nullable<int> forkliftDriverID;
+        [DefaultValue(null)]
+        public Nullable<int> ForkliftDriverID
         {
             get { return this.forkliftDriverID; }
-            set { ApplyPropertyChange<PickupPrimitiveDTO, int>(ref this.forkliftDriverID, o => o.ForkliftDriverID, value); }
+            set { ApplyPropertyChange<PickupPrimitiveDTO, Nullable<int>>(ref this.forkliftDriverID, o => o.ForkliftDriverID, value); }
         }
 
-        private int storekeeperID;
-        [DefaultValue(1)]
-        public int StorekeeperID
+        private Nullable<int> storekeeperID;
+        [DefaultValue(null)]
+        public Nullable<int> StorekeeperID
         {
             get { return this.storekeeperID; }
-            set { ApplyPropertyChange<PickupPrimitiveDTO, int>(ref this.storekeeperID, o => o.StorekeeperID, value); }
+            set { ApplyPropertyChange<PickupPrimitiveDTO, Nullable<int>>(ref this.storekeeperID, o => o.StorekeeperID, value); }
         }
 
+        public override int PreparedPersonID { get { return 1; } }
 
 
         public override void PerformPresaveRule()
@@ -110,6 +113,18 @@ namespace TotalDTO.Inventories
         public BindingListView<PickupDetailDTO> CartonDetails { get; private set; }
         public BindingListView<PickupDetailDTO> PalletDetails { get; private set; }
 
+
+
+        protected override List<ValidationRule> CreateRules()
+        {
+            List<ValidationRule> validationRules = base.CreateRules();
+            validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<PickupDTO>(p => p.WarehouseID), "Vui lòng chọn kho.", delegate { return (this.WarehouseID != null && this.WarehouseID > 0); }));
+            validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<PickupDTO>(p => p.ForkliftDriverID), "Vui lòng chọn tài xế.", delegate { return (this.ForkliftDriverID != null && this.ForkliftDriverID > 0); }));
+            validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<PickupDTO>(p => p.StorekeeperID), "Vui lòng chọn nhân viên kho.", delegate { return (this.StorekeeperID != null && this.StorekeeperID > 0); }));
+
+            return validationRules;
+
+        }
     }
 
 }
