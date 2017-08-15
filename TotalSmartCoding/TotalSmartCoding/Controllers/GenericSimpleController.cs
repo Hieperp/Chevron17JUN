@@ -136,7 +136,7 @@ namespace TotalSmartCoding.Controllers
 
         protected virtual void Init()
         {
-            this.LastID = this.simpleViewModel.GetID();
+            this.simpleViewModel.LastID = this.simpleViewModel.GetID();
             this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() LIKE IN MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
             this.simpleViewModel.Init(); //INITIALIZE DEFAULT
             this.simpleViewModel.LocationID = this.GenericService.LocationID;            
@@ -219,7 +219,7 @@ namespace TotalSmartCoding.Controllers
 
             if (id > 0)
             {
-                this.LastID = this.simpleViewModel.GetID();
+                this.simpleViewModel.LastID = this.simpleViewModel.GetID();
                 TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
                 if (simpleViewModel == null) throw new System.ArgumentException("Lỗi", "Dữ liệu không tồn tại hoặc không có quyền truy cập.");
             }
@@ -286,7 +286,7 @@ namespace TotalSmartCoding.Controllers
         {
             base.CancelDirty(withRestore);
             if (withRestore || this.simpleViewModel.GetID() <= 0)
-                this.Edit(this.LastID);
+                this.Edit(this.simpleViewModel.LastID);
         }
 
 

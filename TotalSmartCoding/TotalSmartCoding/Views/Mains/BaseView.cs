@@ -18,13 +18,14 @@ namespace TotalSmartCoding.Views.Mains
     public partial class BaseView : Form, IToolstripMerge, IToolstripChild
     {
         #region CONTRUCTOR
-        protected BaseController baseController { get; set; }
+        protected BaseDTO baseDTO { get; set; }
 
         public BaseView()
         {
             InitializeComponent();
 
-            this.baseController = new BaseController();
+            this.baseDTO = new BaseDTO(); //JUST FOR CREATE AN EMPTY BaseDTO IN BaseView AT DESIGN TIME ONLY (NOT FUNCTIONAL AT RUN TIME) 
+
             this.fastListIndex = new FastObjectListView();
         }
 
@@ -39,7 +40,7 @@ namespace TotalSmartCoding.Views.Mains
                 this.fastListIndex.MouseClick += new MouseEventHandler(fastListIndex_MouseClick);
                 this.fastListIndex.KeyDown += new KeyEventHandler(fastListIndex_KeyDown);
 
-                this.baseController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+                this.baseDTO.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
 
                 this.InitializeCommonControlBinding();
                 this.InitializeDataGridBinding();
@@ -61,13 +62,13 @@ namespace TotalSmartCoding.Views.Mains
         protected virtual void InitializeCommonControlBinding()
         {
             //IMPORTANT: SHOULD BINDING IsDirty TO CONTROL, BECAUSE: THE PropertyChanged EVENT NEED THE BINDING TARGET IN ORDER TO RAISE: SEE HERE: if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName))
-            this.bindingIsDirty = this.checkBoxIsDirty.DataBindings.Add("Checked", this.baseController.BaseDTO, "IsDirty", true);
-            this.bindingIsDirtyBLL = this.checkBoxIsDirtyBLL.DataBindings.Add("Checked", this.baseController, "IsDirty", true);
+            this.bindingIsDirty = this.checkBoxIsDirty.DataBindings.Add("Checked", this.baseDTO, "IsDirty", true);
+            this.bindingIsDirtyBLL = this.checkBoxIsDirtyBLL.DataBindings.Add("Checked", this, "IsDirty", true); //CÓ CẦN THIẾT KHÔNG????
 
             this.bindingIsDirty.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingIsDirtyBLL.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
-            this.errorProviderMaster.DataSource = this.baseController.BaseDTO; //JUST SET this.errorProviderMaster.DataSource HERE, IT WILL PROVIDE ERROR BINDING TO EVERY VIEW
+            this.errorProviderMaster.DataSource = this.baseDTO; //JUST SET this.errorProviderMaster.DataSource HERE, IT WILL PROVIDE ERROR BINDING TO EVERY VIEW
         }
 
         protected virtual void InitializeDataGridBinding() { }
@@ -121,7 +122,7 @@ namespace TotalSmartCoding.Views.Mains
                 if (this.ReadonlyMode)
                 {
                     int? selectedIndexID = this.getSelectedIndexID();
-                    if (selectedIndexID != null && selectedIndexID != this.baseController.BaseDTO.GetID()) this.baseController.Edit(selectedIndexID);
+                    if (selectedIndexID != null && selectedIndexID != this.baseDTO.GetID()) this.invokeEdit(selectedIndexID);
                 }
             }
             catch (Exception exception)
@@ -135,8 +136,8 @@ namespace TotalSmartCoding.Views.Mains
             if (this.EditableMode)
             {
                 int? selectedIndexID = this.getSelectedIndexID();
-                if (selectedIndexID != null && selectedIndexID != this.baseController.LastID)
-                    this.setSelectedIndexID(this.baseController.LastID);
+                if (selectedIndexID != null && selectedIndexID != this.baseDTO.LastID)
+                    this.setSelectedIndexID(this.baseDTO.LastID);
             }
         }
 
@@ -178,10 +179,10 @@ namespace TotalSmartCoding.Views.Mains
 
         protected virtual bool checkSelectedIndexID()
         {
-            if (this.baseController.BaseDTO.GetID() > 0)
+            if (this.baseDTO.GetID() > 0)
             {
-                this.setSelectedIndexID(this.baseController.BaseDTO.GetID());
-                if (this.baseController.BaseDTO.GetID() == this.getSelectedIndexID())
+                this.setSelectedIndexID(this.baseDTO.GetID());
+                if (this.baseDTO.GetID() == this.getSelectedIndexID())
                     return true;
             }
 
@@ -207,7 +208,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public GlobalEnums.NmvnTaskID NMVNTaskID
         {
-            get { return this.baseController.BaseDTO.NMVNTaskID; }
+            get { return this.baseDTO.NMVNTaskID; }
         }
 
         public virtual ToolStrip toolstripChild { get; protected set; }
@@ -217,20 +218,20 @@ namespace TotalSmartCoding.Views.Mains
 
         public bool IsDirty
         {
-            get { return this.baseController.IsDirty; }
+            get { return this.baseDTO.IsDirty; }
         }
 
         public bool IsValid
         {
-            get { return this.baseController.BaseDTO.IsValid; }
+            get { return this.baseDTO.IsValid; }
         }
 
         public virtual bool Closable { get { return true; } }
         public virtual bool Loadable { get { return true; } }
 
-        public virtual bool Newable { get { return this.baseController.BaseDTO.Newable; } }
-        public virtual bool Editable { get { return this.baseController.BaseDTO.Editable; } }
-        public virtual bool Deletable { get { return this.baseController.BaseDTO.Deletable; } }
+        public virtual bool Newable { get { return this.baseDTO.Newable; } }
+        public virtual bool Editable { get { return this.baseDTO.Editable; } }
+        public virtual bool Deletable { get { return this.baseDTO.Deletable; } }
 
         public virtual bool Importable { get { return false; } }
         public virtual bool Exportable { get { return false; } }
@@ -263,11 +264,13 @@ namespace TotalSmartCoding.Views.Mains
 
         #region IToolstripChild
 
+        protected virtual BaseController InvokeController { get { return new BaseController(); } }
+
         public virtual void Loading()
         {
-            this.setSelectedIndexID(this.baseController.BaseDTO.GetID());
+            this.setSelectedIndexID(this.baseDTO.GetID());
 
-            if (this.ReadonlyMode) this.baseController.Edit(this.baseController.BaseDTO.GetID()); //THIS LINE IS FOR REFRESH THE STATE OF THE CURRENT ENTITY (Editable/ Deletable/ ...)=> THIS MAY BE NOT NECCESSARY IN SOME CASE => LATER: WE SHOULD TRY TO REFRESH BY A BETTER WAY: TO REFRESH WHEN NECCESSARY ONLY
+            if (this.ReadonlyMode) this.invokeEdit(this.baseDTO.GetID()); //THIS LINE IS FOR REFRESH THE STATE OF THE CURRENT ENTITY (Editable/ Deletable/ ...)=> THIS MAY BE NOT NECCESSARY IN SOME CASE => LATER: WE SHOULD TRY TO REFRESH BY A BETTER WAY: TO REFRESH WHEN NECCESSARY ONLY
         }
 
         public void ApplyFilter(string filterTexts)
@@ -301,7 +304,7 @@ namespace TotalSmartCoding.Views.Mains
 
         private void CancelDirty(bool withRestore)
         {
-            this.baseController.CancelDirty(withRestore);
+            this.InvokeController.CancelDirty(withRestore);
             this.EditableMode = false;
         }
 
@@ -321,7 +324,7 @@ namespace TotalSmartCoding.Views.Mains
             //MessageBox.Show(hash);
 
 
-            this.baseController.Create();
+            this.InvokeController.Create();
             if (this.wizardMaster() == DialogResult.OK)
             {
                 this.EditableMode = true;
@@ -342,16 +345,21 @@ namespace TotalSmartCoding.Views.Mains
         {
             if (this.checkSelectedIndexID())
             {
-                this.baseController.Edit(this.baseController.BaseDTO.GetID());
+                this.invokeEdit(this.baseDTO.GetID());
                 this.EditableMode = true;
             }
+        }
+
+        private void invokeEdit(int? id)
+        {
+            this.InvokeController.Edit(id);
         }
 
         public void Save()
         {
             try
             {
-                if (this.baseController.Save())
+                if (this.InvokeController.Save())
                 {
                     this.Escape();
                     this.Loading();
@@ -370,7 +378,7 @@ namespace TotalSmartCoding.Views.Mains
                 if (this.checkSelectedIndexID())
                 {
                     if (MessageBox.Show(this, "Are you sure you want to delete " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
-                        if (this.baseController.Delete(this.baseController.BaseDTO.GetID()))
+                        if (this.InvokeController.Delete(this.baseDTO.GetID()))
                             this.Loading();
                 }
             }
@@ -387,12 +395,12 @@ namespace TotalSmartCoding.Views.Mains
             {
                 if (this.checkSelectedIndexID())
                 {
-                    this.baseController.Approve(this.baseController.BaseDTO.GetID());
+                    this.InvokeController.Approve(this.baseDTO.GetID());
 
-                    if (this.ApproveCheck(this.baseController.BaseDTO.GetID()) && MessageBox.Show(this, "Cài đặt batch này cho sản xuất " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
-                        if (this.baseController.ApproveConfirmed())
+                    if (this.ApproveCheck(this.baseDTO.GetID()) && MessageBox.Show(this, "Cài đặt batch này cho sản xuất " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                        if (this.InvokeController.ApproveConfirmed())
                         {
-                            this.ApproveMore(this.baseController.BaseDTO.GetID());
+                            this.ApproveMore(this.baseDTO.GetID());
                             this.Loading();
                         }
                 }
@@ -412,12 +420,12 @@ namespace TotalSmartCoding.Views.Mains
             {
                 if (this.checkSelectedIndexID())
                 {
-                    this.baseController.Void(this.baseController.BaseDTO.GetID());
+                    this.InvokeController.Void(this.baseDTO.GetID());
 
-                    if (this.VoidCheck(this.baseController.BaseDTO.GetID()) && MessageBox.Show(this, "Dừng sản xuất batch này" + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
-                        if (this.baseController.VoidConfirmed())
+                    if (this.VoidCheck(this.baseDTO.GetID()) && MessageBox.Show(this, "Dừng sản xuất batch này" + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                        if (this.InvokeController.VoidConfirmed())
                         {
-                            this.VoidMore(this.baseController.BaseDTO.GetID());
+                            this.VoidMore(this.baseDTO.GetID());
                             this.Loading();
                         }
                 }

@@ -28,6 +28,7 @@ namespace TotalDTO
         public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.UnKnown; } }
 
         public virtual int GetID() { return 0; }
+        public int LastID { get; set; } //THIS KEEP THE LAST ID WHEN CREATE NEW Entity. HOWEVER, EACH TIME TO EDIT THE CURRENT Entity, THIS ALSO KEEP CURRENT EDITED ID
 
         private string reference;
         [Display(Name = "Số phiếu")]

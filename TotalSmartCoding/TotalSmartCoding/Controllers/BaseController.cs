@@ -35,7 +35,7 @@ namespace TotalSmartCoding.Controllers
 
         public IBaseService BaseService { get { return this.baseService; } }
         public BaseDTO BaseDTO { get { return this.baseDTO; } }
-        public int LastID { get; protected set; } //THIS KEEP THE LAST ID WHEN CREATE NEW Entity. HOWEVER, EACH TIME TO EDIT THE CURRENT Entity, THIS ALSO KEEP CURRENT EDITED ID
+        
 
         protected virtual void baseDTO_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

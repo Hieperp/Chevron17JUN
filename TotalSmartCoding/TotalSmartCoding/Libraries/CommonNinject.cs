@@ -39,7 +39,7 @@ namespace TotalSmartCoding.Libraries
     public static class CommonNinject
     {
         public static readonly IKernel Kernel;
-        
+
         /// <summary>
         ///  static constructor NinjectCommon is called automatically before the first instance is created or any static members are referenced
         /// </summary>
@@ -52,7 +52,7 @@ namespace TotalSmartCoding.Libraries
                 //Kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
 
-                Kernel.Bind<TotalSmartCodingEntities>().ToSelf().InSingletonScope(); //.InRequestScope()
+                Kernel.Bind<TotalSmartCodingEntities>().ToSelf();// NOW: WE USE DEFAULT: .InTransientScope(); //.InRequestScope()
 
                 Kernel.Bind<IBaseRepository>().To<BaseRepository>();
 
@@ -76,7 +76,7 @@ namespace TotalSmartCoding.Libraries
                 Kernel.Bind<GoodsReceiptViewModel>().ToSelf();
 
 
-                
+
 
 
                 Kernel.Bind<IAspNetUserRepository>().To<AspNetUserRepository>();
@@ -115,7 +115,7 @@ namespace TotalSmartCoding.Libraries
 
 
 
-                
+
 
 
 

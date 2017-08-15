@@ -45,7 +45,7 @@ namespace TotalSmartCoding.Views.Productions
         private bool allQueueEmpty;
 
         private BatchAPIs batchAPIs;
-        private BatchController batchController;
+        private BatchViewModel batchViewModel { get; set; }
 
         public Batches(FillingData fillingData, bool allQueueEmpty)
             : base()
@@ -71,10 +71,9 @@ namespace TotalSmartCoding.Views.Productions
 
             this.batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
-            this.batchController = new BatchController(CommonNinject.Kernel.Get<IBatchService>(), CommonNinject.Kernel.Get<BatchViewModel>());
-            this.batchController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
-
-            this.baseController = this.batchController;            
+            this.batchViewModel = CommonNinject.Kernel.Get<BatchViewModel>();
+            this.batchViewModel.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+            this.baseDTO = this.batchViewModel;
         }
 
         protected override void NotifyPropertyChanged(string propertyName)
@@ -131,23 +130,23 @@ namespace TotalSmartCoding.Views.Productions
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.batchController.BatchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingCode = this.textexCode.DataBindings.Add("Text", this.batchController.BatchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.batchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingCode = this.textexCode.DataBindings.Add("Text", this.batchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.bindingNextPackNo = this.textexNextPackNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingNextCartonNo = this.textexNextCartonNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingNextPalletNo = this.textexNextPalletNo.DataBindings.Add("Text", this.batchController.BatchViewModel, "NextPalletNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextPackNo = this.textexNextPackNo.DataBindings.Add("Text", this.batchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextCartonNo = this.textexNextCartonNo.DataBindings.Add("Text", this.batchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingNextPalletNo = this.textexNextPalletNo.DataBindings.Add("Text", this.batchViewModel, "NextPalletNo", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.batchController.BatchViewModel, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.batchViewModel, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.textexCommodityName.DataBindings.Add("Text", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
+            this.textexCommodityName.DataBindings.Add("Text", this.batchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
 
             CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
 
             this.combexCommodityID.DataSource = commodityAPIs.GetCommodityBases();
             this.combexCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.Code);
             this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
-            this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchController.BatchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -166,14 +165,19 @@ namespace TotalSmartCoding.Views.Productions
             base.CommonControl_BindingComplete(sender, e);
             if (sender.Equals(this.bindingCommodityID))
             {
-                if (this.combexCommodityID.SelectedItem != null && this.batchController.BatchViewModel.TrackChanges)
+                if (this.combexCommodityID.SelectedItem != null && this.batchViewModel.TrackChanges)
                 {
                     CommodityBase commodityBase = (CommodityBase)this.combexCommodityID.SelectedItem;
-                    this.batchController.BatchViewModel.CommodityName = commodityBase.Name;
+                    this.batchViewModel.CommodityName = commodityBase.Name;
                 }
             }
         }
 
+
+        protected override Controllers.BaseController InvokeController
+        {
+            get { return new BatchController(CommonNinject.Kernel.Get<IBatchService>(), this.batchViewModel); }
+        }
 
         public override void Loading()
         {
@@ -199,7 +203,7 @@ namespace TotalSmartCoding.Views.Productions
 
         protected override bool ApproveCheck(int id)
         {
-            return !this.batchController.BatchViewModel.IsDefault && !this.batchController.BatchViewModel.InActive;
+            return !this.batchViewModel.IsDefault && !this.batchViewModel.InActive;
         }
 
         protected override void ApproveMore(int id)
@@ -220,10 +224,10 @@ namespace TotalSmartCoding.Views.Productions
 
         protected override bool VoidCheck(int id)
         {
-            this.batchController.BatchViewModel.VoidTypeID = 1;
-            return !this.batchController.BatchViewModel.IsDefault;
+            this.batchViewModel.VoidTypeID = 1;
+            return !this.batchViewModel.IsDefault;
         }
 
-        
+
     }
 }

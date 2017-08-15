@@ -31,7 +31,7 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
     public partial class GoodsReceipts : BaseView
     {
         private GoodsReceiptAPIs goodsReceiptAPIs;
-        private GoodsReceiptController goodsReceiptController;
+        private GoodsReceiptViewModel goodsReceiptViewModel { get; set; }
 
         public GoodsReceipts()
             : base()
@@ -44,10 +44,9 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
 
             this.goodsReceiptAPIs = new GoodsReceiptAPIs(CommonNinject.Kernel.Get<IGoodsReceiptAPIRepository>());
 
-            this.goodsReceiptController = new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), CommonNinject.Kernel.Get<GoodsReceiptViewModel>());
-            this.goodsReceiptController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
-
-            this.baseController = this.goodsReceiptController;
+            this.goodsReceiptViewModel = CommonNinject.Kernel.Get<GoodsReceiptViewModel>();
+            this.goodsReceiptViewModel.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+            this.baseDTO = this.goodsReceiptViewModel;
         }
 
         Binding bindingEntryDate;
@@ -57,8 +56,8 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingReference = this.textexReference.DataBindings.Add("Text", this.goodsReceiptController.GoodsReceiptViewModel, "Reference", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.goodsReceiptController.GoodsReceiptViewModel, "EntryDate", true);
+            this.bindingReference = this.textexReference.DataBindings.Add("Text", this.goodsReceiptViewModel, "Reference", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.goodsReceiptViewModel, "EntryDate", true);
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -80,10 +79,15 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
         protected override void InitializeDataGridBinding()
         {
             this.gridexViewDetails.AutoGenerateColumns = false;
-            this.gridexViewDetails.DataSource = this.goodsReceiptController.GoodsReceiptViewModel.ViewDetails;
-            this.dataGridexView1.DataSource = this.goodsReceiptController.GoodsReceiptViewModel.PalletDetails;
+            this.gridexViewDetails.DataSource = this.goodsReceiptViewModel.ViewDetails;
+            this.dataGridexView1.DataSource = this.goodsReceiptViewModel.PalletDetails;
 
             //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
+        }
+
+        protected override Controllers.BaseController InvokeController
+        {
+            get { return new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), this.goodsReceiptViewModel); }
         }
 
         public override void Loading()
@@ -94,14 +98,14 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
 
         protected override DialogResult wizardMaster()
         {
-            WizardMaster wizardMaster = new WizardMaster(this.goodsReceiptAPIs, this.goodsReceiptController.GoodsReceiptViewModel);
+            WizardMaster wizardMaster = new WizardMaster(this.goodsReceiptAPIs, this.goodsReceiptViewModel);
             return wizardMaster.ShowDialog();
         }
 
         protected override void wizardDetail()
         {
             base.wizardDetail();
-            WizardDetail wizardDetail = new WizardDetail(this.goodsReceiptAPIs, this.goodsReceiptController.GoodsReceiptViewModel);
+            WizardDetail wizardDetail = new WizardDetail(this.goodsReceiptAPIs, this.goodsReceiptViewModel);
             wizardDetail.ShowDialog();
         }
 

@@ -38,7 +38,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         private CustomTabControl customTabBatch;
 
         private PickupAPIs pickupAPIs;
-        private PickupController pickupController;
+        private PickupViewModel pickupViewModel { get; set; }
 
         private System.Timers.Timer timerLoadPending;
         private delegate void timerLoadCallback();
@@ -53,10 +53,9 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
             this.pickupAPIs = new PickupAPIs(CommonNinject.Kernel.Get<IPickupAPIRepository>());
 
-            this.pickupController = new PickupController(CommonNinject.Kernel.Get<IPickupService>(), CommonNinject.Kernel.Get<PickupViewModel>());
-            this.pickupController.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
-
-            this.baseController = this.pickupController;
+            this.pickupViewModel = CommonNinject.Kernel.Get<PickupViewModel>();
+            this.pickupViewModel.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+            this.baseDTO = this.pickupViewModel;
 
             this.timerLoadPending = new System.Timers.Timer(60000);
             this.timerLoadPending.Elapsed += new System.Timers.ElapsedEventHandler(timerLoadPending_Elapsed);
@@ -147,10 +146,10 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.EntryDate), true);
-            this.bindingReference = this.textexReference.DataBindings.Add("Text", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Reference), true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingWarehouseCode = this.textexWarehouseCode.DataBindings.Add("Text", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.WarehouseName), true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Remarks), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.EntryDate), true);
+            this.bindingReference = this.textexReference.DataBindings.Add("Text", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Reference), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingWarehouseCode = this.textexWarehouseCode.DataBindings.Add("Text", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.WarehouseName), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Remarks), true, DataSourceUpdateMode.OnPropertyChanged);
             
 
             EmployeeAPIs employeeAPIs = new EmployeeAPIs(CommonNinject.Kernel.Get<IEmployeeAPIRepository>());
@@ -158,13 +157,13 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.combexForkliftDriverID.DataSource = employeeAPIs.GetEmployeeBases();
             this.combexForkliftDriverID.DisplayMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.Name);
             this.combexForkliftDriverID.ValueMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.EmployeeID);
-            this.bindingForkliftDriverID = this.combexForkliftDriverID.DataBindings.Add("SelectedValue", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.ForkliftDriverID), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingForkliftDriverID = this.combexForkliftDriverID.DataBindings.Add("SelectedValue", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.ForkliftDriverID), true, DataSourceUpdateMode.OnPropertyChanged);
 
 
             this.combexStorekeeperID.DataSource = employeeAPIs.GetEmployeeBases();
             this.combexStorekeeperID.DisplayMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.Name);
             this.combexStorekeeperID.ValueMember = CommonExpressions.PropertyName<EmployeeBase>(p => p.EmployeeID);
-            this.bindingStorekeeperID = this.combexStorekeeperID.DataBindings.Add("SelectedValue", this.pickupController.PickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.StorekeeperID), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingStorekeeperID = this.combexStorekeeperID.DataBindings.Add("SelectedValue", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.StorekeeperID), true, DataSourceUpdateMode.OnPropertyChanged);
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -189,10 +188,15 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         protected override void InitializeDataGridBinding()
         {
             this.gridexPalletDetails.AutoGenerateColumns = false;
-            this.gridexPalletDetails.DataSource = this.pickupController.PickupViewModel.ViewDetails;
-            this.gridexCartonDetails.DataSource = this.pickupController.PickupViewModel.PalletDetails;
+            this.gridexPalletDetails.DataSource = this.pickupViewModel.ViewDetails;
+            this.gridexCartonDetails.DataSource = this.pickupViewModel.PalletDetails;
 
             //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
+        }
+
+        protected override Controllers.BaseController InvokeController
+        {
+            get { return new PickupController(CommonNinject.Kernel.Get<IPickupService>(), this.pickupViewModel); }
         }
 
         public override void Loading()
@@ -207,7 +211,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             try
             {
-                this.fastPendingPallets.SetObjects(this.pickupAPIs.GetPendingPallets(this.pickupController.PickupViewModel.LocationID, this.pickupController.PickupViewModel.PickupID, string.Join(",", this.pickupController.PickupViewModel.ViewDetails.Where(w => w.PalletID != null).Select(d => d.PalletID)), false));
+                this.fastPendingPallets.SetObjects(this.pickupAPIs.GetPendingPallets(this.pickupViewModel.LocationID, this.pickupViewModel.PickupID, string.Join(",", this.pickupViewModel.ViewDetails.Where(w => w.PalletID != null).Select(d => d.PalletID)), false));
                 this.naviPendingItems.Text = "Pending " + this.fastPendingPallets.GetItemCount().ToString("N0") + " pallet" + (this.fastPendingPallets.GetItemCount() > 1 ? "s      " : "      ");
             }
             catch (Exception exception)
@@ -218,14 +222,14 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
         protected override DialogResult wizardMaster()
         {            
-            WizardMaster wizardMaster = new WizardMaster(this.pickupAPIs, this.pickupController.PickupViewModel);
+            WizardMaster wizardMaster = new WizardMaster(this.pickupAPIs, this.pickupViewModel);
             return wizardMaster.ShowDialog();
         }
 
         //protected override void wizardDetail()
         //{
         //    base.wizardDetail();
-        //    WizardDetail wizardDetail = new WizardDetail(this.pickupAPIs, this.pickupController.PickupViewModel);
+        //    WizardDetail wizardDetail = new WizardDetail(this.pickupAPIs, this.PickupViewModel);
         //    wizardDetail.ShowDialog();
         //}
 
