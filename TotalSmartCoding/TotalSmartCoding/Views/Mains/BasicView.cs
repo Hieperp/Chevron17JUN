@@ -31,7 +31,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public GlobalEnums.NmvnTaskID NMVNTaskID
         {
-            get { return this.baseController.BaseDTO.NMVNTaskID; }
+            get { return GlobalEnums.NmvnTaskID.UnKnown ; }
             //get { return this.marketingProgramBLL.TaskID; }
         }
 

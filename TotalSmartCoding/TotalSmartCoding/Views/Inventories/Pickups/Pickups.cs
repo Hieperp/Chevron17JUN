@@ -176,13 +176,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.bindingForkliftDriverID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
 
-
-            //this.naviGroupDetails.DataBindings.Add("ExpandedHeight", this.numericUpDownSizingDetail, "Value", true, DataSourceUpdateMode.OnPropertyChanged);
-            //this.numericUpDownSizingDetail.Minimum = this.naviGroupDetails.HeaderHeight * 2;
-            //this.numericUpDownSizingDetail.Maximum = this.naviGroupDetails.Height + this.fastPickupIndex.Height;
-
             this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelMaster.ColumnStyles[this.tableLayoutPanelMaster.ColumnCount - 1].Width = 10;
-            //this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].SizeType = SizeType.Absolute; this.tableLayoutPanelExtend.ColumnStyles[this.tableLayoutPanelExtend.ColumnCount - 1].Width = 10;
         }
 
         protected override void InitializeDataGridBinding()
@@ -226,12 +220,28 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             return wizardMaster.ShowDialog();
         }
 
-        //protected override void wizardDetail()
-        //{
-        //    base.wizardDetail();
-        //    WizardDetail wizardDetail = new WizardDetail(this.pickupAPIs, this.PickupViewModel);
-        //    wizardDetail.ShowDialog();
-        //}
+        protected override void wizardDetail()
+        {
+            base.wizardDetail();
+
+            TotalDTO.Inventories.PickupDetailDTO pickupDetailDTO = new TotalDTO.Inventories.PickupDetailDTO()
+            {
+                PickupID = this.pickupViewModel.PickupID,
+
+                PalletID = 1,
+
+                BinLocationID = 2,
+
+                CommodityID = 1,
+
+                Quantity = 10,
+                Volume = 20,
+            };
+            this.pickupViewModel.ViewDetails.Add(pickupDetailDTO);
+
+            //WizardDetail wizardDetail = new WizardDetail(this.pickupAPIs, this.PickupViewModel);
+            //wizardDetail.ShowDialog();
+        }
 
 
         private void Pickups_FormClosing(object sender, FormClosingEventArgs e)

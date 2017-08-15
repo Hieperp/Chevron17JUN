@@ -47,7 +47,7 @@ namespace TotalSmartCoding.Controllers
 
         protected void viewDetailViewModel_ListChanged(object sender, ListChangedEventArgs e)
         {
-            this.SetDirty();
+            this.viewDetailViewModel.SetDirty();
         }
 
 

@@ -46,7 +46,7 @@ namespace TotalSmartCoding.Controllers
         }
 
         public GenericSimpleController(IGenericService<TEntity, TDto, TPrimitiveDto> genericService, TSimpleViewModel simpleViewModel, bool isCreateWizard, bool isSimpleCreate)
-            : base(genericService, simpleViewModel)
+            : base(genericService)
         {
             this.GenericService = genericService;
 
@@ -105,40 +105,28 @@ namespace TotalSmartCoding.Controllers
 
             base.AddRequireJsOptions();
 
-
-
-
-            this.StopTracking();
-            this.simpleViewModel.StopTracking();
-
             this.Initialize();
-            
-            this.simpleViewModel.StartTracking();
-            this.simpleViewModel.Reset();
-            this.StartTracking();
-            this.Reset();
-
-
-
-
-
-            
-
+           
             //return View();
         }
 
         private void Initialize()
         {
+            this.simpleViewModel.StopTracking();
+            
             this.Init();
 
             this.TailorViewModel(this.InitViewModelByPrior(this.InitViewModelByDefault(this.simpleViewModel))); //IN MVC: SIMPLE: Need to call new TSimpleViewModel() to ensure construct TSimpleViewModel object using Constructor!
+            
+            this.simpleViewModel.StartTracking();
+            this.simpleViewModel.Reset();
         }
 
         protected virtual void Init()
         {
             this.simpleViewModel.LastID = this.simpleViewModel.GetID();
             this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() LIKE IN MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
-            this.simpleViewModel.Init(); //INITIALIZE DEFAULT
+            this.simpleViewModel.Init(); //INIT DEFAULT
             this.simpleViewModel.LocationID = this.GenericService.LocationID;            
         }
 
@@ -164,7 +152,7 @@ namespace TotalSmartCoding.Controllers
 
 
         /// <summary>
-        /// Create NEW by show a CreateWizard dialog, where user HAVE TO SELECT A RELATIVE OBJECT to INITIALIZE ViewModel, then SUBMIT the ViewModel
+        /// Create NEW by show a CreateWizard dialog, where user HAVE TO SELECT A RELATIVE OBJECT to INIT ViewModel, then SUBMIT the ViewModel
         /// </summary>
         /// <returns></returns>
 
@@ -215,8 +203,6 @@ namespace TotalSmartCoding.Controllers
 
             if (!this.AccessLevelAuthorize(GlobalEnums.AccessLevel.Readable)) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
 
-            this.StopTracking();
-
             if (id > 0)
             {
                 this.simpleViewModel.LastID = this.simpleViewModel.GetID();
@@ -225,9 +211,6 @@ namespace TotalSmartCoding.Controllers
             }
             else
                 this.Initialize();
-
-            this.StartTracking();
-            this.Reset();
 
             base.AddRequireJsOptions();
 

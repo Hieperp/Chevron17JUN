@@ -94,7 +94,7 @@ namespace TotalModel.Helpers
 
         //LE MINH HIEP: call SetDirty from BLL Object only to TURN IsDirty ON (value = true) of BLL Object itself WHEN DTO object Is Dirty
         //LE MINH HIEP: ONLY BLL OBJECT NEED TO CALL THIS METHOD to set it IsDirty itself. DTO has never needed this method
-        protected void SetDirty()
+        public void SetDirty()
         {
             if (TrackChanges)
             {

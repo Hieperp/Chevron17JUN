@@ -8,11 +8,9 @@ namespace TotalSmartCoding.Controllers.Inventories
 {
     public class GoodsReceiptController : GenericViewDetailController<GoodsReceipt, GoodsReceiptDetail, GoodsReceiptViewDetail, GoodsReceiptDTO, GoodsReceiptPrimitiveDTO, GoodsReceiptDetailDTO, GoodsReceiptViewModel>
     {
-        public GoodsReceiptViewModel GoodsReceiptViewModel { get; private set; }
         public GoodsReceiptController(IGoodsReceiptService goodsReceiptService, GoodsReceiptViewModel goodsReceiptViewModel)
             : base(goodsReceiptService, goodsReceiptViewModel)
         {
-            this.GoodsReceiptViewModel = goodsReceiptViewModel;
         }
     }
 }

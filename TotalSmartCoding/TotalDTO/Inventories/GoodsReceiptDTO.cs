@@ -76,6 +76,7 @@ namespace TotalDTO.Inventories
         }
 
 
+        public override int PreparedPersonID { get { return 1; } }
 
         public override void PerformPresaveRule()
         {

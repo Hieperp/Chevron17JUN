@@ -10,7 +10,7 @@ using TotalSmartCoding.Configurations;
 
 namespace TotalSmartCoding.Controllers
 {
-    public class CoreController : NotifyPropertyChangeObject //: Controller
+    public class CoreController //: Controller
     {
         public Dictionary<string, object> TempData { get; private set; }
         public Dictionary<string, object> ViewData { get; private set; }
