@@ -72,7 +72,7 @@ namespace TotalSmartCoding.Views.Productions
             this.batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
 
             this.batchViewModel = CommonNinject.Kernel.Get<BatchViewModel>();
-            this.batchViewModel.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+            this.batchViewModel.PropertyChanged += new PropertyChangedEventHandler(ModelDTO_PropertyChanged);
             this.baseDTO = this.batchViewModel;
         }
 
@@ -174,7 +174,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
-        protected override Controllers.BaseController InvokeController
+        protected override Controllers.BaseController myController
         {
             get { return new BatchController(CommonNinject.Kernel.Get<IBatchService>(), this.batchViewModel); }
         }

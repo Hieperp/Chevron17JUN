@@ -45,7 +45,7 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
             this.goodsReceiptAPIs = new GoodsReceiptAPIs(CommonNinject.Kernel.Get<IGoodsReceiptAPIRepository>());
 
             this.goodsReceiptViewModel = CommonNinject.Kernel.Get<GoodsReceiptViewModel>();
-            this.goodsReceiptViewModel.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+            this.goodsReceiptViewModel.PropertyChanged += new PropertyChangedEventHandler(ModelDTO_PropertyChanged);
             this.baseDTO = this.goodsReceiptViewModel;
         }
 
@@ -85,7 +85,7 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
             //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
         }
 
-        protected override Controllers.BaseController InvokeController
+        protected override Controllers.BaseController myController
         {
             get { return new GoodsReceiptController(CommonNinject.Kernel.Get<IGoodsReceiptService>(), this.goodsReceiptViewModel); }
         }

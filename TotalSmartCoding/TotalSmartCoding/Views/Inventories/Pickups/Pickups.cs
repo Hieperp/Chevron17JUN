@@ -54,7 +54,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.pickupAPIs = new PickupAPIs(CommonNinject.Kernel.Get<IPickupAPIRepository>());
 
             this.pickupViewModel = CommonNinject.Kernel.Get<PickupViewModel>();
-            this.pickupViewModel.PropertyChanged += new PropertyChangedEventHandler(baseController_PropertyChanged);
+            this.pickupViewModel.PropertyChanged += new PropertyChangedEventHandler(ModelDTO_PropertyChanged);
             this.baseDTO = this.pickupViewModel;
 
             this.timerLoadPending = new System.Timers.Timer(60000);
@@ -194,7 +194,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             //StackedHeaderDecorator stackedHeaderDecorator = new StackedHeaderDecorator(this.dataGridViewDetails);
         }
 
-        protected override Controllers.BaseController InvokeController
+        protected override Controllers.BaseController myController
         {
             get { return new PickupController(CommonNinject.Kernel.Get<IPickupService>(), this.pickupViewModel); }
         }
