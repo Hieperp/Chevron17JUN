@@ -32,6 +32,22 @@ namespace TotalDTO.Inventories
         }
 
 
+        private Nullable<int> fillingLineID;
+        [DefaultValue(null)]
+        public Nullable<int> FillingLineID
+        {
+            get { return this.fillingLineID; }
+            set { ApplyPropertyChange<PickupPrimitiveDTO, Nullable<int>>(ref this.fillingLineID, o => o.FillingLineID, value); }
+        }
+        private string fillingLineName;
+        [DefaultValue("")]
+        public string FillingLineName
+        {
+            get { return this.fillingLineName; }
+            set { ApplyPropertyChange<PickupDTO, string>(ref this.fillingLineName, o => o.FillingLineName, value, false); }
+        }
+
+
         private Nullable<int> warehouseID;
         [DefaultValue(null)]
         public Nullable<int> WarehouseID
@@ -44,7 +60,7 @@ namespace TotalDTO.Inventories
         public string WarehouseName
         {
             get { return this.warehouseName; }
-            set { ApplyPropertyChange<PickupDTO, string>(ref this.warehouseName, o => o.WarehouseName, value); }
+            set { ApplyPropertyChange<PickupDTO, string>(ref this.warehouseName, o => o.WarehouseName, value, false); }
         }
 
 

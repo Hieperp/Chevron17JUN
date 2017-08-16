@@ -60,6 +60,7 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.naviDetails = new Guifreaks.Navisuite.NaviGroup(this.components);
+            this.labelFillingLineName = new System.Windows.Forms.Label();
             this.gridexCartonDetails = new CustomControls.DataGridexView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -162,7 +163,7 @@
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMaster.Size = new System.Drawing.Size(1097, 0);
+            this.tableLayoutPanelMaster.Size = new System.Drawing.Size(1097, 262);
             this.tableLayoutPanelMaster.TabIndex = 62;
             // 
             // textexRemarks
@@ -435,10 +436,10 @@
             // 
             // naviDetails
             // 
-            this.naviDetails.Caption = "   Details";
+            this.naviDetails.Caption = "   Pickup for";
+            this.naviDetails.Controls.Add(this.labelFillingLineName);
             this.naviDetails.Controls.Add(this.tableLayoutPanelMaster);
             this.naviDetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.naviDetails.Expanded = false;
             this.naviDetails.ExpandedHeight = 315;
             this.naviDetails.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviDetails.HeaderContextMenuStrip = null;
@@ -446,9 +447,19 @@
             this.naviDetails.Location = new System.Drawing.Point(257, 0);
             this.naviDetails.Name = "naviDetails";
             this.naviDetails.Padding = new System.Windows.Forms.Padding(0, 53, 0, 0);
-            this.naviDetails.Size = new System.Drawing.Size(1097, 51);
+            this.naviDetails.Size = new System.Drawing.Size(1097, 315);
             this.naviDetails.TabIndex = 30;
-            this.naviDetails.Text = "naviGroup1";
+            // 
+            // labelFillingLineName
+            // 
+            this.labelFillingLineName.AutoSize = true;
+            this.labelFillingLineName.BackColor = System.Drawing.Color.Transparent;
+            this.labelFillingLineName.ForeColor = System.Drawing.Color.Firebrick;
+            this.labelFillingLineName.Location = new System.Drawing.Point(154, 9);
+            this.labelFillingLineName.Name = "labelFillingLineName";
+            this.labelFillingLineName.Size = new System.Drawing.Size(106, 33);
+            this.labelFillingLineName.TabIndex = 63;
+            this.labelFillingLineName.Text = "label11";
             // 
             // gridexCartonDetails
             // 
@@ -558,7 +569,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridexPalletDetails.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.gridexPalletDetails.RowTemplate.Height = 45;
-            this.gridexPalletDetails.Size = new System.Drawing.Size(523, 741);
+            this.gridexPalletDetails.Size = new System.Drawing.Size(523, 477);
             this.gridexPalletDetails.TabIndex = 65;
             // 
             // CommodityCode
@@ -774,10 +785,10 @@
             this.panelMaster.Controls.Add(this.gridexCartonDetails);
             this.panelMaster.Controls.Add(this.gridexPalletDetails);
             this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMaster.Location = new System.Drawing.Point(257, 51);
+            this.panelMaster.Location = new System.Drawing.Point(257, 315);
             this.panelMaster.Name = "panelMaster";
             this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.panelMaster.Size = new System.Drawing.Size(1097, 744);
+            this.panelMaster.Size = new System.Drawing.Size(1097, 480);
             this.panelMaster.TabIndex = 72;
             // 
             // gridexPackDetails
@@ -967,6 +978,7 @@
         private BrightIdeasSoftware.OLVColumn olvCommodityCode;
         private BrightIdeasSoftware.OLVColumn olvCode;
         private CustomControls.TextexBox textexWarehouseCode;
+        private System.Windows.Forms.Label labelFillingLineName;
 
     }
 }

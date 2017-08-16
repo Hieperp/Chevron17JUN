@@ -286,6 +286,7 @@
           <Property Name="HasPack" Type="bit" Nullable="false" />
           <Property Name="HasCarton" Type="bit" Nullable="false" />
           <Property Name="HasPallet" Type="bit" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="LastLogonFillingLineID" Type="int" />
           <Property Name="PortName" Type="nvarchar" MaxLength="20" />
           <Property Name="ServerID" Type="int" />
@@ -513,6 +514,7 @@
           <Property Name="PickupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="Reference" Type="nvarchar" MaxLength="10" />
+          <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="ForkliftDriverID" Type="int" Nullable="false" />
           <Property Name="StorekeeperID" Type="int" Nullable="false" />
@@ -1059,6 +1061,18 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pickups_FillingLines">
+          <End Role="FillingLines" Type="Self.FillingLines" Multiplicity="1" />
+          <End Role="Pickups" Type="Self.Pickups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FillingLines">
+              <PropertyRef Name="FillingLineID" />
+            </Principal>
+            <Dependent Role="Pickups">
+              <PropertyRef Name="FillingLineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pickups_Locations">
           <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
           <End Role="Pickups" Type="Self.Pickups" Multiplicity="*" />
@@ -1208,6 +1222,12 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="GetFillingCartons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FillingLineID" Type="int" Mode="In" />
           <Parameter Name="EntryStatusIDs" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetFillingLineBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetFillingLineIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="GetFillingPacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FillingLineID" Type="int" Mode="In" />
@@ -1511,6 +1531,10 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <AssociationSet Name="FK_PickupDetails_Warehouses" Association="Self.FK_PickupDetails_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="PickupDetails" EntitySet="PickupDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pickups_FillingLines" Association="Self.FK_Pickups_FillingLines">
+            <End Role="FillingLines" EntitySet="FillingLines" />
+            <End Role="Pickups" EntitySet="Pickups" />
           </AssociationSet>
           <AssociationSet Name="FK_Pickups_Locations" Association="Self.FK_Pickups_Locations">
             <End Role="Locations" EntitySet="Locations" />
@@ -2128,6 +2152,16 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="Pickup" EntitySet="Pickups" />
           </AssociationSet>
+          <FunctionImport Name="GetFillingLineBases" ReturnType="Collection(TotalSmartCodingModel.FillingLineBase)" />
+          <FunctionImport Name="GetFillingLineIndexes" ReturnType="Collection(TotalSmartCodingModel.FillingLineIndex)">
+            <Parameter Name="AspUserID" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <AssociationSet Name="FK_Pickups_FillingLines" Association="TotalSmartCodingModel.FK_Pickups_FillingLines">
+            <End Role="FillingLine" EntitySet="FillingLines" />
+            <End Role="Pickup" EntitySet="Pickups" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_DeliveryAdvices_Customers1">
           <End Type="TotalSmartCodingModel.Customer" Role="Customer" Multiplicity="1" />
@@ -2387,6 +2421,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="HasPallet" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="FillingLine" ToRole="Carton" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="FillingLine" ToRole="Pack" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pickups" Relationship="TotalSmartCodingModel.FK_Pickups_FillingLines" FromRole="FillingLine" ToRole="Pickup" />
         </EntityType>
         <EntityType Name="GoodsReceiptType">
           <Key>
@@ -2868,6 +2904,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="PreparedPersonID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pickups" FromRole="Pickup" ToRole="PickupDetail" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_Pickups_Warehouses" FromRole="Pickup" ToRole="Warehouse" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Pickups_FillingLines" FromRole="Pickup" ToRole="FillingLine" />
         </EntityType>
         <Association Name="FK_Cartons_Cartons">
           <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
@@ -3361,6 +3399,28 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="FillingLineBase">
+          <Property Type="Int32" Name="FillingLineID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <ComplexType Name="FillingLineIndex">
+          <Property Type="Int32" Name="FillingLineID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="60" />
+        </ComplexType>
+        <Association Name="FK_Pickups_FillingLines">
+          <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Pickup" Role="Pickup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FillingLine">
+              <PropertyRef Name="FillingLineID" />
+            </Principal>
+            <Dependent Role="Pickup">
+              <PropertyRef Name="FillingLineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3699,6 +3759,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="FillingLines">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.FillingLine">
               <MappingFragment StoreEntitySet="FillingLines">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="HasPallet" ColumnName="HasPallet" />
                 <ScalarProperty Name="HasCarton" ColumnName="HasCarton" />
                 <ScalarProperty Name="HasPack" ColumnName="HasPack" />
@@ -4104,6 +4165,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <EntitySetMapping Name="Pickups">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pickup">
               <MappingFragment StoreEntitySet="Pickups">
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
                 <ScalarProperty Name="PreparedPersonID" ColumnName="PreparedPersonID" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
@@ -4275,6 +4337,24 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetFillingLineBases" FunctionName="TotalSmartCodingModel.Store.GetFillingLineBases">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.FillingLineBase">
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFillingLineIndexes" FunctionName="TotalSmartCodingModel.Store.GetFillingLineIndexes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.FillingLineIndex">
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

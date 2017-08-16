@@ -77,6 +77,7 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_Warehouses_Locations" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_PickupDetails_Warehouses" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Pickups_Warehouses" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Pickups_FillingLines" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

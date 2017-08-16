@@ -88,7 +88,7 @@ namespace TotalDTO.Productions
         public string CommodityName
         {
             get { return this.commodityName; }
-            set { ApplyPropertyChange<BatchDTO, string>(ref this.commodityName, o => o.CommodityName, value); }
+            set { ApplyPropertyChange<BatchDTO, string>(ref this.commodityName, o => o.CommodityName, value, false); }
         }
 
 

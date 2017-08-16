@@ -59,7 +59,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
             this.timerLoadPending = new System.Timers.Timer(60000);
             this.timerLoadPending.Elapsed += new System.Timers.ElapsedEventHandler(timerLoadPending_Elapsed);
-            this.timerLoadPending.Enabled = true;                       
+            this.timerLoadPending.Enabled = true;
         }
 
         protected override void InitializeTabControl()
@@ -73,9 +73,9 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
                 this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
 
-                this.customTabBatch.TabPages.Add("tabDetailPallets", "Detail pallets          ");
-                this.customTabBatch.TabPages.Add("tabDetailCartons", "Detail cartons          ");
-                this.customTabBatch.TabPages.Add("tabDetailPacks", "Detail packs          ");
+                this.customTabBatch.TabPages.Add("tabDetailPallets", "Pallet details          ");
+                this.customTabBatch.TabPages.Add("tabDetailCartons", "Carton details          ");
+                this.customTabBatch.TabPages.Add("tabDetailPacks", "Pack details          ");
                 this.customTabBatch.TabPages[0].Controls.Add(this.gridexPalletDetails);
                 this.customTabBatch.TabPages[1].Controls.Add(this.gridexCartonDetails);
                 this.customTabBatch.TabPages[2].Controls.Add(this.gridexPackDetails);
@@ -101,6 +101,9 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             this.customTabBatch.Font = titleFont;
             this.naviDetails.Font = titleFont;
+            this.labelFillingLineName.Font = titleFont;
+            this.labelFillingLineName.Left = 78;
+            this.labelFillingLineName.Top = 14;
 
             List<Control> controls = ViewHelpers.GetAllControls(this);
             foreach (Control control in controls)
@@ -136,6 +139,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
         Binding bindingEntryDate;
         Binding bindingReference;
+        Binding bindingFillingLineName;
         Binding bindingWarehouseCode;
         Binding bindingRemarks;
 
@@ -146,11 +150,13 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             base.InitializeCommonControlBinding();
 
-            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.EntryDate), true);
+            this.bindingFillingLineName = this.labelFillingLineName.DataBindings.Add("Text", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.FillingLineName));
+
+            this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.EntryDate), true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingReference = this.textexReference.DataBindings.Add("Text", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Reference), true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingWarehouseCode = this.textexWarehouseCode.DataBindings.Add("Text", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.WarehouseName), true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.pickupViewModel, CommonExpressions.PropertyName<PickupViewModel>(p => p.Remarks), true, DataSourceUpdateMode.OnPropertyChanged);
-            
+
 
             EmployeeAPIs employeeAPIs = new EmployeeAPIs(CommonNinject.Kernel.Get<IEmployeeAPIRepository>());
 
@@ -167,6 +173,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
 
             this.bindingReference.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingFillingLineName.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingWarehouseCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
@@ -215,7 +222,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         }
 
         protected override DialogResult wizardMaster()
-        {            
+        {
             WizardMaster wizardMaster = new WizardMaster(this.pickupAPIs, this.pickupViewModel);
             return wizardMaster.ShowDialog();
         }

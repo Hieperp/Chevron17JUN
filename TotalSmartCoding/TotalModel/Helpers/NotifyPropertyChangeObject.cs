@@ -130,6 +130,11 @@ namespace TotalModel.Helpers
         /// <param name="value"></param>
         protected void ApplyPropertyChange<T, F>(ref F field, Expression<Func<T, object>> property, F value)
         {
+            this.ApplyPropertyChange<T, F>(ref field, property, value, true);
+        }
+
+        protected void ApplyPropertyChange<T, F>(ref F field, Expression<Func<T, object>> property, F value, bool setDirty)
+        {
             // Only do this if the value changes
             if (field == null || !field.Equals(value))
             {
@@ -142,7 +147,7 @@ namespace TotalModel.Helpers
 
                     string propertyName = propertyExpression.Member.Name; // Property name
 
-                    Changes[propertyName] = value; // Change tracking
+                    if (setDirty) Changes[propertyName] = value; // Change tracking
 
                     NotifyPropertyChanged(propertyName); // Notify change
                 }

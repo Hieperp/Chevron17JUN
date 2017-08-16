@@ -117,6 +117,12 @@
     <Compile Include="Models\FillingLine.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FillingLineBase.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FillingLineIndex.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FillingPack.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>

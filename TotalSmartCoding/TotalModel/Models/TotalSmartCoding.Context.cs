@@ -825,5 +825,27 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseIndex>("GetWarehouseIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
         }
+    
+        public virtual ObjectResult<FillingLineBase> GetFillingLineBases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingLineBase>("GetFillingLineBases");
+        }
+    
+        public virtual ObjectResult<FillingLineIndex> GetFillingLineIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingLineIndex>("GetFillingLineIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
     }
 }

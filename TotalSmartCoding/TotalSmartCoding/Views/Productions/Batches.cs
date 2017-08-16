@@ -165,7 +165,7 @@ namespace TotalSmartCoding.Views.Productions
             base.CommonControl_BindingComplete(sender, e);
             if (sender.Equals(this.bindingCommodityID))
             {
-                if (this.combexCommodityID.SelectedItem != null && this.batchViewModel.TrackChanges)
+                if (this.combexCommodityID.SelectedItem != null)
                 {
                     CommodityBase commodityBase = (CommodityBase)this.combexCommodityID.SelectedItem;
                     this.batchViewModel.CommodityName = commodityBase.Name;

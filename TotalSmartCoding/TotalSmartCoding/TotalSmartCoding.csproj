@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\APIs\Commons\EmployeeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\FillingLineAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\WarehouseAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
     <Compile Include="Controllers\Inventories\PickupController.cs" />

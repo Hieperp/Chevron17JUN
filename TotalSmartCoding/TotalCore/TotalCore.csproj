@@ -54,6 +54,7 @@
     <Compile Include="Repositories\Commons\IAspNetUserRepository.cs" />
     <Compile Include="Repositories\Commons\ICommodityRepository.cs" />
     <Compile Include="Repositories\Commons\IEmployeeRepository.cs" />
+    <Compile Include="Repositories\Commons\IFillingLineRepository.cs" />
     <Compile Include="Repositories\Commons\IPaymentTermRepository.cs" />
     <Compile Include="Repositories\Commons\IWarehouseRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
