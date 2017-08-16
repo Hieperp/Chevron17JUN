@@ -153,14 +153,16 @@
             this.tableLayoutPanelMaster.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelMaster.Name = "tableLayoutPanelMaster";
             this.tableLayoutPanelMaster.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.tableLayoutPanelMaster.RowCount = 6;
+            this.tableLayoutPanelMaster.RowCount = 7;
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelMaster.Size = new System.Drawing.Size(1097, 245);
+            this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelMaster.Size = new System.Drawing.Size(1097, 0);
             this.tableLayoutPanelMaster.TabIndex = 62;
             // 
             // textexRemarks
@@ -221,7 +223,7 @@
             this.label1.Location = new System.Drawing.Point(543, 190);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(206, 50);
+            this.label1.Size = new System.Drawing.Size(206, 40);
             this.label1.TabIndex = 75;
             this.label1.Text = "Remark";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -336,7 +338,7 @@
             this.label9.Location = new System.Drawing.Point(1, 188);
             this.label9.Margin = new System.Windows.Forms.Padding(1);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(210, 54);
+            this.label9.Size = new System.Drawing.Size(210, 44);
             this.label9.TabIndex = 79;
             this.label9.Text = "Store Keeper";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -436,14 +438,15 @@
             this.naviDetails.Caption = "   Details";
             this.naviDetails.Controls.Add(this.tableLayoutPanelMaster);
             this.naviDetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.naviDetails.ExpandedHeight = 298;
+            this.naviDetails.Expanded = false;
+            this.naviDetails.ExpandedHeight = 315;
             this.naviDetails.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviDetails.HeaderContextMenuStrip = null;
             this.naviDetails.HeaderHeight = 51;
             this.naviDetails.Location = new System.Drawing.Point(257, 0);
             this.naviDetails.Name = "naviDetails";
             this.naviDetails.Padding = new System.Windows.Forms.Padding(0, 53, 0, 0);
-            this.naviDetails.Size = new System.Drawing.Size(1097, 298);
+            this.naviDetails.Size = new System.Drawing.Size(1097, 51);
             this.naviDetails.TabIndex = 30;
             this.naviDetails.Text = "naviGroup1";
             // 
@@ -555,7 +558,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridexPalletDetails.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.gridexPalletDetails.RowTemplate.Height = 45;
-            this.gridexPalletDetails.Size = new System.Drawing.Size(523, 494);
+            this.gridexPalletDetails.Size = new System.Drawing.Size(523, 741);
             this.gridexPalletDetails.TabIndex = 65;
             // 
             // CommodityCode
@@ -771,10 +774,10 @@
             this.panelMaster.Controls.Add(this.gridexCartonDetails);
             this.panelMaster.Controls.Add(this.gridexPalletDetails);
             this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMaster.Location = new System.Drawing.Point(257, 298);
+            this.panelMaster.Location = new System.Drawing.Point(257, 51);
             this.panelMaster.Name = "panelMaster";
             this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.panelMaster.Size = new System.Drawing.Size(1097, 497);
+            this.panelMaster.Size = new System.Drawing.Size(1097, 744);
             this.panelMaster.TabIndex = 72;
             // 
             // gridexPackDetails
