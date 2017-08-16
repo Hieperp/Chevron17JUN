@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\EntityFrameworkExtension.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\BinLocation.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\Commodity.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\Employee.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\FillingLine.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\Commons\AspNetUserRepository.cs" />
+    <Compile Include="Repositories\Commons\BinLocationRepository.cs" />
     <Compile Include="Repositories\Commons\CommodityRepository.cs" />
     <Compile Include="Repositories\Commons\EmployeeRepository.cs" />
     <Compile Include="Repositories\Commons\FillingLineRepository.cs" />

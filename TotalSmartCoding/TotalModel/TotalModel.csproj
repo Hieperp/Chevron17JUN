@@ -75,6 +75,12 @@
     <Compile Include="Models\BinLocation.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BinLocationBase.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BinLocationIndex.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Carton.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>

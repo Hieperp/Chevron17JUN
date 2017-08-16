@@ -103,6 +103,12 @@ namespace TotalSmartCoding.Libraries
                 //Kernel.Bind<WarehouseViewModel>().ToSelf();
 
 
+                //Kernel.Bind<IBinLocationService>().To<BinLocationService>();
+                Kernel.Bind<IBinLocationRepository>().To<BinLocationRepository>();
+                Kernel.Bind<IBinLocationAPIRepository>().To<BinLocationAPIRepository>();
+                //Kernel.Bind<BinLocationViewModel>().ToSelf();
+
+
                 //Kernel.Bind<IFillingLineService>().To<FillingLineService>();
                 Kernel.Bind<IFillingLineRepository>().To<FillingLineRepository>();
                 Kernel.Bind<IFillingLineAPIRepository>().To<FillingLineAPIRepository>();

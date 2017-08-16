@@ -28,37 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.buttonESC = new System.Windows.Forms.ToolStripButton();
-            this.buttonAddExit = new System.Windows.Forms.ToolStripButton();
             this.buttonAdd = new System.Windows.Forms.ToolStripButton();
-            this.fastPendingPallets = new BrightIdeasSoftware.FastObjectListView();
-            this.olvIsSelected = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvPickupEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvPickupReference = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvPalletCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.panelMaster = new System.Windows.Forms.Panel();
-            this.fastPendingCartons = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvCartonCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.fastPendingPacks = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvPackCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.label2 = new System.Windows.Forms.Label();
+            this.combexBinLocationID = new CustomControls.CombexBox();
+            this.textexRemarks = new CustomControls.TextexBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textexCode = new CustomControls.TextexBox();
+            this.textexCommodityCode = new CustomControls.TextexBox();
+            this.textexCommodityName = new CustomControls.TextexBox();
+            this.textexQuantity = new CustomControls.TextexBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.errorProviderMaster = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPallets)).BeginInit();
-            this.panelMaster.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingCartons)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPacks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -68,12 +56,11 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonESC,
-            this.buttonAddExit,
             this.buttonAdd});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 548);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 340);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(1147, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(920, 55);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -88,20 +75,9 @@
             this.buttonESC.Text = "Close";
             this.buttonESC.Click += new System.EventHandler(this.buttonAddESC_Click);
             // 
-            // buttonAddExit
-            // 
-            this.buttonAddExit.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
-            this.buttonAddExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonAddExit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonAddExit.Name = "buttonAddExit";
-            this.buttonAddExit.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonAddExit.Size = new System.Drawing.Size(158, 52);
-            this.buttonAddExit.Text = "Add and Close";
-            this.buttonAddExit.Click += new System.EventHandler(this.buttonAddESC_Click);
-            // 
             // buttonAdd
             // 
-            this.buttonAdd.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_previous_view;
+            this.buttonAdd.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
             this.buttonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonAdd.Name = "buttonAdd";
@@ -110,275 +86,190 @@
             this.buttonAdd.Text = "Add";
             this.buttonAdd.Click += new System.EventHandler(this.buttonAddESC_Click);
             // 
-            // fastPendingPallets
+            // label2
             // 
-            this.fastPendingPallets.AllColumns.Add(this.olvIsSelected);
-            this.fastPendingPallets.AllColumns.Add(this.olvPickupEntryDate);
-            this.fastPendingPallets.AllColumns.Add(this.olvPickupReference);
-            this.fastPendingPallets.AllColumns.Add(this.olvCommodityCode);
-            this.fastPendingPallets.AllColumns.Add(this.olvPalletCode);
-            this.fastPendingPallets.AllColumns.Add(this.olvCommodityName);
-            this.fastPendingPallets.CheckBoxes = true;
-            this.fastPendingPallets.CheckedAspectName = "IsSelected";
-            this.fastPendingPallets.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvIsSelected,
-            this.olvPickupEntryDate,
-            this.olvPickupReference,
-            this.olvCommodityCode,
-            this.olvPalletCode,
-            this.olvCommodityName});
-            this.fastPendingPallets.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastPendingPallets.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastPendingPallets.FullRowSelect = true;
-            this.fastPendingPallets.HideSelection = false;
-            this.fastPendingPallets.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPallets.Location = new System.Drawing.Point(0, 303);
-            this.fastPendingPallets.Name = "fastPendingPallets";
-            this.fastPendingPallets.OwnerDraw = true;
-            this.fastPendingPallets.ShowGroups = false;
-            this.fastPendingPallets.ShowImagesOnSubItems = true;
-            this.fastPendingPallets.Size = new System.Drawing.Size(1147, 245);
-            this.fastPendingPallets.TabIndex = 69;
-            this.fastPendingPallets.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPallets.UseCompatibleStateImageBehavior = false;
-            this.fastPendingPallets.UseFiltering = true;
-            this.fastPendingPallets.View = System.Windows.Forms.View.Details;
-            this.fastPendingPallets.VirtualMode = true;
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(279, 42);
+            this.label2.Margin = new System.Windows.Forms.Padding(2);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 40);
+            this.label2.TabIndex = 103;
+            this.label2.Text = "Barcode";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // olvIsSelected
+            // combexBinLocationID
             // 
-            this.olvIsSelected.HeaderCheckBox = true;
-            this.olvIsSelected.HeaderCheckState = System.Windows.Forms.CheckState.Checked;
-            this.olvIsSelected.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvIsSelected.Text = "";
-            this.olvIsSelected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvIsSelected.Width = 20;
+            this.combexBinLocationID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexBinLocationID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexBinLocationID.Editable = true;
+            this.combexBinLocationID.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combexBinLocationID.FormattingEnabled = true;
+            this.combexBinLocationID.Location = new System.Drawing.Point(387, 220);
+            this.combexBinLocationID.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.combexBinLocationID.Name = "combexBinLocationID";
+            this.combexBinLocationID.ReadOnly = false;
+            this.combexBinLocationID.Size = new System.Drawing.Size(509, 47);
+            this.combexBinLocationID.TabIndex = 98;
             // 
-            // olvPickupEntryDate
+            // textexRemarks
             // 
-            this.olvPickupEntryDate.AspectName = "PickupEntryDate";
-            this.olvPickupEntryDate.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPickupEntryDate.Text = "Date";
-            this.olvPickupEntryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPickupEntryDate.Width = 170;
+            this.textexRemarks.Editable = true;
+            this.textexRemarks.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textexRemarks.Location = new System.Drawing.Point(387, 271);
+            this.textexRemarks.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.textexRemarks.Name = "textexRemarks";
+            this.textexRemarks.Size = new System.Drawing.Size(509, 41);
+            this.textexRemarks.TabIndex = 102;
             // 
-            // olvPickupReference
+            // label10
             // 
-            this.olvPickupReference.AspectName = "PickupReference";
-            this.olvPickupReference.Text = "Reference";
-            this.olvPickupReference.Width = 137;
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(256, 87);
+            this.label10.Margin = new System.Windows.Forms.Padding(2);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(127, 40);
+            this.label10.TabIndex = 95;
+            this.label10.Text = "Item Code";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // olvCommodityCode
+            // label3
             // 
-            this.olvCommodityCode.AspectName = "CommodityCode";
-            this.olvCommodityCode.Text = "Item";
-            this.olvCommodityCode.Width = 192;
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(243, 130);
+            this.label3.Margin = new System.Windows.Forms.Padding(2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(140, 40);
+            this.label3.TabIndex = 100;
+            this.label3.Text = "Description";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // olvPalletCode
+            // label9
             // 
-            this.olvPalletCode.AspectName = "PalletCode";
-            this.olvPalletCode.FillsFreeSpace = true;
-            this.olvPalletCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPalletCode.Text = "Pallet Code";
-            this.olvPalletCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPalletCode.Width = 200;
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(232, 222);
+            this.label9.Margin = new System.Windows.Forms.Padding(1);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(151, 40);
+            this.label9.TabIndex = 101;
+            this.label9.Text = "Bin Location";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // olvCommodityName
+            // label1
             // 
-            this.olvCommodityName.AspectName = "CommodityName";
-            this.olvCommodityName.FillsFreeSpace = true;
-            this.olvCommodityName.Text = "Item Name";
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(281, 273);
+            this.label1.Margin = new System.Windows.Forms.Padding(2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 40);
+            this.label1.TabIndex = 99;
+            this.label1.Text = "Remark";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panelMaster
+            // textexCode
             // 
-            this.panelMaster.Controls.Add(this.fastPendingPallets);
-            this.panelMaster.Controls.Add(this.fastPendingCartons);
-            this.panelMaster.Controls.Add(this.fastPendingPacks);
-            this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMaster.Location = new System.Drawing.Point(0, 0);
-            this.panelMaster.Name = "panelMaster";
-            this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
-            this.panelMaster.Size = new System.Drawing.Size(1147, 548);
-            this.panelMaster.TabIndex = 71;
+            this.textexCode.Editable = true;
+            this.textexCode.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textexCode.Location = new System.Drawing.Point(387, 40);
+            this.textexCode.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.textexCode.Name = "textexCode";
+            this.textexCode.ReadOnly = true;
+            this.textexCode.Size = new System.Drawing.Size(509, 41);
+            this.textexCode.TabIndex = 104;
             // 
-            // fastPendingCartons
+            // textexCommodityCode
             // 
-            this.fastPendingCartons.AllColumns.Add(this.olvColumn1);
-            this.fastPendingCartons.AllColumns.Add(this.olvColumn2);
-            this.fastPendingCartons.AllColumns.Add(this.olvColumn3);
-            this.fastPendingCartons.AllColumns.Add(this.olvColumn4);
-            this.fastPendingCartons.AllColumns.Add(this.olvCartonCode);
-            this.fastPendingCartons.AllColumns.Add(this.olvColumn6);
-            this.fastPendingCartons.CheckBoxes = true;
-            this.fastPendingCartons.CheckedAspectName = "IsSelected";
-            this.fastPendingCartons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
-            this.olvColumn2,
-            this.olvColumn3,
-            this.olvColumn4,
-            this.olvCartonCode,
-            this.olvColumn6});
-            this.fastPendingCartons.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastPendingCartons.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastPendingCartons.FullRowSelect = true;
-            this.fastPendingCartons.HideSelection = false;
-            this.fastPendingCartons.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingCartons.Location = new System.Drawing.Point(0, 152);
-            this.fastPendingCartons.Name = "fastPendingCartons";
-            this.fastPendingCartons.OwnerDraw = true;
-            this.fastPendingCartons.ShowGroups = false;
-            this.fastPendingCartons.ShowImagesOnSubItems = true;
-            this.fastPendingCartons.Size = new System.Drawing.Size(1147, 245);
-            this.fastPendingCartons.TabIndex = 70;
-            this.fastPendingCartons.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingCartons.UseCompatibleStateImageBehavior = false;
-            this.fastPendingCartons.UseFiltering = true;
-            this.fastPendingCartons.View = System.Windows.Forms.View.Details;
-            this.fastPendingCartons.VirtualMode = true;
+            this.textexCommodityCode.Editable = true;
+            this.textexCommodityCode.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textexCommodityCode.Location = new System.Drawing.Point(387, 85);
+            this.textexCommodityCode.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.textexCommodityCode.Name = "textexCommodityCode";
+            this.textexCommodityCode.ReadOnly = true;
+            this.textexCommodityCode.Size = new System.Drawing.Size(509, 41);
+            this.textexCommodityCode.TabIndex = 105;
             // 
-            // olvColumn1
+            // textexCommodityName
             // 
-            this.olvColumn1.HeaderCheckBox = true;
-            this.olvColumn1.HeaderCheckState = System.Windows.Forms.CheckState.Checked;
-            this.olvColumn1.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn1.Text = "";
-            this.olvColumn1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn1.Width = 20;
+            this.textexCommodityName.Editable = true;
+            this.textexCommodityName.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textexCommodityName.Location = new System.Drawing.Point(387, 130);
+            this.textexCommodityName.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.textexCommodityName.Name = "textexCommodityName";
+            this.textexCommodityName.ReadOnly = true;
+            this.textexCommodityName.Size = new System.Drawing.Size(509, 41);
+            this.textexCommodityName.TabIndex = 106;
             // 
-            // olvColumn2
+            // textexQuantity
             // 
-            this.olvColumn2.AspectName = "PickupEntryDate";
-            this.olvColumn2.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn2.Text = "Date";
-            this.olvColumn2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn2.Width = 170;
+            this.textexQuantity.Editable = true;
+            this.textexQuantity.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textexQuantity.Location = new System.Drawing.Point(387, 175);
+            this.textexQuantity.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.textexQuantity.Name = "textexQuantity";
+            this.textexQuantity.ReadOnly = true;
+            this.textexQuantity.Size = new System.Drawing.Size(509, 41);
+            this.textexQuantity.TabIndex = 108;
             // 
-            // olvColumn3
+            // label4
             // 
-            this.olvColumn3.AspectName = "PickupReference";
-            this.olvColumn3.Text = "Reference";
-            this.olvColumn3.Width = 137;
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(274, 177);
+            this.label4.Margin = new System.Windows.Forms.Padding(2);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 40);
+            this.label4.TabIndex = 107;
+            this.label4.Text = "Quantity";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // olvColumn4
+            // errorProviderMaster
             // 
-            this.olvColumn4.AspectName = "CommodityCode";
-            this.olvColumn4.Text = "Item";
-            this.olvColumn4.Width = 192;
-            // 
-            // olvCartonCode
-            // 
-            this.olvCartonCode.AspectName = "CartonCode";
-            this.olvCartonCode.FillsFreeSpace = true;
-            this.olvCartonCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCartonCode.Text = "Carton Code";
-            this.olvCartonCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCartonCode.Width = 200;
-            // 
-            // olvColumn6
-            // 
-            this.olvColumn6.AspectName = "CommodityName";
-            this.olvColumn6.FillsFreeSpace = true;
-            this.olvColumn6.Text = "Item Name";
-            // 
-            // fastPendingPacks
-            // 
-            this.fastPendingPacks.AllColumns.Add(this.olvColumn7);
-            this.fastPendingPacks.AllColumns.Add(this.olvColumn8);
-            this.fastPendingPacks.AllColumns.Add(this.olvColumn9);
-            this.fastPendingPacks.AllColumns.Add(this.olvColumn10);
-            this.fastPendingPacks.AllColumns.Add(this.olvPackCode);
-            this.fastPendingPacks.AllColumns.Add(this.olvColumn12);
-            this.fastPendingPacks.CheckBoxes = true;
-            this.fastPendingPacks.CheckedAspectName = "IsSelected";
-            this.fastPendingPacks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn7,
-            this.olvColumn8,
-            this.olvColumn9,
-            this.olvColumn10,
-            this.olvPackCode,
-            this.olvColumn12});
-            this.fastPendingPacks.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastPendingPacks.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastPendingPacks.FullRowSelect = true;
-            this.fastPendingPacks.HideSelection = false;
-            this.fastPendingPacks.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPacks.Location = new System.Drawing.Point(0, 0);
-            this.fastPendingPacks.Name = "fastPendingPacks";
-            this.fastPendingPacks.OwnerDraw = true;
-            this.fastPendingPacks.ShowGroups = false;
-            this.fastPendingPacks.ShowImagesOnSubItems = true;
-            this.fastPendingPacks.Size = new System.Drawing.Size(1147, 245);
-            this.fastPendingPacks.TabIndex = 71;
-            this.fastPendingPacks.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingPacks.UseCompatibleStateImageBehavior = false;
-            this.fastPendingPacks.UseFiltering = true;
-            this.fastPendingPacks.View = System.Windows.Forms.View.Details;
-            this.fastPendingPacks.VirtualMode = true;
-            // 
-            // olvColumn7
-            // 
-            this.olvColumn7.HeaderCheckBox = true;
-            this.olvColumn7.HeaderCheckState = System.Windows.Forms.CheckState.Checked;
-            this.olvColumn7.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn7.Text = "";
-            this.olvColumn7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn7.Width = 20;
-            // 
-            // olvColumn8
-            // 
-            this.olvColumn8.AspectName = "PickupEntryDate";
-            this.olvColumn8.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn8.Text = "Date";
-            this.olvColumn8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvColumn8.Width = 170;
-            // 
-            // olvColumn9
-            // 
-            this.olvColumn9.AspectName = "PickupReference";
-            this.olvColumn9.Text = "Reference";
-            this.olvColumn9.Width = 137;
-            // 
-            // olvColumn10
-            // 
-            this.olvColumn10.AspectName = "CommodityCode";
-            this.olvColumn10.Text = "Item";
-            this.olvColumn10.Width = 192;
-            // 
-            // olvPackCode
-            // 
-            this.olvPackCode.AspectName = "PackCode";
-            this.olvPackCode.FillsFreeSpace = true;
-            this.olvPackCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPackCode.Text = "Pack Code";
-            this.olvPackCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPackCode.Width = 200;
-            // 
-            // olvColumn12
-            // 
-            this.olvColumn12.AspectName = "CommodityName";
-            this.olvColumn12.FillsFreeSpace = true;
-            this.olvColumn12.Text = "Item Name";
+            this.errorProviderMaster.ContainerControl = this;
             // 
             // WizardDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 603);
-            this.Controls.Add(this.panelMaster);
+            this.ClientSize = new System.Drawing.Size(920, 395);
+            this.Controls.Add(this.textexQuantity);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textexCommodityName);
+            this.Controls.Add(this.textexCommodityCode);
+            this.Controls.Add(this.textexCode);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.combexBinLocationID);
+            this.Controls.Add(this.textexRemarks);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WizardDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Create Wizard";
-            this.Load += new System.EventHandler(this.Wizard_Load);
+            this.Text = "Please find a bin location for this pallet";
+            this.Load += new System.EventHandler(this.WizardDetail_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPallets)).EndInit();
-            this.panelMaster.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingCartons)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fastPendingPacks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -388,29 +279,19 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton buttonESC;
-        private System.Windows.Forms.ToolStripButton buttonAddExit;
-        private BrightIdeasSoftware.FastObjectListView fastPendingPallets;
-        private System.Windows.Forms.Panel panelMaster;
-        private BrightIdeasSoftware.OLVColumn olvPickupEntryDate;
-        private BrightIdeasSoftware.OLVColumn olvCommodityCode;
-        private BrightIdeasSoftware.OLVColumn olvPickupReference;
-        private BrightIdeasSoftware.OLVColumn olvPalletCode;
-        private BrightIdeasSoftware.OLVColumn olvIsSelected;
-        private BrightIdeasSoftware.OLVColumn olvCommodityName;
-        private BrightIdeasSoftware.FastObjectListView fastPendingCartons;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
-        private BrightIdeasSoftware.OLVColumn olvColumn4;
-        private BrightIdeasSoftware.OLVColumn olvCartonCode;
-        private BrightIdeasSoftware.OLVColumn olvColumn6;
-        private BrightIdeasSoftware.FastObjectListView fastPendingPacks;
-        private BrightIdeasSoftware.OLVColumn olvColumn7;
-        private BrightIdeasSoftware.OLVColumn olvColumn8;
-        private BrightIdeasSoftware.OLVColumn olvColumn9;
-        private BrightIdeasSoftware.OLVColumn olvColumn10;
-        private BrightIdeasSoftware.OLVColumn olvPackCode;
-        private BrightIdeasSoftware.OLVColumn olvColumn12;
         private System.Windows.Forms.ToolStripButton buttonAdd;
+        private System.Windows.Forms.Label label2;
+        private CustomControls.CombexBox combexBinLocationID;
+        private CustomControls.TextexBox textexRemarks;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label1;
+        private CustomControls.TextexBox textexCode;
+        private CustomControls.TextexBox textexCommodityCode;
+        private CustomControls.TextexBox textexCommodityName;
+        private CustomControls.TextexBox textexQuantity;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider errorProviderMaster;
     }
 }

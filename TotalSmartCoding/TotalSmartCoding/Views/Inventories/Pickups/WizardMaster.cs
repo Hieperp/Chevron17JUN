@@ -82,7 +82,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             }
         }
 
-        protected void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
+        private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
             if (e.BindingCompleteState == BindingCompleteState.Exception) { ExceptionHandlers.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
             if (sender.Equals(this.bindingWarehouseID))

@@ -5,64 +5,87 @@ using System.Collections.Generic;
 using System.Linq;
 using BrightIdeasSoftware;
 
+using Ninject;
+
 using TotalModel.Models;
 using TotalDTO.Inventories;
+using TotalSmartCoding.Controllers.APIs.Commons;
 using TotalSmartCoding.Controllers.APIs.Inventories;
+using TotalSmartCoding.Libraries;
 using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.ViewModels.Inventories;
+using TotalBase;
+using TotalCore.Repositories.Commons;
+
 
 
 namespace TotalSmartCoding.Views.Inventories.Pickups
 {
     public partial class WizardDetail : Form
     {
-        private PickupAPIs pickupAPIs;
         private PickupViewModel pickupViewModel;
-        private CustomTabControl customTabBatch;
-        public WizardDetail(PickupAPIs pickupAPIs, PickupViewModel pickupViewModel)
+
+        private PendingPallet pendingPallet;
+        private PickupDetailDTO pickupDetailDTO;
+
+        Binding bindingCodeID;
+        Binding bindingCommodityCode;
+        Binding bindingCommodityName;
+        Binding bindingQuantity;
+        Binding bindingRemarks;
+        Binding bindingBinLocationID;
+
+        public WizardDetail(PickupViewModel pickupViewModel, PendingPallet pendingPallet)
         {
             InitializeComponent();
 
-            this.customTabBatch = new CustomTabControl();
-            //this.customTabBatch.ImageList = this.imageListTabControl;
-
-            this.customTabBatch.Font = this.fastPendingPallets.Font;
-            this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
-            this.customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
-
-            this.customTabBatch.TabPages.Add("tabPendingPallets", "Pending pallets");
-            this.customTabBatch.TabPages.Add("tabPendingCartons", "Pending cartons");
-            this.customTabBatch.TabPages.Add("tabPendingPacks", "Pending packs");
-            this.customTabBatch.TabPages[0].Controls.Add(this.fastPendingPallets);
-            this.customTabBatch.TabPages[1].Controls.Add(this.fastPendingCartons);
-            this.customTabBatch.TabPages[2].Controls.Add(this.fastPendingPacks);
-
-
-            this.customTabBatch.Dock = DockStyle.Fill;
-            this.fastPendingPallets.Dock = DockStyle.Fill;
-            this.fastPendingCartons.Dock = DockStyle.Fill;
-            this.fastPendingPacks.Dock = DockStyle.Fill;
-            this.panelMaster.Controls.Add(this.customTabBatch);
-
-
-            this.pickupAPIs = pickupAPIs;
             this.pickupViewModel = pickupViewModel;
+            this.pendingPallet = pendingPallet;
         }
 
 
-        private void Wizard_Load(object sender, EventArgs e)
+        private void WizardDetail_Load(object sender, EventArgs e)
         {
             try
             {
-                //List<PendingPalletDetail> pendingPalletDetails = this.pickupAPIs.GetPendingPalletDetails(this.pickupViewModel.LocationID, this.pickupViewModel.PickupID, this.pickupViewModel.PalletID, this.pickupViewModel.WarehouseID, string.Join(",", this.pickupViewModel.ViewDetails.Select(d => d.PalletDetailID)), false);
+                this.pickupDetailDTO = new PickupDetailDTO()
+                {
+                    PickupID = this.pickupViewModel.PickupID,
 
-                //this.fastPendingPallets.SetObjects(pendingPalletDetails.Where(w => w.PalletID != null));
-                //this.fastPendingCartons.SetObjects(pendingPalletDetails.Where(w => w.CartonID != null));
-                //this.fastPendingPacks.SetObjects(pendingPalletDetails.Where(w => w.PackID != null));
+                    PalletID = this.pendingPallet.PalletID,
+                    PalletCode = this.pendingPallet.Code,
+                    PalletEntryDate = this.pendingPallet.EntryDate,
 
-                //this.customTabBatch.TabPages[0].Text = "Pending " + this.fastPendingPallets.GetItemCount().ToString("N0") + " pallet" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
-                //this.customTabBatch.TabPages[1].Text = "Pending " + this.fastPendingCartons.GetItemCount().ToString("N0") + " carton" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
-                //this.customTabBatch.TabPages[2].Text = "Pending " + this.fastPendingPacks.GetItemCount().ToString("N0") + " pack" + (this.fastPendingPacks.GetItemCount() > 1 ? "s      " : "      ");
+                    CommodityID = this.pendingPallet.CommodityID,
+                    CommodityCode = this.pendingPallet.CommodityCode,
+                    CommodityName = this.pendingPallet.CommodityName,
+
+                    Quantity = (decimal)this.pendingPallet.QuantityRemains
+                };
+
+                this.bindingCodeID = this.textexCode.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.PalletCode));
+                this.bindingCommodityCode = this.textexCommodityCode.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.CommodityCode));
+                this.bindingCommodityName = this.textexCommodityName.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.CommodityName));
+                this.bindingQuantity = this.textexQuantity.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.Quantity));
+                this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.Remarks), true, DataSourceUpdateMode.OnPropertyChanged);
+
+
+                BinLocationAPIs binLocationAPIs = new BinLocationAPIs(CommonNinject.Kernel.Get<IBinLocationAPIRepository>());
+
+                this.combexBinLocationID.DataSource = binLocationAPIs.GetBinLocationBases();
+                this.combexBinLocationID.DisplayMember = CommonExpressions.PropertyName<BinLocationBase>(p => p.Name);
+                this.combexBinLocationID.ValueMember = CommonExpressions.PropertyName<BinLocationBase>(p => p.BinLocationID);
+                this.bindingBinLocationID = this.combexBinLocationID.DataBindings.Add("SelectedValue", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.BinLocationID), true, DataSourceUpdateMode.OnPropertyChanged);
+
+
+                this.bindingCodeID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+                this.bindingCommodityCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+                this.bindingCommodityName.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+                this.bindingQuantity.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+                this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+                this.bindingBinLocationID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+                this.errorProviderMaster.DataSource = this.pickupDetailDTO; 
             }
             catch (Exception exception)
             {
@@ -70,62 +93,23 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             }
         }
 
+        private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
+        {
+            if (e.BindingCompleteState == BindingCompleteState.Exception) { ExceptionHandlers.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+        }
 
         private void buttonAddESC_Click(object sender, EventArgs e)
         {
             try
             {
-                if (sender.Equals(this.buttonAdd) || sender.Equals(this.buttonAddExit))
+                if (sender.Equals(this.buttonAdd) && this.pickupDetailDTO.IsValid)
                 {
-                    FastObjectListView fastPendingList = this.customTabBatch.SelectedIndex == 0 ? this.fastPendingPallets : (this.customTabBatch.SelectedIndex == 1 ? this.fastPendingCartons : this.customTabBatch.SelectedIndex == 2 ? this.fastPendingPacks : null);
-
-                    if (fastPendingList != null)
-                    {
-                        foreach (var checkedObjects in fastPendingList.CheckedObjects)
-                        {
-                            //PendingPalletDetail pendingPalletDetail = (PendingPalletDetail)checkedObjects;
-                            //PickupDetailDTO pickupDetailDTO = new PickupDetailDTO()
-                            //{
-                            //    PickupID = this.pickupViewModel.PickupID,
-
-                            //    PalletID = pendingPalletDetail.PalletID,
-                            //    PalletDetailID = pendingPalletDetail.PalletDetailID,
-                            //    PalletReference = pendingPalletDetail.PalletReference,
-                            //    PalletEntryDate = pendingPalletDetail.PalletEntryDate,
-
-                            //    BinLocationID = pendingPalletDetail.BinLocationID,
-                            //    BinLocationCode = pendingPalletDetail.BinLocationCode,
-
-                            //    CommodityID = pendingPalletDetail.CommodityID,
-                            //    CommodityCode = pendingPalletDetail.CommodityCode,
-                            //    CommodityName = pendingPalletDetail.CommodityName,
-
-                            //    Quantity = (decimal)pendingPalletDetail.QuantityRemains,
-                            //    Volume = pendingPalletDetail.Volume,
-                                
-
-                            //    PackID = pendingPalletDetail.PackID,
-                            //    PackCode = pendingPalletDetail.PackCode,
-                            //    CartonID = pendingPalletDetail.CartonID,
-                            //    CartonCode = pendingPalletDetail.CartonCode,
-                            //    PalletID = pendingPalletDetail.PalletID,
-                            //    PalletCode = pendingPalletDetail.PalletCode,
-                            //};
-                            //this.pickupViewModel.ViewDetails.Add(pickupDetailDTO);
-                        }
-                    }
-
-
-                    if (sender.Equals(this.buttonAddExit))
-                        this.DialogResult = DialogResult.OK;
-                    else
-                        this.Wizard_Load(this, new EventArgs());
+                    this.pickupViewModel.ViewDetails.Add(pickupDetailDTO);
+                    this.DialogResult = DialogResult.OK;
                 }
 
                 if (sender.Equals(this.buttonESC))
                     this.DialogResult = DialogResult.Cancel;
-
-
             }
             catch (Exception exception)
             {

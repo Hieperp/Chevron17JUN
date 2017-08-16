@@ -372,7 +372,7 @@
             this.Name = "WizardDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Wizard";
-            this.Load += new System.EventHandler(this.Wizard_Load);
+            this.Load += new System.EventHandler(this.WizardDetail_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastPendingPallets)).EndInit();

@@ -729,6 +729,7 @@
             this.fastPendingPallets.UseFiltering = true;
             this.fastPendingPallets.View = System.Windows.Forms.View.Details;
             this.fastPendingPallets.VirtualMode = true;
+            this.fastPendingPallets.MouseClick += new System.Windows.Forms.MouseEventHandler(this.fastPendingPallets_MouseClick);
             // 
             // olvCommodityCode
             // 

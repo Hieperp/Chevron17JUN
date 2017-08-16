@@ -50,7 +50,7 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
         }
 
 
-        private void Wizard_Load(object sender, EventArgs e)
+        private void WizardDetail_Load(object sender, EventArgs e)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
                     if (sender.Equals(this.buttonAddExit))
                         this.DialogResult = DialogResult.OK;
                     else
-                        this.Wizard_Load(this, new EventArgs());
+                        this.WizardDetail_Load(this, new EventArgs());
                 }
 
                 if (sender.Equals(this.buttonESC))

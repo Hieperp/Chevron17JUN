@@ -205,10 +205,10 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.fastPickupIndex.SetObjects(this.pickupAPIs.GetPickupIndexes());
             base.Loading();
 
-            this.LoadPendingItems(); //CALL AFTER LOAD
+            this.getPendingItems(); //CALL AFTER LOAD
         }
 
-        private void LoadPendingItems() //THIS MAY ALSO LOAD PENDING PALLET/ CARTON/ PACK
+        private void getPendingItems() //THIS MAY ALSO LOAD PENDING PALLET/ CARTON/ PACK
         {
             try
             {
@@ -227,29 +227,45 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             return wizardMaster.ShowDialog();
         }
 
-        protected override void wizardDetail()
+        //protected override void wizardDetail()
+        //{
+        //    base.wizardDetail();
+
+        //    TotalDTO.Inventories.PickupDetailDTO pickupDetailDTO = new TotalDTO.Inventories.PickupDetailDTO()
+        //    {
+        //        PickupID = this.pickupViewModel.PickupID,
+
+        //        PalletID = 1,
+
+        //        BinLocationID = 2,
+
+        //        CommodityID = 1,
+
+        //        Quantity = 10,
+        //        Volume = 20,
+        //    };
+        //    this.pickupViewModel.ViewDetails.Add(pickupDetailDTO);
+
+
+        //}
+
+        private void fastPendingPallets_MouseClick(object sender, MouseEventArgs e)
         {
-            base.wizardDetail();
-
-            TotalDTO.Inventories.PickupDetailDTO pickupDetailDTO = new TotalDTO.Inventories.PickupDetailDTO()
+            try
             {
-                PickupID = this.pickupViewModel.PickupID,
-
-                PalletID = 1,
-
-                BinLocationID = 2,
-
-                CommodityID = 1,
-
-                Quantity = 10,
-                Volume = 20,
-            };
-            this.pickupViewModel.ViewDetails.Add(pickupDetailDTO);
-
-            //WizardDetail wizardDetail = new WizardDetail(this.pickupAPIs, this.PickupViewModel);
-            //wizardDetail.ShowDialog();
+                PendingPallet pendingPallet = (PendingPallet)this.fastPendingPallets.SelectedObject;
+                if (pendingPallet != null)
+                {
+                    WizardDetail wizardDetail = new WizardDetail(this.pickupViewModel, pendingPallet);
+                    if (wizardDetail.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        getPendingItems();
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
         }
-
 
         private void Pickups_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -260,11 +276,13 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             try
             {
-                timerLoadCallback loadPendingItemsCallback = new timerLoadCallback(LoadPendingItems);
+                timerLoadCallback loadPendingItemsCallback = new timerLoadCallback(getPendingItems);
                 this.Invoke(loadPendingItemsCallback);
             }
             catch { }
         }
+
+
 
     }
 }
