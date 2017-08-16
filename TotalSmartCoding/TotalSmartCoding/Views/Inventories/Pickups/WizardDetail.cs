@@ -23,6 +23,8 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 {
     public partial class WizardDetail : Form
     {
+        private CustomTabControl tabBinLocation;
+
         private PickupViewModel pickupViewModel;
 
         private PendingPallet pendingPallet;
@@ -32,12 +34,24 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         Binding bindingCommodityCode;
         Binding bindingCommodityName;
         Binding bindingQuantity;
-        Binding bindingRemarks;
-        Binding bindingBinLocationID;
 
         public WizardDetail(PickupViewModel pickupViewModel, PendingPallet pendingPallet)
         {
             InitializeComponent();
+
+            this.tabBinLocation = new CustomTabControl();
+
+            this.tabBinLocation.Font = new Font("Niagara Engraved", 16);
+            this.tabBinLocation.DisplayStyle = TabStyle.VisualStudio;
+
+            this.tabBinLocation.TabPages.Add("tabBinLocations", "Available Bin Location   ");
+            this.tabBinLocation.TabPages[0].Controls.Add(this.fastBinLocations);
+
+            this.tabBinLocation.Dock = DockStyle.Fill;
+            this.fastBinLocations.Dock = DockStyle.Fill;
+            this.splitContainer2.Panel2.Controls.Add(this.tabBinLocation);
+
+            this.splitContainer2.SplitterDistance = this.textexCode.Height + this.textexCommodityCode.Height + this.textexCommodityName.Height + this.textexQuantity.Height + this.textexBinLocationFilters.Height + 30;
 
             this.pickupViewModel = pickupViewModel;
             this.pendingPallet = pendingPallet;
@@ -67,23 +81,17 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
                 this.bindingCommodityCode = this.textexCommodityCode.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.CommodityCode));
                 this.bindingCommodityName = this.textexCommodityName.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.CommodityName));
                 this.bindingQuantity = this.textexQuantity.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.Quantity));
-                this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.Remarks), true, DataSourceUpdateMode.OnPropertyChanged);
 
+                this.fastBinLocations.SetObjects((new BinLocationAPIs(CommonNinject.Kernel.Get<IBinLocationAPIRepository>())).GetBinLocationBases());
 
-                BinLocationAPIs binLocationAPIs = new BinLocationAPIs(CommonNinject.Kernel.Get<IBinLocationAPIRepository>());
+                this.tabBinLocation.TabPages[0].Text = this.fastBinLocations.GetItemCount().ToString("N0") + " Bin" + (this.fastBinLocations.GetItemCount() > 1 ? "s" : "") + " Available       ";
 
-                this.combexBinLocationID.DataSource = binLocationAPIs.GetBinLocationBases();
-                this.combexBinLocationID.DisplayMember = CommonExpressions.PropertyName<BinLocationBase>(p => p.Name);
-                this.combexBinLocationID.ValueMember = CommonExpressions.PropertyName<BinLocationBase>(p => p.BinLocationID);
-                this.bindingBinLocationID = this.combexBinLocationID.DataBindings.Add("SelectedValue", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.BinLocationID), true, DataSourceUpdateMode.OnPropertyChanged);
-
+                
 
                 this.bindingCodeID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingCommodityCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingCommodityName.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingQuantity.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-                this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-                this.bindingBinLocationID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
                 this.errorProviderMaster.DataSource = this.pickupDetailDTO; 
             }

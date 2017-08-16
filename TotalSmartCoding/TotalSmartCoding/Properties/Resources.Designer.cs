@@ -63,6 +63,66 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _0_icon {
+            get {
+                object obj = ResourceManager.GetObject("0-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("0-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1_icon {
+            get {
+                object obj = ResourceManager.GetObject("1-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("1-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1_icon641 {
+            get {
+                object obj = ResourceManager.GetObject("1-icon641", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1_icon642 {
+            get {
+                object obj = ResourceManager.GetObject("1-icon642", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _1368113696_32538 {
             get {
                 object obj = ResourceManager.GetObject("1368113696_32538", resourceCulture);
@@ -76,6 +136,26 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap _1368113865_132657 {
             get {
                 object obj = ResourceManager.GetObject("1368113865_132657", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _2_icon {
+            get {
+                object obj = ResourceManager.GetObject("2-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _2_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("2-icon64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +183,159 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3_icon {
+            get {
+                object obj = ResourceManager.GetObject("3-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _3_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("3-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _3floppy_mount {
             get {
                 object obj = ResourceManager.GetObject("3floppy-mount", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _4_icon {
+            get {
+                object obj = ResourceManager.GetObject("4-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _4_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("4-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _5_icon {
+            get {
+                object obj = ResourceManager.GetObject("5-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _5_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("5-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _6_icon {
+            get {
+                object obj = ResourceManager.GetObject("6-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _6_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("6-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _7_icon {
+            get {
+                object obj = ResourceManager.GetObject("7-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _7_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("7-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _8_icon {
+            get {
+                object obj = ResourceManager.GetObject("8-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _8_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("8-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _8_icon641 {
+            get {
+                object obj = ResourceManager.GetObject("8-icon641", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _9_icon {
+            get {
+                object obj = ResourceManager.GetObject("9-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _9_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("9-icon64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,6 +563,26 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_left_icon {
+            get {
+                object obj = ResourceManager.GetObject("arrow-left-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_left_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("arrow-left-icon64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Avosoft_Toolbar_Printer {
             get {
                 object obj = ResourceManager.GetObject("Avosoft-Toolbar-Printer", resourceCulture);
@@ -476,6 +726,26 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Benjigarner_Softdimension_Excel2 {
             get {
                 object obj = ResourceManager.GetObject("Benjigarner-Softdimension-Excel2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_key_64 {
+            get {
+                object obj = ResourceManager.GetObject("blank-key-64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blank_keyboard_key_icon {
+            get {
+                object obj = ResourceManager.GetObject("blank-keyboard-key-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -636,6 +906,126 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap chevron_Right_1 {
             get {
                 object obj = ResourceManager.GetObject("chevron_Right.1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_0 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_1 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_11 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_2 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_3 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_4 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_5 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_6 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_7 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_8 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_9 {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chromatix_Keyboard_Keys_Blank_keyboard_key {
+            get {
+                object obj = ResourceManager.GetObject("Chromatix-Keyboard-Keys-Blank-keyboard-key", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1153,6 +1543,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Harwen_Simple_RUN {
+            get {
+                object obj = ResourceManager.GetObject("Harwen-Simple-RUN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Honeycomb_Barcode_Scanner_32 {
             get {
                 object obj = ResourceManager.GetObject("Honeycomb-Barcode-Scanner-32", resourceCulture);
@@ -1376,6 +1776,26 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Land_Play {
             get {
                 object obj = ResourceManager.GetObject("Land-Play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap letter_a_icon {
+            get {
+                object obj = ResourceManager.GetObject("letter-a-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap letter_b_icon {
+            get {
+                object obj = ResourceManager.GetObject("letter-b-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1696,6 +2116,26 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Robsonbillponte_IRob_Folder_Utilities_Folder {
             get {
                 object obj = ResourceManager.GetObject("Robsonbillponte-IRob-Folder-Utilities-Folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RUN_icon {
+            get {
+                object obj = ResourceManager.GetObject("RUN-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RUN_icon64 {
+            get {
+                object obj = ResourceManager.GetObject("RUN-icon64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
