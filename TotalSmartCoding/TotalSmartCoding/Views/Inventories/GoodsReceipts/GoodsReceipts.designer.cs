@@ -103,7 +103,7 @@
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0191F));
             this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32023F));
-            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215F));
+            this.tableLayoutPanelMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 221F));
             this.tableLayoutPanelMaster.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanelMaster.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanelMaster.Controls.Add(this.label1, 6, 1);
@@ -130,7 +130,7 @@
             this.label6.Location = new System.Drawing.Point(1, 3);
             this.label6.Margin = new System.Windows.Forms.Padding(1);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(105, 34);
+            this.label6.Size = new System.Drawing.Size(104, 34);
             this.label6.TabIndex = 30;
             this.label6.Text = "Date";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -142,7 +142,7 @@
             this.label7.Location = new System.Drawing.Point(3, 41);
             this.label7.Margin = new System.Windows.Forms.Padding(3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(101, 14);
+            this.label7.Size = new System.Drawing.Size(100, 14);
             this.label7.TabIndex = 31;
             this.label7.Text = "Marketing Program";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -151,7 +151,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(737, 41);
+            this.label1.Location = new System.Drawing.Point(733, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 14);
@@ -163,10 +163,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(368, 3);
+            this.label4.Location = new System.Drawing.Point(366, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(1);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 34);
+            this.label4.Size = new System.Drawing.Size(104, 34);
             this.label4.TabIndex = 28;
             this.label4.Text = "Payment Period";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -175,7 +175,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(735, 3);
+            this.label14.Location = new System.Drawing.Point(731, 3);
             this.label14.Margin = new System.Windows.Forms.Padding(1);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(105, 34);
@@ -187,10 +187,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(370, 41);
+            this.label2.Location = new System.Drawing.Point(368, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 14);
+            this.label2.Size = new System.Drawing.Size(100, 14);
             this.label2.TabIndex = 56;
             this.label2.Text = "Payment Type";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -199,21 +199,21 @@
             // 
             this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimexEntryDate.Editable = true;
-            this.dateTimexEntryDate.Location = new System.Drawing.Point(110, 3);
+            this.dateTimexEntryDate.Location = new System.Drawing.Point(109, 3);
             this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.dateTimexEntryDate.Name = "dateTimexEntryDate";
             this.dateTimexEntryDate.ReadOnly = false;
-            this.dateTimexEntryDate.Size = new System.Drawing.Size(246, 22);
+            this.dateTimexEntryDate.Size = new System.Drawing.Size(245, 22);
             this.dateTimexEntryDate.TabIndex = 70;
             // 
             // textexReference
             // 
             this.textexReference.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexReference.Editable = true;
-            this.textexReference.Location = new System.Drawing.Point(110, 39);
+            this.textexReference.Location = new System.Drawing.Point(109, 39);
             this.textexReference.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexReference.Name = "textexReference";
-            this.textexReference.Size = new System.Drawing.Size(246, 22);
+            this.textexReference.Size = new System.Drawing.Size(245, 22);
             this.textexReference.TabIndex = 71;
             // 
             // toolStripNaviGroupDetails
@@ -245,10 +245,10 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(369, 5);
+            this.label11.Location = new System.Drawing.Point(367, 5);
             this.label11.Margin = new System.Windows.Forms.Padding(3);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(101, 20);
+            this.label11.Size = new System.Drawing.Size(100, 20);
             this.label11.TabIndex = 45;
             this.label11.Text = "Noted By";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -257,10 +257,10 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(735, 5);
+            this.label12.Location = new System.Drawing.Point(731, 5);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(101, 20);
+            this.label12.Size = new System.Drawing.Size(100, 20);
             this.label12.TabIndex = 47;
             this.label12.Text = "Approved By";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -518,7 +518,7 @@
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.019F));
             this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.32099F));
-            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 218F));
+            this.tableLayoutPanelExtend.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 223F));
             this.tableLayoutPanelExtend.Controls.Add(this.combexCommodityID, 0, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label11, 3, 0);
             this.tableLayoutPanelExtend.Controls.Add(this.label12, 6, 0);
@@ -540,11 +540,11 @@
             this.combexCommodityID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexCommodityID.Editable = true;
             this.combexCommodityID.FormattingEnabled = true;
-            this.combexCommodityID.Location = new System.Drawing.Point(110, 3);
+            this.combexCommodityID.Location = new System.Drawing.Point(109, 3);
             this.combexCommodityID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.combexCommodityID.Name = "combexCommodityID";
             this.combexCommodityID.ReadOnly = false;
-            this.combexCommodityID.Size = new System.Drawing.Size(245, 24);
+            this.combexCommodityID.Size = new System.Drawing.Size(244, 24);
             this.combexCommodityID.TabIndex = 72;
             // 
             // label10
@@ -554,7 +554,7 @@
             this.label10.Location = new System.Drawing.Point(3, 5);
             this.label10.Margin = new System.Windows.Forms.Padding(3);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(101, 20);
+            this.label10.Size = new System.Drawing.Size(100, 20);
             this.label10.TabIndex = 35;
             this.label10.Text = "Requested By";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

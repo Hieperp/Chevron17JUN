@@ -18,13 +18,16 @@ namespace TotalSmartCoding.Controllers
 
         public BaseController(IBaseService baseService)
         {
-            this.baseService = baseService;
-            this.baseService.UserID = ContextAttributes.User.UserID; //(Tamthoi)
+            if (baseService != null)
+            {
+                this.baseService = baseService;
+                this.baseService.UserID = ContextAttributes.User.UserID; //(Tamthoi)
+            }
         }
 
         public IBaseService BaseService { get { return this.baseService; } }
 
-        
+
         public virtual void AddRequireJsOptions()
         {
             //int nmvnModuleID = this.baseService.NmvnModuleID;

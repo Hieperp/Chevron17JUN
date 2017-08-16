@@ -50,9 +50,7 @@ namespace TotalSmartCoding.Controllers
         {
             this.GenericService = genericService;
 
-            this.simpleViewModel = simpleViewModel; //New object vs MVC
-            //--NGAY SAU KHI INIT simpleViewModel => SHOULD CHECK FOR Newable???? => to bind to toolstrip (because: many time: the index list is empty => not select the first row in index list)
-
+            this.simpleViewModel = simpleViewModel; //FOR WINFORM: pass object at contructor vs MVC: PASS FOR EVERY Action BY HTTP REQUEST
 
             this.isCreateWizard = isCreateWizard;
             this.isSimpleCreate = isSimpleCreate;
@@ -106,18 +104,18 @@ namespace TotalSmartCoding.Controllers
             base.AddRequireJsOptions();
 
             this.Initialize();
-           
+
             //return View();
         }
 
         private void Initialize()
         {
             this.simpleViewModel.StopTracking();
-            
+
             this.Init();
 
             this.TailorViewModel(this.InitViewModelByPrior(this.InitViewModelByDefault(this.simpleViewModel))); //IN MVC: SIMPLE: Need to call new TSimpleViewModel() to ensure construct TSimpleViewModel object using Constructor!
-            
+
             this.simpleViewModel.StartTracking();
             this.simpleViewModel.Reset();
         }
@@ -127,7 +125,7 @@ namespace TotalSmartCoding.Controllers
             this.simpleViewModel.LastID = this.simpleViewModel.GetID();
             this.simpleViewModel.ApplyDefaults(); //NEED TO CALL this.simpleViewModel.ApplyDefaults(), INTEAD OF call new TSimpleViewModel() LIKE IN MVC, BECAUSE THE VIEW CONTROL IS BINDING TO this.simpleViewModel
             this.simpleViewModel.Init(); //INIT DEFAULT
-            this.simpleViewModel.LocationID = this.GenericService.LocationID;            
+            this.simpleViewModel.LocationID = this.GenericService.LocationID;
         }
 
 
@@ -205,7 +203,6 @@ namespace TotalSmartCoding.Controllers
 
             if (id > 0)
             {
-                this.simpleViewModel.LastID = this.simpleViewModel.GetID();
                 TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
                 if (simpleViewModel == null) throw new System.ArgumentException("Lỗi", "Dữ liệu không tồn tại hoặc không có quyền truy cập.");
             }
@@ -335,8 +332,13 @@ namespace TotalSmartCoding.Controllers
         public override bool Delete(int id)
         {
             if (!this.AccessLevelAuthorize()) throw new System.ArgumentException("Lỗi phân quyền", "Không có quyền truy cập dữ liệu");
-            return this.GenericService.Delete(id);
-
+            if (this.GenericService.Delete(id))
+            {
+                simpleViewModel.SetID(0);
+                return true;
+            }
+            else
+                return false;
 
 
             //TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Editable, true);
@@ -541,11 +543,8 @@ namespace TotalSmartCoding.Controllers
             //TSimpleViewModel simpleViewModel = Mapper.Map<TSimpleViewModel>(entity);
             //return simpleViewModel;
 
-            this.simpleViewModel.StopTracking();
-            Mapper.Map<TEntity, TSimpleViewModel>(entity, this.simpleViewModel);
-            this.simpleViewModel.StartTracking();
-            this.simpleViewModel.Reset();
 
+            Mapper.Map<TEntity, TSimpleViewModel>(entity, this.simpleViewModel);
             return this.simpleViewModel;
         }
 
@@ -592,7 +591,15 @@ namespace TotalSmartCoding.Controllers
 
         private TSimpleViewModel BuildViewModel(TEntity entity, bool forDelete, bool forAlter, bool forOpen)
         {
-            return this.TailorViewModel(this.DecorateViewModel(this.MapEntityToViewModel(entity)), forDelete, forAlter, forOpen);
+            this.simpleViewModel.LastID = this.simpleViewModel.GetID();
+            this.simpleViewModel.StopTracking();
+
+            TSimpleViewModel tsimpleViewModel = this.TailorViewModel(this.DecorateViewModel(this.MapEntityToViewModel(entity)), forDelete, forAlter, forOpen);
+
+            this.simpleViewModel.StartTracking();
+            this.simpleViewModel.Reset();
+
+            return tsimpleViewModel; //NOW FOR WINFORM tsimpleViewModel AND this.simpleViewModel ARE THE SAME OBJECT
         }
 
         protected virtual TSimpleViewModel TailorViewModel(TSimpleViewModel simpleViewModel)

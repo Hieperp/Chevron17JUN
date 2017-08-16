@@ -88,15 +88,15 @@ namespace TotalSmartCoding.Views.Mains
                     {
                         if (control is DataGridexView)
                         {
-                            //DataGridexView dataGridexView = control as DataGridexView;
-                            //if (dataGridexView != null && dataGridexView.AllowAddRow)
-                            //    control.DataBindings.Add("AllowUserToAddRows", this, "EditableMode");
-                            //else
+                            DataGridexView dataGridexView = control as DataGridexView;
+                            if (dataGridexView != null && dataGridexView.AllowAddRow)
+                                control.DataBindings.Add("AllowUserToAddRows", this, "EditableMode");
+                            else
                                 ((DataGridView)control).AllowUserToAddRows = false;
 
-                            //if (dataGridexView != null && dataGridexView.AllowDeleteRow)
-                            //    control.DataBindings.Add("AllowUserToDeleteRows", this, "EditableMode");
-                            //else
+                            if (dataGridexView != null && dataGridexView.AllowDeleteRow)
+                                control.DataBindings.Add("AllowUserToDeleteRows", this, "EditableMode");
+                            else
                                 ((DataGridView)control).AllowUserToDeleteRows = false;
                         }
 
@@ -155,8 +155,8 @@ namespace TotalSmartCoding.Views.Mains
 
         private void setSelectedIndexID(int? baseIndexID)
         {
-            if (baseIndexID != null && baseIndexID > 0)
-            {
+            //if (baseIndexID != null && baseIndexID > 0)
+            //{
                 IBaseIndex baseIndex = this.fastListIndex.Objects.Cast<IBaseIndex>().FirstOrDefault(w => w.Id == baseIndexID);
                 if (baseIndex == null && (IBaseIndex)this.fastListIndex.SelectedObject != null)
                     fastListIndex_SelectedIndexChanged(this.fastListIndex, new EventArgs());
@@ -169,9 +169,9 @@ namespace TotalSmartCoding.Views.Mains
                         this.fastListIndex.EnsureModelVisible(baseIndex);
                     }
                 }
-            }
-            else
-                if (this.ReadonlyMode && this.fastListIndex.GetItemCount() > 0) this.fastListIndex.SelectedIndex = 0;
+            //}
+            //else
+            //    if (this.ReadonlyMode && this.fastListIndex.GetItemCount() > 0) this.fastListIndex.SelectedIndex = 0;
         }
 
         protected virtual bool checkSelectedIndexID()
