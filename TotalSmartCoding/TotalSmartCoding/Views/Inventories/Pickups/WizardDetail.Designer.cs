@@ -34,7 +34,6 @@
             this.buttonAdd = new System.Windows.Forms.ToolStripButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textexCode = new CustomControls.TextexBox();
             this.textexCommodityCode = new CustomControls.TextexBox();
@@ -51,6 +50,7 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textexBinLocationFilters = new CustomControls.TextexBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
             this.Softkey609 = new System.Windows.Forms.ToolStripButton();
             this.Softkey608 = new System.Windows.Forms.ToolStripButton();
@@ -110,33 +110,36 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonESC,
             this.buttonAdd});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 540);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 551);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(1241, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1241, 52);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // buttonESC
             // 
-            this.buttonESC.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
+            this.buttonESC.Font = new System.Drawing.Font("Niagara Engraved", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonESC.Image = global::TotalSmartCoding.Properties.Resources.signout_icon;
             this.buttonESC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonESC.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonESC.Name = "buttonESC";
             this.buttonESC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonESC.Size = new System.Drawing.Size(73, 52);
+            this.buttonESC.Size = new System.Drawing.Size(85, 49);
             this.buttonESC.Text = "Close";
             this.buttonESC.Click += new System.EventHandler(this.buttonAddESC_Click);
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
+            this.buttonAdd.Font = new System.Drawing.Font("Niagara Engraved", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAdd.Image = global::TotalSmartCoding.Properties.Resources.export_arrow_48;
             this.buttonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonAdd.Size = new System.Drawing.Size(89, 52);
-            this.buttonAdd.Text = "Add";
+            this.buttonAdd.Size = new System.Drawing.Size(248, 52);
+            this.buttonAdd.Text = "Add this pallet to pickup list";
             this.buttonAdd.Click += new System.EventHandler(this.buttonAddESC_Click);
             // 
             // label2
@@ -164,19 +167,6 @@
             this.label10.TabIndex = 95;
             this.label10.Text = "Item Code";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(2, 110);
-            this.label3.Margin = new System.Windows.Forms.Padding(2);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(267, 40);
-            this.label3.TabIndex = 100;
-            this.label3.Text = "Description";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -277,15 +267,17 @@
             this.fastBinLocations.Location = new System.Drawing.Point(0, 0);
             this.fastBinLocations.Name = "fastBinLocations";
             this.fastBinLocations.OwnerDraw = true;
+            this.fastBinLocations.RowHeight = 37;
             this.fastBinLocations.ShowGroups = false;
             this.fastBinLocations.ShowImagesOnSubItems = true;
-            this.fastBinLocations.Size = new System.Drawing.Size(881, 287);
+            this.fastBinLocations.Size = new System.Drawing.Size(881, 294);
             this.fastBinLocations.TabIndex = 109;
             this.fastBinLocations.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBinLocations.UseCompatibleStateImageBehavior = false;
             this.fastBinLocations.UseFiltering = true;
             this.fastBinLocations.View = System.Windows.Forms.View.Details;
             this.fastBinLocations.VirtualMode = true;
+            this.fastBinLocations.SelectedIndexChanged += new System.EventHandler(this.fastBinLocations_SelectedIndexChanged);
             // 
             // olvNo
             // 
@@ -334,7 +326,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip4);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip2);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1241, 540);
+            this.splitContainer1.Size = new System.Drawing.Size(1241, 551);
             this.splitContainer1.SplitterDistance = 881;
             this.splitContainer1.TabIndex = 110;
             // 
@@ -352,8 +344,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.fastBinLocations);
-            this.splitContainer2.Size = new System.Drawing.Size(881, 540);
-            this.splitContainer2.SplitterDistance = 249;
+            this.splitContainer2.Size = new System.Drawing.Size(881, 551);
+            this.splitContainer2.SplitterDistance = 253;
             this.splitContainer2.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -365,12 +357,12 @@
             this.tableLayoutPanel1.Controls.Add(this.textexQuantity, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.textexBinLocationFilters, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.textexCode, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label10, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.textexCommodityCode, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textexCommodityName, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -382,7 +374,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(881, 249);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(881, 253);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // textexBinLocationFilters
@@ -397,6 +389,19 @@
             this.textexBinLocationFilters.TabIndex = 109;
             this.textexBinLocationFilters.TextChanged += new System.EventHandler(this.textexBinLocationFilters_TextChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(2, 110);
+            this.label1.Margin = new System.Windows.Forms.Padding(2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(267, 40);
+            this.label1.TabIndex = 110;
+            this.label1.Text = "Item Description";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // toolStrip8
             // 
             this.toolStrip8.BackColor = System.Drawing.Color.Transparent;
@@ -407,7 +412,7 @@
             this.Softkey608,
             this.Softkey607,
             this.Softkey606});
-            this.toolStrip8.Location = new System.Drawing.Point(0, 367);
+            this.toolStrip8.Location = new System.Drawing.Point(0, 365);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip8.Size = new System.Drawing.Size(356, 71);
@@ -473,7 +478,7 @@
             this.Softkey604,
             this.Softkey603,
             this.Softkey602});
-            this.toolStrip7.Location = new System.Drawing.Point(0, 296);
+            this.toolStrip7.Location = new System.Drawing.Point(0, 294);
             this.toolStrip7.Name = "toolStrip7";
             this.toolStrip7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip7.Size = new System.Drawing.Size(356, 71);
@@ -539,7 +544,7 @@
             this.SoftkeyBackspace,
             this.Softkey601,
             this.Softkey600});
-            this.toolStrip6.Location = new System.Drawing.Point(0, 225);
+            this.toolStrip6.Location = new System.Drawing.Point(0, 223);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip6.Size = new System.Drawing.Size(356, 71);
@@ -603,7 +608,7 @@
             this.Softkey011,
             this.Softkey010,
             this.Softkey009});
-            this.toolStrip5.Location = new System.Drawing.Point(0, 154);
+            this.toolStrip5.Location = new System.Drawing.Point(0, 152);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip5.Size = new System.Drawing.Size(356, 71);
@@ -669,7 +674,7 @@
             this.Softkey007,
             this.Softkey006,
             this.Softkey005});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 83);
+            this.toolStrip4.Location = new System.Drawing.Point(0, 81);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip4.Size = new System.Drawing.Size(356, 71);
@@ -735,7 +740,7 @@
             this.Softkey003,
             this.Softkey002,
             this.Softkey001});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 12);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 10);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip2.Size = new System.Drawing.Size(356, 71);
@@ -795,14 +800,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(356, 12);
+            this.panel1.Size = new System.Drawing.Size(356, 10);
             this.panel1.TabIndex = 8;
             // 
             // WizardDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1241, 595);
+            this.ClientSize = new System.Drawing.Size(1241, 603);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -851,7 +856,6 @@
         private System.Windows.Forms.ToolStripButton buttonAdd;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label9;
         private CustomControls.TextexBox textexCode;
         private CustomControls.TextexBox textexCommodityCode;
@@ -899,5 +903,6 @@
         private System.Windows.Forms.ToolStripButton Softkey010;
         private System.Windows.Forms.ToolStripButton Softkey009;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
     }
 }

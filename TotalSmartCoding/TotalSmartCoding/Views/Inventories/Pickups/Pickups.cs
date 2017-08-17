@@ -62,6 +62,11 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.timerLoadPending.Enabled = true;
         }
 
+        private void Pickups_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.timerLoadPending.Enabled = false;
+        }
+
         protected override void InitializeTabControl()
         {
             try
@@ -227,38 +232,19 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             return wizardMaster.ShowDialog();
         }
 
-        //protected override void wizardDetail()
-        //{
-        //    base.wizardDetail();
-
-        //    TotalDTO.Inventories.PickupDetailDTO pickupDetailDTO = new TotalDTO.Inventories.PickupDetailDTO()
-        //    {
-        //        PickupID = this.pickupViewModel.PickupID,
-
-        //        PalletID = 1,
-
-        //        BinLocationID = 2,
-
-        //        CommodityID = 1,
-
-        //        Quantity = 10,
-        //        Volume = 20,
-        //    };
-        //    this.pickupViewModel.ViewDetails.Add(pickupDetailDTO);
-
-
-        //}
-
         private void fastPendingPallets_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                PendingPallet pendingPallet = (PendingPallet)this.fastPendingPallets.SelectedObject;
-                if (pendingPallet != null)
+                if (this.EditableMode && this.pickupViewModel.Editable)
                 {
-                    WizardDetail wizardDetail = new WizardDetail(this.pickupViewModel, pendingPallet);
-                    if (wizardDetail.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        getPendingItems();
+                    PendingPallet pendingPallet = (PendingPallet)this.fastPendingPallets.SelectedObject;
+                    if (pendingPallet != null)
+                    {
+                        WizardDetail wizardDetail = new WizardDetail(this.pickupViewModel, pendingPallet);
+                        if (wizardDetail.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                            getPendingItems();
+                    }
                 }
             }
             catch (Exception exception)
@@ -267,11 +253,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             }
         }
 
-        private void Pickups_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.timerLoadPending.Enabled = false;
-        }
-
+        
         private void timerLoadPending_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try

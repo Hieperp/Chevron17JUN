@@ -16,6 +16,7 @@ using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.ViewModels.Inventories;
 using TotalBase;
 using TotalCore.Repositories.Commons;
+using System.ComponentModel;
 
 
 
@@ -79,6 +80,8 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
                     Quantity = (decimal)this.pendingPallet.QuantityRemains
                 };
 
+                this.pickupDetailDTO.PropertyChanged += pickupDetailDTO_PropertyChanged;
+
                 this.bindingCodeID = this.textexCode.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.PalletCode));
                 this.bindingCommodityCode = this.textexCommodityCode.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.CommodityCode));
                 this.bindingCommodityName = this.textexCommodityName.DataBindings.Add("Text", this.pickupDetailDTO, CommonExpressions.PropertyName<PickupDetailDTO>(p => p.BinLocationID));
@@ -103,9 +106,52 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             }
         }
 
+        private void pickupDetailDTO_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.buttonAdd.Enabled = this.pickupDetailDTO.IsValid;
+        }
+
         private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
             if (e.BindingCompleteState == BindingCompleteState.Exception) { ExceptionHandlers.ShowExceptionMessageBox(this, e.ErrorText); e.Cancel = true; }
+        }
+
+        private void fastBinLocations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.fastBinLocations.SelectedObject != null)
+            {
+                BinLocationBase baseIndex = (BinLocationBase)this.fastBinLocations.SelectedObject;
+                if (baseIndex != null) { this.pickupDetailDTO.BinLocationID = baseIndex.BinLocationID; this.pickupDetailDTO.BinLocationCode = baseIndex.Code; } else { this.pickupDetailDTO.BinLocationID = null; this.pickupDetailDTO.BinLocationCode = ""; };
+            }
+            else { this.pickupDetailDTO.BinLocationID = null; this.pickupDetailDTO.BinLocationCode = ""; };
+        }
+
+        private void softkey_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.fastBinLocations.SelectedObject = null;
+
+                if (sender.Equals(this.SoftkeyBackspace))
+                {
+                    if (this.textexBinLocationFilters.Text.Length > 0) this.textexBinLocationFilters.Text = this.textexBinLocationFilters.Text.Substring(0, this.textexBinLocationFilters.Text.Length - 1);
+                }
+                else
+                    this.textexBinLocationFilters.Text = this.textexBinLocationFilters.Text + (sender as ToolStripButton).Text;
+
+                this.ActiveControl = this.textexBinLocationFilters;                
+                this.textexBinLocationFilters.SelectionStart = this.textexBinLocationFilters.Text.Length;
+            }
+            catch { }
+        }
+
+        private void textexBinLocationFilters_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                OLVHelpers.ApplyFilters(this.fastBinLocations, this.textexBinLocationFilters.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+            }
+            catch { }
         }
 
         private void buttonAddESC_Click(object sender, EventArgs e)
@@ -127,29 +173,5 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             }
         }
 
-        private void softkey_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (sender.Equals(this.SoftkeyBackspace))
-                    this.textexBinLocationFilters.Text = this.textexBinLocationFilters.Text.Substring(0, this.textexBinLocationFilters.Text.Length - 1);
-                else
-                    this.textexBinLocationFilters.Text = this.textexBinLocationFilters.Text + (sender as ToolStripButton).Text;
-
-                this.ActiveControl = this.textexBinLocationFilters;
-                this.fastBinLocations.SelectedObject = null;
-                this.textexBinLocationFilters.SelectionStart = this.textexBinLocationFilters.Text.Length;
-            }
-            catch { }
-        }
-
-        private void textexBinLocationFilters_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                OLVHelpers.ApplyFilters(this.fastBinLocations, this.textexBinLocationFilters.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
-            }
-            catch { }
-        }
     }
 }

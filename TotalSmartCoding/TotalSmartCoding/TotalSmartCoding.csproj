@@ -781,6 +781,10 @@
     <None Include="Resources\8-icon641.png" />
     <None Include="Resources\blank-key-64.png" />
     <None Include="Resources\arrow-left-icon64.png" />
+    <None Include="Resources\export-arrow.png" />
+    <None Include="Resources\export-arrow-32.png" />
+    <None Include="Resources\icon.png" />
+    <None Include="Resources\export-arrow-48.png" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
     <None Include="Resources\palet031.ico" />

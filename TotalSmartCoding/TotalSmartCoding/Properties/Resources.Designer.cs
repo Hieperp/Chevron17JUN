@@ -1403,6 +1403,36 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap export_arrow {
+            get {
+                object obj = ResourceManager.GetObject("export-arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap export_arrow_32 {
+            get {
+                object obj = ResourceManager.GetObject("export-arrow-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap export_arrow_48 {
+            get {
+                object obj = ResourceManager.GetObject("export-arrow-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Fatcow_Farm_Fresh_Key_escape {
             get {
                 object obj = ResourceManager.GetObject("Fatcow-Farm-Fresh-Key-escape", resourceCulture);
@@ -1576,6 +1606,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Icojam_Onebit_Currency_dollar {
             get {
                 object obj = ResourceManager.GetObject("Icojam-Onebit-Currency-dollar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
