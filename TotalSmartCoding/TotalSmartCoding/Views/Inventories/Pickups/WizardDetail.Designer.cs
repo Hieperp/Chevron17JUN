@@ -47,31 +47,41 @@
             this.olvType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.textexBinLocationFilters = new CustomControls.TextexBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
-            this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.textexBinLocationFilters = new CustomControls.TextexBox();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.button024 = new System.Windows.Forms.ToolStripButton();
+            this.button023 = new System.Windows.Forms.ToolStripButton();
+            this.button022 = new System.Windows.Forms.ToolStripButton();
+            this.button021 = new System.Windows.Forms.ToolStripButton();
+            this.button020 = new System.Windows.Forms.ToolStripButton();
+            this.button019 = new System.Windows.Forms.ToolStripButton();
+            this.button018 = new System.Windows.Forms.ToolStripButton();
+            this.button017 = new System.Windows.Forms.ToolStripButton();
+            this.button016 = new System.Windows.Forms.ToolStripButton();
+            this.button015 = new System.Windows.Forms.ToolStripButton();
+            this.button014 = new System.Windows.Forms.ToolStripButton();
+            this.button013 = new System.Windows.Forms.ToolStripButton();
+            this.button012 = new System.Windows.Forms.ToolStripButton();
+            this.button011 = new System.Windows.Forms.ToolStripButton();
+            this.button010 = new System.Windows.Forms.ToolStripButton();
+            this.button009 = new System.Windows.Forms.ToolStripButton();
+            this.button008 = new System.Windows.Forms.ToolStripButton();
+            this.button007 = new System.Windows.Forms.ToolStripButton();
+            this.button006 = new System.Windows.Forms.ToolStripButton();
+            this.button005 = new System.Windows.Forms.ToolStripButton();
+            this.button004 = new System.Windows.Forms.ToolStripButton();
+            this.button003 = new System.Windows.Forms.ToolStripButton();
+            this.button002 = new System.Windows.Forms.ToolStripButton();
+            this.button001 = new System.Windows.Forms.ToolStripButton();
             this.buttonESC = new System.Windows.Forms.ToolStripButton();
             this.buttonAdd = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastBinLocations)).BeginInit();
@@ -84,12 +94,12 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
-            this.toolStrip4.SuspendLayout();
-            this.toolStrip5.SuspendLayout();
-            this.toolStrip6.SuspendLayout();
-            this.toolStrip7.SuspendLayout();
             this.toolStrip8.SuspendLayout();
+            this.toolStrip7.SuspendLayout();
+            this.toolStrip6.SuspendLayout();
+            this.toolStrip5.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -103,7 +113,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 540);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(1405, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1241, 55);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -115,7 +125,7 @@
             this.label2.Location = new System.Drawing.Point(2, 22);
             this.label2.Margin = new System.Windows.Forms.Padding(2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(307, 40);
+            this.label2.Size = new System.Drawing.Size(267, 40);
             this.label2.TabIndex = 103;
             this.label2.Text = "Barcode";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -128,7 +138,7 @@
             this.label10.Location = new System.Drawing.Point(2, 66);
             this.label10.Margin = new System.Windows.Forms.Padding(2);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(307, 40);
+            this.label10.Size = new System.Drawing.Size(267, 40);
             this.label10.TabIndex = 95;
             this.label10.Text = "Item Code";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -141,7 +151,7 @@
             this.label3.Location = new System.Drawing.Point(2, 110);
             this.label3.Margin = new System.Windows.Forms.Padding(2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(307, 40);
+            this.label3.Size = new System.Drawing.Size(267, 40);
             this.label3.TabIndex = 100;
             this.label3.Text = "Description";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -154,7 +164,7 @@
             this.label9.Location = new System.Drawing.Point(1, 197);
             this.label9.Margin = new System.Windows.Forms.Padding(1);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(309, 41);
+            this.label9.Size = new System.Drawing.Size(269, 41);
             this.label9.TabIndex = 101;
             this.label9.Text = "Bin Location";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -164,11 +174,11 @@
             this.textexCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCode.Editable = true;
             this.textexCode.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textexCode.Location = new System.Drawing.Point(313, 21);
+            this.textexCode.Location = new System.Drawing.Point(273, 21);
             this.textexCode.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexCode.Name = "textexCode";
             this.textexCode.ReadOnly = true;
-            this.textexCode.Size = new System.Drawing.Size(696, 41);
+            this.textexCode.Size = new System.Drawing.Size(607, 41);
             this.textexCode.TabIndex = 104;
             // 
             // textexCommodityCode
@@ -176,11 +186,11 @@
             this.textexCommodityCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCommodityCode.Editable = true;
             this.textexCommodityCode.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textexCommodityCode.Location = new System.Drawing.Point(313, 65);
+            this.textexCommodityCode.Location = new System.Drawing.Point(273, 65);
             this.textexCommodityCode.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexCommodityCode.Name = "textexCommodityCode";
             this.textexCommodityCode.ReadOnly = true;
-            this.textexCommodityCode.Size = new System.Drawing.Size(696, 41);
+            this.textexCommodityCode.Size = new System.Drawing.Size(607, 41);
             this.textexCommodityCode.TabIndex = 105;
             // 
             // textexCommodityName
@@ -188,11 +198,11 @@
             this.textexCommodityName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCommodityName.Editable = true;
             this.textexCommodityName.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textexCommodityName.Location = new System.Drawing.Point(313, 109);
+            this.textexCommodityName.Location = new System.Drawing.Point(273, 109);
             this.textexCommodityName.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexCommodityName.Name = "textexCommodityName";
             this.textexCommodityName.ReadOnly = true;
-            this.textexCommodityName.Size = new System.Drawing.Size(696, 41);
+            this.textexCommodityName.Size = new System.Drawing.Size(607, 41);
             this.textexCommodityName.TabIndex = 106;
             // 
             // textexQuantity
@@ -200,11 +210,11 @@
             this.textexQuantity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexQuantity.Editable = true;
             this.textexQuantity.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textexQuantity.Location = new System.Drawing.Point(313, 153);
+            this.textexQuantity.Location = new System.Drawing.Point(273, 153);
             this.textexQuantity.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexQuantity.Name = "textexQuantity";
             this.textexQuantity.ReadOnly = true;
-            this.textexQuantity.Size = new System.Drawing.Size(696, 41);
+            this.textexQuantity.Size = new System.Drawing.Size(607, 41);
             this.textexQuantity.TabIndex = 108;
             // 
             // label4
@@ -215,7 +225,7 @@
             this.label4.Location = new System.Drawing.Point(2, 154);
             this.label4.Margin = new System.Windows.Forms.Padding(2);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(307, 40);
+            this.label4.Size = new System.Drawing.Size(267, 40);
             this.label4.TabIndex = 107;
             this.label4.Text = "Quantity";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -247,7 +257,7 @@
             this.fastBinLocations.OwnerDraw = true;
             this.fastBinLocations.ShowGroups = false;
             this.fastBinLocations.ShowImagesOnSubItems = true;
-            this.fastBinLocations.Size = new System.Drawing.Size(1010, 287);
+            this.fastBinLocations.Size = new System.Drawing.Size(881, 287);
             this.fastBinLocations.TabIndex = 109;
             this.fastBinLocations.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBinLocations.UseCompatibleStateImageBehavior = false;
@@ -301,8 +311,9 @@
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip5);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip4);
             this.splitContainer1.Panel2.Controls.Add(this.toolStrip2);
-            this.splitContainer1.Size = new System.Drawing.Size(1405, 540);
-            this.splitContainer1.SplitterDistance = 1010;
+            this.splitContainer1.Panel2.Controls.Add(this.panel1);
+            this.splitContainer1.Size = new System.Drawing.Size(1241, 540);
+            this.splitContainer1.SplitterDistance = 881;
             this.splitContainer1.TabIndex = 110;
             // 
             // splitContainer2
@@ -319,20 +330,9 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.fastBinLocations);
-            this.splitContainer2.Size = new System.Drawing.Size(1010, 540);
+            this.splitContainer2.Size = new System.Drawing.Size(881, 540);
             this.splitContainer2.SplitterDistance = 249;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // textexBinLocationFilters
-            // 
-            this.textexBinLocationFilters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexBinLocationFilters.Editable = true;
-            this.textexBinLocationFilters.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textexBinLocationFilters.Location = new System.Drawing.Point(313, 197);
-            this.textexBinLocationFilters.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
-            this.textexBinLocationFilters.Name = "textexBinLocationFilters";
-            this.textexBinLocationFilters.Size = new System.Drawing.Size(696, 41);
-            this.textexBinLocationFilters.TabIndex = 109;
             // 
             // tableLayoutPanel1
             // 
@@ -360,240 +360,366 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1010, 249);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(881, 249);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // toolStrip2
+            // textexBinLocationFilters
             // 
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripLabel1,
-            this.toolStripButton5,
-            this.toolStripButton6});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip2.Size = new System.Drawing.Size(391, 71);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStrip4
-            // 
-            this.toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton9});
-            this.toolStrip4.Location = new System.Drawing.Point(0, 71);
-            this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip4.Size = new System.Drawing.Size(391, 71);
-            this.toolStrip4.TabIndex = 3;
-            this.toolStrip4.Text = "toolStrip4";
-            // 
-            // toolStrip5
-            // 
-            this.toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton11,
-            this.toolStripButton12});
-            this.toolStrip5.Location = new System.Drawing.Point(0, 142);
-            this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip5.Size = new System.Drawing.Size(391, 71);
-            this.toolStrip5.TabIndex = 4;
-            this.toolStrip5.Text = "toolStrip5";
-            // 
-            // toolStrip6
-            // 
-            this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton14,
-            this.toolStripButton15});
-            this.toolStrip6.Location = new System.Drawing.Point(0, 213);
-            this.toolStrip6.Name = "toolStrip6";
-            this.toolStrip6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip6.Size = new System.Drawing.Size(391, 71);
-            this.toolStrip6.TabIndex = 5;
-            this.toolStrip6.Text = "toolStrip6";
-            // 
-            // toolStrip7
-            // 
-            this.toolStrip7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton2,
-            this.toolStripButton10});
-            this.toolStrip7.Location = new System.Drawing.Point(0, 284);
-            this.toolStrip7.Name = "toolStrip7";
-            this.toolStrip7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip7.Size = new System.Drawing.Size(391, 71);
-            this.toolStrip7.TabIndex = 6;
-            this.toolStrip7.Text = "toolStrip7";
+            this.textexBinLocationFilters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexBinLocationFilters.Editable = true;
+            this.textexBinLocationFilters.Font = new System.Drawing.Font("Sitka Banner", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textexBinLocationFilters.Location = new System.Drawing.Point(273, 197);
+            this.textexBinLocationFilters.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
+            this.textexBinLocationFilters.Name = "textexBinLocationFilters";
+            this.textexBinLocationFilters.Size = new System.Drawing.Size(607, 41);
+            this.textexBinLocationFilters.TabIndex = 109;
             // 
             // toolStrip8
             // 
+            this.toolStrip8.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip8.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton13,
-            this.toolStripButton16});
-            this.toolStrip8.Location = new System.Drawing.Point(0, 355);
+            this.button024,
+            this.button023,
+            this.button022,
+            this.button021});
+            this.toolStrip8.Location = new System.Drawing.Point(0, 367);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip8.Size = new System.Drawing.Size(391, 71);
+            this.toolStrip8.Size = new System.Drawing.Size(356, 71);
             this.toolStrip8.TabIndex = 7;
             this.toolStrip8.Text = "toolStrip8";
             // 
-            // toolStripButton13
+            // toolStrip7
             // 
-            this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton13.Image = global::TotalSmartCoding.Properties.Resources.blank_key_64;
-            this.toolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton13.Name = "toolStripButton13";
-            this.toolStripButton13.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripButton13.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton13.Text = "Add";
+            this.toolStrip7.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.button020,
+            this.button019,
+            this.button018,
+            this.button017});
+            this.toolStrip7.Location = new System.Drawing.Point(0, 296);
+            this.toolStrip7.Name = "toolStrip7";
+            this.toolStrip7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip7.Size = new System.Drawing.Size(356, 71);
+            this.toolStrip7.TabIndex = 6;
+            this.toolStrip7.Text = "toolStrip7";
             // 
-            // toolStripButton16
+            // toolStrip6
             // 
-            this.toolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton16.Image = global::TotalSmartCoding.Properties.Resources.arrow_left_icon64;
-            this.toolStripButton16.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton16.Name = "toolStripButton16";
-            this.toolStripButton16.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton16.Text = "toolStripButton3";
+            this.toolStrip6.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.button016,
+            this.button015,
+            this.button014,
+            this.button013});
+            this.toolStrip6.Location = new System.Drawing.Point(0, 225);
+            this.toolStrip6.Name = "toolStrip6";
+            this.toolStrip6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip6.Size = new System.Drawing.Size(356, 71);
+            this.toolStrip6.TabIndex = 5;
+            this.toolStrip6.Text = "toolStrip6";
             // 
-            // toolStripButton2
+            // toolStrip5
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources._9_icon64;
-            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripButton2.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton2.Text = "Add";
+            this.toolStrip5.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.button012,
+            this.button011,
+            this.button010,
+            this.button009});
+            this.toolStrip5.Location = new System.Drawing.Point(0, 154);
+            this.toolStrip5.Name = "toolStrip5";
+            this.toolStrip5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip5.Size = new System.Drawing.Size(356, 71);
+            this.toolStrip5.TabIndex = 4;
+            this.toolStrip5.Text = "toolStrip5";
             // 
-            // toolStripButton10
+            // toolStrip4
             // 
-            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton10.Image = global::TotalSmartCoding.Properties.Resources._8_icon641;
-            this.toolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton10.Text = "toolStripButton3";
+            this.toolStrip4.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.button008,
+            this.button007,
+            this.button006,
+            this.button005});
+            this.toolStrip4.Location = new System.Drawing.Point(0, 83);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip4.Size = new System.Drawing.Size(356, 71);
+            this.toolStrip4.TabIndex = 3;
+            this.toolStrip4.Text = "toolStrip4";
             // 
-            // toolStripButton14
+            // toolStrip2
             // 
-            this.toolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton14.Image = global::TotalSmartCoding.Properties.Resources._7_icon64;
-            this.toolStripButton14.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton14.Name = "toolStripButton14";
-            this.toolStripButton14.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripButton14.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton14.Text = "Add";
+            this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.button004,
+            this.button003,
+            this.button002,
+            this.button001});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 12);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip2.Size = new System.Drawing.Size(356, 71);
+            this.toolStrip2.TabIndex = 1;
+            this.toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButton15
+            // button024
             // 
-            this.toolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton15.Image = global::TotalSmartCoding.Properties.Resources._6_icon64;
-            this.toolStripButton15.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton15.Name = "toolStripButton15";
-            this.toolStripButton15.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton15.Text = "toolStripButton3";
+            this.button024.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button024.Image = global::TotalSmartCoding.Properties.Resources._9_icon64;
+            this.button024.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button024.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button024.Name = "button024";
+            this.button024.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button024.Size = new System.Drawing.Size(68, 68);
+            this.button024.Text = "Add";
             // 
-            // toolStripButton11
+            // button023
             // 
-            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = global::TotalSmartCoding.Properties.Resources._5_icon64;
-            this.toolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripButton11.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton11.Text = "Add";
+            this.button023.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button023.Image = global::TotalSmartCoding.Properties.Resources._8_icon64;
+            this.button023.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button023.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button023.Name = "button023";
+            this.button023.Size = new System.Drawing.Size(68, 68);
+            this.button023.Text = "toolStripButton3";
             // 
-            // toolStripButton12
+            // button022
             // 
-            this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton12.Image = global::TotalSmartCoding.Properties.Resources._4_icon64;
-            this.toolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton12.Name = "toolStripButton12";
-            this.toolStripButton12.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton12.Text = "toolStripButton3";
+            this.button022.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button022.Image = global::TotalSmartCoding.Properties.Resources._7_icon64;
+            this.button022.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button022.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button022.Name = "button022";
+            this.button022.Size = new System.Drawing.Size(68, 68);
+            this.button022.Text = "toolStripButton23";
             // 
-            // toolStripButton1
+            // button021
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::TotalSmartCoding.Properties.Resources._3_icon64;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripButton1.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton1.Text = "Add";
+            this.button021.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button021.Image = global::TotalSmartCoding.Properties.Resources._6_icon64;
+            this.button021.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button021.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button021.Name = "button021";
+            this.button021.Size = new System.Drawing.Size(68, 68);
+            this.button021.Text = "toolStripButton24";
             // 
-            // toolStripButton9
+            // button020
             // 
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton9.Image = global::TotalSmartCoding.Properties.Resources._2_icon64;
-            this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton9.Text = "toolStripButton3";
+            this.button020.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button020.Image = global::TotalSmartCoding.Properties.Resources._5_icon64;
+            this.button020.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button020.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button020.Name = "button020";
+            this.button020.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button020.Size = new System.Drawing.Size(68, 68);
+            this.button020.Text = "Add";
             // 
-            // toolStripButton3
+            // button019
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::TotalSmartCoding.Properties.Resources._1_icon642;
-            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton3.Text = "toolStripButton3";
+            this.button019.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button019.Image = global::TotalSmartCoding.Properties.Resources._4_icon64;
+            this.button019.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button019.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button019.Name = "button019";
+            this.button019.Size = new System.Drawing.Size(68, 68);
+            this.button019.Text = "toolStripButton3";
             // 
-            // toolStripButton4
+            // button018
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::TotalSmartCoding.Properties.Resources._0_icon64;
-            this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton4.Text = "toolStripButton4";
+            this.button018.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button018.Image = global::TotalSmartCoding.Properties.Resources._3_icon64;
+            this.button018.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button018.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button018.Name = "button018";
+            this.button018.Size = new System.Drawing.Size(68, 68);
+            this.button018.Text = "toolStripButton21";
             // 
-            // toolStripButton5
+            // button017
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::TotalSmartCoding.Properties.Resources.letter_b_icon;
-            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.button017.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button017.Image = global::TotalSmartCoding.Properties.Resources._2_icon64;
+            this.button017.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button017.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button017.Name = "button017";
+            this.button017.Size = new System.Drawing.Size(68, 68);
+            this.button017.Text = "toolStripButton22";
             // 
-            // toolStripButton6
+            // button016
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::TotalSmartCoding.Properties.Resources.letter_a_icon;
-            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(68, 68);
-            this.toolStripButton6.Text = "toolStripButton6";
+            this.button016.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button016.Image = global::TotalSmartCoding.Properties.Resources.blank_key_64;
+            this.button016.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button016.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button016.Name = "button016";
+            this.button016.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button016.Size = new System.Drawing.Size(68, 68);
+            this.button016.Text = "Add";
+            // 
+            // button015
+            // 
+            this.button015.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button015.Image = global::TotalSmartCoding.Properties.Resources.arrow_left_icon64;
+            this.button015.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button015.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button015.Name = "button015";
+            this.button015.Size = new System.Drawing.Size(68, 68);
+            this.button015.Text = "toolStripButton3";
+            // 
+            // button014
+            // 
+            this.button014.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button014.Image = global::TotalSmartCoding.Properties.Resources._1_icon642;
+            this.button014.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button014.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button014.Name = "button014";
+            this.button014.Size = new System.Drawing.Size(68, 68);
+            this.button014.Text = "toolStripButton19";
+            // 
+            // button013
+            // 
+            this.button013.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button013.Image = global::TotalSmartCoding.Properties.Resources._0_icon64;
+            this.button013.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button013.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button013.Name = "button013";
+            this.button013.Size = new System.Drawing.Size(68, 68);
+            this.button013.Text = "toolStripButton20";
+            // 
+            // button012
+            // 
+            this.button012.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button012.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_L_icon;
+            this.button012.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button012.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button012.Name = "button012";
+            this.button012.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button012.Size = new System.Drawing.Size(68, 68);
+            this.button012.Text = "Add";
+            // 
+            // button011
+            // 
+            this.button011.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button011.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_K_icon;
+            this.button011.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button011.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button011.Name = "button011";
+            this.button011.Size = new System.Drawing.Size(68, 68);
+            this.button011.Text = "toolStripButton3";
+            // 
+            // button010
+            // 
+            this.button010.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button010.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_J_icon;
+            this.button010.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button010.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button010.Name = "button010";
+            this.button010.Size = new System.Drawing.Size(68, 68);
+            this.button010.Text = "toolStripButton17";
+            // 
+            // button009
+            // 
+            this.button009.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button009.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_I_icon;
+            this.button009.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button009.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button009.Name = "button009";
+            this.button009.Size = new System.Drawing.Size(68, 68);
+            this.button009.Text = "toolStripButton18";
+            // 
+            // button008
+            // 
+            this.button008.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button008.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_H_icon;
+            this.button008.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button008.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button008.Name = "button008";
+            this.button008.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button008.Size = new System.Drawing.Size(68, 68);
+            this.button008.Text = "Add";
+            // 
+            // button007
+            // 
+            this.button007.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button007.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_G_icon;
+            this.button007.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button007.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button007.Name = "button007";
+            this.button007.Size = new System.Drawing.Size(68, 68);
+            this.button007.Text = "toolStripButton3";
+            // 
+            // button006
+            // 
+            this.button006.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button006.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_F_icon;
+            this.button006.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button006.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button006.Name = "button006";
+            this.button006.Size = new System.Drawing.Size(68, 68);
+            this.button006.Text = "toolStripButton7";
+            // 
+            // button005
+            // 
+            this.button005.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button005.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_E_icon;
+            this.button005.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button005.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button005.Name = "button005";
+            this.button005.Size = new System.Drawing.Size(68, 68);
+            this.button005.Text = "toolStripButton8";
+            // 
+            // button004
+            // 
+            this.button004.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button004.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_D_icon;
+            this.button004.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button004.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button004.Name = "button004";
+            this.button004.Size = new System.Drawing.Size(68, 68);
+            this.button004.Text = "toolStripButton3";
+            // 
+            // button003
+            // 
+            this.button003.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button003.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_C_icon;
+            this.button003.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button003.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button003.Name = "button003";
+            this.button003.Size = new System.Drawing.Size(68, 68);
+            this.button003.Text = "toolStripButton4";
+            // 
+            // button002
+            // 
+            this.button002.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button002.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_B_icon;
+            this.button002.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button002.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button002.Name = "button002";
+            this.button002.Size = new System.Drawing.Size(68, 68);
+            this.button002.Text = "toolStripButton5";
+            // 
+            // button001
+            // 
+            this.button001.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.button001.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_A_icon;
+            this.button001.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.button001.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.button001.Name = "button001";
+            this.button001.Size = new System.Drawing.Size(68, 68);
+            this.button001.Text = "toolStripButton6";
             // 
             // buttonESC
             // 
@@ -617,18 +743,19 @@
             this.buttonAdd.Text = "Add";
             this.buttonAdd.Click += new System.EventHandler(this.buttonAddESC_Click);
             // 
-            // toolStripLabel1
+            // panel1
             // 
-            this.toolStripLabel1.AutoSize = false;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(35, 68);
-            this.toolStripLabel1.Text = "  ";
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(356, 12);
+            this.panel1.TabIndex = 8;
             // 
             // WizardDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1405, 595);
+            this.ClientSize = new System.Drawing.Size(1241, 595);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -653,18 +780,18 @@
             this.splitContainer2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
-            this.toolStrip4.ResumeLayout(false);
-            this.toolStrip4.PerformLayout();
-            this.toolStrip5.ResumeLayout(false);
-            this.toolStrip5.PerformLayout();
-            this.toolStrip6.ResumeLayout(false);
-            this.toolStrip6.PerformLayout();
-            this.toolStrip7.ResumeLayout(false);
-            this.toolStrip7.PerformLayout();
             this.toolStrip8.ResumeLayout(false);
             this.toolStrip8.PerformLayout();
+            this.toolStrip7.ResumeLayout(false);
+            this.toolStrip7.PerformLayout();
+            this.toolStrip6.ResumeLayout(false);
+            this.toolStrip6.PerformLayout();
+            this.toolStrip5.ResumeLayout(false);
+            this.toolStrip5.PerformLayout();
+            this.toolStrip4.ResumeLayout(false);
+            this.toolStrip4.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -695,25 +822,35 @@
         private BrightIdeasSoftware.OLVColumn olvNo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton button004;
+        private System.Windows.Forms.ToolStripButton button003;
         private System.Windows.Forms.ToolStrip toolStrip6;
-        private System.Windows.Forms.ToolStripButton toolStripButton14;
-        private System.Windows.Forms.ToolStripButton toolStripButton15;
+        private System.Windows.Forms.ToolStripButton button016;
+        private System.Windows.Forms.ToolStripButton button015;
         private System.Windows.Forms.ToolStrip toolStrip5;
-        private System.Windows.Forms.ToolStripButton toolStripButton11;
-        private System.Windows.Forms.ToolStripButton toolStripButton12;
+        private System.Windows.Forms.ToolStripButton button012;
+        private System.Windows.Forms.ToolStripButton button011;
         private System.Windows.Forms.ToolStrip toolStrip4;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripButton button008;
+        private System.Windows.Forms.ToolStripButton button007;
         private System.Windows.Forms.ToolStrip toolStrip7;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton10;
+        private System.Windows.Forms.ToolStripButton button020;
+        private System.Windows.Forms.ToolStripButton button019;
         private System.Windows.Forms.ToolStrip toolStrip8;
-        private System.Windows.Forms.ToolStripButton toolStripButton13;
-        private System.Windows.Forms.ToolStripButton toolStripButton16;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripButton button024;
+        private System.Windows.Forms.ToolStripButton button023;
+        private System.Windows.Forms.ToolStripButton button002;
+        private System.Windows.Forms.ToolStripButton button001;
+        private System.Windows.Forms.ToolStripButton button006;
+        private System.Windows.Forms.ToolStripButton button005;
+        private System.Windows.Forms.ToolStripButton button022;
+        private System.Windows.Forms.ToolStripButton button021;
+        private System.Windows.Forms.ToolStripButton button018;
+        private System.Windows.Forms.ToolStripButton button017;
+        private System.Windows.Forms.ToolStripButton button014;
+        private System.Windows.Forms.ToolStripButton button013;
+        private System.Windows.Forms.ToolStripButton button010;
+        private System.Windows.Forms.ToolStripButton button009;
+        private System.Windows.Forms.Panel panel1;
     }
 }

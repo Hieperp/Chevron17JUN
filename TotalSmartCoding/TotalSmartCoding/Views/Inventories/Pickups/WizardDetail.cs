@@ -52,6 +52,8 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.splitContainer2.Panel2.Controls.Add(this.tabBinLocation);
 
             this.splitContainer2.SplitterDistance = this.textexCode.Height + this.textexCommodityCode.Height + this.textexCommodityName.Height + this.textexQuantity.Height + this.textexBinLocationFilters.Height + 30;
+            this.splitContainer1.SplitterDistance = this.Width - this.button001.Width - this.button002.Width - this.button003.Width - this.button004.Width - 22;
+            this.ActiveControl = this.textexBinLocationFilters;
 
             this.pickupViewModel = pickupViewModel;
             this.pendingPallet = pendingPallet;
