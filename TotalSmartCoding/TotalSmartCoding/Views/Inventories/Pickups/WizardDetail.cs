@@ -52,7 +52,7 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             this.splitContainer2.Panel2.Controls.Add(this.tabBinLocation);
 
             this.splitContainer2.SplitterDistance = this.textexCode.Height + this.textexCommodityCode.Height + this.textexCommodityName.Height + this.textexQuantity.Height + this.textexBinLocationFilters.Height + 30;
-            this.splitContainer1.SplitterDistance = this.Width - this.button001.Width - this.button002.Width - this.button003.Width - this.button004.Width - 22;
+            this.splitContainer1.SplitterDistance = this.Width - this.Softkey001.Width - this.Softkey002.Width - this.Softkey003.Width - this.Softkey004.Width - 22;
             this.ActiveControl = this.textexBinLocationFilters;
 
             this.pickupViewModel = pickupViewModel;
@@ -88,14 +88,14 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
 
                 this.tabBinLocation.TabPages[0].Text = this.fastBinLocations.GetItemCount().ToString("N0") + " Bin" + (this.fastBinLocations.GetItemCount() > 1 ? "s" : "") + " Available       ";
 
-                
+
 
                 this.bindingCodeID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingCommodityCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingCommodityName.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingQuantity.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
-                this.errorProviderMaster.DataSource = this.pickupDetailDTO; 
+                this.errorProviderMaster.DataSource = this.pickupDetailDTO;
             }
             catch (Exception exception)
             {
@@ -125,6 +125,31 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
             {
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
+        }
+
+        private void softkey_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sender.Equals(this.SoftkeyBackspace))
+                    this.textexBinLocationFilters.Text = this.textexBinLocationFilters.Text.Substring(0, this.textexBinLocationFilters.Text.Length - 1);
+                else
+                    this.textexBinLocationFilters.Text = this.textexBinLocationFilters.Text + (sender as ToolStripButton).Text;
+
+                this.ActiveControl = this.textexBinLocationFilters;
+                this.fastBinLocations.SelectedObject = null;
+                this.textexBinLocationFilters.SelectionStart = this.textexBinLocationFilters.Text.Length;
+            }
+            catch { }
+        }
+
+        private void textexBinLocationFilters_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                OLVHelpers.ApplyFilters(this.fastBinLocations, this.textexBinLocationFilters.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+            }
+            catch { }
         }
     }
 }

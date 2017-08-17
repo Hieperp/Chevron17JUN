@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.buttonESC = new System.Windows.Forms.ToolStripButton();
+            this.buttonAdd = new System.Windows.Forms.ToolStripButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,37 +52,35 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textexBinLocationFilters = new CustomControls.TextexBox();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
+            this.Softkey609 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey608 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey607 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey606 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.Softkey605 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey604 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey603 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey602 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip6 = new System.Windows.Forms.ToolStrip();
+            this.SoftkeyBlank = new System.Windows.Forms.ToolStripButton();
+            this.SoftkeyBackspace = new System.Windows.Forms.ToolStripButton();
+            this.Softkey601 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey600 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
+            this.Softkey012 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey011 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey010 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey009 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.Softkey008 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey007 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey006 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey005 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.button024 = new System.Windows.Forms.ToolStripButton();
-            this.button023 = new System.Windows.Forms.ToolStripButton();
-            this.button022 = new System.Windows.Forms.ToolStripButton();
-            this.button021 = new System.Windows.Forms.ToolStripButton();
-            this.button020 = new System.Windows.Forms.ToolStripButton();
-            this.button019 = new System.Windows.Forms.ToolStripButton();
-            this.button018 = new System.Windows.Forms.ToolStripButton();
-            this.button017 = new System.Windows.Forms.ToolStripButton();
-            this.button016 = new System.Windows.Forms.ToolStripButton();
-            this.button015 = new System.Windows.Forms.ToolStripButton();
-            this.button014 = new System.Windows.Forms.ToolStripButton();
-            this.button013 = new System.Windows.Forms.ToolStripButton();
-            this.button012 = new System.Windows.Forms.ToolStripButton();
-            this.button011 = new System.Windows.Forms.ToolStripButton();
-            this.button010 = new System.Windows.Forms.ToolStripButton();
-            this.button009 = new System.Windows.Forms.ToolStripButton();
-            this.button008 = new System.Windows.Forms.ToolStripButton();
-            this.button007 = new System.Windows.Forms.ToolStripButton();
-            this.button006 = new System.Windows.Forms.ToolStripButton();
-            this.button005 = new System.Windows.Forms.ToolStripButton();
-            this.button004 = new System.Windows.Forms.ToolStripButton();
-            this.button003 = new System.Windows.Forms.ToolStripButton();
-            this.button002 = new System.Windows.Forms.ToolStripButton();
-            this.button001 = new System.Windows.Forms.ToolStripButton();
-            this.buttonESC = new System.Windows.Forms.ToolStripButton();
-            this.buttonAdd = new System.Windows.Forms.ToolStripButton();
+            this.Softkey004 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey003 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey002 = new System.Windows.Forms.ToolStripButton();
+            this.Softkey001 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).BeginInit();
@@ -116,6 +116,28 @@
             this.toolStrip1.Size = new System.Drawing.Size(1241, 55);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // buttonESC
+            // 
+            this.buttonESC.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
+            this.buttonESC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonESC.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonESC.Name = "buttonESC";
+            this.buttonESC.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonESC.Size = new System.Drawing.Size(73, 52);
+            this.buttonESC.Text = "Close";
+            this.buttonESC.Click += new System.EventHandler(this.buttonAddESC_Click);
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
+            this.buttonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonAdd.Size = new System.Drawing.Size(89, 52);
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAddESC_Click);
             // 
             // label2
             // 
@@ -373,6 +395,7 @@
             this.textexBinLocationFilters.Name = "textexBinLocationFilters";
             this.textexBinLocationFilters.Size = new System.Drawing.Size(607, 41);
             this.textexBinLocationFilters.TabIndex = 109;
+            this.textexBinLocationFilters.TextChanged += new System.EventHandler(this.textexBinLocationFilters_TextChanged);
             // 
             // toolStrip8
             // 
@@ -380,10 +403,10 @@
             this.toolStrip8.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button024,
-            this.button023,
-            this.button022,
-            this.button021});
+            this.Softkey609,
+            this.Softkey608,
+            this.Softkey607,
+            this.Softkey606});
             this.toolStrip8.Location = new System.Drawing.Point(0, 367);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -391,16 +414,65 @@
             this.toolStrip8.TabIndex = 7;
             this.toolStrip8.Text = "toolStrip8";
             // 
+            // Softkey609
+            // 
+            this.Softkey609.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey609.Image = global::TotalSmartCoding.Properties.Resources._9_icon64;
+            this.Softkey609.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey609.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey609.Name = "Softkey609";
+            this.Softkey609.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Softkey609.Size = new System.Drawing.Size(68, 68);
+            this.Softkey609.Tag = "9";
+            this.Softkey609.Text = "9";
+            this.Softkey609.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey608
+            // 
+            this.Softkey608.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey608.Image = global::TotalSmartCoding.Properties.Resources._8_icon64;
+            this.Softkey608.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey608.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey608.Name = "Softkey608";
+            this.Softkey608.Size = new System.Drawing.Size(68, 68);
+            this.Softkey608.Tag = "8";
+            this.Softkey608.Text = "8";
+            this.Softkey608.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey607
+            // 
+            this.Softkey607.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey607.Image = global::TotalSmartCoding.Properties.Resources._7_icon64;
+            this.Softkey607.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey607.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey607.Name = "Softkey607";
+            this.Softkey607.Size = new System.Drawing.Size(68, 68);
+            this.Softkey607.Tag = "7";
+            this.Softkey607.Text = "7";
+            this.Softkey607.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey606
+            // 
+            this.Softkey606.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey606.Image = global::TotalSmartCoding.Properties.Resources._6_icon64;
+            this.Softkey606.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey606.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey606.Name = "Softkey606";
+            this.Softkey606.Size = new System.Drawing.Size(68, 68);
+            this.Softkey606.Tag = "6";
+            this.Softkey606.Text = "6";
+            this.Softkey606.Click += new System.EventHandler(this.softkey_Click);
+            // 
             // toolStrip7
             // 
             this.toolStrip7.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip7.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button020,
-            this.button019,
-            this.button018,
-            this.button017});
+            this.Softkey605,
+            this.Softkey604,
+            this.Softkey603,
+            this.Softkey602});
             this.toolStrip7.Location = new System.Drawing.Point(0, 296);
             this.toolStrip7.Name = "toolStrip7";
             this.toolStrip7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -408,16 +480,65 @@
             this.toolStrip7.TabIndex = 6;
             this.toolStrip7.Text = "toolStrip7";
             // 
+            // Softkey605
+            // 
+            this.Softkey605.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey605.Image = global::TotalSmartCoding.Properties.Resources._5_icon64;
+            this.Softkey605.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey605.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey605.Name = "Softkey605";
+            this.Softkey605.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Softkey605.Size = new System.Drawing.Size(68, 68);
+            this.Softkey605.Tag = "5";
+            this.Softkey605.Text = "5";
+            this.Softkey605.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey604
+            // 
+            this.Softkey604.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey604.Image = global::TotalSmartCoding.Properties.Resources._4_icon64;
+            this.Softkey604.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey604.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey604.Name = "Softkey604";
+            this.Softkey604.Size = new System.Drawing.Size(68, 68);
+            this.Softkey604.Tag = "4";
+            this.Softkey604.Text = "4";
+            this.Softkey604.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey603
+            // 
+            this.Softkey603.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey603.Image = global::TotalSmartCoding.Properties.Resources._3_icon64;
+            this.Softkey603.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey603.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey603.Name = "Softkey603";
+            this.Softkey603.Size = new System.Drawing.Size(68, 68);
+            this.Softkey603.Tag = "3";
+            this.Softkey603.Text = "3";
+            this.Softkey603.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey602
+            // 
+            this.Softkey602.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey602.Image = global::TotalSmartCoding.Properties.Resources._2_icon64;
+            this.Softkey602.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey602.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey602.Name = "Softkey602";
+            this.Softkey602.Size = new System.Drawing.Size(68, 68);
+            this.Softkey602.Tag = "2";
+            this.Softkey602.Text = "2";
+            this.Softkey602.Click += new System.EventHandler(this.softkey_Click);
+            // 
             // toolStrip6
             // 
             this.toolStrip6.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip6.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button016,
-            this.button015,
-            this.button014,
-            this.button013});
+            this.SoftkeyBlank,
+            this.SoftkeyBackspace,
+            this.Softkey601,
+            this.Softkey600});
             this.toolStrip6.Location = new System.Drawing.Point(0, 225);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -425,16 +546,63 @@
             this.toolStrip6.TabIndex = 5;
             this.toolStrip6.Text = "toolStrip6";
             // 
+            // SoftkeyBlank
+            // 
+            this.SoftkeyBlank.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SoftkeyBlank.Image = global::TotalSmartCoding.Properties.Resources.blank_key_64;
+            this.SoftkeyBlank.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.SoftkeyBlank.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SoftkeyBlank.Name = "SoftkeyBlank";
+            this.SoftkeyBlank.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SoftkeyBlank.Size = new System.Drawing.Size(68, 68);
+            this.SoftkeyBlank.Tag = " ";
+            this.SoftkeyBlank.Text = " ";
+            this.SoftkeyBlank.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // SoftkeyBackspace
+            // 
+            this.SoftkeyBackspace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SoftkeyBackspace.Image = global::TotalSmartCoding.Properties.Resources.arrow_left_icon64;
+            this.SoftkeyBackspace.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.SoftkeyBackspace.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SoftkeyBackspace.Name = "SoftkeyBackspace";
+            this.SoftkeyBackspace.Size = new System.Drawing.Size(68, 68);
+            this.SoftkeyBackspace.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey601
+            // 
+            this.Softkey601.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey601.Image = global::TotalSmartCoding.Properties.Resources._1_icon642;
+            this.Softkey601.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey601.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey601.Name = "Softkey601";
+            this.Softkey601.Size = new System.Drawing.Size(68, 68);
+            this.Softkey601.Tag = "1";
+            this.Softkey601.Text = "1";
+            this.Softkey601.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey600
+            // 
+            this.Softkey600.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey600.Image = global::TotalSmartCoding.Properties.Resources._0_icon64;
+            this.Softkey600.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey600.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey600.Name = "Softkey600";
+            this.Softkey600.Size = new System.Drawing.Size(68, 68);
+            this.Softkey600.Tag = "0";
+            this.Softkey600.Text = "0";
+            this.Softkey600.Click += new System.EventHandler(this.softkey_Click);
+            // 
             // toolStrip5
             // 
             this.toolStrip5.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button012,
-            this.button011,
-            this.button010,
-            this.button009});
+            this.Softkey012,
+            this.Softkey011,
+            this.Softkey010,
+            this.Softkey009});
             this.toolStrip5.Location = new System.Drawing.Point(0, 154);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -442,16 +610,65 @@
             this.toolStrip5.TabIndex = 4;
             this.toolStrip5.Text = "toolStrip5";
             // 
+            // Softkey012
+            // 
+            this.Softkey012.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey012.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_L_icon;
+            this.Softkey012.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey012.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey012.Name = "Softkey012";
+            this.Softkey012.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Softkey012.Size = new System.Drawing.Size(68, 68);
+            this.Softkey012.Tag = "L";
+            this.Softkey012.Text = "L";
+            this.Softkey012.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey011
+            // 
+            this.Softkey011.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey011.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_K_icon;
+            this.Softkey011.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey011.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey011.Name = "Softkey011";
+            this.Softkey011.Size = new System.Drawing.Size(68, 68);
+            this.Softkey011.Tag = "K";
+            this.Softkey011.Text = "K";
+            this.Softkey011.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey010
+            // 
+            this.Softkey010.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey010.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_J_icon;
+            this.Softkey010.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey010.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey010.Name = "Softkey010";
+            this.Softkey010.Size = new System.Drawing.Size(68, 68);
+            this.Softkey010.Tag = "J";
+            this.Softkey010.Text = "J";
+            this.Softkey010.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey009
+            // 
+            this.Softkey009.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey009.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_I_icon;
+            this.Softkey009.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey009.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey009.Name = "Softkey009";
+            this.Softkey009.Size = new System.Drawing.Size(68, 68);
+            this.Softkey009.Tag = "I";
+            this.Softkey009.Text = "I";
+            this.Softkey009.Click += new System.EventHandler(this.softkey_Click);
+            // 
             // toolStrip4
             // 
             this.toolStrip4.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip4.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button008,
-            this.button007,
-            this.button006,
-            this.button005});
+            this.Softkey008,
+            this.Softkey007,
+            this.Softkey006,
+            this.Softkey005});
             this.toolStrip4.Location = new System.Drawing.Point(0, 83);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -459,16 +676,65 @@
             this.toolStrip4.TabIndex = 3;
             this.toolStrip4.Text = "toolStrip4";
             // 
+            // Softkey008
+            // 
+            this.Softkey008.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey008.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_H_icon;
+            this.Softkey008.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey008.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey008.Name = "Softkey008";
+            this.Softkey008.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Softkey008.Size = new System.Drawing.Size(68, 68);
+            this.Softkey008.Tag = "H";
+            this.Softkey008.Text = "H";
+            this.Softkey008.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey007
+            // 
+            this.Softkey007.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey007.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_G_icon;
+            this.Softkey007.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey007.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey007.Name = "Softkey007";
+            this.Softkey007.Size = new System.Drawing.Size(68, 68);
+            this.Softkey007.Tag = "G";
+            this.Softkey007.Text = "G";
+            this.Softkey007.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey006
+            // 
+            this.Softkey006.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey006.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_F_icon;
+            this.Softkey006.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey006.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey006.Name = "Softkey006";
+            this.Softkey006.Size = new System.Drawing.Size(68, 68);
+            this.Softkey006.Tag = "F";
+            this.Softkey006.Text = "F";
+            this.Softkey006.Click += new System.EventHandler(this.softkey_Click);
+            // 
+            // Softkey005
+            // 
+            this.Softkey005.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey005.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_E_icon;
+            this.Softkey005.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey005.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey005.Name = "Softkey005";
+            this.Softkey005.Size = new System.Drawing.Size(68, 68);
+            this.Softkey005.Tag = "E";
+            this.Softkey005.Text = "E";
+            this.Softkey005.Click += new System.EventHandler(this.softkey_Click);
+            // 
             // toolStrip2
             // 
             this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.button004,
-            this.button003,
-            this.button002,
-            this.button001});
+            this.Softkey004,
+            this.Softkey003,
+            this.Softkey002,
+            this.Softkey001});
             this.toolStrip2.Location = new System.Drawing.Point(0, 12);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -476,272 +742,53 @@
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // button024
+            // Softkey004
             // 
-            this.button024.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button024.Image = global::TotalSmartCoding.Properties.Resources._9_icon64;
-            this.button024.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button024.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button024.Name = "button024";
-            this.button024.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button024.Size = new System.Drawing.Size(68, 68);
-            this.button024.Text = "Add";
+            this.Softkey004.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey004.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_D_icon;
+            this.Softkey004.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey004.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey004.Name = "Softkey004";
+            this.Softkey004.Size = new System.Drawing.Size(68, 68);
+            this.Softkey004.Tag = "D";
+            this.Softkey004.Text = "D";
+            this.Softkey004.Click += new System.EventHandler(this.softkey_Click);
             // 
-            // button023
+            // Softkey003
             // 
-            this.button023.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button023.Image = global::TotalSmartCoding.Properties.Resources._8_icon64;
-            this.button023.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button023.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button023.Name = "button023";
-            this.button023.Size = new System.Drawing.Size(68, 68);
-            this.button023.Text = "toolStripButton3";
+            this.Softkey003.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey003.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_C_icon;
+            this.Softkey003.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey003.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey003.Name = "Softkey003";
+            this.Softkey003.Size = new System.Drawing.Size(68, 68);
+            this.Softkey003.Tag = "C";
+            this.Softkey003.Text = "C";
+            this.Softkey003.Click += new System.EventHandler(this.softkey_Click);
             // 
-            // button022
+            // Softkey002
             // 
-            this.button022.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button022.Image = global::TotalSmartCoding.Properties.Resources._7_icon64;
-            this.button022.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button022.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button022.Name = "button022";
-            this.button022.Size = new System.Drawing.Size(68, 68);
-            this.button022.Text = "toolStripButton23";
+            this.Softkey002.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey002.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_B_icon;
+            this.Softkey002.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey002.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey002.Name = "Softkey002";
+            this.Softkey002.Size = new System.Drawing.Size(68, 68);
+            this.Softkey002.Tag = "B";
+            this.Softkey002.Text = "B";
+            this.Softkey002.Click += new System.EventHandler(this.softkey_Click);
             // 
-            // button021
+            // Softkey001
             // 
-            this.button021.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button021.Image = global::TotalSmartCoding.Properties.Resources._6_icon64;
-            this.button021.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button021.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button021.Name = "button021";
-            this.button021.Size = new System.Drawing.Size(68, 68);
-            this.button021.Text = "toolStripButton24";
-            // 
-            // button020
-            // 
-            this.button020.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button020.Image = global::TotalSmartCoding.Properties.Resources._5_icon64;
-            this.button020.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button020.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button020.Name = "button020";
-            this.button020.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button020.Size = new System.Drawing.Size(68, 68);
-            this.button020.Text = "Add";
-            // 
-            // button019
-            // 
-            this.button019.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button019.Image = global::TotalSmartCoding.Properties.Resources._4_icon64;
-            this.button019.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button019.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button019.Name = "button019";
-            this.button019.Size = new System.Drawing.Size(68, 68);
-            this.button019.Text = "toolStripButton3";
-            // 
-            // button018
-            // 
-            this.button018.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button018.Image = global::TotalSmartCoding.Properties.Resources._3_icon64;
-            this.button018.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button018.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button018.Name = "button018";
-            this.button018.Size = new System.Drawing.Size(68, 68);
-            this.button018.Text = "toolStripButton21";
-            // 
-            // button017
-            // 
-            this.button017.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button017.Image = global::TotalSmartCoding.Properties.Resources._2_icon64;
-            this.button017.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button017.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button017.Name = "button017";
-            this.button017.Size = new System.Drawing.Size(68, 68);
-            this.button017.Text = "toolStripButton22";
-            // 
-            // button016
-            // 
-            this.button016.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button016.Image = global::TotalSmartCoding.Properties.Resources.blank_key_64;
-            this.button016.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button016.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button016.Name = "button016";
-            this.button016.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button016.Size = new System.Drawing.Size(68, 68);
-            this.button016.Text = "Add";
-            // 
-            // button015
-            // 
-            this.button015.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button015.Image = global::TotalSmartCoding.Properties.Resources.arrow_left_icon64;
-            this.button015.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button015.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button015.Name = "button015";
-            this.button015.Size = new System.Drawing.Size(68, 68);
-            this.button015.Text = "toolStripButton3";
-            // 
-            // button014
-            // 
-            this.button014.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button014.Image = global::TotalSmartCoding.Properties.Resources._1_icon642;
-            this.button014.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button014.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button014.Name = "button014";
-            this.button014.Size = new System.Drawing.Size(68, 68);
-            this.button014.Text = "toolStripButton19";
-            // 
-            // button013
-            // 
-            this.button013.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button013.Image = global::TotalSmartCoding.Properties.Resources._0_icon64;
-            this.button013.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button013.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button013.Name = "button013";
-            this.button013.Size = new System.Drawing.Size(68, 68);
-            this.button013.Text = "toolStripButton20";
-            // 
-            // button012
-            // 
-            this.button012.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button012.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_L_icon;
-            this.button012.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button012.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button012.Name = "button012";
-            this.button012.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button012.Size = new System.Drawing.Size(68, 68);
-            this.button012.Text = "Add";
-            // 
-            // button011
-            // 
-            this.button011.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button011.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_K_icon;
-            this.button011.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button011.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button011.Name = "button011";
-            this.button011.Size = new System.Drawing.Size(68, 68);
-            this.button011.Text = "toolStripButton3";
-            // 
-            // button010
-            // 
-            this.button010.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button010.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_J_icon;
-            this.button010.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button010.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button010.Name = "button010";
-            this.button010.Size = new System.Drawing.Size(68, 68);
-            this.button010.Text = "toolStripButton17";
-            // 
-            // button009
-            // 
-            this.button009.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button009.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_I_icon;
-            this.button009.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button009.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button009.Name = "button009";
-            this.button009.Size = new System.Drawing.Size(68, 68);
-            this.button009.Text = "toolStripButton18";
-            // 
-            // button008
-            // 
-            this.button008.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button008.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_H_icon;
-            this.button008.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button008.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button008.Name = "button008";
-            this.button008.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button008.Size = new System.Drawing.Size(68, 68);
-            this.button008.Text = "Add";
-            // 
-            // button007
-            // 
-            this.button007.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button007.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_G_icon;
-            this.button007.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button007.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button007.Name = "button007";
-            this.button007.Size = new System.Drawing.Size(68, 68);
-            this.button007.Text = "toolStripButton3";
-            // 
-            // button006
-            // 
-            this.button006.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button006.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_F_icon;
-            this.button006.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button006.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button006.Name = "button006";
-            this.button006.Size = new System.Drawing.Size(68, 68);
-            this.button006.Text = "toolStripButton7";
-            // 
-            // button005
-            // 
-            this.button005.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button005.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_E_icon;
-            this.button005.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button005.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button005.Name = "button005";
-            this.button005.Size = new System.Drawing.Size(68, 68);
-            this.button005.Text = "toolStripButton8";
-            // 
-            // button004
-            // 
-            this.button004.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button004.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_D_icon;
-            this.button004.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button004.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button004.Name = "button004";
-            this.button004.Size = new System.Drawing.Size(68, 68);
-            this.button004.Text = "toolStripButton3";
-            // 
-            // button003
-            // 
-            this.button003.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button003.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_C_icon;
-            this.button003.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button003.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button003.Name = "button003";
-            this.button003.Size = new System.Drawing.Size(68, 68);
-            this.button003.Text = "toolStripButton4";
-            // 
-            // button002
-            // 
-            this.button002.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button002.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_B_icon;
-            this.button002.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button002.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button002.Name = "button002";
-            this.button002.Size = new System.Drawing.Size(68, 68);
-            this.button002.Text = "toolStripButton5";
-            // 
-            // button001
-            // 
-            this.button001.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.button001.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_A_icon;
-            this.button001.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.button001.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.button001.Name = "button001";
-            this.button001.Size = new System.Drawing.Size(68, 68);
-            this.button001.Text = "toolStripButton6";
-            // 
-            // buttonESC
-            // 
-            this.buttonESC.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
-            this.buttonESC.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonESC.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonESC.Name = "buttonESC";
-            this.buttonESC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonESC.Size = new System.Drawing.Size(73, 52);
-            this.buttonESC.Text = "Close";
-            this.buttonESC.Click += new System.EventHandler(this.buttonAddESC_Click);
-            // 
-            // buttonAdd
-            // 
-            this.buttonAdd.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
-            this.buttonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonAdd.Size = new System.Drawing.Size(89, 52);
-            this.buttonAdd.Text = "Add";
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAddESC_Click);
+            this.Softkey001.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Softkey001.Image = global::TotalSmartCoding.Properties.Resources.letter_uppercase_A_icon;
+            this.Softkey001.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Softkey001.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Softkey001.Name = "Softkey001";
+            this.Softkey001.Size = new System.Drawing.Size(68, 68);
+            this.Softkey001.Tag = "A";
+            this.Softkey001.Text = "A";
+            this.Softkey001.Click += new System.EventHandler(this.softkey_Click);
             // 
             // panel1
             // 
@@ -822,35 +869,35 @@
         private BrightIdeasSoftware.OLVColumn olvNo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton button004;
-        private System.Windows.Forms.ToolStripButton button003;
+        private System.Windows.Forms.ToolStripButton Softkey004;
+        private System.Windows.Forms.ToolStripButton Softkey003;
         private System.Windows.Forms.ToolStrip toolStrip6;
-        private System.Windows.Forms.ToolStripButton button016;
-        private System.Windows.Forms.ToolStripButton button015;
+        private System.Windows.Forms.ToolStripButton SoftkeyBlank;
+        private System.Windows.Forms.ToolStripButton SoftkeyBackspace;
         private System.Windows.Forms.ToolStrip toolStrip5;
-        private System.Windows.Forms.ToolStripButton button012;
-        private System.Windows.Forms.ToolStripButton button011;
+        private System.Windows.Forms.ToolStripButton Softkey012;
+        private System.Windows.Forms.ToolStripButton Softkey011;
         private System.Windows.Forms.ToolStrip toolStrip4;
-        private System.Windows.Forms.ToolStripButton button008;
-        private System.Windows.Forms.ToolStripButton button007;
+        private System.Windows.Forms.ToolStripButton Softkey008;
+        private System.Windows.Forms.ToolStripButton Softkey007;
         private System.Windows.Forms.ToolStrip toolStrip7;
-        private System.Windows.Forms.ToolStripButton button020;
-        private System.Windows.Forms.ToolStripButton button019;
+        private System.Windows.Forms.ToolStripButton Softkey605;
+        private System.Windows.Forms.ToolStripButton Softkey604;
         private System.Windows.Forms.ToolStrip toolStrip8;
-        private System.Windows.Forms.ToolStripButton button024;
-        private System.Windows.Forms.ToolStripButton button023;
-        private System.Windows.Forms.ToolStripButton button002;
-        private System.Windows.Forms.ToolStripButton button001;
-        private System.Windows.Forms.ToolStripButton button006;
-        private System.Windows.Forms.ToolStripButton button005;
-        private System.Windows.Forms.ToolStripButton button022;
-        private System.Windows.Forms.ToolStripButton button021;
-        private System.Windows.Forms.ToolStripButton button018;
-        private System.Windows.Forms.ToolStripButton button017;
-        private System.Windows.Forms.ToolStripButton button014;
-        private System.Windows.Forms.ToolStripButton button013;
-        private System.Windows.Forms.ToolStripButton button010;
-        private System.Windows.Forms.ToolStripButton button009;
+        private System.Windows.Forms.ToolStripButton Softkey609;
+        private System.Windows.Forms.ToolStripButton Softkey608;
+        private System.Windows.Forms.ToolStripButton Softkey002;
+        private System.Windows.Forms.ToolStripButton Softkey001;
+        private System.Windows.Forms.ToolStripButton Softkey006;
+        private System.Windows.Forms.ToolStripButton Softkey005;
+        private System.Windows.Forms.ToolStripButton Softkey607;
+        private System.Windows.Forms.ToolStripButton Softkey606;
+        private System.Windows.Forms.ToolStripButton Softkey603;
+        private System.Windows.Forms.ToolStripButton Softkey602;
+        private System.Windows.Forms.ToolStripButton Softkey601;
+        private System.Windows.Forms.ToolStripButton Softkey600;
+        private System.Windows.Forms.ToolStripButton Softkey010;
+        private System.Windows.Forms.ToolStripButton Softkey009;
         private System.Windows.Forms.Panel panel1;
     }
 }
