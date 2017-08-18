@@ -39,7 +39,7 @@ namespace TotalSmartCoding.Views.Mains
             byte[] data = UnicodeEncoding.Unicode.GetBytes(plainText);
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             String hash = UnicodeEncoding.Unicode.GetString(data);
-            //MessageBox.Show(hash);
+            //CustomMsgBox.Show(hash);
 
 
 

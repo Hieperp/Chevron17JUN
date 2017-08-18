@@ -1,9 +1,39 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using TotalSmartCoding.Views.Commons;
 
-namespace TotalSmartCoding.Views.Commons
+namespace TotalSmartCoding
 {
+    public class CustomMsgBox
+    {
+        public static DialogResult Show(IWin32Window owner, string text)
+        {
+            return CustomMsgBox.Show(owner, text, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        }
+
+        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons)
+        {
+            return CustomMsgBox.Show(owner, text, caption, buttons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        }
+
+        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon)
+        {
+            return CustomMsgBox.Show(owner, text, caption, buttons, icon, MessageBoxDefaultButton.Button1);
+        }
+
+        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton)
+        {
+            CustomMessageBox customMessageBox = new CustomMessageBox(text, caption, buttons, icon, defaultButton);
+            DialogResult dialogResult = customMessageBox.ShowDialog(owner);
+
+
+            customMessageBox.Dispose();
+            return dialogResult;
+        }
+
+    }
+
     class CustomInputBox
     {
         public static DialogResult Show(string title, string promptText, ref string value)

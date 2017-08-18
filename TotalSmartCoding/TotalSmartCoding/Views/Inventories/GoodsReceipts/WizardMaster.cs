@@ -92,7 +92,7 @@ namespace TotalSmartCoding.Views.Inventories.GoodsReceipts
                     if (nextOK)
                         this.DialogResult = DialogResult.OK;
                     else
-                        MessageBox.Show(this, "Vui lòng chọn phiếu giao thành phẩm sau đóng gói, hoặc kho nhận hàng.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);                    
+                        CustomMsgBox.Show(this, "Vui lòng chọn phiếu giao thành phẩm sau đóng gói, hoặc kho nhận hàng.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);                    
                 }
 
                 if (sender.Equals(this.buttonESC))

@@ -281,7 +281,7 @@ namespace TotalSmartCoding.Views.Mains
             {
                 if (this.IsDirty)
                 {
-                    DialogResult dialogResult = MessageBox.Show(this, "Dữ liệu chưa lưu. Bạn có muốn lưu lại không?", "Warning", MessageBoxButtons.YesNoCancel);
+                    DialogResult dialogResult = CustomMsgBox.Show(this, "Dữ liệu chưa lưu. Bạn có muốn lưu lại không?", "Warning", MessageBoxButtons.YesNoCancel);
                     if (dialogResult == DialogResult.Yes)
                     {
                         this.Save();
@@ -318,7 +318,7 @@ namespace TotalSmartCoding.Views.Mains
             //byte[] data = UnicodeEncoding.Unicode.GetBytes(plainText);
             //data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             //String hash = UnicodeEncoding.Unicode.GetString(data);
-            //MessageBox.Show(hash);
+            //CustomMsgBox.Show(this, hash);
 
 
             this.myController.Create();
@@ -374,7 +374,7 @@ namespace TotalSmartCoding.Views.Mains
             {
                 if (this.checkSelectedIndexID())
                 {
-                    if (MessageBox.Show(this, "Are you sure you want to delete " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                    if (CustomMsgBox.Show(this, "Are you sure you want to delete " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                         if (this.myController.Delete(this.baseDTO.GetID()))
                             this.Loading();
                 }
@@ -394,7 +394,7 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     this.myController.Approve(this.baseDTO.GetID());
 
-                    if (this.ApproveCheck(this.baseDTO.GetID()) && MessageBox.Show(this, "Cài đặt batch này cho sản xuất " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                    if (this.ApproveCheck(this.baseDTO.GetID()) && CustomMsgBox.Show(this, "Cài đặt batch này cho sản xuất " + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                         if (this.myController.ApproveConfirmed())
                         {
                             this.ApproveMore(this.baseDTO.GetID());
@@ -419,7 +419,7 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     this.myController.Void(this.baseDTO.GetID());
 
-                    if (this.VoidCheck(this.baseDTO.GetID()) && MessageBox.Show(this, "Dừng sản xuất batch này" + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                    if (this.VoidCheck(this.baseDTO.GetID()) && CustomMsgBox.Show(this, "Dừng sản xuất batch này" + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                         if (this.myController.VoidConfirmed())
                         {
                             this.VoidMore(this.baseDTO.GetID());
@@ -439,7 +439,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public void Print(GlobalEnums.PrintDestination printDestination)
         {
-            MessageBox.Show(Form.ActiveForm, "Print");
+            CustomMsgBox.Show(Form.ActiveForm, "Print");
         }
 
         public void Import()

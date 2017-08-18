@@ -146,7 +146,7 @@ namespace TotalSmartCoding.Views.Mains
             {
                 if (this.IsDirty)
                 {
-                    DialogResult dialogResult = MessageBox.Show(this, "Do you want to save your change?", "Warning", MessageBoxButtons.YesNoCancel);
+                    DialogResult dialogResult = CustomMsgBox.Show(this, "Do you want to save your change?", "Warning", MessageBoxButtons.YesNoCancel);
                     if (dialogResult == DialogResult.Yes)
                     {
                         this.Save();
@@ -176,7 +176,7 @@ namespace TotalSmartCoding.Views.Mains
         public void New()
         {
             this.ControlBox = false;
-            //MessageBox.Show(Form.ActiveForm, "New");
+            //CustomMsgBox.Show(Form.ActiveForm, "New");
 
             string plainText ="nguyễnđạtphú";
             // Convert the plain string pwd into bytes
@@ -187,7 +187,7 @@ namespace TotalSmartCoding.Views.Mains
             byte[] data = UnicodeEncoding.Unicode.GetBytes(plainText);
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             String hash = UnicodeEncoding.Unicode.GetString(data);
-            MessageBox.Show(hash);
+            CustomMsgBox.Show(this, hash);
 
             //this.marketingProgramBLL.New();
             //this.SetEditableMode(true);
@@ -206,7 +206,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public void Delete()
         {
-            //DialogResult dialogResult = MessageBox.Show(this, "Are you sure you want to delete " + this.marketingProgramBLL.MarketingProgramMaster.Reference + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+            //DialogResult dialogResult = CustomMsgBox.Show(this, "Are you sure you want to delete " + this.marketingProgramBLL.MarketingProgramMaster.Reference + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
             //if (dialogResult == DialogResult.Yes)
             //{
             //    try
@@ -251,12 +251,12 @@ namespace TotalSmartCoding.Views.Mains
 
         public void Approve()
         {
-            MessageBox.Show(Form.ActiveForm, "Verify");
+            CustomMsgBox.Show(Form.ActiveForm, "Verify");
         }
 
         public void Print(GlobalEnums.PrintDestination printDestination)
         {
-            MessageBox.Show(Form.ActiveForm, "Print");
+            CustomMsgBox.Show(Form.ActiveForm, "Print");
         }
 
         public void ApplyFilter(string searchText)

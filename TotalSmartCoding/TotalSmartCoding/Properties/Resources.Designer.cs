@@ -1533,6 +1533,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Get_Info_B_icon_48 {
+            get {
+                object obj = ResourceManager.GetObject("Get-Info-B-icon-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gk420t {
             get {
                 object obj = ResourceManager.GetObject("gk420t", resourceCulture);
@@ -1566,6 +1576,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Graphicrating_Koloria_Warning {
             get {
                 object obj = ResourceManager.GetObject("Graphicrating-Koloria-Warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Green_cross {
+            get {
+                object obj = ResourceManager.GetObject("Green-cross", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1806,6 +1826,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap Kyo_Tux_Phuzion_Folder_Blue_Tools {
             get {
                 object obj = ResourceManager.GetObject("Kyo-Tux-Phuzion-Folder-Blue-Tools", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kyo_Tux_Phuzion_Sign_Info {
+            get {
+                object obj = ResourceManager.GetObject("Kyo-Tux-Phuzion-Sign-Info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2433,6 +2463,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Sign_Info_icon_48 {
+            get {
+                object obj = ResourceManager.GetObject("Sign-Info-icon-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Sign_out_01 {
             get {
                 object obj = ResourceManager.GetObject("Sign-out-01", resourceCulture);
@@ -2756,6 +2796,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap White_Pallet {
             get {
                 object obj = ResourceManager.GetObject("White-Pallet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Yellow_cross {
+            get {
+                object obj = ResourceManager.GetObject("Yellow-cross", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
