@@ -35,8 +35,8 @@ namespace TotalModel.Models
         public string Unit { get; set; }
         public string Packing { get; set; }
         public string Origin { get; set; }
-        public double Volume { get; set; }
-        public double Weight { get; set; }
+        public decimal Volume { get; set; }
+        public decimal Weight { get; set; }
         public int PackPerCarton { get; set; }
         public int CartonPerPallet { get; set; }
         public int NoExpiryDate { get; set; }

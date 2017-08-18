@@ -28,6 +28,7 @@ namespace TotalDTO.Productions
         private int commodityID;
         private string commodityCode;
         private string commodityOfficialCode;
+        private decimal volume;
 
         private int noExpiryDate;
         private bool isPailLabel;
@@ -138,6 +139,12 @@ namespace TotalDTO.Productions
         {
             get { return this.commodityOfficialCode; }
             set { ApplyPropertyChange<FillingData, string>(ref this.commodityOfficialCode, o => o.CommodityOfficialCode, value); }
+        }
+
+        public decimal Volume
+        {
+            get { return this.volume; }
+            set { ApplyPropertyChange<FillingData, decimal>(ref this.volume, o => o.Volume, value); }
         }
 
 

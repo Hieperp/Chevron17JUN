@@ -22,5 +22,8 @@ namespace TotalModel.Models
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
+        public int CartonCounts { get; set; }
+        public int PackCounts { get; set; }
+        public decimal Volume { get; set; }
     }
 }

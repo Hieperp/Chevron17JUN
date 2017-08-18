@@ -23,6 +23,8 @@ namespace TotalDTO.Productions
         public int CartonID { get; set; }
         public int FillingCartonID { get; set; }
         public Nullable<int> PalletID { get; set; }
+
+        public decimal PackCounts { get; set; }
     }
 
     public class FillingCartonPrimitiveDTO : CartonPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO

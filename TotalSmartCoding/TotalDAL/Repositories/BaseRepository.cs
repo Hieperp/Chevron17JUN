@@ -27,21 +27,27 @@ namespace TotalDAL.Repositories
 
 
 
-            //if (!GlobalVariables.shouldRestoreProcedure) //return;
+            //if (!GlobalVariables.shouldRestoreProcedure) return;
 
             return;
 
-            //return;
+
+            return;
+
+            Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
+            batch.RestoreProcedure();
+
+            return;
 
             Helpers.SqlProgrammability.Productions.FillingPack fillingPack = new Helpers.SqlProgrammability.Productions.FillingPack(totalSmartCodingEntities);
             fillingPack.RestoreProcedure();
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Productions.FillingCarton fillingCarton = new Helpers.SqlProgrammability.Productions.FillingCarton(totalSmartCodingEntities);
             fillingCarton.RestoreProcedure();
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Productions.FillingPallet fillingPallet = new Helpers.SqlProgrammability.Productions.FillingPallet(totalSmartCodingEntities);
             fillingPallet.RestoreProcedure();
@@ -58,34 +64,34 @@ namespace TotalDAL.Repositories
             accessControl.RestoreProcedure();
 
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Commons.BinLocation binLocation = new Helpers.SqlProgrammability.Commons.BinLocation(totalSmartCodingEntities);
             binLocation.RestoreProcedure();
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Commons.FillingLine fillingLine = new Helpers.SqlProgrammability.Commons.FillingLine(totalSmartCodingEntities);
             fillingLine.RestoreProcedure();
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Commons.Warehouse warehouse = new Helpers.SqlProgrammability.Commons.Warehouse(totalSmartCodingEntities);
             warehouse.RestoreProcedure();
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Commons.Employee employee = new Helpers.SqlProgrammability.Commons.Employee(totalSmartCodingEntities);
             employee.RestoreProcedure();
 
             
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Inventories.GoodsReceipt goodsReceipt = new Helpers.SqlProgrammability.Inventories.GoodsReceipt(totalSmartCodingEntities);
             goodsReceipt.RestoreProcedure();
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Commons.Commodity commodity = new Helpers.SqlProgrammability.Commons.Commodity(totalSmartCodingEntities);
             commodity.RestoreProcedure();
@@ -93,10 +99,6 @@ namespace TotalDAL.Repositories
 
             
 
-            //return;
-
-            Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
-            batch.RestoreProcedure();
 
             
 

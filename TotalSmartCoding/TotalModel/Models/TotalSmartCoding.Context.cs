@@ -31,7 +31,6 @@ namespace TotalModel.Models
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<BinLocation> BinLocations { get; set; }
         public virtual DbSet<Carton> Cartons { get; set; }
-        public virtual DbSet<Commodity> Commodities { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<dtproperty> dtproperties { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
@@ -53,6 +52,7 @@ namespace TotalModel.Models
         public virtual DbSet<Pickup> Pickups { get; set; }
         public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<Commodity> Commodities { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
