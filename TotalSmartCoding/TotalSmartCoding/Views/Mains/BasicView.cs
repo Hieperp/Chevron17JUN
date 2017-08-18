@@ -176,7 +176,7 @@ namespace TotalSmartCoding.Views.Mains
         public void New()
         {
             this.ControlBox = false;
-            //MessageBox.Show("New");
+            //MessageBox.Show(Form.ActiveForm, "New");
 
             string plainText ="nguyễnđạtphú";
             // Convert the plain string pwd into bytes
@@ -251,12 +251,12 @@ namespace TotalSmartCoding.Views.Mains
 
         public void Approve()
         {
-            MessageBox.Show("Verify");
+            MessageBox.Show(Form.ActiveForm, "Verify");
         }
 
         public void Print(GlobalEnums.PrintDestination printDestination)
         {
-            MessageBox.Show("Print");
+            MessageBox.Show(Form.ActiveForm, "Print");
         }
 
         public void ApplyFilter(string searchText)

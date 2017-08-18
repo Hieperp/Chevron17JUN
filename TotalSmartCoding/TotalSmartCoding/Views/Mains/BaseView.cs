@@ -439,7 +439,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public void Print(GlobalEnums.PrintDestination printDestination)
         {
-            MessageBox.Show("Print");
+            MessageBox.Show(Form.ActiveForm, "Print");
         }
 
         public void Import()
