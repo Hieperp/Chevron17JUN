@@ -89,8 +89,8 @@
           <Property Name="Unit" Type="nvarchar" MaxLength="10" />
           <Property Name="Packing" Type="nvarchar" MaxLength="60" />
           <Property Name="Origin" Type="nvarchar" MaxLength="60" />
-          <Property Name="Volume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Volume" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="PackPerCarton" Type="int" Nullable="false" />
           <Property Name="CartonPerPallet" Type="int" Nullable="false" />
           <Property Name="NoExpiryDate" Type="int" Nullable="false" />
@@ -168,7 +168,7 @@
           <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PackCounts" Type="int" Nullable="false" />
-          <Property Name="Volume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Volume" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FillingLines">
@@ -203,7 +203,7 @@
           <Property Name="QueueID" Type="int" Nullable="false" />
           <Property Name="PCID" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Volume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Volume" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FillingPallets">
@@ -219,7 +219,7 @@
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PackCounts" Type="int" Nullable="false" />
           <Property Name="CartonCounts" Type="int" Nullable="false" />
-          <Property Name="Volume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Volume" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="GoodsReceiptDetails">
@@ -1790,7 +1790,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Type="String" Name="NextPalletNo" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="20" />
           <Property Type="Boolean" Name="InActive" Nullable="false" />
-          <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="3" />
         </ComplexType>
         <ComplexType Name="CommodityIndex">
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
@@ -2042,7 +2042,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
           <Property Name="PackCounts" Type="Int32" Nullable="false" />
-          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
         </EntityType>
         <EntityType Name="FillingLine">
           <Key>
@@ -2081,7 +2081,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="PCID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
-          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
         </EntityType>
         <EntityType Name="FillingPallet">
           <Key>
@@ -2097,7 +2097,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
           <Property Name="CartonCounts" Type="Int32" Nullable="false" />
           <Property Name="PackCounts" Type="Int32" Nullable="false" />
-          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
         </EntityType>
         <EntityType Name="GoodsReceiptDetail">
           <Key>
@@ -2780,8 +2780,8 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Packing" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Origin" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="PackPerCarton" Type="Int32" Nullable="false" />
           <Property Name="CartonPerPallet" Type="Int32" Nullable="false" />
           <Property Name="NoExpiryDate" Type="Int32" Nullable="false" />
