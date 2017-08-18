@@ -18,7 +18,6 @@ namespace TotalModel.Models
         public Employee()
         {
             this.Customers = new HashSet<Customer>();
-            this.DeliveryAdvices = new HashSet<DeliveryAdvice>();
         }
     
         public int EmployeeID { get; set; }
@@ -34,8 +33,6 @@ namespace TotalModel.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeliveryAdvice> DeliveryAdvices { get; set; }
         public virtual Location Location { get; set; }
     }
 }

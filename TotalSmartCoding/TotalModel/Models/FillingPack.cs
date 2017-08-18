@@ -17,12 +17,12 @@ namespace TotalModel.Models
         public int FillingPackID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int FillingLineID { get; set; }
+        public int BatchID { get; set; }
         public int CommodityID { get; set; }
-        public int QueueID { get; set; }
         public Nullable<int> FillingCartonID { get; set; }
+        public int QueueID { get; set; }
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
-        public int BatchID { get; set; }
     }
 }

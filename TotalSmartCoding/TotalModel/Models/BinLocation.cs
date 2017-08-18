@@ -24,15 +24,15 @@ namespace TotalModel.Models
         public int BinLocationID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public int LocationID { get; set; }
         public int WarehouseID { get; set; }
         public string Remarks { get; set; }
         public bool InActive { get; set; }
-        public int LocationID { get; set; }
     
+        public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PickupDetail> PickupDetails { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
     }
 }

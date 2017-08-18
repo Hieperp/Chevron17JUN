@@ -25,15 +25,15 @@ namespace TotalModel.Models
         public int PalletID { get; set; }
         public int FillingPalletID { get; set; }
         public System.DateTime EntryDate { get; set; }
+        public int FillingLineID { get; set; }
         public int CommodityID { get; set; }
+        public int LocationID { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityPickup { get; set; }
         public decimal Volume { get; set; }
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
-        public int FillingLineID { get; set; }
-        public int LocationID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons { get; set; }

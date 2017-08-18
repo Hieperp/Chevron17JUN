@@ -96,16 +96,7 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeliveryAdvice.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeliveryAdviceDetail.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeliveryAdviceIndex.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeliveryAdviceViewDetail.cs">
+    <Compile Include="Models\dtproperty.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
@@ -171,9 +162,6 @@
     <Compile Include="Models\Pallet.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PaymentTerm.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PendingPallet.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
@@ -196,6 +184,9 @@
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PickupViewDetail.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Territory.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TotalSmartCodingEntities.cs" />

@@ -6,11 +6,9 @@ using AutoMapper;
 
 using TotalModel.Models;
 
-using TotalDTO.Sales;
 using TotalDTO.Inventories;
 using TotalDTO.Commons;
 
-using TotalSmartCoding.ViewModels.Sales;
 using TotalSmartCoding.ViewModels.Inventories;
 using TotalDTO.Productions;
 using TotalSmartCoding.ViewModels.Productions;
@@ -26,15 +24,6 @@ namespace TotalSmartCoding.Libraries
             Mapper.Initialize(cfg =>
             {
                
-
-
-                cfg.CreateMap<DeliveryAdvice, DeliveryAdviceViewModel>();
-                cfg.CreateMap<DeliveryAdvice, DeliveryAdviceDTO>();
-                cfg.CreateMap<DeliveryAdvicePrimitiveDTO, DeliveryAdvice>();
-                cfg.CreateMap<DeliveryAdviceViewDetail, DeliveryAdviceDetailDTO>();
-                cfg.CreateMap<DeliveryAdviceDetailDTO, DeliveryAdviceDetail>();
-
-                cfg.CreateMap<DeliveryAdvice, DeliveryAdviceBoxDTO>();
 
 
 

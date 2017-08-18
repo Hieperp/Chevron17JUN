@@ -24,10 +24,12 @@ namespace TotalModel.Models
         public int PickupID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
+        public int FillingLineID { get; set; }
         public int WarehouseID { get; set; }
         public int ForkliftDriverID { get; set; }
         public int StorekeeperID { get; set; }
         public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
         public int OrganizationalUnitID { get; set; }
         public int LocationID { get; set; }
         public decimal TotalQuantity { get; set; }
@@ -38,15 +40,13 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
-        public int PreparedPersonID { get; set; }
-        public int FillingLineID { get; set; }
     
+        public virtual FillingLine FillingLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PickupDetail> PickupDetails { get; set; }
         public virtual Warehouse Warehouse { get; set; }
-        public virtual FillingLine FillingLine { get; set; }
     }
 }

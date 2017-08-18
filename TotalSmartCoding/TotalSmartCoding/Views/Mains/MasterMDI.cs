@@ -12,7 +12,6 @@ using TotalBase.Enums;
 using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.Views.Commons;
 
-using TotalSmartCoding.Views.Sales;
 using TotalSmartCoding.Views.Productions;
 using TotalSmartCoding.Views.Inventories.Pickups;
 using TotalSmartCoding.Views.Inventories.GoodsReceipts;

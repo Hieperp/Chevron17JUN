@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Helpers\EntityFrameworkExtension.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\BinLocation.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Commons\AccessControl.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\Commodity.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\Employee.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\FillingLine.cs" />
@@ -68,7 +69,6 @@
     <Compile Include="Repositories\Commons\CommodityRepository.cs" />
     <Compile Include="Repositories\Commons\EmployeeRepository.cs" />
     <Compile Include="Repositories\Commons\FillingLineRepository.cs" />
-    <Compile Include="Repositories\Commons\PaymentTermRepository.cs" />
     <Compile Include="Repositories\Commons\WarehouseRepository.cs" />
     <Compile Include="Repositories\GenericAPIRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
@@ -79,7 +79,6 @@
     <Compile Include="Repositories\Productions\FillingCartonRepository.cs" />
     <Compile Include="Repositories\Productions\FillingPackRepository.cs" />
     <Compile Include="Repositories\Productions\FillingPalletRepository.cs" />
-    <Compile Include="Repositories\Sales\DeliveryAdviceRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

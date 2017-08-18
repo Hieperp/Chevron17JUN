@@ -20,7 +20,6 @@ namespace TotalModel.Models
         public int CommodityID { get; set; }
         public int CartonPerPallet { get; set; }
         public int NoExpiryDate { get; set; }
-        public bool IsPailLabel { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }

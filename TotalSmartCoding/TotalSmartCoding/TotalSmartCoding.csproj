@@ -110,7 +110,6 @@
     <Compile Include="Controllers\APIs\Commons\CommodityAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\GoodsReceiptAPIs.cs" />
     <Compile Include="Controllers\APIs\Productions\BatchAPIs.cs" />
-    <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ControllersExtensions.cs" />
     <Compile Include="Controllers\CoreController.cs" />
@@ -125,7 +124,6 @@
     <Compile Include="Controllers\Productions\FillingPalletController.cs" />
     <Compile Include="Controllers\Productions\PrinterController.cs" />
     <Compile Include="Controllers\Productions\ScannerController.cs" />
-    <Compile Include="Controllers\Sales\DeliveryAdvicesController.cs" />
     <Compile Include="Libraries\Helpers\ViewHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,7 +140,6 @@
     <Compile Include="ViewModels\Productions\FillingCartonViewModel.cs" />
     <Compile Include="ViewModels\Productions\FillingPackViewModel.cs" />
     <Compile Include="ViewModels\Productions\FillingPalletViewModel.cs" />
-    <Compile Include="ViewModels\Sales\DeliveryAdviceViewModel.cs" />
     <Compile Include="Views\Commons\CustomExceptionMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,12 +216,6 @@
     <Compile Include="Views\Productions\SmartCoding.designer.cs">
       <DependentUpon>SmartCoding.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Sales\DeliveryAdvices.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Sales\DeliveryAdvices.Designer.cs">
-      <DependentUpon>DeliveryAdvices.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -268,9 +259,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Productions\SmartCoding.resx">
       <DependentUpon>SmartCoding.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Sales\DeliveryAdvices.resx">
-      <DependentUpon>DeliveryAdvices.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>

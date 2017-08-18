@@ -56,7 +56,6 @@
     <Compile Include="Repositories\Commons\ICommodityRepository.cs" />
     <Compile Include="Repositories\Commons\IEmployeeRepository.cs" />
     <Compile Include="Repositories\Commons\IFillingLineRepository.cs" />
-    <Compile Include="Repositories\Commons\IPaymentTermRepository.cs" />
     <Compile Include="Repositories\Commons\IWarehouseRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Repositories\IGenericAPIRepository.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Repositories\Productions\IFillingCartonRepository.cs" />
     <Compile Include="Repositories\Productions\IFillingPackRepository.cs" />
     <Compile Include="Repositories\Productions\IFillingPalletRepository.cs" />
-    <Compile Include="Repositories\Sales\IDeliveryAdviceRepository.cs" />
     <Compile Include="Services\IBaseService.cs" />
     <Compile Include="Services\IGenericService.cs" />
     <Compile Include="Services\IGenericWithDetailService.cs" />
@@ -79,7 +77,6 @@
     <Compile Include="Services\Productions\IFillingCartonService.cs" />
     <Compile Include="Services\Productions\IFillingPackService.cs" />
     <Compile Include="Services\Productions\IFillingPalletService.cs" />
-    <Compile Include="Services\Sales\IDeliveryAdviceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TotalBase\TotalBase.csproj">

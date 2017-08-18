@@ -11,10 +11,6 @@ using TotalModel.Models;
 //using TotalCore.Services.Inventories;
 
 using TotalDAL.Repositories;
-using TotalDAL.Repositories.Sales;
-using TotalCore.Repositories.Sales;
-using TotalCore.Services.Sales;
-using TotalService.Sales;
 using TotalCore.Repositories.Commons;
 using TotalDAL.Repositories.Commons;
 using TotalService.Inventories;
@@ -22,7 +18,6 @@ using TotalCore.Services.Inventories;
 using TotalDAL.Repositories.Inventories;
 using TotalCore.Repositories.Inventories;
 using TotalSmartCoding.ViewModels.Inventories;
-using TotalSmartCoding.ViewModels.Sales;
 using TotalCore.Services.Productions;
 using TotalService.Productions;
 using TotalDAL.Repositories.Productions;
@@ -58,11 +53,6 @@ namespace TotalSmartCoding.Libraries
 
 
 
-                Kernel.Bind<IDeliveryAdviceService>().To<DeliveryAdviceService>();
-                Kernel.Bind<IDeliveryAdviceRepository>().To<DeliveryAdviceRepository>();
-                Kernel.Bind<IDeliveryAdviceAPIRepository>().To<DeliveryAdviceAPIRepository>();
-                Kernel.Bind<DeliveryAdviceViewModel>().ToSelf();
-
 
 
                 Kernel.Bind<IPickupService>().To<PickupService>();
@@ -80,7 +70,6 @@ namespace TotalSmartCoding.Libraries
 
 
                 Kernel.Bind<IAspNetUserRepository>().To<AspNetUserRepository>();
-                Kernel.Bind<IPaymentTermRepository>().To<PaymentTermRepository>();
 
 
 

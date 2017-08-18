@@ -14,17 +14,13 @@ namespace TotalModel.Models
     
     public partial class Customer
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.DeliveryAdvices = new HashSet<DeliveryAdvice>();
-            this.DeliveryAdvices1 = new HashSet<DeliveryAdvice>();
-        }
-    
         public int CustomerID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string OfficialName { get; set; }
+        public string VendorCode { get; set; }
+        public string VendorCategory { get; set; }
+        public int SalespersonID { get; set; }
         public int CustomerCategoryID { get; set; }
         public int CustomerTypeID { get; set; }
         public int TerritoryID { get; set; }
@@ -35,23 +31,14 @@ namespace TotalModel.Models
         public string Facsimile { get; set; }
         public string AttentionName { get; set; }
         public string AttentionTitle { get; set; }
-        public Nullable<double> LimitAmount { get; set; }
-        public bool InActive { get; set; }
-        public string Remarks { get; set; }
-        public string VendorCode { get; set; }
-        public string VendorCategory { get; set; }
-        public int PriceCategoryID { get; set; }
-        public Nullable<int> MonetaryAccountID { get; set; }
-        public int SalespersonID { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<double> LimitAmount { get; set; }
+        public string Remarks { get; set; }
+        public bool InActive { get; set; }
         public bool IsCustomer { get; set; }
         public bool IsSupplier { get; set; }
         public bool IsFemale { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeliveryAdvice> DeliveryAdvices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeliveryAdvice> DeliveryAdvices1 { get; set; }
         public virtual Employee Employee { get; set; }
     }
 }

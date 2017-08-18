@@ -17,10 +17,10 @@ namespace TotalModel.Models
         public int FillingPalletID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int FillingLineID { get; set; }
+        public int BatchID { get; set; }
         public int CommodityID { get; set; }
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
-        public int BatchID { get; set; }
     }
 }

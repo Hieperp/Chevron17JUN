@@ -27,32 +27,31 @@ namespace TotalModel.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<BinLocation> BinLocations { get; set; }
+        public virtual DbSet<Carton> Cartons { get; set; }
+        public virtual DbSet<Commodity> Commodities { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
-        public virtual DbSet<DeliveryAdvice> DeliveryAdvices { get; set; }
+        public virtual DbSet<dtproperty> dtproperties { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<FillingCarton> FillingCartons { get; set; }
+        public virtual DbSet<FillingLine> FillingLines { get; set; }
+        public virtual DbSet<FillingPack> FillingPacks { get; set; }
+        public virtual DbSet<FillingPallet> FillingPallets { get; set; }
+        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
+        public virtual DbSet<GoodsReceiptType> GoodsReceiptTypes { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<ModuleDetail> ModuleDetails { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
         public virtual DbSet<OrganizationalUnitUser> OrganizationalUnitUsers { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<PaymentTerm> PaymentTerms { get; set; }
-        public virtual DbSet<BinLocation> BinLocations { get; set; }
-        public virtual DbSet<FillingLine> FillingLines { get; set; }
-        public virtual DbSet<GoodsReceiptType> GoodsReceiptTypes { get; set; }
-        public virtual DbSet<Commodity> Commodities { get; set; }
-        public virtual DbSet<FillingCarton> FillingCartons { get; set; }
-        public virtual DbSet<FillingPack> FillingPacks { get; set; }
-        public virtual DbSet<FillingPallet> FillingPallets { get; set; }
-        public virtual DbSet<Batch> Batches { get; set; }
-        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
-        public virtual DbSet<Carton> Cartons { get; set; }
         public virtual DbSet<Pack> Packs { get; set; }
         public virtual DbSet<Pallet> Pallets { get; set; }
-        public virtual DbSet<Pickup> Pickups { get; set; }
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Pickup> Pickups { get; set; }
+        public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
@@ -100,15 +99,6 @@ namespace TotalModel.Models
                 new ObjectParameter("NMVNTaskID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("GetShowDiscount", userIDParameter, nMVNTaskIDParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<bool>> GetShowDiscountByCustomer(Nullable<int> customerID)
-        {
-            var customerIDParameter = customerID.HasValue ?
-                new ObjectParameter("CustomerID", customerID) :
-                new ObjectParameter("CustomerID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("GetShowDiscountByCustomer", customerIDParameter);
         }
     
         public virtual ObjectResult<Nullable<bool>> GetUnApprovalPermitted(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
@@ -160,85 +150,6 @@ namespace TotalModel.Models
                 new ObjectParameter("OrganizationalUnitID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("GetVoidablePermitted", userIDParameter, nMVNTaskIDParameter, organizationalUnitIDParameter);
-        }
-    
-        public virtual ObjectResult<string> DeliveryAdviceApproved(Nullable<int> entityID)
-        {
-            var entityIDParameter = entityID.HasValue ?
-                new ObjectParameter("EntityID", entityID) :
-                new ObjectParameter("EntityID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("DeliveryAdviceApproved", entityIDParameter);
-        }
-    
-        public virtual ObjectResult<string> DeliveryAdviceEditable(Nullable<int> entityID)
-        {
-            var entityIDParameter = entityID.HasValue ?
-                new ObjectParameter("EntityID", entityID) :
-                new ObjectParameter("EntityID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("DeliveryAdviceEditable", entityIDParameter);
-        }
-    
-        public virtual ObjectResult<string> DeliveryAdvicePostSaveValidate(Nullable<int> entityID)
-        {
-            var entityIDParameter = entityID.HasValue ?
-                new ObjectParameter("EntityID", entityID) :
-                new ObjectParameter("EntityID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("DeliveryAdvicePostSaveValidate", entityIDParameter);
-        }
-    
-        public virtual int DeliveryAdviceSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
-        {
-            var entityIDParameter = entityID.HasValue ?
-                new ObjectParameter("EntityID", entityID) :
-                new ObjectParameter("EntityID", typeof(int));
-    
-            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
-                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
-                new ObjectParameter("SaveRelativeOption", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeliveryAdviceSaveRelative", entityIDParameter, saveRelativeOptionParameter);
-        }
-    
-        public virtual int DeliveryAdviceToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
-        {
-            var entityIDParameter = entityID.HasValue ?
-                new ObjectParameter("EntityID", entityID) :
-                new ObjectParameter("EntityID", typeof(int));
-    
-            var approvedParameter = approved.HasValue ?
-                new ObjectParameter("Approved", approved) :
-                new ObjectParameter("Approved", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeliveryAdviceToggleApproved", entityIDParameter, approvedParameter);
-        }
-    
-        public virtual ObjectResult<DeliveryAdviceIndex> GetDeliveryAdviceIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
-        {
-            var aspUserIDParameter = aspUserID != null ?
-                new ObjectParameter("AspUserID", aspUserID) :
-                new ObjectParameter("AspUserID", typeof(string));
-    
-            var fromDateParameter = fromDate.HasValue ?
-                new ObjectParameter("FromDate", fromDate) :
-                new ObjectParameter("FromDate", typeof(System.DateTime));
-    
-            var toDateParameter = toDate.HasValue ?
-                new ObjectParameter("ToDate", toDate) :
-                new ObjectParameter("ToDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DeliveryAdviceIndex>("GetDeliveryAdviceIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
-        }
-    
-        public virtual ObjectResult<DeliveryAdviceViewDetail> GetDeliveryAdviceViewDetails(Nullable<int> deliveryAdviceID)
-        {
-            var deliveryAdviceIDParameter = deliveryAdviceID.HasValue ?
-                new ObjectParameter("DeliveryAdviceID", deliveryAdviceID) :
-                new ObjectParameter("DeliveryAdviceID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DeliveryAdviceViewDetail>("GetDeliveryAdviceViewDetails", deliveryAdviceIDParameter);
         }
     
         public virtual ObjectResult<PendingPickupDetail> GetPendingPickupDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, Nullable<int> pickupID, Nullable<int> warehouseID, string pickupDetailIDs, Nullable<bool> isReadonly)

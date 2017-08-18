@@ -12,22 +12,21 @@ namespace TotalModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PaymentTerm
+    public partial class Territory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PaymentTerm()
+        public Territory()
         {
-            this.DeliveryAdvices = new HashSet<DeliveryAdvice>();
+            this.Territories1 = new HashSet<Territory>();
         }
     
-        public int PaymentTermID { get; set; }
-        public int TermPaymentCategoryID { get; set; }
+        public int TerritoryID { get; set; }
         public string Name { get; set; }
+        public Nullable<int> AncestorID { get; set; }
         public string Remarks { get; set; }
-        public bool IsDefault { get; set; }
-        public int CalculateID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeliveryAdvice> DeliveryAdvices { get; set; }
+        public virtual ICollection<Territory> Territories1 { get; set; }
+        public virtual Territory Territory1 { get; set; }
     }
 }

@@ -12,16 +12,14 @@ namespace TotalModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FillingCarton
+    public partial class dtproperty
     {
-        public int FillingCartonID { get; set; }
-        public System.DateTime EntryDate { get; set; }
-        public int FillingLineID { get; set; }
-        public int BatchID { get; set; }
-        public int CommodityID { get; set; }
-        public Nullable<int> FillingPalletID { get; set; }
-        public string PCID { get; set; }
-        public string Code { get; set; }
-        public int EntryStatusID { get; set; }
+        public int id { get; set; }
+        public Nullable<int> objectid { get; set; }
+        public string property { get; set; }
+        public string value { get; set; }
+        public string uvalue { get; set; }
+        public byte[] lvalue { get; set; }
+        public int version { get; set; }
     }
 }

@@ -30,10 +30,10 @@ namespace TotalModel.Models
         public int FillingLineID { get; set; }
         public int CommodityID { get; set; }
         public Nullable<int> PalletID { get; set; }
+        public int LocationID { get; set; }
         public string PCID { get; set; }
         public string Code { get; set; }
         public int EntryStatusID { get; set; }
-        public int LocationID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons1 { get; set; }

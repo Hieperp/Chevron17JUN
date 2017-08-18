@@ -26,17 +26,17 @@ namespace TotalModel.Models
         public int FillingLineID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        public string Remarks { get; set; }
+        public bool HasPack { get; set; }
+        public bool HasCarton { get; set; }
+        public bool HasPallet { get; set; }
+        public int LocationID { get; set; }
         public Nullable<int> LastLogonFillingLineID { get; set; }
         public string PortName { get; set; }
         public Nullable<int> ServerID { get; set; }
         public string ServerName { get; set; }
         public string DatabaseName { get; set; }
+        public string Remarks { get; set; }
         public bool InActive { get; set; }
-        public bool HasPack { get; set; }
-        public bool HasCarton { get; set; }
-        public bool HasPallet { get; set; }
-        public int LocationID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Batch> Batches { get; set; }
