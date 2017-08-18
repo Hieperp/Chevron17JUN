@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 using Ninject;
 
-using TotalCore.Repositories.Commons;
+using TotalBase;
 using TotalModel.Models;
+using TotalCore.Repositories.Commons;
 using TotalSmartCoding.Controllers.APIs.Commons;
 using TotalSmartCoding.Controllers.APIs.Inventories;
 using TotalSmartCoding.Libraries;
 using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.ViewModels.Inventories;
-using TotalBase;
 
 
 namespace TotalSmartCoding.Views.Inventories.Pickups
@@ -40,6 +41,8 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
         {
             try
             {
+                this.pickupViewModel.PropertyChanged += pickupDetailDTO_PropertyChanged;
+
                 WarehouseAPIs warehouseAPIs = new WarehouseAPIs(CommonNinject.Kernel.Get<IWarehouseAPIRepository>());
 
                 this.combexWarehouseID.DataSource = warehouseAPIs.GetWarehouseBases();
@@ -75,11 +78,18 @@ namespace TotalSmartCoding.Views.Inventories.Pickups
                 this.bindingStorekeeperID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
                 this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+                this.errorProviderMaster.DataSource = this.pickupViewModel;
             }
             catch (Exception exception)
             {
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
+        }
+
+        private void pickupDetailDTO_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.buttonOK.Enabled = this.pickupViewModel.IsValid;
         }
 
         private void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)

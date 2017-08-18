@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.buttonESC = new System.Windows.Forms.ToolStripButton();
             this.buttonOK = new System.Windows.Forms.ToolStripButton();
@@ -41,7 +42,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.combexFillingLineID = new CustomControls.CombexBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.errorProviderMaster = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -55,7 +58,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 305);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(848, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(856, 55);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -73,6 +76,7 @@
             // 
             // buttonOK
             // 
+            this.buttonOK.Enabled = false;
             this.buttonOK.Font = new System.Drawing.Font("Niagara Engraved", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOK.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
             this.buttonOK.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -219,11 +223,15 @@
             this.label2.Text = "Production Line";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // errorProviderMaster
+            // 
+            this.errorProviderMaster.ContainerControl = this;
+            // 
             // WizardMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 360);
+            this.ClientSize = new System.Drawing.Size(856, 360);
             this.Controls.Add(this.combexFillingLineID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.combexWarehouseID);
@@ -244,6 +252,7 @@
             this.Load += new System.EventHandler(this.WizardMaster_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,5 +273,6 @@
         private System.Windows.Forms.Label label1;
         private CustomControls.CombexBox combexFillingLineID;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ErrorProvider errorProviderMaster;
     }
 }

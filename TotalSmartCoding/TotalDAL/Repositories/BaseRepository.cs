@@ -30,6 +30,28 @@ namespace TotalDAL.Repositories
             //if (!GlobalVariables.shouldRestoreProcedure) //return;
 
             return;
+
+            //return;
+
+            Helpers.SqlProgrammability.Productions.FillingPack fillingPack = new Helpers.SqlProgrammability.Productions.FillingPack(totalSmartCodingEntities);
+            fillingPack.RestoreProcedure();
+
+            //return;
+
+            Helpers.SqlProgrammability.Productions.FillingCarton fillingCarton = new Helpers.SqlProgrammability.Productions.FillingCarton(totalSmartCodingEntities);
+            fillingCarton.RestoreProcedure();
+
+            //return;
+
+            Helpers.SqlProgrammability.Productions.FillingPallet fillingPallet = new Helpers.SqlProgrammability.Productions.FillingPallet(totalSmartCodingEntities);
+            fillingPallet.RestoreProcedure();
+
+
+            return;
+
+            Helpers.SqlProgrammability.Inventories.Pickup pickup = new Helpers.SqlProgrammability.Inventories.Pickup(totalSmartCodingEntities);
+            pickup.RestoreProcedure();
+
             return;
 
             Helpers.SqlProgrammability.Commons.AccessControl accessControl = new Helpers.SqlProgrammability.Commons.AccessControl(totalSmartCodingEntities);
@@ -56,10 +78,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Commons.Employee employee = new Helpers.SqlProgrammability.Commons.Employee(totalSmartCodingEntities);
             employee.RestoreProcedure();
 
-            //return;
-
-            Helpers.SqlProgrammability.Inventories.Pickup pickup = new Helpers.SqlProgrammability.Inventories.Pickup(totalSmartCodingEntities);
-            pickup.RestoreProcedure();
+            
 
             //return;
 
@@ -72,26 +91,12 @@ namespace TotalDAL.Repositories
             commodity.RestoreProcedure();
 
 
-            //return;
-
-            Helpers.SqlProgrammability.Productions.FillingPallet fillingPallet = new Helpers.SqlProgrammability.Productions.FillingPallet(totalSmartCodingEntities);
-            fillingPallet.RestoreProcedure();
-
+            
 
             //return;
 
             Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
             batch.RestoreProcedure();
-
-            //return;
-
-            Helpers.SqlProgrammability.Productions.FillingPack fillingPack = new Helpers.SqlProgrammability.Productions.FillingPack(totalSmartCodingEntities);
-            fillingPack.RestoreProcedure();
-
-            //return;
-
-            Helpers.SqlProgrammability.Productions.FillingCarton fillingCarton = new Helpers.SqlProgrammability.Productions.FillingCarton(totalSmartCodingEntities);
-            fillingCarton.RestoreProcedure();
 
             
 

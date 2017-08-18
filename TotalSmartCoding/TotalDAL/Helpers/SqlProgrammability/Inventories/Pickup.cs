@@ -218,9 +218,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
         private void PickupEditable()
         {
-            string[] queryArray = new string[1];
+            string[] queryArray = new string[2];
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = PickupID FROM GoodsReceiptDetails WHERE PickupID = @EntityID ";
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = PickupID FROM GoodsReceipts WHERE PickupID = @EntityID ";
+            queryArray[1] = " SELECT TOP 1 @FoundEntity = PickupID FROM GoodsReceiptDetails WHERE PickupID = @EntityID ";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PickupEditable", queryArray);
         }

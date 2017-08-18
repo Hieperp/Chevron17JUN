@@ -134,6 +134,7 @@ namespace TotalDTO.Inventories
         protected override List<ValidationRule> CreateRules()
         {
             List<ValidationRule> validationRules = base.CreateRules();
+            validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<PickupDTO>(p => p.FillingLineID), "Vui lòng chọn chuyền.", delegate { return (this.FillingLineID != null && this.FillingLineID > 0); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<PickupDTO>(p => p.WarehouseID), "Vui lòng chọn kho.", delegate { return (this.WarehouseID != null && this.WarehouseID > 0); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<PickupDTO>(p => p.ForkliftDriverID), "Vui lòng chọn tài xế.", delegate { return (this.ForkliftDriverID != null && this.ForkliftDriverID > 0); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<PickupDTO>(p => p.StorekeeperID), "Vui lòng chọn nhân viên kho.", delegate { return (this.StorekeeperID != null && this.StorekeeperID > 0); }));
