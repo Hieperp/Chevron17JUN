@@ -38,6 +38,12 @@ namespace TotalDTO.Productions
 
 
 
+        //This is turn to TRUE for processing the last set: TO ALLOW TO MAKE A PARTILAL SET. IT MEANS: THE PENDING Item IS LESS THAN THE ItemPerSet.
+        public bool LastsetProcessing { get; set; }
+
+
+
+
 
 
 
@@ -214,29 +220,33 @@ namespace TotalDTO.Productions
         /// <returns></returns>
         public BarcodeQueue<TBarcodeDTO> Dequeueset()
         {
-            if (((this.ItemPerSet / this.NoSubQueue) % 1) == 0) //CHECK FOR AN Integer RESULT
+            if ((((decimal)this.ItemPerSet / (decimal)this.NoSubQueue) % 1) == 0) //CHECK FOR AN Integer RESULT
             {
                 BarcodeQueue<TBarcodeDTO> barcodesetQueue = new BarcodeQueue<TBarcodeDTO>(this.NoSubQueue, this.ItemPerSet / this.NoSubQueue, false) { ItemPerSet = this.ItemPerSet };
 
-                //chu y: o day: NoItemPerSubQueue co ve khong chac chan lam, nen lap trinh lai: cho no hop ly hon: lay tong so PackPerCarton/ no Sub queue
                 foreach (List<TBarcodeDTO> subQueue in this.list2DBarcode)
                 {
-                    if (barcodesetQueue.itemPerSubQueue > subQueue.Count) return barcodesetQueue; //There is not enough element in this sub queue to dequeue. In this case, return empty
+                    if (barcodesetQueue.itemPerSubQueue > subQueue.Count && !this.LastsetProcessing) return barcodesetQueue; //There is not enough element in this sub queue to dequeue. //IF LastsetProcessing: TO ALLOW TO MAKE A PARTILAL SET. IT MEANS: THE PENDING Item IS LESS THAN THE ItemPerSet, OTHERWISE: return empty
                 }
 
 
                 foreach (List<TBarcodeDTO> subQueue in this.list2DBarcode)
                 {
                     for (int i = 0; i < barcodesetQueue.itemPerSubQueue; i++)
-                    {
+                    {   //THE MAXIMUM ITEM PER EACH subQueue IS itemPerSubQueue (FULL SET). 
+                        //LATER: WHEN LastsetProcessing => WE CAN MODIFY HERE (ONLY HERE) TO ALLOW: THE MAXIMUM ITEM PER EACH subQueue IS GREATER THAN THE STANDARD itemPerSubQueue. TO DO THIS: FIRST WE HAVE TO ADD A NEW PROPERTY pauseStatus (SET TO TRUE) TO PAUSE THE PROCCESS OF MakePackset/ MakeCartonset BY ScannerController, THEN TURN LastsetProcessing TO true IN ORDER TO RELEASE pauseStatus (SET TO FALSE), FINALLY: MODIFY THIS CONDITION: i < barcodesetQueue.itemPerSubQueue
+
+                        //HERE WE CHECK subQueue.Count > 0 => WHEN LastsetProcessing: SOME subQueue OF THE SET MAY NOT IS FULL
                         if (subQueue.Count > 0) { barcodesetQueue.Enqueue(subQueue.ElementAt(0)); subQueue.RemoveAt(0); }//Check subQueue.Count > 0 just for sure, however, we check it already at the begining of this method
                     }
                 }
 
+                if (barcodesetQueue.Count > 0) this.LastsetProcessing = false; //AFTER SUCCESS Dequeueset => WE CLEAR LastsetProcessing
+
                 return barcodesetQueue;
             }
             else
-                throw new Exception("Can not make carton for this item on this filling line!");
+                throw new Exception("Số chai/ carton không phù hợp!");
         }
 
         /// <summary>
@@ -335,7 +345,21 @@ namespace TotalDTO.Productions
 
 
 
-        public string EntityIDs { get { return string.Join(",", this.list2DBarcode.Select(q => string.Join(",", q.Select(l => l.GetID().ToString()).ToArray())).ToArray()); } }
+        public string EntityIDs
+        {
+            get
+            {
+                string entityIDs = string.Join(",", this.list2DBarcode.Select(q => string.Join(",", q.Select(l => l.GetID().ToString()).ToArray())).ToArray());
+
+                if (this.Count < this.ItemPerSet)
+                    while (entityIDs.IndexOf(",,") >= 0)
+                        entityIDs = entityIDs.Replace(",,", ",");
+
+                return entityIDs;
+            }
+        }
+
+        public int TotalPacks { get { return this.list2DBarcode.Select(o => o.Select(y => y.TotalPacks).Sum()).Sum(); } }
 
 
     }

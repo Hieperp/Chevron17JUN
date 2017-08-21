@@ -34,12 +34,12 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
     
         public virtual BinLocation BinLocation { get; set; }
-        public virtual Carton Carton { get; set; }
         public virtual GoodsReceipt GoodsReceipt { get; set; }
         public virtual Pack Pack { get; set; }
-        public virtual Pallet Pallet { get; set; }
         public virtual PickupDetail PickupDetail { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Commodity Commodity { get; set; }
+        public virtual Carton Carton { get; set; }
+        public virtual Pallet Pallet { get; set; }
     }
 }

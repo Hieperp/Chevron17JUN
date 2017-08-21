@@ -178,8 +178,10 @@ namespace TotalSmartCoding.Controllers.Productions
         public void StopScanner() { this.OnScanning = false; }
 
         public int PackQueueCount { get { return this.packQueue.Count; } }
+        public int PacksetQueueCount { get { return this.packsetQueue.Count; } }
         public int CartonPendingQueueCount { get { return this.cartonPendingQueue.Count; } }
         public int CartonQueueCount { get { return this.cartonQueue.Count; } }
+        public int CartonsetQueueCount { get { return this.cartonsetQueue.Count; } }
         public int PalletQueueCount { get { return this.palletQueue.Count; } }
 
         public bool AllQueueEmpty { get { return this.PackQueueCount == 0 && this.packsetQueue.Count == 0 && this.CartonPendingQueueCount == 0 && this.CartonQueueCount == 0 && this.cartonsetQueue.Count == 0 && this.PalletQueueCount == 0; } }
@@ -590,7 +592,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     if (!GlobalVariables.IgnoreEmptyCarton || this.packsetQueue.Count > 0 || !this.FillingData.HasPack) //BY NOT this.FillingData.HasPack: this.packsetQueue.Count WILL ALWAYS BE: 0 (NO PACK RECEIVED)
                     {//IF this.packsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY CARTON. this.packsetQueue.EntityIDs WILL BE BLANK => NO PACK BE UPDATED FOR THIS CARTON
 
-                        FillingCartonDTO fillingCartonDTO = new FillingCartonDTO(this.FillingData) { Code = this.interpretBarcode(cartonCode) };
+                        FillingCartonDTO fillingCartonDTO = new FillingCartonDTO(this.FillingData) { Code = this.interpretBarcode(cartonCode), TotalPacks = this.packsetQueue.Count };
                         if (isPending) fillingCartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Noread;
 
                         lock (this.fillingCartonController)
@@ -695,7 +697,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     if (!GlobalVariables.IgnoreEmptyPallet || ((this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton) && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestScanner))) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
                     {//IF this.cartonsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY PALLET: this.cartonsetQueue.EntityIDs WILL BE BLANK => NO CARTON BE UPDATED FOR THIS PALLET
 
-                        FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode };
+                        FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode, TotalPacks = this.cartonsetQueue.TotalPacks, TotalCartons = this.cartonsetQueue.Count };
 
                         lock (this.fillingPalletController)
                         {
@@ -749,6 +751,11 @@ namespace TotalSmartCoding.Controllers.Productions
         ///AFTER EXXIT AND RESTART THE SOFTWARE WILL LOAD PENDING DATA AGAIN
         ///IMPORTANT: SHOULD IMPLEMENT LATER: TO PREVENT UN-PREDICTABLE FOR UN PROPER EXITING SOFTWARE WHEN HANDLE EXCEPTION (EXIT IMMEDIATELY), WE ONLY ALLOW HANDLE EXCEPYION WHEN THE SYSTEM PAUSE (NO ITEM WAS ADDED AT THE TIME WE EXIT THE SYSTEM)
         #region Handle Exception
+
+        public void ToggleLastCartonset(bool lastsetProcessing)
+        { //HERE WE ONLY HAVE ToggleLastCartonset. LATER: WE CAN HAVE ToggleLastPackset EASYLY, BY ADD THE SAME METHOD HERE WITHOUT ANY CODE SOMEWHERE ELSE
+            this.cartonQueue.LastsetProcessing = lastsetProcessing;
+        }
 
 
         /// <summary>
@@ -956,12 +963,13 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //SEE (***): WE HAVE ADDED ALL PACK OF THIS CARTON TO packsetQueue ALREADY. SO, NOW WE CAN USE this.packsetQueue.EntityIDs FOR ServiceBag["FillingPackIDs"]
                                 if (!this.fillingCartonController.fillingCartonService.Delete(fillingCartonID)) throw new System.ArgumentException("Lỗi", "Không thể xóa carton trên CSDL");
                             }
+                            return true;
                         }
                         else
+                        {
                             this.MainStatus = "Không thể đóng lại carton, do số lượng chai của carton và trên chuyền không phù hợp.";
-
-
-                        return true;
+                            return false;
+                        }
                     }
                 }
                 else throw new System.ArgumentException("Fail to handle this carton", "Another carton is on the line");

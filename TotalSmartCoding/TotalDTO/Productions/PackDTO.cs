@@ -12,7 +12,10 @@ namespace TotalDTO.Productions
         { }
         public PackPrimitiveDTO(FillingData fillingData)
             : base(fillingData)
-        { }
+        {
+            if (fillingData != null)
+                this.Volume = fillingData.Volume;
+        }
 
 
 
@@ -24,6 +27,8 @@ namespace TotalDTO.Productions
         public int PackID { get; set; }
         public int FillingPackID { get; set; }
         public Nullable<int> CartonID { get; set; }
+
+        public override int TotalPacks { get { return 1; } set { } }
     }
 
     public class FillingPackPrimitiveDTO : PackPrimitiveDTO, IPrimitiveEntity, IPrimitiveDTO

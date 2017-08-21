@@ -49,7 +49,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               SET         FillingPalletID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingCartonID PASS BY VARIBLE: FillingCartonIDs
             queryString = queryString + "               WHERE       FillingPalletID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + " AND FillingCartonID IN (SELECT Id FROM dbo.SplitToIntList (@FillingCartonIDs)) " + "\r\n";
 
-            queryString = queryString + "           IF @@ROWCOUNT <> ((SELECT (LEN(@FillingCartonIDs) - LEN(REPLACE(@FillingCartonIDs, ',', '')))) + 1) " + "\r\n";
+            queryString = queryString + "           " + "\r\n";
+            queryString = queryString + "           IF @@ROWCOUNT <> (SELECT TotalCartons FROM FillingPallets WHERE FillingPalletID = @EntityID)  OR  @@ROWCOUNT <> ((SELECT (LEN(@FillingCartonIDs) - LEN(REPLACE(@FillingCartonIDs, ',', '')))) + 1) " + "\r\n"; //CHECK BOTH CONDITION FOR SURE. BUT: WE CAN OMIT THE SECOND CONDITION 
             queryString = queryString + "               BEGIN " + "\r\n";
             queryString = queryString + "                   DECLARE     @msg NVARCHAR(300) = N'System Error: Some carton does not exist!' ; " + "\r\n";
             queryString = queryString + "                   THROW       61001,  @msg, 1; " + "\r\n";

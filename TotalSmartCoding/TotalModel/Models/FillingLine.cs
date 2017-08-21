@@ -18,9 +18,9 @@ namespace TotalModel.Models
         public FillingLine()
         {
             this.Batches = new HashSet<Batch>();
-            this.Cartons = new HashSet<Carton>();
             this.Packs = new HashSet<Pack>();
             this.Pickups = new HashSet<Pickup>();
+            this.Cartons = new HashSet<Carton>();
         }
     
         public int FillingLineID { get; set; }
@@ -41,10 +41,10 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Batch> Batches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Carton> Cartons { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pack> Packs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pickup> Pickups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carton> Cartons { get; set; }
     }
 }

@@ -737,7 +737,7 @@ namespace TotalSmartCoding.Views.Productions
                     if (cartonID > 0 && CustomMsgBox.Show(this, "Bạn có muốn xã thùng carton này ra và đóng lại không:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                         if (this.scannerController.UnwrapCartontoPack(cartonID)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    //    if (e.KeyCode == Keys.Space) //Update barcode
+                    //    if (e.KeyCode == Keys.Space) //Update barcode. This code for update barcode will be check carefully when using. It have not been checked yet for now.
                     //    {
                     //        string cartonBarcode = "";
                     //        if (CustomInputBox.Show("BP Filling System", "Please input barcode for this carton:" + (char)13 + (char)13 + selectedCarton.CartonBarcode + (char)13 + "   " + selectedCartonDescription, ref cartonBarcode) == System.Windows.Forms.DialogResult.OK)
@@ -781,8 +781,21 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (this.buttonConnect.Enabled && CustomMsgBox.Show(this, "Bạn có muốn chia đều chai đang tồn vào carton không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                if (this.scannerController.PackQueueCount > 0 && this.scannerController.PacksetQueueCount == 0 && CustomMsgBox.Show(this, "Bạn có muốn chia đều chai đang tồn vào carton không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                     this.scannerController.ReAllocationPack();
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        private void buttonCartonQueueCount_Click(object sender, EventArgs e)
+        {
+            try
+            {//HERE: WE CHECK CONDITION BEFORE CALL ToggleLastCartonset (TO PROTEST ACCIDENTAL PRESS BY WORKER). SURELY, WE CAN OMIT THESE CONDITION
+                if (this.scannerController.PackQueueCount == 0 && this.scannerController.PacksetQueueCount == 0 && this.scannerController.CartonQueueCount > 0 && this.scannerController.CartonQueueCount < this.fillingData.CartonPerPallet && this.scannerController.CartonPendingQueueCount == 0 && this.scannerController.CartonsetQueueCount == 0 && CustomMsgBox.Show(this, "Số lượng carton ít hơn số lượng đóng pallet.\r\n\r\nBạn có muốn đóng pallet ngay bây giờ không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                    this.scannerController.ToggleLastCartonset(true);
             }
             catch (Exception exception)
             {
@@ -841,6 +854,8 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+
+        
 
 
 

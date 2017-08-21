@@ -12,8 +12,7 @@ namespace TotalDTO.Productions
             {
                 this.FillingLineID = (int)fillingData.FillingLineID;
                 this.BatchID = fillingData.BatchID;
-                this.CommodityID = fillingData.CommodityID;
-                this.Volume = fillingData.Volume;
+                this.CommodityID = fillingData.CommodityID;                
                 
                 this.PCID = fillingData.PCID;
 
@@ -26,6 +25,8 @@ namespace TotalDTO.Productions
         public int BatchID { get; set; }
         public int CommodityID { get; set; }
         public string Code { get; set; }
+
+        public virtual int TotalPacks { get; set; }
 
         public decimal Volume { get; set; }
 
