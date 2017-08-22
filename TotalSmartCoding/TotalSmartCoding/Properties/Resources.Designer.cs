@@ -843,6 +843,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Carlosjj_Google_Jfk_Maps {
+            get {
+                object obj = ResourceManager.GetObject("Carlosjj-Google-Jfk-Maps", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Check {
             get {
                 object obj = ResourceManager.GetObject("Check", resourceCulture);
@@ -2083,6 +2093,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Map_pin_20 {
+            get {
+                object obj = ResourceManager.GetObject("Map-pin-20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap money_dollar_icon {
             get {
                 object obj = ResourceManager.GetObject("money-dollar-icon", resourceCulture);
@@ -2286,6 +2306,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap palet04 {
             get {
                 object obj = ResourceManager.GetObject("palet04", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Paomedia_Small_N_Flat_Carton {
+            get {
+                object obj = ResourceManager.GetObject("Paomedia-Small-N-Flat-Carton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -787,6 +787,7 @@
     <None Include="Resources\export-arrow-48.png" />
     <None Include="Resources\Get-Info-B-icon-48.png" />
     <None Include="Resources\Green-cross.ico" />
+    <None Include="Resources\Carlosjj-Google-Jfk-Maps.ico" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
     <None Include="Resources\palet031.ico" />
@@ -854,6 +855,8 @@
     <None Include="Resources\letter-uppercase-L-icon.png" />
     <None Include="Resources\Sign-Info-icon-48.png" />
     <None Include="Resources\Kyo-Tux-Phuzion-Sign-Info.ico" />
+    <None Include="Resources\Paomedia-Small-N-Flat-Carton.ico" />
+    <None Include="Resources\Map-pin-20.png" />
     <Content Include="Resources\Toolbar Image1.png" />
     <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />
