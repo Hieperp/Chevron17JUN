@@ -57,7 +57,7 @@
             this.dgvCartonQueue = new System.Windows.Forms.DataGridView();
             this.cartonStatusbox = new System.Windows.Forms.TextBox();
             this.timerEverySecond = new System.Windows.Forms.Timer(this.components);
-            this.splitContainerQuality = new System.Windows.Forms.SplitContainer();
+            this.splitContainerPack = new System.Windows.Forms.SplitContainer();
             this.splitPackQueue = new System.Windows.Forms.SplitContainer();
             this.splitContainerCarton = new System.Windows.Forms.SplitContainer();
             this.splitContainerPallet = new System.Windows.Forms.SplitContainer();
@@ -163,10 +163,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPacksetQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonQueue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerQuality)).BeginInit();
-            this.splitContainerQuality.Panel1.SuspendLayout();
-            this.splitContainerQuality.Panel2.SuspendLayout();
-            this.splitContainerQuality.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPack)).BeginInit();
+            this.splitContainerPack.Panel1.SuspendLayout();
+            this.splitContainerPack.Panel2.SuspendLayout();
+            this.splitContainerPack.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPackQueue)).BeginInit();
             this.splitPackQueue.Panel1.SuspendLayout();
             this.splitPackQueue.Panel2.SuspendLayout();
@@ -413,27 +413,27 @@
             this.timerEverySecond.Interval = 1000;
             this.timerEverySecond.Tick += new System.EventHandler(this.timerEverySecond_Tick);
             // 
-            // splitContainerQuality
+            // splitContainerPack
             // 
-            this.splitContainerQuality.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerQuality.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerQuality.Margin = new System.Windows.Forms.Padding(4);
-            this.splitContainerQuality.Name = "splitContainerQuality";
-            this.splitContainerQuality.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerPack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerPack.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerPack.Margin = new System.Windows.Forms.Padding(4);
+            this.splitContainerPack.Name = "splitContainerPack";
+            this.splitContainerPack.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainerQuality.Panel1
+            // splitContainerPack.Panel1
             // 
-            this.splitContainerQuality.Panel1.Controls.Add(this.splitPackQueue);
-            this.splitContainerQuality.Panel1MinSize = 0;
+            this.splitContainerPack.Panel1.Controls.Add(this.splitPackQueue);
+            this.splitContainerPack.Panel1MinSize = 0;
             // 
-            // splitContainerQuality.Panel2
+            // splitContainerPack.Panel2
             // 
-            this.splitContainerQuality.Panel2.Controls.Add(this.splitContainerCarton);
-            this.splitContainerQuality.Panel2MinSize = 0;
-            this.splitContainerQuality.Size = new System.Drawing.Size(1782, 741);
-            this.splitContainerQuality.SplitterDistance = 201;
-            this.splitContainerQuality.SplitterWidth = 1;
-            this.splitContainerQuality.TabIndex = 24;
+            this.splitContainerPack.Panel2.Controls.Add(this.splitContainerCarton);
+            this.splitContainerPack.Panel2MinSize = 0;
+            this.splitContainerPack.Size = new System.Drawing.Size(1782, 741);
+            this.splitContainerPack.SplitterDistance = 201;
+            this.splitContainerPack.SplitterWidth = 1;
+            this.splitContainerPack.TabIndex = 24;
             // 
             // splitPackQueue
             // 
@@ -1814,7 +1814,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1782, 741);
-            this.Controls.Add(this.splitContainerQuality);
+            this.Controls.Add(this.splitContainerPack);
             this.Controls.Add(this.toolStripChildForm);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SmartCoding";
@@ -1825,10 +1825,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackQueue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPacksetQueue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonQueue)).EndInit();
-            this.splitContainerQuality.Panel1.ResumeLayout(false);
-            this.splitContainerQuality.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerQuality)).EndInit();
-            this.splitContainerQuality.ResumeLayout(false);
+            this.splitContainerPack.Panel1.ResumeLayout(false);
+            this.splitContainerPack.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerPack)).EndInit();
+            this.splitContainerPack.ResumeLayout(false);
             this.splitPackQueue.Panel1.ResumeLayout(false);
             this.splitPackQueue.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitPackQueue)).EndInit();
@@ -1959,7 +1959,7 @@
         private System.Windows.Forms.ToolStripButton buttonBatches;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.SplitContainer splitContainerQuality;
+        private System.Windows.Forms.SplitContainer splitContainerPack;
         private System.Windows.Forms.SplitContainer splitPackQueue;
         private System.Windows.Forms.SplitContainer splitContainerCarton;
         private System.Windows.Forms.SplitContainer splitDigit;

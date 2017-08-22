@@ -1138,11 +1138,12 @@
 		<row><td>DAT_MY</td><td>ProgramFilesFolder</td><td>DATMY~1|Dat My</td><td/><td>0</td><td/></row>
 		<row><td>DAT_MY_CO.__LTD.</td><td>ProgramFilesFolder</td><td>DATMYC~1|Dat My Co., Ltd.</td><td/><td>0</td><td/></row>
 		<row><td>DMC_SOLUTION</td><td>ProgramFilesFolder</td><td>DMCSOL~1|DMC Solution</td><td/><td>0</td><td/></row>
+		<row><td>DMC_SOLUTIONS</td><td>ProgramFilesFolder</td><td>DMCSOL~1|DMC Solutions</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
-		<row><td>INSTALLDIR</td><td>SMART_2D_CODING</td><td>.</td><td/><td>0</td><td/></row>
+		<row><td>INSTALLDIR</td><td>SMART_2D_CODING1</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
 		<row><td>ISMyCompanyDir</td><td>ProgramFilesFolder</td><td>MYCOMP~1|My Company Name</td><td/><td>0</td><td/></row>
 		<row><td>ISMyProductDir</td><td>ISMyCompanyDir</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
@@ -1160,6 +1161,7 @@
 		<row><td>ProgramMenuFolder</td><td>TARGETDIR</td><td>.:Programs</td><td/><td>3</td><td/></row>
 		<row><td>RecentFolder</td><td>TARGETDIR</td><td>.:Recent</td><td/><td>0</td><td/></row>
 		<row><td>SMART_2D_CODING</td><td>DMC_SOLUTION</td><td>SMART2~1|Smart 2D Coding</td><td/><td>0</td><td/></row>
+		<row><td>SMART_2D_CODING1</td><td>DMC_SOLUTIONS</td><td>SMART2~1|Smart 2D Coding</td><td/><td>0</td><td/></row>
 		<row><td>SendToFolder</td><td>TARGETDIR</td><td>.:SendTo</td><td/><td>3</td><td/></row>
 		<row><td>StartMenuFolder</td><td>TARGETDIR</td><td>.:STARTM~1|Start Menu</td><td/><td>3</td><td/></row>
 		<row><td>StartupFolder</td><td>TARGETDIR</td><td>.:StartUp</td><td/><td>3</td><td/></row>
@@ -2616,7 +2618,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>DMC Solution</td><td>0</td><td/><td>-1272628393</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>DMC Solutions</td><td>0</td><td/><td>-1138399674</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-1272593241</td></row>
@@ -3718,8 +3720,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DMCSolution.com</td><td>0</td><td/><td>-1272628393</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>DMC Solution</td><td>0</td><td/><td>-1272628393</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DMCSolutions.com</td><td>0</td><td/><td>-1138399674</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>DMC Solutions</td><td>0</td><td/><td>-1138399674</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-1272614872</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1272616953</td></row>
 	</table>

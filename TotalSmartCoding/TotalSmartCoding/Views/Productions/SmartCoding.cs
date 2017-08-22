@@ -99,7 +99,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.comboBoxEmptyCarton.ComboBox.SelectedIndex = GlobalVariables.IgnoreEmptyCarton ? 0 : 1;
                 this.comboBoxEmptyCarton.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
 
-                this.splitContainerQuality.SplitterDistance = this.SplitterDistanceQuality();
+                this.splitContainerPack.SplitterDistance = this.SplitterDistanceQuality();
                 this.splitPackQueue.SplitterDistance = this.SplitterDistanceMatching();
                 this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
 
