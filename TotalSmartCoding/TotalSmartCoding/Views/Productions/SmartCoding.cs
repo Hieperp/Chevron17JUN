@@ -156,7 +156,7 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        
+
 
         private void comboBoxEmptyCarton_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -887,7 +887,32 @@ namespace TotalSmartCoding.Views.Productions
 
         #endregion Backup
 
-        
+        private void dgvQueue_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                try
+                {
+                    DataGridView dataGridView = sender as DataGridView;
+                    if (dataGridView != null && dataGridView.CurrentCell != null)
+                    {
+                        string selectedBarcode = "";
+                        int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
+                        if (barcodeID > 0)
+                        {
+                            QuickView quickView = new QuickView(this.scannerController.GetBarcodeList(sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? barcodeID : 0, sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? 0 : barcodeID));
+                            quickView.ShowDialog();
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+                }
+            }
+        }
+
+
 
 
 

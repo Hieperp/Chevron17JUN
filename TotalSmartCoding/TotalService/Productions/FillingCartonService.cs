@@ -34,9 +34,9 @@ namespace TotalService.Productions
             return true;
         }
 
-        public IList<FillingCarton> GetFillingCartons(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        public IList<FillingCarton> GetFillingCartons(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? fillingPalletID)
         {
-            return this.fillingCartonRepository.GetFillingCartons(fillingLineID, entryStatusIDs);
+            return this.fillingCartonRepository.GetFillingCartons(fillingLineID, entryStatusIDs, fillingPalletID);
         }
 
         public bool UpdateEntryStatus(string fillingCartonIDs, GlobalVariables.BarcodeStatus barcodeStatus)

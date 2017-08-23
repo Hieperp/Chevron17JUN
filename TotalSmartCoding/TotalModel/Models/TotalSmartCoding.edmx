@@ -1006,6 +1006,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
         <Function Name="GetFillingCartons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FillingLineID" Type="int" Mode="In" />
           <Parameter Name="EntryStatusIDs" Type="varchar" Mode="In" />
+          <Parameter Name="FillingPalletID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetFillingLineBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetFillingLineIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1433,6 +1434,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <FunctionImport Name="GetFillingCartons" EntitySet="FillingCartons" ReturnType="Collection(TotalSmartCodingModel.FillingCarton)">
             <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
             <Parameter Name="EntryStatusIDs" Mode="In" Type="String" />
+            <Parameter Name="FillingPalletID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetFillingPallets" EntitySet="FillingPallets" ReturnType="Collection(TotalSmartCodingModel.FillingPallet)">
             <Parameter Name="FillingLineID" Mode="In" Type="Int32" />

@@ -118,7 +118,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.NotifyPropertyChanged("PacksetQueue");
                 }
 
-                IList<FillingCarton> fillingCartons = this.fillingCartonController.fillingCartonService.GetFillingCartons(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Pending + "," + (int)GlobalVariables.BarcodeStatus.Noread);
+                IList<FillingCarton> fillingCartons = this.fillingCartonController.fillingCartonService.GetFillingCartons(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Pending + "," + (int)GlobalVariables.BarcodeStatus.Noread, null);
                 if (fillingCartons.Count > 0)
                 {
                     fillingCartons.Each(fillingCarton =>
@@ -300,6 +300,54 @@ namespace TotalSmartCoding.Controllers.Productions
             }
             else return null;
         }
+
+
+
+
+        #region
+
+        public IList<BarcodeDTO> GetBarcodeList(int fillingCartonID, int fillingPalletID)
+        {
+            try
+            {
+                IList<BarcodeDTO> barcodeList = new List<BarcodeDTO>();
+
+                if (fillingCartonID > 0)
+                {
+                    IList<FillingPack> fillingPacks = this.fillingPackController.fillingPackService.GetFillingPacks(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Wrapped, fillingCartonID);
+                    if (fillingPacks.Count > 0)
+                    {
+                        fillingPacks.Each(fillingPack =>
+                        {
+                            FillingPackDTO fillingPackDTO = Mapper.Map<FillingPack, FillingPackDTO>(fillingPack);
+                            barcodeList.Add(fillingPackDTO);
+                        });
+                    }
+                }
+                else
+                    if (fillingPalletID > 0)
+                    {
+                        IList<FillingCarton> fillingCartons = this.fillingCartonController.fillingCartonService.GetFillingCartons(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Pending + "," + (int)GlobalVariables.BarcodeStatus.Noread, fillingPalletID);
+                        if (fillingCartons.Count > 0)
+                        {
+                            fillingCartons.Each(fillingCarton =>
+                            {
+                                FillingCartonDTO fillingCartonDTO = Mapper.Map<FillingCarton, FillingCartonDTO>(fillingCarton);
+                                barcodeList.Add(fillingCartonDTO);
+                            });
+                        }
+                    }
+
+                return barcodeList;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        #endregion
+
 
 
         private bool Connect()

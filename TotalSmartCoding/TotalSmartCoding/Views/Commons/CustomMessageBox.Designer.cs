@@ -30,9 +30,9 @@
         {
             this.labelText = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -41,7 +41,7 @@
             // labelText
             // 
             this.labelText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelText.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.labelText.ForeColor = System.Drawing.SystemColors.ControlText;
             this.labelText.Location = new System.Drawing.Point(120, 37);
             this.labelText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelText.Name = "labelText";
@@ -59,20 +59,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(824, 62);
             this.panel1.TabIndex = 40;
-            // 
-            // button1
-            // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = global::TotalSmartCoding.Properties.Resources.Yellow_cross;
-            this.button1.Location = new System.Drawing.Point(706, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 53);
-            this.button1.TabIndex = 39;
-            this.button1.Text = "Cancel";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -99,6 +85,20 @@
             this.button2.Text = "OK";
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = global::TotalSmartCoding.Properties.Resources.Yellow_cross;
+            this.button1.Location = new System.Drawing.Point(706, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 53);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Cancel";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 

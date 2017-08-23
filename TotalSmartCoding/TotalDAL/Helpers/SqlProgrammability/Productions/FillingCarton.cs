@@ -74,11 +74,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void GetFillingCartons()
         {
-            string queryString = " @FillingLineID int, @EntryStatusIDs varchar(3999) " + "\r\n";
+            string sqlSelect = "       SELECT * FROM FillingCartons WHERE FillingLineID = @FillingLineID AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs)) " + "\r\n";
+
+            string queryString = " @FillingLineID int, @EntryStatusIDs varchar(3999), @FillingPalletID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT * FROM FillingCartons WHERE FillingLineID = @FillingLineID AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs))  " + "\r\n";
+            queryString = queryString + "       " + "\r\n";
+            queryString = queryString + "   IF (@FillingPalletID IS NULL) " + "\r\n";
+            queryString = queryString + "       " + sqlSelect + "\r\n";
+            queryString = queryString + "   ELSE " + "\r\n";
+            queryString = queryString + "       " + sqlSelect + " AND FillingPalletID = @FillingPalletID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetFillingCartons", queryString);
         }

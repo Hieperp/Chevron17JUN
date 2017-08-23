@@ -15,9 +15,9 @@ namespace TotalDAL.Repositories.Productions
         }
 
 
-        public IList<FillingCarton> GetFillingCartons(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs)
+        public IList<FillingCarton> GetFillingCartons(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? fillingPalletID)
         {
-            return this.TotalSmartCodingEntities.GetFillingCartons((int)fillingLineID, entryStatusIDs).ToList();
+            return this.TotalSmartCodingEntities.GetFillingCartons((int)fillingLineID, entryStatusIDs, fillingPalletID).ToList();
         }
 
         public void UpdateEntryStatus(string fillingCartonIDs, GlobalVariables.BarcodeStatus barcodeStatus)

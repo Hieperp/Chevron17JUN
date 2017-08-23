@@ -394,6 +394,7 @@
             this.dgvCartonQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             this.dgvCartonQueue.DoubleClick += new System.EventHandler(this.dgvPackQueue_DoubleClick);
             this.dgvCartonQueue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCarton_KeyDown);
+            this.dgvCartonQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvQueue_MouseDown);
             // 
             // cartonStatusbox
             // 
@@ -565,7 +566,7 @@
             // 
             this.toolStripLabel9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(65, 52);
+            this.toolStripLabel9.Size = new System.Drawing.Size(65, 20);
             this.toolStripLabel9.Text = "              ";
             // 
             // toolStripButtonWarningNewMonth
@@ -714,6 +715,7 @@
             this.dgvCartonsetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
             this.dgvCartonsetQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             this.dgvCartonsetQueue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCarton_KeyDown);
+            this.dgvCartonsetQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvQueue_MouseDown);
             // 
             // toolStrip10
             // 
@@ -751,8 +753,8 @@
             // 
             // splitPalletQueue.Panel2
             // 
-            this.splitPalletQueue.Panel2.Controls.Add(this.toolStrip6);
             this.splitPalletQueue.Panel2.Controls.Add(this.dgvPalletsetQueue);
+            this.splitPalletQueue.Panel2.Controls.Add(this.toolStrip6);
             this.splitPalletQueue.Size = new System.Drawing.Size(1782, 149);
             this.splitPalletQueue.SplitterDistance = 129;
             this.splitPalletQueue.SplitterWidth = 1;
@@ -807,6 +809,7 @@
             this.dgvPalletQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvPalletQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
             this.dgvPalletQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
+            this.dgvPalletQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvQueue_MouseDown);
             // 
             // toolStrip8
             // 
@@ -895,7 +898,7 @@
             this.dgvPalletsetQueue.DefaultCellStyle = dataGridViewCellStyle20;
             this.dgvPalletsetQueue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPalletsetQueue.EnableHeadersVisualStyles = false;
-            this.dgvPalletsetQueue.Location = new System.Drawing.Point(0, 0);
+            this.dgvPalletsetQueue.Location = new System.Drawing.Point(0, 55);
             this.dgvPalletsetQueue.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.dgvPalletsetQueue.Name = "dgvPalletsetQueue";
             this.dgvPalletsetQueue.ReadOnly = true;
@@ -911,11 +914,12 @@
             this.dgvPalletsetQueue.RowTemplate.Height = 47;
             this.dgvPalletsetQueue.RowTemplate.ReadOnly = true;
             this.dgvPalletsetQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvPalletsetQueue.Size = new System.Drawing.Size(1652, 149);
+            this.dgvPalletsetQueue.Size = new System.Drawing.Size(1652, 94);
             this.dgvPalletsetQueue.TabIndex = 13;
             this.dgvPalletsetQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvPalletsetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
             this.dgvPalletsetQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
+            this.dgvPalletsetQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvQueue_MouseDown);
             // 
             // splitDigit
             // 
@@ -1681,7 +1685,7 @@
             this.textBoxCommodityOfficialCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxCommodityOfficialCode.Name = "textBoxCommodityOfficialCode";
             this.textBoxCommodityOfficialCode.ReadOnly = true;
-            this.textBoxCommodityOfficialCode.Size = new System.Drawing.Size(99, 75);
+            this.textBoxCommodityOfficialCode.Size = new System.Drawing.Size(99, 27);
             this.textBoxCommodityOfficialCode.Text = "8984568";
             this.textBoxCommodityOfficialCode.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxCommodityOfficialCode.Visible = false;
@@ -1790,7 +1794,7 @@
             this.comboBoxEmptyCarton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEmptyCarton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.comboBoxEmptyCarton.Name = "comboBoxEmptyCarton";
-            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(75, 75);
+            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(75, 28);
             this.comboBoxEmptyCarton.Visible = false;
             // 
             // toolStripLabel8
