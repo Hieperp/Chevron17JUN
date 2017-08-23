@@ -99,10 +99,6 @@ namespace TotalSmartCoding.Views.Productions
                 this.comboBoxEmptyCarton.ComboBox.SelectedIndex = GlobalVariables.IgnoreEmptyCarton ? 0 : 1;
                 this.comboBoxEmptyCarton.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
 
-                this.splitContainerPack.SplitterDistance = this.SplitterDistanceQuality();
-                this.splitPackQueue.SplitterDistance = this.SplitterDistanceMatching();
-                this.splitContainerCarton.SplitterDistance = this.SplitterDistanceCarton();
-
                 this.buttonCartonNoreadNow.Visible = GlobalEnums.OnTestScanner;
                 this.buttonPalletReceivedNow.Visible = GlobalEnums.OnTestScanner;
             }
@@ -125,6 +121,22 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        private void splitPallet_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                this.splitContainerPack.SplitterDistance = this.SplitterDistanceQuality();
+                this.splitContainerCarton.SplitterDistance = SplitterContainerCarton();
+                this.splitContainerPallet.SplitterDistance = this.SplitterContainerPallet();
+
+                this.splitDigit.SplitterDistance = this.Width / 5;
+                this.splitPack.SplitterDistance = this.Width / 5;
+                this.splitCarton.SplitterDistance = this.Width / 5;
+                this.splitPallet.SplitterDistance = this.Width / 5;
+            }
+            catch { }
+        }
+
         private void SmartCoding_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -144,17 +156,7 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        private void splitPallet_Resize(object sender, EventArgs e)
-        {
-            try
-            {
-                this.splitDigit.SplitterDistance = this.Width / 5;
-                this.splitPack.SplitterDistance = this.Width / 5;
-                this.splitCarton.SplitterDistance = this.Width / 5;
-                this.splitPallet.SplitterDistance = this.Width / 5;
-            }
-            catch { }
-        }
+        
 
         private void comboBoxEmptyCarton_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -175,7 +177,37 @@ namespace TotalSmartCoding.Views.Productions
             switch (GlobalVariables.FillingLineID)
             {
                 case GlobalVariables.FillingLine.Smallpack:
-                    return 296; //364 
+                    return 307; //364 
+                case GlobalVariables.FillingLine.Pail:
+                    return 0;
+                case GlobalVariables.FillingLine.Drum:
+                    return 70; //86;
+                default:
+                    return 1;
+            }
+        }
+
+        private int SplitterContainerCarton()
+        {
+            switch (GlobalVariables.FillingLineID)
+            {
+                case GlobalVariables.FillingLine.Smallpack:
+                    return 225;
+                case GlobalVariables.FillingLine.Pail:
+                    return 0;
+                case GlobalVariables.FillingLine.Drum:
+                    return 70; //86;
+                default:
+                    return 1;
+            }
+        }
+
+        private int SplitterContainerPallet()
+        {
+            switch (GlobalVariables.FillingLineID)
+            {
+                case GlobalVariables.FillingLine.Smallpack:
+                    return 111;
                 case GlobalVariables.FillingLine.Pail:
                     return 0;
                 case GlobalVariables.FillingLine.Drum:

@@ -340,6 +340,7 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
+		<row><td>Microsoft.ExceptionMessageBox.dll</td><td>{40842F5D-3279-41B1-A97C-F0E75867EA72}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.exceptionmessagebo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>TotalSmartCoding.Primary_output</td><td>{D75D73C0-F4E7-4E8B-B871-9A12648DFFD5}</td><td>INSTALLDIR</td><td>2</td><td/><td>totalsmartcoding.primary_out</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1049,6 +1050,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>INSTALLDIR</td><td>Microsoft.ExceptionMessageBox.dll</td></row>
 		<row><td>INSTALLDIR</td><td>TotalSmartCoding.Primary_output</td></row>
 	</table>
 
@@ -1872,6 +1874,7 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>Microsoft.ExceptionMessageBox.dll</td></row>
 		<row><td>AlwaysInstall</td><td>TotalSmartCoding.Primary_output</td></row>
 	</table>
 
@@ -1887,6 +1890,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
+		<row><td>microsoft.exceptionmessagebo</td><td>Microsoft.ExceptionMessageBox.dll</td><td>MICROS~1.DLL|Microsoft.ExceptionMessageBox.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Program Files (x86)\Microsoft SQL Server\110\SDK\Assemblies\Microsoft.ExceptionMessageBox.dll</td><td>1</td><td/></row>
 		<row><td>totalsmartcoding.primary_out</td><td>TotalSmartCoding.Primary_output</td><td>TotalSmartCoding.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;TotalSmartCoding&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
@@ -2029,6 +2033,7 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
+		<row><td>Microsoft.ExceptionMessageBox.dll</td><td/><td/><td>_B514F1B1_B273_4AC3_9BF2_E6CBD188DD04_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>TotalSmartCoding.Primary_output</td><td/><td/><td>_F0CA18D2_1D26_4F34_9142_41076A137327_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -2618,7 +2623,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>DMC Solutions</td><td>0</td><td/><td>-1138399674</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>DMC Solutions</td><td>0</td><td/><td>-1138371987</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-1272593241</td></row>
@@ -3720,8 +3725,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1272616953</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DMCSolutions.com</td><td>0</td><td/><td>-1138399674</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>DMC Solutions</td><td>0</td><td/><td>-1138399674</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DMCSolutions.com</td><td>0</td><td/><td>-1138371987</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>DMC Solutions</td><td>0</td><td/><td>-1138371987</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-1272614872</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1272616953</td></row>
 	</table>
