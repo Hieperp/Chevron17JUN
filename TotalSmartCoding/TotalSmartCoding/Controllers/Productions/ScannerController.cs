@@ -893,7 +893,7 @@ namespace TotalSmartCoding.Controllers.Productions
             if (fillingPackID <= 0) return false;
 
             this.ReceiveCarton("NoRead");
-            this.NotifyPropertyChanged("PacksetQueue"); 
+            this.NotifyPropertyChanged("PacksetQueue");
             this.NotifyPropertyChanged("CartonPendingQueue");
 
             return true;
@@ -951,6 +951,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         {
                             lock (this.cartonPendingQueue)
                             {
+                                fillingCartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Pending;
                                 this.cartonPendingQueue.Enqueue(fillingCartonDTO);
 
                                 this.NotifyPropertyChanged("CartonPendingQueue");
@@ -966,6 +967,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                             fillingCartonDTO = this.cartonQueue.Dequeue();
                                             if (fillingCartonDTO != null)
                                             {
+                                                fillingCartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Readytoset;
                                                 this.cartonsetQueue.Enqueue(fillingCartonDTO);
 
                                                 this.NotifyPropertyChanged("CartonQueue");

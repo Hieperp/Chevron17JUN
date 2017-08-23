@@ -302,7 +302,7 @@ namespace TotalBase
             switch (GlobalVariables.FillingLineID)
             {
                 case FillingLine.Smallpack:
-                    return true;
+                    return false; //AT BP CASTROL: CO LINE => THIS WILL BE true
                 case FillingLine.Pail:
                     return false;
                 case FillingLine.Drum:
