@@ -724,7 +724,7 @@ namespace TotalSmartCoding.Views.Productions
                     string selectedBarcode = "";
                     int packID = this.getBarcodeID(this.dgvPacksetQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && CustomMsgBox.Show(this, "Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.ReplacePackInPacksetQueue(packID)) CustomMsgBox.Show(this, "Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (this.scannerController.MovePacksetToCartonPendingQueue(packID)) CustomMsgBox.Show(this, "Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
@@ -900,7 +900,7 @@ namespace TotalSmartCoding.Views.Productions
                         int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
                         if (barcodeID > 0)
                         {
-                            QuickView quickView = new QuickView(this.scannerController.GetBarcodeList(sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? barcodeID : 0, sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? 0 : barcodeID));
+                            QuickView quickView = new QuickView(this.scannerController.GetBarcodeList(sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? barcodeID : 0, sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? 0 : barcodeID));
                             quickView.ShowDialog();
                         }
                     }
