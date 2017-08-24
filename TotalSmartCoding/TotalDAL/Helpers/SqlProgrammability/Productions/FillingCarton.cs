@@ -29,7 +29,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         private void FillingCartonSaveRelative()
         {
             //BE CAREFULL WHEN SAVE: NEED TO SET @FillingPackIDs (FOR BOTH WHEN SAVE - Update AND DELETE - Undo
-            string queryString = " @EntityID int, @SaveRelativeOption int, @FillingPackIDs varchar(3999) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            string queryString = " @EntityID int, @SaveRelativeOption int, @FillingPackIDs varchar(3999), @DeleteFillingPack bit " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
@@ -44,13 +44,21 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "           ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 
 
-            queryString = queryString + "               UPDATE      FillingPacks" + "\r\n";
-            queryString = queryString + "               SET         FillingCartonID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingPackID PASS BY VARIBLE: FillingPackIDs
-            queryString = queryString + "               WHERE       FillingCartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n";
+            queryString = queryString + "               BEGIN " + "\r\n";
+            queryString = queryString + "                   IF (@DeleteFillingPack = 1) " + "\r\n";
+            queryString = queryString + "                       DELETE      " + "\r\n";
+            queryString = queryString + "                       FROM        FillingPacks " + "\r\n";
+            queryString = queryString + "                       WHERE       FillingCartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n";
+            queryString = queryString + "                   ELSE " + "\r\n";
+            queryString = queryString + "                       UPDATE      FillingPacks" + "\r\n";
+            queryString = queryString + "                       SET         FillingCartonID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME FillingPackID PASS BY VARIBLE: FillingPackIDs
+            queryString = queryString + "                       WHERE       FillingCartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n";
+            queryString = queryString + "               END " + "\r\n";
+
 
             queryString = queryString + "           IF @@ROWCOUNT <> (SELECT TotalPacks FROM FillingCartons WHERE FillingCartonID = @EntityID)  OR  @@ROWCOUNT <> ((SELECT (LEN(@FillingPackIDs) - LEN(REPLACE(@FillingPackIDs, ',', '')))) + 1) " + "\r\n"; //CHECK BOTH CONDITION FOR SURE. BUT: WE CAN OMIT THE SECOND CONDITION
             queryString = queryString + "               BEGIN " + "\r\n";
-            queryString = queryString + "                   DECLARE     @msg NVARCHAR(300) = N'System Error: Some pack does not exist!' ; " + "\r\n";
+            queryString = queryString + "                   DECLARE     @msg NVARCHAR(300) = N'System Error: Some pack does not exist!' + cast(@@ROWCOUNT as nvarchar) ; " + "\r\n";
             queryString = queryString + "                   THROW       61001,  @msg, 1; " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "       END " + "\r\n";

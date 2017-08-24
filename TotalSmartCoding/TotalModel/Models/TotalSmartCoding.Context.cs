@@ -321,7 +321,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("FillingCartonEditable", entityIDParameter);
         }
     
-        public virtual int FillingCartonSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string fillingPackIDs)
+        public virtual int FillingCartonSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string fillingPackIDs, Nullable<bool> deleteFillingPack)
         {
             var entityIDParameter = entityID.HasValue ?
                 new ObjectParameter("EntityID", entityID) :
@@ -335,7 +335,11 @@ namespace TotalModel.Models
                 new ObjectParameter("FillingPackIDs", fillingPackIDs) :
                 new ObjectParameter("FillingPackIDs", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingCartonSaveRelative", entityIDParameter, saveRelativeOptionParameter, fillingPackIDsParameter);
+            var deleteFillingPackParameter = deleteFillingPack.HasValue ?
+                new ObjectParameter("DeleteFillingPack", deleteFillingPack) :
+                new ObjectParameter("DeleteFillingPack", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FillingCartonSaveRelative", entityIDParameter, saveRelativeOptionParameter, fillingPackIDsParameter, deleteFillingPackParameter);
         }
     
         public virtual ObjectResult<string> FillingPackEditable(Nullable<int> entityID)

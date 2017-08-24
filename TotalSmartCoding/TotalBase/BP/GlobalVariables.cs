@@ -118,7 +118,7 @@ namespace TotalBase
 
 
         public static FillingLine FillingLineID = FillingLine.Smallpack;
-        public static string FillingLineCode = "SP";
+        public static string FillingLineCode = "S1";
         public static string FillingLineName = FillingLine.Smallpack.ToString();
 
         public static int noItemPerCartonSetByProductID = 0;
@@ -138,11 +138,11 @@ namespace TotalBase
                     switch (dominoPrinterNameID)
                     {
                         case PrinterName.DigitInkjet:
-                            return "192.168.1.101";
+                            return "172.21.67.157";
                         case PrinterName.PackInkjet:
-                            return "192.168.1.102";
+                            return "172.21.67.158";
                         case PrinterName.CartonInkjet:
-                            return "192.168.1.105";
+                            return "172.21.67.159";
                         default:
                             return "127.0.0.1";
                     }
@@ -151,11 +151,11 @@ namespace TotalBase
                     switch (dominoPrinterNameID)
                     {
                         case PrinterName.DigitInkjet:
-                            return "192.168.1.101";
+                            return "172.21.67.101";
                         case PrinterName.PackInkjet:
-                            return "192.168.1.102";
+                            return "172.21.67.102";
                         case PrinterName.CartonInkjet:
-                            return "192.168.1.105";
+                            return "172.21.67.105";
                         default:
                             return "127.0.0.1";
                     }
@@ -163,11 +163,11 @@ namespace TotalBase
                     switch (dominoPrinterNameID)
                     {
                         case PrinterName.DigitInkjet:
-                            return "192.168.1.110";
+                            return "172.21.67.110";
                         case PrinterName.PackInkjet:
-                            return "192.168.1.111";
+                            return "172.21.67.111";
                         case PrinterName.CartonInkjet:
-                            return "192.168.1.112";
+                            return "172.21.67.112";
                         default:
                             return "127.0.0.1";
                     }
@@ -192,9 +192,11 @@ namespace TotalBase
                         case ScannerName.QualityScanner:
                             return "127.0.0.1";
                         case ScannerName.PackScanner:
-                            return "192.168.1.28"; //192.168.1.52
+                            return "172.21.67.168";
                         case ScannerName.CartonScanner:
-                            return "192.168.1.55";
+                            return "172.21.67.169";
+                        case ScannerName.PalletScanner:
+                            return "172.21.67.170";
                         default:
                             return "127.0.0.1";
                     }
@@ -204,9 +206,9 @@ namespace TotalBase
                         case ScannerName.QualityScanner:
                             return "127.0.0.1";
                         case ScannerName.PackScanner:
-                            return "192.168.1.28"; //192.168.1.52
+                            return "172.21.67.28"; //172.21.67.52
                         case ScannerName.CartonScanner:
-                            return "192.168.1.55";
+                            return "172.21.67.55";
                         default:
                             return "127.0.0.1";
                     }
@@ -217,7 +219,7 @@ namespace TotalBase
                         case ScannerName.QualityScanner:
                             return "127.0.0.1";
                         case ScannerName.PackScanner:
-                            return "192.168.1.54";
+                            return "172.21.67.54";
                         case ScannerName.CartonScanner:
                             return "127.0.0.1";
                         default:

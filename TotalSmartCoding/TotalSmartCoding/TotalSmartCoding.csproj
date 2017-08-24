@@ -866,6 +866,7 @@
     <None Include="Resources\Kyo-Tux-Phuzion-Sign-Info.ico" />
     <None Include="Resources\Paomedia-Small-N-Flat-Carton.ico" />
     <None Include="Resources\Map-pin-20.png" />
+    <None Include="Resources\Red-cross.ico" />
     <Content Include="Resources\Toolbar Image1.png" />
     <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />

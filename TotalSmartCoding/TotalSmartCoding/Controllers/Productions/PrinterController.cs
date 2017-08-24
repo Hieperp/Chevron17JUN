@@ -300,7 +300,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private string wholeMessageLine()
         {//THE FUNCTION laserDigitMessage totally base on this.wholeMessageLine. Later, if there is any thing change in this.wholeMessageLine, THE FUNCTION laserDigitMessage should be considered
             if (this.printerName == GlobalVariables.PrinterName.DigitInkjet)
-                return GlobalVariables.charESC + "u/1/ " + GlobalVariables.charESC + "/r/" + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1);
+                return this.thirdLine(true, 1); //GlobalVariables.charESC + "u/1/" + 
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
                 return GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.privateFillingData.FirstLine(false) + " " + this.privateFillingData.SecondLine(false) + " " + this.thirdLine(false, 2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode

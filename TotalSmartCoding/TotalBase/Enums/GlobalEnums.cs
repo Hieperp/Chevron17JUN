@@ -3,11 +3,11 @@
     public static class GlobalEnums
     {
 
-        public static bool OnTestScanner = true;
+        public static bool OnTestScanner = false;
         public static bool OnTestPalletScanner = true; //WHEN REAL TEST WITHOUT PalletScanner
 
-        public static bool OnTestPrinter = true;
-        public static bool OnTestDigit = true; //WHEN REAL TEST WITHOUT DIGIT PRINTER
+        public static bool OnTestPrinter = false;
+        public static bool OnTestDigit = false; //WHEN REAL TEST WITHOUT DIGIT PRINTER
         public static bool OnTestZebra = true; //SEND TEST PRINT WHEN CONNECTED
 
 

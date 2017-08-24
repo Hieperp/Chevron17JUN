@@ -92,6 +92,8 @@ namespace TotalSmartCoding.Libraries.Communications
         {
             try
             {
+                return true;
+
                 if (this.serialPort.PortName != "COM 0")
                 {
                     if (this.serialPort.IsOpen) this.serialPort.Close();

@@ -22,7 +22,18 @@ namespace TotalService.Productions
         protected override ObjectParameter[] SaveRelativeParameters(FillingCarton entity, SaveRelativeOption saveRelativeOption)
         {
             ObjectParameter[] baseParameters = base.SaveRelativeParameters(entity, saveRelativeOption); //IMPORTANT: WE SHOULD SET FillingPackIDs WHEN SaveRelativeOption.Update. WE DON'T CARE FillingPackIDs WHEN SaveRelativeOption.Undo [SEE STORE PROCEDURE FillingCartonSaveRelative FOR MORE INFORMATION] 
-            return new ObjectParameter[] { baseParameters[0], baseParameters[1], new ObjectParameter("FillingPackIDs", this.ServiceBag["FillingPackIDs"] != null ? this.ServiceBag["FillingPackIDs"] : "") };
+            ObjectParameter[] objectParameters = new ObjectParameter[] { baseParameters[0], baseParameters[1], new ObjectParameter("FillingPackIDs", this.ServiceBag.ContainsKey("FillingPackIDs") && this.ServiceBag["FillingPackIDs"] != null ? this.ServiceBag["FillingPackIDs"] : ""), new ObjectParameter("DeleteFillingPack", this.ServiceBag.ContainsKey("DeleteFillingPack") && this.ServiceBag["DeleteFillingPack"] != null ? true : false) };
+
+            this.ServiceBag.Remove("FillingPackIDs");
+            this.ServiceBag.Remove("DeleteFillingPack");
+
+            if (this.ServiceBag.ContainsKey("DeleteFillingPack") && this.ServiceBag["DeleteFillingPack"] != null)
+            {
+                int i = 1;
+
+            }
+
+            return objectParameters;
         }
 
         protected override bool TryValidateModel(FillingCartonDTO dto, ref System.Text.StringBuilder invalidMessage)

@@ -72,8 +72,8 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
                 this.ionetSocketPack = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PackScanner)), 23, 120); //PORT 2112: DATA LOGIC
-                this.ionetSocketCarton = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.CartonScanner)), 2112, 120);
-                this.ionetSocketPallet = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PalletScanner)), 2112, 120);
+                this.ionetSocketCarton = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.CartonScanner)), 23, 120);
+                this.ionetSocketPallet = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(GlobalVariables.ScannerName.PalletScanner)), 23, 120);
 
 
                 this.packQueue = new BarcodeQueue<FillingPackDTO>(this.FillingData.NoSubQueue, this.FillingData.ItemPerSubQueue, this.FillingData.RepeatSubQueueIndex) { ItemPerSet = this.FillingData.PackPerCarton };
@@ -655,7 +655,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = fillingCartonDTO.EntryStatusID;
                             this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
                             if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
-                                this.packsetQueue = new BarcodeQueue<FillingPackDTO>(); //CLEAR AFTER ADD TO FillingCartonDTO
+                                this.packsetQueue = new BarcodeQueue<FillingPackDTO>(this.FillingData.NoSubQueue, this.FillingData.ItemPerSubQueue, false) { ItemPerSet = this.FillingData.PackPerCarton }; //CLEAR AFTER ADD TO FillingCartonDTO
                             else
                                 throw new Exception("Lỗi lưu mã vạch carton: " + fillingCartonDTO.Code);
                         }
@@ -1043,6 +1043,27 @@ namespace TotalSmartCoding.Controllers.Productions
                     }
                 }
                 else throw new System.ArgumentException("Fail to handle this carton", "Another carton is on the line");
+            }
+        }
+
+        public Boolean DeleteCarton(int fillingCartonID)
+        {
+            if (fillingCartonID <= 0) return false;
+
+            lock (this.cartonPendingQueue)
+            {
+                lock (this.fillingCartonController)
+                {
+                    this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Noread + "," + (int)GlobalVariables.BarcodeStatus.Pending; //THIS CARTON MUST BE Noread || Pending IN ORDER TO UNWRAP TO PACK
+                    ////this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = ????-lay tu database ==>>>this.packsetQueue.EntityIDs; //SEE (***): WE HAVE ADDED ALL PACK OF THIS CARTON TO packsetQueue ALREADY. SO, NOW WE CAN USE this.packsetQueue.EntityIDs FOR ServiceBag["FillingPackIDs"]
+                    this.fillingCartonController.fillingCartonService.ServiceBag["DeleteFillingPack"] = true; 
+                    if (!this.fillingCartonController.fillingCartonService.Delete(fillingCartonID)) throw new System.ArgumentException("Lỗi", "Không thể xóa carton trên CSDL");
+
+                    this.cartonPendingQueue.Dequeue(fillingCartonID);
+
+                    this.NotifyPropertyChanged("CartonPendingQueue");
+                }
+                return true;
             }
         }
 

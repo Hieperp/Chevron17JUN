@@ -63,17 +63,21 @@
             this.splitContainerPallet = new System.Windows.Forms.SplitContainer();
             this.splitPendingQueue = new System.Windows.Forms.SplitContainer();
             this.splitCartonQueue = new System.Windows.Forms.SplitContainer();
+            this.dgvCartonPendingQueue = new System.Windows.Forms.DataGridView();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.buttonCartonPendingQueueCount = new System.Windows.Forms.ToolStripButton();
+            this.buttonRemoveCartonPending = new System.Windows.Forms.ToolStripButton();
+            this.buttonDeleteCartonPending = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonWarningNewMonth = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabelWarningNewMonth = new System.Windows.Forms.ToolStripLabel();
-            this.dgvCartonPendingQueue = new System.Windows.Forms.DataGridView();
             this.toolStrip9 = new System.Windows.Forms.ToolStrip();
             this.buttonCartonQueueCount = new System.Windows.Forms.ToolStripButton();
+            this.buttonRemoveCarton = new System.Windows.Forms.ToolStripButton();
             this.dgvCartonsetQueue = new System.Windows.Forms.DataGridView();
             this.toolStrip10 = new System.Windows.Forms.ToolStrip();
             this.buttonCartonsetQueueCount = new System.Windows.Forms.ToolStripButton();
+            this.buttonRemoveCartonset = new System.Windows.Forms.ToolStripButton();
             this.splitPalletQueue = new System.Windows.Forms.SplitContainer();
             this.dgvPalletQueue = new System.Windows.Forms.DataGridView();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
@@ -160,6 +164,7 @@
             this.comboBoxEmptyCarton = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.buttonPackQueueCount = new System.Windows.Forms.ToolStripButton();
+            this.buttonRemovePackset = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPacksetQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonQueue)).BeginInit();
@@ -187,8 +192,8 @@
             this.splitCartonQueue.Panel1.SuspendLayout();
             this.splitCartonQueue.Panel2.SuspendLayout();
             this.splitCartonQueue.SuspendLayout();
-            this.toolStrip5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonPendingQueue)).BeginInit();
+            this.toolStrip5.SuspendLayout();
             this.toolStrip9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonsetQueue)).BeginInit();
             this.toolStrip10.SuspendLayout();
@@ -341,7 +346,6 @@
             this.dgvPacksetQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvPacksetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
             this.dgvPacksetQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
-            this.dgvPacksetQueue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvPacksetQueue_KeyDown);
             // 
             // dgvCartonQueue
             // 
@@ -387,12 +391,11 @@
             this.dgvCartonQueue.RowTemplate.Height = 47;
             this.dgvCartonQueue.RowTemplate.ReadOnly = true;
             this.dgvCartonQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCartonQueue.Size = new System.Drawing.Size(369, 86);
+            this.dgvCartonQueue.Size = new System.Drawing.Size(341, 86);
             this.dgvCartonQueue.TabIndex = 10;
             this.dgvCartonQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvCartonQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
             this.dgvCartonQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
-            this.dgvCartonQueue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCarton_KeyDown);
             this.dgvCartonQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvQueue_MouseDown);
             // 
             // cartonStatusbox
@@ -531,61 +534,9 @@
             this.splitCartonQueue.Panel2.Controls.Add(this.dgvCartonQueue);
             this.splitCartonQueue.Panel2.Controls.Add(this.toolStrip9);
             this.splitCartonQueue.Size = new System.Drawing.Size(432, 141);
-            this.splitCartonQueue.SplitterDistance = 62;
+            this.splitCartonQueue.SplitterDistance = 90;
             this.splitCartonQueue.SplitterWidth = 1;
             this.splitCartonQueue.TabIndex = 19;
-            // 
-            // toolStrip5
-            // 
-            this.toolStrip5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStrip5.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
-            this.toolStrip5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buttonCartonPendingQueueCount,
-            this.toolStripLabel9,
-            this.toolStripButtonWarningNewMonth,
-            this.toolStripLabelWarningNewMonth});
-            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip5.Name = "toolStrip5";
-            this.toolStrip5.Size = new System.Drawing.Size(62, 55);
-            this.toolStrip5.TabIndex = 18;
-            this.toolStrip5.Text = "toolStrip5";
-            // 
-            // buttonCartonPendingQueueCount
-            // 
-            this.buttonCartonPendingQueueCount.Image = global::TotalSmartCoding.Properties.Resources.Emey87_Trainee_Box_double_tape;
-            this.buttonCartonPendingQueueCount.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonCartonPendingQueueCount.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonCartonPendingQueueCount.Name = "buttonCartonPendingQueueCount";
-            this.buttonCartonPendingQueueCount.Size = new System.Drawing.Size(79, 52);
-            this.buttonCartonPendingQueueCount.Text = "[0]";
-            // 
-            // toolStripLabel9
-            // 
-            this.toolStripLabel9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(65, 20);
-            this.toolStripLabel9.Text = "              ";
-            // 
-            // toolStripButtonWarningNewMonth
-            // 
-            this.toolStripButtonWarningNewMonth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonWarningNewMonth.Image = global::TotalSmartCoding.Properties.Resources.Graphicrating_Koloria_Warning;
-            this.toolStripButtonWarningNewMonth.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonWarningNewMonth.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonWarningNewMonth.Name = "toolStripButtonWarningNewMonth";
-            this.toolStripButtonWarningNewMonth.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButtonWarningNewMonth.Text = "toolStripButton3";
-            this.toolStripButtonWarningNewMonth.Visible = false;
-            // 
-            // toolStripLabelWarningNewMonth
-            // 
-            this.toolStripLabelWarningNewMonth.Name = "toolStripLabelWarningNewMonth";
-            this.toolStripLabelWarningNewMonth.Size = new System.Drawing.Size(634, 20);
-            this.toolStripLabelWarningNewMonth.Text = "New month! Please STOP and change the PRINTED MONTH in order to reset the serial " +
-    "number.";
-            this.toolStripLabelWarningNewMonth.Visible = false;
             // 
             // dgvCartonPendingQueue
             // 
@@ -632,13 +583,86 @@
             this.dgvCartonPendingQueue.RowTemplate.Height = 47;
             this.dgvCartonPendingQueue.RowTemplate.ReadOnly = true;
             this.dgvCartonPendingQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvCartonPendingQueue.Size = new System.Drawing.Size(62, 86);
+            this.dgvCartonPendingQueue.Size = new System.Drawing.Size(90, 86);
             this.dgvCartonPendingQueue.TabIndex = 11;
             this.dgvCartonPendingQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvCartonPendingQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
             this.dgvCartonPendingQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
-            this.dgvCartonPendingQueue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCartonPendingQueue_KeyDown);
             this.dgvCartonPendingQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvQueue_MouseDown);
+            // 
+            // toolStrip5
+            // 
+            this.toolStrip5.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.toolStrip5.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
+            this.toolStrip5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStrip5.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonCartonPendingQueueCount,
+            this.buttonRemoveCartonPending,
+            this.buttonDeleteCartonPending,
+            this.toolStripLabel9,
+            this.toolStripButtonWarningNewMonth,
+            this.toolStripLabelWarningNewMonth});
+            this.toolStrip5.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip5.Name = "toolStrip5";
+            this.toolStrip5.Size = new System.Drawing.Size(90, 55);
+            this.toolStrip5.TabIndex = 18;
+            this.toolStrip5.Text = "toolStrip5";
+            // 
+            // buttonCartonPendingQueueCount
+            // 
+            this.buttonCartonPendingQueueCount.Image = global::TotalSmartCoding.Properties.Resources.Emey87_Trainee_Box_double_tape;
+            this.buttonCartonPendingQueueCount.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonCartonPendingQueueCount.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonCartonPendingQueueCount.Name = "buttonCartonPendingQueueCount";
+            this.buttonCartonPendingQueueCount.Size = new System.Drawing.Size(79, 52);
+            this.buttonCartonPendingQueueCount.Text = "[0]";
+            // 
+            // buttonRemoveCartonPending
+            // 
+            this.buttonRemoveCartonPending.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemoveCartonPending.Image = global::TotalSmartCoding.Properties.Resources.Green_cross;
+            this.buttonRemoveCartonPending.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRemoveCartonPending.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemoveCartonPending.Name = "buttonRemoveCartonPending";
+            this.buttonRemoveCartonPending.Size = new System.Drawing.Size(52, 52);
+            this.buttonRemoveCartonPending.Click += new System.EventHandler(this.dgvCartonPending_RemoveDelete);
+            // 
+            // buttonDeleteCartonPending
+            // 
+            this.buttonDeleteCartonPending.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonDeleteCartonPending.Image = global::TotalSmartCoding.Properties.Resources.Red_cross;
+            this.buttonDeleteCartonPending.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonDeleteCartonPending.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonDeleteCartonPending.Name = "buttonDeleteCartonPending";
+            this.buttonDeleteCartonPending.Size = new System.Drawing.Size(52, 52);
+            this.buttonDeleteCartonPending.Click += new System.EventHandler(this.dgvCartonPending_RemoveDelete);
+            // 
+            // toolStripLabel9
+            // 
+            this.toolStripLabel9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripLabel9.Name = "toolStripLabel9";
+            this.toolStripLabel9.Size = new System.Drawing.Size(65, 20);
+            this.toolStripLabel9.Text = "              ";
+            // 
+            // toolStripButtonWarningNewMonth
+            // 
+            this.toolStripButtonWarningNewMonth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonWarningNewMonth.Image = global::TotalSmartCoding.Properties.Resources.Graphicrating_Koloria_Warning;
+            this.toolStripButtonWarningNewMonth.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonWarningNewMonth.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonWarningNewMonth.Name = "toolStripButtonWarningNewMonth";
+            this.toolStripButtonWarningNewMonth.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonWarningNewMonth.Text = "toolStripButton3";
+            this.toolStripButtonWarningNewMonth.Visible = false;
+            // 
+            // toolStripLabelWarningNewMonth
+            // 
+            this.toolStripLabelWarningNewMonth.Name = "toolStripLabelWarningNewMonth";
+            this.toolStripLabelWarningNewMonth.Size = new System.Drawing.Size(634, 20);
+            this.toolStripLabelWarningNewMonth.Text = "New month! Please STOP and change the PRINTED MONTH in order to reset the serial " +
+    "number.";
+            this.toolStripLabelWarningNewMonth.Visible = false;
             // 
             // toolStrip9
             // 
@@ -647,10 +671,11 @@
             this.toolStrip9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStrip9.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buttonCartonQueueCount});
+            this.buttonCartonQueueCount,
+            this.buttonRemoveCarton});
             this.toolStrip9.Location = new System.Drawing.Point(0, 0);
             this.toolStrip9.Name = "toolStrip9";
-            this.toolStrip9.Size = new System.Drawing.Size(369, 55);
+            this.toolStrip9.Size = new System.Drawing.Size(341, 55);
             this.toolStrip9.TabIndex = 15;
             this.toolStrip9.Text = "toolStrip9";
             // 
@@ -663,6 +688,16 @@
             this.buttonCartonQueueCount.Size = new System.Drawing.Size(79, 52);
             this.buttonCartonQueueCount.Text = "[0]";
             this.buttonCartonQueueCount.Click += new System.EventHandler(this.buttonCartonQueueCount_Click);
+            // 
+            // buttonRemoveCarton
+            // 
+            this.buttonRemoveCarton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemoveCarton.Image = global::TotalSmartCoding.Properties.Resources.Green_cross;
+            this.buttonRemoveCarton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRemoveCarton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemoveCarton.Name = "buttonRemoveCarton";
+            this.buttonRemoveCarton.Size = new System.Drawing.Size(52, 52);
+            this.buttonRemoveCarton.Click += new System.EventHandler(this.dgvCarton_Remove);
             // 
             // dgvCartonsetQueue
             // 
@@ -714,7 +749,6 @@
             this.dgvCartonsetQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvCartonsetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
             this.dgvCartonsetQueue.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
-            this.dgvCartonsetQueue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvCarton_KeyDown);
             this.dgvCartonsetQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvQueue_MouseDown);
             // 
             // toolStrip10
@@ -724,7 +758,8 @@
             this.toolStrip10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStrip10.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip10.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buttonCartonsetQueueCount});
+            this.buttonCartonsetQueueCount,
+            this.buttonRemoveCartonset});
             this.toolStrip10.Location = new System.Drawing.Point(0, 0);
             this.toolStrip10.Name = "toolStrip10";
             this.toolStrip10.Size = new System.Drawing.Size(1349, 55);
@@ -739,6 +774,16 @@
             this.buttonCartonsetQueueCount.Name = "buttonCartonsetQueueCount";
             this.buttonCartonsetQueueCount.Size = new System.Drawing.Size(79, 52);
             this.buttonCartonsetQueueCount.Text = "[0]";
+            // 
+            // buttonRemoveCartonset
+            // 
+            this.buttonRemoveCartonset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemoveCartonset.Image = global::TotalSmartCoding.Properties.Resources.Green_cross;
+            this.buttonRemoveCartonset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRemoveCartonset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemoveCartonset.Name = "buttonRemoveCartonset";
+            this.buttonRemoveCartonset.Size = new System.Drawing.Size(52, 52);
+            this.buttonRemoveCartonset.Click += new System.EventHandler(this.dgvCarton_Remove);
             // 
             // splitPalletQueue
             // 
@@ -1590,7 +1635,8 @@
             this.textBoxNextPalletNo,
             this.comboBoxEmptyCarton,
             this.toolStripLabel8,
-            this.buttonPackQueueCount});
+            this.buttonPackQueueCount,
+            this.buttonRemovePackset});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
             this.toolStripChildForm.Name = "toolStripChildForm";
             this.toolStripChildForm.Size = new System.Drawing.Size(1782, 75);
@@ -1800,8 +1846,8 @@
             // toolStripLabel8
             // 
             this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(89, 72);
-            this.toolStripLabel8.Text = "                    ";
+            this.toolStripLabel8.Size = new System.Drawing.Size(69, 72);
+            this.toolStripLabel8.Text = "               ";
             // 
             // buttonPackQueueCount
             // 
@@ -1812,6 +1858,16 @@
             this.buttonPackQueueCount.Size = new System.Drawing.Size(79, 72);
             this.buttonPackQueueCount.Text = "[0]";
             this.buttonPackQueueCount.Click += new System.EventHandler(this.buttonPackQueueCount_Click);
+            // 
+            // buttonRemovePackset
+            // 
+            this.buttonRemovePackset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemovePackset.Image = global::TotalSmartCoding.Properties.Resources.Green_cross;
+            this.buttonRemovePackset.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRemovePackset.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemovePackset.Name = "buttonRemovePackset";
+            this.buttonRemovePackset.Size = new System.Drawing.Size(52, 72);
+            this.buttonRemovePackset.Click += new System.EventHandler(this.dgvPackset_Remove);
             // 
             // SmartCoding
             // 
@@ -1856,9 +1912,9 @@
             this.splitCartonQueue.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitCartonQueue)).EndInit();
             this.splitCartonQueue.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCartonPendingQueue)).EndInit();
             this.toolStrip5.ResumeLayout(false);
             this.toolStrip5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCartonPendingQueue)).EndInit();
             this.toolStrip9.ResumeLayout(false);
             this.toolStrip9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonsetQueue)).EndInit();
@@ -2025,5 +2081,10 @@
         private System.Windows.Forms.ToolStripButton buttonPackQueueCount;
         private System.Windows.Forms.ToolStripLabel toolStripLabel8;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton buttonRemoveCarton;
+        private System.Windows.Forms.ToolStripButton buttonRemoveCartonPending;
+        private System.Windows.Forms.ToolStripButton buttonRemoveCartonset;
+        private System.Windows.Forms.ToolStripButton buttonRemovePackset;
+        private System.Windows.Forms.ToolStripButton buttonDeleteCartonPending;
     }
 }

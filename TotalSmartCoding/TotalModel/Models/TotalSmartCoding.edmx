@@ -940,6 +940,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
           <Parameter Name="FillingPackIDs" Type="varchar" Mode="In" />
+          <Parameter Name="DeleteFillingPack" Type="bit" Mode="In" />
         </Function>
         <Function Name="FillingCartonUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FillingCartonIDs" Type="varchar" Mode="In" />
@@ -1392,6 +1393,7 @@ warning 6035: The relationship 'FK_OrganizationalUnitIUsers_AspNetUsers' has col
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
             <Parameter Name="FillingPackIDs" Mode="In" Type="String" />
+            <Parameter Name="DeleteFillingPack" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="FillingPackEditable" ReturnType="Collection(String)">
           <Parameter Name="EntityID" Mode="In" Type="Int32" />

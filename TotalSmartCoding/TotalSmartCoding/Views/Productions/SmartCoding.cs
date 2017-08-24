@@ -711,16 +711,16 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         /// <summary>
-        /// Remove a specific pack in dgvPacksetQueue
+        /// Move Packset To Carton Pending Queue (THE SAME AS NoRead, BUT: WITHOUT READ BY SCANNER)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvPacksetQueue_KeyDown(object sender, KeyEventArgs e)
+        private void dgvPackset_Remove(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && this.dgvPacksetQueue.CurrentCell != null)
+            if (this.dgvPacksetQueue.CurrentCell != null)
             {
                 try
-                {                //Handle exception for PackInOneCarton
+                {
                     string selectedBarcode = "";
                     int packID = this.getBarcodeID(this.dgvPacksetQueue.CurrentCell, out selectedBarcode);
                     if (packID > 0 && CustomMsgBox.Show(this, "Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
@@ -734,17 +734,17 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
-        private void dgvCarton_KeyDown(object sender, KeyEventArgs e)
+        private void dgvCarton_Remove(object sender, EventArgs e)
         {
             try
             {
-                DataGridView dataGridView = sender as DataGridView;
-                if (e.KeyCode == Keys.Delete && dataGridView != null && dataGridView.CurrentCell != null)
+                DataGridView dataGridView = sender.Equals(this.buttonRemoveCarton) ? this.dgvCartonQueue : this.dgvCartonsetQueue;
+                if (dataGridView != null && dataGridView.CurrentCell != null)
                 {
                     string selectedBarcode = "";
                     int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
                     if (barcodeID > 0 && CustomMsgBox.Show(this, "Are you sure you want to remove this carton:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.MoveCartonToPendingQueue(barcodeID, sender.Equals(this.dgvCartonsetQueue))) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (this.scannerController.MoveCartonToPendingQueue(barcodeID, dataGridView.Equals(this.dgvCartonsetQueue))) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception exception)
@@ -754,28 +754,27 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         /// <summary>
-        /// Unwrap a Noread || Pending carton
+        /// REMOVE: Unwrap a Noread || Pending carton
+        /// DELETE: DELETE ALL PACK IN a Noread || Pending carton => USER MUST TO SCAN BY MATCHING SCANNER AGAIN IN ORDER TO MAKE CARTON
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvCartonPendingQueue_KeyDown(object sender, KeyEventArgs e)
+        private void dgvCartonPending_RemoveDelete(object sender, EventArgs e)
         {
-            if ((e.KeyCode == Keys.Space || e.KeyCode == Keys.Delete) && this.dgvCartonPendingQueue.CurrentCell != null)
+            if (this.dgvCartonPendingQueue.CurrentCell != null)
             {
                 try
                 {
                     string selectedBarcode = "";
                     int cartonID = this.getBarcodeID(this.dgvCartonPendingQueue.CurrentCell, out selectedBarcode);
-                    if (cartonID > 0 && CustomMsgBox.Show(this, "Bạn có muốn xã thùng carton này ra và đóng lại không:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.UnwrapCartontoPack(cartonID)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (cartonID > 0 && CustomMsgBox.Show(this, "Bạn có muốn " + (sender.Equals(this.buttonRemoveCartonPending) ? "xã thùng carton này ra và đóng lại không:" : "xóa toàn bộ thùng carton, bao gồm các chai bên trong,: ") + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        if (sender.Equals(this.buttonRemoveCartonPending))
+                            if (this.scannerController.UnwrapCartontoPack(cartonID)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nĐã được xã thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    //    if (e.KeyCode == Keys.Space) //Update barcode. This code for update barcode will be check carefully when using. It have not been checked yet for now.
-                    //    {
-                    //        string cartonBarcode = "";
-                    //        if (CustomInputBox.Show("BP Filling System", "Please input barcode for this carton:" + (char)13 + (char)13 + selectedCarton.CartonBarcode + (char)13 + "   " + selectedCartonDescription, ref cartonBarcode) == System.Windows.Forms.DialogResult.OK)
-                    //            if (this.barcodeScannerMCU.UpdateCartonBarcode(selectedCarton.CartonID, cartonBarcode)) CustomMsgBox.Show(this, "Carton: " + (char)13 + cartonBarcode + (char)13 + "   " + selectedCartonDescription + "\r\nHas been updated successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //    }
-
+                        if (sender.Equals(this.buttonDeleteCartonPending))
+                            if (this.scannerController.DeleteCarton(cartonID)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nĐã được xóa, bao gồm các chai bên trong." + "\r\nVui lòng đọc lại từng chai nếu muốn đóng lại carton.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 catch (Exception exception)
                 {
@@ -784,9 +783,30 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-
-
-
+        private void dgvQueue_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                try
+                {
+                    DataGridView dataGridView = sender as DataGridView;
+                    if (dataGridView != null && dataGridView.CurrentCell != null)
+                    {
+                        string selectedBarcode = "";
+                        int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
+                        if (barcodeID > 0)
+                        {
+                            QuickView quickView = new QuickView(this.scannerController.GetBarcodeList(sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? barcodeID : 0, sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? 0 : barcodeID));
+                            quickView.ShowDialog();
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+                }
+            }
+        }
 
         private int getBarcodeID(DataGridViewCell dataGridViewCell, out string selectedBarcode)
         {
@@ -886,33 +906,6 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
-
-        private void dgvQueue_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                try
-                {
-                    DataGridView dataGridView = sender as DataGridView;
-                    if (dataGridView != null && dataGridView.CurrentCell != null)
-                    {
-                        string selectedBarcode = "";
-                        int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
-                        if (barcodeID > 0)
-                        {
-                            QuickView quickView = new QuickView(this.scannerController.GetBarcodeList(sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? barcodeID : 0, sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? 0 : barcodeID));
-                            quickView.ShowDialog();
-                        }
-                    }
-                }
-                catch (Exception exception)
-                {
-                    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
-                }
-            }
-        }
-
-
 
 
 
