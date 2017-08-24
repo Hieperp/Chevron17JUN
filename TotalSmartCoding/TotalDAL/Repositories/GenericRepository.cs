@@ -95,11 +95,19 @@ namespace TotalDAL.Repositories
         /// <returns></returns>
         public TEntity GetByID(int id)
         {
-            return this.modelDbSet.Find(id);
+            return this.GetByID(id, false);
+        }
+        public TEntity GetByID(int id, bool withReload)
+        {
+            TEntity entity = this.modelDbSet.Find(id);//STEP 1) FOR THIS WINFORM PROJECT => AT FIRST WE NEED TO FIND BY PRIMARYKEY
 
-            //////TEntity entity = this.modelDbSet.Find(id);//STEP 1) FOR THIS WINFORM PROJECT => AT FIRST WE NEED TO FIND BY PRIMARYKEY
-            //////if (entity != null) this.TotalSmartCodingEntities.Entry(entity).Reload(); // STEP 2) => NEXT: WE RELOAD FROM DATABASE. IF THE Entity HAS BEEN DELETE BY SOMEONE ELSE => THE this.modelDbSet WILL REMOVE Entity FROM ENTITIES CACHE
-            //////return this.modelDbSet.Find(id); //STEP 3) FINALLY => WE FIND BY PRIMARYKEY AGAIN. THIS WILL FIND FROM THE CACHE
+            if (withReload)
+            {
+                if (entity != null) this.TotalSmartCodingEntities.Entry(entity).Reload(); // STEP 2) => NEXT: WE RELOAD FROM DATABASE. IF THE Entity HAS BEEN DELETE BY SOMEONE ELSE => THE this.modelDbSet WILL REMOVE Entity FROM ENTITIES CACHE
+                entity = this.modelDbSet.Find(id); //STEP 3) FINALLY => WE FIND BY PRIMARYKEY AGAIN. THIS WILL FIND FROM THE CACHE
+            }
+
+            return entity;
 
             ////////IMPORTANT NOTES: WITH MVC, WE DON'T NEED TO DO 3 STEP, BECAUSE: IN MMVC:  THE DbContext TotalSmartCodingEntities WILL BE LOAD FOR EVERY THREAT, SO Find(id) ALWAYS SEARCH FROM DATABASE
         }

@@ -280,7 +280,7 @@ namespace TotalService
             {
                 try
                 {
-                    TEntity entity = this.genericRepository.GetByID(id);
+                    TEntity entity = this.genericRepository.GetByID(id, true);
                     TDto dto = Mapper.Map<TDto>(entity);
 
                     if (!this.TryValidateModel(dto)) throw new System.ArgumentException("Lỗi xóa dữ liệu", "Dữ liệu này không hợp lệ.");

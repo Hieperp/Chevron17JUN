@@ -27,6 +27,7 @@ namespace TotalCore.Repositories
 
         IQueryable<TEntity> GetAll();
         TEntity GetByID(int id);
+        TEntity GetByID(int id, bool withReload);
 
 
 
