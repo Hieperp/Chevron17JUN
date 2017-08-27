@@ -137,15 +137,18 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.NotifyPropertyChanged("CartonPendingQueue");
                 }
 
-                IList<FillingPallet> fillingPallets = this.fillingPalletController.fillingPalletService.GetFillingPallets(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset);
-                if (fillingPallets.Count > 0)
+                if (!GlobalEnums.OnTestPalletReceivedNow)
                 {
-                    fillingPallets.Each(fillingPallet =>
+                    IList<FillingPallet> fillingPallets = this.fillingPalletController.fillingPalletService.GetFillingPallets(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset);
+                    if (fillingPallets.Count > 0)
                     {
-                        FillingPalletDTO fillingPalletDTO = Mapper.Map<FillingPallet, FillingPalletDTO>(fillingPallet);
-                        this.palletQueue.Enqueue(fillingPalletDTO, false);
-                    });
-                    this.NotifyPropertyChanged("PalletQueue");
+                        fillingPallets.Each(fillingPallet =>
+                        {
+                            FillingPalletDTO fillingPalletDTO = Mapper.Map<FillingPallet, FillingPalletDTO>(fillingPallet);
+                            this.palletQueue.Enqueue(fillingPalletDTO, false);
+                        });
+                        this.NotifyPropertyChanged("PalletQueue");
+                    }
                 }
             }
             catch (Exception exception)
@@ -228,6 +231,10 @@ namespace TotalSmartCoding.Controllers.Productions
         #endregion
 
         #region Public Method
+
+        public void ResetNextPackQueueID() { this.packQueue.ResetNextQueueID(); this.NotifyPropertyChanged("PackQueue"); }
+
+        public string NextPackQueueDescription { get { return this.packQueue.NextQueueDescription; } }
 
         public DataTable GetPackQueue()
         {
@@ -516,7 +523,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool ReceivePack(string stringReceived)
         {
             bool barcodeReceived = false;
-            string[] arrayBarcode = stringReceived.Split(new Char[] { GlobalVariables.charETX });
+            string[] arrayBarcode = stringReceived.Split(new string[] { GlobalVariables.charTAB }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string stringBarcode in arrayBarcode)
             {
@@ -555,7 +562,19 @@ namespace TotalSmartCoding.Controllers.Productions
             }
             catch (System.Exception exception)
             {
-                throw new Exception("Lỗi lưu mã vạch chai [" + packCode + "] " + exception.Message);
+                string msg = exception.Message;
+                if (exception.InnerException != null)
+                {
+                    msg = msg + exception.InnerException.Message;
+
+
+                    if (exception.InnerException.InnerException != null)
+                    {
+                        msg = msg + exception.InnerException.InnerException.Message;
+                    }
+                }
+
+                throw new Exception("Lỗi lưu mã vạch chai [" + packCode + "] " + msg);
             }
         }
 
@@ -620,7 +639,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool ReceiveCarton(string stringReceived)
         {
             bool barcodeReceived = false;
-            string[] arrayBarcode = stringReceived.Split(new Char[] { GlobalVariables.charETX });
+            string[] arrayBarcode = stringReceived.Split(new string[] { GlobalVariables.charTAB }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string stringBarcode in arrayBarcode)
             {
@@ -710,7 +729,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool waitforPallet(ref string stringReceived)
         {
             if (GlobalEnums.OnTestScanner || GlobalEnums.OnTestPalletScanner)
-                if ((GlobalEnums.OnTestPrinter || GlobalEnums.OnTestPalletReceivedNow) && ((DateTime.Now.Second % 10) == 0 || GlobalEnums.OnTestPalletReceivedNow) && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) { stringReceived = "226775310870301174438888" + DateTime.Now.Millisecond.ToString("000000"); GlobalEnums.OnTestPalletReceivedNow = false; } else stringReceived = "";
+                if ((GlobalEnums.OnTestPrinter || GlobalEnums.OnTestPalletReceivedNow) && ((DateTime.Now.Second % 10) == 0 || GlobalEnums.OnTestPalletReceivedNow) && (this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton)) { stringReceived = "226775310870301174438888" + DateTime.Now.Millisecond.ToString("000000"); } else stringReceived = ""; //GlobalEnums.OnTestPalletReceivedNow = false;
             else
                 stringReceived = this.ionetSocketPallet.ReadoutStream().Trim();
 
@@ -728,7 +747,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool ReceivePallet(string stringReceived) //ONLY WHEN cartonsetQueue IS FULL + ONLY ONE PRINT PER PALLET: thêm số đếm printed cho cartonsetQueue?????
         {
             bool barcodeReceived = false;
-            string[] arrayBarcode = stringReceived.Split(new Char[] { GlobalVariables.charETX });
+            string[] arrayBarcode = stringReceived.Split(new string[] { GlobalVariables.charTAB }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string stringBarcode in arrayBarcode)
             {
@@ -749,7 +768,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 lock (this.cartonsetQueue)
                 {
-                    if (!GlobalVariables.IgnoreEmptyPallet || ((this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton) && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestScanner))) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
+                    if (!GlobalVariables.IgnoreEmptyPallet || ((this.cartonsetQueue.Count > 0 || !this.FillingData.HasCarton) && (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Printed || GlobalEnums.OnTestScanner || GlobalEnums.OnTestPalletReceivedNow))) //BY NOW: GlobalVariables.IgnoreEmptyPallet = TRUE. LATER, WE WILL ADD AN OPTION ON MENU FOR USER, IF NEEDED.               NOTES: HERE WE CHECK this.FillingData.CartonsetQueueLabelPrintedCount != 0: TO ENSURE THAT A NEW LABEL HAS BEEN PRINTED BY PrinterController IN ORDER TO MatchingAndAddPallet
                     {//IF this.cartonsetQueue.Count <= 0 => THIS WILL SAVE AN EMPTY PALLET: this.cartonsetQueue.EntityIDs WILL BE BLANK => NO CARTON BE UPDATED FOR THIS PALLET
 
                         FillingPalletDTO fillingPalletDTO = new FillingPalletDTO(this.FillingData) { Code = palletCode, TotalPacks = this.cartonsetQueue.TotalPacks, TotalCartons = this.cartonsetQueue.Count, Volume = this.cartonsetQueue.TotalVolume };
@@ -865,26 +884,35 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public bool RemovePackInPackQueue(int fillingPackID)
         {
-            if (fillingPackID <= 0) return false;
+            return this.RemovePackInPackQueue(fillingPackID, false);
+        }
+
+        public bool RemovePackInPackQueue(int fillingPackID, bool removeAll)
+        {
+            if (fillingPackID <= 0 && !removeAll) return false;
 
             lock (this.packQueue)
             {
-                if (this.packQueue.Count > 0)
+                lock (this.fillingPackController)
                 {
-                    FillingPackDTO messageData = this.packQueue.Dequeue(fillingPackID);
-                    if (messageData != null)
+                    do
                     {
-                        this.NotifyPropertyChanged("PackQueue");
-
-                        lock (this.fillingPackController)
+                        if (this.packQueue.Count > 0)
                         {
-                            if (this.fillingPackController.fillingPackService.Delete(messageData.FillingPackID)) return true; //Delete successfully
-                            else throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
+                            FillingPackDTO messageData = this.packQueue.Dequeue(removeAll ? 0 : fillingPackID);
+                            if (messageData != null)
+                            {
+                                this.NotifyPropertyChanged("PackQueue");
+
+                                if (!this.fillingPackController.fillingPackService.Delete(messageData.FillingPackID)) throw new System.ArgumentException("Lỗi", "Không thể xóa chai từ CSDL: " + messageData.Code);
+                            }
+                            else throw new System.ArgumentException("Lỗi", "Không tìm thấy chai trên hàng");
                         }
-                    }
-                    else throw new System.ArgumentException("Fail to handle this pack", "Can not remove pack from the line");
+                        else throw new System.ArgumentException("Lỗi", "Không còn chai trên hàng");
+                    } while (removeAll && this.packQueue.Count > 0);
+
+                    return true; //Delete successfully
                 }
-                else throw new System.ArgumentException("Fail to handle this pack", "No pack found on the line");
             }
         }
 
@@ -1052,16 +1080,28 @@ namespace TotalSmartCoding.Controllers.Productions
 
             lock (this.cartonPendingQueue)
             {
-                lock (this.fillingCartonController)
+                lock (this.fillingPackController)
                 {
-                    this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Noread + "," + (int)GlobalVariables.BarcodeStatus.Pending; //THIS CARTON MUST BE Noread || Pending IN ORDER TO UNWRAP TO PACK
-                    ////this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = ????-lay tu database ==>>>this.packsetQueue.EntityIDs; //SEE (***): WE HAVE ADDED ALL PACK OF THIS CARTON TO packsetQueue ALREADY. SO, NOW WE CAN USE this.packsetQueue.EntityIDs FOR ServiceBag["FillingPackIDs"]
-                    this.fillingCartonController.fillingCartonService.ServiceBag["DeleteFillingPack"] = true; 
-                    if (!this.fillingCartonController.fillingCartonService.Delete(fillingCartonID)) throw new System.ArgumentException("Lỗi", "Không thể xóa carton trên CSDL");
+                    lock (this.fillingCartonController)
+                    {
+                        IList<FillingPack> fillingPacks = this.fillingPackController.fillingPackService.GetFillingPacks(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Wrapped + "", fillingCartonID);
+                        if (fillingPacks.Count == this.FillingData.PackPerCarton)
+                        {
+                            this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Noread + "," + (int)GlobalVariables.BarcodeStatus.Pending; //THIS CARTON MUST BE Noread || Pending IN ORDER TO UNWRAP TO PACK
+                            this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = string.Join(",", fillingPacks.Select(d => d.FillingPackID));
+                            this.fillingCartonController.fillingCartonService.ServiceBag["DeleteFillingPack"] = true;
+                            if (!this.fillingCartonController.fillingCartonService.Delete(fillingCartonID)) throw new System.ArgumentException("Lỗi", "Không thể xóa carton trên CSDL");
 
-                    this.cartonPendingQueue.Dequeue(fillingCartonID);
+                            this.cartonPendingQueue.Dequeue(fillingCartonID);
 
-                    this.NotifyPropertyChanged("CartonPendingQueue");
+                            this.NotifyPropertyChanged("CartonPendingQueue");
+                        }
+                        else
+                        {
+                            this.MainStatus = "Không thể xóa và đóng lại carton, do số lượng chai của carton và trên chuyền không phù hợp.";
+                            return false;
+                        }
+                    }
                 }
                 return true;
             }

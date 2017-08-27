@@ -98,7 +98,7 @@ namespace TotalDTO.Productions
 
                 this.repeatSubQueueIndex = repeatSubQueueIndex;
 
-                if (this.repeatSubQueueIndex) this.noItemAdded = 0 - this.itemPerSubQueue;//SHOULD CHECK AGAIN. HAVE NOT CHECK YET FOR CHEVRON
+                if (this.repeatSubQueueIndex) this.noItemAdded = 0 - this.itemPerSubQueue;//SHOULD CHECK AGAIN WHEN this.repeatSubQueueIndex. HAVE NOT CHECK YET FOR CHEVRON
             }
             else
                 throw new Exception("Invalid queue!");
@@ -148,6 +148,13 @@ namespace TotalDTO.Productions
                 }
             }
         }
+
+        public string NextQueueDescription
+        {
+            get { return "[" + ((this.noItemAdded % this.itemPerSubQueue) + 1).ToString() + "/" + (this.NextQueueID + 1).ToString() + "]"; }
+        }
+
+        public void ResetNextQueueID() { if (this.repeatSubQueueIndex) this.noItemAdded = 0 - this.itemPerSubQueue; else this.noItemAdded = 0; } //SHOULD CHECK AGAIN WHEN this.repeatSubQueueIndex. HAVE NOT CHECK YET FOR CHEVRON
 
         /// <summary>
         /// Add messageData by specific messageData.QueueID, without increase noItemAdded by 1
@@ -361,7 +368,7 @@ namespace TotalDTO.Productions
 
         public int TotalPacks { get { return this.list2DBarcode.Select(o => o.Select(y => y.TotalPacks).Sum()).Sum(); } }
 
-        public decimal TotalVolume { get { return this.list2DBarcode.Select(o => o.Select(y => y.Volume).Sum()).Sum(); } }        
+        public decimal TotalVolume { get { return this.list2DBarcode.Select(o => o.Select(y => y.Volume).Sum()).Sum(); } }
 
     }
 }

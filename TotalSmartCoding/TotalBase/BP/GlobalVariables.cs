@@ -31,9 +31,12 @@ namespace TotalBase
 
         public const char charSTX = (char)02;//char.ConvertFromUtf32(02);//02H
         public const char charETX = (char)03;//char.ConvertFromUtf32(03);//03H
-
+        //public const char charTAB = (char)09;
+        public const string charTAB = "<HT>";
 
         public const char doubleTabChar = (char)09;
+
+        
 
 
         public const char charLF = (char)10;//char.ConvertFromUtf32( );//

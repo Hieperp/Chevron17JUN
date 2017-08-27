@@ -145,7 +145,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private string getNextNo()
         {
-            if (this.printerName == GlobalVariables.PrinterName.PackInkjet)
+            if (this.printerName == GlobalVariables.PrinterName.DigitInkjet || this.printerName == GlobalVariables.PrinterName.PackInkjet)
                 return this.NextPackNo;
             else
                 if (this.printerName == GlobalVariables.PrinterName.CartonInkjet)
@@ -300,13 +300,13 @@ namespace TotalSmartCoding.Controllers.Productions
         private string wholeMessageLine()
         {//THE FUNCTION laserDigitMessage totally base on this.wholeMessageLine. Later, if there is any thing change in this.wholeMessageLine, THE FUNCTION laserDigitMessage should be considered
             if (this.printerName == GlobalVariables.PrinterName.DigitInkjet)
-                return this.thirdLine(true, 1); //GlobalVariables.charESC + "u/1/" + 
+                return this.privateFillingData.FirstLine(true) + " " + this.privateFillingData.SecondLineA1(true) + this.thirdLine(true, 1); //GlobalVariables.charESC + "u/1/" + 
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
                 return GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.privateFillingData.FirstLine(false) + " " + this.privateFillingData.SecondLine(false) + " " + this.thirdLine(false, 2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
-                       GlobalVariables.charESC + "u/1/" + "   " + this.privateFillingData.FirstLine(true) + "/" +
-                       GlobalVariables.charESC + "/r/" + "   " + GlobalVariables.charESC + "u/1/" + this.privateFillingData.SecondLine(true) +
-                       GlobalVariables.charESC + "/r/" + "   " + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1);
+                       GlobalVariables.charESC + "u/1/" + " " + this.privateFillingData.FirstLine(true) + "/" +
+                       GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.privateFillingData.SecondLine(true) +
+                       GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1);
             }
             else //this.printerName == GlobalVariables.PrinterName.PalletLabel
             {
@@ -484,7 +484,8 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             if (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew || this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Reprint)
             {//ONLY PRINT WHEN: PrintStatus.Freshnew: AUTO PRINT FOR EACH NEW CartonsetQueue, AND: WHEN = PrintStatus.Reprint: USER PRESS RE-PRINT BUTTON
-                this.ioserialPort.WritetoSerial(this.wholeMessageLine());
+
+                if (GlobalEnums.SendToZebra) this.ioserialPort.WritetoSerial(this.wholeMessageLine());
 
                 this.FillingData.CartonsetQueueZebraStatus = this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? GlobalVariables.ZebraStatus.Printing1 : GlobalVariables.ZebraStatus.Reprinting1; Thread.Sleep(88);
             }
@@ -833,7 +834,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 //    U: UPDATE SERIAL NUMBER - Counter 1
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
                                 if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
-
+                                
                                 //    U: UPDATE SERIAL NUMBER - Counter 2
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/2/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
                                 if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);

@@ -177,7 +177,7 @@ namespace TotalSmartCoding.Views.Productions
             switch (GlobalVariables.FillingLineID)
             {
                 case GlobalVariables.FillingLine.Smallpack:
-                    return 307; //364 
+                    return 346; //364 
                 case GlobalVariables.FillingLine.Pail:
                     return 0;
                 case GlobalVariables.FillingLine.Drum:
@@ -493,10 +493,11 @@ namespace TotalSmartCoding.Views.Productions
 
                         if (currentRowIndex >= 0 && currentRowIndex < this.dgvPackQueue.Rows.Count && currentColumnIndex >= 0 && currentColumnIndex < this.dgvPackQueue.ColumnCount) this.dgvPackQueue.CurrentCell = this.dgvPackQueue[currentColumnIndex, currentRowIndex]; //Keep current cell
 
-                        this.buttonPackQueueCount.Text = "[" + this.scannerController.PackQueueCount.ToString("N0") + "]";
+                        this.buttonDeleteAllPack.Text = "[" + this.scannerController.PackQueueCount.ToString("N0") + "]";
+                        this.buttonPackQueueCount.Text = this.scannerController.NextPackQueueDescription;
                     }
 
-                    if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); }
+                    if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); this.buttonPacksetQueueCount.Text = "[" + this.scannerController.PacksetQueueCount.ToString("N0") + "]"; }
 
                     if (e.PropertyName == "CartonPendingQueue")
                     {
@@ -692,16 +693,16 @@ namespace TotalSmartCoding.Views.Productions
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgvPackQueue_KeyDown(object sender, KeyEventArgs e)
+        private void buttonDeletePack_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && this.dgvPackQueue.CurrentCell != null)
+            if (this.dgvPackQueue.CurrentCell != null)
             {
                 try
                 {                //Handle exception for PackInOneCarton
                     string selectedBarcode = "";
                     int packID = this.getBarcodeID(this.dgvPackQueue.CurrentCell, out selectedBarcode);
-                    if (packID > 0 && CustomMsgBox.Show(this, "Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.RemovePackInPackQueue(packID)) CustomMsgBox.Show(this, "Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (packID > 0 && CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Xóa toàn bộ chai đang trên chuyền" : "Xóa chai này:" + (char)13 + (char)13 + selectedBarcode) +"?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                        if (this.scannerController.RemovePackInPackQueue(packID, sender.Equals(this.buttonDeleteAllPack))) CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Toàn bộ chai đang trên chuyền" : "Pack: " + selectedBarcode) + "\r\n\r\nĐã được xóa thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
@@ -723,8 +724,8 @@ namespace TotalSmartCoding.Views.Productions
                 {
                     string selectedBarcode = "";
                     int packID = this.getBarcodeID(this.dgvPacksetQueue.CurrentCell, out selectedBarcode);
-                    if (packID > 0 && CustomMsgBox.Show(this, "Are you sure you want to remove this pack:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.MovePacksetToCartonPendingQueue(packID)) CustomMsgBox.Show(this, "Pack: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (packID > 0 && CustomMsgBox.Show(this, "Thùng carton này chuẩn bị đóng, bạn muốn bỏ ra khỏi chuyền xử lý sau:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                        if (this.scannerController.MovePacksetToCartonPendingQueue(packID)) CustomMsgBox.Show(this, "Thùng carton (chuẩn bị đóng) chứa chai: " + selectedBarcode + "\r\nđã bỏ ra khỏi chuyền.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
                 {
@@ -828,12 +829,24 @@ namespace TotalSmartCoding.Views.Productions
             return -1;
         }
 
-
         private void buttonPackQueueCount_Click(object sender, EventArgs e)
         {
             try
             {
-                if (this.scannerController.PackQueueCount > 0 && this.scannerController.PacksetQueueCount == 0 && CustomMsgBox.Show(this, "Bạn có muốn chia đều chai đang tồn vào carton không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                if (CustomMsgBox.Show(this, "Bạn có muốn reset số thứ tự chia làn auto packer về vị trí gốc [1, 1].?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                    this.scannerController.ResetNextPackQueueID();
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        private void buttonPacksetQueueCount_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.scannerController.PackQueueCount > 0 && this.scannerController.PacksetQueueCount == 0 && CustomMsgBox.Show(this, "Bạn có muốn chia đều chai vào các làn auto packer không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                     this.scannerController.ReAllocationPack();
             }
             catch (Exception exception)
@@ -846,7 +859,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {//HERE: WE CHECK CONDITION BEFORE CALL ToggleLastCartonset (TO PROTEST ACCIDENTAL PRESS BY WORKER). SURELY, WE CAN OMIT THESE CONDITION
-                if (this.scannerController.PackQueueCount == 0 && this.scannerController.PacksetQueueCount == 0 && this.scannerController.CartonQueueCount > 0 && this.scannerController.CartonQueueCount < this.fillingData.CartonPerPallet && this.scannerController.CartonPendingQueueCount == 0 && this.scannerController.CartonsetQueueCount == 0 && CustomMsgBox.Show(this, "Số lượng carton ít hơn số lượng đóng pallet.\r\n\r\nBạn có muốn đóng pallet ngay bây giờ không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                if (this.scannerController.PackQueueCount == 0 && this.scannerController.PacksetQueueCount == 0 && this.scannerController.CartonQueueCount > 0 && this.scannerController.CartonQueueCount < this.fillingData.CartonPerPallet && this.scannerController.CartonPendingQueueCount == 0 && this.scannerController.CartonsetQueueCount == 0 && CustomMsgBox.Show(this, "Số lượng carton ít hơn số lượng cần đóng pallet.\r\n\r\nBạn có muốn đóng pallet ngay bây giờ không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                     this.scannerController.ToggleLastCartonset(true);
             }
             catch (Exception exception)
@@ -906,6 +919,10 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+
+       
+
+
 
 
 
