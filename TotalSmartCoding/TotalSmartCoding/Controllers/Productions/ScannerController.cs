@@ -161,7 +161,7 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             try
             {
-                if (e.PropertyName == "PackPerCarton") { this.packQueue.ItemPerSet = this.FillingData.PackPerCarton; this.packsetQueue.ItemPerSet = this.FillingData.PackPerCarton; }
+                if (e.PropertyName == "PackPerCarton") { this.packQueue.NoSubQueue = this.FillingData.NoSubQueue; this.packQueue.ItemPerSet = this.FillingData.PackPerCarton; this.packsetQueue.NoSubQueue = this.FillingData.NoSubQueue; this.packsetQueue.ItemPerSet = this.FillingData.PackPerCarton; }
                 if (e.PropertyName == "CartonPerPallet") { this.cartonPendingQueue.ItemPerSet = this.FillingData.CartonPerPallet; this.cartonQueue.ItemPerSet = this.FillingData.CartonPerPallet; this.cartonsetQueue.ItemPerSet = this.FillingData.CartonPerPallet; }
             }
             catch (Exception exception)
@@ -187,7 +187,7 @@ namespace TotalSmartCoding.Controllers.Productions
         public int CartonsetQueueCount { get { return this.cartonsetQueue.Count; } }
         public int PalletQueueCount { get { return this.palletQueue.Count; } }
 
-        public bool AllQueueEmpty { get { return this.PackQueueCount == 0 && this.packsetQueue.Count == 0 && this.CartonPendingQueueCount == 0 && this.CartonQueueCount == 0 && this.cartonsetQueue.Count == 0 && this.PalletQueueCount == 0; } }
+        public bool AllQueueEmpty { get { return (this.packQueue == null && this.packsetQueue == null && this.cartonPendingQueue == null && this.cartonQueue == null && this.cartonsetQueue == null) || (this.PackQueueCount == 0 && this.packsetQueue.Count == 0 && this.CartonPendingQueueCount == 0 && this.CartonQueueCount == 0 && this.cartonsetQueue.Count == 0); } } // && this.PalletQueueCount == 0 : HIEN TAI: KHONG CO CACH NAO UNWRAP PALLET TO CARTON => SO NO NEED TO CHECK ALL PalletQueueCount
 
         #endregion Public Properties
 
@@ -672,7 +672,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         lock (this.fillingCartonController)
                         {
                             this.fillingCartonController.fillingCartonService.ServiceBag["EntryStatusIDs"] = fillingCartonDTO.EntryStatusID;
-                            this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.packsetQueue.EntityIDs; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
+                            this.fillingCartonController.fillingCartonService.ServiceBag["FillingPackIDs"] = this.FillingData.HasPack ? this.packsetQueue.EntityIDs : ""; //VERY IMPORTANT: NEED TO ADD FillingPackIDs TO NEW FillingCartonDTO
                             if (this.fillingCartonController.fillingCartonService.Save(fillingCartonDTO))
                                 this.packsetQueue = new BarcodeQueue<FillingPackDTO>(this.FillingData.NoSubQueue, this.FillingData.ItemPerSubQueue, false) { ItemPerSet = this.FillingData.PackPerCarton }; //CLEAR AFTER ADD TO FillingCartonDTO
                             else

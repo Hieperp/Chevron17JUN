@@ -66,10 +66,8 @@ namespace TotalSmartCoding.Views.Productions
             {
                 this.fillingData = new FillingData();
 
-
-                BatchIndex batchIndex = (new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
-                if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
-
+                this.Initialize();
+                
                 IBatchService batchService = CommonNinject.Kernel.Get<IBatchService>();//ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService
 
                 digitController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.DigitInkjet);
@@ -101,6 +99,9 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.buttonCartonNoreadNow.Visible = GlobalEnums.OnTestScanner;
                 this.buttonPalletReceivedNow.Visible = GlobalEnums.OnTestScanner;
+
+                if (!fillingData.HasPack) { this.dgvCartonPendingQueue.RowTemplate.Height = 195; this.dgvCartonQueue.RowTemplate.Height = 195; this.dgvCartonsetQueue.RowTemplate.Height = 195; this.dgvPalletQueue.RowTemplate.Height = 195; this.dgvPalletsetQueue.RowTemplate.Height = 195; }
+
             }
             catch (Exception exception)
             {
@@ -108,6 +109,18 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        public void Initialize()
+        {
+            try
+            {
+                BatchIndex batchIndex = (new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
+                if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
 
         private void SmartCoding_Load(object sender, EventArgs e)
         {
@@ -128,6 +141,8 @@ namespace TotalSmartCoding.Views.Productions
                 this.splitContainerPack.SplitterDistance = this.SplitterDistanceQuality();
                 this.splitContainerCarton.SplitterDistance = SplitterContainerCarton();
                 this.splitContainerPallet.SplitterDistance = this.SplitterContainerPallet();
+
+                
 
                 this.splitDigit.SplitterDistance = this.Width / 5;
                 this.splitPack.SplitterDistance = this.Width / 5;
@@ -194,7 +209,7 @@ namespace TotalSmartCoding.Views.Productions
                 case GlobalVariables.FillingLine.Smallpack:
                     return 225;
                 case GlobalVariables.FillingLine.Pail:
-                    return 0;
+                    return 521;
                 case GlobalVariables.FillingLine.Drum:
                     return 70; //86;
                 default:
@@ -209,7 +224,7 @@ namespace TotalSmartCoding.Views.Productions
                 case GlobalVariables.FillingLine.Smallpack:
                     return 111;
                 case GlobalVariables.FillingLine.Pail:
-                    return 0;
+                    return 259;
                 case GlobalVariables.FillingLine.Drum:
                     return 70; //86;
                 default:
@@ -230,7 +245,7 @@ namespace TotalSmartCoding.Views.Productions
                 case GlobalVariables.FillingLine.Smallpack:
                     return 955;//1199
                 case GlobalVariables.FillingLine.Pail:
-                    return 760;//760---24
+                    return 955;//760---24
                 case GlobalVariables.FillingLine.Drum:
                     return GlobalVariables.noItemPerCartonSetByProductID == 6 ? 860 : 880;
                 default:
@@ -245,7 +260,7 @@ namespace TotalSmartCoding.Views.Productions
                 case GlobalVariables.FillingLine.Smallpack:
                     return 160; //213
                 case GlobalVariables.FillingLine.Pail:
-                    return 429;
+                    return 160;
                 case GlobalVariables.FillingLine.Drum:
                     return 361; //485
                 default:
@@ -367,14 +382,12 @@ namespace TotalSmartCoding.Views.Productions
         private void toolStripButtonSetting_Click(object sender, EventArgs e)
         {
             try
-            {
-                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this.fillingData, true)); //this.scannerController.AllQueueEmpty
+            {                
+                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this, this.scannerController.AllQueueEmpty));
 
                 masterMDI.ShowDialog();
 
                 masterMDI.Dispose();
-
-                //this.splitContainerMatching.SplitterDistance = this.SplitterDistanceMatching();
             }
             catch (Exception exception)
             {
@@ -637,7 +650,12 @@ namespace TotalSmartCoding.Views.Productions
             if (indexOfDoubleTabChar == 0) printedBarcode = ""; //10-AUG-2017: WHAT IS GlobalVariables.doubleTabChar.ToString()???
             //else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
             else
-                if (printedBarcode.Length >= 29) printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
+            {
+                if (this.fillingData.HasPack && printedBarcode.Length >= 29)
+                    printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
+                else
+                    printedBarcode = printedBarcode.Substring(0, indexOfDoubleTabChar);
+            }
 
             //////--BP CASTROL
             ////if (printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString()) == 0) printedBarcode = "";

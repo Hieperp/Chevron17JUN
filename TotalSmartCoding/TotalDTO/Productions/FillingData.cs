@@ -12,7 +12,7 @@ namespace TotalDTO.Productions
     public class FillingData : NotifyPropertyChangeObject
     {
 
-        public int NoSubQueue { get { return GlobalVariables.NoSubQueue(); } }
+        public int NoSubQueue { get { return this.PackPerCarton / 4; } } //GlobalVariables.NoSubQueue()
         public int ItemPerSubQueue { get { return GlobalVariables.NoItemDiverter(); } }
         public bool RepeatSubQueueIndex { get { return GlobalVariables.RepeatedSubQueueIndex(); } }
 
@@ -48,38 +48,7 @@ namespace TotalDTO.Productions
 
         public FillingData()
         {
-
             this.settingDate = DateTime.Now;
-            //DataTable defaultFillingLineData = ADODatabase.GetDataTable("SELECT FillingLineData.ProductID, ListProductName.ProductCode, ListProductName.ProductCodeOriginal, ListProductName.NoItemPerCarton, ListProductName.NoExpiryDate, ListProductName.IsPailLabel, FillingLineData.BatchNo, FillingLineData.SettingDate, FillingLineData.SettingMonthID, FillingLineData.LastPackNo, FillingLineData.LastPackNo, FillingLineData.LastCartonNo, FillingLineData.MonthCartonNumber FROM FillingLineData INNER JOIN ListProductName ON FillingLineData.ProductID = ListProductName.ProductID WHERE FillingLineData.FillingLineID = " + (int)this.FillingLineID + " AND FillingLineData.IsDefault = 1");
-
-            //if (defaultFillingLineData.Rows.Count > 0)
-            //{
-            //    this.StartTracking();
-
-            //    this.ProductID = int.Parse(defaultFillingLineData.Rows[0]["ProductID"].ToString());
-            //    this.ProductCode = defaultFillingLineData.Rows[0]["ProductCode"].ToString();
-            //    this.ProductCodeOriginal = defaultFillingLineData.Rows[0]["ProductCodeOriginal"].ToString();
-
-            //    this.NoExpiryDate = int.Parse(defaultFillingLineData.Rows[0]["NoExpiryDate"].ToString());
-            //    this.IsPailLabel = bool.Parse(defaultFillingLineData.Rows[0]["IsPailLabel"] is DBNull ? "False" : defaultFillingLineData.Rows[0]["IsPailLabel"].ToString());
-
-            //    GlobalVariables.noItemPerCartonSetByProductID = int.Parse(defaultFillingLineData.Rows[0]["NoItemPerCarton"].ToString());
-
-            //    this.BatchNo = defaultFillingLineData.Rows[0]["BatchNo"].ToString();
-
-            //    this.SettingDate = DateTime.Parse(defaultFillingLineData.Rows[0]["SettingDate"].ToString());
-            //    this.SettingMonthID = int.Parse(defaultFillingLineData.Rows[0]["SettingMonthID"].ToString());
-
-            //    this.LastPackNo = defaultFillingLineData.Rows[0]["NextPackNo"].ToString();
-            //    this.LastPackNo = defaultFillingLineData.Rows[0]["NextPackNo"].ToString();
-
-            //    this.LastCartonNo = defaultFillingLineData.Rows[0]["NextCartonNo"].ToString();
-            //    this.MonthCartonNumber = defaultFillingLineData.Rows[0]["MonthCartonNumber"].ToString();
-
-            //    this.StartTracking();
-            //}
-
-
         }
 
         #endregion Contructor
@@ -88,26 +57,13 @@ namespace TotalDTO.Productions
         #region Public Properties
 
 
-        public GlobalVariables.FillingLine FillingLineID
-        {
-            get { return GlobalVariables.FillingLineID; }
+        public GlobalVariables.FillingLine FillingLineID { get { return GlobalVariables.FillingLineID; } }
+        public string FillingLineCode { get { return GlobalVariables.FillingLineCode; } }
+        public string FillingLineName { get { return GlobalVariables.FillingLineName; } }
 
-        }
-
-        //***************THESE SHOULD GET FROM FillingLines TABLE
-        public bool HasPack { get { return true; } }
-        public bool HasCarton { get { return true; } }
+        public bool HasPack { get { return this.FillingLineID == GlobalVariables.FillingLine.Smallpack; } }
+        public bool HasCarton { get { return this.FillingLineID == GlobalVariables.FillingLine.Smallpack || this.FillingLineID == GlobalVariables.FillingLine.Pail; } }
         public bool HasPallet { get { return true; } }
-
-        public string FillingLineCode
-        {
-            get { return GlobalVariables.FillingLineCode; }
-        }
-
-        public string FillingLineName
-        {
-            get { return GlobalVariables.FillingLineName; }
-        }
 
 
         public int CommodityID    //ResetSerialNumber

@@ -7,9 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using Ninject;
+
 using TotalDAL;
 using TotalBase;
 using TotalSmartCoding.Libraries.Helpers;
+using TotalSmartCoding.Controllers.APIs.Commons;
+using TotalSmartCoding.Libraries;
+using TotalCore.Repositories.Commons;
+using TotalModel.Models;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -45,6 +51,15 @@ namespace TotalSmartCoding.Views.Mains
 
             try
             {
+                FillingLineAPIs fillingLineAPIs = new FillingLineAPIs(CommonNinject.Kernel.Get<IFillingLineAPIRepository>());
+
+                this.comboFillingLineID.DataSource = fillingLineAPIs.GetFillingLineBases();
+                this.comboFillingLineID.DisplayMember = CommonExpressions.PropertyName<FillingLineBase>(p => p.Name);
+                this.comboFillingLineID.ValueMember = CommonExpressions.PropertyName<FillingLineBase>(p => p.FillingLineID);
+                //this.bindingFillingLineID = this.comboFillingLineID.DataBindings.Add("SelectedValue", GlobalVariables., CommonExpressions.PropertyName<PickupViewModel>(p => p.FillingLineID), true, DataSourceUpdateMode.OnPropertyChanged);
+
+
+
                 //DataTable dataTable = ADODatabase.GetDataTable("SELECT * FROM ListProductionLine WHERE (ProductionLineID > 0 AND ProductionLineID <= 6) OR ProductionLineID = 99");
                 //this.comboBoxProductionLineID.DataSource = dataTable;
                 //this.comboBoxProductionLineID.ValueMember = "ProductionLineID";
@@ -196,7 +211,7 @@ namespace TotalSmartCoding.Views.Mains
 
         private void comboBoxProductionLineID_Validated(object sender, EventArgs e)
         {
-            if (this.comboBoxProductionLineID.SelectedIndex < 0) this.comboBoxProductionLineID.Text = "";
+            if (this.comboFillingLineID.SelectedIndex < 0) this.comboFillingLineID.Text = "";
         }
 
         private void labelNoDomino_DoubleClick(object sender, EventArgs e)

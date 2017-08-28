@@ -88,11 +88,7 @@ namespace TotalDTO.Productions
         {
             if (noSubQueue > 0)
             {
-                this.list2DBarcode = new List<List<TBarcodeDTO>>();
-                for (int i = 1; i <= noSubQueue; i++)
-                {
-                    this.list2DBarcode.Add(new List<TBarcodeDTO>());
-                }
+                this.NoSubQueue = noSubQueue;
 
                 this.itemPerSubQueue = itemPerSubQueue;
 
@@ -113,7 +109,19 @@ namespace TotalDTO.Productions
 
         #region Public Properties
 
-        public int NoSubQueue { get { return this.list2DBarcode.Count; } }
+        public int NoSubQueue { 
+            get { return this.list2DBarcode.Count; }
+            set {  
+                if  (this.list2DBarcode == null || this.list2DBarcode.Count != value )
+                {
+                    this.list2DBarcode = new List<List<TBarcodeDTO>>();
+                    for (int i = 1; i <= value; i++)
+                    {
+                        this.list2DBarcode.Add(new List<TBarcodeDTO>());
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Return the total number of items in BarcodeQueue

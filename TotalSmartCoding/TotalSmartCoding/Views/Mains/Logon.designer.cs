@@ -43,7 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.labelChangePassword = new System.Windows.Forms.Label();
-            this.comboBoxProductionLineID = new System.Windows.Forms.ComboBox();
+            this.comboFillingLineID = new System.Windows.Forms.ComboBox();
             this.lbProductionLineID = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelPortAutonis = new System.Windows.Forms.Label();
@@ -209,16 +209,16 @@
             this.labelChangePassword.Text = "Click vào đây để đổi mật khẩu";
             this.labelChangePassword.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // comboBoxProductionLineID
+            // comboFillingLineID
             // 
-            this.comboBoxProductionLineID.Enabled = false;
-            this.comboBoxProductionLineID.FormattingEnabled = true;
-            this.comboBoxProductionLineID.Location = new System.Drawing.Point(168, 33);
-            this.comboBoxProductionLineID.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBoxProductionLineID.Name = "comboBoxProductionLineID";
-            this.comboBoxProductionLineID.Size = new System.Drawing.Size(324, 24);
-            this.comboBoxProductionLineID.TabIndex = 21;
-            this.comboBoxProductionLineID.Validated += new System.EventHandler(this.comboBoxProductionLineID_Validated);
+            this.comboFillingLineID.Enabled = false;
+            this.comboFillingLineID.FormattingEnabled = true;
+            this.comboFillingLineID.Location = new System.Drawing.Point(168, 33);
+            this.comboFillingLineID.Margin = new System.Windows.Forms.Padding(4);
+            this.comboFillingLineID.Name = "comboFillingLineID";
+            this.comboFillingLineID.Size = new System.Drawing.Size(324, 24);
+            this.comboFillingLineID.TabIndex = 21;
+            this.comboFillingLineID.Validated += new System.EventHandler(this.comboBoxProductionLineID_Validated);
             // 
             // lbProductionLineID
             // 
@@ -287,7 +287,7 @@
             this.Controls.Add(this.labelPortAutonis);
             this.Controls.Add(this.checkBoxNoDomino);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBoxProductionLineID);
+            this.Controls.Add(this.comboFillingLineID);
             this.Controls.Add(this.lbProductionLineID);
             this.Controls.Add(this.labelChangePassword);
             this.Controls.Add(this.textBoxPassword);
@@ -327,7 +327,7 @@
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label labelChangePassword;
         private System.Windows.Forms.CheckBox checkBoxNoDomino;
-        private System.Windows.Forms.ComboBox comboBoxProductionLineID;
+        private System.Windows.Forms.ComboBox comboFillingLineID;
         private System.Windows.Forms.Label lbProductionLineID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelPortAutonis;

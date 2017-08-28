@@ -120,9 +120,9 @@ namespace TotalBase
 
 
 
-        public static FillingLine FillingLineID = FillingLine.Smallpack;
-        public static string FillingLineCode = "S1";
-        public static string FillingLineName = FillingLine.Smallpack.ToString();
+        public static FillingLine FillingLineID = FillingLine.Pail;
+        public static string FillingLineCode = "P1";
+        public static string FillingLineName = FillingLine.Pail.ToString();
 
         public static int noItemPerCartonSetByProductID = 0;
 

@@ -41,19 +41,19 @@ namespace TotalSmartCoding.Views.Productions
 {
     public partial class Batches : BaseView
     {
-        private FillingData fillingData;
+        private SmartCoding smartCoding;
         private bool allQueueEmpty;
 
         private BatchAPIs batchAPIs;
         private BatchViewModel batchViewModel { get; set; }
 
-        public Batches(FillingData fillingData, bool allQueueEmpty)
+        public Batches(SmartCoding smartCoding, bool allQueueEmpty)
             : base()
         {
             InitializeComponent();
 
 
-            this.fillingData = fillingData;
+            this.smartCoding = smartCoding;
             this.allQueueEmpty = allQueueEmpty;
 
             this.toolstripChild = this.toolStripChildForm;
@@ -183,6 +183,8 @@ namespace TotalSmartCoding.Views.Productions
         {
             this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both));
             base.Loading();
+
+            this.smartCoding.Initialize();
         }
 
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
@@ -204,17 +206,6 @@ namespace TotalSmartCoding.Views.Productions
         protected override bool ApproveCheck(int id)
         {
             return !this.batchViewModel.IsDefault && !this.batchViewModel.InActive;
-        }
-
-        protected override void ApproveMore(int id)
-        {
-            base.ApproveMore(id);
-
-            if (this.fastBatchIndex.SelectedObject != null && ((BatchIndex)fastBatchIndex.SelectedObject).BatchID == id)
-            {
-                BatchIndex batchIndex = (BatchIndex)fastBatchIndex.SelectedObject;
-                if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
-            }
         }
 
         private void buttonDiscontinued_Click(object sender, EventArgs e)
