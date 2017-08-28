@@ -177,7 +177,10 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public bool OnScanning { get; private set; }
 
-        public void StartScanner() { this.OnScanning = true; }
+        public void StartScanner() {
+            if (!this.OnScanning) this.ClearSocket(); //CHECK !this.OnScanning JUST FOR SURE, BECAUSE WE DO NOT TEST BEFORE. I WORRY THAT this.ClearSocket WILL CONFLICT WITH ThreadRoutine ReadoutStream. I THINK THIS IS NOT NECCESSARY!!!
+            this.OnScanning = true; 
+        }
         public void StopScanner() { this.OnScanning = false; }
 
         public int PackQueueCount { get { return this.packQueue.Count; } }
@@ -417,6 +420,47 @@ namespace TotalSmartCoding.Controllers.Productions
             }
 
         }
+
+        private bool ClearSocket()
+        {
+            try
+            {
+                if (!GlobalEnums.OnTestScanner)
+                {
+                    if (this.FillingData.HasPack)
+                    {
+                        lock (this.ionetSocketPack)
+                        {
+                            this.ionetSocketPack.ReadoutStream();
+                        }
+                    }
+
+                    if (this.FillingData.HasCarton)
+                    {
+                        lock (this.ionetSocketCarton)
+                        {
+                            this.ionetSocketCarton.ReadoutStream();
+                        }
+                    }
+
+                    if (this.FillingData.HasPallet && !GlobalEnums.OnTestPalletScanner)
+                    {
+                        lock (this.ionetSocketPallet)
+                        {
+                            this.ionetSocketPallet.ReadoutStream();
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            catch (Exception exception)
+            {
+                this.MainStatus = exception.Message; return false;
+            }
+        }
+
 
         #endregion Public Method
 

@@ -1563,6 +1563,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Graphicloads_100_Flat_2_Inside_logout {
+            get {
+                object obj = ResourceManager.GetObject("Graphicloads-100-Flat-2-Inside-logout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Graphicloads_100_Flat_Home {
             get {
                 object obj = ResourceManager.GetObject("Graphicloads-100-Flat-Home", resourceCulture);

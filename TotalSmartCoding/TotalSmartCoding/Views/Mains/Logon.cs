@@ -56,28 +56,33 @@ namespace TotalSmartCoding.Views.Mains
                 this.comboFillingLineID.DataSource = fillingLineAPIs.GetFillingLineBases();
                 this.comboFillingLineID.DisplayMember = CommonExpressions.PropertyName<FillingLineBase>(p => p.Name);
                 this.comboFillingLineID.ValueMember = CommonExpressions.PropertyName<FillingLineBase>(p => p.FillingLineID);
+
+                int fillingLineID;
+                if (int.TryParse(CommonConfigs.ReadSetting("FillingLineID"), out fillingLineID) && fillingLineID >= 1 && fillingLineID <= 3)
+                    this.comboFillingLineID.SelectedValue = fillingLineID;
+
+                this.comboFillingLineID.SelectedValue = 2;
+
                 //this.bindingFillingLineID = this.comboFillingLineID.DataBindings.Add("SelectedValue", GlobalVariables., CommonExpressions.PropertyName<PickupViewModel>(p => p.FillingLineID), true, DataSourceUpdateMode.OnPropertyChanged);
 
-
+                //string a = CommonConfigs.ReadSetting("FillingLineID");
+                //CommonConfigs.AddUpdateAppSettings("FillingLineID", "2");
+                //a = CommonConfigs.ReadSetting("FillingLineID");
 
                 //DataTable dataTable = ADODatabase.GetDataTable("SELECT * FROM ListProductionLine WHERE (ProductionLineID > 0 AND ProductionLineID <= 6) OR ProductionLineID = 99");
-                //this.comboBoxProductionLineID.DataSource = dataTable;
-                //this.comboBoxProductionLineID.ValueMember = "ProductionLineID";
-                //this.comboBoxProductionLineID.DisplayMember = "ProductionLineName";
-                //if (dataTable.Rows.Count > 0) this.comboBoxProductionLineID.SelectedValue = dataTable.Rows[0]["LastLogonProductionLineID"];
+                //this.comboFillingLineID.DataSource = dataTable;
+                //this.comboFillingLineID.ValueMember = "ProductionLineID";
+                //this.comboFillingLineID.DisplayMember = "ProductionLineName";
+                //if (dataTable.Rows.Count > 0) this.comboFillingLineID.SelectedValue = dataTable.Rows[0]["LastLogonProductionLineID"];
 
 
-                //this.comboBoxImageS8PortName.DataSource = System.IO.Ports.SerialPort.GetPortNames();
-                //this.comboBoxAutonicsPortName.DataSource = System.IO.Ports.SerialPort.GetPortNames();
+                this.comboBoxAutonicsPortName.DataSource = System.IO.Ports.SerialPort.GetPortNames();
 
-                //if (this.comboBoxImageS8PortName.Items.Count == 0)
-                //{
-                //    this.comboBoxImageS8PortName.DataSource = null;
-                //    this.comboBoxImageS8PortName.Items.Add("COM 0");
-
-                //    this.comboBoxAutonicsPortName.DataSource = null;
-                //    this.comboBoxAutonicsPortName.Items.Add("COM 0");
-                //}
+                if (this.comboBoxAutonicsPortName.Items.Count == 0)
+                {
+                    this.comboBoxAutonicsPortName.DataSource = null;
+                    this.comboBoxAutonicsPortName.Items.Add("COM 0");
+                }
 
                 //DataTable dataTablePublicPrinterProperties = SQLDatabase.GetDataTable("SELECT TOP 1 * FROM PublicPrinterProperties");
                 //if (dataTablePublicPrinterProperties.Rows.Count > 0)
@@ -103,6 +108,7 @@ namespace TotalSmartCoding.Views.Mains
                 //this.employeeIDBinding.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
                 //this.dateTimePickerUserDate.Value = DateTime.Now - DateTime.Today <= new TimeSpan(7, 0, 0) ? DateTime.Today.AddDays(-1) : DateTime.Today;
+                this.comboBoxEmployeeID.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
 
             }
             catch (Exception exception)
@@ -121,37 +127,22 @@ namespace TotalSmartCoding.Views.Mains
 
         private void pictureBoxIcon_DoubleClick(object sender, EventArgs e)
         {
-            //if (this.EmployeeID == 1 && (int)this.comboBoxProductionLineID.SelectedValue != (int)GlobalVariables.ProductionLine.SERVER)
-            //{
-            //    this.comboBoxImageS8PortName.Visible = true;
-            //    this.comboBoxAutonicsPortName.Visible = true;
-            //    this.labelPortName.Visible = true;
-            //    this.labelPortAutonis.Visible = true;
-            //}
+            this.labelPortAutonis.Visible = true;
+            this.comboBoxAutonicsPortName.Visible = true;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
             try
             {
-                ContextAttributes.User = new UserInformation(1, 1, this.comboBoxEmployeeID.Text, this.dateTimePickerUserDate.Value);
+                ContextAttributes.User = new UserInformation(1, 1, this.comboBoxEmployeeID.Text, new DateTime());
+
+                //if (this.comboFillingLineID.SelectedIndex < 0 || this.comboBoxAutonicsPortName.SelectedIndex < 0) throw new System.ArgumentException("Vui lòng chọn chuyền sản xuất (NOF1, NOF2, NOF...), và chọn đúng cổng COM để chạy phần mềm"); // || (this.comboFillingLineID.Enabled && (GlobalVariables.ProductionLine)this.comboFillingLineID.SelectedValue == GlobalVariables.ProductionLine.SERVER)
 
 
-
-
-                //if (this.comboBoxProductionLineID.SelectedIndex < 0 || this.comboBoxAutonicsPortName.SelectedIndex < 0 || this.comboBoxImageS8PortName.SelectedIndex < 0 || (this.comboBoxProductionLineID.Enabled && (GlobalVariables.ProductionLine)this.comboBoxProductionLineID.SelectedValue == GlobalVariables.ProductionLine.SERVER)) throw new System.ArgumentException("Vui lòng chọn chuyền sản xuất (NOF1, NOF2, NOF...), và chọn đúng cổng COM để chạy phần mềm");
-
-                //GlobalVariables.ProductionLineID = (GlobalVariables.ProductionLine)this.comboBoxProductionLineID.SelectedValue;
-                //GlobalVariables.ProductionLineCode = (string)((DataRowView)this.comboBoxProductionLineID.SelectedItem)["ProductionLineCode"];
-                //GlobalVariables.ProductionLineName = (string)((DataRowView)this.comboBoxProductionLineID.SelectedItem)["ProductionLineName"];
-
-                //GlobalVariables.CoilExtension = (int)((DataRowView)this.comboBoxProductionLineID.SelectedItem)["CoilExtension"];
-                //GlobalVariables.AutonisStartValue = (int)((DataRowView)this.comboBoxProductionLineID.SelectedItem)["AutonisStartValue"];
-                //GlobalVariables.DominoStartValue = (int)((DataRowView)this.comboBoxProductionLineID.SelectedItem)["DominoStartValue"];
-                //GlobalVariables.CounterValueWarning = (int)((DataRowView)this.comboBoxProductionLineID.SelectedItem)["CounterValueWarning"];
-
-                //ADODatabase.ExecuteNonQuery("UPDATE ListProductionLine SET LastLogonProductionLineID = " + (int)GlobalVariables.ProductionLineID);
-
+                GlobalVariables.FillingLineID = (GlobalVariables.FillingLine)this.comboFillingLineID.SelectedValue;
+                GlobalVariables.FillingLineCode = ((FillingLineBase)this.comboFillingLineID.SelectedItem).Code;
+                GlobalVariables.FillingLineName = ((FillingLineBase)this.comboFillingLineID.SelectedItem).Name;
 
                 //if (this.comboBoxEmployeeID.SelectedIndex < 0 || this.EmployeeID < 0) throw new System.ArgumentException("Vui lòng chọn tên người sử dụng!");
 
@@ -209,14 +200,14 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void comboBoxProductionLineID_Validated(object sender, EventArgs e)
+        private void comboFillingLineID_Validated(object sender, EventArgs e)
         {
             if (this.comboFillingLineID.SelectedIndex < 0) this.comboFillingLineID.Text = "";
         }
 
         private void labelNoDomino_DoubleClick(object sender, EventArgs e)
         {
-            //if ((int)this.comboBoxProductionLineID.SelectedValue != (int)GlobalVariables.ProductionLine.SERVER)
+            //if ((int)this.comboFillingLineID.SelectedValue != (int)GlobalVariables.ProductionLine.SERVER)
             //{
             //    this.labelNoDomino.Visible = false;
             //    this.checkBoxNoDomino.Visible = true;
@@ -229,7 +220,7 @@ namespace TotalSmartCoding.Views.Mains
             //{
             //    string textInput = "";
             //    if (CustomInputBox.Show("NMVN", "Vui lòng nhập mật khẩu đổi chuyền", ref textInput) == System.Windows.Forms.DialogResult.OK)
-            //        this.comboBoxProductionLineID.Enabled = (textInput == "9876543210");
+            //        this.comboFillingLineID.Enabled = (textInput == "9876543210");
             //}
             //catch (Exception exception)
             //{

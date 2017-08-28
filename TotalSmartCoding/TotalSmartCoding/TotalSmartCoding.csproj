@@ -77,6 +77,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -95,6 +96,7 @@
     <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
     <Compile Include="Controllers\Inventories\PickupController.cs" />
     <Compile Include="Libraries\AutoMapperConfig.cs" />
+    <Compile Include="Libraries\CommonConfigs.cs" />
     <Compile Include="Libraries\CommonRegistries.cs" />
     <Compile Include="Libraries\Communications\Crc16CCITT.cs" />
     <Compile Include="Libraries\Communications\Crc16CcittBACKUP.cs" />
@@ -797,6 +799,7 @@
     <None Include="Resources\Get-Info-B-icon-48.png" />
     <None Include="Resources\Green-cross.ico" />
     <None Include="Resources\Carlosjj-Google-Jfk-Maps.ico" />
+    <None Include="Resources\Graphicloads-100-Flat-2-Inside-logout.ico" />
     <Content Include="Resources\Icons-Land-Play-Stop-Pause-Play-Pressed.ico" />
     <None Include="Resources\Land-Play.ico" />
     <None Include="Resources\palet031.ico" />

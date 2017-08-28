@@ -15,6 +15,9 @@ using TotalSmartCoding.Views.Commons;
 using TotalSmartCoding.Views.Productions;
 using TotalSmartCoding.Views.Inventories.Pickups;
 using TotalSmartCoding.Views.Inventories.GoodsReceipts;
+using System.IO;
+using System.Reflection;
+using TotalBase;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -88,6 +91,12 @@ namespace TotalSmartCoding.Views.Mains
                 }
                 else
                     OpenTestView();
+
+                DateTime buildDate = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
+                this.statusVersion.Text = "Version 1.0i Date: " + buildDate.ToString("dd/MM/yyyy hh:mm:ss");
+
+                this.statusFillingLine.Text = GlobalVariables.FillingLineName;
+                this.statusUserDescription.Text = ContextAttributes.User.UserDescription;
 
             }
             catch (Exception exception)
