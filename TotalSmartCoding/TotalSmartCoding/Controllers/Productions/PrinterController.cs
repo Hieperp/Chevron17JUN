@@ -55,7 +55,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.isLaser = isLaser;
 
                 this.ionetSocket = new IONetSocket(IPAddress.Parse(GlobalVariables.IpAddress(this.printerName)), 7000, this.isLaser);
-                this.ioserialPort = new IOSerialPort(GlobalVariables.PortName, 9600, Parity.None, 8, StopBits.One, false, "Zebra");
+                this.ioserialPort = new IOSerialPort(GlobalVariables.ComportName, 9600, Parity.None, 8, StopBits.One, false, "Zebra");
 
 
                 this.ioserialPort.PropertyChanged += new PropertyChangedEventHandler(ioserialPort_PropertyChanged);
