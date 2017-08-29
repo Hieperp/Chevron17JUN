@@ -647,13 +647,15 @@ namespace TotalSmartCoding.Views.Productions
         private string GetSerialNumber(string printedBarcode)
         {
             int indexOfDoubleTabChar = printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString());
-            if (indexOfDoubleTabChar == 0) printedBarcode = ""; //10-AUG-2017: WHAT IS GlobalVariables.doubleTabChar.ToString()???
+            if (indexOfDoubleTabChar == 0) 
+                printedBarcode = ""; //10-AUG-2017: WHAT IS GlobalVariables.doubleTabChar.ToString()???
             //else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
             else
             {
                 if (this.fillingData.HasPack && printedBarcode.Length >= 29)
                     printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
-                else
+
+                if (!this.fillingData.HasPack && printedBarcode.Length >= 29)
                     printedBarcode = printedBarcode.Substring(0, indexOfDoubleTabChar);
             }
 

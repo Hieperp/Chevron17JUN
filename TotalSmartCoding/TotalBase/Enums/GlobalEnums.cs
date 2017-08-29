@@ -13,7 +13,7 @@
         public static bool SendToZebra = false;
 
         public static bool OnTestCartonNoreadNow = false;
-        public static bool OnTestPalletReceivedNow = true;
+        public static bool OnTestPalletReceivedNow = false;
         
 
         public static OptionSetting GlobalOptionSetting = new OptionSetting();

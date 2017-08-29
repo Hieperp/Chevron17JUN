@@ -89,7 +89,10 @@ namespace TotalSmartCoding.Controllers.Productions
         #region Public Properties
 
 
-        public void StartPrint() { this.OnPrinting = true; }
+        public void StartPrint() {
+            if (GlobalEnums.OnTestPrinter) this.MainStatus = "Đang in ..."; 
+            this.OnPrinting = true; 
+        }
         public void StopPrint() { this.OnPrinting = false; }
 
 
