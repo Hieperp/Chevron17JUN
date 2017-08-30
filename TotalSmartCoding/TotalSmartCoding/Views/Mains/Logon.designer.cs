@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Logon));
             this.groupBoxMainButton = new System.Windows.Forms.GroupBox();
+            this.buttonListEmployee = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelFillingLineID = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.labelNoDomino = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.buttonListEmployee = new System.Windows.Forms.Button();
             this.groupBoxMainButton.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
@@ -63,26 +63,42 @@
             this.groupBoxMainButton.TabIndex = 9;
             this.groupBoxMainButton.TabStop = false;
             // 
+            // buttonListEmployee
+            // 
+            this.buttonListEmployee.Image = ((System.Drawing.Image)(resources.GetObject("buttonListEmployee.Image")));
+            this.buttonListEmployee.Location = new System.Drawing.Point(444, 23);
+            this.buttonListEmployee.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonListEmployee.Name = "buttonListEmployee";
+            this.buttonListEmployee.Size = new System.Drawing.Size(33, 28);
+            this.buttonListEmployee.TabIndex = 2;
+            this.buttonListEmployee.UseVisualStyleBackColor = true;
+            this.buttonListEmployee.Visible = false;
+            this.buttonListEmployee.Click += new System.EventHandler(this.buttonOK_Click);
+            // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(825, 19);
+            this.buttonCancel.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
+            this.buttonCancel.Location = new System.Drawing.Point(807, 16);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(88, 32);
+            this.buttonCancel.Size = new System.Drawing.Size(105, 50);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(729, 19);
+            this.buttonOK.Image = global::TotalSmartCoding.Properties.Resources.Saki_NuoveXT_Actions_ok;
+            this.buttonOK.Location = new System.Drawing.Point(693, 16);
             this.buttonOK.Margin = new System.Windows.Forms.Padding(4);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(88, 32);
+            this.buttonOK.Size = new System.Drawing.Size(105, 50);
             this.buttonOK.TabIndex = 0;
             this.buttonOK.Text = "OK";
+            this.buttonOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -225,25 +241,13 @@
             this.pictureBoxIcon.TabStop = false;
             this.pictureBoxIcon.DoubleClick += new System.EventHandler(this.pictureBoxIcon_DoubleClick);
             // 
-            // buttonListEmployee
-            // 
-            this.buttonListEmployee.Image = ((System.Drawing.Image)(resources.GetObject("buttonListEmployee.Image")));
-            this.buttonListEmployee.Location = new System.Drawing.Point(433, 23);
-            this.buttonListEmployee.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonListEmployee.Name = "buttonListEmployee";
-            this.buttonListEmployee.Size = new System.Drawing.Size(33, 28);
-            this.buttonListEmployee.TabIndex = 2;
-            this.buttonListEmployee.UseVisualStyleBackColor = true;
-            this.buttonListEmployee.Visible = false;
-            this.buttonListEmployee.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
             // Logon
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(509, 255);
+            this.ClientSize = new System.Drawing.Size(506, 275);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.labelPortAutonis);
@@ -257,7 +261,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Logon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Đăng nhập";
+            this.Text = "Logon";
             this.Load += new System.EventHandler(this.PublicApplicationLogon_Load);
             this.groupBoxMainButton.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
