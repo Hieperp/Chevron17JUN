@@ -64,10 +64,10 @@
             // 
             this.button3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Image = global::TotalSmartCoding.Properties.Resources.Saki_NuoveXT_Actions_ok;
-            this.button3.Location = new System.Drawing.Point(480, 0);
+            this.button3.Location = new System.Drawing.Point(441, 0);
             this.button3.Margin = new System.Windows.Forms.Padding(0);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(110, 53);
+            this.button3.Size = new System.Drawing.Size(121, 53);
             this.button3.TabIndex = 41;
             this.button3.Text = "Yes";
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -77,10 +77,10 @@
             // 
             this.button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Image = global::TotalSmartCoding.Properties.Resources.Saki_NuoveXT_Actions_ok;
-            this.button2.Location = new System.Drawing.Point(593, 0);
+            this.button2.Location = new System.Drawing.Point(567, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 53);
+            this.button2.Size = new System.Drawing.Size(121, 53);
             this.button2.TabIndex = 40;
             this.button2.Text = "OK";
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -91,10 +91,10 @@
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = global::TotalSmartCoding.Properties.Resources.Yellow_cross;
-            this.button1.Location = new System.Drawing.Point(706, 0);
+            this.button1.Location = new System.Drawing.Point(693, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 53);
+            this.button1.Size = new System.Drawing.Size(121, 53);
             this.button1.TabIndex = 39;
             this.button1.Text = "Cancel";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

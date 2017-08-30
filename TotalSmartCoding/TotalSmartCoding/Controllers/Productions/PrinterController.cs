@@ -89,9 +89,10 @@ namespace TotalSmartCoding.Controllers.Productions
         #region Public Properties
 
 
-        public void StartPrint() {
-            if (GlobalEnums.OnTestPrinter) this.MainStatus = "Đang in ..."; 
-            this.OnPrinting = true; 
+        public void StartPrint()
+        {
+            if (GlobalEnums.OnTestPrinter) this.MainStatus = "Đang in ...";
+            this.OnPrinting = true;
         }
         public void StopPrint() { this.OnPrinting = false; }
 
@@ -317,29 +318,29 @@ namespace TotalSmartCoding.Controllers.Productions
                 if (this.OnPrinting)
                 {
                     stringMessage = stringMessage + "^XA"; //[^XA - Indicates start of label format.]
-                    stringMessage = stringMessage + "^LH80,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
+                    stringMessage = stringMessage + "^LH60,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
 
                     stringMessage = stringMessage + "^FO0,10  ^BC,360,N  ^FD" + this.privateFillingData.FirstLine(false) + this.privateFillingData.SecondLine(false) + this.thirdLine(false, 0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
 
-                    stringMessage = stringMessage + "^FO760,10 ^AV ^FD" + this.privateFillingData.FirstLine(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                    stringMessage = stringMessage + "^FO760,100 ^AV ^FD" + this.privateFillingData.SecondLineA1(true) + "^FS";
-                    stringMessage = stringMessage + "^FO760,200 ^AV ^FD" + this.privateFillingData.SecondLineA2(true) + "^FS";
-                    stringMessage = stringMessage + "^FO760,306 ^AV ^FD" + this.thirdLine(true, 0) + "^FS";
+                    stringMessage = stringMessage + "^FO770,10 ^AV ^FD" + this.privateFillingData.FirstLine(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                    stringMessage = stringMessage + "^FO770,100 ^AV ^FD" + this.privateFillingData.SecondLineA1(true) + "^FS";
+                    stringMessage = stringMessage + "^FO770,200 ^AV ^FD" + this.privateFillingData.SecondLineA2(true) + "^FS";
+                    stringMessage = stringMessage + "^FO770,306 ^AV ^FD" + this.thirdLine(true, 0) + "^FS";
 
                     stringMessage = stringMessage + "^XZ"; //[^XZ - Indicates end of label format.]
                 }
                 else //TEST PAGE ONLY
                 {
                     stringMessage = stringMessage + "^XA"; //[^XA - Indicates start of label format.]
-                    stringMessage = stringMessage + "^LH80,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
+                    stringMessage = stringMessage + "^LH60,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
 
                     stringMessage = stringMessage + "^FO0,30 ^AS ^FD" + "If you can read this, your printer is ready" + "^FS";
                     stringMessage = stringMessage + "^FO0,80 ^AS ^FD" + "**PLEASE PRESS THE START BUTTON TO BEGIN**" + "^FS";
 
-                    stringMessage = stringMessage + "^FO760,10 ^AV ^FD" + this.privateFillingData.FirstLine(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                    stringMessage = stringMessage + "^FO760,100 ^AV ^FD" + this.privateFillingData.SecondLineA1(true) + "^FS";
-                    stringMessage = stringMessage + "^FO760,200 ^AV ^FD" + this.privateFillingData.SecondLineA2(true) + "^FS";
-                    stringMessage = stringMessage + "^FO760,306 ^AV ^FD" + this.thirdLine(true, 0) + "^FS";
+                    stringMessage = stringMessage + "^FO770,10 ^AV ^FD" + this.privateFillingData.FirstLine(true) + "^FS"; //[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                    stringMessage = stringMessage + "^FO770,100 ^AV ^FD" + this.privateFillingData.SecondLineA1(true) + "^FS";
+                    stringMessage = stringMessage + "^FO770,200 ^AV ^FD" + this.privateFillingData.SecondLineA2(true) + "^FS";
+                    stringMessage = stringMessage + "^FO770,306 ^AV ^FD" + this.thirdLine(true, 0) + "^FS";
 
                     stringMessage = stringMessage + "^XZ"; //[^XZ - Indicates end of label format.]
                 }
@@ -373,7 +374,10 @@ namespace TotalSmartCoding.Controllers.Productions
                         this.ionetSocket.Connect();
 
                     if (this.printerName == GlobalVariables.PrinterName.PalletLabel)
+                    {
                         this.ioserialPort.Connect();
+                        //this.ioserialPort.WritetoSerial(this.wholeMessageLine());//FOR TEST AT DESIGN ONLY                        
+                    }
                 }
                 return true;
             }
@@ -837,7 +841,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 //    U: UPDATE SERIAL NUMBER - Counter 1
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
                                 if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
-                                
+
                                 //    U: UPDATE SERIAL NUMBER - Counter 2
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/2/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
                                 if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);

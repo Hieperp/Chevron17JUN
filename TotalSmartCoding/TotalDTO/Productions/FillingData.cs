@@ -12,7 +12,7 @@ namespace TotalDTO.Productions
     public class FillingData : NotifyPropertyChangeObject
     {
 
-        public int NoSubQueue { get { return this.PackPerCarton / 4; } } //GlobalVariables.NoSubQueue()
+        public int NoSubQueue { get { return this.PackPerCarton == 0 ? 1 : (this.PackPerCarton / 4); } } //GlobalVariables.NoSubQueue()
         public int ItemPerSubQueue { get { return GlobalVariables.NoItemDiverter(); } }
         public bool RepeatSubQueueIndex { get { return GlobalVariables.RepeatedSubQueueIndex(); } }
 

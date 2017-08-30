@@ -67,7 +67,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.fillingData = new FillingData();
 
                 this.Initialize();
-                
+
                 IBatchService batchService = CommonNinject.Kernel.Get<IBatchService>();//ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService
 
                 digitController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.DigitInkjet);
@@ -142,7 +142,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.splitContainerCarton.SplitterDistance = SplitterContainerCarton();
                 this.splitContainerPallet.SplitterDistance = this.SplitterContainerPallet();
 
-                
+
 
                 this.splitDigit.SplitterDistance = this.Width / 5;
                 this.splitPack.SplitterDistance = this.Width / 5;
@@ -382,7 +382,7 @@ namespace TotalSmartCoding.Views.Productions
         private void toolStripButtonSetting_Click(object sender, EventArgs e)
         {
             try
-            {                
+            {
                 MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this, this.scannerController.AllQueueEmpty));
 
                 masterMDI.ShowDialog();
@@ -647,7 +647,7 @@ namespace TotalSmartCoding.Views.Productions
         private string GetSerialNumber(string printedBarcode)
         {
             int indexOfDoubleTabChar = printedBarcode.IndexOf(GlobalVariables.doubleTabChar.ToString());
-            if (indexOfDoubleTabChar == 0) 
+            if (indexOfDoubleTabChar == 0)
                 printedBarcode = ""; //10-AUG-2017: WHAT IS GlobalVariables.doubleTabChar.ToString()???
             //else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
             else
@@ -721,7 +721,7 @@ namespace TotalSmartCoding.Views.Productions
                 {                //Handle exception for PackInOneCarton
                     string selectedBarcode = "";
                     int packID = this.getBarcodeID(this.dgvPackQueue.CurrentCell, out selectedBarcode);
-                    if (packID > 0 && CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Xóa toàn bộ chai đang trên chuyền" : "Xóa chai này:" + (char)13 + (char)13 + selectedBarcode) +"?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                    if (packID > 0 && CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Xóa toàn bộ chai đang trên chuyền" : "Xóa chai này:" + (char)13 + (char)13 + selectedBarcode) + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                         if (this.scannerController.RemovePackInPackQueue(packID, sender.Equals(this.buttonDeleteAllPack))) CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Toàn bộ chai đang trên chuyền" : "Pack: " + selectedBarcode) + "\r\n\r\nĐã được xóa thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
@@ -791,7 +791,7 @@ namespace TotalSmartCoding.Views.Productions
                     if (cartonID > 0 && CustomMsgBox.Show(this, "Bạn có muốn " + (sender.Equals(this.buttonRemoveCartonPending) ? "xã thùng carton này ra và đóng lại không:" : "xóa toàn bộ thùng carton, bao gồm các chai bên trong,: ") + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                     {
                         if (sender.Equals(this.buttonRemoveCartonPending))
-                            if (this.scannerController.UnwrapCartontoPack(cartonID)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nĐã được xã thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if ((this.fillingData.HasPack && this.scannerController.UnwrapCartontoPack(cartonID)) || (!this.fillingData.HasPack && this.scannerController.TakebackCartonFromPendingQueue(cartonID))) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nĐã được xã thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         if (sender.Equals(this.buttonDeleteCartonPending))
                             if (this.scannerController.DeleteCarton(cartonID)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nĐã được xóa, bao gồm các chai bên trong." + "\r\nVui lòng đọc lại từng chai nếu muốn đóng lại carton.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -940,7 +940,7 @@ namespace TotalSmartCoding.Views.Productions
 
         #endregion Backup
 
-       
+
 
 
 

@@ -3,14 +3,14 @@
     public static class GlobalEnums
     {
 
-        public static bool OnTestScanner = true; //1
+        public static bool OnTestScanner = false; //1
         public static bool OnTestPalletScanner = true; //WHEN REAL TEST WITHOUT PalletScanner
 
-        public static bool OnTestPrinter = true; //2
+        public static bool OnTestPrinter = false; //2
         public static bool OnTestDigit = false; //WHEN REAL TEST WITHOUT DIGIT PRINTER
-        public static bool OnTestZebra = true; //SEND TEST PRINT WHEN CONNECTED
+        public static bool OnTestZebra = false; //false: WILL SEND TEST PRINT WHEN CONNECTED
 
-        public static bool SendToZebra = false;
+        public static bool SendToZebra = true;
 
         public static bool OnTestCartonNoreadNow = false;
         public static bool OnTestPalletReceivedNow = false;

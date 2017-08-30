@@ -85,7 +85,7 @@ namespace TotalSmartCoding.Views.Mains
 
                 string comportName = CommonConfigs.ReadSetting("ComportName"); 
                 if (this.comboBoxAutonicsPortName.Items.IndexOf(comportName) >=0 )
-                    this.comboBoxAutonicsPortName.SelectedText = comportName;
+                    this.comboBoxAutonicsPortName.SelectedIndex = this.comboBoxAutonicsPortName.Items.IndexOf(comportName);
 
 
 

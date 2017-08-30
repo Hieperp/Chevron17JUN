@@ -177,9 +177,10 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public bool OnScanning { get; private set; }
 
-        public void StartScanner() {
+        public void StartScanner()
+        {
             if (!this.OnScanning) this.ClearSocket(); //CHECK !this.OnScanning JUST FOR SURE, BECAUSE WE DO NOT TEST BEFORE. I WORRY THAT this.ClearSocket WILL CONFLICT WITH ThreadRoutine ReadoutStream. I THINK THIS IS NOT NECCESSARY!!!
-            this.OnScanning = true; 
+            this.OnScanning = true;
         }
         public void StopScanner() { this.OnScanning = false; }
 
@@ -1064,6 +1065,41 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
+
+        public bool TakebackCartonFromPendingQueue(int fillingCartonID)
+        {
+            if (fillingCartonID <= 0) return false;
+
+            lock (this.cartonPendingQueue)
+            {
+                lock (this.cartonQueue)
+                {
+                    if (this.cartonPendingQueue.Count > 0)
+                    {
+                        FillingCartonDTO fillingCartonDTO = this.cartonPendingQueue.Dequeue(fillingCartonID);
+                        if (fillingCartonDTO != null)
+                        {
+
+                            fillingCartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Freshnew;
+                            this.cartonQueue.Enqueue(fillingCartonDTO);
+
+                            this.NotifyPropertyChanged("CartonPendingQueue");
+                            this.NotifyPropertyChanged("CartonQueue");
+
+                            lock (this.fillingCartonController)
+                            {
+                                if (this.fillingCartonController.fillingCartonService.UpdateEntryStatus(fillingCartonDTO.FillingCartonID.ToString(), GlobalVariables.BarcodeStatus.Freshnew))
+                                    return true;
+                                else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                            }
+
+                        }
+                        else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
+                    }
+                    else throw new System.ArgumentException("Fail to handle this carton", "No carton found on the line");
+                }
+            }
+        }
 
 
 

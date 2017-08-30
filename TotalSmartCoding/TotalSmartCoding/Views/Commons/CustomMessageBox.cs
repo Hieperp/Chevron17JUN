@@ -40,6 +40,8 @@ namespace TotalSmartCoding.Views.Commons
                     this.button1.Text = "Cancel";
                     this.button2.Text = "OK";
 
+                    this.button1.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
+
                     this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
                     this.button2.DialogResult = System.Windows.Forms.DialogResult.OK;
 
@@ -54,6 +56,23 @@ namespace TotalSmartCoding.Views.Commons
 
                     this.button1.DialogResult = System.Windows.Forms.DialogResult.No;
                     this.button2.DialogResult = System.Windows.Forms.DialogResult.Yes;
+
+                    break;
+                case MessageBoxButtons.YesNoCancel:
+                    this.button1.Visible = true;
+                    this.button2.Visible = true;
+                    this.button3.Visible = true;
+
+                    this.button1.Text = "Cancel";
+                    this.button2.Text = "No";
+                    this.button3.Text = "Yes";
+
+                    this.button2.Image = global::TotalSmartCoding.Properties.Resources.Yellow_cross;
+                    this.button1.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
+
+                    this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+                    this.button2.DialogResult = System.Windows.Forms.DialogResult.No;
+                    this.button3.DialogResult = System.Windows.Forms.DialogResult.Yes;
 
                     break;
                 default:

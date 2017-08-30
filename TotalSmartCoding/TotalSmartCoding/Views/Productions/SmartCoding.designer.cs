@@ -502,8 +502,8 @@
             this.buttonPackQueueCount.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonPackQueueCount.Name = "buttonPackQueueCount";
             this.buttonPackQueueCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonPackQueueCount.Size = new System.Drawing.Size(79, 52);
-            this.buttonPackQueueCount.Text = "[1]";
+            this.buttonPackQueueCount.Size = new System.Drawing.Size(93, 52);
+            this.buttonPackQueueCount.Text = "[1/1]";
             this.buttonPackQueueCount.ToolTipText = "Số thứ tự chia làn auto packer. Nhấn vào đây để reset về vị trí gốc [1, 1].";
             this.buttonPackQueueCount.Click += new System.EventHandler(this.buttonPackQueueCount_Click);
             // 
@@ -916,7 +916,7 @@
             this.splitPalletQueue.Panel2.Controls.Add(this.dgvPalletsetQueue);
             this.splitPalletQueue.Panel2.Controls.Add(this.toolStrip6);
             this.splitPalletQueue.Size = new System.Drawing.Size(1782, 149);
-            this.splitPalletQueue.SplitterDistance = 129;
+            this.splitPalletQueue.SplitterDistance = 160;
             this.splitPalletQueue.SplitterWidth = 1;
             this.splitPalletQueue.TabIndex = 20;
             // 
@@ -964,7 +964,7 @@
             this.dgvPalletQueue.RowTemplate.Height = 47;
             this.dgvPalletQueue.RowTemplate.ReadOnly = true;
             this.dgvPalletQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvPalletQueue.Size = new System.Drawing.Size(129, 94);
+            this.dgvPalletQueue.Size = new System.Drawing.Size(160, 94);
             this.dgvPalletQueue.TabIndex = 12;
             this.dgvPalletQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvPalletQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
@@ -983,7 +983,7 @@
             this.toolStrip8.Location = new System.Drawing.Point(0, 0);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip8.Size = new System.Drawing.Size(129, 55);
+            this.toolStrip8.Size = new System.Drawing.Size(160, 55);
             this.toolStrip8.TabIndex = 15;
             this.toolStrip8.Text = "toolStrip8";
             // 
@@ -1053,7 +1053,7 @@
             this.dgvPalletsetQueue.RowTemplate.Height = 47;
             this.dgvPalletsetQueue.RowTemplate.ReadOnly = true;
             this.dgvPalletsetQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvPalletsetQueue.Size = new System.Drawing.Size(1652, 94);
+            this.dgvPalletsetQueue.Size = new System.Drawing.Size(1621, 94);
             this.dgvPalletsetQueue.TabIndex = 13;
             this.dgvPalletsetQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvPalletsetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
@@ -1071,7 +1071,7 @@
             this.toolStrip6.Location = new System.Drawing.Point(0, 0);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip6.Size = new System.Drawing.Size(1652, 55);
+            this.toolStrip6.Size = new System.Drawing.Size(1621, 55);
             this.toolStrip6.TabIndex = 19;
             this.toolStrip6.Text = "toolStrip6";
             // 
