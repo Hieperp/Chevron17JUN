@@ -4,7 +4,7 @@
     {
 
         public static bool OnTestScanner = false; //1
-        public static bool OnTestPalletScanner = true; //WHEN REAL TEST WITHOUT PalletScanner
+        public static bool OnTestPalletScanner = false; //3 //WHEN REAL TEST WITHOUT PalletScanner
 
         public static bool OnTestPrinter = false; //2
         public static bool OnTestDigit = false; //WHEN REAL TEST WITHOUT DIGIT PRINTER
