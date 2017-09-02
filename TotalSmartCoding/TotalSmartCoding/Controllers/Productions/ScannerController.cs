@@ -137,7 +137,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.NotifyPropertyChanged("CartonPendingQueue");
                 }
 
-                if (!GlobalEnums.OnTestPalletReceivedNow)
+                if (false && !GlobalEnums.OnTestPalletReceivedNow)
                 {
                     IList<FillingPallet> fillingPallets = this.fillingPalletController.fillingPalletService.GetFillingPallets(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset);
                     if (fillingPallets.Count > 0)

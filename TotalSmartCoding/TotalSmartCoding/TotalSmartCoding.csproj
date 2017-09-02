@@ -870,6 +870,13 @@
     <None Include="Resources\Paomedia-Small-N-Flat-Carton.ico" />
     <None Include="Resources\Map-pin-20.png" />
     <None Include="Resources\Red-cross.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-1.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-2.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-3.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-4.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-5.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-6.ico" />
+    <None Include="Resources\Icons8-Windows-8-Numbers-0.ico" />
     <Content Include="Resources\Toolbar Image1.png" />
     <None Include="Resources\Umar123-Carton.ico" />
     <Content Include="Resources\warning__1_.ico" />

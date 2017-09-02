@@ -1703,6 +1703,76 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_0 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_1 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_2 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_3 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_4 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_5 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_6 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Iconshock_Perspective_General_Administrator {
             get {
                 object obj = ResourceManager.GetObject("Iconshock-Perspective-General-Administrator", resourceCulture);
